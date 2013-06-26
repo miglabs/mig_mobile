@@ -38,6 +38,10 @@
 		1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1623168717773BEE00CF8FB5 /* CoreLocation.framework */; };
 		1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */; };
 		1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1623168E17773E6F00CF8FB5 /* MigLabAPI.m */; };
+		1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1627EA0E177B1CDB0049F9F5 /* qhc.caf */; };
+		1627EA13177B1CFA0049F9F5 /* PMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA12177B1CFA0049F9F5 /* PMusicPlayer.m */; };
+		1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA19177B24D60049F9F5 /* UserSessionManager.m */; };
+		1627EA21177B25600049F9F5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA20177B25600049F9F5 /* User.m */; };
 		16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */; };
 		16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */; };
 		16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3F1759AD5E001BE4E9 /* CoreGraphics.framework */; };
@@ -108,6 +112,13 @@
 		1623168D17773E6F00CF8FB5 /* MigLabAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigLabAPI.h; sourceTree = "<group>"; };
 		1623168E17773E6F00CF8FB5 /* MigLabAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigLabAPI.m; sourceTree = "<group>"; };
 		1623169317773EA800CF8FB5 /* MigLabConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MigLabConfig.h; sourceTree = "<group>"; };
+		1627EA0E177B1CDB0049F9F5 /* qhc.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = qhc.caf; sourceTree = "<group>"; };
+		1627EA11177B1CFA0049F9F5 /* PMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayer.h; sourceTree = "<group>"; };
+		1627EA12177B1CFA0049F9F5 /* PMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMusicPlayer.m; sourceTree = "<group>"; };
+		1627EA18177B24D60049F9F5 /* UserSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSessionManager.h; sourceTree = "<group>"; };
+		1627EA19177B24D60049F9F5 /* UserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionManager.m; sourceTree = "<group>"; };
+		1627EA1F177B25600049F9F5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		1627EA20177B25600049F9F5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		16EDEF371759AD5E001BE4E9 /* miglab_mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miglab_mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,10 +156,10 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1627EA1E177B25530049F9F5 /* DataStruct */,
 				1623168917773DC400CF8FB5 /* PPlayer */,
 				162316001777397600CF8FB5 /* AFNetworking */,
 				162316351777397600CF8FB5 /* Common */,
-				1623163A1777397600CF8FB5 /* DataStruct */,
 				1623163B1777397600CF8FB5 /* EGOImageLoading */,
 				1623164A1777397600CF8FB5 /* FMDatabase */,
 				162316581777397600CF8FB5 /* Guide */,
@@ -192,13 +203,6 @@
 				162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		1623163A1777397600CF8FB5 /* DataStruct */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataStruct;
 			sourceTree = "<group>";
 		};
 		1623163B1777397600CF8FB5 /* EGOImageLoading */ = {
@@ -285,6 +289,8 @@
 				1623168D17773E6F00CF8FB5 /* MigLabAPI.h */,
 				1623168E17773E6F00CF8FB5 /* MigLabAPI.m */,
 				1623169317773EA800CF8FB5 /* MigLabConfig.h */,
+				1627EA18177B24D60049F9F5 /* UserSessionManager.h */,
+				1627EA19177B24D60049F9F5 /* UserSessionManager.m */,
 			);
 			path = MigLabAPI;
 			sourceTree = "<group>";
@@ -301,8 +307,27 @@
 			children = (
 				1623168A17773E2600CF8FB5 /* PMusicPlayerControllerView.h */,
 				1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */,
+				1627EA11177B1CFA0049F9F5 /* PMusicPlayer.h */,
+				1627EA12177B1CFA0049F9F5 /* PMusicPlayer.m */,
 			);
 			path = PPlayer;
+			sourceTree = "<group>";
+		};
+		1627EA0D177B1CDB0049F9F5 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				1627EA0E177B1CDB0049F9F5 /* qhc.caf */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		1627EA1E177B25530049F9F5 /* DataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				1627EA1F177B25600049F9F5 /* User.h */,
+				1627EA20177B25600049F9F5 /* User.m */,
+			);
+			path = DataStruct;
 			sourceTree = "<group>";
 		};
 		16EDEF2C1759AD5E001BE4E9 = {
@@ -340,6 +365,7 @@
 		16EDEF411759AD5E001BE4E9 /* miglab_mobile */ = {
 			isa = PBXGroup;
 			children = (
+				1627EA0D177B1CDB0049F9F5 /* resources */,
 				162316791777397D00CF8FB5 /* images */,
 				162315FF1777397600CF8FB5 /* classes */,
 				16EDEF4A1759AD5E001BE4E9 /* AppDelegate.h */,
@@ -419,6 +445,7 @@
 				16EDEF501759AD5E001BE4E9 /* Default@2x.png in Resources */,
 				16EDEF521759AD5E001BE4E9 /* Default-568h@2x.png in Resources */,
 				162316771777397600CF8FB5 /* GuideViewController.xib in Resources */,
+				1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +483,9 @@
 				162316761777397600CF8FB5 /* GuideViewController.m in Sources */,
 				1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */,
 				1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */,
+				1627EA13177B1CFA0049F9F5 /* PMusicPlayer.m in Sources */,
+				1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */,
+				1627EA21177B25600049F9F5 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
