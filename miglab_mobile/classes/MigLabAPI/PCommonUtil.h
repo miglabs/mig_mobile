@@ -10,4 +10,11 @@
 
 @interface PCommonUtil : NSObject
 
++(NSString *)md5Encode:(NSString *)str;
++(NSString *)encodeBase64:(NSString *)str;
++(NSString *)decodeBase64:(NSString *)str;
++(NSString *)encodeUrlParameter:(NSString *)param;
++(NSString *)decodeUrlParameter:(NSString *)param;
+
+
 @end

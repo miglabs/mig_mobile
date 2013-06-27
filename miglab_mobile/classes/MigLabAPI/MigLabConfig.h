@@ -16,14 +16,18 @@
 
 #if (0 == IS_DEBUG_SERVER)
 
-#define HTTP_DOMAIN                                                             @"http://www/i.aspx"
+#define HTTP_DOMAIN                                         @"http://www/i.aspx"
 
 #elif (1 == IS_DEBUG_SERVER)
 
-#define HTTP_DOMAIN                                                             @"http://www./i.aspx"
+#define LOGIN_SSO_SP                                        @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
+
+#define HTTP_DOMAIN                                         @"http://www./i.aspx"
 
 #endif
 
-#define NotificationNameDownloadFailed                                          @"NotificationNameDownloadFailed"
+
+#define NotificationNameDownloadFailed                      @"NotificationNameDownloadFailed"
+
 
 #endif

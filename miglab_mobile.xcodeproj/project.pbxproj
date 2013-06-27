@@ -46,6 +46,8 @@
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
 		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
 		163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF8177C680D008656D1 /* AVFoundation.framework */; };
+		163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE0C177C9672008656D1 /* PCommonUtil.m */; };
+		163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE11177C96DC008656D1 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */; };
 		16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */; };
 		16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3F1759AD5E001BE4E9 /* CoreGraphics.framework */; };
@@ -133,6 +135,11 @@
 		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		163BCDF8177C680D008656D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		163BCE0B177C9672008656D1 /* PCommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCommonUtil.h; sourceTree = "<group>"; };
+		163BCE0C177C9672008656D1 /* PCommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCommonUtil.m; sourceTree = "<group>"; };
+		163BCE10177C96DC008656D1 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		163BCE11177C96DC008656D1 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		163BCE12177C96DC008656D1 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		16EDEF371759AD5E001BE4E9 /* miglab_mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miglab_mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,6 +191,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				163BCE0F177C96DC008656D1 /* CTMBase64 */,
 				183E0239177C412D00EE8944 /* Test */,
 				183E0233177C408100EE8944 /* Home */,
 				1627EA1E177B25530049F9F5 /* DataStruct */,
@@ -323,6 +331,8 @@
 				1627EA19177B24D60049F9F5 /* UserSessionManager.m */,
 				183E0228177C32CC00EE8944 /* SongDownloadManager.h */,
 				183E0229177C32CC00EE8944 /* SongDownloadManager.m */,
+				163BCE0B177C9672008656D1 /* PCommonUtil.h */,
+				163BCE0C177C9672008656D1 /* PCommonUtil.m */,
 			);
 			path = MigLabAPI;
 			sourceTree = "<group>";
@@ -362,6 +372,16 @@
 				183E022C177C33A300EE8944 /* Song.m */,
 			);
 			path = DataStruct;
+			sourceTree = "<group>";
+		};
+		163BCE0F177C96DC008656D1 /* CTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				163BCE10177C96DC008656D1 /* GTMBase64.h */,
+				163BCE11177C96DC008656D1 /* GTMBase64.m */,
+				163BCE12177C96DC008656D1 /* GTMDefines.h */,
+			);
+			path = CTMBase64;
 			sourceTree = "<group>";
 		};
 		16EDEF2C1759AD5E001BE4E9 = {
@@ -550,6 +570,8 @@
 				183E022D177C33A300EE8944 /* Song.m in Sources */,
 				183E0237177C408E00EE8944 /* HomeViewController.m in Sources */,
 				183E023D177C413800EE8944 /* TestViewController.m in Sources */,
+				163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */,
+				163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

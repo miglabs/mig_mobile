@@ -10,4 +10,18 @@
 
 @interface MigLabAPI : NSObject
 
+/*
+ hosts:
+ 
+ 60.191.220.135   sso.miglab.com
+ 60.191.220.135   fm.miglab.com
+ */
+
+/*
+ SSO的登录接口
+ http://sso.miglab.com/cgi-bin/sp.fcgi?sp
+ */
++(void)doSsoLoginFirst;
++(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSDictionary *)dicParam;
+
 @end

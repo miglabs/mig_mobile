@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "MigLabAPI.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
 
@@ -29,6 +30,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //test
+    [MigLabAPI doSsoLoginFirst];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
