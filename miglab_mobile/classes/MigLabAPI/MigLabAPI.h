@@ -22,6 +22,7 @@
  http://sso.miglab.com/cgi-bin/sp.fcgi?sp
  */
 +(void)doSsoLoginFirst;
-+(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSDictionary *)dicParam;
++(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam;
++(void)doSsoLoginThird:(NSString *)ssoSecondUrl param:(NSString *)strParam;
 
 @end

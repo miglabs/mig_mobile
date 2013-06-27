@@ -13,6 +13,7 @@
 
 @property (nonatomic, retain) User *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;
+@property (nonatomic, retain) NSString *accesstoken;
 
 +(UserSessionManager *)GetInstance;
 

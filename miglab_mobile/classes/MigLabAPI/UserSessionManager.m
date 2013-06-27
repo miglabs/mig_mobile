@@ -12,6 +12,7 @@
 
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
+@synthesize accesstoken = _accesstoken;
 
 +(UserSessionManager *)GetInstance{
     

@@ -10,7 +10,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
-#import "PCommonUtil.h"
+#import "UserSessionManager.h"
 
 @implementation MigLabAPI
 
@@ -40,9 +40,8 @@
             
             NSString *post_content = [NSString stringWithFormat:@"username=%@&password=%@&%@", username, password, postContent];
             
-            NSMutableDictionary *dicParam = [[NSMutableDictionary alloc] init];
-            [dicParam setValue:post_content forKey:@"post_content"];
-            
+//            NSMutableDictionary *dicParam = [[NSMutableDictionary alloc] init];
+//            
 //            [dicParam setValue:username forKey:@"username"];
 //            [dicParam setValue:password forKey:@"password"];
 //            
@@ -66,7 +65,7 @@
             
             
             
-            [self doSsoLoginSecond:postUrl param:dicParam];
+            [self doSsoLoginSecond:postUrl param:post_content];
             
         } else {
             
@@ -83,21 +82,66 @@
     
 }
 
-+(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSDictionary *)dicParam{
++(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam{
     
     NSString *loginSsoSecondUrl = ssoSecondUrl;
     NSLog(@"loginSsoSecondUrl: %@", loginSsoSecondUrl);
     
     NSURL *url = [NSURL URLWithString:loginSsoSecondUrl];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:nil parameters:dicParam constructingBodyWithBlock:nil];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[strParam dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"result: %@", result);
+        NSArray *resultList = [result componentsSeparatedByString:@"?"];
+        for (int i=0; i<[resultList count]; i++) {
+            NSLog(@"resultList%d: %@", i, [resultList objectAtIndex:i]);
+        }
+        if ([resultList count] == 2) {
+            NSString *postUrl = [resultList objectAtIndex:0];
+            NSString *postContent = [resultList objectAtIndex:1];
+            
+            [self doSsoLoginThird:postUrl param:postContent];
+            
+        } else {
+            
+            NSLog(@"doSsoLoginSecond failure...");
+        }
         
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"failure: %@", error);
+        
+    }];
+    
+    [operation start];
+    
+}
+
++(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam{
+    
+    NSString *loginSsoThirdUrl = ssoThirdUrl;
+    NSLog(@"loginSsoThirdUrl: %@", loginSsoThirdUrl);
+    
+    NSURL *url = [NSURL URLWithString:loginSsoThirdUrl];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[strParam dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"result AccessToken: %@", result);
+        
+        [UserSessionManager GetInstance].accesstoken = result;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
