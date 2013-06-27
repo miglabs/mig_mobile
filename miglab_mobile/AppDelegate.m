@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 #import "UncaughtExceptionHandler.h"
-
 #import "GuideViewController.h"
+#import "HomeViewController.h"
+
+//test
+#import "Song.h"
+#import "SongDownloadManager.h"
 
 @implementation AppDelegate
 
@@ -37,7 +41,21 @@
         GuideViewController *guideViewController = [[GuideViewController alloc] initWithNibName:@"GuideViewController" bundle:nil];
         self.navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
         
-    }
+    } else {
+        
+        BOOL doTest = NO;
+        
+        if (doTest) {
+            //
+            
+        } else {
+            
+            HomeViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+            self.navController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+            
+        }
+        
+    }//
     
     _navController.navigationBar.hidden = YES;
     self.window.rootViewController = _navController;

@@ -16,13 +16,14 @@
 
 #if (0 == IS_DEBUG_SERVER)
 
-#define VANKE_DOMAIN                        @"http://www/i.aspx"
+#define HTTP_DOMAIN                                                             @"http://www/i.aspx"
 
 #elif (1 == IS_DEBUG_SERVER)
 
-#define VANKE_DOMAIN                        @"http://www./i.aspx"
-#define VANKE_DOMAINBase                    @"http://www./"
+#define HTTP_DOMAIN                                                             @"http://www./i.aspx"
 
 #endif
+
+#define NotificationNameDownloadFailed                                          @"NotificationNameDownloadFailed"
 
 #endif

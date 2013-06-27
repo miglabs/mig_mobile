@@ -10,4 +10,8 @@
 
 @interface HomeViewController : UIViewController
 
+-(IBAction)doStart:(id)sender;
+-(IBAction)doPause:(id)sender;
+-(IBAction)doResume:(id)sender;
+
 @end

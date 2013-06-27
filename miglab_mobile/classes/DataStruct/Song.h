@@ -10,4 +10,8 @@
 
 @interface Song : NSObject
 
+@property (nonatomic, assign) long long songId;
+@property (nonatomic, retain) NSString *songName;
+@property (nonatomic, retain) NSString *songUrl;
+
 @end

@@ -10,4 +10,8 @@
 
 @implementation Song
 
+@synthesize songId = _songId;
+@synthesize songName = _songName;
+@synthesize songUrl = _songUrl;
+
 @end
