@@ -42,6 +42,10 @@
 		1627EA13177B1CFA0049F9F5 /* PMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA12177B1CFA0049F9F5 /* PMusicPlayer.m */; };
 		1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA19177B24D60049F9F5 /* UserSessionManager.m */; };
 		1627EA21177B25600049F9F5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA20177B25600049F9F5 /* User.m */; };
+		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
+		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
+		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
+		163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF8177C680D008656D1 /* AVFoundation.framework */; };
 		16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */; };
 		16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */; };
 		16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3F1759AD5E001BE4E9 /* CoreGraphics.framework */; };
@@ -125,6 +129,10 @@
 		1627EA19177B24D60049F9F5 /* UserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionManager.m; sourceTree = "<group>"; };
 		1627EA1F177B25600049F9F5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1627EA20177B25600049F9F5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		163BCDF8177C680D008656D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		16EDEF371759AD5E001BE4E9 /* miglab_mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miglab_mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -155,8 +163,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
 				1623168617773BE700CF8FB5 /* QuartzCore.framework in Frameworks */,
+				163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */,
+				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
+				163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */,
+				163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */,
+				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
 				1623168417773BE000CF8FB5 /* OpenGLES.framework in Frameworks */,
 				1623168217773BD600CF8FB5 /* SystemConfiguration.framework in Frameworks */,
 				1623167C17773B6700CF8FB5 /* libsqlite3.0.dylib in Frameworks */,
@@ -372,10 +384,14 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1623168717773BEE00CF8FB5 /* CoreLocation.framework */,
-				1623168517773BE700CF8FB5 /* QuartzCore.framework */,
 				1623168317773BE000CF8FB5 /* OpenGLES.framework */,
 				1623168117773BD600CF8FB5 /* SystemConfiguration.framework */,
+				1623168517773BE700CF8FB5 /* QuartzCore.framework */,
+				1623168717773BEE00CF8FB5 /* CoreLocation.framework */,
+				163BCDF8177C680D008656D1 /* AVFoundation.framework */,
+				163BCDF6177C67FD008656D1 /* CoreMedia.framework */,
+				163BCDF4177C67F3008656D1 /* MediaPlayer.framework */,
+				163BCDF2177C67DF008656D1 /* AudioToolbox.framework */,
 				1623167B17773B6700CF8FB5 /* libsqlite3.0.dylib */,
 				16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */,
 				16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */,
