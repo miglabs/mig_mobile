@@ -10,4 +10,8 @@
 
 @implementation User
 
+@synthesize username = _username;
+@synthesize password = _password;
+@synthesize userid = _userid;
+
 @end

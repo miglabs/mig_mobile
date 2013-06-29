@@ -11,6 +11,7 @@
 #import "Song.h"
 #import "SongDownloadManager.h"
 #import "MigLabConfig.h"
+#import "UserSessionManager.h"
 
 @interface HomeViewController ()
 
@@ -43,8 +44,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdFailed:) name:NotificationNameGetUserIdFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdSuccess:) name:NotificationNameGetUserIdSuccess object:nil];
     
-    NSString *username = @"test@miglab.com";
-    NSString *password = @"123456";
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
     
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doAuthLogin:username password:password];
@@ -68,8 +69,11 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"loginSuccess: %@", result);
     
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *accesstoken = [result objectForKey:@"AccessToken"];
+    
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-    [miglabAPI doGetUserId:[result objectForKey:@"AccessToken"]];
+    [miglabAPI doGetUserInfo:username accessToken:accesstoken];
     
 }
 

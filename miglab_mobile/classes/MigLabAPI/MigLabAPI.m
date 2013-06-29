@@ -166,16 +166,16 @@
 }
 
 /*
- 获取用户的id
+ 获取用户信息
  <!--请求Get-->
- http://fm.miglab.com/cgi-bin/getid.fcgi&token=AAOfv3WG35avZspzKhoeodwv2MFd8zkyRjUwRDIzQjI2QThCNzVGMzEx
+ http://open.fm.miglab.com/api/userinfo.fcgi
  */
--(void)doGetUserId:(NSString *)tAccessToken{
+-(void)doGetUserInfo:(NSString *)tUserName accessToken:(NSString *)tAccessToken{
     
-    NSString *getUserIdUrl = [NSString stringWithFormat:@"%@?token=%@", GET_USER_ID, tAccessToken];
-    NSLog(@"getUserIdUrl: %@", getUserIdUrl);
+    NSString *getUserInfoUrl = [NSString stringWithFormat:@"%@?username=%@&token=%@", GET_USER_INFO, tUserName, tAccessToken];
+    NSLog(@"getUserInfoUrl: %@", getUserInfoUrl);
     
-    NSURL *url = [NSURL URLWithString:getUserIdUrl];
+    NSURL *url = [NSURL URLWithString:getUserInfoUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

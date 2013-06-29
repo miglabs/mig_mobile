@@ -22,8 +22,10 @@
 
 //登陆第一次验证地址
 #define LOGIN_SSO_SP_URL                                    @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
-//获取用户id
-#define GET_USER_ID                                         @"http://fm.miglab.com/cgi-bin/getid.fcgi"
+//获取用户信息
+#define GET_USER_INFO                                       @"http://open.fm.miglab.com/api/userinfo.fcgi"
+
+//#define GET_USER_ID                                         @"http://fm.miglab.com/cgi-bin/getid.fcgi"
 
 #define HTTP_DOMAIN                                         @"http://www./i.aspx"
 

@@ -10,6 +10,8 @@
 #import "UncaughtExceptionHandler.h"
 #import "GuideViewController.h"
 #import "HomeViewController.h"
+#import "User.h"
+#import "UserSessionManager.h"
 
 //test
 #import "Song.h"
@@ -42,6 +44,11 @@
         self.navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
         
     } else {
+        
+        User *user = [[User alloc] init];
+        user.username = @"test@miglab.com";
+        user.password = @"123456";
+        [UserSessionManager GetInstance].currentUser = user;
         
         BOOL doTest = NO;
         

@@ -27,9 +27,9 @@
 -(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam;
 
 /*
- 获取用户id
+ 获取用户信息
  */
--(void)doGetUserId:(NSString *)tAccessToken;
+-(void)doGetUserInfo:(NSString *)tUserName accessToken:(NSString *)tAccessToken;
 
 
 @end
