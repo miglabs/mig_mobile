@@ -11,4 +11,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    //by pig
+    #import "MigLabConfig.h"
+    #import "MigLabAPI.h"
+
 #endif

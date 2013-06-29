@@ -50,6 +50,8 @@
         user.password = @"123456";
         [UserSessionManager GetInstance].currentUser = user;
         
+        PLog(@"username: %@, password: %@", user.username, user.password);
+        
         BOOL doTest = NO;
         
         if (doTest) {

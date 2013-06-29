@@ -9,6 +9,12 @@
 #ifndef miglab_mobile_MigLabConfig_h
 #define miglab_mobile_MigLabConfig_h
 
+#ifdef DEBUG
+#define PLog(format, ...) NSLog(format, ## __VA_ARGS__)
+#else
+#define PLog(format, ...)
+#endif
+
 /*
  * 用于切换不同域名地址
  */
