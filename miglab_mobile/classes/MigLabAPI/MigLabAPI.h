@@ -18,11 +18,18 @@
  */
 
 /*
- SSO的登录接口
+ SSO的登录
  http://sso.miglab.com/cgi-bin/sp.fcgi?sp
  */
-+(void)doSsoLoginFirst;
-+(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam;
-+(void)doSsoLoginThird:(NSString *)ssoSecondUrl param:(NSString *)strParam;
+-(void)doAuthLogin:(NSString *)tusername password:(NSString *)tpassword;
+-(void)doSsoLoginFirst:(NSString *)tusername password:(NSString *)tpassword;
+-(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam;
+-(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam;
+
+/*
+ 获取用户id
+ */
+-(void)doGetUserId:(NSString *)tAccessToken;
+
 
 @end

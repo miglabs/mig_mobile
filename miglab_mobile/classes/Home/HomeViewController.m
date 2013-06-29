@@ -10,6 +10,7 @@
 #import "MigLabAPI.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
+#import "MigLabConfig.h"
 
 @interface HomeViewController ()
 
@@ -31,9 +32,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //test
-    [MigLabAPI doSsoLoginFirst];
     
+    //test
+    
+    //login
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:NotificationNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
+    
+    //user
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdFailed:) name:NotificationNameGetUserIdFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdSuccess:) name:NotificationNameGetUserIdSuccess object:nil];
+    
+    NSString *username = @"test@miglab.com";
+    NSString *password = @"123456";
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doAuthLogin:username password:password];
     
 }
 
@@ -41,6 +55,34 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)loginFailed:(NSNotification *)tNotification{
+    
+    NSLog(@"loginFailed...");
+    
+}
+
+-(void)loginSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"loginSuccess: %@", result);
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doGetUserId:[result objectForKey:@"AccessToken"]];
+    
+}
+
+-(void)getUserIdFailed:(NSNotification *)tNotification{
+    
+    NSLog(@"getUserIdFailed...");
+    
+}
+
+-(void)getUserIdSuccess:(NSNotification *)tNotification{
+    
+    NSLog(@"getUserIdSuccess...");
+    
 }
 
 -(IBAction)doStart:(id)sender{
