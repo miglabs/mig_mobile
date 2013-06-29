@@ -13,6 +13,7 @@
     #import <Foundation/Foundation.h>
 
     //by pig
+    #import "NSObject+PObjectCategory.h"
     #import "MigLabConfig.h"
     #import "MigLabAPI.h"
 

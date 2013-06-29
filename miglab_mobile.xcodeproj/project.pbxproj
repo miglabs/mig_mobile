@@ -42,6 +42,7 @@
 		1627EA13177B1CFA0049F9F5 /* PMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA12177B1CFA0049F9F5 /* PMusicPlayer.m */; };
 		1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA19177B24D60049F9F5 /* UserSessionManager.m */; };
 		1627EA21177B25600049F9F5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA20177B25600049F9F5 /* User.m */; };
+		163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
 		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
@@ -131,6 +132,8 @@
 		1627EA19177B24D60049F9F5 /* UserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionManager.m; sourceTree = "<group>"; };
 		1627EA1F177B25600049F9F5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1627EA20177B25600049F9F5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PObjectCategory.h"; sourceTree = "<group>"; };
+		163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PObjectCategory.m"; sourceTree = "<group>"; };
 		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -239,6 +242,8 @@
 				162316371777397600CF8FB5 /* UIImage+PImageCategory.m */,
 				162316381777397600CF8FB5 /* UncaughtExceptionHandler.h */,
 				162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */,
+				163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */,
+				163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -572,6 +577,7 @@
 				183E023D177C413800EE8944 /* TestViewController.m in Sources */,
 				163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */,
 				163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */,
+				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
