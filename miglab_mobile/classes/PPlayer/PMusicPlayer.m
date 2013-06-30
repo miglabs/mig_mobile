@@ -7,6 +7,8 @@
 //
 
 #import "PMusicPlayer.h"
+#import "UIImage+PImageCategory.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @implementation PMusicPlayer
 
@@ -15,21 +17,58 @@
 @synthesize audioMix = _audioMix;
 @synthesize volumeMixInput = _volumeMixInput;
 
-@synthesize songUrl = _songUrl;
-@synthesize playBeginState = _playBeginState;
+@synthesize avAudioPlayer = _avAudioPlayer;
 
-//初始化
+@synthesize playerTimer = _playerTimer;
+
+@synthesize song = _song;
+@synthesize playerState = _playerState;
+
+/*
+ 先取消，后初始化
+ */
 -(BOOL)initPlayer{
     
-    NSLog(@"initPlayer...");
+    //先取消
+    [self playerDestory];
     
-    _playBeginState = NO;
+    PLog(@"initPlayer...");
     
-    if (!_songUrl) {
+    if (!_song || !_song.songUrl) {
         return NO;
     }
     
-    NSURL *tempSongUrl = [NSURL URLWithString:_songUrl];
+    @try {
+        
+        /*
+         0-app中打包的歌曲
+         1-手机库中的歌曲
+         2-网络下载到手机缓存的歌曲
+         3-网络歌曲
+         */
+        if (_song.whereIsTheSong == 0 || _song.whereIsTheSong == 2) {
+            
+            NSURL *url = [NSURL URLWithString:_song.songUrl];
+            _avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+            
+        } else if (_song.whereIsTheSong == 1 || _song.whereIsTheSong == 3) {
+            
+            NSURL *url = [NSURL URLWithString:_song.songUrl];
+            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
+            _avPlayer = [AVPlayer playerWithPlayerItem:playerItem];
+            
+            //添加播放完成的notifation
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicPlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+            
+        }
+        
+    }
+    @catch (NSException *exception) {
+        PLog(@"PMusicPlayer initPlayer failed...");
+    }
+    
+    
+    NSURL *tempSongUrl = [NSURL URLWithString:_song.songUrl];
     AVURLAsset *songAsset = [[AVURLAsset alloc] initWithURL:tempSongUrl options:nil];
     _avPlayerItem = [AVPlayerItem playerItemWithAsset:songAsset];
     [_avPlayerItem addObserver:self forKeyPath:@"status" options:0 context:NULL];
@@ -40,6 +79,23 @@
     [_avPlayer setAllowsExternalPlayback:YES];
     
     return YES;
+}
+
+-(void)playerDestory{
+    
+    PLog(@"playerDestory...");
+    if (_avPlayer) {
+        [_avPlayer pause];
+        _avPlayer = nil;
+    }
+    
+    if (_avAudioPlayer) {
+        [_avAudioPlayer stop];
+        _avAudioPlayer = nil;
+    }
+    
+    _playerState = NO;
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -77,6 +133,32 @@
     
 }
 
+-(void)timerStop{
+    
+    @synchronized(self){
+        if (_playerTimer) {
+            if ([_playerTimer isValid]) {
+                [_playerTimer invalidate];
+            }
+            _playerTimer = nil;
+        }
+    }
+    
+}
+
+-(void)timerStart{
+    
+    [self timerStop];
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
+    
+}
+
+-(void)playerTimerFunction{
+    
+    PLog(@"playerTimerFunction...");
+    
+}
+
 //音量调整
 -(void)setVolume:(float)volume{
     
@@ -98,42 +180,24 @@
 //    [_avPlayer ]
 }
 
-//取得播放时间
--(NSTimeInterval)playableDuration{
+//设置锁屏状态，显示的歌曲信息
+-(void)configNowPlayingInfoCenter{
     
-    NSLog(@"playableDuration...");
-    
-    AVPlayerItem *item = _avPlayer.currentItem;
-    if (item.status == AVPlayerItemStatusReadyToPlay) {
-        return CMTimeGetSeconds(_avPlayer.currentItem.duration);
-    } else {
-        return (CMTimeGetSeconds(kCMTimeInvalid));
+    if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"name" forKey:MPMediaItemPropertyTitle];
+        [dict setObject:@"singer" forKey:MPMediaItemPropertyArtist];
+        [dict setObject:@"album" forKey:MPMediaItemPropertyAlbumTitle];
+        
+        UIImage *image = [UIImage imageWithName:@"fs00" type:@"png"];
+        MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+        [dict setObject:artwork forKey:MPMediaItemPropertyArtwork];
+        
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
+        
     }
     
-    return 0;
-}
-
-//当前播放时间
--(NSTimeInterval)playableCurrentTime{
-    
-    NSLog(@"playableDuration...");
-    
-    AVPlayerItem *item = _avPlayer.currentItem;
-    if (item.status == AVPlayerItemStatusReadyToPlay) {
-        
-        NSLog(@"_avPlayer.currentItem.currentTime: %f", CMTimeGetSeconds(_avPlayer.currentItem.currentTime));
-        if (!_playBeginState && CMTimeGetSeconds(item.currentTime) == CMTimeGetSeconds(item.duration)) {
-            [_avPlayer pause];
-        }
-        
-        _playBeginState = NO;
-        return CMTimeGetSeconds(item.currentTime);
-        
-    } else {
-        return (CMTimeGetSeconds(kCMTimeInvalid));
-    }
-    
-    return 0;
 }
 
 @end
