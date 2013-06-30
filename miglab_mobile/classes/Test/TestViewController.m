@@ -27,6 +27,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doRegister:@"pig1" password:@"pig1" nickname:@"pig1" gender:1 birthday:@"2013-06-30" location:@"浙江" age:100 source:1 head:@"image"];
+    
 }
 
 - (void)didReceiveMemoryWarning

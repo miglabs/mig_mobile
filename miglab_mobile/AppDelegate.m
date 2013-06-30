@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UncaughtExceptionHandler.h"
 #import <AVFoundation/AVFoundation.h>
+#import "AFNetworkActivityIndicatorManager.h"
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "User.h"
@@ -46,6 +47,7 @@
     NSError *activationError = nil;
     [session setActive:YES error:&activationError];
     
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -67,7 +69,7 @@
         
         PLog(@"username: %@, password: %@", user.username, user.password);
         
-        BOOL doTest = NO;
+        BOOL doTest = YES;
         
         if (doTest) {
             //
