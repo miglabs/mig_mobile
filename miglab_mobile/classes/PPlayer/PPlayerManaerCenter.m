@@ -74,25 +74,29 @@ static PPlayerManaerCenter *instance;
 //用于单个实例控制
 -(id)getPlayer:(WhichPlayer)whichPlayer{
     
-    if (WhichPlayer_AVPlayer == whichPlayer) {
+    @synchronized(self) {
         
-        id avPlayer = [_dicPlayer objectForKey:@"WhichPlayer_AVPlayer"];
-        if (!avPlayer || ![avPlayer isKindOfClass:[PAMusicPlayer class]]) {
-            avPlayer = [[PAMusicPlayer alloc] init];
-            [_dicPlayer setValue:avPlayer forKey:@"WhichPlayer_AVPlayer"];
+        if (WhichPlayer_AVPlayer == whichPlayer) {
+            
+            id avPlayer = [_dicPlayer objectForKey:@"WhichPlayer_AVPlayer"];
+            if (!avPlayer || ![avPlayer isKindOfClass:[PAMusicPlayer class]]) {
+                avPlayer = [[PAMusicPlayer alloc] init];
+                [_dicPlayer setValue:avPlayer forKey:@"WhichPlayer_AVPlayer"];
+            }
+            
+            return avPlayer;
+            
+        } else if (WhichPlayer_AVAudioPlayer == whichPlayer) {
+            
+            id avAudioPlayer = [_dicPlayer objectForKey:@"WhichPlayer_AVAudioPlayer"];
+            if (!avAudioPlayer || ![avAudioPlayer isKindOfClass:[PAAMusicPlayer class]]) {
+                avAudioPlayer = [[PAAMusicPlayer alloc] init];
+                [_dicPlayer setValue:avAudioPlayer forKey:@"WhichPlayer_AVAudioPlayer"];
+            }
+            
+            return avAudioPlayer;
+            
         }
-        
-        return avPlayer;
-        
-    } else if (WhichPlayer_AVAudioPlayer == whichPlayer) {
-        
-        id avAudioPlayer = [_dicPlayer objectForKey:@"WhichPlayer_AVAudioPlayer"];
-        if (!avAudioPlayer || ![avAudioPlayer isKindOfClass:[PAAMusicPlayer class]]) {
-            avAudioPlayer = [[PAAMusicPlayer alloc] init];
-            [_dicPlayer setValue:avAudioPlayer forKey:@"WhichPlayer_AVAudioPlayer"];
-        }
-        
-        return avAudioPlayer;
         
     }
     
