@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161F850F178032100010090F /* PAAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850C178032100010090F /* PAAMusicPlayer.m */; };
+		161F8510178032100010090F /* PAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850E178032100010090F /* PAMusicPlayer.m */; };
 		1623165D1777397600CF8FB5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316021777397600CF8FB5 /* AFHTTPClient.m */; };
 		1623165E1777397600CF8FB5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316041777397600CF8FB5 /* AFHTTPRequestOperation.m */; };
 		1623165F1777397600CF8FB5 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316061777397600CF8FB5 /* AFImageRequestOperation.m */; };
@@ -67,6 +69,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		161F850B178032100010090F /* PAAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAMusicPlayer.h; sourceTree = "<group>"; };
+		161F850C178032100010090F /* PAAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAMusicPlayer.m; sourceTree = "<group>"; };
+		161F850D178032100010090F /* PAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMusicPlayer.h; sourceTree = "<group>"; };
+		161F850E178032100010090F /* PAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMusicPlayer.m; sourceTree = "<group>"; };
 		162316011777397600CF8FB5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		162316021777397600CF8FB5 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		162316031777397600CF8FB5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -352,6 +358,10 @@
 		1623168917773DC400CF8FB5 /* PPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				161F850B178032100010090F /* PAAMusicPlayer.h */,
+				161F850C178032100010090F /* PAAMusicPlayer.m */,
+				161F850D178032100010090F /* PAMusicPlayer.h */,
+				161F850E178032100010090F /* PAMusicPlayer.m */,
 				1623168A17773E2600CF8FB5 /* PMusicPlayerControllerView.h */,
 				1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */,
 				1627EA11177B1CFA0049F9F5 /* PMusicPlayer.h */,
@@ -578,6 +588,8 @@
 				163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */,
 				163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */,
 				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
+				161F850F178032100010090F /* PAAMusicPlayer.m in Sources */,
+				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,7 +629,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -638,7 +650,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

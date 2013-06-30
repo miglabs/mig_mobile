@@ -96,7 +96,7 @@
     
     PLog(@"do play...");
     
-    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"3" ofType:@"caf"];
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"qhc" ofType:@"caf"];
     BOOL fileexit = [[NSFileManager defaultManager] fileExistsAtPath:filepath];
     if (fileexit) {
         
