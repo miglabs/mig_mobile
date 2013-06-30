@@ -39,7 +39,7 @@
     
     PLog(@"initPlayer...");
     
-    if (!_song || !_song.songUrl) {
+    if (!_song || !_song.songurl) {
         return NO;
     }
     
@@ -53,7 +53,7 @@
          */
         if (_song.whereIsTheSong == WhereIsTheSong_IN_IPOD || _song.whereIsTheSong == WhereIsTheSong_IN_NET) {
             
-            NSURL *url = [NSURL URLWithString:_song.songUrl];
+            NSURL *url = [NSURL URLWithString:_song.songurl];
             AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
             _avPlayer = [AVPlayer playerWithPlayerItem:playerItem];
             

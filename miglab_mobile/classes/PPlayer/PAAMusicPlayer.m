@@ -38,7 +38,7 @@
     
     PLog(@"initPlayer...");
     
-    if (!_song || !_song.songUrl) {
+    if (!_song || !_song.songurl) {
         return NO;
     }
     
@@ -52,7 +52,7 @@
          */
         if (_song.whereIsTheSong == WhereIsTheSong_IN_APP || _song.whereIsTheSong == WhereIsTheSong_IN_CACHE) {
             
-            NSURL *url = [NSURL URLWithString:_song.songUrl];
+            NSURL *url = [NSURL URLWithString:_song.songurl];
             _avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
             _avAudioPlayer.delegate = self;
             
