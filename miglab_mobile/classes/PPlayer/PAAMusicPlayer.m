@@ -18,6 +18,16 @@
 @synthesize song = _song;
 @synthesize playerDestoried = _playerDestoried;
 
+-(id)init{
+    
+    self = [super init];
+    if (self) {
+        _playerDestoried = YES;
+    }
+    return self;
+    
+}
+
 /*
  先取消，后初始化
  */

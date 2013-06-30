@@ -19,6 +19,16 @@
 @synthesize playerDestoried = _playerDestoried;
 @synthesize isPlaying = _isPlaying;
 
+-(id)init{
+    
+    self = [super init];
+    if (self) {
+        _playerDestoried = YES;
+    }
+    return self;
+    
+}
+
 /*
  先取消，后初始化
  */

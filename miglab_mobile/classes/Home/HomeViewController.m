@@ -12,6 +12,7 @@
 #import "SongDownloadManager.h"
 #import "MigLabConfig.h"
 #import "UserSessionManager.h"
+#import "PPlayerManaerCenter.h"
 
 @interface HomeViewController ()
 
@@ -104,13 +105,25 @@
         tempSong.songUrl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
-        _aaMusicPlayer = [[PAAMusicPlayer alloc] init];
-        _aaMusicPlayer.song = tempSong;
+        _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+//        _aaMusicPlayer = [[PAAMusicPlayer alloc] init];
         
-        BOOL isPlayerInit = [_aaMusicPlayer initPlayer];
-        if (isPlayerInit) {
-            [_aaMusicPlayer play];
+        if (_aaMusicPlayer.playerDestoried) {
+            
+            _aaMusicPlayer.song = tempSong;
+            
+            BOOL isPlayerInit = [_aaMusicPlayer initPlayer];
+            if (isPlayerInit) {
+                [_aaMusicPlayer play];
+            }
+            
+        } else {
+            
+            [_aaMusicPlayer playerPlayPause];
+            
         }
+        
+        
         
     }
     
