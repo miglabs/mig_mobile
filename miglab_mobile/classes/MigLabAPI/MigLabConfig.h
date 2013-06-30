@@ -56,4 +56,7 @@
 #define NotificationNameDownloadFailed                      @"NotificationNameDownloadFailed"
 
 
+//注册
+#define HTTP_REGISTER                                       @"http://open.fm.miglab.com/api/regedit.fcgi"
+
 #endif

@@ -195,4 +195,50 @@
     
 }
 
+/*
+ 注册用户
+ <!--请求POST-->
+ http://open.fm.miglab.com/api/regedit.fcgi
+ */
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname gender:(int)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation age:(int)tage source:(int)tsource head:(NSString*)thead{
+    
+    NSString* registerUrl = HTTP_REGISTER;
+    NSLog(@"registerUrl: %@", registerUrl);
+    
+    NSURL* url = [NSURL URLWithString:registerUrl];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"%@&%@&%@&%d&%@&%@&%d&%d&%@", tusername, tpassword, tnickname, tgender, tbirthday, tlocation, tage, tsource, thead];
+    NSLog(@"httpBody: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    //    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //
+    //        NSString* result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+    //        NSLog(@"register return result: %@", result);
+    //
+    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //
+    //        NSLog(@"failure: %@", error);
+    //    }];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dictionary = JSON;
+        NSLog(@"result: %@", dictionary);
+        
+        //[NSNotificationCenter defaultCenter] postNotificationName:<#(NSString *)#> object:<#(id)#> userInfo:<#(NSDictionary *)#>
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        NSLog(@"failure: ");
+        
+    }];
+    
+    [operation start];
+}
+
 @end

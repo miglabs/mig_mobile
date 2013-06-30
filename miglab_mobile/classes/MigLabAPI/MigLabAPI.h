@@ -31,5 +31,10 @@
  */
 -(void)doGetUserInfo:(NSString *)tUserName accessToken:(NSString *)tAccessToken;
 
+/*
+ 注册用户信息
+ */
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname gender:(int)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation age:(int)tage source:(int)tsource head:(NSString*)thead;
+
 
 @end
