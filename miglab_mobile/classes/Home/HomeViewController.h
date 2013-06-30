@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PAAMusicPlayer.h"
 
 @interface HomeViewController : UIViewController
+
+@property (nonatomic, retain) PAAMusicPlayer *aaMusicPlayer;
+
+-(IBAction)doPlay:(id)sender;
 
 -(IBAction)doStart:(id)sender;
 -(IBAction)doPause:(id)sender;

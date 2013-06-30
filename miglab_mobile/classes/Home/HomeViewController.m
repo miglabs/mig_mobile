@@ -19,6 +19,8 @@
 
 @implementation HomeViewController
 
+@synthesize aaMusicPlayer = _aaMusicPlayer;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -88,6 +90,33 @@
     NSLog(@"getUserIdSuccess...");
     
 }
+
+//-------------------------
+-(IBAction)doPlay:(id)sender{
+    
+    PLog(@"do play...");
+    
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"3" ofType:@"caf"];
+    BOOL fileexit = [[NSFileManager defaultManager] fileExistsAtPath:filepath];
+    if (fileexit) {
+        
+        Song *tempSong = [[Song alloc] init];
+        tempSong.songUrl = filepath;
+        tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
+        
+        _aaMusicPlayer = [[PAAMusicPlayer alloc] init];
+        _aaMusicPlayer.song = tempSong;
+        
+        BOOL isPlayerInit = [_aaMusicPlayer initPlayer];
+        if (isPlayerInit) {
+            [_aaMusicPlayer play];
+        }
+        
+    }
+    
+}
+
+//-------------------------
 
 -(IBAction)doStart:(id)sender{
     
