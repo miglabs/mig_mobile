@@ -228,13 +228,44 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dictionary = JSON;
+        User* user = [[User alloc] init];
         NSLog(@"result: %@", dictionary);
         
-        //[NSNotificationCenter defaultCenter] postNotificationName:<#(NSString *)#> object:<#(id)#> userInfo:<#(NSDictionary *)#>
+        int status = [dictionary objectForKey:@"status"];
+        if (-1 == status) {
+            
+            NSString* msg = [dictionary objectForKey:@"msg"];
+            NSLog(@"server issue: %@", msg);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
+            
+        }
+        else if (0 == status){
+            
+            NSString* msg = [dictionary objectForKey:@"msg"];
+            NSLog(@"Operation failed: %@", msg);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
+            
+        }
+        else if (1 == status) {
+            
+            NSLog(@"Operation succeeded");
+            user.userid       = [dictionary objectForKey:@"userid"];
+            user.username     = [dictionary objectForKey:@"username"];
+            user.nickname     = [dictionary objectForKey:@"nickname"];
+            user.gender       = [dictionary objectForKey:@"birthday"];
+            user.location     = [dictionary objectForKey:@"location"];
+            user.age          = [dictionary objectForKey:@"age"];
+            user.source       = [dictionary objectForKey:@"source"];
+            user.head         = [dictionary objectForKey:@"head"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:user];
+            
+        }
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        NSLog(@"failure: ");
+        NSLog(@"failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
         
     }];
     

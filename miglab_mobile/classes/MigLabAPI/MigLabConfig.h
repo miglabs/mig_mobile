@@ -58,5 +58,7 @@
 
 //注册
 #define HTTP_REGISTER                                       @"http://open.fm.miglab.com/api/regedit.fcgi"
+#define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
+#define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
 #endif
