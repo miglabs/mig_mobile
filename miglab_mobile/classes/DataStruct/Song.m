@@ -19,6 +19,8 @@
 @synthesize coverUrl = _coverUrl;
 @synthesize like = _like;
 
+@synthesize whereIsTheSong = _whereIsTheSong;
+
 +(id)initWithNSDictionary:(NSDictionary *)dict{
     
     Song *song = nil;
