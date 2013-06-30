@@ -47,6 +47,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdFailed:) name:NotificationNameGetUserIdFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdSuccess:) name:NotificationNameGetUserIdSuccess object:nil];
     
+    //download
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProcess:) name:NotificationNameDownloadProcess object:nil];
+    
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     
@@ -102,7 +105,7 @@
     if (fileexit) {
         
         Song *tempSong = [[Song alloc] init];
-        tempSong.songUrl = filepath;
+        tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
         _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
@@ -131,11 +134,19 @@
 
 //-------------------------
 
+-(void)downloadProcess:(NSNotification *)tNotification{
+    
+    NSDictionary *dicProcess = [tNotification userInfo];
+    
+    PLog(@"downloadProcess: %@", dicProcess);
+    
+}
+
 -(IBAction)doStart:(id)sender{
     
     Song *song = [[Song alloc] init];
-    song.songId = 276269;
-    song.songUrl = @"http://umusic.9158.com//2013/06/27/10/36/276269_3e084a286f644b3caa3d701025b34ca3.mp3";
+    song.songid = 276269;
+    song.songurl = @"http://umusic.9158.com//2013/06/27/10/36/276269_3e084a286f644b3caa3d701025b34ca3.mp3";
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     songManager.song = song;
