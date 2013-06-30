@@ -76,12 +76,12 @@
     
     NSLog(@"initDownloadInfo...");
     
-    if (_song && _song.songId > 0 && _song.songUrl) {
+    if (_song && _song.songid > 0 && _song.songurl) {
         
-        NSString *songpath = [self getSongCachePath:_song.songId songExt:@".mp3"];
+        NSString *songpath = [self getSongCachePath:_song.songid songExt:@".mp3"];
         NSLog(@"songpath: %@", songpath);
         
-        NSURL *url = [NSURL URLWithString:_song.songUrl];
+        NSURL *url = [NSURL URLWithString:_song.songurl];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         
         long long offset = [SongDownloadManager getLocalFileSize:songpath];//local file size
@@ -95,6 +95,7 @@
         [_httpRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSLog(@"setCompletionBlockWithSuccess responseObject: %@", responseObject);
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadSuccess object:nil userInfo:nil];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
@@ -107,6 +108,11 @@
         [_httpRequestOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
             
             NSLog(@"bytesRead: %d, totalBytesRead: %lld, totalBytesExpectedToRead: %lld", bytesRead, totalBytesRead, totalBytesExpectedToRead);
+            
+            float downloadProcess = (float)(offset + totalBytesRead) / (float)(offset + totalBytesExpectedToRead);
+            NSDictionary *dicProcess = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:downloadProcess], @"DownloadProcess", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadProcess object:nil userInfo:dicProcess];
             
         }];
         
