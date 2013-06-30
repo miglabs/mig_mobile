@@ -13,5 +13,15 @@
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic, retain) NSString *userid;
+@property (nonatomic, retain) NSString *nickname;
+@property (nonatomic, assign) int gender;
+@property (nonatomic, assign) int type;                 //0为游客，1为用户
+@property (nonatomic, retain) NSString *birthday;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic, assign) int age;
+@property (nonatomic, assign) int source;
+@property (nonatomic, retain) NSString *head;
+
++(id)initWithNSDictionary:(NSDictionary *)dict;
 
 @end
