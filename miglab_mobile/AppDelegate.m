@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UncaughtExceptionHandler.h"
+#import <AVFoundation/AVFoundation.h>
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "User.h"
@@ -16,6 +17,7 @@
 //test
 #import "Song.h"
 #import "SongDownloadManager.h"
+#import "TestViewController.h"
 
 @implementation AppDelegate
 
@@ -31,6 +33,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self installUncaughtExceptionHandler];//
+    
+    //这种方式后台，可以连续播放非网络请求歌曲。遇到网络请求歌曲就废，需要后台申请task
+    /*
+     * AudioSessionInitialize用于处理中断处理，
+     * AVAudioSession主要调用setCategory和setActive方法来进行设置，
+     * AVAudioSessionCategoryPlayback一般用于支持后台播放
+     */
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *setCategoryError = nil;
+    [session setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
+    NSError *activationError = nil;
+    [session setActive:YES error:&activationError];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -56,6 +71,8 @@
         
         if (doTest) {
             //
+            TestViewController *testViewController = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
+            self.navController = [[UINavigationController alloc] initWithRootViewController:testViewController];
             
         } else {
             
