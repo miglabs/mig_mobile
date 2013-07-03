@@ -79,6 +79,7 @@
 		18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451131784017B00CFFAD4 /* PCustomTabBarViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451151784017B00CFFAD4 /* PCustomToolBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
+		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +210,8 @@
 		18A451151784017B00CFFAD4 /* PCustomToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomToolBarView.m; sourceTree = "<group>"; };
 		18A4511B1784023E00CFFAD4 /* NSString+PStringCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PStringCategory.h"; sourceTree = "<group>"; };
 		18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PStringCategory.m"; sourceTree = "<group>"; };
+		18A4512117841A0400CFFAD4 /* PDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDatabaseManager.h; sourceTree = "<group>"; };
+		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -546,6 +549,8 @@
 				18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */,
 				18A450F61783FA5E00CFFAD4 /* SongDownloadManager.h */,
 				18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */,
+				18A4512117841A0400CFFAD4 /* PDatabaseManager.h */,
+				18A4512217841A0400CFFAD4 /* PDatabaseManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -680,6 +685,7 @@
 				18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */,
 				18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */,
 				18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */,
+				18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

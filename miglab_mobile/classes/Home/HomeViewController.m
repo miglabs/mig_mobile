@@ -13,6 +13,7 @@
 #import "MigLabConfig.h"
 #import "UserSessionManager.h"
 #import "PPlayerManaerCenter.h"
+#import "PDatabaseManager.h"
 
 @interface HomeViewController ()
 
@@ -58,6 +59,11 @@
     
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doAuthLogin:username password:password];
+    
+    //test database
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager setSongMaxSize:231 type:@"mp3" fileMaxSize:2342343];
+    [databaseManager setSongMaxSize:231 type:@"mp3" fileMaxSize:2342343];
     
 }
 
