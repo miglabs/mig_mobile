@@ -73,6 +73,12 @@
 		18A451061783FCA700CFFAD4 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451041783FCA600CFFAD4 /* RightViewController.m */; };
 		18A451071783FCA700CFFAD4 /* RightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A451051783FCA700CFFAD4 /* RightViewController.xib */; };
 		18A4510B1783FD2700CFFAD4 /* DDMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4510A1783FD2700CFFAD4 /* DDMenuController.m */; };
+		18A451161784017B00CFFAD4 /* PCustomNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4510D1784017B00CFFAD4 /* PCustomNavigationBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		18A451171784017B00CFFAD4 /* PCustomTabBarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4510F1784017B00CFFAD4 /* PCustomTabBarItemView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		18A451181784017B00CFFAD4 /* PCustomTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451111784017B00CFFAD4 /* PCustomTabBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451131784017B00CFFAD4 /* PCustomTabBarViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451151784017B00CFFAD4 /* PCustomToolBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +197,18 @@
 		18A451051783FCA700CFFAD4 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightViewController.xib; sourceTree = "<group>"; };
 		18A451091783FD2700CFFAD4 /* DDMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMenuController.h; sourceTree = "<group>"; };
 		18A4510A1783FD2700CFFAD4 /* DDMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMenuController.m; sourceTree = "<group>"; };
+		18A4510C1784017B00CFFAD4 /* PCustomNavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomNavigationBarView.h; sourceTree = "<group>"; };
+		18A4510D1784017B00CFFAD4 /* PCustomNavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomNavigationBarView.m; sourceTree = "<group>"; };
+		18A4510E1784017B00CFFAD4 /* PCustomTabBarItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomTabBarItemView.h; sourceTree = "<group>"; };
+		18A4510F1784017B00CFFAD4 /* PCustomTabBarItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomTabBarItemView.m; sourceTree = "<group>"; };
+		18A451101784017B00CFFAD4 /* PCustomTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomTabBarView.h; sourceTree = "<group>"; };
+		18A451111784017B00CFFAD4 /* PCustomTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomTabBarView.m; sourceTree = "<group>"; };
+		18A451121784017B00CFFAD4 /* PCustomTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomTabBarViewController.h; sourceTree = "<group>"; };
+		18A451131784017B00CFFAD4 /* PCustomTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomTabBarViewController.m; sourceTree = "<group>"; };
+		18A451141784017B00CFFAD4 /* PCustomToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomToolBarView.h; sourceTree = "<group>"; };
+		18A451151784017B00CFFAD4 /* PCustomToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomToolBarView.m; sourceTree = "<group>"; };
+		18A4511B1784023E00CFFAD4 /* NSString+PStringCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PStringCategory.h"; sourceTree = "<group>"; };
+		18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PStringCategory.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +283,18 @@
 		162316351777397600CF8FB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18A4511B1784023E00CFFAD4 /* NSString+PStringCategory.h */,
+				18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */,
+				18A4510C1784017B00CFFAD4 /* PCustomNavigationBarView.h */,
+				18A4510D1784017B00CFFAD4 /* PCustomNavigationBarView.m */,
+				18A4510E1784017B00CFFAD4 /* PCustomTabBarItemView.h */,
+				18A4510F1784017B00CFFAD4 /* PCustomTabBarItemView.m */,
+				18A451101784017B00CFFAD4 /* PCustomTabBarView.h */,
+				18A451111784017B00CFFAD4 /* PCustomTabBarView.m */,
+				18A451121784017B00CFFAD4 /* PCustomTabBarViewController.h */,
+				18A451131784017B00CFFAD4 /* PCustomTabBarViewController.m */,
+				18A451141784017B00CFFAD4 /* PCustomToolBarView.h */,
+				18A451151784017B00CFFAD4 /* PCustomToolBarView.m */,
 				162316361777397600CF8FB5 /* UIImage+PImageCategory.h */,
 				162316371777397600CF8FB5 /* UIImage+PImageCategory.m */,
 				162316381777397600CF8FB5 /* UncaughtExceptionHandler.h */,
@@ -644,6 +674,12 @@
 				18A451011783FC9800CFFAD4 /* LeftViewController.m in Sources */,
 				18A451061783FCA700CFFAD4 /* RightViewController.m in Sources */,
 				18A4510B1783FD2700CFFAD4 /* DDMenuController.m in Sources */,
+				18A451161784017B00CFFAD4 /* PCustomNavigationBarView.m in Sources */,
+				18A451171784017B00CFFAD4 /* PCustomTabBarItemView.m in Sources */,
+				18A451181784017B00CFFAD4 /* PCustomTabBarView.m in Sources */,
+				18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */,
+				18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */,
+				18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

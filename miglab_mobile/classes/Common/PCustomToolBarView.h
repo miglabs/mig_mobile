@@ -16,14 +16,6 @@
 -(void)doMiddleAction;
 -(void)doRightAction;
 
-@optional
-//底部无规则菜单委托
--(void)doFirstAction;
--(void)doSecondAction;
--(void)doThirdAction;
--(void)doFourAction;
--(void)doFiveAction;
-
 @end
 
 @interface PCustomToolBarView : UIView{
@@ -38,12 +30,5 @@
 -(void)leftAction;
 -(void)middleAction;
 -(void)rightAction;
-
--(id)initWithCustomButtonBar;
--(void)firstAction;
--(void)secondAction;
--(void)thirdAction;
--(void)fourAction;
--(void)fiveAction;
 
 @end

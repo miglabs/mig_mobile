@@ -52,12 +52,13 @@
 
 +(NSString *)encodeUrlParameter:(NSString *)param{
     if (param) {
-        return (NSString *)
-        CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                  (__bridge CFStringRef)param,
-                                                                  NULL,
-                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                  kCFStringEncodingUTF8));;
+//        return (NSString *)
+//        CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                  (__bridge CFStringRef)param,
+//                                                                  NULL,
+//                                                                  (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+//                                                                  kCFStringEncodingUTF8));
+        return [param stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     
     return param;
@@ -72,5 +73,6 @@
     
     return param;
 }
+
 
 @end

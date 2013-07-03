@@ -8,8 +8,6 @@
 
 #import "PCustomToolBarView.h"
 #import "UIImage+PImageCategory.h"
-#import "UIGlossyButton.h"
-#import "UIView+LayerEffects.h"
 
 @implementation PCustomToolBarView
 
@@ -87,116 +85,6 @@
 -(void)rightAction{
     if (delegate && [delegate respondsToSelector:@selector(doRightAction)]) {
         [delegate doRightAction];
-    }
-}
-
--(id)initWithCustomButtonBar{
-    
-    self = [super initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 68, 320, 48)];
-    if (self) {
-        
-        //显示左边菜单
-        UIGlossyButton *first = [[UIGlossyButton alloc] init];
-        [first setFrame:CGRectMake(-10, -15, 68, 68)];
-        first.tintColor = [UIColor whiteColor];
-        [first useWhiteLabel: YES];
-        [first setTitle:@"菜单" forState:UIControlStateNormal];
-        first.buttonBorderWidth = 0.0f;
-        first.buttonCornerRadius = 50.0f;
-        first.backgroundOpacity = 0.5;
-        [first setShadow:[UIColor blackColor] opacity:0.8 offset:CGSizeMake(0, 1) blurRadius: 4];
-        [first addTarget:self action:@selector(firstAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:first];
-        [first release];
-        
-        //文字便笺
-        UIGlossyButton *second = [[UIGlossyButton alloc] init];
-        [second setFrame:CGRectMake(80, 5, 40, 40)];
-        second.tintColor = [UIColor whiteColor];
-        [second useWhiteLabel: YES];
-        [second setTitle:@"便签" forState:UIControlStateNormal];
-        second.buttonBorderWidth = 0.0f;
-        second.buttonCornerRadius = 40.0f;
-        second.backgroundOpacity = 0.5;
-        [second setShadow:[UIColor blackColor] opacity:0.8 offset:CGSizeMake(0, 1) blurRadius: 4];
-        [second addTarget:self action:@selector(secondAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:second];
-        [second release];
-        
-        //记忆语音
-        UIGlossyButton *third = [[UIGlossyButton alloc] init];
-        [third setFrame:CGRectMake(140, -25, 70, 70)];
-        third.tintColor = [UIColor whiteColor];
-        [third useWhiteLabel: YES];
-        [third setTitle:@"录音" forState:UIControlStateNormal];
-        third.buttonBorderWidth = 0.0f;
-        third.buttonCornerRadius = 40.0f;
-        third.backgroundOpacity = 0.5;
-        [third setShadow:[UIColor blackColor] opacity:0.8 offset:CGSizeMake(0, 1) blurRadius: 4];
-        [third addTarget:self action:@selector(thirdAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:third];
-        [third release];
-        
-        //个性照片
-        UIGlossyButton *four = [[UIGlossyButton alloc] init];
-        [four setFrame:CGRectMake(210, 10, 40, 40)];
-        four.tintColor = [UIColor whiteColor];
-        [four useWhiteLabel: YES];
-        [four setTitle:@"拍照" forState:UIControlStateNormal];
-        four.buttonBorderWidth = 0.0f;
-        four.buttonCornerRadius = 40.0f;
-        four.backgroundOpacity = 0.5;
-        [four setShadow:[UIColor blackColor] opacity:0.8 offset:CGSizeMake(0, 1) blurRadius: 4];
-        [four addTarget:self action:@selector(fourAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:four];
-        [four release];
-        
-        //魅力视频
-        UIGlossyButton *five = [[UIGlossyButton alloc] init];
-        [five setFrame:CGRectMake(270, -5, 50, 50)];
-        five.tintColor = [UIColor whiteColor];
-        [five useWhiteLabel: YES];
-        [five setTitle:@"视频" forState:UIControlStateNormal];
-        five.buttonBorderWidth = 0.0f;
-        five.buttonCornerRadius = 40.0f;
-        five.backgroundOpacity = 0.5;
-        [five setShadow:[UIColor blackColor] opacity:0.8 offset:CGSizeMake(0, 1) blurRadius: 4];
-        [five addTarget:self action:@selector(fiveAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:five];
-        [five release];
-        
-    }
-    return self;
-}
-
-//底部无规则菜单委托
--(void)firstAction{
-    if (delegate && [delegate respondsToSelector:@selector(doFirstAction)]) {
-        [delegate doFirstAction];
-    }
-}
-
--(void)secondAction{
-    if (delegate && [delegate respondsToSelector:@selector(doSecondAction)]) {
-        [delegate doSecondAction];
-    }
-}
-
--(void)thirdAction{
-    if (delegate && [delegate respondsToSelector:@selector(doThirdAction)]) {
-        [delegate doThirdAction];
-    }
-}
-
--(void)fourAction{
-    if (delegate && [delegate respondsToSelector:@selector(doFourAction)]) {
-        [delegate doFourAction];
-    }
-}
-
--(void)fiveAction{
-    if (delegate && [delegate respondsToSelector:@selector(doFiveAction)]) {
-        [delegate doFiveAction];
     }
 }
 
