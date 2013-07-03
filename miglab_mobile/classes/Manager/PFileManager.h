@@ -13,5 +13,7 @@
 -(NSString *)getCacheHomeDirectory;
 -(NSString *)createPath:(NSString *)tpath;
 -(long long)getLocalFileSize:(NSString *)filepath;
+//计算文件夹下文件的总大小
+-(long long)getFileSizeForDir:(NSString *)dir;
 
 @end

@@ -25,6 +25,11 @@
 @synthesize window = _window;
 @synthesize navController = _navController;
 
+@synthesize menuController = _menuController;
+@synthesize homeViewController = _homeViewController;
+@synthesize leftViewController = _leftViewController;
+@synthesize rightViewController = _rightViewController;
+
 //for crash
 -(void)installUncaughtExceptionHandler
 {
@@ -53,12 +58,16 @@
     // Override point for customization after application launch.
     
     //增加标识，用于判断是否是第一次启动应用...
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
+    if (NO && ![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunch"];
         
         GuideViewController *guideViewController = [[GuideViewController alloc] initWithNibName:@"GuideViewController" bundle:nil];
-        self.navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
+        _navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
+        _navController.navigationBar.hidden = YES;
+        
+        self.window.rootViewController = _navController;
+        [self.window addSubview:self.navController.view];
         
     } else {
         
@@ -69,26 +78,37 @@
         
         PLog(@"username: %@, password: %@", user.username, user.password);
         
-        BOOL doTest = YES;
+        BOOL doTest = NO;
         
         if (doTest) {
             //
             TestViewController *testViewController = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-            self.navController = [[UINavigationController alloc] initWithRootViewController:testViewController];
+            _navController = [[UINavigationController alloc] initWithRootViewController:testViewController];
+            _navController.navigationBar.hidden = YES;
+            
+            self.window.rootViewController = _navController;
+            [self.window addSubview:self.navController.view];
             
         } else {
             
-            HomeViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-            self.navController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+            _homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:_homeViewController];
+            [_navController.navigationBar setHidden:YES];
             
+            //menu
+            DDMenuController *rootController = [[DDMenuController alloc] initWithRootViewController:_navController];
+            _leftViewController = [[LeftViewController alloc] initWithNibName:@"LeftViewController" bundle:nil];
+            _rightViewController = [[RightViewController alloc] initWithNibName:@"RightViewController" bundle:nil];
+            rootController.leftViewController = _leftViewController;
+            rootController.rightViewController = _rightViewController;
+            
+            _menuController = rootController;
+            self.window.rootViewController =  rootController;
         }
         
     }//
     
-    _navController.navigationBar.hidden = YES;
-    self.window.rootViewController = _navController;
-    [self.window addSubview:self.navController.view];
-    
+    //
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

@@ -43,4 +43,28 @@
     return [fileAttributes fileSize];
 }
 
+//计算文件夹下文件的总大小
+-(long long)getFileSizeForDir:(NSString *)dir{
+    
+    long long size = 0;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *filelist = [fileManager contentsOfDirectoryAtPath:dir error:nil];
+    int fileCount = [filelist count];
+    for (int i=0; i<fileCount; i++) {
+        
+        NSString *fullPath = [dir stringByAppendingPathComponent:[filelist objectAtIndex:i]];
+        NSLog(@"fullPath: %@", fullPath);
+        
+        if ([fileManager fileExistsAtPath:fullPath isDirectory:YES]) {
+            size += [self getFileSizeForDir:fullPath];
+        } else {
+            size += [self getLocalFileSize:fullPath];
+        }
+        
+    }
+    
+    return size;
+}
+
 @end

@@ -142,6 +142,7 @@
     
 }
 
+/*
 -(IBAction)doStart:(id)sender{
     
     Song *song = [[Song alloc] init];
@@ -171,5 +172,6 @@
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     [songManager doResume];
 }
+*/
 
 @end

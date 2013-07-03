@@ -42,7 +42,6 @@
 		1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */; };
 		1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1623168E17773E6F00CF8FB5 /* MigLabAPI.m */; };
 		1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1627EA0E177B1CDB0049F9F5 /* qhc.caf */; };
-		1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA19177B24D60049F9F5 /* UserSessionManager.m */; };
 		1627EA21177B25600049F9F5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA20177B25600049F9F5 /* User.m */; };
 		163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
@@ -60,12 +59,20 @@
 		16EDEF4E1759AD5E001BE4E9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDEF4D1759AD5E001BE4E9 /* Default.png */; };
 		16EDEF501759AD5E001BE4E9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDEF4F1759AD5E001BE4E9 /* Default@2x.png */; };
 		16EDEF521759AD5E001BE4E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDEF511759AD5E001BE4E9 /* Default-568h@2x.png */; };
-		183E022A177C32CC00EE8944 /* SongDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E0229177C32CC00EE8944 /* SongDownloadManager.m */; };
 		183E022D177C33A300EE8944 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E022C177C33A300EE8944 /* Song.m */; };
 		183E0237177C408E00EE8944 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E0235177C408E00EE8944 /* HomeViewController.m */; };
 		183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E0236177C408E00EE8944 /* HomeViewController.xib */; };
 		183E023D177C413800EE8944 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E023B177C413800EE8944 /* TestViewController.m */; };
 		183E023E177C413800EE8944 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E023C177C413800EE8944 /* TestViewController.xib */; };
+		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
+		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
+		18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */; };
+		18A450FD1783FC2700CFFAD4 /* UserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450FC1783FC2700CFFAD4 /* UserSessionManager.m */; };
+		18A451011783FC9800CFFAD4 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450FF1783FC9800CFFAD4 /* LeftViewController.m */; };
+		18A451021783FC9800CFFAD4 /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A451001783FC9800CFFAD4 /* LeftViewController.xib */; };
+		18A451061783FCA700CFFAD4 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451041783FCA600CFFAD4 /* RightViewController.m */; };
+		18A451071783FCA700CFFAD4 /* RightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A451051783FCA700CFFAD4 /* RightViewController.xib */; };
+		18A4510B1783FD2700CFFAD4 /* DDMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4510A1783FD2700CFFAD4 /* DDMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,8 +141,6 @@
 		1623168E17773E6F00CF8FB5 /* MigLabAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigLabAPI.m; sourceTree = "<group>"; };
 		1623169317773EA800CF8FB5 /* MigLabConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MigLabConfig.h; sourceTree = "<group>"; };
 		1627EA0E177B1CDB0049F9F5 /* qhc.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = qhc.caf; sourceTree = "<group>"; };
-		1627EA18177B24D60049F9F5 /* UserSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSessionManager.h; sourceTree = "<group>"; };
-		1627EA19177B24D60049F9F5 /* UserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionManager.m; sourceTree = "<group>"; };
 		1627EA1F177B25600049F9F5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1627EA20177B25600049F9F5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PObjectCategory.h"; sourceTree = "<group>"; };
@@ -162,8 +167,6 @@
 		16EDEF4D1759AD5E001BE4E9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		16EDEF4F1759AD5E001BE4E9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		16EDEF511759AD5E001BE4E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		183E0228177C32CC00EE8944 /* SongDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDownloadManager.h; sourceTree = "<group>"; };
-		183E0229177C32CC00EE8944 /* SongDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDownloadManager.m; sourceTree = "<group>"; };
 		183E022B177C33A300EE8944 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		183E022C177C33A300EE8944 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		183E0234177C408E00EE8944 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -172,6 +175,22 @@
 		183E023A177C413800EE8944 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		183E023B177C413800EE8944 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		183E023C177C413800EE8944 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		18A450F21783FA5E00CFFAD4 /* PFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileManager.h; sourceTree = "<group>"; };
+		18A450F31783FA5E00CFFAD4 /* PFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileManager.m; sourceTree = "<group>"; };
+		18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHttpDownloader.h; sourceTree = "<group>"; };
+		18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHttpDownloader.m; sourceTree = "<group>"; };
+		18A450F61783FA5E00CFFAD4 /* SongDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDownloadManager.h; sourceTree = "<group>"; };
+		18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDownloadManager.m; sourceTree = "<group>"; };
+		18A450FB1783FC2700CFFAD4 /* UserSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSessionManager.h; sourceTree = "<group>"; };
+		18A450FC1783FC2700CFFAD4 /* UserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionManager.m; sourceTree = "<group>"; };
+		18A450FE1783FC9800CFFAD4 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		18A450FF1783FC9800CFFAD4 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		18A451001783FC9800CFFAD4 /* LeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
+		18A451031783FCA600CFFAD4 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		18A451041783FCA600CFFAD4 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		18A451051783FCA700CFFAD4 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightViewController.xib; sourceTree = "<group>"; };
+		18A451091783FD2700CFFAD4 /* DDMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMenuController.h; sourceTree = "<group>"; };
+		18A4510A1783FD2700CFFAD4 /* DDMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMenuController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +219,8 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				18A451081783FD2700CFFAD4 /* DDMenuController */,
+				18A450F11783FA5E00CFFAD4 /* Manager */,
 				163BCE0F177C96DC008656D1 /* CTMBase64 */,
 				183E0239177C412D00EE8944 /* Test */,
 				183E0233177C408100EE8944 /* Home */,
@@ -338,10 +359,6 @@
 				1623168D17773E6F00CF8FB5 /* MigLabAPI.h */,
 				1623168E17773E6F00CF8FB5 /* MigLabAPI.m */,
 				1623169317773EA800CF8FB5 /* MigLabConfig.h */,
-				1627EA18177B24D60049F9F5 /* UserSessionManager.h */,
-				1627EA19177B24D60049F9F5 /* UserSessionManager.m */,
-				183E0228177C32CC00EE8944 /* SongDownloadManager.h */,
-				183E0229177C32CC00EE8944 /* SongDownloadManager.m */,
 				163BCE0B177C9672008656D1 /* PCommonUtil.h */,
 				163BCE0C177C9672008656D1 /* PCommonUtil.m */,
 			);
@@ -468,6 +485,12 @@
 				183E0234177C408E00EE8944 /* HomeViewController.h */,
 				183E0235177C408E00EE8944 /* HomeViewController.m */,
 				183E0236177C408E00EE8944 /* HomeViewController.xib */,
+				18A450FE1783FC9800CFFAD4 /* LeftViewController.h */,
+				18A450FF1783FC9800CFFAD4 /* LeftViewController.m */,
+				18A451001783FC9800CFFAD4 /* LeftViewController.xib */,
+				18A451031783FCA600CFFAD4 /* RightViewController.h */,
+				18A451041783FCA600CFFAD4 /* RightViewController.m */,
+				18A451051783FCA700CFFAD4 /* RightViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -480,6 +503,30 @@
 				183E023C177C413800EE8944 /* TestViewController.xib */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		18A450F11783FA5E00CFFAD4 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				18A450FB1783FC2700CFFAD4 /* UserSessionManager.h */,
+				18A450FC1783FC2700CFFAD4 /* UserSessionManager.m */,
+				18A450F21783FA5E00CFFAD4 /* PFileManager.h */,
+				18A450F31783FA5E00CFFAD4 /* PFileManager.m */,
+				18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */,
+				18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */,
+				18A450F61783FA5E00CFFAD4 /* SongDownloadManager.h */,
+				18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		18A451081783FD2700CFFAD4 /* DDMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				18A451091783FD2700CFFAD4 /* DDMenuController.h */,
+				18A4510A1783FD2700CFFAD4 /* DDMenuController.m */,
+			);
+			path = DDMenuController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,6 +588,8 @@
 				1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */,
 				183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */,
 				183E023E177C413800EE8944 /* TestViewController.xib in Resources */,
+				18A451021783FC9800CFFAD4 /* LeftViewController.xib in Resources */,
+				18A451071783FCA700CFFAD4 /* RightViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,9 +627,7 @@
 				162316761777397600CF8FB5 /* GuideViewController.m in Sources */,
 				1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */,
 				1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */,
-				1627EA1A177B24D60049F9F5 /* UserSessionManager.m in Sources */,
 				1627EA21177B25600049F9F5 /* User.m in Sources */,
-				183E022A177C32CC00EE8944 /* SongDownloadManager.m in Sources */,
 				183E022D177C33A300EE8944 /* Song.m in Sources */,
 				183E0237177C408E00EE8944 /* HomeViewController.m in Sources */,
 				183E023D177C413800EE8944 /* TestViewController.m in Sources */,
@@ -590,6 +637,13 @@
 				161F850F178032100010090F /* PAAMusicPlayer.m in Sources */,
 				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
 				161F851E178033D90010090F /* PPlayerManaerCenter.m in Sources */,
+				18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */,
+				18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */,
+				18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */,
+				18A450FD1783FC2700CFFAD4 /* UserSessionManager.m in Sources */,
+				18A451011783FC9800CFFAD4 /* LeftViewController.m in Sources */,
+				18A451061783FCA700CFFAD4 /* RightViewController.m in Sources */,
+				18A4510B1783FD2700CFFAD4 /* DDMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,7 +683,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -650,7 +704,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
