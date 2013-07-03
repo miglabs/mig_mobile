@@ -29,13 +29,10 @@
     self = [super init];
     if (self) {
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadFailed:) name:NotificationNameDownloadFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProcess:) name:NotificationNameDownloadProcess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadSuccess:) name:NotificationNameDownloadSuccess object:nil];
-        
         _songCacheDirectory = [self getSongCacheDirectory];
         _lrcCacheDirectory = [self getLrcCacheDirectory];
         _downloader = [[PHttpDownloader alloc] init];
+        
     }
     
     return self;
@@ -55,18 +52,6 @@
     NSString *lrcCacheDirectory = [cacheHome stringByAppendingPathComponent:@"Lrc"];
     
     return [super createPath:lrcCacheDirectory];
-}
-
--(void)downloadFailed:(NSNotification *)tNotification{
-    PLog(@"downloadFailed...");
-}
-
--(void)downloadProcess:(NSNotification *)tNotification{
-    PLog(@"downloadProcess...");
-}
-
--(void)downloadSuccess:(NSNotification *)tNotification{
-    PLog(@"downloadSuccess...");
 }
 
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext{
@@ -118,6 +103,12 @@
 -(void)downloadPause{
     
     [_downloader doPause];
+    
+}
+
+-(void)downloadResume{
+    
+    [_downloader doResume];
     
 }
 

@@ -48,7 +48,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdSuccess:) name:NotificationNameGetUserIdSuccess object:nil];
     
     //download
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadFailed:) name:NotificationNameDownloadFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProcess:) name:NotificationNameDownloadProcess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadSuccess:) name:NotificationNameDownloadSuccess object:nil];
+    
     
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
@@ -109,7 +112,6 @@
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
         _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-//        _aaMusicPlayer = [[PAAMusicPlayer alloc] init];
         
         if (_aaMusicPlayer.playerDestoried) {
             
@@ -134,15 +136,6 @@
 
 //-------------------------
 
--(void)downloadProcess:(NSNotification *)tNotification{
-    
-    NSDictionary *dicProcess = [tNotification userInfo];
-    
-    PLog(@"downloadProcess: %@", dicProcess);
-    
-}
-
-/*
 -(IBAction)doStart:(id)sender{
     
     Song *song = [[Song alloc] init];
@@ -150,28 +143,35 @@
     song.songurl = @"http://umusic.9158.com//2013/06/27/10/36/276269_3e084a286f644b3caa3d701025b34ca3.mp3";
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
-    songManager.song = song;
-    
-    if ([songManager initDownloadInfo]) {
-        
-        [songManager doStart];
-        
-    }
+    [songManager downloadStart:song];
     
 }
 
 -(IBAction)doPause:(id)sender{
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
-    [songManager doPause];
+    [songManager downloadPause];
     
 }
 
 -(IBAction)doResume:(id)sender{
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
-    [songManager doResume];
+    [songManager downloadResume];
 }
-*/
+
+-(void)downloadFailed:(NSNotification *)tNotification{
+    PLog(@"downloadFailed...");
+}
+
+-(void)downloadProcess:(NSNotification *)tNotification{
+    
+    NSDictionary *dicProcess = [tNotification userInfo];
+    PLog(@"downloadProcess: %@", dicProcess);
+}
+
+-(void)downloadSuccess:(NSNotification *)tNotification{
+    PLog(@"downloadSuccess...");
+}
 
 @end

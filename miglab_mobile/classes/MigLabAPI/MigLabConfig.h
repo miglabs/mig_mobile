@@ -52,12 +52,12 @@
 #define NotificationNameGetUserIdFailed                     @"NotificationNameGetUserIdFailed"
 
 
-//下载失败
-#define NotificationNameDownloadFailed                      @"NotificationNameDownloadFailed"
-//下载进度
-#define NotificationNameDownloadProcess                     @"NotificationNameDownloadProcess"
-//下载成功
-#define NotificationNameDownloadSuccess                     @"NotificationNameDownloadSuccess"
+////下载失败
+//#define NotificationNameDownloadFailed                      @"NotificationNameDownloadFailed"
+////下载进度
+//#define NotificationNameDownloadProcess                     @"NotificationNameDownloadProcess"
+////下载成功
+//#define NotificationNameDownloadSuccess                     @"NotificationNameDownloadSuccess"
 
 
 //注册

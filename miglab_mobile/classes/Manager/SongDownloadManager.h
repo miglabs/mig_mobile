@@ -21,10 +21,6 @@
 -(NSString *)getSongCacheDirectory;
 -(NSString *)getLrcCacheDirectory;
 
--(void)downloadFailed:(NSNotification *)tNotification;
--(void)downloadProcess:(NSNotification *)tNotification;
--(void)downloadSuccess:(NSNotification *)tNotification;
-
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext;
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext;
 
@@ -32,6 +28,7 @@
 -(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath;
 
 -(void)downloadPause;
+-(void)downloadResume;
 -(void)downloadStop;
 
 @end

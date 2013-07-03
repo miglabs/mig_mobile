@@ -19,4 +19,8 @@
 -(IBAction)doPause:(id)sender;
 -(IBAction)doResume:(id)sender;
 
+-(void)downloadFailed:(NSNotification *)tNotification;
+-(void)downloadProcess:(NSNotification *)tNotification;
+-(void)downloadSuccess:(NSNotification *)tNotification;
+
 @end
