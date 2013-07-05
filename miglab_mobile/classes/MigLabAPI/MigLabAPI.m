@@ -13,6 +13,7 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "UserSessionManager.h"
+#import "Song.h"
 
 @implementation MigLabAPI
 
@@ -260,6 +261,48 @@
     
     [operation start];
     
+}
+
+/*
+ 获取默认推荐歌曲接口
+ <!--请求Get-->
+ http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001
+ */
+-(void)getDefaultMusic:(NSString *)ttype token:(NSString *)ttoken uid:(int)tuid {
+
+    NSString* musicUrl = HTTP_DEFAULTMUSIC;
+    NSLog(@"musicUrl: %@", musicUrl);
+    
+    NSURL* url = [NSURL URLWithString:musicUrl];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status)
+        {
+            Song* song = [dicJson objectForKey:@"song"];
+            NSDictionary* dicSong = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicSuccess object:nil userInfo:dicSong];
+        }
+        else
+        {
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicError = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicFailed object:nil userInfo:dicError];
+        }
+        
+            
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    
+        NSLog(@"failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
 }
 
 @end

@@ -65,4 +65,9 @@
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
+//默认推荐歌曲
+#define HTTP_DEFAULTMUSIC                                   @"http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001"
+#define NotificationNameGetDefaultMusicSuccess              @"NotificationNameGetDefaultMusicSuccess"
+#define NotificationNameGetDefaultMusicFailed               @"NotificationNameGetDefaultMusicFailed"
+
 #endif

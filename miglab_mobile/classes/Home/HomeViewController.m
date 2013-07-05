@@ -60,6 +60,9 @@
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doAuthLogin:username password:password];
     
+    [miglabAPI doRegister:@"archer" password:@"123456" nickname:@"archer" gender:1 birthday:@"1987-08-23" location:@"china" age:20 source:0 head:@""];
+    
+    
     //test database
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager setSongMaxSize:231 type:@"mp3" fileMaxSize:2342343];
@@ -89,7 +92,6 @@
     
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doGetUserInfo:username accessToken:accesstoken];
-    
 }
 
 -(void)getUserIdFailed:(NSNotification *)tNotification{

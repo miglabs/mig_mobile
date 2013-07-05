@@ -36,5 +36,10 @@
  */
 -(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname gender:(int)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation age:(int)tage source:(int)tsource head:(NSString*)thead;
 
+/*
+ 获取默认推荐歌曲歌曲
+ */
+-(void)getDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
+
 
 @end
