@@ -34,12 +34,17 @@
 /*
  注册用户信息
  */
--(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname gender:(int)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation age:(int)tage source:(int)tsource head:(NSString*)thead;
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(int)tsource;
 
 /*
  获取默认推荐歌曲歌曲
  */
--(void)getDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
+-(void)doGetDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
+
+/*
+ 收藏歌曲
+ */
+-(void)doAddFavorite:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
 
 
 @end

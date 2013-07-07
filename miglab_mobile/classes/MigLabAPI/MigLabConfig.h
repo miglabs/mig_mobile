@@ -61,7 +61,7 @@
 
 
 //注册
-#define HTTP_REGISTER                                       @"http://open.fm.miglab.com/api/regedit.fcgi"
+#define HTTP_REGISTER                                       @"http://42.121.14.108/cgi-bin/regedit.fcgi"
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
@@ -69,5 +69,10 @@
 #define HTTP_DEFAULTMUSIC                                   @"http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001"
 #define NotificationNameGetDefaultMusicSuccess              @"NotificationNameGetDefaultMusicSuccess"
 #define NotificationNameGetDefaultMusicFailed               @"NotificationNameGetDefaultMusicFailed"
+
+//添加收藏
+#define HTTP_ADDFAVORITE                                    @"http://open.fm.miglab.com/api/collectsong.fcgi"
+#define NotificationNameAddFavoriteSuccess                  @"NotificationNameAddFavoriteSuccess"
+#define NotificationNameAddFavoriteFailed                   @"NotificationNameAddFavoriteFailed"
 
 #endif

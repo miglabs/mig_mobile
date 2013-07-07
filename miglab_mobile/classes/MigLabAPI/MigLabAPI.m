@@ -199,21 +199,25 @@
 /*
  注册用户
  <!--请求POST-->
- http://open.fm.miglab.com/api/regedit.fcgi
+ HTTP_REGISTER
  */
--(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname gender:(int)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation age:(int)tage source:(int)tsource head:(NSString*)thead{
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(int)tsource {
     
     NSString* registerUrl = HTTP_REGISTER;
-    NSLog(@"registerUrl: %@", registerUrl);
+    PLog(@"registerUrl: %@", registerUrl);
     
     NSURL* url = [NSURL URLWithString:registerUrl];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&gender=%d&birthday=%@&location=%@&age=%d&source=%d&head=%@", tusername, tpassword, tnickname, tgender, tbirthday, tlocation, tage, tsource, thead];
-    NSLog(@"httpBody: %@", httpBody);
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    
+    //NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&gender=%d&birthday=%@&location=%@&age=%d&source=%d&head=%@", tusername, tpassword, tnickname, tgender, tbirthday, tlocation, tage, tsource, thead];
+    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d", tusername, tpassword, tnickname, tsource];
+    PLog(@"httpBody: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
@@ -221,32 +225,28 @@
         PLog(@"result: %@", dicJson);
         
         int status = [[dicJson objectForKey:@"status"] intValue];
-        if (-1 == status) {
+        
+        if (1 == status) {
             
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            NSLog(@"server issue: %@", msg);
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
-            
-        } else if (0 == status) {
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            NSLog(@"Operation failed: %@", msg);
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
-            
-        } else if (1 == status) {
-            
-            NSLog(@"Operation succeeded");
+            PLog(@"Operation succeeded");
             
             User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:dicResult];
             
-        } else {
+        }
+        else if(0 == status || -1 == status){
+            
+            NSString* encodeMsg = [dicJson objectForKey:@"msg"];
+            NSString* msg = [NSString stringWithUTF8String:[encodeMsg cStringUsingEncoding:[NSString defaultCStringEncoding]]];
+            PLog(@"Operation failed: %@", msg);
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
+            
+        }
+        else {
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
             
@@ -254,7 +254,7 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
         
     }];
@@ -268,10 +268,10 @@
  <!--请求Get-->
  http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001
  */
--(void)getDefaultMusic:(NSString *)ttype token:(NSString *)ttoken uid:(int)tuid {
+-(void)doGetDefaultMusic:(NSString *)ttype token:(NSString *)ttoken uid:(int)tuid {
 
     NSString* musicUrl = HTTP_DEFAULTMUSIC;
-    NSLog(@"musicUrl: %@", musicUrl);
+    PLog(@"musicUrl: %@", musicUrl);
     
     NSURL* url = [NSURL URLWithString:musicUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -297,12 +297,61 @@
             
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
     
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicFailed object:nil userInfo:nil];
         
     }];
     
     [operation start];
+}
+
+/*
+添加歌曲到收藏列表
+ <!--请求POST-->
+ HTTP_ADDFAVORITE
+ */
+-(void)doAddFavorite:(NSString *)ttoken uid:(int)tuid sid:(long)tsid {
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDFAVORITE]];
+    
+    
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%d&songid=%ld", ttoken, tuid, tsid];
+    PLog(@"httpBody: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeed");
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteSuccess object:nil userInfo:nil];
+            
+        }
+        else {
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            PLog(@"operation failed: %@", msg);
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
+            
+        }
+        
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
 }
 
 @end
