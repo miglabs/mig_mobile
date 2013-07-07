@@ -238,8 +238,7 @@
         }
         else if(0 == status || -1 == status){
             
-            NSString* encodeMsg = [dicJson objectForKey:@"msg"];
-            NSString* msg = [NSString stringWithUTF8String:[encodeMsg cStringUsingEncoding:[NSString defaultCStringEncoding]]];
+            NSString* msg = [dicJson objectForKey:@"msg"];
             PLog(@"Operation failed: %@", msg);
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
@@ -256,6 +255,106 @@
         
         PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 生成游客信息
+ <!--请求Get-->
+ HTTP_GUEST
+ */
+-(void)doGetGuestInfo {
+    
+    PLog(@"guest url: %@", HTTP_GUEST);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_GUEST]];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeeded");
+            
+            User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, "result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetGuestSuccess object:nil userInfo:dicResult];
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserIdFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserIdFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 更新用户信息
+ <!--请求POST-->
+ HTTP_UPDATEUSER
+ */
+-(void)doUpdateUserInfo:(NSString *)tuid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
+    
+    PLog(@"update url: %@", HTTP_UPDATEUSER);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_UPDATEUSER]];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", tuid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeed");
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserSuccess object:nil userInfo:nil];
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserFailed object:nil userInfo:nil];
         
     }];
     
@@ -312,11 +411,11 @@
  */
 -(void)doAddFavorite:(NSString *)ttoken uid:(int)tuid sid:(long)tsid {
     
+    PLog(@"add favorite url: %@", HTTP_ADDFAVORITE);
+    
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDFAVORITE]];
     
-    
     NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%d&songid=%ld", ttoken, tuid, tsid];
-    PLog(@"httpBody: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -347,6 +446,53 @@
         
         PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 添加黑名单
+ <!--请求POST-->
+ HTTP_ADDBLACKLIST
+ */
+-(void)doAddBlacklist:(NSString *)ttoken uid:(int)tuid sid:(long)tsid {
+    
+    PLog(@"add blacklist url: %@", HTTP_ADDBLACKLIST);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDBLACKLIST]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%d&songid=%ld", ttoken, tuid, tsid];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeed");
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistSuccess object:nil userInfo:nil];
+            
+        }
+        else {
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            PLog(@"operation failed: %@", msg);
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:nil];
         
     }];
     

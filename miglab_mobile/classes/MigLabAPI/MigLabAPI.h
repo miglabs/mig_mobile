@@ -17,6 +17,8 @@
  60.191.220.135   fm.miglab.com
  */
 
+/************************* 用户 ****************************/
+
 /*
  SSO的登录
  http://sso.miglab.com/cgi-bin/sp.fcgi?sp
@@ -37,6 +39,19 @@
 -(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(int)tsource;
 
 /*
+ 生成游客信息
+ */
+-(void)doGetGuestInfo;
+
+/*
+ 更新用户信息
+ */
+-(void)doUpdateUserInfo:(NSString*)tuid token:(NSString*)ttoken username:(NSString*)tusername nickname:(NSString*)tnickname gender:(NSString*)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation source:(NSString*)tsource head:(NSString*)thead;
+
+
+/************************* 歌曲 ****************************/
+
+/*
  获取默认推荐歌曲歌曲
  */
 -(void)doGetDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
@@ -45,6 +60,11 @@
  收藏歌曲
  */
 -(void)doAddFavorite:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
+
+/*
+ 歌曲拉黑
+ */
+-(void)doAddBlacklist:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
 
 
 @end

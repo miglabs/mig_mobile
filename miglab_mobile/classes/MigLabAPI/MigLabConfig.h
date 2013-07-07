@@ -65,6 +65,16 @@
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
+//游客信息
+#define HTTP_GUEST                                          @"http://open.fm.miglab.com/api/guest.fcgi"
+#define NotificationNameGetGuestSuccess                     @"NotificationNameGetGuestSuccess"
+#define NotificationNameGetGuestFailed                      @"NotificationNameGetGuestFailed"
+
+//更新用户信息
+#define HTTP_UPDATEUSER                                     @"http://open.fm.miglab.com/api/usrupdate.fcgi"
+#define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"
+#define NotificationUpdateUserFailed                        @"NotificationUpdateUserFailed"
+
 //默认推荐歌曲
 #define HTTP_DEFAULTMUSIC                                   @"http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001"
 #define NotificationNameGetDefaultMusicSuccess              @"NotificationNameGetDefaultMusicSuccess"
@@ -74,5 +84,10 @@
 #define HTTP_ADDFAVORITE                                    @"http://open.fm.miglab.com/api/collectsong.fcgi"
 #define NotificationNameAddFavoriteSuccess                  @"NotificationNameAddFavoriteSuccess"
 #define NotificationNameAddFavoriteFailed                   @"NotificationNameAddFavoriteFailed"
+
+//添加黑名单
+#define HTTP_ADDBLACKLIST                                   @"http://open.fm.miglab.com/api/hatsong.fcgi"
+#define NotificationNameAddBlacklistSuccess                 @"NotificationNameAddBlacklistSuccess"
+#define NotificationNameAddBlacklistFailed                  @"NotificationNameAddBlacklistFailed"
 
 #endif
