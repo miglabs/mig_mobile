@@ -95,6 +95,10 @@
 #define NotificationNamePresentMusicSuccess                 @"NotificationNamePresentMusicSuccess"
 #define NotificationNamePresentMusicFailed                  @"NotificationNamePresentMusicFailed"
 
+//分享歌曲
+#define HTTP_SHAREMUSIC                                     @"http://open.fm.miglab.com/api/sharesong.fcgi"
+#define NotificationNameShareMusicSuccess                   @"NotificationNameShareMusicSuccess"
+#define NotificationNameShareMusicFailed                    @"NotificationNameShareMusicFailed"
 
 
 #endif

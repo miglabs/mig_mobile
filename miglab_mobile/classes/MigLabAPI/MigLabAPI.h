@@ -71,5 +71,10 @@
  */
 -(void)doPresentMusic:(int)senduid touid:(int)ttouid token:(NSString*)ttoken sid:(long)tsid;
 
+/*
+ 分享歌曲
+ */
+-(void)doShareMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid platform:(int)tplatform;
+
 
 @end
