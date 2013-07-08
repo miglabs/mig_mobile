@@ -90,4 +90,11 @@
 #define NotificationNameAddBlacklistSuccess                 @"NotificationNameAddBlacklistSuccess"
 #define NotificationNameAddBlacklistFailed                  @"NotificationNameAddBlacklistFailed"
 
+//赠送歌曲
+#define HTTP_PRESENTMUSIC                                   @"http://open.fm.miglab.com/api/sendsong.fcgi"
+#define NotificationNamePresentMusicSuccess                 @"NotificationNamePresentMusicSuccess"
+#define NotificationNamePresentMusicFailed                  @"NotificationNamePresentMusicFailed"
+
+
+
 #endif

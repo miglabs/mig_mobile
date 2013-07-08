@@ -66,5 +66,10 @@
  */
 -(void)doAddBlacklist:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
 
+/*
+ 赠送歌曲
+ */
+-(void)doPresentMusic:(int)senduid touid:(int)ttouid token:(NSString*)ttoken sid:(long)tsid;
+
 
 @end
