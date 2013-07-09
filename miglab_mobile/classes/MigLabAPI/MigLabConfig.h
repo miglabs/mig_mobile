@@ -100,5 +100,10 @@
 #define NotificationNameShareMusicSuccess                   @"NotificationNameShareMusicSuccess"
 #define NotificationNameShareMusicFailed                    @"NotificationNameShareMusicFailed"
 
+//上传用户本地歌曲信息
+#define HTTP_UPLOADMUSIC                                    @"http://open.fm.miglab.com/api/updatesong.fcgi"
+#define NotificationNameUploadMusicSuccess                  @"NotificationNameUploadMusicSuccess"
+#define NotificationNameUploadMusicFailed                   @"NotificationNameUploadMusicFailed"
+
 
 #endif

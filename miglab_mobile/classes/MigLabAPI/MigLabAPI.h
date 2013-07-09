@@ -76,5 +76,10 @@
  */
 -(void)doShareMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid platform:(int)tplatform;
 
+/*
+ 上传本地歌曲信息
+ */
+-(void)doUploadMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent;
+
 
 @end
