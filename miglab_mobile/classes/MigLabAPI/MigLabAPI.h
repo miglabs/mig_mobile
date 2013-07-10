@@ -81,5 +81,20 @@
  */
 -(void)doUploadMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent;
 
+/*
+ 获取附近的人
+ */
+-(void)doGetNearbyUser:(int)uid token:(NSString*)ttoken page:(int)tpage;
+
+/*
+ 获取某个用户歌单
+ */
+-(void)doGetListFromUser:(int)uid sid:(long)tsid token:(NSString*)ttoken;
+
+/*
+ 获取用户正在听的歌曲
+ */
+-(void)doGetPlayingMusicFromUser:(int)uid token:(NSString*)ttoken begin:(int)tbegin page:(int)tpage;
+
 
 @end

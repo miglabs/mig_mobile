@@ -105,5 +105,20 @@
 #define NotificationNameUploadMusicSuccess                  @"NotificationNameUploadMusicSuccess"
 #define NotificationNameUploadMusicFailed                   @"NotificationNameUploadMusicFailed"
 
+//获取附近用户
+#define HTTP_NEARBYUSER                                     @"http://open.fm.miglab.com/api/getusrpos.fcgi"
+#define NotificationNameNearbyUserSuccess                   @"NotificationNameNearbyUserSuccess"
+#define NotificationNameNearbyUserFailed                    @"NotificationNameNearbyUserFailed"
+
+//获取用户歌单
+#define HTTP_GETUSERLIST                                    @"http://open.fm.miglab.com/api/getsonglist.fcgi"
+#define NotificationNameUserListSuccess                     @"NotificationNameUserListSuccess"
+#define NotificationNameUserListFailed                      @"NotificationNameUserListFailed"
+
+//获取用户正在听的歌曲
+#define HTTP_GETPLAYINGMUSIC                                @"http://open.fm.miglab.com/api/nearsong.fcgi"
+#define NotificationNamePlayingMusicSuccess                 @"NotificationNamePlayingMusicSuccess"
+#define NotificationNamePlayingMusicFailed                  @"NotificationNamePlayingMusicFailed"
+
 
 #endif
