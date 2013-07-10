@@ -81,5 +81,10 @@
  */
 -(void)doUploadMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent;
 
+/*
+ 获取附近的人
+ */
+-(void)doGetNearbyUser:(int)uid token:(NSString*)ttoken page:(int)tpage;
+
 
 @end

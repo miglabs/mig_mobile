@@ -105,5 +105,10 @@
 #define NotificationNameUploadMusicSuccess                  @"NotificationNameUploadMusicSuccess"
 #define NotificationNameUploadMusicFailed                   @"NotificationNameUploadMusicFailed"
 
+//获取附近用户
+#define HTTP_NEARBYUSER                                     @"http://open.fm.miglab.com/api/getusrpos.fcgi"
+#define NotificationNameNearbyUserSuccess                   @"NotificationNameNearbyUserSuccess"
+#define NotificationNameNearbyUserFailed                    @"NotificationNameNearbyUserFailed"
+
 
 #endif
