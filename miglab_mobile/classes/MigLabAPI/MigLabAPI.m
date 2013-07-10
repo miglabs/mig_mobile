@@ -382,7 +382,7 @@
         
         if(1 == status)
         {
-            Song* song = [dicJson objectForKey:@"song"];
+            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
             NSDictionary* dicSong = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicSuccess object:nil userInfo:dicSong];
         }
@@ -699,5 +699,56 @@
     [operation start];
     
 }
+
+/*
+ 获取用户歌单
+ <!--请求GET-->
+ HTTP_GETUSERLIST
+ */
+-(void)doGetListFromUser:(int)uid sid:(long)tsid token:(NSString *)ttoken {
+    
+    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%d&sid=%ld", HTTP_GETUSERLIST, ttoken, uid, tsid];
+    PLog(@"get list from user url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeeded");
+            
+            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListSuccess object:nil userInfo:dicResult];
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
 
 @end

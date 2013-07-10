@@ -110,5 +110,10 @@
 #define NotificationNameNearbyUserSuccess                   @"NotificationNameNearbyUserSuccess"
 #define NotificationNameNearbyUserFailed                    @"NotificationNameNearbyUserFailed"
 
+//获取用户歌单
+#define HTTP_GETUSERLIST                                    @"http://open.fm.miglab.com/api/getsonglist.fcgi"
+#define NotificationNameUserListSuccess                     @"NotificationNameUserListSuccess"
+#define NotificationNameUserListFailed                      @"NotificationNameUserListFailed"
+
 
 #endif

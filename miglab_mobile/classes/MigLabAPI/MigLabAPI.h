@@ -86,5 +86,10 @@
  */
 -(void)doGetNearbyUser:(int)uid token:(NSString*)ttoken page:(int)tpage;
 
+/*
+ 获取某个用户歌单
+ */
+-(void)doGetListFromUser:(int)uid sid:(long)tsid token:(NSString*)ttoken;
+
 
 @end
