@@ -115,5 +115,10 @@
 #define NotificationNameUserListSuccess                     @"NotificationNameUserListSuccess"
 #define NotificationNameUserListFailed                      @"NotificationNameUserListFailed"
 
+//获取用户正在听的歌曲
+#define HTTP_GETPLAYINGMUSIC                                @"http://open.fm.miglab.com/api/nearsong.fcgi"
+#define NotificationNamePlayingMusicSuccess                 @"NotificationNamePlayingMusicSuccess"
+#define NotificationNamePlayingMusicFailed                  @"NotificationNamePlayingMusicFailed"
+
 
 #endif

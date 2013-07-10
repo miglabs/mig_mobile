@@ -750,5 +750,55 @@
     
 }
 
+/*
+ 获取用户正在听的歌曲
+ <!--请求GET-->
+ HTTP_GETPLAYINGMUSIC
+ */
+-(void)doGetPlayingMusicFromUser:(int)uid token:(NSString *)ttoken begin:(int)tbegin page:(int)tpage {
+    
+    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%d", HTTP_GETPLAYINGMUSIC, ttoken, uid];
+    PLog(@"playing music url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeeded");
+            
+            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicSuccess object:nil userInfo:dicResult];
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
 
 @end
