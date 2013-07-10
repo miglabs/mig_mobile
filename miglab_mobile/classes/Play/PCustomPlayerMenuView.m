@@ -7,6 +7,7 @@
 //
 
 #import "PCustomPlayerMenuView.h"
+#import "UIImage+PImageCategory.h"
 
 @implementation PCustomPlayerMenuView
 
@@ -26,13 +27,16 @@
 
 -(id)initPlayerMenuView:(CGRect)frame
 {
+    //CGRectMake(0, 0, 320, 90);
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
         //背景图片
         _playerMenuBgImageView = [[UIImageView alloc] init];
-        _playerMenuBgImageView.frame = CGRectMake(0, 0, 320, 85);
+        _playerMenuBgImageView.frame = CGRectMake(0, 0, 320, 90);
+        UIImage *playerMenuBgImage = [UIImage imageWithName:@"bottom_control_bg" type:@"png"];
+        _playerMenuBgImageView.image = playerMenuBgImage;
         [self addSubview:_playerMenuBgImageView];
         
         //移除按钮

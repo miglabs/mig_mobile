@@ -43,15 +43,15 @@
     NSLog(@"height: %f", height);
     
     //top
-    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, 0, 320, 44)];
+    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, 320, 44)];
     [self.view addSubview:_topPlayerInfoView];
     
     //song info
-    _songInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, height - 20 - 44 - 85)];
+    _songInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, height - 20 - 44 - 90)];
     [self.view addSubview:_songInfoScrollView];
     
     //bottom
-    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 85, 320, 85)];
+    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 90, 320, 90)];
     [self.view addSubview:_bottomPlayerMenuView];
     
     

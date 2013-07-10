@@ -34,7 +34,7 @@
         
         //左边菜单按钮
         _btnMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnMenu.frame = CGRectMake(10, 30, 50, 50);
+        _btnMenu.frame = CGRectMake(10, 30, 30, 30);
         UIImage *menuNorImage = [UIImage imageWithName:@"btn_menu_nor" type:@"png"];
         [_btnMenu setImage:menuNorImage forState:UIControlStateNormal];
         [self addSubview:_btnMenu];
@@ -54,7 +54,7 @@
         
         //分享按钮
         _btnShare = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnShare.frame = CGRectMake(250, 29, 30, 30);
+        _btnShare.frame = CGRectMake(278, 29, 30, 30);
         UIImage *shareNorImage = [UIImage imageWithName:@"btn_share_nor" type:@"png"];
         [_btnShare setImage:shareNorImage forState:UIControlStateNormal];
         [self addSubview:_btnShare];

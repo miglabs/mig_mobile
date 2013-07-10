@@ -23,4 +23,6 @@
 -(void)downloadProcess:(NSNotification *)tNotification;
 -(void)downloadSuccess:(NSNotification *)tNotification;
 
+-(IBAction)doGotoPlayView:(id)sender;
+
 @end

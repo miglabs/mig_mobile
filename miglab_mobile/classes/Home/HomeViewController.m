@@ -14,6 +14,9 @@
 #import "UserSessionManager.h"
 #import "PPlayerManaerCenter.h"
 #import "PDatabaseManager.h"
+#import "PlayViewController.h"
+#import "AppDelegate.h"
+#import "DDMenuController.h"
 
 @interface HomeViewController ()
 
@@ -181,6 +184,18 @@
 
 -(void)downloadSuccess:(NSNotification *)tNotification{
     PLog(@"downloadSuccess...");
+}
+
+//
+-(IBAction)doGotoPlayView:(id)sender{
+    
+    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:playViewController];
+    [nav setNavigationBarHidden:YES];
+    
+    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
+    [menuController setRootController:nav animated:YES];
+    
 }
 
 @end
