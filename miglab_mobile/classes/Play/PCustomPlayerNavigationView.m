@@ -7,6 +7,7 @@
 //
 
 #import "PCustomPlayerNavigationView.h"
+#import "UIImage+PImageCategory.h"
 
 @implementation PCustomPlayerNavigationView
 
@@ -26,26 +27,36 @@
 
 -(id)initPlayerNavigationView:(CGRect)frame
 {
+    //0,0,320,63
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
         //左边菜单按钮
         _btnMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnMenu.frame = CGRectMake(0, 0, 50, 50);
+        _btnMenu.frame = CGRectMake(10, 30, 50, 50);
+        UIImage *menuNorImage = [UIImage imageWithName:@"btn_menu_nor" type:@"png"];
+        [_btnMenu setImage:menuNorImage forState:UIControlStateNormal];
         [self addSubview:_btnMenu];
         
         //播放中标化图表
         _showPlayingImageView = [[UIImageView alloc] init];
+        _showPlayingImageView.frame = CGRectMake(52, 37, 28, 17);
+        UIImage *playingTipImage = [UIImage imageWithName:@"playing_tip" type:@"png"];
+        [_showPlayingImageView setImage:playingTipImage];
         [self addSubview:_showPlayingImageView];
         
         //显示歌曲信息
         _lblPlayingSongInfo = [[UILabel alloc] init];
+        _lblPlayingSongInfo.frame = CGRectMake(88, 35, 125, 21);
+        _lblPlayingSongInfo.text = @"聚乐音乐会";
         [self addSubview:_lblPlayingSongInfo];
         
         //分享按钮
         _btnShare = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnShare.frame = CGRectMake(250, 0, 50, 50);
+        _btnShare.frame = CGRectMake(250, 29, 30, 30);
+        UIImage *shareNorImage = [UIImage imageWithName:@"btn_share_nor" type:@"png"];
+        [_btnShare setImage:shareNorImage forState:UIControlStateNormal];
         [self addSubview:_btnShare];
         
     }
