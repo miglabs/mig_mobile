@@ -125,5 +125,10 @@
 #define NotificationNameGetChannelSuccess                   @"NotificationNameGetChannelSuccess"
 #define NotificationNameGetChannelFailed                    @"NotificationNameGetChannelFailed"
 
+//获取频道的歌曲
+#define HTTP_GETCHANNELMUSIC                                @"http://open.fm.miglab.com/api/cgi-bin/channel_song.fcgi"
+#define NotificationNameGetChannelMusicSuccess              @"NotificationNameGetChannelMusicSuccess"
+#define NotificationNameGetChannelMusicFailed               @"NotificationNameGetChannelMusicFailed"
+
 
 #endif

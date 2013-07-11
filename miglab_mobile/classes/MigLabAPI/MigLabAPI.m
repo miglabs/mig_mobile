@@ -805,7 +805,7 @@
  <!--请求GET-->
  HTTP_GETCHANNEL
  */
--(void)doGEtChannel:(int)uid token:(NSString *)ttoken num:(int)tnum {
+-(void)doGetChannel:(int)uid token:(NSString *)ttoken num:(int)tnum {
     
     NSString* url = [NSString stringWithFormat:@"%@&num=%d&token=%@&uid=%d", HTTP_GETCHANNEL, tnum, ttoken, uid];
     PLog(@"get channel url: %@", url);
@@ -838,6 +838,32 @@
         PLog(@"failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 获取频道歌曲
+ <!--请求GET-->
+ HTTP_GETCHANNELMUSIC
+ */
+-(void)doGetMusicFromChannel:(int)uid token:(NSString *)ttoken channel:(int)tchannel {
+    
+    NSString* url = [NSString stringWithFormat:@"%@&channel=%d&token=%@&uid=%d", HTTP_GETCHANNELMUSIC, uid, ttoken, tchannel];
+    PLog(@"get channel music url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        ;
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        
         
     }];
     
