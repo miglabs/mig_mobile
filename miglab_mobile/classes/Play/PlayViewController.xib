@@ -33,27 +33,28 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIView" id="299444362">
+			<object class="IBUIView" id="408659789">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="862289559">
-						<reference key="NSNextResponder" ref="299444362"/>
+					<object class="IBUIImageView" id="800995596">
+						<reference key="NSNextResponder" ref="408659789"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{54, 10}, {213, 213}}</string>
-						<reference key="NSSuperview" ref="299444362"/>
+						<string key="NSFrame">{{54, 0}, {213, 213}}</string>
+						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="681631014"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIButton" id="1060920281">
-						<reference key="NSNextResponder" ref="299444362"/>
+					<object class="IBUIButton" id="681631014">
+						<reference key="NSNextResponder" ref="408659789"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{60, 17}, {200, 200}}</string>
-						<reference key="NSSuperview" ref="299444362"/>
+						<string key="NSFrame">{{60, 7}, {200, 200}}</string>
+						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="92412297"/>
+						<reference key="NSNextKeyView" ref="476155295"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -76,19 +77,19 @@
 							<int key="type">2</int>
 							<double key="pointSize">15</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="394371722">
+						<object class="NSFont" key="IBUIFont" id="135317674">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUITextView" id="92412297">
-						<reference key="NSNextResponder" ref="299444362"/>
+					<object class="IBUITextView" id="476155295">
+						<reference key="NSNextResponder" ref="408659789"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{40, 231}, {240, 86}}</string>
-						<reference key="NSSuperview" ref="299444362"/>
+						<string key="NSFrame">{{40, 221}, {240, 86}}</string>
+						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="862289559"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -116,7 +117,7 @@
 				<string key="NSFrameSize">{320, 326}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1060920281"/>
+				<reference key="NSNextKeyView" ref="800995596"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -167,7 +168,7 @@
 							<string key="NSResourceName">btn_delete_nor.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="341288956"/>
-						<reference key="IBUIFont" ref="394371722"/>
+						<reference key="IBUIFont" ref="135317674"/>
 					</object>
 					<object class="IBUIButton" id="16281047">
 						<reference key="NSNextResponder" ref="828935263"/>
@@ -193,7 +194,7 @@
 							<string key="NSResourceName">btn_like0_0.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="341288956"/>
-						<reference key="IBUIFont" ref="394371722"/>
+						<reference key="IBUIFont" ref="135317674"/>
 					</object>
 					<object class="IBUIButton" id="305694095">
 						<reference key="NSNextResponder" ref="828935263"/>
@@ -201,6 +202,7 @@
 						<string key="NSFrame">{{232, 27}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="828935263"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -218,7 +220,7 @@
 							<string key="NSResourceName">btn_next_nor.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="341288956"/>
-						<reference key="IBUIFont" ref="394371722"/>
+						<reference key="IBUIFont" ref="135317674"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 90}</string>
@@ -242,6 +244,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -264,7 +267,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">cdOfSongView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="299444362"/>
+						<reference key="destination" ref="408659789"/>
 					</object>
 					<int key="connectionID">14</int>
 				</object>
@@ -272,7 +275,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">cdOfSongEGOImageButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1060920281"/>
+						<reference key="destination" ref="681631014"/>
 					</object>
 					<int key="connectionID">16</int>
 				</object>
@@ -280,7 +283,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">ivCircleProcess</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="862289559"/>
+						<reference key="destination" ref="800995596"/>
 					</object>
 					<int key="connectionID">18</int>
 				</object>
@@ -288,14 +291,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lrcOfSongTextView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="92412297"/>
+						<reference key="destination" ref="476155295"/>
 					</object>
 					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">doPlayOrPause:</string>
-						<reference key="source" ref="1060920281"/>
+						<reference key="source" ref="681631014"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -304,7 +307,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="92412297"/>
+						<reference key="source" ref="476155295"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">21</int>
@@ -368,28 +371,28 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
-						<reference key="object" ref="299444362"/>
+						<reference key="object" ref="408659789"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="862289559"/>
-							<reference ref="1060920281"/>
-							<reference ref="92412297"/>
+							<reference ref="800995596"/>
+							<reference ref="681631014"/>
+							<reference ref="476155295"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="862289559"/>
-						<reference key="parent" ref="299444362"/>
+						<reference key="object" ref="800995596"/>
+						<reference key="parent" ref="408659789"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
-						<reference key="object" ref="1060920281"/>
-						<reference key="parent" ref="299444362"/>
+						<reference key="object" ref="681631014"/>
+						<reference key="parent" ref="408659789"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
-						<reference key="object" ref="92412297"/>
-						<reference key="parent" ref="299444362"/>
+						<reference key="object" ref="476155295"/>
+						<reference key="parent" ref="408659789"/>
 					</object>
 				</array>
 			</object>
@@ -414,7 +417,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -468,7 +471,6 @@
 						<string key="cdOfSongView">UIView</string>
 						<string key="ivCircleProcess">UIImageView</string>
 						<string key="ivPlayProcessPoint">UIImageView</string>
-						<string key="lblSongInfo">UILabel</string>
 						<string key="lrcOfSongTextView">UITextView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -487,10 +489,6 @@
 						<object class="IBToOneOutletInfo" key="ivPlayProcessPoint">
 							<string key="name">ivPlayProcessPoint</string>
 							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lblSongInfo">
-							<string key="name">lblSongInfo</string>
-							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lrcOfSongTextView">
 							<string key="name">lrcOfSongTextView</string>

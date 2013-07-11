@@ -23,9 +23,9 @@
 @synthesize backgroundEGOImageView = _backgroundEGOImageView;
 @synthesize topPlayerInfoView = _topPlayerInfoView;
 @synthesize songInfoScrollView = _songInfoScrollView;
-@synthesize showInfoPageControl = _showInfoPageControl;
 
 @synthesize lblSongInfo = _lblSongInfo;
+@synthesize showInfoPageControl = _showInfoPageControl;
 
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
@@ -67,11 +67,29 @@
     _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, 320, 44)];
     [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowLeftViewAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topPlayerInfoView.btnShare addTarget:self action:@selector(doShareAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:_topPlayerInfoView];
+    
+    //song info label
+    _lblSongInfo = [[UILabel alloc] init];
+    _lblSongInfo.frame = CGRectMake(0, 60, 320, 21);
+    _lblSongInfo.backgroundColor = [UIColor clearColor];
+    _lblSongInfo.textAlignment = kTextAlignmentCenter;
+    _lblSongInfo.text = @"pig - 123321";
+    [self.view addSubview:_lblSongInfo];
+    
+    //song of page
+    _showInfoPageControl = [[PCustomPageControl alloc] init];
+    _showInfoPageControl.backgroundColor = [UIColor clearColor];
+    _showInfoPageControl.frame = CGRectMake(0, 90, 320, 15);
+    _showInfoPageControl.numberOfPages = 2;
+    _showInfoPageControl.currentPage = 0;
+    _showInfoPageControl.imagePageStateNormal = [UIImage imageWithName:@"page_nor" type:@"png"];
+    _showInfoPageControl.imagePageStateHighlighted = [UIImage imageWithName:@"page_sel" type:@"png"];
+    [self.view addSubview:_showInfoPageControl];
     
     //song info
     _songInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320 * 2, height - 20 - 44 - 90)];
+    _songInfoScrollView.backgroundColor = [UIColor clearColor];
     _songInfoScrollView.scrollEnabled = YES;
     _songInfoScrollView.showsHorizontalScrollIndicator = NO;
     _songInfoScrollView.pagingEnabled = YES;
@@ -84,22 +102,14 @@
     [self.view addSubview:_songInfoScrollView];
     
     //cd of sone player
+    _cdOfSongView.frame = CGRectMake(0, 110, 320, height - 110 - 90);
     [self.view addSubview:_cdOfSongView];
-    
-    //song of page
-    _showInfoPageControl = [[UIPageControl alloc] init];
-    _showInfoPageControl.frame = CGRectMake(0, 60, 320, 16);
-    _showInfoPageControl.numberOfPages = 2;
-    _showInfoPageControl.currentPage = 0;
-    _showInfoPageControl.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_showInfoPageControl];
     
     //bottom
     _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 90, 320, 90)];
     [_bottomPlayerMenuView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:_bottomPlayerMenuView];
     
     //download
@@ -144,6 +154,18 @@
     PLog(@"downloadSuccess...");
 }
 
+#pragma UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    int page = 0;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    _showInfoPageControl.currentPage = page;
+    
+}
+
+#pragma UIScrollViewDelegate end
+
 -(IBAction)doPlayOrPause:(id)sender{
     
     PLog(@"doPlayOrPause...");
@@ -178,14 +200,20 @@
     
 }
 
-#pragma PMusicPlayerDelegate
-//PAAMusicPlayer
--(void)aaMusicPlayerTimerFunction{
+-(void)doUpdateProcess{
     
     long duration = _aaMusicPlayer.getDuration;
     long currentTime = _aaMusicPlayer.getCurrentTime;
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     [self updateProcess:playProcess];
+    
+}
+
+#pragma PMusicPlayerDelegate
+//PAAMusicPlayer
+-(void)aaMusicPlayerTimerFunction{
+    
+    [self doUpdateProcess];
     
 }
 
@@ -195,6 +223,8 @@
 
 //PAMusicPlayer
 -(void)aMusicPlayerTimerFunction{
+    
+    [self doUpdateProcess];
     
 }
 
@@ -250,16 +280,6 @@
 -(IBAction)doNextAction:(id)sender{
     
     PLog(@"doNextAction...");
-    
-}
-
-#pragma UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
-    int page = 0;
-    CGFloat pageWidth = scrollView.frame.size.width;
-    page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    _showInfoPageControl.currentPage = page;
     
 }
 

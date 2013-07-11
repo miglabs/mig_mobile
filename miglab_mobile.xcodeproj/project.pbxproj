@@ -90,6 +90,7 @@
 		183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E0236177C408E00EE8944 /* HomeViewController.xib */; };
 		183E023D177C413800EE8944 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E023B177C413800EE8944 /* TestViewController.m */; };
 		183E023E177C413800EE8944 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E023C177C413800EE8944 /* TestViewController.xib */; };
+		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
 		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
 		18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */; };
@@ -238,6 +239,8 @@
 		183E023B177C413800EE8944 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		183E023C177C413800EE8944 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
+		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
+		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
 		18A450F21783FA5E00CFFAD4 /* PFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileManager.h; sourceTree = "<group>"; };
 		18A450F31783FA5E00CFFAD4 /* PFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileManager.m; sourceTree = "<group>"; };
 		18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHttpDownloader.h; sourceTree = "<group>"; };
@@ -361,6 +364,8 @@
 				162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */,
 				163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */,
 				163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */,
+				1880E455178E9FE300330DDE /* PCustomPageControl.h */,
+				1880E456178E9FE300330DDE /* PCustomPageControl.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -814,6 +819,7 @@
 				16E77E1D178DA518006A24A6 /* PCustomPlayerMenuView.m in Sources */,
 				16E77E1E178DA518006A24A6 /* PCustomPlayerNavigationView.m in Sources */,
 				16E77E1F178DA518006A24A6 /* PlayViewController.m in Sources */,
+				1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "EGOImageView.h"
 #import "PCustomPlayerNavigationView.h"
 #import "PCustomPlayerMenuView.h"
+#import "PCustomPageControl.h"
 #import "EGOImageButton.h"
 #import "PMusicPlayerDelegate.h"
 #import "PAAMusicPlayer.h"
@@ -21,9 +22,9 @@
 @property (nonatomic, retain) EGOImageView *backgroundEGOImageView;
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 @property (nonatomic, retain) UIScrollView *songInfoScrollView;
-@property (nonatomic, retain) UIPageControl *showInfoPageControl;
 
-@property (nonatomic, retain) IBOutlet UILabel *lblSongInfo;
+@property (nonatomic, retain) UILabel *lblSongInfo;
+@property (nonatomic, retain) PCustomPageControl *showInfoPageControl;
 
 @property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UIImageView *ivCircleProcess;
@@ -47,6 +48,7 @@
 -(IBAction)doPlayOrPause:(id)sender;
 //根据圆圈的比率，刷新圆盘进度
 -(void)updateProcess:(float)processRate;
+-(void)doUpdateProcess;
 
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
