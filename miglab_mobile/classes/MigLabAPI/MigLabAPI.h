@@ -96,5 +96,10 @@
  */
 -(void)doGetPlayingMusicFromUser:(int)uid token:(NSString*)ttoken begin:(int)tbegin page:(int)tpage;
 
+/*
+ 获取频道目录
+ */
+-(void)doGEtChannel:(int)uid token:(NSString*)ttoken num:(int)tnum;
+
 
 @end
