@@ -237,6 +237,7 @@
 		183E023A177C413800EE8944 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		183E023B177C413800EE8944 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		183E023C177C413800EE8944 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		18A450F21783FA5E00CFFAD4 /* PFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileManager.h; sourceTree = "<group>"; };
 		18A450F31783FA5E00CFFAD4 /* PFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileManager.m; sourceTree = "<group>"; };
 		18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHttpDownloader.h; sourceTree = "<group>"; };
@@ -457,6 +458,7 @@
 		1623168917773DC400CF8FB5 /* PPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */,
 				161F850B178032100010090F /* PAAMusicPlayer.h */,
 				161F850C178032100010090F /* PAAMusicPlayer.m */,
 				161F850D178032100010090F /* PAMusicPlayer.h */,

@@ -192,6 +192,9 @@
 -(void)playerTimerFunction{
     
     PLog(@"playerTimerFunction...");
+    if (_delegate && [_delegate respondsToSelector:@selector(aMusicPlayerTimerFunction)]) {
+        [_delegate aMusicPlayerTimerFunction];
+    }
     
 }
 

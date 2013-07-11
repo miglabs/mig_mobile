@@ -10,10 +10,13 @@
 
 @protocol PMusicPlayerDelegate <NSObject>
 
+@optional
 //PAAMusicPlayer
+-(void)aaMusicPlayerTimerFunction;
 -(void)aaMusicPlayerStoped;
 
 //PAMusicPlayer
+-(void)aMusicPlayerTimerFunction;
 -(void)aMusicPlayerStoped;
 
 @end
