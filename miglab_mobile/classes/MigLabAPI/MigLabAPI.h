@@ -106,5 +106,10 @@
  */
 -(void)doGetMusicFromChannel:(int)uid token:(NSString*)ttoken channel:(int)tchannel;
 
+/*
+ 获取心情，场景词描述
+ */
+-(void)doGetModeScene:(int)uid token:(NSString*)ttoken decword:(NSString*)tdecword;
+
 
 @end

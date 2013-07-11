@@ -871,5 +871,16 @@
     
 }
 
+/*
+ 获取心情，场景词描述
+ <!--请求GET-->
+ HTTP_MODESCENE
+ */
+-(void)doGetModeScene:(int)uid token:(NSString *)ttoken decword:(NSString *)tdecword {
+    
+    //TODO
+    
+}
+
 
 @end

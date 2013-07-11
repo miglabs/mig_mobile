@@ -130,5 +130,10 @@
 #define NotificationNameGetChannelMusicSuccess              @"NotificationNameGetChannelMusicSuccess"
 #define NotificationNameGetChannelMusicFailed               @"NotificationNameGetChannelMusicFailed"
 
+//获取心情场景词描述
+#define HTTP_MODESCENE                                      @"http://open.fm.miglab.com/api/cgi-bin/getword.fcgi"
+#define NotificationNameModeSceneSuccess                    @"NotificationNameModeSceneSuccess"
+#define NotificationNameModeSceneFailed                     @"NotificationNameModeSceneFailed"
+
 
 #endif
