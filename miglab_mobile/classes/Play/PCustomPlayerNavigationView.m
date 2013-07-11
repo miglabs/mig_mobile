@@ -41,7 +41,7 @@
         
         //播放中标化图表
         _showPlayingImageView = [[UIImageView alloc] init];
-        _showPlayingImageView.frame = CGRectMake(52, 37, 28, 17);
+        _showPlayingImageView.frame = CGRectMake(52, 42, 28, 17);
         UIImage *playingTipImage = [UIImage imageWithName:@"playing_tip" type:@"png"];
         [_showPlayingImageView setImage:playingTipImage];
         [self addSubview:_showPlayingImageView];
@@ -49,7 +49,9 @@
         //显示歌曲信息
         _lblPlayingSongInfo = [[UILabel alloc] init];
         _lblPlayingSongInfo.backgroundColor = [UIColor clearColor];
-        _lblPlayingSongInfo.frame = CGRectMake(88, 35, 125, 21);
+        _lblPlayingSongInfo.frame = CGRectMake(88, 38, 125, 21);
+        _lblPlayingSongInfo.textColor = [UIColor whiteColor];
+        _lblPlayingSongInfo.shadowOffset = CGSizeMake(0, 1);
         _lblPlayingSongInfo.text = @"聚乐音乐会";
         [self addSubview:_lblPlayingSongInfo];
         

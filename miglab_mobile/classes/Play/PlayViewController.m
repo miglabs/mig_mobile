@@ -74,7 +74,9 @@
     _lblSongInfo.frame = CGRectMake(0, 60, 320, 21);
     _lblSongInfo.backgroundColor = [UIColor clearColor];
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
-    _lblSongInfo.text = @"pig - 123321";
+    _lblSongInfo.textColor = [UIColor whiteColor];
+    _lblSongInfo.shadowOffset = CGSizeMake(0, 1);
+    _lblSongInfo.text = @"乐瑟 - 无敌仙曲";
     [self.view addSubview:_lblSongInfo];
     
     //song of page
