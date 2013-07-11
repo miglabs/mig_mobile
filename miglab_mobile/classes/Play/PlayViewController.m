@@ -25,11 +25,13 @@
 @synthesize songInfoScrollView = _songInfoScrollView;
 @synthesize showInfoPageControl = _showInfoPageControl;
 
-@synthesize cdOfSongView = _cdOfSongView;
 @synthesize lblSongInfo = _lblSongInfo;
+
+@synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
 @synthesize ivPlayProcessPoint = _ivPlayProcessPoint;
 @synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
+@synthesize lrcOfSongTextView = _lrcOfSongTextView;
 
 @synthesize aaMusicPlayer = _aaMusicPlayer;
 @synthesize aMusicPlayer = _aMusicPlayer;
@@ -80,6 +82,9 @@
     cdImageView.frame = CGRectMake(0, 0, 320, height - 20 - 44 - 90);
     
     [self.view addSubview:_songInfoScrollView];
+    
+    //cd of sone player
+    [self.view addSubview:_cdOfSongView];
     
     //song of page
     _showInfoPageControl = [[UIPageControl alloc] init];
@@ -173,6 +178,32 @@
     
 }
 
+#pragma PMusicPlayerDelegate
+//PAAMusicPlayer
+-(void)aaMusicPlayerTimerFunction{
+    
+    long duration = _aaMusicPlayer.getDuration;
+    long currentTime = _aaMusicPlayer.getCurrentTime;
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    [self updateProcess:playProcess];
+    
+}
+
+-(void)aaMusicPlayerStoped{
+    
+}
+
+//PAMusicPlayer
+-(void)aMusicPlayerTimerFunction{
+    
+}
+
+-(void)aMusicPlayerStoped{
+    
+}
+
+#pragma PMusicPlayerDelegate end
+
 //根据圆圈的比率，刷新圆盘进度
 -(void)updateProcess:(float)processRate{
     
@@ -219,30 +250,6 @@
 -(IBAction)doNextAction:(id)sender{
     
     PLog(@"doNextAction...");
-    
-}
-
-#pragma PMusicPlayerDelegate
-//PAAMusicPlayer
--(void)aaMusicPlayerTimerFunction{
-    
-    long duration = _aaMusicPlayer.getDuration;
-    long currentTime = _aaMusicPlayer.getCurrentTime;
-    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
-    [self updatePlayingProcess:playProcess];
-    
-}
-
--(void)aaMusicPlayerStoped{
-    
-}
-
-//PAMusicPlayer
--(void)aMusicPlayerTimerFunction{
-    
-}
-
--(void)aMusicPlayerStoped{
     
 }
 

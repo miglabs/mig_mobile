@@ -23,11 +23,13 @@
 @property (nonatomic, retain) UIScrollView *songInfoScrollView;
 @property (nonatomic, retain) UIPageControl *showInfoPageControl;
 
-@property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongInfo;
+
+@property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UIImageView *ivCircleProcess;
 @property (nonatomic, retain) IBOutlet UIImageView *ivPlayProcessPoint;
 @property (nonatomic, retain) IBOutlet EGOImageButton *cdOfSongEGOImageButton;
+@property (nonatomic, retain) IBOutlet UITextView *lrcOfSongTextView;
 
 @property (nonatomic, retain) PAAMusicPlayer *aaMusicPlayer;
 @property (nonatomic, retain) PAMusicPlayer *aMusicPlayer;
@@ -43,8 +45,8 @@
 -(void)downloadSuccess:(NSNotification *)tNotification;
 
 -(IBAction)doPlayOrPause:(id)sender;
-//刷新圆盘进度
--(void)updatePlayingProcess:(float)playRate;
+//根据圆圈的比率，刷新圆盘进度
+-(void)updateProcess:(float)processRate;
 
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
