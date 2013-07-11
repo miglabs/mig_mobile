@@ -90,22 +90,29 @@
     [self.view addSubview:_showInfoPageControl];
     
     //song info
-    _songInfoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320 * 2, height - 20 - 44 - 90)];
+    _songInfoScrollView = [[UIScrollView alloc] init];
     _songInfoScrollView.backgroundColor = [UIColor clearColor];
+    _songInfoScrollView.frame = CGRectMake(0, 110, 320, height - 20 - 110 - 90);
     _songInfoScrollView.scrollEnabled = YES;
     _songInfoScrollView.showsHorizontalScrollIndicator = NO;
     _songInfoScrollView.pagingEnabled = YES;
     _songInfoScrollView.delegate = self;
+    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, height - 20 - 110 - 90);
     
     //song of cd view
-    UIImageView *cdImageView = [[UIImageView alloc] init];
-    cdImageView.frame = CGRectMake(0, 0, 320, height - 20 - 44 - 90);
+    
+    //cd of sone player
+    _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 110 - 90);
+    [_songInfoScrollView addSubview:_cdOfSongView];
+    
+//    _cdOfSongView.frame = CGRectMake(320, 0, 320, height - 20 - 110 - 90);
+//    [_songInfoScrollView addSubview:_cdOfSongView];
     
     [self.view addSubview:_songInfoScrollView];
     
     //cd of sone player
-    _cdOfSongView.frame = CGRectMake(0, 110, 320, height - 110 - 90);
-    [self.view addSubview:_cdOfSongView];
+//    _cdOfSongView.frame = CGRectMake(0, 110, 320, height - 110 - 90);
+//    [self.view addSubview:_cdOfSongView];
     
     //bottom
     _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 90, 320, 90)];
