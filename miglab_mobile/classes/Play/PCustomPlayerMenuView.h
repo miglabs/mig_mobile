@@ -13,7 +13,7 @@
 //底部歌曲控制菜单
 @property (nonatomic, retain) UIImageView *playerMenuBgImageView;
 @property (nonatomic, retain) UIButton *btnRemove;                                  //移除
-@property (nonatomic, retain) UIButton *btnCollect;                                 //收藏
+@property (nonatomic, retain) UIButton *btnLike;                                    //喜欢
 @property (nonatomic, retain) UIButton *btnNext;                                    //下一首
 
 -(id)initPlayerMenuView:(CGRect)frame;

@@ -48,6 +48,7 @@
         
         //显示歌曲信息
         _lblPlayingSongInfo = [[UILabel alloc] init];
+        _lblPlayingSongInfo.backgroundColor = [UIColor clearColor];
         _lblPlayingSongInfo.frame = CGRectMake(88, 35, 125, 21);
         _lblPlayingSongInfo.text = @"聚乐音乐会";
         [self addSubview:_lblPlayingSongInfo];

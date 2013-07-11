@@ -13,7 +13,7 @@
 
 @synthesize playerMenuBgImageView = _playerMenuBgImageView;
 @synthesize btnRemove = _btnRemove;
-@synthesize btnCollect = _btnCollect;
+@synthesize btnLike = _btnLike;
 @synthesize btnNext = _btnNext;
 
 - (id)initWithFrame:(CGRect)frame
@@ -41,18 +41,29 @@
         
         //移除按钮
         _btnRemove = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnRemove.frame = CGRectMake(0, 0, 50, 50);
-        [_btnRemove setAdjustsImageWhenHighlighted:YES];
+        _btnRemove.frame = CGRectMake(42, 27, 48, 48);
+        UIImage *removeNorImage = [UIImage imageWithName:@"btn_delete_nor" type:@"png"];
+        UIImage *removeSelImage = [UIImage imageWithName:@"btn_delete_sel" type:@"png"];
+        [_btnRemove setImage:removeNorImage forState:UIControlStateNormal];
+        [_btnRemove setImage:removeSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnRemove];
         
-        //收藏
-        _btnCollect = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnCollect.frame = CGRectMake(100, 0, 50, 50);
-        [self addSubview:_btnCollect];
+        //喜欢
+        _btnLike = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btnLike.frame = CGRectMake(128, 17, 63, 62);
+        UIImage *likeNorImage = [UIImage imageWithName:@"btn_like0_0" type:@"png"];
+        UIImage *likeSelImage = [UIImage imageWithName:@"btn_like0_1" type:@"png"];
+        [_btnLike setImage:likeNorImage forState:UIControlStateNormal];
+        [_btnLike setImage:likeSelImage forState:UIControlStateHighlighted];
+        [self addSubview:_btnLike];
         
         //下一首
         _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnNext.frame = CGRectMake(200, 0, 50, 50);
+        _btnNext.frame = CGRectMake(232, 27, 48, 48);
+        UIImage *nextNorImage = [UIImage imageWithName:@"btn_next_nor" type:@"png"];
+        UIImage *nextSelImage = [UIImage imageWithName:@"btn_next_sel" type:@"png"];
+        [_btnNext setImage:nextNorImage forState:UIControlStateNormal];
+        [_btnNext setImage:nextSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnNext];
         
         
