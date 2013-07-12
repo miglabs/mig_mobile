@@ -29,6 +29,9 @@
 @property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UIImageView *ivCircleProcess;
 @property (nonatomic, retain) IBOutlet UIButton *btnPlayProcessPoint;
+@property (assign) BOOL isDraging;                                          //是否在拖动进度
+@property (nonatomic, assign) CGFloat lastAngle;
+
 @property (nonatomic, retain) IBOutlet EGOImageButton *cdOfSongEGOImageButton;
 @property (nonatomic, retain) IBOutlet UITextView *lrcOfSongTextView;
 

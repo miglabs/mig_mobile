@@ -30,6 +30,9 @@
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
 @synthesize btnPlayProcessPoint = _btnPlayProcessPoint;
+@synthesize isDraging = _isDraging;
+@synthesize lastAngle = _lastAngle;
+
 @synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
 @synthesize lrcOfSongTextView = _lrcOfSongTextView;
 
@@ -104,6 +107,10 @@
     //cd of sone player
     _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 110 - 90);
     [_songInfoScrollView addSubview:_cdOfSongView];
+    
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragMoving:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     
 //    _cdOfSongView.frame = CGRectMake(320, 0, 320, height - 20 - 110 - 90);
 //    [_songInfoScrollView addSubview:_cdOfSongView];
@@ -214,20 +221,76 @@
     CGPoint beginPoint = [[[ev allTouches] anyObject] locationInView:self.view];
     NSLog(@"dragBegin beginPoint.x: %f, beginPoint.y: %f", beginPoint.x, beginPoint.y);
     
+    _isDraging = YES;
+    _lastAngle = [self angleBetweenCenterAndPoint:beginPoint];
+    
 }
 
 -(IBAction)doDragMoving:(UIControl *)c withEvent:ev{
     
-    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
-    NSLog(@"dragMoving c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
+    CGPoint movePoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragMoving movePoint.x: %f, movePoint.y: %f", movePoint.x, movePoint.y);
+    
+    CGFloat delta = [self angleBetweenCenterAndPoint:movePoint] - _lastAngle;
+    
+    if (fabsf(delta) > (2*M_PI)-fabsf(delta)) {
+        BOOL greaterThanZero = (delta > 0);
+        delta = (2*M_PI)-fabsf(delta);
+        if (greaterThanZero) {
+            delta = -1 * delta;
+        }
+    }
+    
+    _lastAngle = [self angleBetweenCenterAndPoint:movePoint];
+    
+    [self movePlayProcessPointToPosition:[self angleBetweenCenterAndPoint:movePoint]];
     
 }
 
 -(IBAction)doDragEnd:(UIControl *)c withEvent:ev{
     
-    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
-    NSLog(@"dragEnd c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
+    CGPoint endPoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragEnd endPoint.x: %f, endPoint.y: %f", endPoint.x, endPoint.y);
     
+    _isDraging = NO;
+    
+}
+
+#pragma mark - Math Helper methods
+-(CGFloat)angleBetweenCenterAndPoint:(CGPoint)point {
+    
+    CGPoint center = CGPointMake(160.0f, 110.0f + 20.0f + 100.0f);
+    CGFloat origAngle = atan2f(center.y - point.y, point.x - center.x);
+    
+    //Translate to Unit circle
+    if (origAngle > 0) {
+        origAngle = (M_PI - origAngle) + M_PI;
+    } else {
+        origAngle = fabsf(origAngle);
+    }
+    
+    //Rotating so "origin" is at "due north/Noon", I need to stop mixing metaphors
+    origAngle = fmodf(origAngle+(M_PI/2), 2*M_PI);
+    NSLog(@"origAngle: %f", origAngle);
+    
+    return origAngle;
+}
+
+- (void)movePlayProcessPointToPosition:(CGFloat)angle {
+    
+    CGRect rect = _btnPlayProcessPoint.frame;
+    CGPoint center = CGPointMake(160.0f, 110.0f + 20.0f + 100.0f);
+    angle -= (M_PI/2);
+    
+    rect.origin.x = center.x + 75 * cosf(angle) - (rect.size.width/2);
+    rect.origin.y = center.y + 75 * sinf(angle) - (rect.size.height/2);
+    
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    
+    _btnPlayProcessPoint.frame = rect;
+    
+    [CATransaction commit];
 }
 
 #pragma PMusicPlayerDelegate
@@ -281,11 +344,13 @@
     CGFloat xOffset = radius*(1 + 0.85*cosf(radians));
     CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
     
-    //金属圆点
-    CGRect processPointFrame = _btnPlayProcessPoint.frame;
-    processPointFrame.origin.x = xOffset + 57 - (processPointFrame.size.width/2);
-    processPointFrame.origin.y = yOffset - (processPointFrame.size.height/2);
-    _btnPlayProcessPoint.frame = processPointFrame;
+    //圆点
+    if (!_isDraging) {
+        CGRect processPointFrame = _btnPlayProcessPoint.frame;
+        processPointFrame.origin.x = xOffset + 57 - (processPointFrame.size.width/2);
+        processPointFrame.origin.y = yOffset + 5 - (processPointFrame.size.height/2);
+        _btnPlayProcessPoint.frame = processPointFrame;
+    }
     
     //圆盘
     UIImage *circleProcess = [UIImage imageWithName:@"progress_line" type:@"png"];
