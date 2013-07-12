@@ -283,8 +283,8 @@
     
     //金属圆点
     CGRect processPointFrame = _btnPlayProcessPoint.frame;
-    processPointFrame.origin.x = xOffset + 72 - (processPointFrame.size.width/2);
-    processPointFrame.origin.y = yOffset + 90 -  (processPointFrame.size.height/2);
+    processPointFrame.origin.x = xOffset + 57 - (processPointFrame.size.width/2);
+    processPointFrame.origin.y = yOffset - (processPointFrame.size.height/2);
     _btnPlayProcessPoint.frame = processPointFrame;
     
     //圆盘
