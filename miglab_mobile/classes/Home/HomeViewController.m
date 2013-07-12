@@ -26,6 +26,8 @@
 
 @synthesize aaMusicPlayer = _aaMusicPlayer;
 
+@synthesize btnMove = _btnMove;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -71,6 +73,32 @@
 //    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
 //    [databaseManager setSongMaxSize:231 type:@"mp3" fileMaxSize:2342343];
 //    [databaseManager setSongMaxSize:231 type:@"mp3" fileMaxSize:2342343];
+    
+    
+    [_btnMove addTarget:self action:@selector(dragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
+    [_btnMove addTarget:self action:@selector(dragMoving:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [_btnMove addTarget:self action:@selector(dragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    
+}
+
+-(void)dragBegin:(UIControl *)c withEvent:ev{
+    
+    CGPoint beginPoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragBegin beginPoint.x: %f, beginPoint.y: %f", beginPoint.x, beginPoint.y);
+    
+}
+
+-(void)dragMoving:(UIControl *)c withEvent:ev{
+    
+    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragMoving c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
+    
+}
+
+-(void)dragEnd:(UIControl *)c withEvent:ev{
+    
+    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragEnd c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
     
 }
 

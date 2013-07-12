@@ -13,6 +13,8 @@
 
 @property (nonatomic, retain) PAAMusicPlayer *aaMusicPlayer;
 
+@property (nonatomic, retain) IBOutlet UIButton *btnMove;
+
 -(IBAction)doPlay:(id)sender;
 
 -(IBAction)doStart:(id)sender;

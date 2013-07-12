@@ -29,7 +29,7 @@
 
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
-@synthesize ivPlayProcessPoint = _ivPlayProcessPoint;
+@synthesize btnPlayProcessPoint = _btnPlayProcessPoint;
 @synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
 @synthesize lrcOfSongTextView = _lrcOfSongTextView;
 
@@ -209,12 +209,24 @@
     
 }
 
--(void)doUpdateProcess{
+-(IBAction)doDragBegin:(UIControl *)c withEvent:ev{
     
-    long duration = _aaMusicPlayer.getDuration;
-    long currentTime = _aaMusicPlayer.getCurrentTime;
-    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
-    [self updateProcess:playProcess];
+    CGPoint beginPoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragBegin beginPoint.x: %f, beginPoint.y: %f", beginPoint.x, beginPoint.y);
+    
+}
+
+-(IBAction)doDragMoving:(UIControl *)c withEvent:ev{
+    
+    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragMoving c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
+    
+}
+
+-(IBAction)doDragEnd:(UIControl *)c withEvent:ev{
+    
+    c.center = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragEnd c.center.x: %f, c.center.y: %f", c.center.x, c.center.y);
     
 }
 
@@ -244,6 +256,15 @@
 #pragma PMusicPlayerDelegate end
 
 //根据圆圈的比率，刷新圆盘进度
+-(void)doUpdateProcess{
+    
+    long duration = _aaMusicPlayer.getDuration;
+    long currentTime = _aaMusicPlayer.getCurrentTime;
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    [self updateProcess:playProcess];
+    
+}
+
 -(void)updateProcess:(float)processRate{
     
     if (processRate <= 0.01) {
@@ -261,10 +282,10 @@
     CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
     
     //金属圆点
-    CGRect processPointFrame = _ivPlayProcessPoint.frame;
+    CGRect processPointFrame = _btnPlayProcessPoint.frame;
     processPointFrame.origin.x = xOffset + 72 - (processPointFrame.size.width/2);
     processPointFrame.origin.y = yOffset + 90 -  (processPointFrame.size.height/2);
-    _ivPlayProcessPoint.frame = processPointFrame;
+    _btnPlayProcessPoint.frame = processPointFrame;
     
     //圆盘
     UIImage *circleProcess = [UIImage imageWithName:@"progress_line" type:@"png"];

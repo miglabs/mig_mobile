@@ -28,7 +28,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UIImageView *ivCircleProcess;
-@property (nonatomic, retain) IBOutlet UIImageView *ivPlayProcessPoint;
+@property (nonatomic, retain) IBOutlet UIButton *btnPlayProcessPoint;
 @property (nonatomic, retain) IBOutlet EGOImageButton *cdOfSongEGOImageButton;
 @property (nonatomic, retain) IBOutlet UITextView *lrcOfSongTextView;
 
@@ -45,10 +45,15 @@
 -(void)downloadProcess:(NSNotification *)tNotification;
 -(void)downloadSuccess:(NSNotification *)tNotification;
 
+//播放、暂停歌曲
 -(IBAction)doPlayOrPause:(id)sender;
+//拖动进度按钮事件
+-(IBAction)doDragBegin:(UIControl *)c withEvent:ev;
+-(IBAction)doDragMoving:(UIControl *)c withEvent:ev;
+-(IBAction)doDragEnd:(UIControl *)c withEvent:ev;
 //根据圆圈的比率，刷新圆盘进度
--(void)updateProcess:(float)processRate;
 -(void)doUpdateProcess;
+-(void)updateProcess:(float)processRate;
 
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
