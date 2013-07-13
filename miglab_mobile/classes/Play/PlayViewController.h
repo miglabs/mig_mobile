@@ -30,11 +30,13 @@
 
 @property (nonatomic, retain) IBOutlet UIView *cdOfSongView;
 @property (nonatomic, retain) IBOutlet UIImageView *ivCircleProcess;
+@property (nonatomic, retain) IBOutlet EGOImageView *coverOfSongEGOImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *cdCenterImageView;
+@property (nonatomic, retain) IBOutlet EGOImageButton *cdOfSongEGOImageButton;
 @property (nonatomic, retain) IBOutlet UIButton *btnPlayProcessPoint;
 @property (assign) BOOL isDraging;                                          //是否在拖动进度
 @property (nonatomic, assign) CGFloat lastAngle;
 
-@property (nonatomic, retain) IBOutlet EGOImageButton *cdOfSongEGOImageButton;
 @property (nonatomic, retain) IBOutlet UITextView *lrcOfSongTextView;
 
 @property (nonatomic, retain) PAAMusicPlayer *aaMusicPlayer;
@@ -60,6 +62,8 @@
 -(void)doUpdateForPlaying;
 //显示正在播放图标
 -(void)doUpdatePlayingTip;
+//旋转歌曲封面
+-(void)doRotateSongCover;
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess;
 -(void)updateProcess:(float)processRate;

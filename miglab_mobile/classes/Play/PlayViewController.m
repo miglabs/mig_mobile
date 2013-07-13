@@ -8,11 +8,16 @@
 
 #import "PlayViewController.h"
 #import "UIImage+PImageCategory.h"
+#import <QuartzCore/QuartzCore.h>
 #import "PCommonUtil.h"
 #import "AppDelegate.h"
 #import "MigLabAPI.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
+
+#define ROTATE_ANGLE 0.01//0.026526
+//计算角度旋转
+//static CGFloat Rotate_Angle = 15 *(M_2_PI/360);
 
 @interface PlayViewController ()
 
@@ -31,11 +36,13 @@
 
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
+@synthesize coverOfSongEGOImageView = _coverOfSongEGOImageView;
+@synthesize cdCenterImageView = _cdCenterImageView;
+@synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
 @synthesize btnPlayProcessPoint = _btnPlayProcessPoint;
 @synthesize isDraging = _isDraging;
 @synthesize lastAngle = _lastAngle;
 
-@synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
 @synthesize lrcOfSongTextView = _lrcOfSongTextView;
 
 @synthesize aaMusicPlayer = _aaMusicPlayer;
@@ -111,6 +118,19 @@
     //cd of sone player
     _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 100 - 90);
 //    _cdOfSongView.backgroundColor = [UIColor redColor];
+    
+    _coverOfSongEGOImageView.layer.cornerRadius = 98;
+    _coverOfSongEGOImageView.layer.masksToBounds = YES;
+    
+    _cdOfSongEGOImageButton.layer.cornerRadius = 98;
+    _cdOfSongEGOImageButton.layer.masksToBounds = YES;
+    _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
+    
+//    CGSize imageSize = _cdOfSongEGOImageButton.frame.size;
+//    UIImage *defaultSongCover = [UIImage imageWithName:@"song_cover" type:@"png"];
+//    defaultSongCover = [UIImage createRoundedRectImage:defaultSongCover size:imageSize radius:imageSize.width / 2];
+//    [_cdOfSongEGOImageButton setImage:defaultSongCover forState:UIControlStateNormal];
+//    _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
     
     [self updateProcess:0.01];
     
@@ -326,6 +346,7 @@
 -(void)doUpdateForPlaying{
     
     [self doUpdatePlayingTip];
+    [self doRotateSongCover];
     [self doUpdateProcess];
     
 }
@@ -338,6 +359,15 @@
     
     NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", _playingTipIndex];
     _topPlayerInfoView.showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
+    
+}
+
+//旋转歌曲封面
+-(void)doRotateSongCover{
+    
+    CGAffineTransform transformTmp = _coverOfSongEGOImageView.transform;
+    transformTmp = CGAffineTransformRotate(transformTmp, ROTATE_ANGLE);
+    _coverOfSongEGOImageView.transform = transformTmp;
     
 }
 
