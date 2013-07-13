@@ -63,10 +63,10 @@
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-    //[miglabAPI doAuthLogin:username password:password];
+    [miglabAPI doAuthLogin:username password:password];
     
     //[miglabAPI doRegister:@"archer1234" password:@"123456" nickname:@"archer" source:0];
-    [miglabAPI doGetGuestInfo];
+//    [miglabAPI doGetGuestInfo];
     
     
     //test database
