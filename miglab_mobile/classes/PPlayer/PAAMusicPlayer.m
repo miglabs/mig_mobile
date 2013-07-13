@@ -201,7 +201,7 @@
 -(void)timerStart{
     
     [self timerStop];
-    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:PlayerTimerFunctionInterval target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
     
 }
 
@@ -218,6 +218,7 @@
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
+    [self timerStop];
     
     if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)])
     {

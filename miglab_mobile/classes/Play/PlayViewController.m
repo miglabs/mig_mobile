@@ -8,11 +8,16 @@
 
 #import "PlayViewController.h"
 #import "UIImage+PImageCategory.h"
+#import <QuartzCore/QuartzCore.h>
 #import "PCommonUtil.h"
 #import "AppDelegate.h"
 #import "MigLabAPI.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
+
+#define ROTATE_ANGLE 0.01//0.026526
+//计算角度旋转
+//static CGFloat Rotate_Angle = 15 *(M_2_PI/360);
 
 @interface PlayViewController ()
 
@@ -22,6 +27,8 @@
 
 @synthesize backgroundEGOImageView = _backgroundEGOImageView;
 @synthesize topPlayerInfoView = _topPlayerInfoView;
+@synthesize playingTipIndex = _playingTipIndex;
+
 @synthesize songInfoScrollView = _songInfoScrollView;
 
 @synthesize lblSongInfo = _lblSongInfo;
@@ -29,8 +36,13 @@
 
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize ivCircleProcess = _ivCircleProcess;
-@synthesize ivPlayProcessPoint = _ivPlayProcessPoint;
+@synthesize coverOfSongEGOImageView = _coverOfSongEGOImageView;
+@synthesize cdCenterImageView = _cdCenterImageView;
 @synthesize cdOfSongEGOImageButton = _cdOfSongEGOImageButton;
+@synthesize btnPlayProcessPoint = _btnPlayProcessPoint;
+@synthesize isDraging = _isDraging;
+@synthesize lastAngle = _lastAngle;
+
 @synthesize lrcOfSongTextView = _lrcOfSongTextView;
 
 @synthesize aaMusicPlayer = _aaMusicPlayer;
@@ -43,6 +55,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _playingTipIndex = random() % 7;
     }
     return self;
 }
@@ -58,7 +71,8 @@
     float height = [UIScreen mainScreen].bounds.size.height;
     PLog(@"height: %f", height);
     
-    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"cd_pic_0" type:@"png"];
+//    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"cd_pic_0" type:@"png"];
+    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"bg_mask_2" type:@"png"];
     _backgroundEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultBackgroundImage];
     _backgroundEGOImageView.frame = CGRectMake(0, -20, 320, height + 20);
     [self.view addSubview:_backgroundEGOImageView];
@@ -92,27 +106,44 @@
     //song info
     _songInfoScrollView = [[UIScrollView alloc] init];
     _songInfoScrollView.backgroundColor = [UIColor clearColor];
-    _songInfoScrollView.frame = CGRectMake(0, 110, 320, height - 20 - 110 - 90);
+    _songInfoScrollView.frame = CGRectMake(0, 100, 320, height - 20 - 100 - 90);
     _songInfoScrollView.scrollEnabled = YES;
     _songInfoScrollView.showsHorizontalScrollIndicator = NO;
     _songInfoScrollView.pagingEnabled = YES;
     _songInfoScrollView.delegate = self;
-    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, height - 20 - 110 - 90);
+    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, height - 20 - 100 - 90);
     
     //song of cd view
     
     //cd of sone player
-    _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 110 - 90);
+    _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 100 - 90);
+//    _cdOfSongView.backgroundColor = [UIColor redColor];
+    
+    _coverOfSongEGOImageView.layer.cornerRadius = 98;
+    _coverOfSongEGOImageView.layer.masksToBounds = YES;
+    
+    _cdOfSongEGOImageButton.layer.cornerRadius = 98;
+    _cdOfSongEGOImageButton.layer.masksToBounds = YES;
+    _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
+    
+//    CGSize imageSize = _cdOfSongEGOImageButton.frame.size;
+//    UIImage *defaultSongCover = [UIImage imageWithName:@"song_cover" type:@"png"];
+//    defaultSongCover = [UIImage createRoundedRectImage:defaultSongCover size:imageSize radius:imageSize.width / 2];
+//    [_cdOfSongEGOImageButton setImage:defaultSongCover forState:UIControlStateNormal];
+//    _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
+    
+    [self updateProcess:0.01];
+    
     [_songInfoScrollView addSubview:_cdOfSongView];
     
-//    _cdOfSongView.frame = CGRectMake(320, 0, 320, height - 20 - 110 - 90);
-//    [_songInfoScrollView addSubview:_cdOfSongView];
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragMoving:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [_btnPlayProcessPoint addTarget:self action:@selector(doDragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    
+    //lrc of song layer
+    //todo
     
     [self.view addSubview:_songInfoScrollView];
-    
-    //cd of sone player
-//    _cdOfSongView.frame = CGRectMake(0, 110, 320, height - 110 - 90);
-//    [self.view addSubview:_cdOfSongView];
     
     //bottom
     _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 90, 320, 90)];
@@ -209,20 +240,88 @@
     
 }
 
--(void)doUpdateProcess{
+-(IBAction)doDragBegin:(UIControl *)c withEvent:ev{
     
-    long duration = _aaMusicPlayer.getDuration;
-    long currentTime = _aaMusicPlayer.getCurrentTime;
-    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
-    [self updateProcess:playProcess];
+    CGPoint beginPoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragBegin beginPoint.x: %f, beginPoint.y: %f", beginPoint.x, beginPoint.y);
     
+    _isDraging = YES;
+    _lastAngle = [self angleBetweenCenterAndPoint:beginPoint];
+    
+}
+
+-(IBAction)doDragMoving:(UIControl *)c withEvent:ev{
+    
+    CGPoint movePoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragMoving movePoint.x: %f, movePoint.y: %f", movePoint.x, movePoint.y);
+    
+    CGFloat delta = [self angleBetweenCenterAndPoint:movePoint] - _lastAngle;
+    
+    if (fabsf(delta) > (2*M_PI)-fabsf(delta)) {
+        BOOL greaterThanZero = (delta > 0);
+        delta = (2*M_PI)-fabsf(delta);
+        if (greaterThanZero) {
+            delta = -1 * delta;
+        }
+    }
+    
+    _lastAngle = [self angleBetweenCenterAndPoint:movePoint];
+    
+    [self movePlayProcessPointToPosition:[self angleBetweenCenterAndPoint:movePoint]];
+    
+}
+
+-(IBAction)doDragEnd:(UIControl *)c withEvent:ev{
+    
+    CGPoint endPoint = [[[ev allTouches] anyObject] locationInView:self.view];
+    NSLog(@"dragEnd endPoint.x: %f, endPoint.y: %f", endPoint.x, endPoint.y);
+    
+    _isDraging = NO;
+    
+}
+
+#pragma mark - Math Helper methods
+-(CGFloat)angleBetweenCenterAndPoint:(CGPoint)point {
+    
+    CGPoint center = CGPointMake(160.0f, 100.0f + 20.0f + 100.0f);
+    CGFloat origAngle = atan2f(center.y - point.y, point.x - center.x);
+    
+    //Translate to Unit circle
+    if (origAngle > 0) {
+        origAngle = (M_PI - origAngle) + M_PI;
+    } else {
+        origAngle = fabsf(origAngle);
+    }
+    
+    //Rotating so "origin" is at "due north/Noon", I need to stop mixing metaphors
+    origAngle = fmodf(origAngle+(M_PI/2), 2*M_PI);
+    NSLog(@"origAngle: %f", origAngle);
+    
+    return origAngle;
+}
+
+- (void)movePlayProcessPointToPosition:(CGFloat)angle {
+    
+    CGRect rect = _btnPlayProcessPoint.frame;
+    CGPoint center = CGPointMake(160.0f, 100.0f + 20.0f + 100.0f);
+    angle -= (M_PI/2);
+    
+    rect.origin.x = center.x + 75 * cosf(angle) - (rect.size.width/2);
+    rect.origin.y = center.y + 75 * sinf(angle) - (rect.size.height/2);
+    
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    
+    _btnPlayProcessPoint.frame = rect;
+    
+    [CATransaction commit];
 }
 
 #pragma PMusicPlayerDelegate
 //PAAMusicPlayer
 -(void)aaMusicPlayerTimerFunction{
     
-    [self doUpdateProcess];
+    [self doUpdateForPlaying];
     
 }
 
@@ -233,7 +332,7 @@
 //PAMusicPlayer
 -(void)aMusicPlayerTimerFunction{
     
-    [self doUpdateProcess];
+    [self doUpdateForPlaying];
     
 }
 
@@ -243,34 +342,77 @@
 
 #pragma PMusicPlayerDelegate end
 
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying{
+    
+    [self doUpdatePlayingTip];
+    [self doRotateSongCover];
+    [self doUpdateProcess];
+    
+}
+
+//显示正在播放图标
+-(void)doUpdatePlayingTip{
+    
+    _playingTipIndex++;
+    _playingTipIndex = _playingTipIndex % 7;
+    
+    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", _playingTipIndex];
+    _topPlayerInfoView.showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
+    
+}
+
+//旋转歌曲封面
+-(void)doRotateSongCover{
+    
+    CGAffineTransform transformTmp = _coverOfSongEGOImageView.transform;
+    transformTmp = CGAffineTransformRotate(transformTmp, ROTATE_ANGLE);
+    _coverOfSongEGOImageView.transform = transformTmp;
+    
+}
+
 //根据圆圈的比率，刷新圆盘进度
+-(void)doUpdateProcess{
+    
+    long duration = _aaMusicPlayer.getDuration;
+    long currentTime = _aaMusicPlayer.getCurrentTime;
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    
+    [self updateProcess:playProcess];
+    
+}
+
 -(void)updateProcess:(float)processRate{
     
-    if (processRate <= 0.01) {
+    if (processRate < 0.01) {
         processRate = 0.01;
     }
     
     float width = 213.0f;
     float height = 213.0f;
     CGSize imageSize = CGSizeMake(width, height);
-    //半径
-    CGFloat radius = MIN(height, width) / 2 - 10;
-    //扇形开始角度
-    CGFloat radians = DEGREES_2_RADIANS((processRate * 359.9) - 90);
-    CGFloat xOffset = radius*(1 + 0.85*cosf(radians));
-    CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
-    
-    //金属圆点
-    CGRect processPointFrame = _ivPlayProcessPoint.frame;
-    processPointFrame.origin.x = xOffset + 72 - (processPointFrame.size.width/2);
-    processPointFrame.origin.y = yOffset + 90 -  (processPointFrame.size.height/2);
-    _ivPlayProcessPoint.frame = processPointFrame;
     
     //圆盘
     UIImage *circleProcess = [UIImage imageWithName:@"progress_line" type:@"png"];
     UIImage *processMask = [PCommonUtil getCircleProcessImageWithNoneAlpha:imageSize progress:processRate];
     UIImage *currentProcessImage = [PCommonUtil maskImage:circleProcess withImage:processMask];
     _ivCircleProcess.image = currentProcessImage;
+    
+    //圆点
+    if (!_isDraging) {
+        
+        //半径
+        CGFloat radius = MIN(height, width) / 2 + 10;
+        //扇形开始角度
+        CGFloat radians = DEGREES_2_RADIANS((processRate * 359.9) - 90);
+        CGFloat xOffset = radius*(1 + 0.85*cosf(radians));
+        CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
+        
+        CGRect processPointFrame = _btnPlayProcessPoint.frame;
+        processPointFrame.origin.x = xOffset + 45 - (processPointFrame.size.width/2);
+        processPointFrame.origin.y = yOffset - (processPointFrame.size.height/2);
+        _btnPlayProcessPoint.frame = processPointFrame;
+    }
     
 }
 

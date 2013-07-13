@@ -63,6 +63,13 @@
     
 }
 
+-(void)setCurrentPage:(NSInteger)currentPage{
+    
+    [super setCurrentPage:currentPage];
+    [self updateDots];
+    
+}
+
 // 更新显示所有的点按钮
 -(void)updateDots{
     
@@ -74,9 +81,9 @@
         for (int i=0; i<subviewcount; i++) {
             
             UIImageView *dot = [subview objectAtIndex:i];
-            CGSize size = CGSizeMake(18, 5);
+            CGSize size = CGSizeMake(18, 18);
             [dot setFrame:CGRectMake(dot.frame.origin.x, dot.frame.origin.y, size.width, size.height)];
-            dot.image = (self.currentPage == i) ? _imagePageStateNormal : _imagePageStateHighlighted;
+            dot.image = (self.currentPage == i) ? _imagePageStateHighlighted : _imagePageStateNormal;
             
         }
         
