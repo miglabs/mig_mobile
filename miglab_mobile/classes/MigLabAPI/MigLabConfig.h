@@ -135,5 +135,10 @@
 #define NotificationNameModeSceneSuccess                    @"NotificationNameModeSceneSuccess"
 #define NotificationNameModeSceneFailed                     @"NotificationNameModeSceneFailed"
 
+//获取心情场景歌曲
+#define HTTP_MODEMUSIC                                      @"http://open.fm.miglab.com/api/cgi-bin/word_song.fcgi"
+#define NotificationNameModeMusicSuccess                    @"NotificationNameModeMusicSuccess"
+#define NotificationNameModeMusicFailed                     @"NotificationNameModeMusicFailed"
+
 
 #endif

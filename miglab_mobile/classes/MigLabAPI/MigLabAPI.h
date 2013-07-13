@@ -111,5 +111,10 @@
  */
 -(void)doGetModeScene:(int)uid token:(NSString*)ttoken decword:(NSString*)tdecword;
 
+/*
+ 获取心情，场景歌曲
+ */
+-(void)doGetModeMusic:(int)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
+
 
 @end

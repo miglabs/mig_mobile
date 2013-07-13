@@ -878,7 +878,67 @@
  */
 -(void)doGetModeScene:(int)uid token:(NSString *)ttoken decword:(NSString *)tdecword {
     
-    //TODO
+    NSString* url = [NSString stringWithFormat:@"%@&decword=%@&token=%@&uid=%d", HTTP_MODESCENE, tdecword, ttoken, uid];
+    PLog(@"get mode scene url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODESCENE]];
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeeded");
+            
+            //TODO, send content
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 获取心情，场景歌曲
+ <!--请求GET-->
+ HTTP_MODEMUSIC
+ */
+-(void)doGetModeMusic:(int)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%d", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid];
+    PLog(@"get mode music url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        
+        
+    }];
+    
+    [operation start];
     
 }
 
