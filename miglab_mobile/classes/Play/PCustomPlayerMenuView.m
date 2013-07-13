@@ -50,9 +50,9 @@
         
         //喜欢
         _btnLike = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnLike.frame = CGRectMake(128, 17, 63, 62);
-        UIImage *likeNorImage = [UIImage imageWithName:@"btn_like0_0" type:@"png"];
-        UIImage *likeSelImage = [UIImage imageWithName:@"btn_like0_1" type:@"png"];
+        _btnLike.frame = CGRectMake(128, 16, 62, 62);
+        UIImage *likeNorImage = [UIImage imageWithName:@"btn_like_nor" type:@"png"];
+        UIImage *likeSelImage = [UIImage imageWithName:@"btn_like_sel" type:@"png"];
         [_btnLike setImage:likeNorImage forState:UIControlStateNormal];
         [_btnLike setImage:likeSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnLike];

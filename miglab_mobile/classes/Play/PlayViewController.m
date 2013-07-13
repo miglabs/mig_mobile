@@ -95,31 +95,28 @@
     //song info
     _songInfoScrollView = [[UIScrollView alloc] init];
     _songInfoScrollView.backgroundColor = [UIColor clearColor];
-    _songInfoScrollView.frame = CGRectMake(0, 110, 320, height - 20 - 110 - 90);
+    _songInfoScrollView.frame = CGRectMake(0, 100, 320, height - 20 - 100 - 90);
     _songInfoScrollView.scrollEnabled = YES;
     _songInfoScrollView.showsHorizontalScrollIndicator = NO;
     _songInfoScrollView.pagingEnabled = YES;
     _songInfoScrollView.delegate = self;
-    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, height - 20 - 110 - 90);
+    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, height - 20 - 100 - 90);
     
     //song of cd view
     
     //cd of sone player
-    _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 110 - 90);
+    _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 100 - 90);
+//    _cdOfSongView.backgroundColor = [UIColor redColor];
     [_songInfoScrollView addSubview:_cdOfSongView];
     
     [_btnPlayProcessPoint addTarget:self action:@selector(doDragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
     [_btnPlayProcessPoint addTarget:self action:@selector(doDragMoving:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [_btnPlayProcessPoint addTarget:self action:@selector(doDragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     
-//    _cdOfSongView.frame = CGRectMake(320, 0, 320, height - 20 - 110 - 90);
-//    [_songInfoScrollView addSubview:_cdOfSongView];
+    //lrc of song layer
+    //todo
     
     [self.view addSubview:_songInfoScrollView];
-    
-    //cd of sone player
-//    _cdOfSongView.frame = CGRectMake(0, 110, 320, height - 110 - 90);
-//    [self.view addSubview:_cdOfSongView];
     
     //bottom
     _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, height - 20 - 90, 320, 90)];
@@ -259,7 +256,7 @@
 #pragma mark - Math Helper methods
 -(CGFloat)angleBetweenCenterAndPoint:(CGPoint)point {
     
-    CGPoint center = CGPointMake(160.0f, 110.0f + 20.0f + 100.0f);
+    CGPoint center = CGPointMake(160.0f, 100.0f + 20.0f + 100.0f);
     CGFloat origAngle = atan2f(center.y - point.y, point.x - center.x);
     
     //Translate to Unit circle
@@ -279,7 +276,7 @@
 - (void)movePlayProcessPointToPosition:(CGFloat)angle {
     
     CGRect rect = _btnPlayProcessPoint.frame;
-    CGPoint center = CGPointMake(160.0f, 110.0f + 20.0f + 100.0f);
+    CGPoint center = CGPointMake(160.0f, 100.0f + 20.0f + 100.0f);
     angle -= (M_PI/2);
     
     rect.origin.x = center.x + 75 * cosf(angle) - (rect.size.width/2);
@@ -322,8 +319,12 @@
 -(void)doUpdateProcess{
     
     long duration = _aaMusicPlayer.getDuration;
+    
+    duration = 60;
+    
     long currentTime = _aaMusicPlayer.getCurrentTime;
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    
     [self updateProcess:playProcess];
     
 }
@@ -337,26 +338,28 @@
     float width = 213.0f;
     float height = 213.0f;
     CGSize imageSize = CGSizeMake(width, height);
-    //半径
-    CGFloat radius = MIN(height, width) / 2 - 10;
-    //扇形开始角度
-    CGFloat radians = DEGREES_2_RADIANS((processRate * 359.9) - 90);
-    CGFloat xOffset = radius*(1 + 0.85*cosf(radians));
-    CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
-    
-    //圆点
-    if (!_isDraging) {
-        CGRect processPointFrame = _btnPlayProcessPoint.frame;
-        processPointFrame.origin.x = xOffset + 57 - (processPointFrame.size.width/2);
-        processPointFrame.origin.y = yOffset + 5 - (processPointFrame.size.height/2);
-        _btnPlayProcessPoint.frame = processPointFrame;
-    }
     
     //圆盘
     UIImage *circleProcess = [UIImage imageWithName:@"progress_line" type:@"png"];
     UIImage *processMask = [PCommonUtil getCircleProcessImageWithNoneAlpha:imageSize progress:processRate];
     UIImage *currentProcessImage = [PCommonUtil maskImage:circleProcess withImage:processMask];
     _ivCircleProcess.image = currentProcessImage;
+    
+    //圆点
+    if (!_isDraging) {
+        
+        //半径
+        CGFloat radius = MIN(height, width) / 2 + 10;
+        //扇形开始角度
+        CGFloat radians = DEGREES_2_RADIANS((processRate * 359.9) - 90);
+        CGFloat xOffset = radius*(1 + 0.85*cosf(radians));
+        CGFloat yOffset = radius*(1 + 0.85*sinf(radians));
+        
+        CGRect processPointFrame = _btnPlayProcessPoint.frame;
+        processPointFrame.origin.x = xOffset + 45 - (processPointFrame.size.width/2);
+        processPointFrame.origin.y = yOffset - (processPointFrame.size.height/2);
+        _btnPlayProcessPoint.frame = processPointFrame;
+    }
     
 }
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2083</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -40,10 +40,10 @@
 					<object class="IBUIImageView" id="800995596">
 						<reference key="NSNextResponder" ref="408659789"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{54, 13}, {213, 213}}</string>
+						<string key="NSFrame">{{54, 10}, {213, 213}}</string>
 						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="681631014"/>
+						<reference key="NSNextKeyView" ref="836260067"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -51,10 +51,10 @@
 					<object class="IBUIButton" id="681631014">
 						<reference key="NSNextResponder" ref="408659789"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{60, 20}, {200, 200}}</string>
+						<string key="NSFrame">{{60, 17}, {200, 200}}</string>
 						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="836260067"/>
+						<reference key="NSNextKeyView" ref="476155295"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -89,7 +89,7 @@
 						<string key="NSFrame">{{148, 0}, {25, 25}}</string>
 						<reference key="NSSuperview" ref="408659789"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="476155295"/>
+						<reference key="NSNextKeyView" ref="681631014"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -198,7 +198,7 @@
 					<object class="IBUIButton" id="16281047">
 						<reference key="NSNextResponder" ref="828935263"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 17}, {63, 62}}</string>
+						<string key="NSFrame">{{128, 16}, {62, 62}}</string>
 						<reference key="NSSuperview" ref="828935263"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="305694095"/>
@@ -216,7 +216,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="868522371"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btn_like0_0.png</string>
+							<string key="NSResourceName">btn_like_nor.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="341288956"/>
 						<reference key="IBUIFont" ref="135317674"/>
@@ -407,9 +407,9 @@
 						<reference key="object" ref="408659789"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="800995596"/>
-							<reference ref="681631014"/>
 							<reference ref="836260067"/>
 							<reference ref="476155295"/>
+							<reference ref="681631014"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -473,6 +473,9 @@
 					<string key="className">PlayViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="doDragBegin:withEvent:">UIControl</string>
+						<string key="doDragEnd:withEvent:">UIControl</string>
+						<string key="doDragMoving:withEvent:">UIControl</string>
 						<string key="doLikeAction:">id</string>
 						<string key="doNextAction:">id</string>
 						<string key="doPlayOrPause:">id</string>
@@ -481,6 +484,18 @@
 						<string key="doShowLeftViewAction:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="doDragBegin:withEvent:">
+							<string key="name">doDragBegin:withEvent:</string>
+							<string key="candidateClassName">UIControl</string>
+						</object>
+						<object class="IBActionInfo" key="doDragEnd:withEvent:">
+							<string key="name">doDragEnd:withEvent:</string>
+							<string key="candidateClassName">UIControl</string>
+						</object>
+						<object class="IBActionInfo" key="doDragMoving:withEvent:">
+							<string key="name">doDragMoving:withEvent:</string>
+							<string key="candidateClassName">UIControl</string>
+						</object>
 						<object class="IBActionInfo" key="doLikeAction:">
 							<string key="name">doLikeAction:</string>
 							<string key="candidateClassName">id</string>
@@ -549,10 +564,10 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="bottom_control_bg.png">{640, 181}</string>
 			<string key="btn_delete_nor.png">{96, 96}</string>
-			<string key="btn_like0_0.png">{126, 124}</string>
+			<string key="btn_like_nor.png">{124, 124}</string>
 			<string key="btn_next_nor.png">{96, 96}</string>
 			<string key="progress_point.png">{50, 50}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">2083</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>
