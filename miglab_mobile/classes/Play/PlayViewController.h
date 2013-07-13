@@ -21,6 +21,8 @@
 
 @property (nonatomic, retain) EGOImageView *backgroundEGOImageView;
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
+@property (nonatomic, assign) int playingTipIndex;
+
 @property (nonatomic, retain) UIScrollView *songInfoScrollView;
 
 @property (nonatomic, retain) UILabel *lblSongInfo;

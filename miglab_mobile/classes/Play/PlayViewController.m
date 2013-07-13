@@ -22,6 +22,8 @@
 
 @synthesize backgroundEGOImageView = _backgroundEGOImageView;
 @synthesize topPlayerInfoView = _topPlayerInfoView;
+@synthesize playingTipIndex = _playingTipIndex;
+
 @synthesize songInfoScrollView = _songInfoScrollView;
 
 @synthesize lblSongInfo = _lblSongInfo;
@@ -46,6 +48,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _playingTipIndex = random() % 7;
     }
     return self;
 }
@@ -108,6 +111,9 @@
     //cd of sone player
     _cdOfSongView.frame = CGRectMake(0, 0, 320, height - 20 - 100 - 90);
 //    _cdOfSongView.backgroundColor = [UIColor redColor];
+    
+    [self updateProcess:0.01];
+    
     [_songInfoScrollView addSubview:_cdOfSongView];
     
     [_btnPlayProcessPoint addTarget:self action:@selector(doDragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
@@ -327,9 +333,10 @@
 //显示正在播放图标
 -(void)doUpdatePlayingTip{
     
-    long currentTime = _aaMusicPlayer.getCurrentTime;
-    int rnd = currentTime % 7;//random() % 4;
-    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", rnd];
+    _playingTipIndex++;
+    _playingTipIndex = _playingTipIndex % 7;
+    
+    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", _playingTipIndex];
     _topPlayerInfoView.showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
     
 }
@@ -347,7 +354,7 @@
 
 -(void)updateProcess:(float)processRate{
     
-    if (processRate <= 0.01) {
+    if (processRate < 0.01) {
         processRate = 0.01;
     }
     

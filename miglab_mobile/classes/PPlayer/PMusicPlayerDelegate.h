@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define PlayerTimerFunctionInterval 0.05
+#define PlayerTimerFunctionInterval 0.1
 
 @protocol PMusicPlayerDelegate <NSObject>
 
