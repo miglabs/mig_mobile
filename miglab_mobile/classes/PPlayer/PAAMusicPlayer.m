@@ -218,6 +218,7 @@
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
+    [self timerStop];
     
     if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)])
     {

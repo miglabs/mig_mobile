@@ -202,6 +202,8 @@
 
 -(void)musicPlayDidEnd:(NSNotification *)notification{
     
+    [self timerStop];
+    
     if (_delegate && [_delegate respondsToSelector:@selector(aMusicPlayerStoped)])
     {
         [_delegate aMusicPlayerStoped];

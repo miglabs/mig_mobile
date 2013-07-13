@@ -294,7 +294,7 @@
 //PAAMusicPlayer
 -(void)aaMusicPlayerTimerFunction{
     
-    [self doUpdateProcess];
+    [self doUpdateForPlaying];
     
 }
 
@@ -305,7 +305,7 @@
 //PAMusicPlayer
 -(void)aMusicPlayerTimerFunction{
     
-    [self doUpdateProcess];
+    [self doUpdateForPlaying];
     
 }
 
@@ -315,13 +315,28 @@
 
 #pragma PMusicPlayerDelegate end
 
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying{
+    
+    [self doUpdatePlayingTip];
+    [self doUpdateProcess];
+    
+}
+
+//显示正在播放图标
+-(void)doUpdatePlayingTip{
+    
+    long currentTime = _aaMusicPlayer.getCurrentTime;
+    int rnd = currentTime % 7;//random() % 4;
+    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", rnd];
+    _topPlayerInfoView.showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
+    
+}
+
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess{
     
     long duration = _aaMusicPlayer.getDuration;
-    
-    duration = 60;
-    
     long currentTime = _aaMusicPlayer.getCurrentTime;
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     

@@ -54,6 +54,10 @@
 -(IBAction)doDragBegin:(UIControl *)c withEvent:ev;
 -(IBAction)doDragMoving:(UIControl *)c withEvent:ev;
 -(IBAction)doDragEnd:(UIControl *)c withEvent:ev;
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying;
+//显示正在播放图标
+-(void)doUpdatePlayingTip;
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess;
 -(void)updateProcess:(float)processRate;
