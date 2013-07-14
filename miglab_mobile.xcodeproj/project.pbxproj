@@ -119,6 +119,7 @@
 		18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451151784017B00CFFAD4 /* PCustomToolBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
+		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -295,6 +296,8 @@
 		18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PStringCategory.m"; sourceTree = "<group>"; };
 		18A4512117841A0400CFFAD4 /* PDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDatabaseManager.h; sourceTree = "<group>"; };
 		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
+		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
+		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -515,6 +518,8 @@
 				1627EA20177B25600049F9F5 /* User.m */,
 				183E022B177C33A300EE8944 /* Song.h */,
 				183E022C177C33A300EE8944 /* Song.m */,
+				CB30BAA71792873300F96FC4 /* Channel.h */,
+				CB30BAA81792873300F96FC4 /* Channel.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -876,6 +881,7 @@
 				16E77E1E178DA518006A24A6 /* PCustomPlayerNavigationView.m in Sources */,
 				16E77E1F178DA518006A24A6 /* PlayViewController.m in Sources */,
 				1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */,
+				CB30BAA91792873300F96FC4 /* Channel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
