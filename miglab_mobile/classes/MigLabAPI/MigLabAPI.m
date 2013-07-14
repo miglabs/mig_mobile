@@ -961,5 +961,49 @@
     
 }
 
+/*
+ 获取心绪地图
+ <!--请求GET-->
+ HTTP_MODEMAP
+ */
+-(void)doGetModeMap:(int)uid token:(NSString *)ttoken sid:(int)tsid {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d&sid=%d", HTTP_MODEMAP, ttoken, uid, tsid];
+    PLog(@"mode map url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODEMAP]];
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        NSDictionary* dicJson = JSON;
+        int status = [dicJson objectForKey:@"status"];
+        
+        if(1 == status) {
+            
+            PLog(@"operation succeeded");
+            
+        }
+        else {
+            
+            PLog(@"operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
 
 @end

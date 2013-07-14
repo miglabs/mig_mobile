@@ -116,5 +116,10 @@
  */
 -(void)doGetModeMusic:(int)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
 
+/*
+ 获取心绪地图
+ */
+-(void)doGetModeMap:(int)uid token:(NSString*)ttoken sid:(int)tsid;
+
 
 @end

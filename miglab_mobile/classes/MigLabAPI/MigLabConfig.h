@@ -140,5 +140,10 @@
 #define NotificationNameModeMusicSuccess                    @"NotificationNameModeMusicSuccess"
 #define NotificationNameModeMusicFailed                     @"NotificationNameModeMusicFailed"
 
+//获取心绪地图
+#define HTTP_MODEMAP                                        @"http://open.fm.miglab.com/api/moodmap.fcgi"
+#define NotificationNameModeMapSuccess                      @"NotificationNameModeMapSuccess"
+#define NotificationNameModeMapFailed                       @"NotificationNameModeMapFailed"
+
 
 #endif
