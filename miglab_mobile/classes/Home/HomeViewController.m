@@ -122,6 +122,8 @@
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *accesstoken = [result objectForKey:@"AccessToken"];
     
+    [UserSessionManager GetInstance].accesstoken = accesstoken;
+    
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doGetUserInfo:username accessToken:accesstoken];
 }
