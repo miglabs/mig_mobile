@@ -11,8 +11,11 @@
 #import "HomeViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
+#import "WXApi.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class SinaWeibo;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
@@ -21,5 +24,7 @@
 @property (nonatomic, retain) HomeViewController *homeViewController;
 @property (nonatomic, retain) LeftViewController *leftViewController;
 @property (nonatomic, retain) RightViewController *rightViewController;
+
+@property (nonatomic, retain) SinaWeibo *sinaweibo;
 
 @end

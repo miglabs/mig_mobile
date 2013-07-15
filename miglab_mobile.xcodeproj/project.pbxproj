@@ -102,6 +102,18 @@
 		183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E0236177C408E00EE8944 /* HomeViewController.xib */; };
 		183E023D177C413800EE8944 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E023B177C413800EE8944 /* TestViewController.m */; };
 		183E023E177C413800EE8944 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E023C177C413800EE8944 /* TestViewController.xib */; };
+		1846483F1793A25300E83EBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1846483C1793A25300E83EBB /* SVProgressHUD.bundle */; };
+		184648401793A25300E83EBB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846483E1793A25300E83EBB /* SVProgressHUD.m */; };
+		184648461793A60800E83EBB /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648441793A60800E83EBB /* RegisterViewController.m */; };
+		184648471793A60800E83EBB /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184648451793A60800E83EBB /* RegisterViewController.xib */; };
+		1846484B1793A61700E83EBB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648491793A61700E83EBB /* LoginViewController.m */; };
+		1846484C1793A61700E83EBB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846484A1793A61700E83EBB /* LoginViewController.xib */; };
+		1846485A1793AA5F00E83EBB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648501793AA5F00E83EBB /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		1846485B1793AA5F00E83EBB /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 184648521793AA5F00E83EBB /* SinaWeibo.bundle */; };
+		1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648541793AA5F00E83EBB /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184648601793ACF700E83EBB /* libWeChatSDK.a */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
 		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
@@ -263,6 +275,28 @@
 		183E023A177C413800EE8944 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		183E023B177C413800EE8944 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		183E023C177C413800EE8944 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		1846483C1793A25300E83EBB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		1846483D1793A25300E83EBB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		1846483E1793A25300E83EBB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		184648431793A60800E83EBB /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		184648441793A60800E83EBB /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		184648451793A60800E83EBB /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		184648481793A61700E83EBB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		184648491793A61700E83EBB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1846484A1793A61700E83EBB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		1846484F1793AA5F00E83EBB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		184648501793AA5F00E83EBB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		184648521793AA5F00E83EBB /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		184648531793AA5F00E83EBB /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		184648541793AA5F00E83EBB /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
+		184648551793AA5F00E83EBB /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
+		184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboAuthorizeView.m; sourceTree = "<group>"; };
+		184648571793AA5F00E83EBB /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
+		184648581793AA5F00E83EBB /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
+		184648591793AA5F00E83EBB /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
+		184648601793ACF700E83EBB /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		184648621793ACF700E83EBB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
@@ -317,6 +351,7 @@
 				16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */,
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
+				184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +361,11 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1846485F1793ACF700E83EBB /* WeChatAPI */,
+				1846484D1793AA5F00E83EBB /* sinaweibo_ios_sdk */,
+				184648411793A5F700E83EBB /* Login */,
+				184648421793A5F700E83EBB /* Register */,
+				1846483B1793A25300E83EBB /* SVProgressHUD */,
 				16E77E15178DA517006A24A6 /* Play */,
 				18A451081783FD2700CFFAD4 /* DDMenuController */,
 				18A450F11783FA5E00CFFAD4 /* Manager */,
@@ -694,6 +734,79 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		1846483B1793A25300E83EBB /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1846483C1793A25300E83EBB /* SVProgressHUD.bundle */,
+				1846483D1793A25300E83EBB /* SVProgressHUD.h */,
+				1846483E1793A25300E83EBB /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		184648411793A5F700E83EBB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				184648481793A61700E83EBB /* LoginViewController.h */,
+				184648491793A61700E83EBB /* LoginViewController.m */,
+				1846484A1793A61700E83EBB /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		184648421793A5F700E83EBB /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				184648431793A60800E83EBB /* RegisterViewController.h */,
+				184648441793A60800E83EBB /* RegisterViewController.m */,
+				184648451793A60800E83EBB /* RegisterViewController.xib */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		1846484D1793AA5F00E83EBB /* sinaweibo_ios_sdk */ = {
+			isa = PBXGroup;
+			children = (
+				1846484E1793AA5F00E83EBB /* JSONKit */,
+				184648511793AA5F00E83EBB /* SinaWeibo */,
+			);
+			path = sinaweibo_ios_sdk;
+			sourceTree = "<group>";
+		};
+		1846484E1793AA5F00E83EBB /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				1846484F1793AA5F00E83EBB /* JSONKit.h */,
+				184648501793AA5F00E83EBB /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		184648511793AA5F00E83EBB /* SinaWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				184648521793AA5F00E83EBB /* SinaWeibo.bundle */,
+				184648531793AA5F00E83EBB /* SinaWeibo.h */,
+				184648541793AA5F00E83EBB /* SinaWeibo.m */,
+				184648551793AA5F00E83EBB /* SinaWeiboAuthorizeView.h */,
+				184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */,
+				184648571793AA5F00E83EBB /* SinaWeiboConstants.h */,
+				184648581793AA5F00E83EBB /* SinaWeiboRequest.h */,
+				184648591793AA5F00E83EBB /* SinaWeiboRequest.m */,
+			);
+			path = SinaWeibo;
+			sourceTree = "<group>";
+		};
+		1846485F1793ACF700E83EBB /* WeChatAPI */ = {
+			isa = PBXGroup;
+			children = (
+				184648601793ACF700E83EBB /* libWeChatSDK.a */,
+				184648621793ACF700E83EBB /* WXApi.h */,
+				184648631793ACF700E83EBB /* WXApiObject.h */,
+			);
+			path = WeChatAPI;
+			sourceTree = "<group>";
+		};
 		18A450F11783FA5E00CFFAD4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,6 +929,10 @@
 				1683FBA11791295B0081612B /* playing_tip_7.png in Resources */,
 				1683FBA3179129990081612B /* playing_tip_0.png in Resources */,
 				1683FBA9179137DF0081612B /* song_cover.png in Resources */,
+				1846483F1793A25300E83EBB /* SVProgressHUD.bundle in Resources */,
+				184648471793A60800E83EBB /* RegisterViewController.xib in Resources */,
+				1846484C1793A61700E83EBB /* LoginViewController.xib in Resources */,
+				1846485B1793AA5F00E83EBB /* SinaWeibo.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +999,13 @@
 				16E77E1F178DA518006A24A6 /* PlayViewController.m in Sources */,
 				1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */,
 				CB30BAA91792873300F96FC4 /* Channel.m in Sources */,
+				184648401793A25300E83EBB /* SVProgressHUD.m in Sources */,
+				184648461793A60800E83EBB /* RegisterViewController.m in Sources */,
+				1846484B1793A61700E83EBB /* LoginViewController.m in Sources */,
+				1846485A1793AA5F00E83EBB /* JSONKit.m in Sources */,
+				1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */,
+				1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */,
+				1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +1082,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -977,6 +1102,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

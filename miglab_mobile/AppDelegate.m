@@ -14,6 +14,7 @@
 #import "HomeViewController.h"
 #import "User.h"
 #import "UserSessionManager.h"
+#import "SinaWeibo.h"
 
 //test
 #import "Song.h"
@@ -29,6 +30,8 @@
 @synthesize homeViewController = _homeViewController;
 @synthesize leftViewController = _leftViewController;
 @synthesize rightViewController = _rightViewController;
+
+@synthesize sinaweibo = _sinaweibo;
 
 //for crash
 -(void)installUncaughtExceptionHandler
@@ -124,6 +127,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSLog(@"applicationDidEnterBackground...");
+    
+    [application beginReceivingRemoteControlEvents];
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -134,11 +142,42 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    NSLog(@"applicationDidBecomeActive...");
+    [_sinaweibo applicationDidBecomeActive];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma something
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    
+    if ([[url absoluteString] hasPrefix:@"wx"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    if ([[url absoluteString] hasPrefix:@"sinaweibosso"]) {
+        return [_sinaweibo handleOpenURL:url];
+    }
+    
+    return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    
+    if ([[url absoluteString] hasPrefix:@"wx"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    if ([[url absoluteString] hasPrefix:@"sinaweibosso"]) {
+        return [_sinaweibo handleOpenURL:url];
+    }
+    
+    return YES;
 }
 
 @end

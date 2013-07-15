@@ -91,14 +91,13 @@ const NSInteger UncaughtExceptionHandlerReportAddressCount = 5;
 @end
 NSString* getAppInfo()
 {
-    NSString *appInfo = [NSString stringWithFormat:@"App : %@ %@(%@)\nDevice : %@\nOS Version : %@ %@\nUDID : %@\n",
+    NSString *appInfo = [NSString stringWithFormat:@"App : %@ %@(%@)\nDevice : %@\nOS Version : %@ %@\n",
                          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"],
                          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
                          [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
                          [UIDevice currentDevice].model,
                          [UIDevice currentDevice].systemName,
-                         [UIDevice currentDevice].systemVersion,
-                         [UIDevice currentDevice].uniqueIdentifier];
+                         [UIDevice currentDevice].systemVersion];
     NSLog(@"Crash!!!! %@", appInfo);
     return appInfo;
 }
