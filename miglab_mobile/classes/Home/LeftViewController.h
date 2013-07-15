@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UIViewController
+@interface LeftViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, retain) UITableView *menuTableView;
+@property (nonatomic, retain) NSArray *tableTitles;
 
 @end

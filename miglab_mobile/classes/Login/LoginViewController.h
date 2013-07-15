@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SinaWeibo.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<SinaWeiboDelegate>
 
 -(IBAction)doLoginAction:(id)sender;
 -(IBAction)doRegisterAction:(id)sender;
