@@ -182,13 +182,13 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"result: %@", result);
+        PLog(@"result: %@", result);
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserIdFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
         
     }];
     
@@ -296,14 +296,14 @@
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserIdFailed object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
             
         }
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
         PLog(@"failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserIdFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
         
     }];
     

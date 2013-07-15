@@ -50,8 +50,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
     
     //user
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdFailed:) name:NotificationNameGetUserIdFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserIdSuccess:) name:NotificationNameGetUserIdSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
     
     //download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadFailed:) name:NotificationNameDownloadFailed object:nil];
@@ -128,13 +128,13 @@
     [miglabAPI doGetUserInfo:username accessToken:accesstoken];
 }
 
--(void)getUserIdFailed:(NSNotification *)tNotification{
+-(void)getUserInfoFailed:(NSNotification *)tNotification{
     
     NSLog(@"getUserIdFailed...");
     
 }
 
--(void)getUserIdSuccess:(NSNotification *)tNotification{
+-(void)getUserInfoSuccess:(NSNotification *)tNotification{
     
     NSLog(@"getUserIdSuccess...");
     

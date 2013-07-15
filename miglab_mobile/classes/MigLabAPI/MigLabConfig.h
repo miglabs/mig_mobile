@@ -52,20 +52,12 @@
 #define NotificationNameLoginSuccess                        @"NotificationNameLoginSuccess"
 
 //获取用户信息
-#define NotificationNameGetUserIdSuccess                    @"NotificationNameGetUserIdSuccess"
-#define NotificationNameGetUserIdFailed                     @"NotificationNameGetUserIdFailed"
-
-
-////下载失败
-//#define NotificationNameDownloadFailed                      @"NotificationNameDownloadFailed"
-////下载进度
-//#define NotificationNameDownloadProcess                     @"NotificationNameDownloadProcess"
-////下载成功
-//#define NotificationNameDownloadSuccess                     @"NotificationNameDownloadSuccess"
+#define NotificationNameGetUserInfoSuccess                  @"NotificationNameGetUserInfoSuccess"
+#define NotificationNameGetUserInfoFailed                   @"NotificationNameGetUserInfoFailed"
 
 
 //注册
-#define HTTP_REGISTER                                       @"http://42.121.14.108/cgi-bin/regedit.fcgi"
+#define HTTP_REGISTER                                       @"http://open.fm.miglab.com/api/regedit.fcgi"//@"http://42.121.14.108/cgi-bin/regedit.fcgi"
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 

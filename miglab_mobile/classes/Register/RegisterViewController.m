@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "MigLabAPI.h"
 
 @interface RegisterViewController ()
 
@@ -27,12 +28,39 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //login
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterSuccess object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)doRegisterAction:(id)sender{
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doRegister:@"pig" password:@"pig" nickname:@"pig" source:0];
+    
+}
+
+//notification
+-(void)registerFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"registerFailed: %@", result);
+    
+}
+
+-(void)registerSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"registerSuccess: %@", result);
+    
 }
 
 @end

@@ -14,6 +14,7 @@
 
 //test
 #import "LoginViewController.h"
+#import "RegisterViewController.h"
 
 @interface LeftViewController ()
 
@@ -75,14 +76,14 @@
         
     } else if (indexPath.row == 1) {
         
-        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        nav = [[UINavigationController alloc] initWithRootViewController:registerViewController];
         [nav setNavigationBarHidden:YES];
         
     } else if (indexPath.row == 2) {
         
-        HomeViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-        nav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         [nav setNavigationBarHidden:YES];
         
     } else {

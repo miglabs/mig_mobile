@@ -12,7 +12,7 @@
 @interface LoginViewController : UIViewController<SinaWeiboDelegate>
 
 -(IBAction)doLoginAction:(id)sender;
--(IBAction)doRegisterAction:(id)sender;
+-(IBAction)doGotoRegisterAction:(id)sender;
 -(IBAction)doSinaLoginAction:(id)sender;
 
 @end

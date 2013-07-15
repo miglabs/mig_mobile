@@ -41,7 +41,7 @@
     
 }
 
--(IBAction)doRegisterAction:(id)sender{
+-(IBAction)doGotoRegisterAction:(id)sender{
     
     PLog(@"doRegisterAction...");
     

@@ -10,4 +10,8 @@
 
 @interface RegisterViewController : UIViewController
 
+-(IBAction)doRegisterAction:(id)sender;
+-(void)registerFailed:(NSNotification *)tNotification;
+-(void)registerSuccess:(NSNotification *)tNotification;
+
 @end
