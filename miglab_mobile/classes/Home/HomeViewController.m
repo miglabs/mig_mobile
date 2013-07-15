@@ -62,10 +62,17 @@
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     
+    NSString* token = [UserSessionManager GetInstance].accesstoken;
+    PLog(@"before log in token: %@", token);
+    
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     [miglabAPI doAuthLogin:username password:password];
     
-    //[miglabAPI doRegister:@"archer1234" password:@"123456" nickname:@"archer" source:0];
+    token = [UserSessionManager GetInstance].accesstoken;
+    PLog(@"after log in token: %@", token);
+    
+    
+//    [miglabAPI doRegister:@"test@miglab.com" password:@"123456" nickname:@"archer" source:0];
 //    [miglabAPI doGetGuestInfo];
     
     
@@ -214,6 +221,15 @@
 
 -(void)downloadSuccess:(NSNotification *)tNotification{
     PLog(@"downloadSuccess...");
+}
+
+-(IBAction)doInterfaceTest:(id)sender {
+    
+    NSString* token = [UserSessionManager GetInstance].accesstoken;
+    int uid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    MigLabAPI* migapi = [[MigLabAPI alloc] init];
+    [migapi doGetGuestInfo];
 }
 
 //

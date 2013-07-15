@@ -20,6 +20,7 @@
 -(IBAction)doStart:(id)sender;
 -(IBAction)doPause:(id)sender;
 -(IBAction)doResume:(id)sender;
+-(IBAction)doInterfaceTest:(id)sender;
 
 -(void)downloadFailed:(NSNotification *)tNotification;
 -(void)downloadProcess:(NSNotification *)tNotification;

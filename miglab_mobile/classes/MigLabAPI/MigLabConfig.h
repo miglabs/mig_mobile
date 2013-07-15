@@ -55,7 +55,7 @@
 
 
 //注册
-#define HTTP_REGISTER                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/regedit.fcgi"]//@"http://42.121.14.108/cgi-bin/regedit.fcgi"
+#define HTTP_REGISTER                                       @"http://42.121.14.108/cgi-bin/regedit.fcgi"//[NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/regedit.fcgi"]
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 

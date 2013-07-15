@@ -228,7 +228,7 @@
         
         if (1 == status) {
             
-            PLog(@"Operation succeeded");
+            PLog(@"register operation succeeded");
             
             User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
@@ -239,7 +239,7 @@
         else if(0 == status || -1 == status){
             
             NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"Operation failed: %@", msg);
+            PLog(@"register operation failed: %@", msg);
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
@@ -253,7 +253,7 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"register failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
         
     }];
