@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "MigLabAPI.h"
+#import "SVProgressHUD.h"
 
 @interface RegisterViewController ()
 
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //login
+    //register
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterSuccess object:nil];
     
@@ -53,6 +54,9 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"registerFailed: %@", result);
+    
+    NSString *msg = [result objectForKey:@"msg"];
+    [SVProgressHUD showErrorWithStatus:msg];
     
 }
 

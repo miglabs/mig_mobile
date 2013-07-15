@@ -114,6 +114,7 @@
 		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184648601793ACF700E83EBB /* libWeChatSDK.a */; };
+		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
 		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
@@ -297,6 +298,8 @@
 		184648601793ACF700E83EBB /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		184648621793ACF700E83EBB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		184648661793D4D500E83EBB /* AccountOf3rdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOf3rdParty.h; sourceTree = "<group>"; };
+		184648671793D4D500E83EBB /* AccountOf3rdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOf3rdParty.m; sourceTree = "<group>"; };
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
@@ -560,6 +563,8 @@
 				183E022C177C33A300EE8944 /* Song.m */,
 				CB30BAA71792873300F96FC4 /* Channel.h */,
 				CB30BAA81792873300F96FC4 /* Channel.m */,
+				184648661793D4D500E83EBB /* AccountOf3rdParty.h */,
+				184648671793D4D500E83EBB /* AccountOf3rdParty.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1006,6 +1011,7 @@
 				1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */,
 				1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */,
 				1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */,
+				184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

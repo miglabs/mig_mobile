@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AccountOf3rdParty.h"
 
 @interface User : NSObject
 
@@ -21,6 +22,10 @@
 @property (nonatomic, assign) int age;
 @property (nonatomic, assign) int source;
 @property (nonatomic, retain) NSString *head;
+
+@property (nonatomic, retain) AccountOf3rdParty *mainAccount;
+@property (nonatomic, retain) AccountOf3rdParty *account2;
+@property (nonatomic, retain) AccountOf3rdParty *account3;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict;
 

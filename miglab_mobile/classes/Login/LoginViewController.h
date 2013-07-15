@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
+#import "SinaWeiboRequest.h"
 
-@interface LoginViewController : UIViewController<SinaWeiboDelegate>
+@interface LoginViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate>
 
 -(IBAction)doLoginAction:(id)sender;
 -(IBAction)doGotoRegisterAction:(id)sender;

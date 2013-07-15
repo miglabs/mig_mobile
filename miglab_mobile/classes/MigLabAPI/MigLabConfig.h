@@ -26,22 +26,19 @@
 
 #if (0 == IS_DEBUG_SERVER)
 
-#define HTTP_DOMAIN                                         @"http://www/i.aspx"
+#define HTTP_DOMAIN                                         @"http://open.fm.miglab.com/"
+#define HTTP_API_DOMAIN                                     @"http://open.fm.miglab.com/"
 
 #elif (1 == IS_DEBUG_SERVER)
 
-//登陆第一次验证地址
-#define LOGIN_SSO_SP_URL                                    @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
-//获取用户信息
-#define GET_USER_INFO                                       @"http://open.fm.miglab.com/api/userinfo.fcgi"
-
-//#define GET_USER_ID                                         @"http://fm.miglab.com/cgi-bin/getid.fcgi"
-
-#define HTTP_DOMAIN                                         @"http://www./i.aspx"
+#define HTTP_DOMAIN                                         @"http://open.fm.miglab.com/"
+#define HTTP_API_DOMAIN                                     @"http://open.fm.miglab.com/"
 
 #endif
 
 //登陆
+//登陆第一次验证地址
+#define LOGIN_SSO_SP_URL                                    @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
 //用户名为空
 #define NotificationNameUsernameIsNull                      @"NotificationNameUsernameIsNull"
 //密码为空
@@ -52,12 +49,13 @@
 #define NotificationNameLoginSuccess                        @"NotificationNameLoginSuccess"
 
 //获取用户信息
+#define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/userinfo.fcgi"]
 #define NotificationNameGetUserInfoSuccess                  @"NotificationNameGetUserInfoSuccess"
 #define NotificationNameGetUserInfoFailed                   @"NotificationNameGetUserInfoFailed"
 
 
 //注册
-#define HTTP_REGISTER                                       @"http://open.fm.miglab.com/api/regedit.fcgi"//@"http://42.121.14.108/cgi-bin/regedit.fcgi"
+#define HTTP_REGISTER                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/regedit.fcgi"]//@"http://42.121.14.108/cgi-bin/regedit.fcgi"
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 

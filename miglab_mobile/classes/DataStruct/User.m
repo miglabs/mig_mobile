@@ -22,6 +22,10 @@
 @synthesize source = _source;
 @synthesize head = _head;
 
+@synthesize mainAccount = _mainAccount;
+@synthesize account2 = _account2;
+@synthesize account3 = _account3;
+
 +(id)initWithNSDictionary:(NSDictionary *)dict{
     
     User *user = nil;
