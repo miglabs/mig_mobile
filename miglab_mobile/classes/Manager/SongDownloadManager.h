@@ -24,6 +24,10 @@
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext;
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext;
 
+-(long long)getSongMaxSize:(Song *)tsong;
+-(long long)getSongLocalSize:(Song *)tsong;
+-(float)getSongProgress:(Song *)tsong;
+
 -(void)downloadStart:(Song *)tsong;
 -(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath;
 

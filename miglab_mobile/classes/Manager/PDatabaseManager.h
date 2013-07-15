@@ -22,5 +22,7 @@
 -(void)setSongMaxSize:(long long)tlocalkey type:(NSString *)ttype fileMaxSize:(long long)tfilemaxsize;
 //判断是否已经记录歌曲的总文件大小
 -(BOOL)isExistsSongMaxSize:(long long)tlocalkey type:(NSString *)ttype;
+//获取某个歌曲的总文件大小
+-(long long)getSongMaxSize:(long long)tlocalkey type:(NSString *)ttype;
 
 @end

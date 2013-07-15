@@ -94,4 +94,27 @@
     return isExists;
 }
 
+//获取某个歌曲的总文件大小
+-(long long)getSongMaxSize:(long long)tlocalkey type:(NSString *)ttype{
+    
+    PLog(@"tlocalkey: %lld, ttype: %@", tlocalkey, ttype);
+    
+    long long tfilemaxsize = 0;
+    
+    NSString *sql = [NSString stringWithFormat:@"select filemaxsize from SONG_DOWNLOAD_INFO where songid = %lld and type = '%@' ", tlocalkey, ttype];
+    
+    [_db open];
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        tfilemaxsize = [rs longLongIntForColumn:@"filemaxsize"];
+        
+    }
+    
+    [_db close];
+    
+    return tfilemaxsize;
+    
+}
+
 @end

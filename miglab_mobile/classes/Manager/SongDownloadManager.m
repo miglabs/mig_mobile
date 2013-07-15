@@ -7,6 +7,7 @@
 //
 
 #import "SongDownloadManager.h"
+#import "PDatabaseManager.h"
 
 @implementation SongDownloadManager
 
@@ -60,6 +61,33 @@
 
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext{
     return [_lrcCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lld%@", tsongid, tlrcext]];
+}
+
+-(long long)getSongMaxSize:(Song *)tsong{
+    
+    NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    return [databaseManager getSongMaxSize:tsong.songid type:songext];
+    
+}
+
+-(long long)getSongLocalSize:(Song *)tsong{
+    
+    NSString *songext = [NSString stringWithFormat:@".%@", [tsong.songurl lastPathComponent]];
+    NSString *cachepath = [self getSongCachePath:tsong.songid songExt:songext];
+    return [super getLocalFileSize:cachepath];
+    
+}
+
+-(float)getSongProgress:(Song *)tsong{
+    
+    long long maxsize = [self getSongMaxSize:tsong];
+    if (maxsize == 0) {
+        return 0;
+    }
+    long long localsize = [self getSongLocalSize:tsong];
+    return (float)localsize / (float)maxsize;
 }
 
 -(void)downloadStart:(Song *)tsong{

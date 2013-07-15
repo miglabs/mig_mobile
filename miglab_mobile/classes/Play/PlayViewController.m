@@ -14,6 +14,7 @@
 #import "MigLabAPI.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
+#import "PDatabaseManager.h"
 
 #define ROTATE_ANGLE 0.01//0.026526
 //计算角度旋转
@@ -49,6 +50,10 @@
 @synthesize aMusicPlayer = _aMusicPlayer;
 
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
+
+@synthesize songList = _songList;
+@synthesize currentSongIndex = _currentSongIndex;
+@synthesize currentSong = _currentSong;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -157,7 +162,44 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProcess:) name:NotificationNameDownloadProcess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadSuccess:) name:NotificationNameDownloadSuccess object:nil];
     
+    //song list
+    _songList = [[NSMutableArray alloc] init];
+    _currentSongIndex = 0;
     
+    Song *song0 = [[Song alloc] init];
+    song0.songid = 346630;
+    song0.songname = @"寂寞";
+    song0.artist = @"谢容儿";
+    song0.songurl = @"http://umusic.9158.com/2013/07/14/14/14/346630_3cd4dbc8abde417c83cd9261f50bdb4c.mp3";
+    song0.coverurl = @"http://upic.9158.com/2013/07/12/12/31/20130712123159_img1008690313.jpg";
+    song0.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [_songList addObject:song0];
+    
+    Song *song1 = [[Song alloc] init];
+    song1.songid = 314001;
+    song1.songname = @"黄梅戏";
+    song1.artist = @"慕容晓晓";
+    song1.songurl = @"http://umusic.9158.com/2013/07/06/09/21/314001_a2e7fbfef7bd448e9349a3becfdea19e.mp3";
+    song1.coverurl = @"http://upic.9158.com/2013/07/07/05/49/20130707054950_img1008690313.jpg";
+    song1.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [_songList addObject:song1];
+    
+    Song *song2 = [[Song alloc] init];
+    song2.songid = 284711;
+    song2.songname = @"青春纪念册";
+    song2.artist = @"G_voice家族";
+    song2.songurl = @"http://umusic.9158.com/2013/06/29/16/35/284711_abbf9d95fcbe42a486e86d4281881e0a.mp3";
+    song2.coverurl = @"http://upic.9158.com/2013/07/05/07/16/20130705071624_img1008690313.jpg";
+    song2.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [_songList addObject:song2];
+    
+    Song *song3 = [[Song alloc] init];
+    song3.songid = 267654;
+    song3.songname = @"你是我的眼";
+    song3.artist = @"萧煌奇";
+    song3.songurl = @"http://umusic.9158.com/2013/06/24/23/40/267654_c281b790308e41d2966b24cf56838c0e.mp3";
+    song3.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [_songList addObject:song3];
     
 }
 
@@ -188,10 +230,60 @@
     
     NSDictionary *dicProcess = [tNotification userInfo];
     PLog(@"downloadProcess: %@", dicProcess);
+        
+    if (_currentSong.songurl) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
+        if (tempfilesize > 0) {
+            return;
+        }
+        
+        long long totalBytesExpectedToRead = [dicProcess objectForKey:@"TotalBytesExpectedToRead"];
+        
+        [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+        
+    }
+    
 }
 
 -(void)downloadSuccess:(NSNotification *)tNotification{
     PLog(@"downloadSuccess...");
+}
+
+-(void)stopDownload{
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    [songManager downloadPause];
+    
+}
+
+-(void)initSongInfo{
+    
+    _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
+    
+    [self downloadSong];
+    
+}
+
+-(void)downloadSong{
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    float rate = [songManager getSongProgress:_currentSong];
+    if (rate >= 1) {
+        
+        [self initAndStartPlayer];
+        
+    }
+    
+}
+
+-(void)initAndStartPlayer{
+    
+    
+    
 }
 
 #pragma UIScrollViewDelegate
@@ -209,6 +301,15 @@
 -(IBAction)doPlayOrPause:(id)sender{
     
     PLog(@"doPlayOrPause...");
+    
+    
+//    [self playLocationSong];
+    
+    [self doNextAction:nil];
+    
+}
+
+-(void)playLocationSong{
     
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"qhc" ofType:@"caf"];
     BOOL fileexit = [[NSFileManager defaultManager] fileExistsAtPath:filepath];
@@ -431,6 +532,19 @@
 -(IBAction)doNextAction:(id)sender{
     
     PLog(@"doNextAction...");
+    
+    if (_songList && [_songList count] > 0) {
+        
+        [self stopDownload];
+        
+        _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if (_aaMusicPlayer.isMusicPlaying) {
+            [_aaMusicPlayer pause];
+        }
+        
+        [self initSongInfo];
+        
+    }
     
 }
 

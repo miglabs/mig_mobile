@@ -44,6 +44,10 @@
 
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
+@property (nonatomic, retain) NSMutableArray *songList;
+@property (nonatomic, assign) int currentSongIndex;
+@property (nonatomic, retain) Song *currentSong;
+
 -(IBAction)doShowLeftViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 
@@ -51,6 +55,11 @@
 -(void)downloadFailed:(NSNotification *)tNotification;
 -(void)downloadProcess:(NSNotification *)tNotification;
 -(void)downloadSuccess:(NSNotification *)tNotification;
+
+-(void)stopDownload;
+-(void)initSongInfo;
+-(void)downloadSong;
+-(void)initAndStartPlayer;
 
 //播放、暂停歌曲
 -(IBAction)doPlayOrPause:(id)sender;
