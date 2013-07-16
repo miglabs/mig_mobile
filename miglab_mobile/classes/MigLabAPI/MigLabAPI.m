@@ -275,20 +275,21 @@
     PLog(@"guest url: %@", HTTP_GUEST);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_GUEST]];
-    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [dicJson objectForKey:@"status"];
+        PLog(@"dicJson: %@", dicJson);
+        
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
             PLog(@"get guest operation succeeded");
             
             User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, "result", nil];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetGuestSuccess object:nil userInfo:dicResult];
             

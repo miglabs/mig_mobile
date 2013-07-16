@@ -37,6 +37,7 @@
             user = [[User alloc] init];
             user.userid = [dict objectForKey:@"userid"];
             user.username = [dict objectForKey:@"username"];
+            user.password = [dict objectForKey:@"password"];
             user.nickname = [dict objectForKey:@"nickname"];
             user.gender = [[dict objectForKey:@"gender"] intValue];
             user.type = [[dict objectForKey:@"type"] intValue];
