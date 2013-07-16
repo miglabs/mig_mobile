@@ -38,7 +38,7 @@
     
     PLog(@"initPlayer...");
     
-    if (!_song || !_song.songurl) {
+    if (!_song || !_song.songCachePath) {
         return NO;
     }
     
@@ -52,7 +52,7 @@
          */
         if (_song.whereIsTheSong == WhereIsTheSong_IN_APP || _song.whereIsTheSong == WhereIsTheSong_IN_CACHE) {
             
-            NSURL *url = [NSURL URLWithString:_song.songurl];
+            NSURL *url = [NSURL URLWithString:_song.songCachePath];
             _avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
             _avAudioPlayer.delegate = self;
             
@@ -132,6 +132,7 @@
     
     BOOL isplayed = [_avAudioPlayer play];
     if (isplayed) {
+        PLog(@"play start...");
         [self timerStart];
     }
     

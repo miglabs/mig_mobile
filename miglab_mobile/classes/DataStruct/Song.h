@@ -28,6 +28,8 @@ typedef enum{
 @property (nonatomic, retain) NSString *coverurl;                       //专辑封面图片地址
 @property (nonatomic, retain) NSString *like;
 
+@property (nonatomic, retain) NSString *songCachePath;                  //本地缓存路径
+
 /*
  0-app中打包的歌曲
  1-手机库中的歌曲

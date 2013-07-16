@@ -59,13 +59,31 @@
     return [_songCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lld%@", tsongid, tsongext]];
 }
 
+-(NSString *)getSongCachePath:(Song *)tsong{
+    
+    NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
+    NSRange range = [songext rangeOfString:@"."];
+    songext = [songext substringFromIndex:range.location];
+    return [self getSongCachePath:tsong.songid songExt:songext];
+}
+
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext{
     return [_lrcCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lld%@", tsongid, tlrcext]];
+}
+
+-(NSString *)getLrcCachePath:(Song *)tsong{
+    
+    NSString *lrcext = [NSString stringWithFormat:@"%@", [tsong.lrcurl lastPathComponent]];
+    NSRange range = [lrcext rangeOfString:@"."];
+    lrcext = [lrcext substringFromIndex:range.location];
+    return [self getLrcCachePath:tsong.songid lrcExt:lrcext];
 }
 
 -(long long)getSongMaxSize:(Song *)tsong{
     
     NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
+    NSRange range = [songext rangeOfString:@"."];
+    songext = [songext substringFromIndex:range.location + 1];
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     return [databaseManager getSongMaxSize:tsong.songid type:songext];
@@ -100,8 +118,7 @@
         if (tsong.songurl) {
             
             NSString *localkey = [NSString stringWithFormat:@"%lld", tsong.songid];
-            NSString *songext = [NSString stringWithFormat:@".%@", [tsong.songurl lastPathComponent]];
-            NSString *cachepath = [self getSongCachePath:tsong.songid songExt:songext];
+            NSString *cachepath = [self getSongCachePath:tsong];
             [self downloadFile:localkey requestUrl:tsong.songurl cachePath:cachepath];
             
         }

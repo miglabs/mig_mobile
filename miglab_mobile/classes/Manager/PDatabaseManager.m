@@ -55,8 +55,6 @@
 //设置某个歌曲的总文件大小
 -(void)setSongMaxSize:(long long)tlocalkey type:(NSString *)ttype fileMaxSize:(long long)tfilemaxsize{
     
-    PLog(@"tlocalkey: %lld, ttype: %@, tfilemaxsize: %lld", tlocalkey, ttype, tfilemaxsize);
-    
     if ([self isExistsSongMaxSize:tlocalkey type:ttype]) {
         return;
     }
@@ -66,6 +64,7 @@
     NSNumber *numFileMaxSize = [NSNumber numberWithLongLong:tfilemaxsize];
     
     NSString *sql = @"insert into SONG_DOWNLOAD_INFO (songid, type, filemaxsize) values (?, ?, ?)";
+    PLog(@"sql: %@", sql);
     
     [_db open];
     [_db executeUpdate:sql, numLocalKey, strType, numFileMaxSize];
@@ -76,11 +75,10 @@
 //判断是否已经记录歌曲的总文件大小
 -(BOOL)isExistsSongMaxSize:(long long)tlocalkey type:(NSString *)ttype{
     
-    PLog(@"tlocalkey: %lld, ttype: %@", tlocalkey, ttype);
-    
     BOOL isExists = NO;
     
     NSString *sql = [NSString stringWithFormat:@"select * from SONG_DOWNLOAD_INFO where songid = %lld and type = '%@' ", tlocalkey, ttype];
+    PLog(@"sql: %@", sql);
     
     [_db open];
     FMResultSet *rs = [_db executeQuery:sql];
@@ -97,11 +95,10 @@
 //获取某个歌曲的总文件大小
 -(long long)getSongMaxSize:(long long)tlocalkey type:(NSString *)ttype{
     
-    PLog(@"tlocalkey: %lld, ttype: %@", tlocalkey, ttype);
-    
     long long tfilemaxsize = 0;
     
     NSString *sql = [NSString stringWithFormat:@"select filemaxsize from SONG_DOWNLOAD_INFO where songid = %lld and type = '%@' ", tlocalkey, ttype];
+    PLog(@"sql: %@", sql);
     
     [_db open];
     FMResultSet *rs = [_db executeQuery:sql];

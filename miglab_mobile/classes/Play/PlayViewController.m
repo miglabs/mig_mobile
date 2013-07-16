@@ -16,6 +16,8 @@
 #import "SongDownloadManager.h"
 #import "PDatabaseManager.h"
 
+#define SONG_INIT_SIZE 3000
+
 #define ROTATE_ANGLE 0.01//0.026526
 //计算角度旋转
 //static CGFloat Rotate_Angle = 15 *(M_2_PI/360);
@@ -166,6 +168,10 @@
     _songList = [[NSMutableArray alloc] init];
     _currentSongIndex = 0;
     
+    _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    
     Song *song0 = [[Song alloc] init];
     song0.songid = 346630;
     song0.songname = @"寂寞";
@@ -173,6 +179,7 @@
     song0.songurl = @"http://umusic.9158.com/2013/07/14/14/14/346630_3cd4dbc8abde417c83cd9261f50bdb4c.mp3";
     song0.coverurl = @"http://upic.9158.com/2013/07/12/12/31/20130712123159_img1008690313.jpg";
     song0.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song0.songCachePath = [songManager getSongCachePath:song0];
     [_songList addObject:song0];
     
     Song *song1 = [[Song alloc] init];
@@ -182,6 +189,7 @@
     song1.songurl = @"http://umusic.9158.com/2013/07/06/09/21/314001_a2e7fbfef7bd448e9349a3becfdea19e.mp3";
     song1.coverurl = @"http://upic.9158.com/2013/07/07/05/49/20130707054950_img1008690313.jpg";
     song1.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song1.songCachePath = [songManager getSongCachePath:song1];
     [_songList addObject:song1];
     
     Song *song2 = [[Song alloc] init];
@@ -191,6 +199,7 @@
     song2.songurl = @"http://umusic.9158.com/2013/06/29/16/35/284711_abbf9d95fcbe42a486e86d4281881e0a.mp3";
     song2.coverurl = @"http://upic.9158.com/2013/07/05/07/16/20130705071624_img1008690313.jpg";
     song2.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song2.songCachePath = [songManager getSongCachePath:song2];
     [_songList addObject:song2];
     
     Song *song3 = [[Song alloc] init];
@@ -199,6 +208,7 @@
     song3.artist = @"萧煌奇";
     song3.songurl = @"http://umusic.9158.com/2013/06/24/23/40/267654_c281b790308e41d2966b24cf56838c0e.mp3";
     song3.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song3.songCachePath = [songManager getSongCachePath:song3];
     [_songList addObject:song3];
     
 }
@@ -224,6 +234,10 @@
 
 -(void)downloadFailed:(NSNotification *)tNotification{
     PLog(@"downloadFailed...");
+    
+    //播放下一首
+    [self doNextAction:nil];
+    
 }
 
 -(void)downloadProcess:(NSNotification *)tNotification{
@@ -234,16 +248,29 @@
     if (_currentSong.songurl) {
         
         NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        songext = [songext substringFromIndex:range.location + 1];
         
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
         long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
-        if (tempfilesize > 0) {
-            return;
+        if (tempfilesize <= 0) {
+            
+            long long totalBytesExpectedToRead = [dicProcess objectForKey:@"TotalBytesExpectedToRead"];
+            [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+            
         }
         
-        long long totalBytesExpectedToRead = [dicProcess objectForKey:@"TotalBytesExpectedToRead"];
-        
-        [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+        //
+        SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+        long long localsize = [songManager getSongLocalSize:_currentSong];
+        if (localsize < SONG_INIT_SIZE) {
+            //
+            
+        } else {
+            
+            [self initAndStartPlayer];
+            
+        }
         
     }
     
@@ -276,13 +303,29 @@
         
         [self initAndStartPlayer];
         
+    } else {
+        
+        [songManager downloadStart:_currentSong];
+        
     }
     
 }
 
 -(void)initAndStartPlayer{
     
+    if (_aaMusicPlayer && _aaMusicPlayer.isMusicPlaying) {
+        return;
+    }
     
+    PLog(@"initAndStartPlayer...");
+    
+    _aaMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [_aaMusicPlayer initPlayer];
+    if (isPlayerInit) {
+        _aaMusicPlayer.delegate = self;
+        [_aaMusicPlayer play];
+    }
     
 }
 
@@ -302,10 +345,7 @@
     
     PLog(@"doPlayOrPause...");
     
-    
-//    [self playLocationSong];
-    
-    [self doNextAction:nil];
+    [self playLocationSong];
     
 }
 
@@ -535,9 +575,11 @@
     
     if (_songList && [_songList count] > 0) {
         
+        _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
+        _currentSong = [_songList objectAtIndex:_currentSongIndex];
+        
         [self stopDownload];
         
-        _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if (_aaMusicPlayer.isMusicPlaying) {
             [_aaMusicPlayer pause];
         }

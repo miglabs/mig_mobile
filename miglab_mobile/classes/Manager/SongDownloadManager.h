@@ -22,7 +22,9 @@
 -(NSString *)getLrcCacheDirectory;
 
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext;
+-(NSString *)getSongCachePath:(Song *)tsong;
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext;
+-(NSString *)getLrcCachePath:(Song *)tsong;
 
 -(long long)getSongMaxSize:(Song *)tsong;
 -(long long)getSongLocalSize:(Song *)tsong;
