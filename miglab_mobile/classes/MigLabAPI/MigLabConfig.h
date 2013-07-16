@@ -60,12 +60,12 @@
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
 //游客信息
-#define HTTP_GUEST                                          [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/guest.fcgi"]
+#define HTTP_GUEST                                          [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/guest.fcgi"]
 #define NotificationNameGetGuestSuccess                     @"NotificationNameGetGuestSuccess"
 #define NotificationNameGetGuestFailed                      @"NotificationNameGetGuestFailed"
 
 //更新用户信息
-#define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/usrupdate.fcgi"]
+#define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/usrupdate.fcgi"]
 #define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"
 #define NotificationUpdateUserFailed                        @"NotificationUpdateUserFailed"
 
