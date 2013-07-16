@@ -92,8 +92,7 @@
 
 -(long long)getSongLocalSize:(Song *)tsong{
     
-    NSString *songext = [NSString stringWithFormat:@".%@", [tsong.songurl lastPathComponent]];
-    NSString *cachepath = [self getSongCachePath:tsong.songid songExt:songext];
+    NSString *cachepath = [self getSongCachePath:tsong];
     return [super getLocalFileSize:cachepath];
     
 }
