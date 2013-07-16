@@ -75,8 +75,8 @@
     } else {
         
         User *user = [[User alloc] init];
-        user.username = @"test@miglab.com";
-        user.password = @"123456";
+        user.username = @"pig";
+        user.password = @"pig";
         [UserSessionManager GetInstance].currentUser = user;
         
         PLog(@"username: %@, password: %@", user.username, user.password);
