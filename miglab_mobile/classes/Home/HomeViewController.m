@@ -219,12 +219,13 @@
 
 -(IBAction)doInterfaceTest:(id)sender {
     
-    //NSString* token = [UserSessionManager GetInstance].accesstoken;
-    //int uid = [UserSessionManager GetInstance].currentUser.userid;
+    NSString* token = [UserSessionManager GetInstance].accesstoken;
+    int uid = [UserSessionManager GetInstance].currentUser.userid;
     
     MigLabAPI* migapi = [[MigLabAPI alloc] init];
-    [migapi doGetGuestInfo];
-    //[migapi doRegister:@"myfirstarcher" password:@"12345678" nickname:@"hehearcher" source:0];
+    //[migapi doGetGuestInfo]; //OK
+    //[migapi doRegister:@"myfirstarcher" password:@"12345678" nickname:@"hehearcher" source:0]; //OK
+    [migapi doUpdateUserInfo:uid token:token username:@"test@miglab.com" nickname:@"migtest" gender:@"male" birthday:@"1987-08-23" location:@"china" source:@"0" head:@""];
 }
 
 //

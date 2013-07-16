@@ -186,6 +186,29 @@
             NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             PLog(@"dicJson: %@", dicJson);
             
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get user information operation succeeded");
+                
+                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get user information operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoSuccess object:nil userInfo:dicResult];
+                
+            }
+            
         }
         @catch (NSException *exception) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
@@ -321,14 +344,15 @@
  <!--请求POST-->
  HTTP_UPDATEUSER
  */
--(void)doUpdateUserInfo:(NSString *)tuid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
+-(void)doUpdateUserInfo:(int)tuid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
     
     PLog(@"update user information url: %@", HTTP_UPDATEUSER);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_UPDATEUSER]];
-    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", tuid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%d&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", tuid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
+    PLog(@"update user information body: %@", httpBody);
+    
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     
