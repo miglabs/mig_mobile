@@ -181,8 +181,15 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        PLog(@"result: %@", result);
+        @try {
+            
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
+            
+        }
+        @catch (NSException *exception) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
+        }
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

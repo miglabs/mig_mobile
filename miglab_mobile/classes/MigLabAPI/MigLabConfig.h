@@ -49,7 +49,7 @@
 #define NotificationNameLoginSuccess                        @"NotificationNameLoginSuccess"
 
 //获取用户信息
-#define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/userinfo.fcgi"]
+#define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/userinfo.fcgi"]
 #define NotificationNameGetUserInfoSuccess                  @"NotificationNameGetUserInfoSuccess"
 #define NotificationNameGetUserInfoFailed                   @"NotificationNameGetUserInfoFailed"
 
