@@ -215,8 +215,7 @@
     
     NSURL* url = [NSURL URLWithString:registerUrl];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    //NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&gender=%d&birthday=%@&location=%@&age=%d&source=%d&head=%@", tusername, tpassword, tnickname, tgender, tbirthday, tlocation, tage, tsource, thead];
+
     NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d", tusername, tpassword, tnickname, tsource];
     PLog(@"httpBody: %@", httpBody);
     
@@ -278,14 +277,15 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_GUEST]];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = JSON;
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
         int status = [dicJson objectForKey:@"status"];
         
         if(1 == status) {
             
-            PLog(@"operation succeeded");
+            PLog(@"get guest operation succeeded");
             
             User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, "result", nil];
@@ -295,7 +295,7 @@
         }
         else {
             
-            PLog(@"operation failed");
+            PLog(@"get guest operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
@@ -304,9 +304,9 @@
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"get guest failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
         
     }];
@@ -322,7 +322,7 @@
  */
 -(void)doUpdateUserInfo:(NSString *)tuid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
     
-    PLog(@"update url: %@", HTTP_UPDATEUSER);
+    PLog(@"update user information url: %@", HTTP_UPDATEUSER);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_UPDATEUSER]];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
@@ -331,21 +331,22 @@
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] init];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = JSON;
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
         int status = [dicJson objectForKey:@"status"];
         
         if(1 == status) {
             
-            PLog(@"operation succeed");
+            PLog(@"update user information operation succeed");
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserSuccess object:nil userInfo:nil];
             
         }
         else {
             
-            PLog(@"operation failed");
+            PLog(@"update user information operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
@@ -354,9 +355,9 @@
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"update user information failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserFailed object:nil userInfo:nil];
         
