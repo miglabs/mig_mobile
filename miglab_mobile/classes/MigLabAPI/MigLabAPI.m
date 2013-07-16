@@ -209,8 +209,6 @@
     NSURL* url = [NSURL URLWithString:registerUrl];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
-    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-    
     //NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&gender=%d&birthday=%@&location=%@&age=%d&source=%d&head=%@", tusername, tpassword, tnickname, tgender, tbirthday, tlocation, tage, tsource, thead];
     NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d", tusername, tpassword, tnickname, tsource];
     PLog(@"httpBody: %@", httpBody);
@@ -218,11 +216,11 @@
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary *dicJson = JSON;
-        PLog(@"result: %@", dicJson);
+        NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+        PLog(@"dicJson: %@", dicJson);
         
         int status = [[dicJson objectForKey:@"status"] intValue];
         
@@ -235,8 +233,7 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:dicResult];
             
-        }
-        else if(0 == status || -1 == status){
+        } else if (0 == status || -1 == status) {
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             PLog(@"register operation failed: %@", msg);
@@ -244,14 +241,14 @@
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
             
-        }
-        else {
+        } else {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"未知错误", @"msg", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         PLog(@"register failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];

@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "MigLabAPI.h"
 #import "SVProgressHUD.h"
+#import "AFJSONRequestOperation.h"
 
 @interface RegisterViewController ()
 

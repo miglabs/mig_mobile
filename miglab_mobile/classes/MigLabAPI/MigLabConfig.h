@@ -31,8 +31,8 @@
 
 #elif (1 == IS_DEBUG_SERVER)
 
-#define HTTP_DOMAIN                                         @"http://open.fm.miglab.com/"
-#define HTTP_API_DOMAIN                                     @"http://open.fm.miglab.com/"
+#define HTTP_DOMAIN                                         @"http://42.121.14.108/"
+#define HTTP_API_DOMAIN                                     @"http://42.121.14.108/"
 
 #endif
 
@@ -55,7 +55,7 @@
 
 
 //注册
-#define HTTP_REGISTER                                       @"http://42.121.14.108/cgi-bin/regedit.fcgi"//[NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/regedit.fcgi"]
+#define HTTP_REGISTER                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/regedit.fcgi"]
 #define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
 #define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
 
