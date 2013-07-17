@@ -150,8 +150,9 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"result AccessToken: %@", result);
-        NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:result, @"AccessToken", nil];
+        NSString *strAccessToken = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
+        NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:strAccessToken, @"AccessToken", nil];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicResult];
         
@@ -205,13 +206,14 @@
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoSuccess object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
                 
             }
             
         }
         @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"未知错误", @"msg", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
         }
         
         
