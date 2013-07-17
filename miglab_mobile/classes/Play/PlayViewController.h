@@ -47,6 +47,7 @@
 @property (nonatomic, retain) NSMutableArray *songList;
 @property (nonatomic, assign) int currentSongIndex;
 @property (nonatomic, retain) Song *currentSong;
+@property (nonatomic) BOOL shouldStartPlayAfterDownloaded;
 
 -(IBAction)doShowLeftViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;

@@ -56,6 +56,7 @@
 @synthesize songList = _songList;
 @synthesize currentSongIndex = _currentSongIndex;
 @synthesize currentSong = _currentSong;
+@synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +64,7 @@
     if (self) {
         // Custom initialization
         _playingTipIndex = random() % 7;
+        _shouldStartPlayAfterDownloaded = YES;
     }
     return self;
 }
@@ -271,7 +273,11 @@
             
         } else {
             
-            [self initAndStartPlayer];
+            if (!_aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+                _shouldStartPlayAfterDownloaded = NO;
+                [self initAndStartPlayer];
+            }
+        
             
         }
         
@@ -287,6 +293,8 @@
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     [songManager downloadPause];
+    
+    _shouldStartPlayAfterDownloaded = YES;
     
 }
 

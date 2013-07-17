@@ -109,6 +109,8 @@
 		16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */; };
 		16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575CE179590BA00277308 /* borad_menu_like_sel.png */; };
 		180271EF178C019800CA9488 /* Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180271EE178C019800CA9488 /* Icon.jpg */; };
+		1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834106017969FC000EAAFFC /* MainMenuViewController.m */; };
+		1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1834106117969FC000EAAFFC /* MainMenuViewController.xib */; };
 		183E022D177C33A300EE8944 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E022C177C33A300EE8944 /* Song.m */; };
 		183E0237177C408E00EE8944 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E0235177C408E00EE8944 /* HomeViewController.m */; };
 		183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E0236177C408E00EE8944 /* HomeViewController.xib */; };
@@ -293,6 +295,9 @@
 		16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerBoradView.m; sourceTree = "<group>"; };
 		16F575CE179590BA00277308 /* borad_menu_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borad_menu_like_sel.png; sourceTree = "<group>"; };
 		180271EE178C019800CA9488 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
+		1834105F17969FC000EAAFFC /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		1834106017969FC000EAAFFC /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		1834106117969FC000EAAFFC /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
 		183E022B177C33A300EE8944 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		183E022C177C33A300EE8944 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		183E0234177C408E00EE8944 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -640,6 +645,9 @@
 				16E77E1C178DA518006A24A6 /* PlayViewController.xib */,
 				16F575CB17958B2300277308 /* PCustomPlayerBoradView.h */,
 				16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */,
+				1834105F17969FC000EAAFFC /* MainMenuViewController.h */,
+				1834106017969FC000EAAFFC /* MainMenuViewController.m */,
+				1834106117969FC000EAAFFC /* MainMenuViewController.xib */,
 			);
 			path = Play;
 			sourceTree = "<group>";
@@ -995,6 +1003,7 @@
 				16F575C8179587D900277308 /* borad_menu_stop.png in Resources */,
 				16F575C9179587D900277308 /* player_borad_bg.png in Resources */,
 				16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */,
+				1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,6 +1079,7 @@
 				1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */,
 				184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */,
 				16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */,
+				1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
