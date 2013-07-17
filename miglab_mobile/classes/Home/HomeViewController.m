@@ -137,7 +137,13 @@
 
 -(void)getUserInfoSuccess:(NSNotification *)tNotification{
     
-    NSLog(@"getUserIdSuccess...");
+    NSDictionary* result = [tNotification userInfo];
+    NSLog(@"getUserIdSuccess...%@", result);
+    
+    User* user = [result objectForKey:@"result"];
+    [UserSessionManager GetInstance].currentUser = user;
+    
+    PLog(@"%@", user);
     
 }
 
