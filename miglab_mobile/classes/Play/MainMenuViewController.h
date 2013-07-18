@@ -13,6 +13,12 @@
 
 @interface MainMenuViewController : UIViewController
 
+@property (nonatomic, retain) UIView *playView;
+
 @property (nonatomic, retain) PCustomPlayerBoradView *playerBoradView;
+
+-(IBAction)doRemoveAction:(id)sender;
+-(IBAction)doLikeAction:(id)sender;
+-(IBAction)doNextAction:(id)sender;
 
 @end

@@ -17,6 +17,8 @@
 #import "PlayViewController.h"
 #import "AppDelegate.h"
 #import "DDMenuController.h"
+#import "MainMenuViewController.h"
+#import "UINavigationController+PAnimationCategory.h"
 
 @interface HomeViewController ()
 
@@ -67,7 +69,7 @@
     
     
 //    [miglabAPI doRegister:@"test@miglab.com" password:@"123456" nickname:@"archer" source:0];
-//    [miglabAPI doGetGuestInfo];
+    [miglabAPI doGetGuestInfo];
     
     
     //test database
@@ -247,6 +249,21 @@
     
     DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
     [menuController setRootController:nav animated:YES];
+    
+}
+
+-(IBAction)doGotoMenuView:(id)sender{
+    
+    MainMenuViewController *menuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+    
+    UIViewAnimationTransition trans = UIViewAnimationOptionTransitionCurlUp;
+    [self.navigationController pushViewController:menuViewController animatedWithTransition:trans];
+    
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+//    [nav setNavigationBarHidden:YES];
+//    
+//    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
+//    [menuController setRootController:nav animated:YES];
     
 }
 
