@@ -115,7 +115,7 @@
 #define NotificationNamePlayingMusicFailed                  @"NotificationNamePlayingMusicFailed"
 
 //获取频道目录
-#define HTTP_GETCHANNEL                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/cgi-bin/channel.fcgi"]
+#define HTTP_GETCHANNEL                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/channel.fcgi"]
 #define NotificationNameGetChannelSuccess                   @"NotificationNameGetChannelSuccess"
 #define NotificationNameGetChannelFailed                    @"NotificationNameGetChannelFailed"
 

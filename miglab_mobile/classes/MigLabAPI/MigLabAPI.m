@@ -14,6 +14,7 @@
 #import "AFJSONRequestOperation.h"
 #import "UserSessionManager.h"
 #import "Song.h"
+#import "Channel.h"
 
 @implementation MigLabAPI
 
@@ -352,7 +353,7 @@
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_UPDATEUSER]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", uid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@", uid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
     PLog(@"update user information body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
@@ -837,26 +838,38 @@
  <!--请求GET-->
  HTTP_GETCHANNEL
  */
--(void)doGetChannel:(int)uid token:(NSString *)ttoken num:(int)tnum {
+-(void)doGetChannel:(NSString*)uid token:(NSString *)ttoken num:(int)tnum {
     
-    NSString* url = [NSString stringWithFormat:@"%@&num=%d&token=%@&uid=%d", HTTP_GETCHANNEL, tnum, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?num=%d&token=%@&uid=%@", HTTP_GETCHANNEL, tnum, ttoken, uid];
     PLog(@"get channel url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+        PLog(@"dicJson: %@", dicJson);
+        
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
+            PLog(@"get channel operation succeeded");
             
+            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+            NSArray* dicChannels = [dicTemp objectForKey:@"channle"];
+            
+            NSMutableArray* channel = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<tnum; i++) {
+                //Channel* channelTmp = [Channel initWithNSDictionary:dicChannels[i]];
+            }
             
         }
         else {
             
-            PLog(@"operation failed");
+            PLog(@"get channel operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
@@ -865,7 +878,7 @@
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         PLog(@"failure: %@", error);
         

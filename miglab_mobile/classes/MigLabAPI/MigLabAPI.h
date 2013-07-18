@@ -99,7 +99,7 @@
 /*
  获取频道目录
  */
--(void)doGetChannel:(int)uid token:(NSString*)ttoken num:(int)tnum;
+-(void)doGetChannel:(NSString*)uid token:(NSString*)ttoken num:(int)tnum;
 
 /*
  获取频道的歌曲

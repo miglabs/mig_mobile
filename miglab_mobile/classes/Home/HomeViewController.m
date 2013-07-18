@@ -233,7 +233,8 @@
     MigLabAPI* migapi = [[MigLabAPI alloc] init];
     //[migapi doGetGuestInfo]; //OK
     //[migapi doRegister:@"myfirstarcher" password:@"12345678" nickname:@"hehearcher" source:0]; //OK
-    [migapi doUpdateUserInfo:uid token:token username:[UserSessionManager GetInstance].currentUser.username nickname:@"migtest" gender:@"1" birthday:@"1987-08-23" location:@"china" source:@"0" head:[UserSessionManager GetInstance].currentUser.head];
+    //[migapi doUpdateUserInfo:uid token:token username:[UserSessionManager GetInstance].currentUser.username nickname:@"migtest" gender:@"1" birthday:@"1987-08-23" location:@"china" source:@"0" head:[UserSessionManager GetInstance].currentUser.head];
+    [migapi doGetChannel:uid token:token num:5];
 }
 
 //
