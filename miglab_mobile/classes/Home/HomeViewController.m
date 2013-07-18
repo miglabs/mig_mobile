@@ -141,7 +141,11 @@
     NSLog(@"getUserIdSuccess...%@", result);
     
     User* user = [result objectForKey:@"result"];
-    [UserSessionManager GetInstance].currentUser = user;
+    //[UserSessionManager GetInstance].currentUser = user;
+    [UserSessionManager GetInstance].currentUser.username = user.username;
+    [UserSessionManager GetInstance].currentUser.userid = user.userid;
+    [UserSessionManager GetInstance].currentUser.nickname = user.nickname;
+    [UserSessionManager GetInstance].currentUser.password = user.password;
     
     PLog(@"%@", user);
     
