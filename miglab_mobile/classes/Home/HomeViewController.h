@@ -28,4 +28,6 @@
 
 -(IBAction)doGotoPlayView:(id)sender;
 
+-(IBAction)doGotoMenuView:(id)sender;
+
 @end

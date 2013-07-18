@@ -51,6 +51,7 @@
         
         _lblSongName = [[UILabel alloc] init];
         _lblSongName.frame = CGRectMake(56, 14, 79, 21);
+        _lblSongName.backgroundColor = [UIColor clearColor];
         _lblSongName.textColor = [UIColor whiteColor];
         _lblSongName.textAlignment = kTextAlignmentLeft;
         _lblSongName.text = @"SongName";
@@ -59,6 +60,7 @@
         
         _lblArtist = [[UILabel alloc] init];
         _lblArtist.frame = CGRectMake(56, 33, 79, 21);
+        _lblArtist.backgroundColor = [UIColor clearColor];
         _lblArtist.textColor = [UIColor whiteColor];
         _lblArtist.textAlignment = kTextAlignmentLeft;
         _lblArtist.text = @"Artist";
@@ -90,7 +92,7 @@
         
         //下一首
         _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnNext.frame = CGRectMake(232, 27, 48, 48);
+        _btnNext.frame = CGRectMake(286, 26, 19, 17);
         UIImage *nextNorImage = [UIImage imageWithName:@"borad_menu_next" type:@"png"];
         [_btnNext setImage:nextNorImage forState:UIControlStateNormal];
         [self addSubview:_btnNext];

@@ -130,6 +130,7 @@
 		184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184648601793ACF700E83EBB /* libWeChatSDK.a */; };
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
+		188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
 		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
 		18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */; };
@@ -333,6 +334,8 @@
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
+		188E060E1797D7D200AFE89D /* UINavigationController+PAnimationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PAnimationCategory.h"; sourceTree = "<group>"; };
+		188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PAnimationCategory.m"; sourceTree = "<group>"; };
 		18A450F21783FA5E00CFFAD4 /* PFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileManager.h; sourceTree = "<group>"; };
 		18A450F31783FA5E00CFFAD4 /* PFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileManager.m; sourceTree = "<group>"; };
 		18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHttpDownloader.h; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 				163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */,
 				1880E455178E9FE300330DDE /* PCustomPageControl.h */,
 				1880E456178E9FE300330DDE /* PCustomPageControl.m */,
+				188E060E1797D7D200AFE89D /* UINavigationController+PAnimationCategory.h */,
+				188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1080,6 +1085,7 @@
 				184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */,
 				16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */,
 				1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */,
+				188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
