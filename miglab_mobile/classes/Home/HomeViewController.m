@@ -69,7 +69,7 @@
     
     
 //    [miglabAPI doRegister:@"test@miglab.com" password:@"123456" nickname:@"archer" source:0];
-    [miglabAPI doGetGuestInfo];
+    //[miglabAPI doGetGuestInfo];
     
     
     //test database
@@ -143,11 +143,10 @@
     NSLog(@"getUserIdSuccess...%@", result);
     
     User* user = [result objectForKey:@"result"];
-    //[UserSessionManager GetInstance].currentUser = user;
-    [UserSessionManager GetInstance].currentUser.username = user.username;
-    [UserSessionManager GetInstance].currentUser.userid = user.userid;
-    [UserSessionManager GetInstance].currentUser.nickname = user.nickname;
-    [UserSessionManager GetInstance].currentUser.password = user.password;
+    [UserSessionManager GetInstance].currentUser = user;
+//    [UserSessionManager GetInstance].currentUser.userid = user.userid;
+//    [UserSessionManager GetInstance].currentUser.nickname = user.nickname;
+//    [UserSessionManager GetInstance].currentUser.password = user.password;
     
     PLog(@"%@", user);
     

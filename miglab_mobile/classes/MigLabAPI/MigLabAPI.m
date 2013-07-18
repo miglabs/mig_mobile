@@ -189,7 +189,7 @@
             
             int status = [[dicJson objectForKey:@"status"] intValue];
             
-            if(0 == status) {
+            if(1 == status) {
                 
                 PLog(@"get user information operation succeeded");
                 
