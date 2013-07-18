@@ -346,13 +346,13 @@
  <!--请求POST-->
  HTTP_UPDATEUSER
  */
--(void)doUpdateUserInfo:(int)tuid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
+-(void)doUpdateUserInfo:(NSString*)uid token:(NSString *)ttoken username:(NSString *)tusername nickname:(NSString *)tnickname gender:(NSString *)tgender birthday:(NSString *)tbirthday location:(NSString *)tlocation source:(NSString *)tsource head:(NSString *)thead {
     
     PLog(@"update user information url: %@", HTTP_UPDATEUSER);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_UPDATEUSER]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%d&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", tuid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&username=%@&nickname=%@&gender=%@&birthday=%@&location=%@&source=%@&head=%@&", uid, ttoken, tusername, tnickname, tgender, tbirthday, tlocation, tsource, thead];
     PLog(@"update user information body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
