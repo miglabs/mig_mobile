@@ -14,7 +14,10 @@
 @property (nonatomic, retain) UIImageView *showPlayingImageView;
 @property (nonatomic, retain) UILabel *lblPlayingSongInfo;
 @property (nonatomic, retain) UIButton *btnShare;
+@property (nonatomic, assign) int playingTipIndex;
 
 -(id)initPlayerNavigationView:(CGRect)frame;
+//显示正在播放图标
+-(void)doUpdatePlayingTip;
 
 @end

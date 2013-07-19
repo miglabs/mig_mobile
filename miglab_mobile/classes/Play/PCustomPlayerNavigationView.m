@@ -62,9 +62,22 @@
         [_btnShare setImage:shareNorImage forState:UIControlStateNormal];
         [self addSubview:_btnShare];
         
+        _playingTipIndex = 0;
+        
     }
     
     return self;
+}
+
+//显示正在播放图标
+-(void)doUpdatePlayingTip{
+    
+    _playingTipIndex++;
+    _playingTipIndex = _playingTipIndex % 7;
+    
+    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", _playingTipIndex];
+    _showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
+    
 }
 
 /*

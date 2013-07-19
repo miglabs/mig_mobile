@@ -12,8 +12,10 @@
 #import "PCommonUtil.h"
 #import "SongDownloadManager.h"
 #import "PDatabaseManager.h"
+#import "PPlayerManaerCenter.h"
 
 #define SONG_INIT_SIZE 3000
+#define ROTATE_ANGLE 0.01//0.026526
 
 @interface MainMenuViewController ()
 
@@ -153,6 +155,7 @@
     [_playerBoradView.btnAvatar addTarget:self action:@selector(doAvatarAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playerBoradView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_playerBoradView];
     
@@ -198,8 +201,65 @@
     
 }
 
+-(IBAction)doPlayOrPause:(id)sender{
+    
+    PLog(@"doPlayOrPause...");
+    
+    [self playLocationSong];
+    
+}
+
 -(IBAction)doNextAction:(id)sender{
     
+    PLog(@"doNextAction...");
+    
+    if (_songList && [_songList count] > 0) {
+        
+        _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
+        _currentSong = [_songList objectAtIndex:_currentSongIndex];
+        
+        [self stopDownload];
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if (aaMusicPlayer.isMusicPlaying) {
+            [aaMusicPlayer pause];
+        }
+        
+        [self initSongInfo];
+        
+    }
+    
+}
+
+-(void)playLocationSong{
+    
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"qhc" ofType:@"caf"];
+    BOOL fileexit = [[NSFileManager defaultManager] fileExistsAtPath:filepath];
+    if (fileexit) {
+        
+        Song *tempSong = [[Song alloc] init];
+        tempSong.songurl = filepath;
+        tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        
+        if (aaMusicPlayer.playerDestoried) {
+            
+            aaMusicPlayer.song = tempSong;
+            
+            BOOL isPlayerInit = [aaMusicPlayer initPlayer];
+            if (isPlayerInit) {
+                aaMusicPlayer.delegate = self;
+                [aaMusicPlayer play];
+            }
+            
+        } else {
+            
+            [aaMusicPlayer playerPlayPause];
+            
+        }
+        
+    }
     
 }
 
@@ -270,6 +330,7 @@
     _cdOfSongView.btnCdOfSong.layer.cornerRadius = 98;
     _cdOfSongView.btnCdOfSong.layer.masksToBounds = YES;
     _cdOfSongView.btnCdOfSong.adjustsImageWhenHighlighted = NO;
+    [_cdOfSongView.btnCdOfSong addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
     
     //初始化进度指示
     [_cdOfSongView updateProcess:0.01];
@@ -329,9 +390,49 @@
     
 }
 
--(IBAction)doShowPlayViewAction:(id)sender{
+-(IBAction)doShareAction:(id)sender{
     
-    PLog(@"doShowPlayViewAction...");
+    PLog(@"doShareAction...");
+    
+}
+
+-(void)handlePan:(UIPanGestureRecognizer *)recognizer{
+    
+    CGPoint translation = [recognizer translationInView:_playView];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, recognizer.view.center.y);
+    
+    NSLog(@"recognizer.view.center.x: %f, recognizer.view.center.y: %f", recognizer.view.center.x, recognizer.view.center.y);
+    
+    [recognizer setTranslation:CGPointZero inView:_playView];
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            if (recognizer.view.frame.origin.x > 50) {
+                
+                [self doShowMenuViewAction:nil];
+                //                _playView.frame = CGRectMake(320, 0, kMainScreenWidth, kMainScreenHeight);
+                
+            } else {
+                
+                _playView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
+                
+            }
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        //
+        
+    }
+    
+}
+
+-(IBAction)doShowPlayViewAction:(id)sender{
     
 //    float height = [UIScreen mainScreen].bounds.size.height;
     
@@ -545,12 +646,6 @@
     
 }
 
--(IBAction)doShareAction:(id)sender{
-    
-    PLog(@"doShareAction...");
-    
-}
-
 -(void)downloadFailed:(NSNotification *)tNotification{
     PLog(@"downloadFailed...");
     
@@ -587,10 +682,11 @@
             
         } else {
             
-//            if (!_aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
-//                _shouldStartPlayAfterDownloaded = NO;
-//                [self initAndStartPlayer];
-//            }
+            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+            if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+                _shouldStartPlayAfterDownloaded = NO;
+                [self initAndStartPlayer];
+            }
             
             
         }
@@ -603,34 +699,110 @@
     PLog(@"downloadSuccess...");
 }
 
--(void)handlePan:(UIPanGestureRecognizer *)recognizer{
+-(void)stopDownload{
     
-    CGPoint translation = [recognizer translationInView:_playView];
-    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    [songManager downloadPause];
     
-    NSLog(@"recognizer.view.center.x: %f, recognizer.view.center.y: %f", recognizer.view.center.x, recognizer.view.center.y);
+    _shouldStartPlayAfterDownloaded = YES;
     
-    [recognizer setTranslation:CGPointZero inView:_playView];
+}
+
+-(void)initSongInfo{
     
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
+    _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
+    
+    [self downloadSong];
+    
+}
+
+-(void)downloadSong{
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    float rate = [songManager getSongProgress:_currentSong];
+    if (rate >= 1) {
         
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            if (recognizer.view.frame.origin.y > 50) {
-                _playView.frame = CGRectMake(0, 300, kMainScreenWidth, 100);
-            } else {
-                _playView.frame = CGRectMake(0, 0, kMainScreenWidth, 50);
-            }
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        [self initAndStartPlayer];
         
-    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
+    } else {
         
-        
+        [songManager downloadStart:_currentSong];
         
     }
+    
+}
+
+-(void)initAndStartPlayer{
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (aaMusicPlayer && aaMusicPlayer.isMusicPlaying) {
+        return;
+    }
+    
+    PLog(@"initAndStartPlayer...");
+    
+    aaMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [aaMusicPlayer initPlayer];
+    if (isPlayerInit) {
+        aaMusicPlayer.delegate = self;
+        [aaMusicPlayer play];
+    }
+    
+}
+
+#pragma PMusicPlayerDelegate
+//PAAMusicPlayer
+-(void)aaMusicPlayerTimerFunction{
+    
+    [self doUpdateForPlaying];
+    
+}
+
+-(void)aaMusicPlayerStoped{
+    
+}
+
+//PAMusicPlayer
+-(void)aMusicPlayerTimerFunction{
+    
+    [self doUpdateForPlaying];
+    
+}
+
+-(void)aMusicPlayerStoped{
+    
+}
+
+#pragma PMusicPlayerDelegate end
+
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying{
+    
+    [_topPlayerInfoView doUpdatePlayingTip];
+    [self doRotateSongCover];
+    [self doUpdateProcess];
+    
+}
+
+//旋转歌曲封面
+-(void)doRotateSongCover{
+    
+    CGAffineTransform transformTmp = _cdOfSongView.coverOfSongEGOImageView.transform;
+    transformTmp = CGAffineTransformRotate(transformTmp, ROTATE_ANGLE);
+    _cdOfSongView.coverOfSongEGOImageView.transform = transformTmp;
+    
+}
+
+//根据圆圈的比率，刷新圆盘进度
+-(void)doUpdateProcess{
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    long duration = aaMusicPlayer.getDuration;
+    long currentTime = aaMusicPlayer.getCurrentTime;
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    
+    [_cdOfSongView updateProcess:playProcess];
     
 }
 

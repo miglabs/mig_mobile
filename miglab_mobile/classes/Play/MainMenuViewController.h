@@ -16,6 +16,8 @@
 
 #import "PCustomPlayerBoradView.h"
 
+#import "PAAMusicPlayer.h"
+#import "PAMusicPlayer.h"
 #import "Song.h"
 #import "PMusicPlayerDelegate.h"
 
@@ -48,6 +50,7 @@
 -(IBAction)doAvatarAction:(id)sender;
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
+-(IBAction)doPlayOrPause:(id)sender;                                                //播放、暂停歌曲
 -(IBAction)doNextAction:(id)sender;
 
 //播放页面方法
@@ -55,6 +58,14 @@
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 
+//下载歌曲
+-(void)downloadFailed:(NSNotification *)tNotification;
+-(void)downloadProcess:(NSNotification *)tNotification;
+-(void)downloadSuccess:(NSNotification *)tNotification;
 
+-(void)stopDownload;
+-(void)initSongInfo;
+-(void)downloadSong;
+-(void)initAndStartPlayer;
 
 @end
