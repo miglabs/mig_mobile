@@ -862,7 +862,7 @@
             
             NSMutableArray* channel = [[NSMutableArray alloc] init];
             
-            for (int i=0; i<tnum; i++) {
+            for (int i=0; i<[dicChannels count]; i++) {
                 
                 [channel addObject:[Channel initWithNSDictionary:[dicChannels objectAtIndex:i]]];
             }
@@ -900,20 +900,57 @@
  <!--请求GET-->
  HTTP_GETCHANNELMUSIC
  */
--(void)doGetMusicFromChannel:(int)uid token:(NSString *)ttoken channel:(int)tchannel {
+-(void)doGetMusicFromChannel:(NSString*)uid token:(NSString *)ttoken channel:(int)tchannel {
     
-    NSString* url = [NSString stringWithFormat:@"%@&channel=%d&token=%@&uid=%d", HTTP_GETCHANNELMUSIC, uid, ttoken, tchannel];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&channel=%d", HTTP_GETCHANNELMUSIC, uid, ttoken, tchannel];
     PLog(@"get channel music url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        ;
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+        PLog(@"dicJson: %@", dicJson);
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
+        if(1 == status) {
+            
+            PLog(@"get music from channel operation succeeded");
+            
+            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+            NSArray* arrChannels = [dicTemp objectForKey:@"channel"];
+            
+            NSMutableArray* songs = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<[arrChannels count]; i++) {
+                
+                [songs addObject:[Song initWithNSDictionary:[arrChannels objectAtIndex:i]]];
+                
+            }
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songs, @"result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicSuccess object:nil userInfo:dicResult];
+            
+        }
+        else {
+            
+            PLog(@"get music from channel operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicFailed object:nil userInfo:dicResult];
+            
+        }
         
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get music from channel failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicFailed object:nil userInfo:nil];
         
     }];
     

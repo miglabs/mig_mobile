@@ -120,7 +120,7 @@
 #define NotificationNameGetChannelFailed                    @"NotificationNameGetChannelFailed"
 
 //获取频道的歌曲
-#define HTTP_GETCHANNELMUSIC                                [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/cgi-bin/channel_song.fcgi"]
+#define HTTP_GETCHANNELMUSIC                                [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/channel_song.fcgi"]
 #define NotificationNameGetChannelMusicSuccess              @"NotificationNameGetChannelMusicSuccess"
 #define NotificationNameGetChannelMusicFailed               @"NotificationNameGetChannelMusicFailed"
 

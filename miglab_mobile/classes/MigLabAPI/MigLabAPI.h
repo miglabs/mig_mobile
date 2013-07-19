@@ -104,7 +104,7 @@
 /*
  获取频道的歌曲
  */
--(void)doGetMusicFromChannel:(int)uid token:(NSString*)ttoken channel:(int)tchannel;
+-(void)doGetMusicFromChannel:(NSString*)uid token:(NSString*)ttoken channel:(int)tchannel;
 
 /*
  获取心情，场景词描述
