@@ -13,6 +13,8 @@
 @synthesize songid = _songid;
 @synthesize songname = _songname;
 @synthesize artist = _artist;
+@synthesize pubtime = _pubtime;
+@synthesize album = _album;
 @synthesize duration = _duration;
 @synthesize songurl = _songurl;
 @synthesize lrcurl = _lrcurl;
@@ -32,13 +34,15 @@
         if (dict && [dict isKindOfClass:[NSDictionary class]]) {
             
             song = [[Song alloc] init];
-            song.songid = [[dict objectForKey:@"songid"] longLongValue];
-            song.songname = [dict objectForKey:@"songname"];
+            song.songid = [[dict objectForKey:@"id"] longLongValue];
+            song.songname = [dict objectForKey:@"title"];
             song.artist = [dict objectForKey:@"artist"];
-            song.duration = [dict objectForKey:@"duration"];
-            song.songurl = [dict objectForKey:@"songurl"];
+            song.pubtime = [dict objectForKey:@"pub_time"];
+            song.album = [dict objectForKey:@"album"];
+            song.duration = [dict objectForKey:@"time"];
+            song.songurl = [dict objectForKey:@"url"];
             song.lrcurl = [dict objectForKey:@"lrcurl"];
-            song.coverurl = [dict objectForKey:@"coverurl"];
+            song.coverurl = [dict objectForKey:@"pic"];
             song.like = [dict objectForKey:@"like"];
             
         }
