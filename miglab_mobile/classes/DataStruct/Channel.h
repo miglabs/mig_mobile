@@ -10,7 +10,7 @@
 
 @interface Channel : NSObject
 
-@property (nonatomic, assign) int channelId; //频道id
+@property (nonatomic, retain) NSString* channelId; //频道id
 @property (nonatomic, retain) NSString* channelName; //频道名称
 @property (nonatomic, retain) NSString* channelPicUrl; //频道封面图片地址
 

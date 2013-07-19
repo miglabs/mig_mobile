@@ -863,8 +863,13 @@
             NSMutableArray* channel = [[NSMutableArray alloc] init];
             
             for (int i=0; i<tnum; i++) {
-                //Channel* channelTmp = [Channel initWithNSDictionary:dicChannels[i]];
+                
+                [channel addObject:[Channel initWithNSDictionary:[dicChannels objectAtIndex:i]]];
             }
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:channel, @"result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelSuccess object:nil userInfo:dicResult];
             
         }
         else {
