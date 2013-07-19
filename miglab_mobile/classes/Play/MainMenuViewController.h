@@ -31,9 +31,11 @@
 @property (nonatomic, retain) PlayBodyView *cdOfSongView;
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
+@property (nonatomic, retain) EGOImageView *cdEGOImageView;                         //光盘旋转动画
+
 //歌曲场景切换页面
 @property (nonatomic, retain) PCustomPlayerBoradView *playerBoradView;
-@property (nonatomic, retain) EGOImageView *cdEGOImageView;                         //光盘旋转动画
+
 @property (nonatomic, assign) BOOL isPlayViewShowing;                               //当前是否显示播放页面
 
 @property (nonatomic, retain) NSMutableArray *songList;
@@ -43,13 +45,14 @@
 
 -(void)initMenuView;
 
+-(IBAction)doAvatarAction:(id)sender;
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
 -(IBAction)doNextAction:(id)sender;
 
 //播放页面方法
 -(void)initPlayView;
--(IBAction)doShowPlayViewAction:(id)sender;
+-(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 
 

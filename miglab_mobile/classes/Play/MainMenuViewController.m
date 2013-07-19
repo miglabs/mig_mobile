@@ -31,9 +31,11 @@
 @synthesize cdOfSongView = _cdOfSongView;
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
+@synthesize cdEGOImageView = _cdEGOImageView;
+
 //歌曲场景切换页面
 @synthesize playerBoradView = _playerBoradView;
-@synthesize cdEGOImageView = _cdEGOImageView;
+
 @synthesize isPlayViewShowing = _isPlayViewShowing;
 
 @synthesize songList = _songList;
@@ -72,6 +74,14 @@
     [self initPlayView];
     
     //end 播放
+    
+    UIImage *defaultCover = [UIImage imageWithName:@"song_cover" type:@"png"];
+    defaultCover = [UIImage createRoundedRectImage:defaultCover size:CGSizeMake(200, 200) radius:100];
+    _cdEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultCover];
+//    _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
+    _cdEGOImageView.frame = CGRectMake(62, 119, 196, 196);
+    _cdEGOImageView.hidden = YES;
+    [self.view addSubview:_cdEGOImageView];
     
     //download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadFailed:) name:NotificationNameDownloadFailed object:nil];
@@ -139,18 +149,44 @@
 -(void)initMenuView{
     
     //bottom
-    _playerBoradView = [[PCustomPlayerBoradView alloc] initPlayerBoradView:CGRectMake(0, kMainScreenHeight - 60, 320, 60)];
-    [_playerBoradView.btnAvatar addTarget:self action:@selector(doShowPlayViewAction:) forControlEvents:UIControlEventTouchUpInside];
+    _playerBoradView = [[PCustomPlayerBoradView alloc] initPlayerBoradView:CGRectMake(0, kMainScreenHeight - 60, kMainScreenWidth, 60)];
+    [_playerBoradView.btnAvatar addTarget:self action:@selector(doAvatarAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playerBoradView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_playerBoradView];
     
-    UIImage *defaultCover = [UIImage imageWithName:@"song_cover" type:@"png"];
-    defaultCover = [UIImage createRoundedRectImage:defaultCover size:CGSizeMake(200, 200) radius:100];
-    _cdEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultCover];
-    _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
-    [self.view addSubview:_cdEGOImageView];
+    
+}
+
+-(IBAction)doAvatarAction:(id)sender{
+    
+    //逆时针旋转
+    CABasicAnimation *transformAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    transformAnim.fromValue = [NSNumber numberWithFloat:0];
+    transformAnim.toValue = [NSNumber numberWithFloat:2 * M_PI];
+    transformAnim.duration = 0.3;
+    transformAnim.autoreverses = NO;
+    transformAnim.repeatCount = 2;
+    
+    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+    animGroup.animations = [NSArray arrayWithObjects:transformAnim, nil];
+    animGroup.duration = 6;
+    _cdEGOImageView.hidden = NO;
+    [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
+    
+    //移动位置
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        _playView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
+        _cdEGOImageView.frame = CGRectMake(62, 119, 196, 196);
+        
+    } completion:^(BOOL finished) {
+        
+        _cdEGOImageView.hidden = YES;
+        _cdOfSongView.coverOfSongEGOImageView.hidden = NO;
+        
+    }];
     
 }
 
@@ -175,23 +211,23 @@
     
     //构造播放页面
     _playView = [[UIView alloc] init];
-    _playView.frame = CGRectMake(0, 0, 320, kMainScreenHeight);
+    _playView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
     
     //background view
     UIImage *defaultBackgroundImage = [UIImage imageWithName:@"bg_mask_2" type:@"png"];
     _backgroundEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultBackgroundImage];
-    _backgroundEGOImageView.frame = CGRectMake(0, -20, 320, kMainScreenHeight + 20);
+    _backgroundEGOImageView.frame = CGRectMake(0, -20, kMainScreenWidth, kMainScreenHeight + 20);
     [_playView addSubview:_backgroundEGOImageView];
     
     //top
-    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, 320, 44)];
-    [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowPlayViewAction:) forControlEvents:UIControlEventTouchUpInside];
+    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, kMainScreenWidth, 44)];
+    [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowMenuViewAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topPlayerInfoView.btnShare addTarget:self action:@selector(doShareAction:) forControlEvents:UIControlEventTouchUpInside];
     [_playView addSubview:_topPlayerInfoView];
     
     //song info label
     _lblSongInfo = [[UILabel alloc] init];
-    _lblSongInfo.frame = CGRectMake(0, 60, 320, 21);
+    _lblSongInfo.frame = CGRectMake(0, 60, kMainScreenWidth, 21);
     _lblSongInfo.backgroundColor = [UIColor clearColor];
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
     _lblSongInfo.textColor = [UIColor whiteColor];
@@ -202,7 +238,7 @@
     //song of page
     _showInfoPageControl = [[PCustomPageControl alloc] init];
     _showInfoPageControl.backgroundColor = [UIColor clearColor];
-    _showInfoPageControl.frame = CGRectMake(0, 90, 320, 15);
+    _showInfoPageControl.frame = CGRectMake(0, 90, kMainScreenWidth, 15);
     _showInfoPageControl.numberOfPages = 2;
     _showInfoPageControl.currentPage = 0;
     _showInfoPageControl.imagePageStateNormal = [UIImage imageWithName:@"page_nor" type:@"png"];
@@ -212,12 +248,12 @@
     //song info
     _songInfoScrollView = [[UIScrollView alloc] init];
     _songInfoScrollView.backgroundColor = [UIColor clearColor];
-    _songInfoScrollView.frame = CGRectMake(0, 100, 320, kMainScreenHeight - 100 - 90);
+    _songInfoScrollView.frame = CGRectMake(0, 100, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     _songInfoScrollView.scrollEnabled = YES;
     _songInfoScrollView.showsHorizontalScrollIndicator = NO;
     _songInfoScrollView.pagingEnabled = YES;
     _songInfoScrollView.delegate = self;
-    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, kMainScreenHeight - 100 - 90);
+    _songInfoScrollView.contentSize = CGSizeMake(kMainScreenWidth * 2, kMainScreenHeight - 100 - 90);
     
     //song of cd view
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PlayBodyView" owner:self options:nil];
@@ -226,7 +262,7 @@
             _cdOfSongView = (PlayBodyView *)oneObject;
         }//if
     }//for
-    _cdOfSongView.frame = CGRectMake(0, 0, 320, kMainScreenHeight - 100 - 90);
+    _cdOfSongView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
     _cdOfSongView.coverOfSongEGOImageView.layer.cornerRadius = 98;
     _cdOfSongView.coverOfSongEGOImageView.layer.masksToBounds = YES;
@@ -243,7 +279,7 @@
     [_playView addSubview:_songInfoScrollView];
     
     //bottom
-    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight - 90, 320, 90)];
+    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight - 90, kMainScreenWidth, 90)];
     [_bottomPlayerMenuView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -260,11 +296,44 @@
     
 }
 
+-(IBAction)doShowMenuViewAction:(id)sender{
+    
+    PLog(@"doShowMenuViewAction...");
+    
+    //逆时针旋转
+    CABasicAnimation *transformAnim = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    transformAnim.fromValue = [NSNumber numberWithFloat:2 * M_PI];
+    transformAnim.toValue = [NSNumber numberWithFloat:0];
+    transformAnim.duration = 0.3;
+    transformAnim.autoreverses = NO;
+    transformAnim.repeatCount = 2;
+    
+    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+    animGroup.animations = [NSArray arrayWithObjects:transformAnim, nil];
+    animGroup.duration = 6;
+    _cdEGOImageView.hidden = NO;
+    _cdOfSongView.coverOfSongEGOImageView.hidden = YES;
+    [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
+    
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        _playView.frame = CGRectMake(320, 0, kMainScreenWidth, kMainScreenHeight);
+        _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
+        
+    } completion:^(BOOL finished) {
+        
+        _cdEGOImageView.hidden = YES;
+        
+    }];
+    
+}
+
 -(IBAction)doShowPlayViewAction:(id)sender{
     
     PLog(@"doShowPlayViewAction...");
     
-    float height = [UIScreen mainScreen].bounds.size.height;
+//    float height = [UIScreen mainScreen].bounds.size.height;
     
     /*
      CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -446,6 +515,7 @@
     CAAnimationGroup *animGroup = [CAAnimationGroup animation];
     animGroup.animations = [NSArray arrayWithObjects:shake, nil];
     animGroup.duration = 6;
+    _cdEGOImageView.hidden = NO;
     [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
     
     
@@ -455,19 +525,21 @@
             
             _isPlayViewShowing = NO;
             
-            _cdEGOImageView.frame = CGRectMake(9, height - 20 - 50, 44, 44);
+            _playView.frame = CGRectMake(320, 0, kMainScreenWidth, kMainScreenHeight);
+            _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
             
         } else {
             
             _isPlayViewShowing = YES;
             
+            _playView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
             _cdEGOImageView.frame = CGRectMake(62, 119, 196, 196);
             
         }
         
     } completion:^(BOOL finished) {
         
-        //        _cdEGOImageView.hidden = YES;
+        _cdEGOImageView.hidden = YES;
         
     }];
     
@@ -545,9 +617,9 @@
         [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
             
             if (recognizer.view.frame.origin.y > 50) {
-                _playView.frame = CGRectMake(0, 300, 320, 100);
+                _playView.frame = CGRectMake(0, 300, kMainScreenWidth, 100);
             } else {
-                _playView.frame = CGRectMake(0, 0, 320, 50);
+                _playView.frame = CGRectMake(0, 0, kMainScreenWidth, 50);
             }
             
         } completion:^(BOOL finished) {
@@ -559,6 +631,37 @@
         
         
     }
+    
+}
+
+#pragma UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    int page = 0;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    _showInfoPageControl.currentPage = page;
+    
+}
+
+#pragma UIScrollViewDelegate end
+
+
+#pragma EGOImageViewDelegate
+- (void)imageViewLoadedImage:(EGOImageView*)imageView{
+    
+}
+
+- (void)imageViewFailedToLoadImage:(EGOImageView*)imageView error:(NSError*)error{
+    
+}
+
+#pragma EGOImageButtonDelegate
+- (void)imageButtonLoadedImage:(EGOImageButton*)imageButton{
+    
+}
+
+- (void)imageButtonFailedToLoadImage:(EGOImageButton*)imageButton error:(NSError*)error{
     
 }
 
