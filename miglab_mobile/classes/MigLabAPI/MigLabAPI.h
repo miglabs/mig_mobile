@@ -109,7 +109,7 @@
 /*
  获取心情，场景词描述
  */
--(void)doGetModeScene:(int)uid token:(NSString*)ttoken decword:(NSString*)tdecword;
+-(void)doGetModeScene:(NSString*)uid token:(NSString*)ttoken decword:(NSString*)tdecword;
 
 /*
  获取心情，场景歌曲

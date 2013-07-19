@@ -15,6 +15,7 @@
 #import "UserSessionManager.h"
 #import "Song.h"
 #import "Channel.h"
+#import "Scene.h"
 
 @implementation MigLabAPI
 
@@ -963,27 +964,42 @@
  <!--请求GET-->
  HTTP_MODESCENE
  */
--(void)doGetModeScene:(int)uid token:(NSString *)ttoken decword:(NSString *)tdecword {
+-(void)doGetModeScene:(NSString*)uid token:(NSString *)ttoken decword:(NSString *)tdecword {
     
-    NSString* url = [NSString stringWithFormat:@"%@&decword=%@&token=%@&uid=%d", HTTP_MODESCENE, tdecword, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?decword=%@&token=%@&uid=%@", HTTP_MODESCENE, tdecword, ttoken, uid];
     PLog(@"get mode scene url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODESCENE]];
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = JSON;
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
         int status = [dicJson objectForKey:@"status"];
         
         if(1 == status) {
             
-            PLog(@"operation succeeded");
+            PLog(@"get mode scene operation succeeded");
             
-            //TODO, send content
+            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+            NSArray* arrScenes = [dicTemp objectForKey:@"word"];
+            
+            NSMutableArray* scene = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<[arrScenes count]; i++) {
+                
+                [scene addObject:[Scene initWithNSDictionary:[arrScenes objectAtIndex:i]]];
+                
+            }
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:scene, @"result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneSuccess object:nil userInfo:dicResult];
             
         }
         else {
             
-            PLog(@"operation failed");
+            PLog(@"get mode scene operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
@@ -992,14 +1008,14 @@
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"get mode scene failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneFailed object:nil userInfo:nil];
         
     }];
-    
+     
     [operation start];
     
 }

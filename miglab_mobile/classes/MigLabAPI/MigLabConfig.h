@@ -125,7 +125,7 @@
 #define NotificationNameGetChannelMusicFailed               @"NotificationNameGetChannelMusicFailed"
 
 //获取心情场景词描述
-#define HTTP_MODESCENE                                      [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/cgi-bin/getword.fcgi"]
+#define HTTP_MODESCENE                                      [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getword.fcgi"]
 #define NotificationNameModeSceneSuccess                    @"NotificationNameModeSceneSuccess"
 #define NotificationNameModeSceneFailed                     @"NotificationNameModeSceneFailed"
 
