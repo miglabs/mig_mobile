@@ -8,17 +8,50 @@
 
 #import <UIKit/UIKit.h>
 #import "EGOImageButton.h"
+#import "EGOImageView.h"
+#import "PCustomPlayerNavigationView.h"
+#import "PCustomPlayerMenuView.h"
+#import "PCustomPageControl.h"
+#import "PlayBodyView.h"
 
 #import "PCustomPlayerBoradView.h"
 
-@interface MainMenuViewController : UIViewController
+#import "Song.h"
+#import "PMusicPlayerDelegate.h"
 
+@interface MainMenuViewController : UIViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate, PMusicPlayerDelegate>
+
+//播放页面
 @property (nonatomic, retain) UIView *playView;
+@property (nonatomic, retain) EGOImageView *backgroundEGOImageView;
+@property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
+@property (nonatomic, retain) UILabel *lblSongInfo;
+@property (nonatomic, retain) PCustomPageControl *showInfoPageControl;
+@property (nonatomic, retain) UIScrollView *songInfoScrollView;
+@property (nonatomic, retain) PlayBodyView *cdOfSongView;
+@property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
+//歌曲场景切换页面
 @property (nonatomic, retain) PCustomPlayerBoradView *playerBoradView;
+@property (nonatomic, retain) EGOImageView *cdEGOImageView;                         //光盘旋转动画
+@property (nonatomic, assign) BOOL isPlayViewShowing;                               //当前是否显示播放页面
+
+@property (nonatomic, retain) NSMutableArray *songList;
+@property (nonatomic, assign) int currentSongIndex;
+@property (nonatomic, retain) Song *currentSong;
+@property (nonatomic) BOOL shouldStartPlayAfterDownloaded;
+
+-(void)initMenuView;
 
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
 -(IBAction)doNextAction:(id)sender;
+
+//播放页面方法
+-(void)initPlayView;
+-(IBAction)doShowPlayViewAction:(id)sender;
+-(IBAction)doShareAction:(id)sender;
+
+
 
 @end

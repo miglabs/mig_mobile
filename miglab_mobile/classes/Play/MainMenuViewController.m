@@ -10,8 +10,10 @@
 #import "UIImage+PImageCategory.h"
 #import <QuartzCore/QuartzCore.h>
 #import "PCommonUtil.h"
+#import "SongDownloadManager.h"
+#import "PDatabaseManager.h"
 
-#import "PlayViewController.h"
+#define SONG_INIT_SIZE 3000
 
 @interface MainMenuViewController ()
 
@@ -19,15 +21,33 @@
 
 @implementation MainMenuViewController
 
+//播放页面
 @synthesize playView = _playView;
+@synthesize backgroundEGOImageView = _backgroundEGOImageView;
+@synthesize topPlayerInfoView = _topPlayerInfoView;
+@synthesize lblSongInfo = _lblSongInfo;
+@synthesize showInfoPageControl = _showInfoPageControl;
+@synthesize songInfoScrollView = _songInfoScrollView;
+@synthesize cdOfSongView = _cdOfSongView;
+@synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
+//歌曲场景切换页面
 @synthesize playerBoradView = _playerBoradView;
+@synthesize cdEGOImageView = _cdEGOImageView;
+@synthesize isPlayViewShowing = _isPlayViewShowing;
+
+@synthesize songList = _songList;
+@synthesize currentSongIndex = _currentSongIndex;
+@synthesize currentSong = _currentSong;
+@synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _isPlayViewShowing = NO;
+        
     }
     return self;
 }
@@ -40,23 +60,71 @@
     FRAMELOG(self.view);
     
     //screen height
-    float height = [UIScreen mainScreen].bounds.size.height;
-    PLog(@"height: %f", height);
+    PLog(@"kMainScreenHeight: %f", kMainScreenHeight);
     
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
-    _playView = playViewController.view;
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [_playView addGestureRecognizer:panGestureRecognizer];
+    //构造场景选择页面
+    [self initMenuView];
     
-//    [self.view addSubview:_playView];
+    //end 场景
     
-    //bottom
-    _playerBoradView = [[PCustomPlayerBoradView alloc] initPlayerBoradView:CGRectMake(0, height - 20 - 60, 320, 60)];
-    [_playerBoradView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_playerBoradView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_playerBoradView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_playerBoradView];
+    //构造播放页面
+    [self initPlayView];
+    
+    //end 播放
+    
+    //download
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadFailed:) name:NotificationNameDownloadFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProcess:) name:NotificationNameDownloadProcess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadSuccess:) name:NotificationNameDownloadSuccess object:nil];
+    
+    //song list
+    _songList = [[NSMutableArray alloc] init];
+    _currentSongIndex = 0;
+    
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    
+    Song *song0 = [[Song alloc] init];
+    song0.songid = 346630;
+    song0.songname = @"寂寞";
+    song0.artist = @"谢容儿";
+    song0.songurl = @"http://umusic.9158.com/2013/07/14/14/14/346630_3cd4dbc8abde417c83cd9261f50bdb4c.mp3";
+    song0.coverurl = @"http://upic.9158.com/2013/07/12/12/31/20130712123159_img1008690313.jpg";
+    song0.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song0.songCachePath = [songManager getSongCachePath:song0];
+    [_songList addObject:song0];
+    
+    Song *song1 = [[Song alloc] init];
+    song1.songid = 314001;
+    song1.songname = @"黄梅戏";
+    song1.artist = @"慕容晓晓";
+    song1.songurl = @"http://umusic.9158.com/2013/07/06/09/21/314001_a2e7fbfef7bd448e9349a3becfdea19e.mp3";
+    song1.coverurl = @"http://upic.9158.com/2013/07/07/05/49/20130707054950_img1008690313.jpg";
+    song1.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song1.songCachePath = [songManager getSongCachePath:song1];
+    [_songList addObject:song1];
+    
+    Song *song2 = [[Song alloc] init];
+    song2.songid = 284711;
+    song2.songname = @"青春纪念册";
+    song2.artist = @"G_voice家族";
+    song2.songurl = @"http://umusic.9158.com/2013/06/29/16/35/284711_abbf9d95fcbe42a486e86d4281881e0a.mp3";
+    song2.coverurl = @"http://upic.9158.com/2013/07/05/07/16/20130705071624_img1008690313.jpg";
+    song2.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song2.songCachePath = [songManager getSongCachePath:song2];
+    [_songList addObject:song2];
+    
+    Song *song3 = [[Song alloc] init];
+    song3.songid = 267654;
+    song3.songname = @"你是我的眼";
+    song3.artist = @"萧煌奇";
+    song3.songurl = @"http://umusic.9158.com/2013/06/24/23/40/267654_c281b790308e41d2966b24cf56838c0e.mp3";
+    song3.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    song3.songCachePath = [songManager getSongCachePath:song3];
+    [_songList addObject:song3];
+    
+    
     
 }
 
@@ -64,6 +132,403 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+-(void)initMenuView{
+    
+    //bottom
+    _playerBoradView = [[PCustomPlayerBoradView alloc] initPlayerBoradView:CGRectMake(0, kMainScreenHeight - 60, 320, 60)];
+    [_playerBoradView.btnAvatar addTarget:self action:@selector(doShowPlayViewAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playerBoradView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playerBoradView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playerBoradView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_playerBoradView];
+    
+    UIImage *defaultCover = [UIImage imageWithName:@"song_cover" type:@"png"];
+    defaultCover = [UIImage createRoundedRectImage:defaultCover size:CGSizeMake(200, 200) radius:100];
+    _cdEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultCover];
+    _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
+    [self.view addSubview:_cdEGOImageView];
+    
+}
+
+-(IBAction)doRemoveAction:(id)sender{
+    
+}
+
+-(IBAction)doLikeAction:(id)sender{
+    
+}
+
+-(IBAction)doNextAction:(id)sender{
+    
+    
+}
+
+//构造播放页面
+-(void)initPlayView{
+    
+    //screen height
+    PLog(@"kMainScreenHeight: %f", kMainScreenHeight);
+    
+    //构造播放页面
+    _playView = [[UIView alloc] init];
+    _playView.frame = CGRectMake(0, 0, 320, kMainScreenHeight);
+    
+    //background view
+    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"bg_mask_2" type:@"png"];
+    _backgroundEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultBackgroundImage];
+    _backgroundEGOImageView.frame = CGRectMake(0, -20, 320, kMainScreenHeight + 20);
+    [_playView addSubview:_backgroundEGOImageView];
+    
+    //top
+    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, 320, 44)];
+    [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowPlayViewAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_topPlayerInfoView.btnShare addTarget:self action:@selector(doShareAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playView addSubview:_topPlayerInfoView];
+    
+    //song info label
+    _lblSongInfo = [[UILabel alloc] init];
+    _lblSongInfo.frame = CGRectMake(0, 60, 320, 21);
+    _lblSongInfo.backgroundColor = [UIColor clearColor];
+    _lblSongInfo.textAlignment = kTextAlignmentCenter;
+    _lblSongInfo.textColor = [UIColor whiteColor];
+    _lblSongInfo.shadowOffset = CGSizeMake(0, 1);
+    _lblSongInfo.text = @"乐瑟 - 无敌仙曲";
+    [_playView addSubview:_lblSongInfo];
+    
+    //song of page
+    _showInfoPageControl = [[PCustomPageControl alloc] init];
+    _showInfoPageControl.backgroundColor = [UIColor clearColor];
+    _showInfoPageControl.frame = CGRectMake(0, 90, 320, 15);
+    _showInfoPageControl.numberOfPages = 2;
+    _showInfoPageControl.currentPage = 0;
+    _showInfoPageControl.imagePageStateNormal = [UIImage imageWithName:@"page_nor" type:@"png"];
+    _showInfoPageControl.imagePageStateHighlighted = [UIImage imageWithName:@"page_sel" type:@"png"];
+    [_playView addSubview:_showInfoPageControl];
+    
+    //song info
+    _songInfoScrollView = [[UIScrollView alloc] init];
+    _songInfoScrollView.backgroundColor = [UIColor clearColor];
+    _songInfoScrollView.frame = CGRectMake(0, 100, 320, kMainScreenHeight - 100 - 90);
+    _songInfoScrollView.scrollEnabled = YES;
+    _songInfoScrollView.showsHorizontalScrollIndicator = NO;
+    _songInfoScrollView.pagingEnabled = YES;
+    _songInfoScrollView.delegate = self;
+    _songInfoScrollView.contentSize = CGSizeMake(320 * 2, kMainScreenHeight - 100 - 90);
+    
+    //song of cd view
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PlayBodyView" owner:self options:nil];
+    for (id oneObject in nib){
+        if ([oneObject isKindOfClass:[PlayBodyView class]]){
+            _cdOfSongView = (PlayBodyView *)oneObject;
+        }//if
+    }//for
+    _cdOfSongView.frame = CGRectMake(0, 0, 320, kMainScreenHeight - 100 - 90);
+    
+    _cdOfSongView.coverOfSongEGOImageView.layer.cornerRadius = 98;
+    _cdOfSongView.coverOfSongEGOImageView.layer.masksToBounds = YES;
+    
+    _cdOfSongView.btnCdOfSong.layer.cornerRadius = 98;
+    _cdOfSongView.btnCdOfSong.layer.masksToBounds = YES;
+    _cdOfSongView.btnCdOfSong.adjustsImageWhenHighlighted = NO;
+    
+    //初始化进度指示
+    [_cdOfSongView updateProcess:0.01];
+    
+    [_songInfoScrollView addSubview:_cdOfSongView];
+    
+    [_playView addSubview:_songInfoScrollView];
+    
+    //bottom
+    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight - 90, 320, 90)];
+    [_bottomPlayerMenuView.btnRemove addTarget:self action:@selector(doRemoveAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomPlayerMenuView.btnLike addTarget:self action:@selector(doLikeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_playView addSubview:_bottomPlayerMenuView];
+    
+    //add view
+    [self.view addSubview:_playView];
+    
+    //end 构造播放页面
+    
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [_playView addGestureRecognizer:panGestureRecognizer];
+    
+    
+}
+
+-(IBAction)doShowPlayViewAction:(id)sender{
+    
+    PLog(@"doShowPlayViewAction...");
+    
+    float height = [UIScreen mainScreen].bounds.size.height;
+    
+    /*
+     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+     CGMutablePathRef aPath = CGPathCreateMutable();
+     CGPathMoveToPoint(aPath, nil, 9, height - 20 - 50);
+     CGPathAddQuadCurveToPoint(aPath, nil, 30, 100, 62, 119);
+     animation.path = aPath;
+     animation.duration = 0.7;
+     */
+    
+    //    //路径曲线
+    //    CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    //    CGMutablePathRef aPath = CGPathCreateMutable();
+    //    CGPathMoveToPoint(aPath, nil, 9, height - 20 - 50);
+    //    CGPathAddQuadCurveToPoint(aPath, nil, 60, 100, 62, 119);
+    //    moveAnim.path = aPath;
+    //    moveAnim.duration = 0.6;
+    //    moveAnim.removedOnCompletion = YES;
+    
+    //    [_cdEGOImageView.layer addAnimation:moveAnim forKey:@"position"];
+    
+    /*
+     CGPoint fromPoint = _cdEGOImageView.center;
+     
+     //路径曲线
+     UIBezierPath *movePath = [UIBezierPath bezierPath];
+     [movePath moveToPoint:fromPoint];
+     CGPoint toPoint = CGPointMake(62, 119);
+     [movePath addQuadCurveToPoint:toPoint
+     controlPoint:CGPointMake(100, 0)];
+     //关键帧
+     CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+     moveAnim.path = movePath.CGPath;
+     moveAnim.duration = 0.6;
+     moveAnim.removedOnCompletion = YES;
+     
+     //旋转变化
+     CABasicAnimation *transformAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+     transformAnim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+     //沿Z轴旋转
+     transformAnim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 0, 0, 1)];
+     transformAnim.cumulative = YES;
+     transformAnim.duration = 0.3;
+     //旋转2遍，360度
+     transformAnim.repeatCount = 2;
+     transformAnim.removedOnCompletion = YES;
+     
+     //缩放
+     CABasicAnimation *scaleAnim = [CABasicAnimation animationWithKeyPath:@"scale"];
+     scaleAnim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+     scaleAnim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(3, 3, 1)];
+     scaleAnim.duration = 0.6;
+     scaleAnim.removedOnCompletion = YES;
+     
+     CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+     animGroup.animations = [NSArray arrayWithObjects:transformAnim, scaleAnim, nil];
+     animGroup.duration = 6;
+     [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
+     */
+    
+    /*
+     CGPoint fromPoint = _cdEGOImageView.center;
+     
+     //路径曲线
+     UIBezierPath *movePath = [UIBezierPath bezierPath];
+     [movePath moveToPoint:fromPoint];
+     CGPoint toPoint = CGPointMake(62, 119);
+     [movePath addQuadCurveToPoint:toPoint
+     controlPoint:CGPointMake(62, 119)];
+     //关键帧
+     CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+     moveAnim.path = movePath.CGPath;
+     //    moveAnim.removedOnCompletion = YES;
+     
+     //旋转变化
+     CABasicAnimation *scaleAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+     scaleAnim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+     //x，y轴缩小到0.1,Z 轴不变
+     scaleAnim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(3, 3, 1.0)];
+     //    scaleAnim.removedOnCompletion = YES;
+     
+     //透明度变化
+     CABasicAnimation *opacityAnim = [CABasicAnimation animationWithKeyPath:@"alpha"];
+     opacityAnim.fromValue = [NSNumber numberWithFloat:1.0];
+     opacityAnim.toValue = [NSNumber numberWithFloat:0.1];
+     //    opacityAnim.removedOnCompletion = YES;
+     
+     //关键帧，旋转，透明度组合起来执行
+     CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+     animGroup.animations = [NSArray arrayWithObjects:moveAnim, scaleAnim,opacityAnim, nil];
+     animGroup.duration = 1;
+     [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
+     */
+    /*
+     CGPoint fromPoint = _cdEGOImageView.center;
+     UIBezierPath *movePath = [UIBezierPath bezierPath];
+     [movePath moveToPoint:fromPoint];
+     CGPoint toPoint = CGPointMake(fromPoint.x +100 , fromPoint.y ) ;
+     [movePath addLineToPoint:toPoint];
+     
+     CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+     moveAnim.path = movePath.CGPath;
+     
+     CABasicAnimation *TransformAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+     TransformAnim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+     
+     //沿Z轴旋转
+     TransformAnim.toValue = [NSValue valueWithCATransform3D: CATransform3DMakeRotation(M_PI,0,0,1)];
+     
+     //沿Y轴旋转
+     //   scaleAnim.toValue = [NSValue valueWithCATransform3D: CATransform3DMakeRotation(M_PI,0,1.0,0)];
+     
+     //沿X轴旋转
+     //     TransformAnim.toValue = [NSValue valueWithCATransform3D: CATransform3DMakeRotation(M_PI,1.0,0,0)];
+     TransformAnim.cumulative = YES;
+     TransformAnim.duration = 0.6;
+     //旋转2遍，360度
+     TransformAnim.repeatCount =2;
+     _cdEGOImageView.center = toPoint;
+     TransformAnim.removedOnCompletion = YES;
+     CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+     animGroup.animations = [NSArray arrayWithObjects:moveAnim, TransformAnim, nil];
+     animGroup.duration = 0.6;
+     */
+    
+    //    [_cdEGOImageView.layer addAnimation:animGroup forKey:nil];
+    
+    /*
+     //用例3 scale+rotate+position
+     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform"];
+     CATransform3D rotateTransform = CATransform3DMakeRotation(1.57, 0, 0, -1);
+     CATransform3D scaleTransform = CATransform3DMakeScale(5, 5, 5);
+     CATransform3D positionTransform = CATransform3DMakeTranslation(0, 0, 0); //位置移动
+     CATransform3D combinedTransform = CATransform3DConcat(rotateTransform, scaleTransform); //Concat就是combine的意思
+     combinedTransform = CATransform3DConcat(combinedTransform, positionTransform); //再combine一次把三个动作连起来
+     
+     [anim setFromValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]]; //放在3D坐标系中最正的位置
+     [anim setToValue:[NSValue valueWithCATransform3D:combinedTransform]];
+     [anim setDuration:5.0f];
+     
+     [_cdEGOImageView.layer addAnimation:anim forKey:nil];
+     
+     [_cdEGOImageView.layer setTransform:combinedTransform];  //如果没有这句，layer执行完动画又会返回最初的state
+     */
+    
+    /*
+     //旋转变化
+     CABasicAnimation *transformAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+     transformAnim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+     //沿Z轴旋转
+     transformAnim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 0, 0, 1)];
+     transformAnim.cumulative = YES;
+     transformAnim.duration = 0.3;
+     //旋转2遍，360度
+     transformAnim.repeatCount = 2;
+     transformAnim.removedOnCompletion = YES;
+     */
+    
+    
+    
+    //逆时针旋转
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    shake.duration = 0.3;
+    shake.autoreverses = NO;
+    shake.repeatCount = 2;
+    
+    if (_isPlayViewShowing) {
+        //逆时针旋转
+        shake.fromValue = [NSNumber numberWithFloat:2 * M_PI];
+        shake.toValue = [NSNumber numberWithFloat:0];
+        
+    } else {
+        //顺时针旋转
+        shake.fromValue = [NSNumber numberWithFloat:0];
+        shake.toValue = [NSNumber numberWithFloat:2 * M_PI];
+        
+    }
+    
+    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+    animGroup.animations = [NSArray arrayWithObjects:shake, nil];
+    animGroup.duration = 6;
+    [_cdEGOImageView.layer addAnimation:animGroup forKey:@"animGroup"];
+    
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        if (_isPlayViewShowing) {
+            
+            _isPlayViewShowing = NO;
+            
+            _cdEGOImageView.frame = CGRectMake(9, height - 20 - 50, 44, 44);
+            
+        } else {
+            
+            _isPlayViewShowing = YES;
+            
+            _cdEGOImageView.frame = CGRectMake(62, 119, 196, 196);
+            
+        }
+        
+    } completion:^(BOOL finished) {
+        
+        //        _cdEGOImageView.hidden = YES;
+        
+    }];
+    
+}
+
+-(IBAction)doShareAction:(id)sender{
+    
+    PLog(@"doShareAction...");
+    
+}
+
+-(void)downloadFailed:(NSNotification *)tNotification{
+    PLog(@"downloadFailed...");
+    
+    //播放下一首
+    [self doNextAction:nil];
+    
+}
+
+-(void)downloadProcess:(NSNotification *)tNotification{
+    
+    NSDictionary *dicProcess = [tNotification userInfo];
+    PLog(@"downloadProcess: %@", dicProcess);
+    
+    if (_currentSong.songurl) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        songext = [songext substringFromIndex:range.location + 1];
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
+        if (tempfilesize <= 0) {
+            
+            long long totalBytesExpectedToRead = [dicProcess objectForKey:@"TotalBytesExpectedToRead"];
+            [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+            
+        }
+        
+        //
+        SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+        long long localsize = [songManager getSongLocalSize:_currentSong];
+        if (localsize < SONG_INIT_SIZE) {
+            //
+            
+        } else {
+            
+//            if (!_aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+//                _shouldStartPlayAfterDownloaded = NO;
+//                [self initAndStartPlayer];
+//            }
+            
+            
+        }
+        
+    }
+    
+}
+
+-(void)downloadSuccess:(NSNotification *)tNotification{
+    PLog(@"downloadSuccess...");
 }
 
 -(void)handlePan:(UIPanGestureRecognizer *)recognizer{
@@ -94,19 +559,6 @@
         
         
     }
-    
-}
-
--(IBAction)doRemoveAction:(id)sender{
-    
-}
-
--(IBAction)doLikeAction:(id)sender{
-    
-}
-
--(IBAction)doNextAction:(id)sender{
-    
     
 }
 
