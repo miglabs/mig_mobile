@@ -150,6 +150,7 @@
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CB30BAAC1799926100F96FC4 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAAB1799926100F96FC4 /* Scene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -373,6 +374,8 @@
 		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CB30BAAA1799926000F96FC4 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		CB30BAAB1799926100F96FC4 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +608,8 @@
 				CB30BAA81792873300F96FC4 /* Channel.m */,
 				184648661793D4D500E83EBB /* AccountOf3rdParty.h */,
 				184648671793D4D500E83EBB /* AccountOf3rdParty.m */,
+				CB30BAAA1799926000F96FC4 /* Scene.h */,
+				CB30BAAB1799926100F96FC4 /* Scene.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1096,6 +1101,7 @@
 				1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */,
 				188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */,
 				187A5667179927D200221569 /* PlayBodyView.m in Sources */,
+				CB30BAAC1799926100F96FC4 /* Scene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
