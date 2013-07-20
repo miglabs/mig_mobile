@@ -130,7 +130,7 @@
 #define NotificationNameModeSceneFailed                     @"NotificationNameModeSceneFailed"
 
 //获取心情场景歌曲
-#define HTTP_MODEMUSIC                                      [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/cgi-bin/word_song.fcgi"]
+#define HTTP_MODEMUSIC                                      [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/word_song.fcgi"]
 #define NotificationNameModeMusicSuccess                    @"NotificationNameModeMusicSuccess"
 #define NotificationNameModeMusicFailed                     @"NotificationNameModeMusicFailed"
 

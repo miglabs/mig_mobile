@@ -1025,25 +1025,34 @@
  <!--请求GET-->
  HTTP_MODEMUSIC
  */
--(void)doGetModeMusic:(int)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood {
+-(void)doGetModeMusic:(NSString*)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood {
     
-    NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%d", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%@", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid];
     PLog(@"get mode music url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = JSON;
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
         int status = [dicJson objectForKey:@"status"];
         
         if(1 == status) {
             
-            PLog(@"operation succeeded");
+            PLog(@"get mood music operation succeeded");
+            
+            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+            Song* song = [Song initWithNSDictionary:[dicTemp objectForKey:@"word"]];
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicSuccess object:nil userInfo:dicResult];
             
         }
         else {
             
-            PLog(@"operation failed");
+            PLog(@"get mood music operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
@@ -1052,9 +1061,9 @@
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"get mood music failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicFailed object:nil userInfo:nil];
         

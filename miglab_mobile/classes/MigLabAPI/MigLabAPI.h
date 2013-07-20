@@ -114,7 +114,7 @@
 /*
  获取心情，场景歌曲
  */
--(void)doGetModeMusic:(int)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
+-(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
 
 /*
  获取心绪地图
