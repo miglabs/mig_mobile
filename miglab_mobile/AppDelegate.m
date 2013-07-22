@@ -79,6 +79,9 @@
         
     } else {
         
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        [databaseManager insertUserAccout:@"pig" password:@"pig" userid:@""];
+        
         User *user = [[User alloc] init];
         user.username = @"archer1234";
         user.password = @"123456";
@@ -87,7 +90,7 @@
         PLog(@"username: %@, password: %@", user.username, user.password);
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页
-        int initHomeViewType = 2;
+        int initHomeViewType = 1;
         
         if (initHomeViewType == 0) {
             //

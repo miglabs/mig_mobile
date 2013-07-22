@@ -674,9 +674,6 @@
 -(void)initUserData{
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    
-    [databaseManager insertUserAccout:@"pig" password:@"pig" userid:@""];
-    
     User *lastUser = [databaseManager getLastLoginUser];
     if (lastUser && lastUser.username && lastUser.password) {
         
