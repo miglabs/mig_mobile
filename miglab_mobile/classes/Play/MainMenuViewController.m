@@ -219,9 +219,13 @@
 
 -(IBAction)doRemoveAction:(id)sender{
     
+    PLog(@"doRemoveAction...");
+    
 }
 
 -(IBAction)doLikeAction:(id)sender{
+    
+    PLog(@"doLikeAction...");
     
 }
 
@@ -776,7 +780,7 @@
         long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
         if (tempfilesize <= 0) {
             
-            long long totalBytesExpectedToRead = [dicProcess objectForKey:@"TotalBytesExpectedToRead"];
+            long long totalBytesExpectedToRead = [[dicProcess objectForKey:@"TotalBytesExpectedToRead"] longLongValue];
             [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
             
         }
@@ -818,6 +822,9 @@
 -(void)initSongInfo{
     
     _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
+    
+    _playerBoradView.lblSongName.text = _currentSong.songname;
+    _playerBoradView.lblArtist.text = _currentSong.artist;
     
     [self downloadSong];
     
