@@ -12,7 +12,11 @@
 #import "PCommonUtil.h"
 #import "SongDownloadManager.h"
 #import "PDatabaseManager.h"
+#import "UserSessionManager.h"
+#import "SVProgressHUD.h"
+
 #import "PPlayerManaerCenter.h"
+
 
 #define SONG_INIT_SIZE 3000
 #define ROTATE_ANGLE 0.01//0.026526
@@ -45,6 +49,8 @@
 @synthesize currentSong = _currentSong;
 @synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
 
+@synthesize miglabAPI = _miglabAPI;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -65,6 +71,18 @@
     
     //screen height
     PLog(@"kMainScreenHeight: %f", kMainScreenHeight);
+    
+    //doGetGuestInfo
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoFailed:) name:NotificationNameGetGuestFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoSuccess:) name:NotificationNameGetGuestSuccess object:nil];
+    
+    //login
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:NotificationNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
+    
+    //user
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
     
     
     //构造场景选择页面
@@ -94,7 +112,13 @@
     _songList = [[NSMutableArray alloc] init];
     _currentSongIndex = 0;
     
+    _miglabAPI = [[MigLabAPI alloc] init];
     
+    //登录，获取用户资料
+    [self initUserData];
+    
+    
+    //test data
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     
     Song *song0 = [[Song alloc] init];
@@ -645,6 +669,92 @@
     }];
     
 }
+
+//登录，获取用户资料
+-(void)initUserData{
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    
+    [databaseManager insertUserAccout:@"pig" password:@"pig" userid:@""];
+    
+    User *lastUser = [databaseManager getLastLoginUser];
+    if (lastUser && lastUser.username && lastUser.password) {
+        
+        [_miglabAPI doAuthLogin:lastUser.username password:lastUser.password];
+        
+    } else {
+        
+        [_miglabAPI doGetGuestInfo];
+        
+    }
+    
+}
+
+//getGuestInfo notification
+-(void)getGuestInfoFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"getGuestInfoFailed: %@", result);
+    
+}
+
+-(void)getGuestInfoSuccess:(NSNotification *)tNotification{
+    
+    NSLog(@"getGuestInfoSuccess...");
+    
+    NSDictionary *result = [tNotification userInfo];
+    User *guest = [result objectForKey:@"result"];
+    [guest log];
+    
+    [_miglabAPI doAuthLogin:guest.username password:guest.password];
+    
+}
+
+//login notification
+-(void)loginFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"loginFailed: %@", result);
+    [SVProgressHUD showErrorWithStatus:@"登录失败"];
+    
+}
+
+-(void)loginSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"loginSuccess: %@", result);
+    
+    NSString *accesstoken = [result objectForKey:@"AccessToken"];
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    
+    [UserSessionManager GetInstance].accesstoken = accesstoken;
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doGetUserInfo:username accessToken:accesstoken];
+}
+
+//getUserInfo notification
+-(void)getUserInfoFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"getUserInfoFailed: %@", result);
+    [SVProgressHUD showErrorWithStatus:@"获取用户信息失败"];
+    
+}
+
+-(void)getUserInfoSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary* result = [tNotification userInfo];
+    NSLog(@"getUserIdSuccess...%@", result);
+    
+    User* user = [result objectForKey:@"result"];
+    [UserSessionManager GetInstance].currentUser = user;
+    
+    PLog(@"%@", [UserSessionManager GetInstance].currentUser.userid);
+    
+}
+
+// end 登录，获取用户资料
 
 -(void)downloadFailed:(NSNotification *)tNotification{
     PLog(@"downloadFailed...");

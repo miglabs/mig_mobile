@@ -36,6 +36,7 @@
         _db = [FMDatabase databaseWithPath:dbpath];
         [_db open];
         
+        [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text not null, userid integer, logintime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         
@@ -49,6 +50,84 @@
 -(void)initDataInfo{
     
     PLog(@"initDataInfo...");
+    
+}
+
+//记录登录账号信息（aes加密）
+-(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid{
+    
+    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid) values (?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select username from USER_ACCOUNT where username = '%@' ", tusername];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? ";
+        PLog(@"sql: %@", sql);
+        break;
+    }
+    
+    [_db executeUpdate:sql, tusername, tpassword, tuserid];
+    [_db close];
+    
+}
+
+//获取最近登录使用的账号
+-(User *)getLastLoginUser{
+    
+    User *user = nil;
+    
+    NSString *sql = @"select username, password, userid from USER_ACCOUNT order by logintime desc";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        NSString *pusername = [rs stringForColumn:@"username"];
+        NSString *ppassword = [rs stringForColumn:@"password"];
+        NSString *puserid = [rs stringForColumn:@"userid"];
+        
+        user = [[User alloc] init];
+        user.username = pusername;
+        user.password = ppassword;
+        user.userid = puserid;
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return user;
+}
+
+//根据userid删除制定账号
+-(void)deleteUserAccountByUserId:(NSString *)tuserid{
+    
+    NSString *sql = @"delete from USER_ACCOUNT where userid = ? ";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, tuserid];
+    [_db close];
+    
+}
+
+//清空账号
+-(void)deleteAllUserAccount{
+    
+    NSString *sql = @"delete from USER_ACCOUNT";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
     
 }
 

@@ -10,7 +10,12 @@
 #import "UncaughtExceptionHandler.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AFNetworkActivityIndicatorManager.h"
+#import "PDatabaseManager.h"
+
 #import "GuideViewController.h"
+
+#import "MainMenuViewController.h"
+
 #import "HomeViewController.h"
 #import "User.h"
 #import "UserSessionManager.h"
@@ -81,9 +86,10 @@
         
         PLog(@"username: %@, password: %@", user.username, user.password);
         
-        BOOL doTest = NO;
+        //0-测试，1-左右侧滑菜单，2-播放菜单主页
+        int initHomeViewType = 2;
         
-        if (doTest) {
+        if (initHomeViewType == 0) {
             //
             TestViewController *testViewController = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
             _navController = [[UINavigationController alloc] initWithRootViewController:testViewController];
@@ -92,7 +98,7 @@
             self.window.rootViewController = _navController;
             [self.window addSubview:self.navController.view];
             
-        } else {
+        } else if (initHomeViewType == 1) {
             
             _homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
             _navController = [[UINavigationController alloc] initWithRootViewController:_homeViewController];
@@ -107,6 +113,16 @@
             
             _menuController = rootController;
             self.window.rootViewController =  rootController;
+            
+        } else if (initHomeViewType == 2) {
+            
+            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+            _navController.navigationBar.hidden = YES;
+            
+            self.window.rootViewController = _navController;
+            [self.window addSubview:self.navController.view];
+            
         }
         
     }//

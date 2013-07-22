@@ -57,4 +57,10 @@
     return user;
 }
 
+-(void)log{
+    
+    PLog(@"Print User: username(%@), password(%@), userid(%@), nickname(%@), gender(%d), type(%d), birthday(%@), location(%@), age(%d), source(%d), head(%@)", _username, _password, _userid, _nickname, _gender, _type, _birthday, _location, _age, _source, _head);
+    
+}
+
 @end

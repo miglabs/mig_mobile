@@ -28,5 +28,6 @@
 @property (nonatomic, retain) AccountOf3rdParty *account3;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict;
+-(void)log;
 
 @end

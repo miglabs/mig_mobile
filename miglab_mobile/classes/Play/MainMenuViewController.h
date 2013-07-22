@@ -45,6 +45,8 @@
 @property (nonatomic, retain) Song *currentSong;
 @property (nonatomic) BOOL shouldStartPlayAfterDownloaded;
 
+@property (nonatomic, retain) MigLabAPI *miglabAPI;
+
 -(void)initMenuView;
 
 -(IBAction)doAvatarAction:(id)sender;
@@ -57,6 +59,15 @@
 -(void)initPlayView;
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
+
+//登录，获取用户资料
+-(void)initUserData;
+-(void)getGuestInfoFailed:(NSNotification *)tNotification;
+-(void)getGuestInfoSuccess:(NSNotification *)tNotification;
+-(void)loginFailed:(NSNotification *)tNotification;
+-(void)loginSuccess:(NSNotification *)tNotification;
+-(void)getUserInfoFailed:(NSNotification *)tNotification;
+-(void)getUserInfoSuccess:(NSNotification *)tNotification;
 
 //下载歌曲
 -(void)downloadFailed:(NSNotification *)tNotification;

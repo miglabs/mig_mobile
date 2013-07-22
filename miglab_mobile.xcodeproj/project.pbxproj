@@ -109,6 +109,7 @@
 		16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */; };
 		16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575CE179590BA00277308 /* borad_menu_like_sel.png */; };
 		180271EF178C019800CA9488 /* Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180271EE178C019800CA9488 /* Icon.jpg */; };
+		1830B52E179D129200314A28 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830B52D179D129200314A28 /* NSData+AES256.m */; };
 		1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834106017969FC000EAAFFC /* MainMenuViewController.m */; };
 		1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1834106117969FC000EAAFFC /* MainMenuViewController.xib */; };
 		183E022D177C33A300EE8944 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E022C177C33A300EE8944 /* Song.m */; };
@@ -299,6 +300,8 @@
 		16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerBoradView.m; sourceTree = "<group>"; };
 		16F575CE179590BA00277308 /* borad_menu_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borad_menu_like_sel.png; sourceTree = "<group>"; };
 		180271EE178C019800CA9488 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
+		1830B52C179D129200314A28 /* NSData+AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES256.h"; sourceTree = "<group>"; };
+		1830B52D179D129200314A28 /* NSData+AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES256.m"; sourceTree = "<group>"; };
 		1834105F17969FC000EAAFFC /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		1834106017969FC000EAAFFC /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		1834106117969FC000EAAFFC /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
@@ -405,6 +408,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1830B52B179D129200314A28 /* AES256 */,
 				1846485F1793ACF700E83EBB /* WeChatAPI */,
 				1846484D1793AA5F00E83EBB /* sinaweibo_ios_sdk */,
 				184648411793A5F700E83EBB /* Login */,
@@ -785,6 +789,15 @@
 			path = play_borad;
 			sourceTree = "<group>";
 		};
+		1830B52B179D129200314A28 /* AES256 */ = {
+			isa = PBXGroup;
+			children = (
+				1830B52C179D129200314A28 /* NSData+AES256.h */,
+				1830B52D179D129200314A28 /* NSData+AES256.m */,
+			);
+			path = AES256;
+			sourceTree = "<group>";
+		};
 		183E0233177C408100EE8944 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1102,6 +1115,7 @@
 				188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */,
 				187A5667179927D200221569 /* PlayBodyView.m in Sources */,
 				CB30BAAC1799926100F96FC4 /* Scene.m in Sources */,
+				1830B52E179D129200314A28 /* NSData+AES256.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
