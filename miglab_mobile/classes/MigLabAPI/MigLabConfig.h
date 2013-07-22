@@ -15,9 +15,11 @@
 #define PLog(format, ...)
 #endif
 
-#define SINA_WEIBO_APP_KEY                @"1468499793"
-#define SINA_WEIBO_APP_SECRET             @"ce6dd4ab9ae4f14aa7982a43453cc173"
-#define SINA_WEIBO_APP_REDIRECTURI        @"https://api.weibo.com/oauth2/default.html"
+#define SINA_WEIBO_APP_KEY                  @"1468499793"
+#define SINA_WEIBO_APP_SECRET               @"ce6dd4ab9ae4f14aa7982a43453cc173"
+#define SINA_WEIBO_APP_REDIRECTURI          @"https://api.weibo.com/oauth2/default.html"
+
+#define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
 /*
  * 用于切换不同域名地址

@@ -64,6 +64,9 @@
 
 -(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid accessToken:(NSString *)taccesstoken accountType:(int)taccounttype{
     
+    NSString *encodeUsername = [PCommonUtil encodeAES256:tusername];
+    NSString *encodePassword = [PCommonUtil encodeAES256:tpassword];
+    
     NSString *sql = @"insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype) values (?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
@@ -80,7 +83,7 @@
         break;
     }
     
-    [_db executeUpdate:sql, tusername, tpassword, tuserid, taccesstoken, taccounttype];
+    [_db executeUpdate:sql, encodeUsername, encodePassword, tuserid, taccesstoken, taccounttype];
     [_db close];
     
 }
@@ -105,8 +108,8 @@
         int paccounttype = [rs intForColumn:@"accounttype"];
         
         account = [[AccountOf3rdParty alloc] init];
-        account.username = pusername;
-        account.password = ppassword;
+        account.username = [PCommonUtil decodeAES256:pusername];
+        account.password = [PCommonUtil decodeAES256:ppassword];
         account.accountid = puserid;
         account.accesstoken = paccesstoken;
         account.accounttype = paccounttype;

@@ -229,11 +229,15 @@
     
     PLog(@"doRemoveAction...");
     
+//    [_miglabAPI doAddBlacklist:<#(NSString *)#> uid:<#(int)#> sid:<#(long)#>]
+    
 }
 
 -(IBAction)doLikeAction:(id)sender{
     
     PLog(@"doLikeAction...");
+    
+//    [_miglabAPI doAddFavorite:<#(NSString *)#> uid:<#(int)#> sid:<#(long)#>]
     
 }
 
@@ -829,8 +833,10 @@
 -(void)downloadFailed:(NSNotification *)tNotification{
     PLog(@"downloadFailed...");
     
+    [SVProgressHUD showErrorWithStatus:@"下载歌曲失败"];
+    
     //播放下一首
-    [self doNextAction:nil];
+//    [self doNextAction:nil];
     
 }
 
@@ -944,6 +950,9 @@
 
 -(void)aaMusicPlayerStoped{
     
+    //播放下一首
+    [self doNextAction:nil];
+    
 }
 
 //PAMusicPlayer
@@ -954,6 +963,9 @@
 }
 
 -(void)aMusicPlayerStoped{
+    
+    //播放下一首
+    [self doNextAction:nil];
     
 }
 

@@ -9,6 +9,7 @@
 #import "PCommonUtil.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "GTMBase64.h"
+#import "NSData+AES256.h"
 
 @implementation PCommonUtil
 
@@ -72,6 +73,30 @@
     }
     
     return param;
+}
+
++(NSString *)encodeAES256:(NSString *)str{
+    
+    if (str && [str isKindOfClass:[NSString class]]) {
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *encodeData = [data AES256EncryptWithKey:AES256_SECRET];
+        
+        return [[NSString alloc] initWithData:encodeData encoding:NSUTF8StringEncoding];
+    }
+    
+    return str;
+}
+
++(NSString *)decodeAES256:(NSString *)str{
+    
+    if (str && [str isKindOfClass:[NSString class]]) {
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *decodeData = [data AES256DecryptWithKey:AES256_SECRET];
+        
+        return [[NSString alloc] initWithData:decodeData encoding:NSUTF8StringEncoding];
+    }
+    
+    return str;
 }
 
 //制作图片遮罩(注意：需要有一张原图是带alpha通道的图片，和一个不带alpha通道的遮罩图)
