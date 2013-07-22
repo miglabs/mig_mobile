@@ -1,0 +1,131 @@
+2013-07-22 22:43:33.792 miglab_mobile[24116:707] dbpath: /var/mobile/Applications/B604BACC-C109-4862-A9CD-A5BD9131073C/Library/Caches/miglab_mobile/user.sqlite
+2013-07-22 22:43:33.800 miglab_mobile[24116:707] sql: insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype) values (?, ?, ?, ?, ?)
+2013-07-22 22:43:33.802 miglab_mobile[24116:707] checksql: select username from USER_ACCOUNT where username = 'pig' 
+2013-07-22 22:43:33.807 miglab_mobile[24116:707] sql: update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? 
+2013-07-22 22:43:33.822 miglab_mobile[24116:707] username: archer1234, password: 123456
+2013-07-22 22:43:33.839 miglab_mobile[24116:707] 0.000000 0.000000 320.000000 460.000000
+2013-07-22 22:43:33.841 miglab_mobile[24116:707] kMainScreenHeight: 460.000000
+2013-07-22 22:43:33.856 miglab_mobile[24116:707] kMainScreenHeight: 460.000000
+2013-07-22 22:43:34.267 miglab_mobile[24116:707] sql: select username, password, userid from USER_ACCOUNT order by logintime desc
+2013-07-22 22:43:34.271 miglab_mobile[24116:707] Warning: I could not find the column named 'accesstoken'.
+2013-07-22 22:43:34.273 miglab_mobile[24116:707] Warning: I could not find the column named 'accounttype'.
+2013-07-22 22:43:34.276 miglab_mobile[24116:707] username: pig, password: pig
+2013-07-22 22:43:34.278 miglab_mobile[24116:707] LOGIN_SSO_SP_URL: http://sso.miglab.com/cgi-bin/sp.fcgi?sp
+2013-07-22 22:43:34.316 miglab_mobile[24116:707] applicationDidBecomeActive...
+2013-07-22 22:43:35.991 miglab_mobile[24116:707] result: http://sso.miglab.com/cgi-bin/idp.fcgi?RequestID=_170A62E0C97145A8FE16A9BFE8BC54D1&MajorVersion=1&MinorVersion=2&IssueInstant=2013-07-22T14%3A53%3A10Z&ProviderID=http%3A%2F%2Ffm.miglab.com&ForceAuthn=false&IsPassive=false&NameIDPolicy=federated&RelayState=fake%5B%5D&consent=urn%3Aliberty%3Aconsent%3Aobtained&SigAlg=http%3A%2F%2Fwww.w3.org%2F2000%2F09%2Fxmldsig%23rsa-sha1&Signature=bNNyD%2FZH1cS3Dn4Ne6jl1XHe7X74aVySd8YrWh%2FGeFNbt%2BWoKwf90u2yh9FLKhjO8ec4Sm%2BLatvYnXnXTSnZjlt8Oe46hdId9%2FmJWiU%2BcgtfroURMDWfPcRhEQ2hmAcMgfNI5TQ3PoHUPe2%2BcEMaQZTvh2HyRhsjcRhHYWUBEhd3DMx3QDQB7aiYsYtDN9ozmHdOWAkwdGPjqnguj2K8jm8c%2BLt6pojzP%2Bx6IBZknwY%2BQJLZF2lRCokKpwzXQt7oe1hnhayZlvzUVlGbsm%2FXH%2F9eskutWjAxL8BJILaHfTI2lMBsBhLrNuxfiwRQqlz0L0YVs4j7SbAHLbYMIYclZw%3D%3D
+2013-07-22 22:43:35.993 miglab_mobile[24116:707] loginSsoSecondUrl: http://sso.miglab.com/cgi-bin/idp.fcgi
+2013-07-22 22:43:37.623 miglab_mobile[24116:707] result: http://fm.miglab.com/cgi-bin/sp.fcgi?SAMLart=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0&RelayState=fake%5B%5D
+2013-07-22 22:43:37.626 miglab_mobile[24116:707] loginSsoThirdUrl: http://fm.miglab.com/cgi-bin/sp.fcgi
+2013-07-22 22:43:39.160 miglab_mobile[24116:707] result AccessToken: AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0
+, strAccessToken: AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0
+2013-07-22 22:43:39.162 miglab_mobile[24116:707] loginSuccess: {
+    AccessToken = AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0;
+}
+2013-07-22 22:43:39.164 miglab_mobile[24116:707] getUserInfoUrl: http://42.121.14.108/cgi-bin/userinfo.fcgi?username=pig&token=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0
+2013-07-22 22:43:43.362 miglab_mobile[24116:707] dicJson: {
+    msg = 0;
+    result =     {
+        birthday = "1986-10-01";
+        gender = 1;
+        head = "http://fm.miglab.com/default.jpg";
+        location = "\U6d59\U6c5f\U7701\U676d\U5dde\U5e02";
+        nickname = pig;
+        source = 0;
+        type = 1;
+        userid = 10026;
+        username = pig;
+    };
+    status = 1;
+}
+2013-07-22 22:43:43.364 miglab_mobile[24116:707] get user information operation succeeded
+2013-07-22 22:43:43.369 miglab_mobile[24116:707] getUserIdSuccess...{
+    result = "<User: 0x1f56fbf0>";
+}
+2013-07-22 22:43:43.370 miglab_mobile[24116:707] Print User: username(pig), password((null)), userid(10026), nickname(pig), gender(1), type(1), birthday(1986-10-01), location(浙江省杭州市), age(0), source(0), head(http://fm.miglab.com/default.jpg)
+2013-07-22 22:43:43.372 miglab_mobile[24116:707] sql: insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype) values (?, ?, ?, ?, ?)
+2013-07-22 22:43:43.376 miglab_mobile[24116:707] checksql: select username from USER_ACCOUNT where username = 'pig' 
+2013-07-22 22:43:43.380 miglab_mobile[24116:707] sql: update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? 
+2013-07-22 22:43:43.388 miglab_mobile[24116:707] get channel url: http://42.121.14.108/cgi-bin/channel.fcgi?num=10&token=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0&uid=10026
+2013-07-22 22:43:44.389 miglab_mobile[24116:707] dicJson: {
+    msg = 0;
+    result =     {
+        channle =         (
+                        {
+                id = 14;
+                name = "\U7535\U97f3\U4e4b\U58f0";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 15;
+                name = "\U8bf4\U5531RAP";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 16;
+                name = "R&B";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 17;
+                name = "\U65e5\U8bed";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 18;
+                name = "\U97e9\U8bed";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 20;
+                name = "\U5973\U751f\U5bbf\U820d";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 22;
+                name = "\U6cd5\U8bed";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 27;
+                name = "\U53e4\U5178\U4e4b\U7f8e";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            },
+                        {
+                id = 28;
+                name = "\U52a8\U6f2b\U4e4b\U97f3";
+                pic = "http://42.121.14.108/wx/1.jpg";
+            }
+        );
+    };
+    status = 1;
+}
+2013-07-22 22:43:44.392 miglab_mobile[24116:707] get channel operation succeeded
+2013-07-22 22:43:44.397 miglab_mobile[24116:707] getChannelSuccess...
+2013-07-22 22:43:44.400 miglab_mobile[24116:707] get channel music url: http://42.121.14.108/cgi-bin/channel_song.fcgi?uid=10026&token=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0&channel=14
+2013-07-22 22:44:25.332 miglab_mobile[24116:707] get music from channel failure: Error Domain=AFNetworkingErrorDomain Code=-1011 "Expected status code in (200-299), got 500" UserInfo=0x1f59b580 {NSLocalizedRecoverySuggestion=<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>500 Internal Server Error</title>
+</head><body>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error or
+misconfiguration and was unable to complete
+your request.</p>
+<p>Please contact the server administrator,
+ root@miglab.com and inform them of the time the error occurred,
+and anything you might have done that may have
+caused the error.</p>
+<p>More information about this error may be available
+in the server error log.</p>
+<hr>
+<address>Apache/2.2.22 (EL) Server at 42.121.14.108 Port 80</address>
+</body></html>
+, AFNetworkingOperationFailingURLResponseErrorKey=<NSHTTPURLResponse: 0x1f5c2510>, NSErrorFailingURLKey=http://42.121.14.108/cgi-bin/channel_song.fcgi?uid=10026&token=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0&channel=14, NSLocalizedDescription=Expected status code in (200-299), got 500, AFNetworkingOperationFailingURLRequestErrorKey=<NSURLRequest http://42.121.14.108/cgi-bin/channel_song.fcgi?uid=10026&token=AAOfv3WG35avZspzKhoeodwv2MFd8zM1MTA1QjIzMzhBMjlBMTYwREI0&channel=14>}
+2013-07-22 22:44:25.335 miglab_mobile[24116:707] getMusicFromChannelFailed...
+
+
+------------------
+
+112.124.49.59    open.fm.miglab.com
+
+
+

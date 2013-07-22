@@ -68,6 +68,10 @@
 -(void)loginSuccess:(NSNotification *)tNotification;
 -(void)getUserInfoFailed:(NSNotification *)tNotification;
 -(void)getUserInfoSuccess:(NSNotification *)tNotification;
+-(void)getChannelFailed:(NSNotification *)tNotification;
+-(void)getChannelSuccess:(NSNotification *)tNotification;
+-(void)getMusicFromChannelFailed:(NSNotification *)tNotification;
+-(void)getMusicFromChannelSuccess:(NSNotification *)tNotification;
 
 //下载歌曲
 -(void)downloadFailed:(NSNotification *)tNotification;

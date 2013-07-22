@@ -10,6 +10,8 @@
 
 @interface AccountOf3rdParty : NSObject
 
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *password;
 @property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) NSString *accountid;
 @property (nonatomic, retain) NSString *accesstoken;

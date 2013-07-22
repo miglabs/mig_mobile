@@ -8,7 +8,7 @@
 
 #import "PFileManager.h"
 #import "FMDatabase.h"
-#import "User.h"
+#import "AccountOf3rdParty.h"
 #import "PCommonUtil.h"
 
 @interface PDatabaseManager : PFileManager
@@ -21,11 +21,12 @@
 -(void)initDataInfo;
 
 //记录登录账号信息（aes加密）
--(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid;
+-(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword;
+-(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid accessToken:(NSString *)taccesstoken accountType:(int)taccounttype;
 //获取最近登录使用的账号
--(User *)getLastLoginUser;
+-(AccountOf3rdParty *)getLastLoginUserAccount;
 //根据userid删除制定账号
--(void)deleteUserAccountByUserId:(NSString *)tuserid;
+-(void)deleteUserAccountByUserName:(NSString *)tusername;
 //清空账号
 -(void)deleteAllUserAccount;
 

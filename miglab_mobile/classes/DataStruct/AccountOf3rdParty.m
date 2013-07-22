@@ -10,6 +10,8 @@
 
 @implementation AccountOf3rdParty
 
+@synthesize username = _username;
+@synthesize password = _password;
 @synthesize accounttype = _accounttype;
 @synthesize accountid = _accountid;
 @synthesize accesstoken = _accesstoken;

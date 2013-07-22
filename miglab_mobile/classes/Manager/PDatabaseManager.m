@@ -36,7 +36,8 @@
         _db = [FMDatabase databaseWithPath:dbpath];
         [_db open];
         
-        [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text not null, userid integer, logintime integer)"];
+        [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text not null, userid integer, accesstoken text, accounttype integer, logintime integer)"];
+        [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         
@@ -54,9 +55,16 @@
 }
 
 //记录登录账号信息（aes加密）
--(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid{
+-(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword{
     
-    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid) values (?, ?, ?)";
+    //默认为本身数据
+    [self insertUserAccout:tusername password:tpassword userid:@"" accessToken:@"" accountType:0];
+    
+}
+
+-(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid accessToken:(NSString *)taccesstoken accountType:(int)taccounttype{
+    
+    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype) values (?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -67,20 +75,20 @@
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
-        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? ";
+        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? ";
         PLog(@"sql: %@", sql);
         break;
     }
     
-    [_db executeUpdate:sql, tusername, tpassword, tuserid];
+    [_db executeUpdate:sql, tusername, tpassword, tuserid, taccesstoken, taccounttype];
     [_db close];
     
 }
 
 //获取最近登录使用的账号
--(User *)getLastLoginUser{
+-(AccountOf3rdParty *)getLastLoginUserAccount{
     
-    User *user = nil;
+    AccountOf3rdParty *account = nil;
     
     NSString *sql = @"select username, password, userid from USER_ACCOUNT order by logintime desc";
     PLog(@"sql: %@", sql);
@@ -93,28 +101,32 @@
         NSString *pusername = [rs stringForColumn:@"username"];
         NSString *ppassword = [rs stringForColumn:@"password"];
         NSString *puserid = [rs stringForColumn:@"userid"];
+        NSString *paccesstoken = [rs stringForColumn:@"accesstoken"];
+        int paccounttype = [rs intForColumn:@"accounttype"];
         
-        user = [[User alloc] init];
-        user.username = pusername;
-        user.password = ppassword;
-        user.userid = puserid;
+        account = [[AccountOf3rdParty alloc] init];
+        account.username = pusername;
+        account.password = ppassword;
+        account.accountid = puserid;
+        account.accesstoken = paccesstoken;
+        account.accounttype = paccounttype;
         
         break;
     }
     
     [_db close];
     
-    return user;
+    return account;
 }
 
 //根据userid删除制定账号
--(void)deleteUserAccountByUserId:(NSString *)tuserid{
+-(void)deleteUserAccountByUserName:(NSString *)tusername{
     
-    NSString *sql = @"delete from USER_ACCOUNT where userid = ? ";
+    NSString *sql = @"delete from USER_ACCOUNT where username = ? ";
     PLog(@"sql: %@", sql);
     
     [_db open];
-    [_db executeUpdate:sql, tuserid];
+    [_db executeUpdate:sql, tusername];
     [_db close];
     
 }

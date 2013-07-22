@@ -14,6 +14,7 @@
 #import "PDatabaseManager.h"
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
+#import "Channel.h"
 
 #import "PPlayerManaerCenter.h"
 
@@ -84,6 +85,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
     
+    //getChannel
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelFailed:) name:NotificationNameGetChannelFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelSuccess:) name:NotificationNameGetChannelSuccess object:nil];
+    
+    //getMusicFromChannel
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelFailed:) name:NotificationNameGetChannelMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelSuccess:) name:NotificationNameGetChannelMusicSuccess object:nil];
     
     //构造场景选择页面
     [self initMenuView];
@@ -678,10 +686,13 @@
 -(void)initUserData{
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    User *lastUser = [databaseManager getLastLoginUser];
-    if (lastUser && lastUser.username && lastUser.password) {
+    AccountOf3rdParty *lastUserAccount = [databaseManager getLastLoginUserAccount];
+    if (lastUserAccount && lastUserAccount.username && lastUserAccount.password) {
         
-        [_miglabAPI doAuthLogin:lastUser.username password:lastUser.password];
+        [UserSessionManager GetInstance].currentUser.username = lastUserAccount.username;
+        [UserSessionManager GetInstance].currentUser.password = lastUserAccount.password;
+        
+        [_miglabAPI doAuthLogin:lastUserAccount.username password:lastUserAccount.password];
         
     } else {
         
@@ -716,6 +727,10 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"loginFailed: %@", result);
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteUserAccountByUserName:[UserSessionManager GetInstance].currentUser.username];
+    
     [SVProgressHUD showErrorWithStatus:@"登录失败"];
     
 }
@@ -746,12 +761,66 @@
 -(void)getUserInfoSuccess:(NSNotification *)tNotification{
     
     NSDictionary* result = [tNotification userInfo];
-    NSLog(@"getUserIdSuccess...%@", result);
+    NSLog(@"getUserInfoSuccess...%@", result);
     
     User* user = [result objectForKey:@"result"];
+    [user log];
+    
+    user.password = [UserSessionManager GetInstance].currentUser.password;
     [UserSessionManager GetInstance].currentUser = user;
     
-    PLog(@"%@", [UserSessionManager GetInstance].currentUser.userid);
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    
+    //获取频道
+    [_miglabAPI doGetChannel:userid token:accesstoken num:10];
+    
+}
+
+-(void)getChannelFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getChannelFailed...%@", result);
+    [SVProgressHUD showErrorWithStatus:@"获取频道信息失败"];
+    
+}
+
+-(void)getChannelSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getChannelSuccess...");
+    
+    NSMutableArray* channelList = [result objectForKey:@"result"];
+    int channelCount = [channelList count];
+    if (channelCount > 0) {
+        
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+        
+        Channel *channel = [channelList objectAtIndex:0];
+        [_miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:[channel.channelId intValue]];
+        
+    }
+    
+}
+
+-(void)getMusicFromChannelFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getMusicFromChannelFailed...%@", result);
+    [SVProgressHUD showErrorWithStatus:@"根据频道获取歌曲信息失败"];
+    
+}
+
+-(void)getMusicFromChannelSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getMusicFromChannelSuccess...");
     
 }
 
