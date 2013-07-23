@@ -12,6 +12,7 @@
 #import "PCommonUtil.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
+#import "Work.h"
 
 @interface PDatabaseManager : PFileManager
 
@@ -35,11 +36,20 @@
 //清空账号
 -(void)deleteAllUserAccount;
 
-//歌曲数据列表记录
+/*
+ 歌曲数据列表记录
+ */
 -(void)insertSongInfo:(Song *)tsong;
 -(NSMutableArray *)getSongInfoList:(int)trowcount;
 -(void)deleteSongInfo:(long long)tlocalkey;
 -(void)deleteAllSongInfo;
+
+/*
+ 描述词记录(心情，场景)
+ */
+-(void)insertWordInfo:(Work *)tword;
+-(NSMutableArray *)getWordInfoList:(int)trowcount;
+-(void)deleteAllWordInfo;
 
 //设置某个歌曲的总文件大小
 -(void)setSongMaxSize:(long long)tlocalkey type:(NSString *)ttype fileMaxSize:(long long)tfilemaxsize;

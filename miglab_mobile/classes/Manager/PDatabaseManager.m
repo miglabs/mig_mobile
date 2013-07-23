@@ -41,6 +41,7 @@
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
+        [_db executeUpdate:@"create table if not exists WORK_INFO (typeid integer not null, name text)"];
         
         [_db close];
     }
@@ -203,7 +204,9 @@
     
 }
 
-//歌曲数据列表记录
+/*
+ 歌曲数据列表记录
+ */
 -(void)insertSongInfo:(Song *)tsong{
     
     NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like) values (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -264,8 +267,6 @@
         psong.songCachePath = [songManager getSongCachePath:psong];
         
         [songInfoList addObject:psong];
-        
-        break;
     }
     
     [_db close];
@@ -287,6 +288,71 @@
 -(void)deleteAllSongInfo{
     
     NSString *sql = @"delete from SONG_LOCAL_INFO";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+/*
+ 描述词记录(心情，场景)
+ */
+-(void)insertWordInfo:(Work *)tword{
+    
+    NSString *sql = @"insert into WORK_INFO (typeid, name) values (?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select username from WORK_INFO where typeid = %d ", tword.typeid];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        PLog(@"is exists...");
+        return;
+    }
+    
+    NSNumber *numTypeId = [NSNumber numberWithLongLong:tword.typeid];
+    
+    [_db executeUpdate:sql, numTypeId, tword.name];
+    [_db close];
+    
+}
+
+-(NSMutableArray *)getWordInfoList:(int)trowcount{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from WORK_INFO limit %d ", trowcount];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *workInfoList = [[NSMutableArray alloc] init];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        int ptypeid = [rs intForColumn:@"typeid"];
+        NSString *pname = [rs stringForColumn:@"name"];
+        
+        Work *pwork = [[Work alloc] init];
+        pwork.typeid = ptypeid;
+        pwork.name = pname;
+        
+        [workInfoList addObject:pwork];
+    }
+    
+    [_db close];
+    
+    return workInfoList;
+}
+
+-(void)deleteAllWordInfo{
+    
+    NSString *sql = @"delete from WORK_INFO";
     PLog(@"sql: %@", sql);
     
     [_db open];

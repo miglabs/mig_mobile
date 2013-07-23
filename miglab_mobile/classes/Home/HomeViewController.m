@@ -140,9 +140,10 @@
 -(void)getUserInfoSuccess:(NSNotification *)tNotification{
     
     NSDictionary* result = [tNotification userInfo];
-    NSLog(@"getUserIdSuccess...%@", result);
+    NSLog(@"getUserInfoSuccess...");
     
     User* user = [result objectForKey:@"result"];
+    [user log];
     [UserSessionManager GetInstance].currentUser = user;
     
     PLog(@"%@", [UserSessionManager GetInstance].currentUser.userid);
