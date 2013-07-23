@@ -36,7 +36,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="1022538591">
+					<object class="IBUIImageView" id="587618171">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 2}</string>
@@ -57,7 +57,7 @@
 						<string key="NSFrame">{{15, 13}, {25, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="170425155"/>
+						<reference key="NSNextKeyView" ref="940004304"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -66,7 +66,7 @@
 							<string key="NSResourceName">left_menu_yinyuejiyin.png</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="170425155">
+					<object class="IBUILabel" id="940004304">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{54, 15}, {152, 21}}</string>
@@ -103,7 +103,6 @@
 						<string key="NSFrame">{{235, 17}, {11, 18}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -116,7 +115,7 @@
 				<string key="NSFrameSize">{320, 50}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1022538591"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MCAwAA</bytes>
@@ -138,7 +137,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lblMenu</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="170425155"/>
+						<reference key="destination" ref="940004304"/>
 					</object>
 					<int key="connectionID">7</int>
 				</object>
@@ -157,8 +156,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="523147285"/>
 							<reference ref="530247080"/>
-							<reference ref="170425155"/>
-							<reference ref="1022538591"/>
+							<reference ref="940004304"/>
+							<reference ref="587618171"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -185,12 +184,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="170425155"/>
+						<reference key="object" ref="940004304"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
-						<reference key="object" ref="1022538591"/>
+						<reference key="object" ref="587618171"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -210,7 +209,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">8</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -218,10 +217,15 @@
 					<string key="className">LeftViewCell</string>
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnBackgroundView">UIButton</string>
 						<string key="lblMenu">UILabel</string>
 						<string key="menuImageView">UIImageView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnBackgroundView">
+							<string key="name">btnBackgroundView</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="lblMenu">
 							<string key="name">lblMenu</string>
 							<string key="candidateClassName">UILabel</string>

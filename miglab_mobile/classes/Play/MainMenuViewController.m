@@ -365,7 +365,7 @@
     //end 构造播放页面
     
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [_playView addGestureRecognizer:panGestureRecognizer];
+//    [_playView addGestureRecognizer:panGestureRecognizer];
     
     
 }

@@ -105,8 +105,8 @@
             
         }
         
-        //0-测试，1-左右侧滑菜单，2-播放菜单主页
-        int initHomeViewType = 1;
+        //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
+        int initHomeViewType = 3;
         
         if (initHomeViewType == 0) {
             //
@@ -141,6 +141,22 @@
             
             self.window.rootViewController = _navController;
             [self.window addSubview:self.navController.view];
+            
+        } else if (initHomeViewType == 3) {
+            
+            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+            [_navController.navigationBar setHidden:YES];
+            
+            //menu
+            DDMenuController *rootController = [[DDMenuController alloc] initWithRootViewController:_navController];
+            _leftViewController = [[LeftViewController alloc] initWithNibName:@"LeftViewController" bundle:nil];
+            _rightViewController = [[RightViewController alloc] initWithNibName:@"RightViewController" bundle:nil];
+            rootController.leftViewController = _leftViewController;
+            rootController.rightViewController = _rightViewController;
+            
+            _menuController = rootController;
+            self.window.rootViewController =  rootController;
             
         }
         
