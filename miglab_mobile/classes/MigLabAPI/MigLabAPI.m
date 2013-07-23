@@ -15,7 +15,7 @@
 #import "UserSessionManager.h"
 #import "Song.h"
 #import "Channel.h"
-#import "Scene.h"
+#import "Work.h"
 
 @implementation MigLabAPI
 
@@ -960,62 +960,127 @@
 }
 
 /*
- 获取心情，场景词描述
+ 获取心情词描述
  <!--请求GET-->
  HTTP_MODESCENE
  */
--(void)doGetModeScene:(NSString*)uid token:(NSString *)ttoken decword:(NSString *)tdecword {
+-(void)doGetWorkOfMood:(NSString*)uid token:(NSString*)ttoken{
     
-    NSString* url = [NSString stringWithFormat:@"%@?decword=%@&token=%@&uid=%@", HTTP_MODESCENE, tdecword, ttoken, uid];
-    PLog(@"get mode scene url: %@", url);
+    NSString* url = [NSString stringWithFormat:@"%@?decword=mood&token=%@&uid=%@", HTTP_MOODSCENE, ttoken, uid];
+    PLog(@"get mood url: %@", url);
     
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODESCENE]];
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
-            PLog(@"get mode scene operation succeeded");
+            PLog(@"get mood operation succeeded");
             
             NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray* arrScenes = [dicTemp objectForKey:@"word"];
+            NSArray* wordlist = [dicTemp objectForKey:@"word"];
+            int wordcount = [wordlist count];
             
-            NSMutableArray* scene = [[NSMutableArray alloc] init];
+            NSMutableArray* moodList = [[NSMutableArray alloc] init];
             
-            for (int i=0; i<[arrScenes count]; i++) {
+            for (int i=0; i<wordcount; i++) {
                 
-                [scene addObject:[Scene initWithNSDictionary:[arrScenes objectAtIndex:i]]];
+                Work *tempwork = [Work initWithNSDictionary:[wordlist objectAtIndex:i]];
+                tempwork.workMode = @"mm";
+                [tempwork log];
                 
+                [moodList addObject:tempwork];
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:scene, @"result", nil];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneSuccess object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodSuccess object:nil userInfo:dicResult];
             
-        }
-        else {
+        } else {
             
-            PLog(@"get mode scene operation failed");
+            PLog(@"get mood operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneFailed object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodFailed object:nil userInfo:dicResult];
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"get mode scene failure: %@", error);
+        PLog(@"get mood failure: %@", error);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeSceneFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodFailed object:nil userInfo:nil];
         
     }];
-     
+    
+    [operation start];
+    
+}
+
+/*
+ 获取场景词描述
+ */
+-(void)doGetWorkOfScene:(NSString*)uid token:(NSString*)ttoken{
+    
+    NSString* url = [NSString stringWithFormat:@"%@?decword=scene&token=%@&uid=%@", HTTP_MOODSCENE, ttoken, uid];
+    PLog(@"get scene url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+        int status = [[dicJson objectForKey:@"status"] intValue];
+        
+        if(1 == status) {
+            
+            PLog(@"get scene operation succeeded");
+            
+            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+            NSArray* wordlist = [dicTemp objectForKey:@"word"];
+            int wordcount = [wordlist count];
+            
+            NSMutableArray* moodList = [[NSMutableArray alloc] init];
+            
+            for (int i=0; i<wordcount; i++) {
+                
+                Work *tempwork = [Work initWithNSDictionary:[wordlist objectAtIndex:i]];
+                tempwork.workMode = @"ms";
+                [tempwork log];
+                
+                [moodList addObject:tempwork];
+            }
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneSuccess object:nil userInfo:dicResult];
+            
+        } else {
+            
+            PLog(@"get scene operation failed");
+            
+            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get scene failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneFailed object:nil userInfo:nil];
+        
+    }];
+    
     [operation start];
     
 }
@@ -1036,23 +1101,33 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
-            PLog(@"get mood music operation succeeded");
+            PLog(@"get mode music operation succeeded");
             
             NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            Song* song = [Song initWithNSDictionary:[dicTemp objectForKey:@"word"]];
+            NSArray *songlist = [dicTemp objectForKey:@"song"];
+            int songcount = [songlist count];
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+            NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+            for (int i=0; i<songcount; i++) {
+                
+                Song *song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                [song log];
+                
+                [songInfoList addObject:song];
+            }
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicSuccess object:nil userInfo:dicResult];
             
         }
         else {
             
-            PLog(@"get mood music operation failed");
+            PLog(@"get mode music operation failed");
             
             NSString* msg = [dicJson objectForKey:@"msg"];
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];

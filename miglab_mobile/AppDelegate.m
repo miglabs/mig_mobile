@@ -106,7 +106,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页
-        int initHomeViewType = 2;
+        int initHomeViewType = 1;
         
         if (initHomeViewType == 0) {
             //
@@ -145,6 +145,18 @@
         }
         
     }//
+    
+    //api test
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    [miglabAPI doGetWorkOfMood:userid token:accesstoken];
+    [miglabAPI doGetWorkOfScene:userid token:accesstoken];
+    
+    [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm"];
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

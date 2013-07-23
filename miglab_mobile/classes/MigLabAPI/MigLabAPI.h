@@ -107,9 +107,14 @@
 -(void)doGetMusicFromChannel:(NSString*)uid token:(NSString*)ttoken channel:(int)tchannel;
 
 /*
- 获取心情，场景词描述
+ 获取心情词描述 20130723 by pig
  */
--(void)doGetModeScene:(NSString*)uid token:(NSString*)ttoken decword:(NSString*)tdecword;
+-(void)doGetWorkOfMood:(NSString*)uid token:(NSString*)ttoken;
+
+/*
+ 获取场景词描述 20130723 by pig
+ */
+-(void)doGetWorkOfScene:(NSString*)uid token:(NSString*)ttoken;
 
 /*
  获取心情，场景歌曲
