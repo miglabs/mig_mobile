@@ -23,8 +23,13 @@
 +(NSString *)decodeBase64:(NSString *)str;
 +(NSString *)encodeUrlParameter:(NSString *)param;
 +(NSString *)decodeUrlParameter:(NSString *)param;
-+(NSString *)encodeAES256:(NSString *)str;
-+(NSString *)decodeAES256:(NSString *)str;
+
++(NSData *)encodeAesAndBase64DataFromStr:(NSString *)str secretKey:(NSString *)secretKey;
++(NSString *)encodeAesAndBase64StrFromStr:(NSString *)str secretKey:(NSString *)secretKey;
++(NSData *)decodeAesAndBase64DataFromStr:(NSString *)str secretKey:(NSString *)secretKey;
++(NSString *)decodeAesAndBase64StrFromStr:(NSString *)str secretKey:(NSString *)secretKey;
++(NSString *)encodeAesAndBase64StrFromStr:(NSString *)str;
++(NSString *)decodeAesAndBase64StrFromStr:(NSString *)str;
 
 //制作图片遮罩(注意：需要有一张原图是带alpha通道的图片，和一个不带alpha通道的遮罩图)
 +(UIImage *)maskImage:(UIImage *)baseImage withImage:(UIImage *)theMaskImage;

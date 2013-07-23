@@ -123,7 +123,18 @@
     _miglabAPI = [[MigLabAPI alloc] init];
     
     //登录，获取用户资料
-    [self initUserData];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *username = [UserSessionManager GetInstance].currentUser.username;
+        [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+        
+    } else {
+        
+        [self initUserData];
+        
+    }
+    
     
     
     //test data
@@ -749,8 +760,7 @@
     
     [UserSessionManager GetInstance].accesstoken = accesstoken;
     
-    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-    [miglabAPI doGetUserInfo:username accessToken:accesstoken];
+    [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
 }
 
 //getUserInfo notification

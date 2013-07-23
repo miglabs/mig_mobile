@@ -64,26 +64,30 @@
 
 -(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid accessToken:(NSString *)taccesstoken accountType:(int)taccounttype{
     
-    NSString *encodeUsername = [PCommonUtil encodeAES256:tusername];
-    NSString *encodePassword = [PCommonUtil encodeAES256:tpassword];
+    NSString *encodeUsername = [PCommonUtil encodeAesAndBase64StrFromStr:tusername];
+    NSString *encodePassword = [PCommonUtil encodeAesAndBase64StrFromStr:tpassword];
+    NSDate *nowDate = [NSDate date];
+    long loginTime = [nowDate timeIntervalSince1970];
+    NSNumber *numAccountType = [NSNumber numberWithInt:taccounttype];
+    NSNumber *numLoginTime = [NSNumber numberWithLong:loginTime];
     
-    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype) values (?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype, logintime) values (?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
     
-    NSString *checksql = [NSString stringWithFormat:@"select username from USER_ACCOUNT where username = '%@' ", tusername];
+    NSString *checksql = [NSString stringWithFormat:@"select username from USER_ACCOUNT where username = '%@' ", encodeUsername];
     PLog(@"checksql: %@", checksql);
     
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
-        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? ";
+        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? , logintime = ? ";
         PLog(@"sql: %@", sql);
         break;
     }
     
-    [_db executeUpdate:sql, encodeUsername, encodePassword, tuserid, taccesstoken, taccounttype];
+    [_db executeUpdate:sql, encodeUsername, encodePassword, tuserid, taccesstoken, numAccountType, numLoginTime];
     [_db close];
     
 }
@@ -93,7 +97,7 @@
     
     AccountOf3rdParty *account = nil;
     
-    NSString *sql = @"select username, password, userid from USER_ACCOUNT order by logintime desc";
+    NSString *sql = @"select username, password, userid, accesstoken, accounttype from USER_ACCOUNT order by logintime desc";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -108,8 +112,8 @@
         int paccounttype = [rs intForColumn:@"accounttype"];
         
         account = [[AccountOf3rdParty alloc] init];
-        account.username = [PCommonUtil decodeAES256:pusername];
-        account.password = [PCommonUtil decodeAES256:ppassword];
+        account.username = [PCommonUtil decodeAesAndBase64StrFromStr:pusername];
+        account.password = [PCommonUtil decodeAesAndBase64StrFromStr:ppassword];
         account.accountid = puserid;
         account.accesstoken = paccesstoken;
         account.accounttype = paccounttype;

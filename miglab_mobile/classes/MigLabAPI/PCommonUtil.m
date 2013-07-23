@@ -75,28 +75,73 @@
     return param;
 }
 
-+(NSString *)encodeAES256:(NSString *)str{
+//1. AES256加解密 2. base64 encode
+/*
+ * 1. 把普通的str转成data类型
+ * 2. 对data做AES256加密，得到加密后的data
+ * 3. 对加密后的data做base64编码
+ */
++(NSData *)encodeAesAndBase64DataFromStr:(NSString *)str secretKey:(NSString *)secretKey{
     
-    if (str && [str isKindOfClass:[NSString class]]) {
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *encodeData = [data AES256EncryptWithKey:AES256_SECRET];
-        
-        return [[NSString alloc] initWithData:encodeData encoding:NSUTF8StringEncoding];
+    NSData *encodeData = nil;
+    if (str && secretKey) {
+        NSData *tempData = [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+        NSData *tempAesData = [tempData AES256EncryptWithKey:secretKey];
+        encodeData = [GTMBase64 encodeData:tempAesData];
     }
-    
-    return str;
+    return encodeData;
 }
 
-+(NSString *)decodeAES256:(NSString *)str{
-    
-    if (str && [str isKindOfClass:[NSString class]]) {
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *decodeData = [data AES256DecryptWithKey:AES256_SECRET];
-        
-        return [[NSString alloc] initWithData:decodeData encoding:NSUTF8StringEncoding];
+/*
+ * 1. 把普通的str转成data类型
+ * 2. 对data做AES256加密，得到加密后的data
+ * 3. 对加密后的data做base64编码
+ * 4. 把加密并编码后的data转成str，用于输入查看
+ */
++(NSString *)encodeAesAndBase64StrFromStr:(NSString *)str secretKey:(NSString *)secretKey{
+    NSData *tempEncodeData = [self encodeAesAndBase64DataFromStr:str secretKey:secretKey];
+    if (tempEncodeData) {
+        return [[NSString alloc] initWithData:tempEncodeData encoding:NSUTF8StringEncoding];;
     }
+    return nil;
+}
+
+/*
+ * 1. 把做了AES256加密，并做过base64编码的str转成data类型
+ * 2. 对加密后的data做base64解码，得到新的data
+ * 3. 对data做AES256解密，得到解密后的data
+ */
++(NSData *)decodeAesAndBase64DataFromStr:(NSString *)str secretKey:(NSString *)secretKey{
     
-    return str;
+    NSData *decodeData = nil;
+    if (str && secretKey) {
+        NSData *tempData = [str dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *tempBase64Data = [GTMBase64 decodeData:tempData];
+        decodeData = [tempBase64Data AES256DecryptWithKey:secretKey];
+    }
+    return decodeData;
+}
+
+/*
+ * 1. 把做了AES256加密，并做过base64编码的str转成data类型
+ * 2. 对加密后的data做base64解码，得到新的data
+ * 3. 对data做AES256解密，得到解密后的data
+ * 4. 把解密后的data转成普通的str
+ */
++(NSString *)decodeAesAndBase64StrFromStr:(NSString *)str secretKey:(NSString *)secretKey{
+    NSData *tempDecodeData = [self decodeAesAndBase64DataFromStr:str secretKey:secretKey];
+    if (tempDecodeData) {
+        return [[NSString alloc] initWithData:tempDecodeData encoding:NSUTF8StringEncoding];;
+    }
+    return nil;
+}
+
++(NSString *)encodeAesAndBase64StrFromStr:(NSString *)str{
+    return [self encodeAesAndBase64StrFromStr:str secretKey:AES256_SECRET];
+}
+
++(NSString *)decodeAesAndBase64StrFromStr:(NSString *)str{
+    return [self decodeAesAndBase64StrFromStr:str secretKey:AES256_SECRET];
 }
 
 //制作图片遮罩(注意：需要有一张原图是带alpha通道的图片，和一个不带alpha通道的遮罩图)

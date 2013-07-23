@@ -80,14 +80,30 @@
     } else {
         
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-        [databaseManager insertUserAccout:@"pig" password:@"pig"];
-        
-        User *user = [[User alloc] init];
-        user.username = @"archer1234";
-        user.password = @"123456";
-        [UserSessionManager GetInstance].currentUser = user;
-        
-        PLog(@"username: %@, password: %@", user.username, user.password);
+        AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
+        if (lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+            
+            User *user = [[User alloc] init];
+            user.username = lastAccount.username;
+            user.password = lastAccount.password;
+            user.userid = lastAccount.accountid;
+            user.source = lastAccount.accounttype;
+            [UserSessionManager GetInstance].currentUser = user;
+            [UserSessionManager GetInstance].accesstoken = lastAccount.accesstoken;
+            [UserSessionManager GetInstance].isLoggedIn = YES;
+            
+        } else {
+            
+            [databaseManager insertUserAccout:@"pig" password:@"pig"];
+            
+            User *user = [[User alloc] init];
+            user.username = @"archer1234";
+            user.password = @"123456";
+            [UserSessionManager GetInstance].currentUser = user;
+            
+            PLog(@"username: %@, password: %@", user.username, user.password);
+            
+        }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页
         int initHomeViewType = 2;
