@@ -55,4 +55,10 @@
     return song;
 }
 
+-(void)log{
+    
+    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), lrcurl(%@), coverurl(%@), like(%@)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _lrcurl, _coverurl, _like);
+    
+}
+
 @end

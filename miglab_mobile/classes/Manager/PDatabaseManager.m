@@ -18,6 +18,7 @@
     @synchronized(self){
         if (nil == instance) {
             instance = [[PDatabaseManager alloc] init];
+            [instance initDataInfo];
         }
     }
     return instance;
@@ -52,6 +53,58 @@
     
     PLog(@"initDataInfo...");
     
+    NSMutableArray *psonginfolist = [self getDefaultSongInfoList];
+    int songinfocount = [psonginfolist count];
+    for (int i=0; i<songinfocount; i++) {
+        
+        Song *psong = [psonginfolist objectAtIndex:i];
+        
+        [self insertSongInfo:psong];
+    }
+    
+}
+
+//default song info list
+-(NSMutableArray *)getDefaultSongInfoList{
+    
+    NSMutableArray *defaultSongInfoList = [[NSMutableArray alloc] init];
+    
+    Song *song0 = [[Song alloc] init];
+    song0.songid = 346630;
+    song0.songname = @"寂寞";
+    song0.artist = @"谢容儿";
+    song0.songurl = @"http://umusic.9158.com/2013/07/14/14/14/346630_3cd4dbc8abde417c83cd9261f50bdb4c.mp3";
+    song0.coverurl = @"http://upic.9158.com/2013/07/12/12/31/20130712123159_img1008690313.jpg";
+    song0.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [defaultSongInfoList addObject:song0];
+    
+    Song *song1 = [[Song alloc] init];
+    song1.songid = 314001;
+    song1.songname = @"黄梅戏";
+    song1.artist = @"慕容晓晓";
+    song1.songurl = @"http://umusic.9158.com/2013/07/06/09/21/314001_a2e7fbfef7bd448e9349a3becfdea19e.mp3";
+    song1.coverurl = @"http://upic.9158.com/2013/07/07/05/49/20130707054950_img1008690313.jpg";
+    song1.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [defaultSongInfoList addObject:song1];
+    
+    Song *song2 = [[Song alloc] init];
+    song2.songid = 284711;
+    song2.songname = @"青春纪念册";
+    song2.artist = @"G_voice家族";
+    song2.songurl = @"http://umusic.9158.com/2013/06/29/16/35/284711_abbf9d95fcbe42a486e86d4281881e0a.mp3";
+    song2.coverurl = @"http://upic.9158.com/2013/07/05/07/16/20130705071624_img1008690313.jpg";
+    song2.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [defaultSongInfoList addObject:song2];
+    
+    Song *song3 = [[Song alloc] init];
+    song3.songid = 267654;
+    song3.songname = @"你是我的眼";
+    song3.artist = @"萧煌奇";
+    song3.songurl = @"http://umusic.9158.com/2013/06/24/23/40/267654_c281b790308e41d2966b24cf56838c0e.mp3";
+    song3.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+    [defaultSongInfoList addObject:song3];
+    
+    return defaultSongInfoList;
 }
 
 //记录登录账号信息（aes加密）
@@ -142,6 +195,98 @@
 -(void)deleteAllUserAccount{
     
     NSString *sql = @"delete from USER_ACCOUNT";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+//歌曲数据列表记录
+-(void)insertSongInfo:(Song *)tsong{
+    
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select username from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        PLog(@"is exists...");
+        return;
+    }
+    
+    NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+    
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like];
+    [_db close];
+    
+}
+
+-(NSMutableArray *)getSongInfoList:(int)trowcount{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO limit %d ", trowcount];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *songInfoList = [[NSMutableArray alloc] init];
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long long psongid = [rs longLongIntForColumn:@"songid"];
+        NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *partist = [rs stringForColumn:@"artist"];
+        NSString *pduration = [rs stringForColumn:@"duration"];
+        NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
+        NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
+        NSString *plike = [rs stringForColumn:@"like"];
+        
+        Song *psong = [[Song alloc] init];
+        psong.songid = psongid;
+        psong.songname = psongname;
+        psong.artist = partist;
+        psong.duration = pduration;
+        psong.songurl = psongurl;
+        psong.lrcurl = plrcurl;
+        psong.coverurl = pcoverurl;
+        psong.like = plike;
+        psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+        psong.songCachePath = [songManager getSongCachePath:psong];
+        
+        [songInfoList addObject:psong];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return songInfoList;
+}
+
+-(void)deleteSongInfo:(long long)tlocalkey{
+    
+    NSString *sql = [NSString stringWithFormat:@"delete from SONG_LOCAL_INFO where songid = %lld ", tlocalkey];
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+-(void)deleteAllSongInfo{
+    
+    NSString *sql = @"delete from SONG_LOCAL_INFO";
     PLog(@"sql: %@", sql);
     
     [_db open];

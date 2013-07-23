@@ -41,5 +41,6 @@ typedef enum{
 @property (nonatomic, assign) WhereIsTheSong whereIsTheSong;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict;
+-(void)log;
 
 @end

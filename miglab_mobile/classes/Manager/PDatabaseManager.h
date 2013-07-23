@@ -10,6 +10,8 @@
 #import "FMDatabase.h"
 #import "AccountOf3rdParty.h"
 #import "PCommonUtil.h"
+#import "Song.h"
+#import "SongDownloadManager.h"
 
 @interface PDatabaseManager : PFileManager
 
@@ -20,6 +22,9 @@
 //重制部分数据记录
 -(void)initDataInfo;
 
+//default song info list
+-(NSMutableArray *)getDefaultSongInfoList;
+
 //记录登录账号信息（aes加密）
 -(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword;
 -(void)insertUserAccout:(NSString *)tusername password:(NSString *)tpassword userid:(NSString *)tuserid accessToken:(NSString *)taccesstoken accountType:(int)taccounttype;
@@ -29,6 +34,12 @@
 -(void)deleteUserAccountByUserName:(NSString *)tusername;
 //清空账号
 -(void)deleteAllUserAccount;
+
+//歌曲数据列表记录
+-(void)insertSongInfo:(Song *)tsong;
+-(NSMutableArray *)getSongInfoList:(int)trowcount;
+-(void)deleteSongInfo:(long long)tlocalkey;
+-(void)deleteAllSongInfo;
 
 //设置某个歌曲的总文件大小
 -(void)setSongMaxSize:(long long)tlocalkey type:(NSString *)ttype fileMaxSize:(long long)tfilemaxsize;

@@ -15,5 +15,6 @@
 @property (nonatomic, retain) NSString* channelPicUrl; //频道封面图片地址
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
+-(void)log;
 
 @end

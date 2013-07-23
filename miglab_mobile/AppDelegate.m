@@ -167,6 +167,68 @@
     
     [application beginReceivingRemoteControlEvents];
     
+    //处理本地推送提醒，一段时间未使用软件则提示
+//    [self doLocalNotification];
+    
+}
+
+//处理本地推送提醒，一段时间未使用软件则提示
+-(void)doLocalNotification{
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    /*
+     1、几天不见，榜单又有更新喽，快来看看有什么好歌吧
+     2、这么多天不来好声音，伦家都感觉不会再爱了~
+     3、“你伤害了我，却一笑而过，你肿么可以许久不来看我。。。”讨厌~
+     4、几天没见，好声音好想里呀~~快来看看吧~
+     5、好声音重磅打造，海量新歌上线，快来欢唱吧~
+     */
+    NSArray *alertBodyList = [NSArray arrayWithObjects:@"几天不见，榜单又有更新喽，快来看看有什么好歌吧", @"这么多天不来好声音，伦家都感觉不会再爱了~", @"\"你伤害了我，却一笑而过，你肿么可以许久不来看我。。。\"讨厌~", @"几天没见，好声音好想里呀~~快来看看吧~", @"好声音重磅打造，海量新歌上线，快来欢唱吧~", nil];
+    int nAlertBodyListSize = [alertBodyList count];
+    
+    NSDate *nowDate = [NSDate new];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH"];
+    NSString *strHour = [formatter stringFromDate:nowDate];
+    NSLog(@"strHour: %@, %d", strHour, [@"0" intValue]);
+    int nHour = [strHour intValue];
+    
+    long addSecond = 72 * 3600;
+    if (nHour < 9) {
+        addSecond += (9 - nHour) * 3600;
+    } else if (nHour == 13) {
+        addSecond += 3600;
+    } else if (nHour >= 21) {
+        addSecond += (24 - nHour + 9) * 3600;//延后小时
+    }
+    
+    for (int i=0; i<10; i++) {
+        
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        if (localNotification) {
+            NSLog(@"support local notification...");
+            
+            //一个月制定10个，按月循环启动
+            addSecond += 3600 * 72 * i;
+            //随机显示消息内容
+            int rnd = random() % nAlertBodyListSize;
+            NSString *strAlertBody = [alertBodyList objectAtIndex:rnd];
+            
+            NSLog(@"addSecond: %ld, rnd: %d, strAlertBody: %@", addSecond, rnd, strAlertBody);
+            
+            localNotification.fireDate = [nowDate dateByAddingTimeInterval:addSecond];
+            localNotification.timeZone = [NSTimeZone defaultTimeZone];
+            localNotification.alertBody = strAlertBody;
+            localNotification.hasAction = YES;
+            localNotification.soundName = @"sound.caf";
+            localNotification.repeatInterval = kCFCalendarUnitMonth;
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+            
+        }//if
+        
+    }//for
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

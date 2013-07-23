@@ -38,4 +38,10 @@
     
 }
 
+-(void)log{
+    
+    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@)", _channelId, _channelName, _channelPicUrl);
+    
+}
+
 @end
