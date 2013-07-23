@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageButton.h"
 
 @interface LeftViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, retain) IBOutlet UIView *topUserInfoView;
+@property (nonatomic, retain) IBOutlet EGOImageButton *btnUserAvatar;
+@property (nonatomic, retain) IBOutlet UILabel *lblUserNickName;
+@property (nonatomic, retain) IBOutlet UIImageView *userGenderImageView;
 
 @property (nonatomic, retain) UITableView *menuTableView;
 @property (nonatomic, retain) NSArray *tableTitles;

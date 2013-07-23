@@ -7,6 +7,9 @@
 //
 
 #import "LeftViewController.h"
+#import "LeftViewCell.h"
+#import "UIImage+PImageCategory.h"
+
 #import "AppDelegate.h"
 #import "DDMenuController.h"
 #import "PlayViewController.h"
@@ -21,6 +24,11 @@
 @end
 
 @implementation LeftViewController
+
+@synthesize topUserInfoView = _topUserInfoView;
+@synthesize btnUserAvatar = _btnUserAvatar;
+@synthesize lblUserNickName = _lblUserNickName;
+@synthesize userGenderImageView = _userGenderImageView;
 
 @synthesize menuTableView = _menuTableView;
 @synthesize tableTitles = _tableTitles;
@@ -39,20 +47,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _tableTitles = [NSArray arrayWithObjects:@"首页", @"test", @"系统设置", @"关于我们", nil];
+    self.view.backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:46.0f/255.0f blue:46.0f/255.0f alpha:1.0f];
+    
+    //top user info
+    [self.view addSubview:_topUserInfoView];
+    
+    NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"left_menu_yinyuejiyin", @"MenuImageName", @"音乐基因", @"MenuText", nil];
+    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"left_menu_gedan", @"MenuImageName", @"歌单", @"MenuText", nil];
+    NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"left_menu_haoyou", @"MenuImageName", @"好友", @"MenuText", nil];
+    NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"left_menu_shezhi", @"MenuImageName", @"设置", @"MenuText", nil];
+//    _tableTitles = [NSArray arrayWithObjects:@"音乐基因", @"歌单", @"好友", @"设置", nil];
+    _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     //计算tableview的高度和坐标，并设置tableview
-    float height = [_tableTitles count] * 44;
-    float tableviewy = [[UIScreen mainScreen] bounds].size.height - 20 - height;
+    float tableheight = [_tableTitles count] * 50;
+    float tableviewy = kMainScreenHeight - tableheight;
     
     //menu
-    _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, tableviewy, 320.0f, height) style:UITableViewStylePlain];
+    _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, tableviewy, kMainScreenWidth, tableheight) style:UITableViewStylePlain];
     _menuTableView.delegate = self;
     _menuTableView.dataSource = self;
-    _menuTableView.backgroundColor = [UIColor brownColor];
-    _menuTableView.separatorColor = [UIColor darkGrayColor];
+    _menuTableView.backgroundColor = [UIColor clearColor];
+//    _menuTableView.separatorColor = [UIColor darkGrayColor];
+    _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _menuTableView.scrollEnabled = NO;
     [self.view addSubview:_menuTableView];
+    
+    //middle desc
+    UIImageView *descImageView = [[UIImageView alloc] init];
+    descImageView.frame = CGRectMake((kMainScreenWidth - 92 - 60)/2, 70 + (tableviewy - 70 - 23)/2, 92, 23);
+    descImageView.backgroundColor = [UIColor clearColor];
+    descImageView.image = [UIImage imageWithName:@"left_menu_migfm" type:@"png"];
+    [self.view addSubview:descImageView];
     
 }
 
@@ -109,19 +135,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"LeftViewTableCell";
-	UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	LeftViewCell *cell = (LeftViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"LeftViewCell" owner:self options:nil];
+        cell = (LeftViewCell *)[nibContents objectAtIndex:0];
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16.0];
-    cell.textLabel.text = [_tableTitles objectAtIndex:indexPath.row];
+    NSDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
+    cell.menuImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
+    cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
+    
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;
+}
+
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 50;
 }
 
 @end
