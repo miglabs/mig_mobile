@@ -1251,6 +1251,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1271,6 +1272,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
