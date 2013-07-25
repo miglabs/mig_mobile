@@ -19,7 +19,7 @@
 #import "PPlayerManaerCenter.h"
 
 
-#define SONG_INIT_SIZE 3000
+#define SONG_INIT_SIZE 30000
 #define ROTATE_ANGLE 0.01//0.026526
 
 @interface MainMenuViewController ()
@@ -92,6 +92,10 @@
     //getMusicFromChannel
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelFailed:) name:NotificationNameGetChannelMusicFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelSuccess:) name:NotificationNameGetChannelMusicSuccess object:nil];
+    
+    //getModeMusic
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
     
     //构造场景选择页面
     [self initMenuView];
@@ -753,6 +757,9 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
+    //根据描述词获取歌曲 test
+    [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm"];
+    
     //获取频道
     [_miglabAPI doGetChannel:userid token:accesstoken num:10];
     
@@ -799,6 +806,23 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getMusicFromChannelSuccess...");
+    
+}
+
+-(void)getModeMusicFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getModeMusicFailed...%@", result);
+    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败"];
+    
+}
+
+-(void)getModeMusicSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getModeMusicSuccess...");
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray* songInfoList = [result objectForKey:@"result"];
+    [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
 }
 

@@ -15,7 +15,7 @@
 #import "UserSessionManager.h"
 #import "Song.h"
 #import "Channel.h"
-#import "Work.h"
+#import "Word.h"
 
 @implementation MigLabAPI
 
@@ -989,11 +989,11 @@
             
             for (int i=0; i<wordcount; i++) {
                 
-                Work *tempwork = [Work initWithNSDictionary:[wordlist objectAtIndex:i]];
-                tempwork.workMode = @"mm";
-                [tempwork log];
+                Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
+                tempword.mode = @"mm";
+                [tempword log];
                 
-                [moodList addObject:tempwork];
+                [moodList addObject:tempword];
             }
             
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
@@ -1051,11 +1051,11 @@
             
             for (int i=0; i<wordcount; i++) {
                 
-                Work *tempwork = [Work initWithNSDictionary:[wordlist objectAtIndex:i]];
-                tempwork.workMode = @"ms";
-                [tempwork log];
+                Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
+                tempword.mode = @"ms";
+                [tempword log];
                 
-                [moodList addObject:tempwork];
+                [moodList addObject:tempword];
             }
             
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
