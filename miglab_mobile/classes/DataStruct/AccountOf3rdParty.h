@@ -16,4 +16,6 @@
 @property (nonatomic, retain) NSString *accountid;
 @property (nonatomic, retain) NSString *accesstoken;
 
+-(void)log;
+
 @end

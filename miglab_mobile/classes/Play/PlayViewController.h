@@ -15,7 +15,7 @@
 #import "PMusicPlayerDelegate.h"
 #import "PAAMusicPlayer.h"
 #import "PAMusicPlayer.h"
-#import "PPlayerManaerCenter.h"
+#import "PPlayerManagerCenter.h"
 
 @interface PlayViewController : UIViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate, PMusicPlayerDelegate>
 

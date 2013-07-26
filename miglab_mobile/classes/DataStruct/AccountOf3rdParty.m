@@ -16,4 +16,10 @@
 @synthesize accountid = _accountid;
 @synthesize accesstoken = _accesstoken;
 
+-(void)log{
+    
+    PLog(@"Print AccountOf3rdParty: username(%@), password(%@), accounttype(%d), accountid(%@), accesstoken(%@)", _username, _password, _accounttype, _accountid, _accesstoken);
+    
+}
+
 @end

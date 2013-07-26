@@ -106,7 +106,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 3;
+        int initHomeViewType = 0;
         
         if (initHomeViewType == 0) {
             //
@@ -175,6 +175,7 @@
     [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"3" mood:@"ms" num:8];
     
     [miglabAPI doGetChannel:userid token:accesstoken num:10];
+    [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
     
     [miglabAPI doAddFavorite:accesstoken uid:userid sid:11741];
     [miglabAPI doAddBlacklist:accesstoken uid:userid sid:99993];

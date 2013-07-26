@@ -170,7 +170,7 @@
     _songList = [[NSMutableArray alloc] init];
     _currentSongIndex = 0;
     
-    _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    _aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     
@@ -370,7 +370,7 @@
         tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
-        _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        _aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         
         if (_aaMusicPlayer.playerDestoried) {
             

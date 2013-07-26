@@ -172,8 +172,9 @@
         account.username = [PCommonUtil decodeAesAndBase64StrFromStr:pusername];
         account.password = [PCommonUtil decodeAesAndBase64StrFromStr:ppassword];
         account.accountid = puserid;
-        account.accesstoken = paccesstoken;
+        account.accesstoken = (paccesstoken.length > 10) ? paccesstoken : nil;
         account.accounttype = paccounttype;
+        [account log];
         
         break;
     }

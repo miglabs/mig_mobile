@@ -926,15 +926,17 @@
             NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
             NSArray* arrChannels = [dicTemp objectForKey:@"channel"];
             
-            NSMutableArray* songs = [[NSMutableArray alloc] init];
+            NSMutableArray* songList = [[NSMutableArray alloc] init];
             
             for (int i=0; i<[arrChannels count]; i++) {
                 
-                [songs addObject:[Song initWithNSDictionary:[arrChannels objectAtIndex:i]]];
+                Song *tempsong = [Song initWithNSDictionary:[arrChannels objectAtIndex:i]];
+                [tempsong log];
                 
+                [songList addObject:tempsong];
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songs, @"result", nil];
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songList, @"result", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicSuccess object:nil userInfo:dicResult];
             

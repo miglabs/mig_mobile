@@ -35,6 +35,11 @@
 
 @property (nonatomic, retain) EGOImageView *cdEGOImageView;                         //光盘旋转动画
 
+/*
+ 使用播放计时器控制统一控制刷新，预留后续的歌词刷新
+ */
+@property (nonatomic, retain) NSTimer *playerTimer;
+
 //歌曲场景切换页面
 @property (nonatomic, retain) PCustomPlayerBoradView *playerBoradView;
 
@@ -84,5 +89,9 @@
 -(void)initSongInfo;
 -(void)downloadSong;
 -(void)initAndStartPlayer;
+
+-(void)timerStop;
+-(void)timerStart;
+-(void)playerTimerFunction;
 
 @end

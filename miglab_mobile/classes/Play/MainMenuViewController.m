@@ -16,7 +16,7 @@
 #import "SVProgressHUD.h"
 #import "Channel.h"
 
-#import "PPlayerManaerCenter.h"
+#import "PPlayerManagerCenter.h"
 
 
 #define SONG_INIT_SIZE 30000
@@ -39,6 +39,8 @@
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
 @synthesize cdEGOImageView = _cdEGOImageView;
+
+@synthesize playerTimer = _playerTimer;
 
 //歌曲场景切换页面
 @synthesize playerBoradView = _playerBoradView;
@@ -237,7 +239,7 @@
         
         [self stopDownload];
         
-        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if (aaMusicPlayer.isMusicPlaying) {
             [aaMusicPlayer pause];
         }
@@ -258,7 +260,7 @@
         tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
-        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         
         if (aaMusicPlayer.playerDestoried) {
             
@@ -866,7 +868,7 @@
             
         } else {
             
-            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
             if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
@@ -921,7 +923,7 @@
 
 -(void)initAndStartPlayer{
     
-    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (aaMusicPlayer && aaMusicPlayer.isMusicPlaying) {
         return;
     }
@@ -935,6 +937,37 @@
         aaMusicPlayer.delegate = self;
         [aaMusicPlayer play];
     }
+    
+}
+
+/*
+ 把播放器的定时器移动页面来
+ 
+ 使用播放计时器控制统一控制刷新，预留后续的歌词刷新
+ */
+-(void)timerStop{
+    
+    @synchronized(self){
+        if (_playerTimer) {
+            if ([_playerTimer isValid]) {
+                [_playerTimer invalidate];
+            }
+            _playerTimer = nil;
+        }
+    }
+    
+}
+
+-(void)timerStart{
+    
+    [self timerStop];
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:PlayerTimerFunctionInterval target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
+    
+}
+
+-(void)playerTimerFunction{
+    
+    PLog(@"playerTimerFunction...");
     
 }
 
@@ -990,7 +1023,7 @@
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess{
     
-    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     long duration = aaMusicPlayer.getDuration;
     long currentTime = aaMusicPlayer.getCurrentTime;
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;

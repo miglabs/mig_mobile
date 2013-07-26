@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		161F850F178032100010090F /* PAAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850C178032100010090F /* PAAMusicPlayer.m */; };
 		161F8510178032100010090F /* PAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850E178032100010090F /* PAMusicPlayer.m */; };
-		161F851E178033D90010090F /* PPlayerManaerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F851D178033D80010090F /* PPlayerManaerCenter.m */; };
 		1623165D1777397600CF8FB5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316021777397600CF8FB5 /* AFHTTPClient.m */; };
 		1623165E1777397600CF8FB5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316041777397600CF8FB5 /* AFHTTPRequestOperation.m */; };
 		1623165F1777397600CF8FB5 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316061777397600CF8FB5 /* AFImageRequestOperation.m */; };
@@ -163,6 +162,7 @@
 		18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A451151784017B00CFFAD4 /* PCustomToolBarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
+		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 /* End PBXBuildFile section */
 
@@ -171,8 +171,6 @@
 		161F850C178032100010090F /* PAAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAMusicPlayer.m; sourceTree = "<group>"; };
 		161F850D178032100010090F /* PAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMusicPlayer.h; sourceTree = "<group>"; };
 		161F850E178032100010090F /* PAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMusicPlayer.m; sourceTree = "<group>"; };
-		161F851C178033D80010090F /* PPlayerManaerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPlayerManaerCenter.h; sourceTree = "<group>"; };
-		161F851D178033D80010090F /* PPlayerManaerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManaerCenter.m; sourceTree = "<group>"; };
 		162316011777397600CF8FB5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		162316021777397600CF8FB5 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		162316031777397600CF8FB5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -402,6 +400,8 @@
 		18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PStringCategory.m"; sourceTree = "<group>"; };
 		18A4512117841A0400CFFAD4 /* PDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDatabaseManager.h; sourceTree = "<group>"; };
 		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
+		18E3472B17A27A57001C46C7 /* PPlayerManagerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPlayerManagerCenter.h; sourceTree = "<group>"; };
+		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -605,6 +605,8 @@
 		1623168917773DC400CF8FB5 /* PPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				18E3472B17A27A57001C46C7 /* PPlayerManagerCenter.h */,
+				18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */,
 				1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */,
 				161F850B178032100010090F /* PAAMusicPlayer.h */,
 				161F850C178032100010090F /* PAAMusicPlayer.m */,
@@ -612,8 +614,6 @@
 				161F850E178032100010090F /* PAMusicPlayer.m */,
 				1623168A17773E2600CF8FB5 /* PMusicPlayerControllerView.h */,
 				1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */,
-				161F851C178033D80010090F /* PPlayerManaerCenter.h */,
-				161F851D178033D80010090F /* PPlayerManaerCenter.m */,
 			);
 			path = PPlayer;
 			sourceTree = "<group>";
@@ -1139,7 +1139,6 @@
 				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
 				161F850F178032100010090F /* PAAMusicPlayer.m in Sources */,
 				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
-				161F851E178033D90010090F /* PPlayerManaerCenter.m in Sources */,
 				18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */,
 				18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */,
 				18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */,
@@ -1174,6 +1173,7 @@
 				1830B52E179D129200314A28 /* NSData+AES256.m in Sources */,
 				16AB8BB3179EBF590009411F /* LeftViewCell.m in Sources */,
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
+				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

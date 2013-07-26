@@ -12,7 +12,7 @@
 #import "SongDownloadManager.h"
 #import "MigLabConfig.h"
 #import "UserSessionManager.h"
-#import "PPlayerManaerCenter.h"
+#import "PPlayerManagerCenter.h"
 #import "PDatabaseManager.h"
 #import "PlayViewController.h"
 #import "AppDelegate.h"
@@ -163,7 +163,7 @@
         tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
-        _aaMusicPlayer = [[PPlayerManaerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        _aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         
         if (_aaMusicPlayer.playerDestoried) {
             
