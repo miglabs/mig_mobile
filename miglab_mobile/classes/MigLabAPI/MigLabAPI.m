@@ -865,7 +865,10 @@
             
             for (int i=0; i<[dicChannels count]; i++) {
                 
-                [channel addObject:[Channel initWithNSDictionary:[dicChannels objectAtIndex:i]]];
+                Channel *tempChannel = [Channel initWithNSDictionary:[dicChannels objectAtIndex:i]];
+                [tempChannel log];
+                
+                [channel addObject:tempChannel];
             }
             
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:channel, @"result", nil];
@@ -1090,9 +1093,9 @@
  <!--请求GET-->
  HTTP_MODEMUSIC
  */
--(void)doGetModeMusic:(NSString*)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood {
+-(void)doGetModeMusic:(NSString*)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood num:(int)tnum{
     
-    NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%@", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%@&num=%d", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid, tnum];
     PLog(@"get mode music url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -1146,6 +1149,10 @@
     
     [operation start];
     
+}
+
+-(void)doGetModeMusic:(NSString *)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood{
+    [self doGetModeMusic:uid token:ttoken wordid:twordid mood:tmood num:10];
 }
 
 /*

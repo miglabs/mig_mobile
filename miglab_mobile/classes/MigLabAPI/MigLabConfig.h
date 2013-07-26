@@ -77,12 +77,12 @@
 #define NotificationNameGetDefaultMusicFailed               @"NotificationNameGetDefaultMusicFailed"
 
 //添加收藏
-#define HTTP_ADDFAVORITE                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/collectsong.fcgi"]
+#define HTTP_ADDFAVORITE                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
 #define NotificationNameAddFavoriteSuccess                  @"NotificationNameAddFavoriteSuccess"
 #define NotificationNameAddFavoriteFailed                   @"NotificationNameAddFavoriteFailed"
 
 //添加黑名单
-#define HTTP_ADDBLACKLIST                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/hatsong.fcgi"]
+#define HTTP_ADDBLACKLIST                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hatsong.fcgi"]
 #define NotificationNameAddBlacklistSuccess                 @"NotificationNameAddBlacklistSuccess"
 #define NotificationNameAddBlacklistFailed                  @"NotificationNameAddBlacklistFailed"
 
