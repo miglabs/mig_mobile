@@ -72,6 +72,8 @@
 -(void)getChannelSuccess:(NSNotification *)tNotification;
 -(void)getMusicFromChannelFailed:(NSNotification *)tNotification;
 -(void)getMusicFromChannelSuccess:(NSNotification *)tNotification;
+-(void)getModeMusicFailed:(NSNotification *)tNotification;
+-(void)getModeMusicSuccess:(NSNotification *)tNotification;
 
 //下载歌曲
 -(void)downloadFailed:(NSNotification *)tNotification;

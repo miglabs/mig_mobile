@@ -12,7 +12,7 @@
 #import "PCommonUtil.h"
 #import "Song.h"
 #import "SongDownloadManager.h"
-#import "Work.h"
+#import "Word.h"
 
 @interface PDatabaseManager : PFileManager
 
@@ -40,6 +40,7 @@
  歌曲数据列表记录
  */
 -(void)insertSongInfo:(Song *)tsong;
+-(void)insertSongInfoList:(NSMutableArray *)tsonginfolist;
 -(NSMutableArray *)getSongInfoList:(int)trowcount;
 -(void)deleteSongInfo:(long long)tlocalkey;
 -(void)deleteAllSongInfo;
@@ -47,8 +48,9 @@
 /*
  描述词记录(心情，场景)
  */
--(void)insertWordInfo:(Work *)tword;
+-(void)insertWordInfo:(Word *)tword;
 -(NSMutableArray *)getWordInfoList:(int)trowcount;
+-(NSMutableArray *)getWordInfoListByMode:(NSString *)tmode;
 -(void)deleteAllWordInfo;
 
 //设置某个歌曲的总文件大小

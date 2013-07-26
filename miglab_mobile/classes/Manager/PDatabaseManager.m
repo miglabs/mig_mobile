@@ -41,7 +41,7 @@
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
-        [_db executeUpdate:@"create table if not exists WORK_INFO (typeid integer not null, name text)"];
+        [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
         
         [_db close];
     }
@@ -52,17 +52,20 @@
 //重制部分数据记录
 -(void)initDataInfo{
     
-    PLog(@"initDataInfo...");
+    PLog(@"initDataInfo begin...............................................");
     
     NSMutableArray *psonginfolist = [self getDefaultSongInfoList];
-    int songinfocount = [psonginfolist count];
-    for (int i=0; i<songinfocount; i++) {
-        
-        Song *psong = [psonginfolist objectAtIndex:i];
-        
-        [self insertSongInfo:psong];
-    }
+    [self insertSongInfoList:psonginfolist];
     
+//    int songinfocount = [psonginfolist count];
+//    for (int i=0; i<songinfocount; i++) {
+//        
+//        Song *psong = [psonginfolist objectAtIndex:i];
+//        
+//        [self insertSongInfo:psong];
+//    }
+    
+    PLog(@"initDataInfo end...............................................");
 }
 
 //default song info list
@@ -214,7 +217,7 @@
     
     [_db open];
     
-    NSString *checksql = [NSString stringWithFormat:@"select username from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
+    NSString *checksql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
     PLog(@"checksql: %@", checksql);
     
     FMResultSet *rs = [_db executeQuery:checksql];
@@ -227,6 +230,47 @@
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
     
     [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like];
+    [_db close];
+    
+}
+
+-(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
+    
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    int songCount = [tsonginfolist count];
+    for (int i=0; i<songCount; i++) {
+        
+        Song *tsong = [tsonginfolist objectAtIndex:i];
+        [tsong log];
+        
+        NSString *checksql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
+        PLog(@"checksql: %@", checksql);
+        
+        //
+        BOOL isExists = NO;
+        FMResultSet *rs = [_db executeQuery:checksql];
+        while ([rs next]) {
+            
+            isExists = YES;
+            break;
+        }
+        
+        if (isExists) {
+            PLog(@"is exists...");
+            continue;
+        }
+        NSLog(@"i: %d", i);
+        
+        NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+        
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like];
+        
+    }
+    
     [_db close];
     
 }
@@ -265,6 +309,7 @@
         psong.like = plike;
         psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
         psong.songCachePath = [songManager getSongCachePath:psong];
+        [psong log];
         
         [songInfoList addObject:psong];
     }
@@ -299,14 +344,14 @@
 /*
  描述词记录(心情，场景)
  */
--(void)insertWordInfo:(Work *)tword{
+-(void)insertWordInfo:(Word *)tword{
     
-    NSString *sql = @"insert into WORK_INFO (typeid, name) values (?, ?)";
+    NSString *sql = @"insert into WORK_INFO (index, typeid, name, mode) values (?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
     
-    NSString *checksql = [NSString stringWithFormat:@"select username from WORK_INFO where typeid = %d ", tword.typeid];
+    NSString *checksql = [NSString stringWithFormat:@"select * from WORK_INFO where typeid = %d , mode = '%@' ", tword.typeid, tword.mode];
     PLog(@"checksql: %@", checksql);
     
     FMResultSet *rs = [_db executeQuery:checksql];
@@ -316,38 +361,77 @@
         return;
     }
     
+    NSNumber *numIndex = [NSNumber numberWithInt:tword.index];
     NSNumber *numTypeId = [NSNumber numberWithLongLong:tword.typeid];
     
-    [_db executeUpdate:sql, numTypeId, tword.name];
+    [_db executeUpdate:sql, numIndex, numTypeId, tword.name, tword.mode];
     [_db close];
     
 }
 
 -(NSMutableArray *)getWordInfoList:(int)trowcount{
     
-    NSString *sql = [NSString stringWithFormat:@"select * from WORK_INFO limit %d ", trowcount];
+    NSString *sql = [NSString stringWithFormat:@"select * from WORD_INFO limit %d ", trowcount];
     PLog(@"sql: %@", sql);
     
-    NSMutableArray *workInfoList = [[NSMutableArray alloc] init];
+    NSMutableArray *wordInfoList = [[NSMutableArray alloc] init];
     
     [_db open];
     
     FMResultSet *rs = [_db executeQuery:sql];
     while ([rs next]) {
         
+        int pindex = [rs intForColumn:@"index"];
         int ptypeid = [rs intForColumn:@"typeid"];
         NSString *pname = [rs stringForColumn:@"name"];
+        NSString *pmode = [rs stringForColumn:@"mode"];
         
-        Work *pwork = [[Work alloc] init];
-        pwork.typeid = ptypeid;
-        pwork.name = pname;
         
-        [workInfoList addObject:pwork];
+        Word *pword = [[Word alloc] init];
+        pword.index = pindex;
+        pword.typeid = ptypeid;
+        pword.name = pname;
+        pword.mode = pmode;
+        
+        [wordInfoList addObject:pword];
     }
     
     [_db close];
     
-    return workInfoList;
+    return wordInfoList;
+}
+
+-(NSMutableArray *)getWordInfoListByMode:(NSString *)tmode{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from WORD_INFO where mode = '%@' ", tmode];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *wordInfoList = [[NSMutableArray alloc] init];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        int pindex = [rs intForColumn:@"index"];
+        int ptypeid = [rs intForColumn:@"typeid"];
+        NSString *pname = [rs stringForColumn:@"name"];
+        NSString *pmode = [rs stringForColumn:@"mode"];
+        
+        
+        Word *pword = [[Word alloc] init];
+        pword.index = pindex;
+        pword.typeid = ptypeid;
+        pword.name = pname;
+        pword.mode = pmode;
+        
+        [wordInfoList addObject:pword];
+    }
+    
+    [_db close];
+    
+    return wordInfoList;
+    
 }
 
 -(void)deleteAllWordInfo{
