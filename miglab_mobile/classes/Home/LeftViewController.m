@@ -9,6 +9,7 @@
 #import "LeftViewController.h"
 #import "LeftViewCell.h"
 #import "UIImage+PImageCategory.h"
+#import "PCommonUtil.h"
 
 #import "AppDelegate.h"
 #import "DDMenuController.h"
@@ -24,6 +25,8 @@
 @end
 
 @implementation LeftViewController
+
+@synthesize bgImageView = _bgImageView;
 
 @synthesize topUserInfoView = _topUserInfoView;
 @synthesize btnUserAvatar = _btnUserAvatar;
@@ -48,6 +51,9 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = [UIColor colorWithRed:46.0f/255.0f green:46.0f/255.0f blue:46.0f/255.0f alpha:1.0f];
+    
+    _bgImageView.frame = CGRectMake(0, -20, kMainScreenWidth, kMainScreenHeight);
+    _bgImageView.image = (iPhone5) ? [UIImage imageWithName:@"left_menu_bg_5" type:@"png"] : [UIImage imageWithName:@"left_menu_bg_4" type:@"png"];
     
     //top user info
     [self.view addSubview:_topUserInfoView];

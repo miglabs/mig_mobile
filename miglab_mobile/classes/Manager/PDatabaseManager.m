@@ -212,7 +212,7 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -228,15 +228,17 @@
     }
     
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+    NSDate *nowDate = [NSDate date];
+    NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
     
-    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like];
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numCreateTime];
     [_db close];
     
 }
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -266,8 +268,10 @@
         NSLog(@"i: %d", i);
         
         NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+        NSDate *nowDate = [NSDate date];
+        NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numCreateTime];
         
     }
     
@@ -277,7 +281,7 @@
 
 -(NSMutableArray *)getSongInfoList:(int)trowcount{
     
-    NSString *sql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO limit %d ", trowcount];
+    NSString *sql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO order by createtime desc limit %d ", trowcount];
     PLog(@"sql: %@", sql);
     
     NSMutableArray *songInfoList = [[NSMutableArray alloc] init];

@@ -11,6 +11,8 @@
 
 @interface LeftViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, retain) IBOutlet UIImageView *bgImageView;
+
 @property (nonatomic, retain) IBOutlet UIView *topUserInfoView;
 @property (nonatomic, retain) IBOutlet EGOImageButton *btnUserAvatar;
 @property (nonatomic, retain) IBOutlet UILabel *lblUserNickName;
