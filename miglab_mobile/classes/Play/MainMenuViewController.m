@@ -17,6 +17,7 @@
 #import "Channel.h"
 
 #import "PPlayerManagerCenter.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 
 #define SONG_INIT_SIZE 30000
@@ -166,9 +167,40 @@
     NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:50];
     [_songList addObjectsFromArray:tempSongInfoList];
     
-    _currentSongIndex = 0;
-    _currentSong = (_songList.count > 0) ? [_songList objectAtIndex:0] : nil;
+    PLog(@"rand():%d, random(): %ld", rand(), random());
+    int songListCount = [_songList count];
+    int rnd = rand() % songListCount;
+    _currentSongIndex = rnd;
+    _currentSong = (_songList.count > 0) ? [_songList objectAtIndex:_currentSongIndex] : nil;
     
+}
+
+#pragma for player remote control 
+//add by zhuruhong 20130728
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    
+    //if it is a remote control event handle it correctly
+    if (event.type == UIEventTypeRemoteControl) {
+        
+        if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
+            
+            PLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
+            [self doPlayOrPause:nil];
+            
+        } else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
+            
+            PLog(@"UIEventSubtypeRemoteControlNextTrack...");
+            [self doNextAction:nil];
+            
+        }
+        
+    }
+    
+}
+
+//Make sure we can recieve remote control events
+- (BOOL)canBecomeFirstResponder{
+    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -236,6 +268,8 @@
     
     UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_stop" type:@"png"];
     _playerBoradView.btnPlayOrPause.imageView.image = playOrPauseImage;
+    //设置锁屏显示
+    [self configNowPlayingInfoCenter];
     
 }
 
@@ -1173,6 +1207,22 @@
     
 }
 
+-(void)configNowPlayingInfoCenter{
+    
+    if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
+        
+        NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:_currentSong.songname forKey:MPMediaItemPropertyTitle];
+        [dict setObject:_currentSong.artist forKey:MPMediaItemPropertyArtist];
+        MPMediaItemArtwork * mArt = [[MPMediaItemArtwork alloc] initWithImage:_cdEGOImageView.image];
+        [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
+        [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = nil;
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
+        
+    }
+    
+}
+
 #pragma PMusicPlayerDelegate
 //PAAMusicPlayer
 -(void)aaMusicPlayerTimerFunction{
@@ -1255,6 +1305,8 @@
 
 #pragma EGOImageViewDelegate
 - (void)imageViewLoadedImage:(EGOImageView*)imageView{
+    
+    [self configNowPlayingInfoCenter];
     
 }
 

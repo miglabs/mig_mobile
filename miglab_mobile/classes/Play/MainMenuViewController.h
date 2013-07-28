@@ -65,6 +65,7 @@
 -(IBAction)doPlayOrPause:(id)sender;                                                //播放、暂停歌曲
 -(void)playCurrentSong;
 -(IBAction)doNextAction:(id)sender;
+-(void)configNowPlayingInfoCenter;                                                  //锁屏封面
 
 //播放页面方法
 -(void)initPlayView;

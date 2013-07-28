@@ -80,6 +80,11 @@
             }
             
         }];
+        [_operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^{
+            
+            PLog(@"setShouldExecuteAsBackgroundTaskWithExpirationHandler...");
+            
+        }];
         
         _isReadyToDownload = YES;
         PLog(@"initDownloader is ready...");

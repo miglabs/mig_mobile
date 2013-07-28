@@ -62,14 +62,9 @@
     
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-//    [self installUncaughtExceptionHandler];//
+//这种方式后台，可以连续播放非网络请求歌曲。遇到网络请求歌曲就废，需要后台申请task
+-(void)setAudioSession{
     
-    //友盟的方法本身是异步执行，所以不需要再异步调用
-    [self umengTrack];
-    
-    //这种方式后台，可以连续播放非网络请求歌曲。遇到网络请求歌曲就废，需要后台申请task
     /*
      * AudioSessionInitialize用于处理中断处理，
      * AVAudioSession主要调用setCategory和setActive方法来进行设置，
@@ -81,6 +76,24 @@
     NSError *activationError = nil;
     [session setActive:YES error:&activationError];
     
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+//    [self installUncaughtExceptionHandler];//
+    
+    //友盟的方法本身是异步执行，所以不需要再异步调用
+    [self umengTrack];
+    
+    //这种方式后台，可以连续播放非网络请求歌曲。遇到网络请求歌曲就废，需要后台申请task
+    [self setAudioSession];
+    
+    //add by zhuruhong 20130728
+    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
+    //网络请求指示器
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -228,8 +241,14 @@
     
     [application beginReceivingRemoteControlEvents];
     
+    //add by zhuruhong 20130728
+    //End recieving events
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+    
     //处理本地推送提醒，一段时间未使用软件则提示
 //    [self doLocalNotification];
+    
     
 }
 
@@ -273,7 +292,7 @@
             //一个月制定10个，按月循环启动
             addSecond += 3600 * 72 * i;
             //随机显示消息内容
-            int rnd = random() % nAlertBodyListSize;
+            int rnd = rand() % nAlertBodyListSize;
             NSString *strAlertBody = [alertBodyList objectAtIndex:rnd];
             
             NSLog(@"addSecond: %ld, rnd: %d, strAlertBody: %@", addSecond, rnd, strAlertBody);
@@ -295,6 +314,12 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    //add by zhuruhong 20130728
+    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
