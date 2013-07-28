@@ -257,7 +257,7 @@
     }
     
     UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_play" type:@"png"];
-    _playerBoradView.btnPlayOrPause.imageView.image = playOrPauseImage;
+    [_playerBoradView.btnPlayOrPause setImage:playOrPauseImage forState:UIControlStateNormal];
     
 }
 
@@ -267,7 +267,7 @@
     _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
     
     UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_stop" type:@"png"];
-    _playerBoradView.btnPlayOrPause.imageView.image = playOrPauseImage;
+    [_playerBoradView.btnPlayOrPause setImage:playOrPauseImage forState:UIControlStateNormal];
     //设置锁屏显示
     [self configNowPlayingInfoCenter];
     
