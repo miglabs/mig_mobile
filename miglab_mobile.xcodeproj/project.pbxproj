@@ -48,6 +48,7 @@
 		163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF8177C680D008656D1 /* AVFoundation.framework */; };
 		163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE0C177C9672008656D1 /* PCommonUtil.m */; };
 		163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE11177C96DC008656D1 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		1642B2A117A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1642B2A017A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a */; };
 		1683FB81179119640081612B /* bg_mask_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7A179119640081612B /* bg_mask_0.png */; };
 		1683FB82179119640081612B /* bg_mask_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7B179119640081612B /* bg_mask_1.png */; };
 		1683FB83179119640081612B /* bg_mask_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7C179119640081612B /* bg_mask_2.png */; };
@@ -141,7 +142,6 @@
 		1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648541793AA5F00E83EBB /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
-		184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184648601793ACF700E83EBB /* libWeChatSDK.a */; };
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
 		187A5667179927D200221569 /* PlayBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A5666179927D200221569 /* PlayBodyView.m */; };
 		187A5669179927E800221569 /* PlayBodyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A5668179927E800221569 /* PlayBodyView.xib */; };
@@ -242,6 +242,7 @@
 		163BCE10177C96DC008656D1 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		163BCE11177C96DC008656D1 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		163BCE12177C96DC008656D1 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		1642B2A017A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
 		1683FB7A179119640081612B /* bg_mask_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_0.png; sourceTree = "<group>"; };
 		1683FB7B179119640081612B /* bg_mask_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_1.png; sourceTree = "<group>"; };
 		1683FB7C179119640081612B /* bg_mask_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_2.png; sourceTree = "<group>"; };
@@ -359,7 +360,6 @@
 		184648571793AA5F00E83EBB /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
 		184648581793AA5F00E83EBB /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
 		184648591793AA5F00E83EBB /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
-		184648601793ACF700E83EBB /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		184648621793ACF700E83EBB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		184648661793D4D500E83EBB /* AccountOf3rdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOf3rdParty.h; sourceTree = "<group>"; };
@@ -426,8 +426,8 @@
 				16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */,
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
-				184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */,
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
+				1642B2A117A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,7 +949,7 @@
 		1846485F1793ACF700E83EBB /* WeChatAPI */ = {
 			isa = PBXGroup;
 			children = (
-				184648601793ACF700E83EBB /* libWeChatSDK.a */,
+				1642B2A017A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a */,
 				184648621793ACF700E83EBB /* WXApi.h */,
 				184648631793ACF700E83EBB /* WXApiObject.h */,
 			);
