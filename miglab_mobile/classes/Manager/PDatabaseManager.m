@@ -250,6 +250,10 @@
         Song *tsong = [tsonginfolist objectAtIndex:i];
         [tsong log];
         
+        if (!tsong.songurl || tsong.songurl.length < 5) {
+            continue;
+        }
+        
         NSString *checksql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
         PLog(@"checksql: %@", checksql);
         

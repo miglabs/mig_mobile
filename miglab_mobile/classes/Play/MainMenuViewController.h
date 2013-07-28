@@ -16,12 +16,16 @@
 
 #import "PCustomPlayerBoradView.h"
 
+#import "PHttpDownloader.h"
+
 #import "PAAMusicPlayer.h"
 #import "PAMusicPlayer.h"
 #import "Song.h"
 #import "PMusicPlayerDelegate.h"
 
-@interface MainMenuViewController : UIViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate, PMusicPlayerDelegate>
+#import "MigLabAPI.h"
+
+@interface MainMenuViewController : UIViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate, PMusicPlayerDelegate, AVAudioPlayerDelegate, PHttpDownloaderDelegate>
 
 //播放页面
 @property (nonatomic, retain) UIView *playView;
@@ -39,6 +43,7 @@
  使用播放计时器控制统一控制刷新，预留后续的歌词刷新
  */
 @property (nonatomic, retain) NSTimer *playerTimer;
+@property (nonatomic, assign) int checkUpdatePlayProcess;
 
 //歌曲场景切换页面
 @property (nonatomic, retain) PCustomPlayerBoradView *playerBoradView;
@@ -48,7 +53,7 @@
 @property (nonatomic, retain) NSMutableArray *songList;
 @property (nonatomic, assign) int currentSongIndex;
 @property (nonatomic, retain) Song *currentSong;
-@property (nonatomic) BOOL shouldStartPlayAfterDownloaded;
+@property BOOL shouldStartPlayAfterDownloaded;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
@@ -58,6 +63,7 @@
 -(IBAction)doRemoveAction:(id)sender;
 -(IBAction)doLikeAction:(id)sender;
 -(IBAction)doPlayOrPause:(id)sender;                                                //播放、暂停歌曲
+-(void)playCurrentSong;
 -(IBAction)doNextAction:(id)sender;
 
 //播放页面方法

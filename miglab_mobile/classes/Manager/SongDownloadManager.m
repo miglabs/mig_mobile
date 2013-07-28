@@ -107,7 +107,7 @@
     return (float)localsize / (float)maxsize;
 }
 
--(void)downloadStart:(Song *)tsong{
+-(void)downloadStart:(Song *)tsong delegate:(id)delegate{
     
     [_downloader doStop];
     
@@ -118,7 +118,7 @@
             
             NSString *localkey = [NSString stringWithFormat:@"%lld", tsong.songid];
             NSString *cachepath = [self getSongCachePath:tsong];
-            [self downloadFile:localkey requestUrl:tsong.songurl cachePath:cachepath];
+            [self downloadFile:localkey requestUrl:tsong.songurl cachePath:cachepath delegate:delegate];
             
         }
         
@@ -131,11 +131,12 @@
     
 }
 
--(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath{
+-(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath delegate:(id)delegate{
     
     [_downloader setRequestUrl:trequesturl];
     [_downloader setLocalKey:tlocalkey];
     [_downloader setCachePath:tcachepath];
+    [_downloader setDelegate:delegate];
     
     BOOL isDownloaderInit = [_downloader initDownloader];
     if (isDownloaderInit) {

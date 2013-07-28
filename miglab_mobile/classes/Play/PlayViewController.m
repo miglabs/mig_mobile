@@ -316,7 +316,7 @@
         
     } else {
         
-        [songManager downloadStart:_currentSong];
+        [songManager downloadStart:_currentSong delegate:nil];
         
     }
     

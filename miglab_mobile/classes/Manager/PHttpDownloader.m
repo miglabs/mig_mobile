@@ -15,6 +15,7 @@
 @synthesize localKey = _localKey;
 @synthesize cachePath = _cachePath;
 @synthesize isReadyToDownload = _isReadyToDownload;
+@synthesize delegate = _delegate;
 
 -(BOOL)initDownloader{
     
@@ -23,6 +24,7 @@
     if (_requestUrl && _localKey && _cachePath) {
         
         NSString *tempLocalKey = _localKey;
+        id<PHttpDownloaderDelegate> tempdelegate = _delegate;
         
         //local file size
         long long offset = [super getLocalFileSize:_cachePath];
@@ -39,13 +41,19 @@
             
             PLog(@"setCompletionBlockWithSuccess responseObject: %@", responseObject);
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:tempLocalKey, @"LocalKey", nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadSuccess object:nil userInfo:dicResult];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadSuccess object:nil userInfo:dicResult];
+            if (tempdelegate && [tempdelegate respondsToSelector:@selector(doDownloadSuccess:)]) {
+                [tempdelegate doDownloadSuccess:dicResult];
+            }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             PLog(@"failure: %@", error);
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:tempLocalKey, @"LocalKey", nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadFailed object:nil userInfo:dicResult];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadFailed object:nil userInfo:dicResult];
+            if (tempdelegate && [tempdelegate respondsToSelector:@selector(doDownloadFailed:)]) {
+                [tempdelegate doDownloadFailed:dicResult];
+            }
             
         }];
         
@@ -58,7 +66,10 @@
             NSNumber *numTotalBytesExpectedToRead = [NSNumber numberWithLongLong:totalBytesExpectedToRead];
             NSDictionary *dicProcess = [NSDictionary dictionaryWithObjectsAndKeys:tempLocalKey, @"LocalKey", numBytesRead, @"BytesRead", numTotalBytesRead, @"TotalBytesRead", numTotalBytesExpectedToRead, @"TotalBytesExpectedToRead", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadProcess object:nil userInfo:dicProcess];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadProcess object:nil userInfo:dicProcess];
+            if (tempdelegate && [tempdelegate respondsToSelector:@selector(doDownloadProcess:)]) {
+                [tempdelegate doDownloadProcess:dicProcess];
+            }
             
         }];
         

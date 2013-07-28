@@ -8,6 +8,7 @@
 
 #import "PCustomPlayerBoradView.h"
 #import "UIImage+PImageCategory.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PCustomPlayerBoradView
 
@@ -43,9 +44,12 @@
         _playerBoradBgImageView.image = playerBoradBgImage;
         [self addSubview:_playerBoradBgImageView];
         
-        _btnAvatar = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnAvatar.frame = CGRectMake(9, 10, 44, 44);
+        
         UIImage *avatarNorImage = [UIImage imageWithName:@"borad_default_avatar" type:@"png"];
+        _btnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:avatarNorImage];
+        _btnAvatar.frame = CGRectMake(9, 10, 44, 44);
+        _btnAvatar.layer.cornerRadius = 22;
+        _btnAvatar.layer.masksToBounds = YES;
         [_btnAvatar setImage:avatarNorImage forState:UIControlStateNormal];
         [self addSubview:_btnAvatar];
         

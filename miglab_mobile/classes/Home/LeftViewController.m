@@ -13,6 +13,8 @@
 
 #import "AppDelegate.h"
 #import "DDMenuController.h"
+#import "MainMenuViewController.h"
+
 #import "PlayViewController.h"
 #import "HomeViewController.h"
 
@@ -102,8 +104,10 @@
     UINavigationController *nav = nil;
     if (indexPath.row == 0) {
         
-        PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
-        nav = [[UINavigationController alloc] initWithRootViewController:playViewController];
+//        PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
+        
+        MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+        nav = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
         [nav setNavigationBarHidden:YES];
         
     } else if (indexPath.row == 1) {

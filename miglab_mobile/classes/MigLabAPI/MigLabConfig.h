@@ -15,6 +15,8 @@
 #define PLog(format, ...)
 #endif
 
+#define UMENG_APPKEY                        @"51f338a356240baf3a0723a0"
+
 #define SINA_WEIBO_APP_KEY                  @"1468499793"
 #define SINA_WEIBO_APP_SECRET               @"ce6dd4ab9ae4f14aa7982a43453cc173"
 #define SINA_WEIBO_APP_REDIRECTURI          @"https://api.weibo.com/oauth2/default.html"
@@ -24,7 +26,7 @@
 /*
  * 用于切换不同域名地址
  */
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 
 #if (0 == IS_DEBUG_SERVER)
 
@@ -35,6 +37,11 @@
 
 #define HTTP_DOMAIN                                         @"http://42.121.14.108/"
 #define HTTP_API_DOMAIN                                     @"http://42.121.14.108/"
+
+#elif (2 == IS_DEBUG_SERVER)
+
+#define HTTP_DOMAIN                                         @"http://112.124.49.59/"
+#define HTTP_API_DOMAIN                                     @"http://112.124.49.59/"
 
 #endif
 

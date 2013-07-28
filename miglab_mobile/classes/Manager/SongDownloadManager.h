@@ -30,8 +30,8 @@
 -(long long)getSongLocalSize:(Song *)tsong;
 -(float)getSongProgress:(Song *)tsong;
 
--(void)downloadStart:(Song *)tsong;
--(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath;
+-(void)downloadStart:(Song *)tsong delegate:(id)delegate;
+-(void)downloadFile:(NSString *)tlocalkey requestUrl:(NSString *)trequesturl cachePath:(NSString *)tcachepath delegate:(id)delegate;
 
 -(void)downloadPause;
 -(void)downloadResume;

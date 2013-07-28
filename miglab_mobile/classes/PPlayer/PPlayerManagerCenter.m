@@ -13,6 +13,7 @@
 @implementation PPlayerManagerCenter
 
 @synthesize playerList = _playerList;
+@synthesize dicPlayer = _dicPlayer;
 
 static PPlayerManagerCenter *instance;
 

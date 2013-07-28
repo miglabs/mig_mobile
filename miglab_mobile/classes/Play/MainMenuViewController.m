@@ -41,6 +41,7 @@
 @synthesize cdEGOImageView = _cdEGOImageView;
 
 @synthesize playerTimer = _playerTimer;
+@synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
 
 //歌曲场景切换页面
 @synthesize playerBoradView = _playerBoradView;
@@ -60,6 +61,7 @@
     if (self) {
         // Custom initialization
         _isPlayViewShowing = NO;
+        _checkUpdatePlayProcess = 0;
         
     }
     return self;
@@ -114,6 +116,8 @@
     _cdEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultCover];
 //    _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
     _cdEGOImageView.frame = CGRectMake(62, 119, 196, 196);
+    _cdEGOImageView.layer.cornerRadius = 98;
+    _cdEGOImageView.layer.masksToBounds = YES;
     _cdEGOImageView.hidden = YES;
     [self.view addSubview:_cdEGOImageView];
     
@@ -124,7 +128,6 @@
     
     //song list
     _songList = [[NSMutableArray alloc] init];
-    _currentSongIndex = 0;
     
     _miglabAPI = [[MigLabAPI alloc] init];
     
@@ -148,7 +151,108 @@
     NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:50];
     [_songList addObjectsFromArray:tempSongInfoList];
     
+    _currentSongIndex = 0;
+    _currentSong = (_songList.count > 0) ? [_songList objectAtIndex:0] : nil;
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (aaMusicPlayer.isMusicPlaying) {
+        
+        _currentSong = aaMusicPlayer.song;
+        
+        [self timerStart];
+    } else {
+        [self timerStop];
+    }
+    
+    //现在当前歌曲信息
+    if (_currentSong) {
+        
+        _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
+        _playerBoradView.lblSongName.text = _currentSong.songname;
+        _playerBoradView.lblArtist.text = _currentSong.artist;
+        
+    }
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [self timerStop];
+    
+}
+
+/*
+ 把播放器的定时器移动页面来
+ 
+ 使用播放计时器控制统一控制刷新，预留后续的歌词刷新
+ */
+-(void)timerStop{
+    
+    @synchronized(self){
+        if (_playerTimer) {
+            if ([_playerTimer isValid]) {
+                [_playerTimer invalidate];
+            }
+            _playerTimer = nil;
+        }
+    }
+    
+}
+
+-(void)timerStart{
+    
+    [self timerStop];
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
+    
+}
+
+-(void)playerTimerFunction{
+    
+    PLog(@"playerTimerFunction...");
+    [self doUpdateForPlaying];
+    
+}
+
+#pragma AVAudioPlayerDelegate
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    //播放下一首
+    [self doNextAction:nil];
+    
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error
+{
+    
+}
+
+- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player
+{
+    //change ui
+}
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags
+{
+    if (player) [player play];
+}
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags
+{
+    if (player) [player play];
+}
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player
+{
+    if (player) [player play];
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,7 +261,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma AVAudioPlayerDelegate end
 
 -(void)initMenuView{
     
@@ -224,7 +328,26 @@
     
     PLog(@"doPlayOrPause...");
     
-    [self playLocationSong];
+    [self playCurrentSong];
+    
+}
+
+-(void)playCurrentSong{
+    
+    _currentSong = [_songList objectAtIndex:_currentSongIndex];
+    
+    [self stopDownload];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (aaMusicPlayer.isMusicPlaying) {
+        [aaMusicPlayer pause];
+        [self timerStop];
+    } else if (aaMusicPlayer.playerDestoried) {
+        [self initSongInfo];
+    } else {
+        [aaMusicPlayer play];
+        [self timerStart];
+    }
     
 }
 
@@ -242,6 +365,7 @@
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if (aaMusicPlayer.isMusicPlaying) {
             [aaMusicPlayer pause];
+            [self timerStop];
         }
         
         [self initSongInfo];
@@ -885,6 +1009,60 @@
     PLog(@"downloadSuccess...");
 }
 
+#pragma PHttpDownloaderDelegate
+
+-(void)doDownloadFailed:(NSDictionary *)dicResult{
+    
+    PLog(@"doDownloadFailed...%@", dicResult);
+    [SVProgressHUD showErrorWithStatus:@"下载歌曲失败"];
+}
+
+-(void)doDownloadProcess:(NSDictionary *)dicProcess{
+    
+    PLog(@"downloadProcess: %@", dicProcess);
+    
+    if (_currentSong.songurl) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        songext = [songext substringFromIndex:range.location + 1];
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
+        if (tempfilesize <= 0) {
+            
+            long long totalBytesExpectedToRead = [[dicProcess objectForKey:@"TotalBytesExpectedToRead"] longLongValue];
+            [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+            
+        }
+        
+        //
+        SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+        long long localsize = [songManager getSongLocalSize:_currentSong];
+        if (localsize < SONG_INIT_SIZE) {
+            //
+            
+        } else {
+            
+            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+            if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+                _shouldStartPlayAfterDownloaded = NO;
+                [self initAndStartPlayer];
+            }
+            
+            
+        }
+        
+    }
+    
+}
+
+-(void)doDownloadSuccess:(NSDictionary *)dicResult{
+    PLog(@"doDownloadSuccess...%@", dicResult);
+}
+
+#pragma PHttpDownloaderDelegate end
+
 -(void)stopDownload{
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
@@ -900,6 +1078,10 @@
     
     _playerBoradView.lblSongName.text = _currentSong.songname;
     _playerBoradView.lblArtist.text = _currentSong.artist;
+    NSURL *tempCoverUrl = [NSURL URLWithString:_currentSong.coverurl];
+    _cdOfSongView.coverOfSongEGOImageView.imageURL = tempCoverUrl;
+    _cdEGOImageView.imageURL = tempCoverUrl;
+    _playerBoradView.btnAvatar.imageURL = tempCoverUrl;
     
     [self downloadSong];
     
@@ -915,7 +1097,7 @@
         
     } else {
         
-        [songManager downloadStart:_currentSong];
+        [songManager downloadStart:_currentSong delegate:self];
         
     }
     
@@ -923,12 +1105,17 @@
 
 -(void)initAndStartPlayer{
     
+    PLog(@"initAndStartPlayer...");
+    
+    if (!_currentSong || !_currentSong.songCachePath) {
+        PLog(@"_currentSong.songCachePath is nil...");
+        return;
+    }
+    
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (aaMusicPlayer && aaMusicPlayer.isMusicPlaying) {
         return;
     }
-    
-    PLog(@"initAndStartPlayer...");
     
     aaMusicPlayer.song = _currentSong;
     
@@ -936,38 +1123,8 @@
     if (isPlayerInit) {
         aaMusicPlayer.delegate = self;
         [aaMusicPlayer play];
+        [self timerStart];
     }
-    
-}
-
-/*
- 把播放器的定时器移动页面来
- 
- 使用播放计时器控制统一控制刷新，预留后续的歌词刷新
- */
--(void)timerStop{
-    
-    @synchronized(self){
-        if (_playerTimer) {
-            if ([_playerTimer isValid]) {
-                [_playerTimer invalidate];
-            }
-            _playerTimer = nil;
-        }
-    }
-    
-}
-
--(void)timerStart{
-    
-    [self timerStop];
-    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:PlayerTimerFunctionInterval target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
-    
-}
-
--(void)playerTimerFunction{
-    
-    PLog(@"playerTimerFunction...");
     
 }
 
@@ -975,7 +1132,7 @@
 //PAAMusicPlayer
 -(void)aaMusicPlayerTimerFunction{
     
-    [self doUpdateForPlaying];
+//    [self doUpdateForPlaying];
     
 }
 
@@ -989,7 +1146,7 @@
 //PAMusicPlayer
 -(void)aMusicPlayerTimerFunction{
     
-    [self doUpdateForPlaying];
+//    [self doUpdateForPlaying];
     
 }
 
@@ -1022,6 +1179,12 @@
 
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess{
+    
+    if (_checkUpdatePlayProcess < 10) {
+        _checkUpdatePlayProcess++;
+        return;
+    }
+    _checkUpdatePlayProcess = 0;
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     long duration = aaMusicPlayer.getDuration;

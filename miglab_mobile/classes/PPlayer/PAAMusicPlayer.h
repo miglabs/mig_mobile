@@ -51,10 +51,11 @@
 -(BOOL)isMusicPlaying;
 -(void)playerPlayPause;
 
+/*
 -(void)timerStop;
 -(void)timerStart;
 -(void)playerTimerFunction;
-
+*/
 
 
 

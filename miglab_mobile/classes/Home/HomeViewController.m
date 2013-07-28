@@ -195,7 +195,7 @@
     song.songurl = @"http://umusic.9158.com//2013/06/27/10/36/276269_3e084a286f644b3caa3d701025b34ca3.mp3";
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
-    [songManager downloadStart:song];
+    [songManager downloadStart:song delegate:nil];
     
 }
 

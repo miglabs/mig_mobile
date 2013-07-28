@@ -19,7 +19,6 @@
 		162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316111777397600CF8FB5 /* AFXMLRequestOperation.m */; };
 		162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316131777397600CF8FB5 /* UIImageView+AFNetworking.m */; };
 		162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316371777397600CF8FB5 /* UIImage+PImageCategory.m */; };
-		162316691777397600CF8FB5 /* UncaughtExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1623166A1777397600CF8FB5 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1623163E1777397600CF8FB5 /* EGOCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1623166B1777397600CF8FB5 /* EGOImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316411777397600CF8FB5 /* EGOImageButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1623166C1777397600CF8FB5 /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316441777397600CF8FB5 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
@@ -65,6 +64,8 @@
 		1683FBA11791295B0081612B /* playing_tip_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB9E1791295B0081612B /* playing_tip_7.png */; };
 		1683FBA3179129990081612B /* playing_tip_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FBA2179129990081612B /* playing_tip_0.png */; };
 		1683FBA9179137DF0081612B /* song_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FBA8179137DF0081612B /* song_cover.png */; };
+		169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169C2E1117A381C2009774E7 /* libMobClickLibrary.a */; };
+		169C2E1617A38AC7009774E7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 169C2E1517A38AC7009774E7 /* libz.dylib */; };
 		16AB8BA4179EB8A40009411F /* left_menu_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16AB8B9A179EB8A40009411F /* left_menu_arrow.png */; };
 		16AB8BA6179EB8A40009411F /* left_menu_gedan.png in Resources */ = {isa = PBXBuildFile; fileRef = 16AB8B9C179EB8A40009411F /* left_menu_gedan.png */; };
 		16AB8BA7179EB8A40009411F /* left_menu_haoyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 16AB8B9D179EB8A40009411F /* left_menu_haoyou.png */; };
@@ -192,8 +193,6 @@
 		162316131777397600CF8FB5 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		162316361777397600CF8FB5 /* UIImage+PImageCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PImageCategory.h"; sourceTree = "<group>"; };
 		162316371777397600CF8FB5 /* UIImage+PImageCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PImageCategory.m"; sourceTree = "<group>"; };
-		162316381777397600CF8FB5 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = UncaughtExceptionHandler.mm; sourceTree = "<group>"; };
 		1623163D1777397600CF8FB5 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
 		1623163E1777397600CF8FB5 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		162316401777397600CF8FB5 /* EGOImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageButton.h; sourceTree = "<group>"; };
@@ -259,6 +258,9 @@
 		1683FB9E1791295B0081612B /* playing_tip_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing_tip_7.png; sourceTree = "<group>"; };
 		1683FBA2179129990081612B /* playing_tip_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing_tip_0.png; sourceTree = "<group>"; };
 		1683FBA8179137DF0081612B /* song_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = song_cover.png; sourceTree = "<group>"; };
+		169C2E1117A381C2009774E7 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		169C2E1217A381C2009774E7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		169C2E1517A38AC7009774E7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		16AB8B9A179EB8A40009411F /* left_menu_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_menu_arrow.png; sourceTree = "<group>"; };
 		16AB8B9C179EB8A40009411F /* left_menu_gedan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_menu_gedan.png; sourceTree = "<group>"; };
 		16AB8B9D179EB8A40009411F /* left_menu_haoyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_menu_haoyou.png; sourceTree = "<group>"; };
@@ -307,7 +309,7 @@
 		16EDEF471759AD5E001BE4E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16EDEF491759AD5E001BE4E9 /* miglab_mobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "miglab_mobile-Prefix.pch"; sourceTree = "<group>"; };
 		16EDEF4A1759AD5E001BE4E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		16EDEF4B1759AD5E001BE4E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		16EDEF4B1759AD5E001BE4E9 /* AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		16EDEF4D1759AD5E001BE4E9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		16EDEF4F1759AD5E001BE4E9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		16EDEF511759AD5E001BE4E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				169C2E1617A38AC7009774E7 /* libz.dylib in Frameworks */,
 				1623168617773BE700CF8FB5 /* QuartzCore.framework in Frameworks */,
 				163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */,
 				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
@@ -424,6 +427,7 @@
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
 				184648641793ACF700E83EBB /* libWeChatSDK.a in Frameworks */,
+				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +437,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				169C2E1017A381C2009774E7 /* UMAnalytics_Sdk_2.2.0.OpenUDID */,
 				1830B52B179D129200314A28 /* AES256 */,
 				1846485F1793ACF700E83EBB /* WeChatAPI */,
 				1846484D1793AA5F00E83EBB /* sinaweibo_ios_sdk */,
@@ -500,8 +505,6 @@
 				18A451151784017B00CFFAD4 /* PCustomToolBarView.m */,
 				162316361777397600CF8FB5 /* UIImage+PImageCategory.h */,
 				162316371777397600CF8FB5 /* UIImage+PImageCategory.m */,
-				162316381777397600CF8FB5 /* UncaughtExceptionHandler.h */,
-				162316391777397600CF8FB5 /* UncaughtExceptionHandler.mm */,
 				163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */,
 				163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */,
 				1880E455178E9FE300330DDE /* PCustomPageControl.h */,
@@ -668,6 +671,15 @@
 			path = playing_tips;
 			sourceTree = "<group>";
 		};
+		169C2E1017A381C2009774E7 /* UMAnalytics_Sdk_2.2.0.OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				169C2E1117A381C2009774E7 /* libMobClickLibrary.a */,
+				169C2E1217A381C2009774E7 /* MobClick.h */,
+			);
+			path = UMAnalytics_Sdk_2.2.0.OpenUDID;
+			sourceTree = "<group>";
+		};
 		16AB8B99179EB8A40009411F /* left_menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +782,7 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				169C2E1517A38AC7009774E7 /* libz.dylib */,
 				1623168317773BE000CF8FB5 /* OpenGLES.framework */,
 				1623168117773BD600CF8FB5 /* SystemConfiguration.framework */,
 				1623168517773BE700CF8FB5 /* QuartzCore.framework */,
@@ -1115,7 +1128,6 @@
 				162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */,
 				162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */,
 				162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */,
-				162316691777397600CF8FB5 /* UncaughtExceptionHandler.mm in Sources */,
 				1623166A1777397600CF8FB5 /* EGOCache.m in Sources */,
 				1623166B1777397600CF8FB5 /* EGOImageButton.m in Sources */,
 				1623166C1777397600CF8FB5 /* EGOImageLoadConnection.m in Sources */,
@@ -1252,6 +1264,7 @@
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1273,6 +1286,7 @@
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
+					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

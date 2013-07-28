@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MigLabConfig.h"
 
 #define IS_RETINA ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -37,5 +38,6 @@
 +(UIImage *)getCircleProcessImageWithAlpha:(CGSize)imageSize progress:(float)progress;
 //获取不含有alpha通道的扇形进度圆圈
 +(UIImage *)getCircleProcessImageWithNoneAlpha:(CGSize)imageSize progress:(float)progress;
++(void)saveImage2Cache:(UIImage *)timage;
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "UncaughtExceptionHandler.h"
+//#import "UncaughtExceptionHandler.h"
+#import "MigLabConfig.h"
+#import "MobClick.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AFNetworkActivityIndicatorManager.h"
 #import "PDatabaseManager.h"
@@ -39,14 +41,33 @@
 @synthesize sinaweibo = _sinaweibo;
 
 //for crash
--(void)installUncaughtExceptionHandler
-{
-    InstallUncaughtExceptionHandler();
+//-(void)installUncaughtExceptionHandler
+//{
+//    InstallUncaughtExceptionHandler();
+//}
+
+- (void)umengTrack {
+//    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行
+    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    //
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) REALTIME channelId:nil];
+    //   reportPolicy为枚举类型,可以为 REALTIME, BATCH,SENDDAILY,SENDWIFIONLY几种
+    //   channelId 为NSString * 类型，channelId 为nil或@""时,默认会被被当作@"App Store"渠道
+    
+    //      [MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
+    //    [MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
+    
+    [MobClick updateOnlineConfig];  //在线参数配置
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self installUncaughtExceptionHandler];//
+//    [self installUncaughtExceptionHandler];//
+    
+    //友盟的方法本身是异步执行，所以不需要再异步调用
+    [self umengTrack];
     
     //这种方式后台，可以连续播放非网络请求歌曲。遇到网络请求歌曲就废，需要后台申请task
     /*
@@ -106,7 +127,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 0;
+        int initHomeViewType = 3;
         
         if (initHomeViewType == 0) {
             //

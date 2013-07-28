@@ -246,4 +246,21 @@
     return processImage;
 }
 
++(void)saveImage2Cache:(UIImage *)timage{
+    
+    if (!timage) {
+        return;
+    }
+    
+    NSDate *nowDate = [NSDate date];
+    long forImageName = [nowDate timeIntervalSince1970];
+    NSString *path = [NSHomeDirectory() stringByAppendingFormat:@"/%ld.png", forImageName];
+    if ([UIImagePNGRepresentation(timage) writeToFile:path atomically:YES]) {
+        NSLog(@"saveImage2Cache Successful...%@", path);
+    } else {
+        NSLog(@"saveImage2Cache failure...");
+    }
+    
+}
+
 @end

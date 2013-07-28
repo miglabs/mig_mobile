@@ -56,7 +56,11 @@
             _avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
             _avAudioPlayer.delegate = self;
             
-            _playerDestoried = NO;
+            if (_avAudioPlayer) {
+                _playerDestoried = NO;
+            } else {
+                _playerDestoried = YES;
+            }
             
         } else {
             _playerDestoried = YES;
@@ -133,7 +137,7 @@
     BOOL isplayed = [_avAudioPlayer play];
     if (isplayed) {
         PLog(@"play start...");
-        [self timerStart];
+//        [self timerStart];
     }
     
     return isplayed;
@@ -144,12 +148,12 @@
     
     PLog(@"pause...");
     
-    [self playerTimerFunction];
+//    [self playerTimerFunction];
     
     if (_avAudioPlayer) {
         [_avAudioPlayer pause];
     }
-    [self timerStop];
+//    [self timerStop];
     
 }
 
@@ -158,13 +162,13 @@
     
     PLog(@"stop...");
     
-    [self playerTimerFunction];
+//    [self playerTimerFunction];
     
     if (_avAudioPlayer) {
         [_avAudioPlayer stop];
         _avAudioPlayer = nil;
     }
-    [self timerStop];
+//    [self timerStop];
     
 }
 
@@ -186,6 +190,7 @@
     
 }
 
+/*
 -(void)timerStop{
     
     @synchronized(self){
@@ -214,12 +219,13 @@
     }
     
 }
+*/
 
 #pragma AVAudioPlayerDelegate
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    [self timerStop];
+//    [self timerStop];
     
     if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)])
     {
