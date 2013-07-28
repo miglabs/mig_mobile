@@ -189,17 +189,23 @@
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-    [miglabAPI doGetWorkOfMood:userid token:accesstoken];
-    [miglabAPI doGetWorkOfScene:userid token:accesstoken];
-    [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm" num:2];
-    [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"3" mood:@"ms" num:8];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+        [miglabAPI doGetWorkOfMood:userid token:accesstoken];
+        [miglabAPI doGetWorkOfScene:userid token:accesstoken];
+        [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm" num:2];
+        [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"3" mood:@"ms" num:8];
+        
+        [miglabAPI doGetChannel:userid token:accesstoken num:10];
+        [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
+        
+        [miglabAPI doAddFavorite:accesstoken uid:userid sid:11741];
+        [miglabAPI doAddBlacklist:accesstoken uid:userid sid:99993];
+        
+    }
     
-    [miglabAPI doGetChannel:userid token:accesstoken num:10];
-    [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
     
-    [miglabAPI doAddFavorite:accesstoken uid:userid sid:11741];
-    [miglabAPI doAddBlacklist:accesstoken uid:userid sid:99993];
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

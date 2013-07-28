@@ -191,6 +191,10 @@
         _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
         _playerBoradView.lblSongName.text = _currentSong.songname;
         _playerBoradView.lblArtist.text = _currentSong.artist;
+        NSURL *tempCoverUrl = [NSURL URLWithString:_currentSong.coverurl];
+        _cdOfSongView.coverOfSongEGOImageView.imageURL = tempCoverUrl;
+        _cdEGOImageView.imageURL = tempCoverUrl;
+        _playerBoradView.btnAvatar.imageURL = tempCoverUrl;
         
     }
     
@@ -220,6 +224,9 @@
         }
     }
     
+    UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_play" type:@"png"];
+    _playerBoradView.btnPlayOrPause.imageView.image = playOrPauseImage;
+    
 }
 
 -(void)timerStart{
@@ -227,13 +234,15 @@
     [self timerStop];
     _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
     
+    UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_stop" type:@"png"];
+    _playerBoradView.btnPlayOrPause.imageView.image = playOrPauseImage;
+    
 }
 
 -(void)playerTimerFunction{
     
     PLog(@"playerTimerFunction...");
     [self performSelectorOnMainThread:@selector(doUpdateForPlaying) withObject:nil waitUntilDone:NO];
-//    [self doUpdateForPlaying];
     
 }
 

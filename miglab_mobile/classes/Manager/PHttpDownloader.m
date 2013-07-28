@@ -25,6 +25,7 @@
         
         NSString *tempLocalKey = _localKey;
         id<PHttpDownloaderDelegate> tempdelegate = _delegate;
+        __block int checkDownloadProcessCount = 0;
         
         //local file size
         long long offset = [super getLocalFileSize:_cachePath];
@@ -58,6 +59,13 @@
         }];
         
         [_operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            
+            if (checkDownloadProcessCount < 8) {
+                checkDownloadProcessCount++;
+                return;
+            }
+            
+            checkDownloadProcessCount = 0;
             
             PLog(@"bytesRead: %d, totalBytesRead: %lld, totalBytesExpectedToRead: %lld", bytesRead, totalBytesRead, totalBytesExpectedToRead);
             
