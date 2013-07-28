@@ -364,7 +364,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -412,7 +412,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status)
         {
@@ -443,13 +443,13 @@
  <!--请求POST-->
  HTTP_ADDFAVORITE
  */
--(void)doAddFavorite:(NSString *)ttoken uid:(int)tuid sid:(long)tsid {
+-(void)doAddFavorite:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
     
     PLog(@"add favorite url: %@", HTTP_ADDFAVORITE);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDFAVORITE]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%d&songid=%ld", ttoken, tuid, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsid];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -457,18 +457,18 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
-            PLog(@"operation succeed");
+            PLog(@"doAddFavorite operation succeed");
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteSuccess object:nil userInfo:nil];
             
         }
         else {
             
             NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"operation failed: %@", msg);
+            PLog(@"doAddFavorite operation failed: %@", msg);
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
@@ -478,7 +478,7 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"doAddFavorite failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:nil];
         
     }];
@@ -492,31 +492,31 @@
  <!--请求POST-->
  HTTP_ADDBLACKLIST
  */
--(void)doAddBlacklist:(NSString *)ttoken uid:(int)tuid sid:(long)tsid {
+-(void)doAddBlacklist:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
     
     PLog(@"add blacklist url: %@", HTTP_ADDBLACKLIST);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDBLACKLIST]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%d&songid=%ld", ttoken, tuid, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsid];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
-            PLog(@"operation succeed");
+            PLog(@"doAddBlacklist operation succeed");
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistSuccess object:nil userInfo:nil];
             
         }
         else {
             
             NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"operation failed: %@", msg);
+            PLog(@"doAddBlacklist operation failed: %@", msg);
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
@@ -525,7 +525,7 @@
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        PLog(@"failure: %@", error);
+        PLog(@"doAddBlacklist failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:nil];
         
     }];
@@ -553,7 +553,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -604,7 +604,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -655,7 +655,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -702,7 +702,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -749,7 +749,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -799,7 +799,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             
@@ -1171,7 +1171,7 @@
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         NSDictionary* dicJson = JSON;
-        int status = [dicJson objectForKey:@"status"];
+        int status = [[dicJson objectForKey:@"status"] intValue];
         
         if(1 == status) {
             

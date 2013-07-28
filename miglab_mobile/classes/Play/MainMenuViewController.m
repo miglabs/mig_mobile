@@ -67,6 +67,12 @@
     return self;
 }
 
+-(void)dealloc{
+    
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -100,6 +106,15 @@
     //getModeMusic
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
+    
+    //doAddBlacklist
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistFailed:) name:NotificationNameAddBlacklistFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistSuccess:) name:NotificationNameAddBlacklistSuccess object:nil];
+    
+    //doAddFavorite
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFavoriteFailed:) name:NotificationNameAddFavoriteFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFavoriteSuccess:) name:NotificationNameAddFavoriteSuccess object:nil];
+    
     
     //构造场景选择页面
     [self initMenuView];
@@ -217,7 +232,8 @@
 -(void)playerTimerFunction{
     
     PLog(@"playerTimerFunction...");
-    [self doUpdateForPlaying];
+    [self performSelectorOnMainThread:@selector(doUpdateForPlaying) withObject:nil waitUntilDone:NO];
+//    [self doUpdateForPlaying];
     
 }
 
@@ -312,7 +328,9 @@
     
     PLog(@"doRemoveAction...");
     
-//    [_miglabAPI doAddBlacklist:<#(NSString *)#> uid:<#(int)#> sid:<#(long)#>]
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    [_miglabAPI doAddBlacklist:accesstoken uid:userid sid:_currentSong.songid];
     
 }
 
@@ -320,7 +338,9 @@
     
     PLog(@"doLikeAction...");
     
-//    [_miglabAPI doAddFavorite:<#(NSString *)#> uid:<#(int)#> sid:<#(long)#>]
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    [_miglabAPI doAddFavorite:accesstoken uid:userid sid:_currentSong.songid];
     
 }
 
@@ -950,6 +970,22 @@
     NSMutableArray* songInfoList = [result objectForKey:@"result"];
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
+}
+
+-(void)addBlacklistFailed:(NSNotification *)tNotification{
+    [SVProgressHUD showErrorWithStatus:@"歌曲拉黑失败:("];
+}
+
+-(void)addBlacklistSuccess:(NSNotification *)tNotification{
+    [SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
+}
+
+-(void)addFavoriteFailed:(NSNotification *)tNotification{
+    [SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
+}
+
+-(void)addFavoriteSuccess:(NSNotification *)tNotification{
+    [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
 }
 
 // end 登录，获取用户资料

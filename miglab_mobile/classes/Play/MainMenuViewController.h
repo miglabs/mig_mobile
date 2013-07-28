@@ -85,6 +85,10 @@
 -(void)getMusicFromChannelSuccess:(NSNotification *)tNotification;
 -(void)getModeMusicFailed:(NSNotification *)tNotification;
 -(void)getModeMusicSuccess:(NSNotification *)tNotification;
+-(void)addBlacklistFailed:(NSNotification *)tNotification;
+-(void)addBlacklistSuccess:(NSNotification *)tNotification;
+-(void)addFavoriteFailed:(NSNotification *)tNotification;
+-(void)addFavoriteSuccess:(NSNotification *)tNotification;
 
 //下载歌曲
 -(void)downloadFailed:(NSNotification *)tNotification;

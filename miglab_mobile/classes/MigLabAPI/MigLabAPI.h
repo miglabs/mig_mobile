@@ -59,12 +59,12 @@
 /*
  收藏歌曲
  */
--(void)doAddFavorite:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
+-(void)doAddFavorite:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
 
 /*
  歌曲拉黑
  */
--(void)doAddBlacklist:(NSString*)ttoken uid:(int)tuid sid:(long)tsid;
+-(void)doAddBlacklist:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
 
 /*
  赠送歌曲
