@@ -54,24 +54,32 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"result: %@", result);
-        
-        NSArray *resultList = [result componentsSeparatedByString:@"?"];
-        if ([resultList count] == 2) {
+        @try {
             
-            NSString *postUrl = [resultList objectAtIndex:0];
-            NSString *postContent = [resultList objectAtIndex:1];
-            NSString *secondPostContent = [NSString stringWithFormat:@"username=%@&password=%@&%@", tusername, tpassword, postContent];
+            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"result: %@", result);
             
-            [self doSsoLoginSecond:postUrl param:secondPostContent];
-            
-        } else {
-            
-            NSLog(@"doSsoLoginFirst failure...");
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+            NSArray *resultList = [result componentsSeparatedByString:@"?"];
+            if ([resultList count] == 2) {
+                
+                NSString *postUrl = [resultList objectAtIndex:0];
+                NSString *postContent = [resultList objectAtIndex:1];
+                NSString *secondPostContent = [NSString stringWithFormat:@"username=%@&password=%@&%@", tusername, tpassword, postContent];
+                
+                [self doSsoLoginSecond:postUrl param:secondPostContent];
+                
+            } else {
+                
+                NSLog(@"doSsoLoginFirst failure...");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+                
+            }
             
         }
+        @catch (NSException *exception) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+        }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -103,21 +111,28 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"result: %@", result);
-        NSArray *resultList = [result componentsSeparatedByString:@"?"];
-        if ([resultList count] == 2) {
+        @try {
             
-            NSString *postUrl = [resultList objectAtIndex:0];
-            NSString *postContent = [resultList objectAtIndex:1];
+            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"result: %@", result);
+            NSArray *resultList = [result componentsSeparatedByString:@"?"];
+            if ([resultList count] == 2) {
+                
+                NSString *postUrl = [resultList objectAtIndex:0];
+                NSString *postContent = [resultList objectAtIndex:1];
+                
+                [self doSsoLoginThird:postUrl param:postContent];
+                
+            } else {
+                
+                NSLog(@"doSsoLoginSecond failure...");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+                
+            }
             
-            [self doSsoLoginThird:postUrl param:postContent];
-            
-        } else {
-            
-            NSLog(@"doSsoLoginSecond failure...");
+        }
+        @catch (NSException *exception) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-            
         }
         
         
@@ -151,12 +166,20 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSString *strAccessToken = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
-        NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:strAccessToken, @"AccessToken", nil];
+        @try {
+            
+            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSString *strAccessToken = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:strAccessToken, @"AccessToken", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicResult];
+            
+        }
+        @catch (NSException *exception) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+        }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicResult];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -214,8 +237,12 @@
             
         }
         @catch (NSException *exception) {
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"未知错误", @"msg", nil];
+            
+            NSString* msg = @"解析返回数据失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
+            
         }
         
         
@@ -252,34 +279,49 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        PLog(@"dicJson: %@", dicJson);
-        
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if (1 == status) {
+        @try {
             
-            PLog(@"register operation succeeded");
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
             
-            User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:dicResult];
+            if (1 == status) {
+                
+                PLog(@"register operation succeeded");
+                
+                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:dicResult];
+                
+            } else if (0 == status || -1 == status) {
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                PLog(@"register operation failed: %@", msg);
+                NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
+                
+            } else {
+                
+                NSString* msg = @"未知错误:(";
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
+                
+            }
             
-        } else if (0 == status || -1 == status) {
+        }
+        @catch (NSException *exception) {
             
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"register operation failed: %@", msg);
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
-            
-        } else {
-            
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"未知错误", @"msg", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -306,31 +348,44 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        PLog(@"dicJson: %@", dicJson);
-        
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get guest operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
             
-            User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetGuestSuccess object:nil userInfo:dicResult];
+            if(1 == status) {
+                
+                PLog(@"get guest operation succeeded");
+                
+                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetGuestSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get guest operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"get guest operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -363,21 +418,33 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] init];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"update user information operation succeed");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserSuccess object:nil userInfo:nil];
+            if(1 == status) {
+                
+                PLog(@"update user information operation succeed");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserSuccess object:nil userInfo:nil];
+                
+            }
+            else {
+                
+                PLog(@"update user information operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"update user information operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUpdateUserFailed object:nil userInfo:dicResult];
@@ -410,23 +477,33 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
         
-        if(1 == status)
-        {
-            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary* dicSong = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicSuccess object:nil userInfo:dicSong];
+        @try {
+            
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status)
+            {
+                Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary* dicSong = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicSuccess object:nil userInfo:dicSong];
+            }
+            else
+            {
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicError = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicFailed object:nil userInfo:dicError];
+            }
+            
         }
-        else
-        {
-            NSString* msg = [dicJson objectForKey:@"msg"];
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicError = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultMusicFailed object:nil userInfo:dicError];
+            
         }
-        
             
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
     
@@ -456,19 +533,31 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"doAddFavorite operation succeed");
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteSuccess object:nil userInfo:nil];
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"doAddFavorite operation succeed");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteSuccess object:nil userInfo:nil];
+                
+            }
+            else {
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                PLog(@"doAddFavorite operation failed: %@", msg);
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"doAddFavorite operation failed: %@", msg);
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
@@ -504,24 +593,37 @@
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"doAddBlacklist operation succeed");
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistSuccess object:nil userInfo:nil];
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"doAddBlacklist operation succeed");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistSuccess object:nil userInfo:nil];
+                
+            }
+            else {
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                PLog(@"doAddBlacklist operation failed: %@", msg);
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            PLog(@"doAddBlacklist operation failed: %@", msg);
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
@@ -552,21 +654,33 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicSuccess object:nil userInfo:nil];
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicSuccess object:nil userInfo:nil];
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicFailed object:nil userInfo:dicResult];
@@ -603,26 +717,39 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameShareMusicSuccess object:nil userInfo:nil];
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameShareMusicSuccess object:nil userInfo:nil];
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameShareMusicFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameShareMusicFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
@@ -654,22 +781,34 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUploadMusicSuccess object:nil userInfo:nil];
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUploadMusicSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUploadMusicFailed object:nil userInfo:dicResult];
+                
+            }
+            
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
-            
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUploadMusicFailed object:nil userInfo:dicResult];
             
         }
@@ -701,26 +840,39 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            //TODO add user
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                //TODO add user
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNearbyUserFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNearbyUserFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
@@ -748,29 +900,42 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListSuccess object:nil userInfo:dicResult];
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserListFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
@@ -798,24 +963,36 @@
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicSuccess object:nil userInfo:dicResult];
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:dicResult];
@@ -849,43 +1026,56 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        PLog(@"dicJson: %@", dicJson);
-        
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get channel operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
             
-            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray* dicChannels = [dicTemp objectForKey:@"channle"];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            NSMutableArray* channel = [[NSMutableArray alloc] init];
-            
-            for (int i=0; i<[dicChannels count]; i++) {
+            if(1 == status) {
                 
-                Channel *tempChannel = [Channel initWithNSDictionary:[dicChannels objectAtIndex:i]];
-                [tempChannel log];
+                PLog(@"get channel operation succeeded");
                 
-                [channel addObject:tempChannel];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* dicChannels = [dicTemp objectForKey:@"channle"];
+                
+                NSMutableArray* channel = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<[dicChannels count]; i++) {
+                    
+                    Channel *tempChannel = [Channel initWithNSDictionary:[dicChannels objectAtIndex:i]];
+                    [tempChannel log];
+                    
+                    [channel addObject:tempChannel];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:channel, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get channel operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelFailed object:nil userInfo:dicResult];
+                
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:channel, @"result", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelSuccess object:nil userInfo:dicResult];
-            
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"get channel operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -914,43 +1104,56 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        PLog(@"dicJson: %@", dicJson);
-        
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get music from channel operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
             
-            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray* arrChannels = [dicTemp objectForKey:@"channel"];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            NSMutableArray* songList = [[NSMutableArray alloc] init];
-            
-            for (int i=0; i<[arrChannels count]; i++) {
+            if(1 == status) {
                 
-                Song *tempsong = [Song initWithNSDictionary:[arrChannels objectAtIndex:i]];
-                [tempsong log];
+                PLog(@"get music from channel operation succeeded");
                 
-                [songList addObject:tempsong];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* arrChannels = [dicTemp objectForKey:@"channel"];
+                
+                NSMutableArray* songList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<[arrChannels count]; i++) {
+                    
+                    Song *tempsong = [Song initWithNSDictionary:[arrChannels objectAtIndex:i]];
+                    [tempsong log];
+                    
+                    [songList addObject:tempsong];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get music from channel operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicFailed object:nil userInfo:dicResult];
+                
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songList, @"result", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicSuccess object:nil userInfo:dicResult];
-            
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"get music from channel operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetChannelMusicFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -979,42 +1182,55 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get mood operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray* wordlist = [dicTemp objectForKey:@"word"];
-            int wordcount = [wordlist count];
-            
-            NSMutableArray* moodList = [[NSMutableArray alloc] init];
-            
-            for (int i=0; i<wordcount; i++) {
+            if(1 == status) {
                 
-                Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
-                tempword.mode = @"mm";
-                [tempword log];
+                PLog(@"get mood operation succeeded");
                 
-                [moodList addObject:tempword];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* wordlist = [dicTemp objectForKey:@"word"];
+                int wordcount = [wordlist count];
+                
+                NSMutableArray* moodList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<wordcount; i++) {
+                    
+                    Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
+                    tempword.mode = @"mm";
+                    [tempword log];
+                    
+                    [moodList addObject:tempword];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodSuccess object:nil userInfo:dicResult];
+                
+            } else {
+                
+                PLog(@"get mood operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodFailed object:nil userInfo:dicResult];
+                
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
+        }
+        @catch (NSException *exception) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodSuccess object:nil userInfo:dicResult];
-            
-        } else {
-            
-            PLog(@"get mood operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -1041,42 +1257,55 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get scene operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray* wordlist = [dicTemp objectForKey:@"word"];
-            int wordcount = [wordlist count];
-            
-            NSMutableArray* moodList = [[NSMutableArray alloc] init];
-            
-            for (int i=0; i<wordcount; i++) {
+            if(1 == status) {
                 
-                Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
-                tempword.mode = @"ms";
-                [tempword log];
+                PLog(@"get scene operation succeeded");
                 
-                [moodList addObject:tempword];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* wordlist = [dicTemp objectForKey:@"word"];
+                int wordcount = [wordlist count];
+                
+                NSMutableArray* moodList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<wordcount; i++) {
+                    
+                    Word *tempword = [Word initWithNSDictionary:[wordlist objectAtIndex:i]];
+                    tempword.mode = @"ms";
+                    [tempword log];
+                    
+                    [moodList addObject:tempword];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneSuccess object:nil userInfo:dicResult];
+                
+            } else {
+                
+                PLog(@"get scene operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneFailed object:nil userInfo:dicResult];
+                
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodList, @"result", nil];
+        }
+        @catch (NSException *exception) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneSuccess object:nil userInfo:dicResult];
-            
-        } else {
-            
-            PLog(@"get scene operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSceneFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -1105,41 +1334,54 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"get mode music operation succeeded");
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
-            NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-            NSArray *songlist = [dicTemp objectForKey:@"song"];
-            int songcount = [songlist count];
-            
-            NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
-            for (int i=0; i<songcount; i++) {
+            if(1 == status) {
                 
-                Song *song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
-                [song log];
+                PLog(@"get mode music operation succeeded");
                 
-                [songInfoList addObject:song];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray *songlist = [dicTemp objectForKey:@"song"];
+                int songcount = [songlist count];
+                
+                NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<songcount; i++) {
+                    
+                    Song *song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    [song log];
+                    
+                    [songInfoList addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get mode music operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicFailed object:nil userInfo:dicResult];
+                
             }
             
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicSuccess object:nil userInfo:dicResult];
-            
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"get mode music operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMusicFailed object:nil userInfo:dicResult];
             
         }
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -1170,19 +1412,31 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODEMAP]];
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        NSDictionary* dicJson = JSON;
-        int status = [[dicJson objectForKey:@"status"] intValue];
-        
-        if(1 == status) {
+        @try {
             
-            PLog(@"operation succeeded");
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:dicResult];
+                
+            }
             
         }
-        else {
+        @catch (NSException *exception) {
             
-            PLog(@"operation failed");
-            
-            NSString* msg = [dicJson objectForKey:@"msg"];
+            NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:dicResult];
