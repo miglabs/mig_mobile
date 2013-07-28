@@ -50,6 +50,8 @@
         _btnAvatar.frame = CGRectMake(9, 10, 44, 44);
         _btnAvatar.layer.cornerRadius = 22;
         _btnAvatar.layer.masksToBounds = YES;
+        _btnAvatar.layer.borderWidth = 2;
+        _btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
         [_btnAvatar setImage:avatarNorImage forState:UIControlStateNormal];
         [self addSubview:_btnAvatar];
         
