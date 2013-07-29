@@ -203,9 +203,25 @@
     return YES;
 }
 
+//摇一摇
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    
+    if (motion == UIEventSubtypeMotionShake) {
+        PLog(@"Shake...");
+        
+        //摇一摇，下一首
+        [self doNextAction:nil];
+        
+    }
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    //摇一摇
+    [self becomeFirstResponder];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (aaMusicPlayer.isMusicPlaying) {
@@ -233,6 +249,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    //摇一摇
+    [self resignFirstResponder];
     
     [super viewWillDisappear:animated];
     

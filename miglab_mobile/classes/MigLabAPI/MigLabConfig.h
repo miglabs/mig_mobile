@@ -26,7 +26,7 @@
 /*
  * 用于切换不同域名地址
  */
-#define IS_DEBUG_SERVER 2
+#define IS_DEBUG_SERVER 1
 
 #if (0 == IS_DEBUG_SERVER)
 
