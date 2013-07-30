@@ -219,7 +219,7 @@
         
     }
     
-    [miglabAPI doGetModeMusic:@"10026" token:@"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC" wordid:@"3" mood:@"mm"];
+    [miglabAPI doGetModeMusic:@"10026" token:@"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC" wordid:@"1" mood:@"mm"];
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

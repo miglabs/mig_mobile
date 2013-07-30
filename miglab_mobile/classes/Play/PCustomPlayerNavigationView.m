@@ -49,10 +49,10 @@
         //显示歌曲信息
         _lblPlayingSongInfo = [[UILabel alloc] init];
         _lblPlayingSongInfo.backgroundColor = [UIColor clearColor];
-        _lblPlayingSongInfo.frame = CGRectMake(88, 40, 125, 21);
+        _lblPlayingSongInfo.frame = CGRectMake(88, 40, 182, 21);
         _lblPlayingSongInfo.textColor = [UIColor whiteColor];
         _lblPlayingSongInfo.shadowOffset = CGSizeMake(0, 1);
-        _lblPlayingSongInfo.text = @"聚乐音乐";
+        _lblPlayingSongInfo.text = @"心情推荐-失恋疗伤";//@"聚乐音乐";
         [self addSubview:_lblPlayingSongInfo];
         
         //分享按钮
