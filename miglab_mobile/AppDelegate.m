@@ -202,9 +202,10 @@
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    
+    if ([UserSessionManager GetInstance].isLoggedIn && NO) {
         
-        MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
         [miglabAPI doGetWorkOfMood:userid token:accesstoken];
         [miglabAPI doGetWorkOfScene:userid token:accesstoken];
         [miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm" num:2];
@@ -218,7 +219,7 @@
         
     }
     
-    
+    [miglabAPI doGetModeMusic:@"10026" token:@"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC" wordid:@"3" mood:@"mm"];
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

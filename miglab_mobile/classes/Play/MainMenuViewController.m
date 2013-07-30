@@ -899,6 +899,8 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getGuestInfoFailed: %@", result);
     
+    [SVProgressHUD showErrorWithStatus:@""];
+    
 }
 
 -(void)getGuestInfoSuccess:(NSNotification *)tNotification{
@@ -944,7 +946,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getUserInfoFailed: %@", result);
-    [SVProgressHUD showErrorWithStatus:@"获取用户信息失败"];
+    [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
     
 }
 
@@ -967,11 +969,13 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
+    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    
     //根据描述词获取歌曲 test
     [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm"];
     
     //获取频道
-    [_miglabAPI doGetChannel:userid token:accesstoken num:10];
+//    [_miglabAPI doGetChannel:userid token:accesstoken num:10];
     
 }
 
@@ -1023,7 +1027,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getModeMusicFailed...%@", result);
-    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败"];
+    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败:("];
     
 }
 
@@ -1033,6 +1037,7 @@
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray* songInfoList = [result objectForKey:@"result"];
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
     
 }
 
