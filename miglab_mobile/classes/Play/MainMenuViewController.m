@@ -549,6 +549,8 @@
     }//for
     _cdOfSongView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
+    _cdOfSongView.coverOfSongEGOImageView.tag = 2000;
+    _cdOfSongView.coverOfSongEGOImageView.delegate = self;
     _cdOfSongView.coverOfSongEGOImageView.layer.cornerRadius = 98;
     _cdOfSongView.coverOfSongEGOImageView.layer.masksToBounds = YES;
     
@@ -1117,7 +1119,7 @@
 
 -(void)doDownloadProcess:(NSDictionary *)dicProcess{
     
-    PLog(@"downloadProcess: %@", dicProcess);
+//    PLog(@"downloadProcess: %@", dicProcess);
     
     if (_currentSong.songurl) {
         
@@ -1157,6 +1159,13 @@
 
 -(void)doDownloadSuccess:(NSDictionary *)dicResult{
     PLog(@"doDownloadSuccess...%@", dicResult);
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+        _shouldStartPlayAfterDownloaded = NO;
+        [self initAndStartPlayer];
+    }
+    
 }
 
 #pragma PHttpDownloaderDelegate end
@@ -1331,6 +1340,12 @@
 
 - (void)imageViewFailedToLoadImage:(EGOImageView*)imageView error:(NSError*)error{
     
+    PLog(@"imageViewFailedToLoadImage tag: %d, error: %@", imageView.tag, error);
+    if (imageView && imageView.tag == 2000) {
+        //_cdOfSongView.coverOfSongEGOImageView
+        imageView.image = [UIImage imageWithName:@"song_cover" type:@"png"];
+    }
+    
 }
 
 #pragma EGOImageButtonDelegate
@@ -1339,6 +1354,8 @@
 }
 
 - (void)imageButtonFailedToLoadImage:(EGOImageButton*)imageButton error:(NSError*)error{
+    
+    PLog(@"imageButtonFailedToLoadImage tag: %d, error: %@", imageButton.tag, error);
     
 }
 

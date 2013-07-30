@@ -17,6 +17,8 @@
 @synthesize isReadyToDownload = _isReadyToDownload;
 @synthesize delegate = _delegate;
 
+#define kCheckDownloadProcessCount 8
+
 -(BOOL)initDownloader{
     
     PLog(@"initDownloader: requestUrl(%@), localKey(%@), cachePath(%@)", _requestUrl, _localKey, _cachePath);
@@ -25,7 +27,7 @@
         
         NSString *tempLocalKey = _localKey;
         id<PHttpDownloaderDelegate> tempdelegate = _delegate;
-        __block int checkDownloadProcessCount = 0;
+        __block int checkDownloadProcessCount = kCheckDownloadProcessCount;
         
         //local file size
         long long offset = [super getLocalFileSize:_cachePath];
@@ -60,7 +62,7 @@
         
         [_operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
             
-            if (checkDownloadProcessCount < 8) {
+            if (checkDownloadProcessCount < kCheckDownloadProcessCount) {
                 checkDownloadProcessCount++;
                 return;
             }
