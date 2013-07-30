@@ -48,6 +48,15 @@
 		163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF8177C680D008656D1 /* AVFoundation.framework */; };
 		163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE0C177C9672008656D1 /* PCommonUtil.m */; };
 		163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE11177C96DC008656D1 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
+		163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */; };
+		163EA98817A7F59E00EBD24C /* LoginChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */; };
+		163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98B17A7F9B700EBD24C /* login_button_mig.png */; };
+		163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98C17A7F9B700EBD24C /* login_button_mig_0.png */; };
+		163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98E17A7F9B700EBD24C /* login_choose_menu_nor_88_88.png */; };
+		163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */; };
+		163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99017A7F9B700EBD24C /* login_choose_register.png */; };
+		163EA99817A7F9B700EBD24C /* login_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99117A7F9B700EBD24C /* login_top_bg.png */; };
+		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
 		1642B2A117A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1642B2A017A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a */; };
 		1683FB81179119640081612B /* bg_mask_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7A179119640081612B /* bg_mask_0.png */; };
 		1683FB82179119640081612B /* bg_mask_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7B179119640081612B /* bg_mask_1.png */; };
@@ -242,6 +251,16 @@
 		163BCE10177C96DC008656D1 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		163BCE11177C96DC008656D1 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		163BCE12177C96DC008656D1 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		163EA98417A7F59E00EBD24C /* LoginChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginChooseViewController.h; sourceTree = "<group>"; };
+		163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginChooseViewController.m; sourceTree = "<group>"; };
+		163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginChooseViewController.xib; sourceTree = "<group>"; };
+		163EA98B17A7F9B700EBD24C /* login_button_mig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button_mig.png; sourceTree = "<group>"; };
+		163EA98C17A7F9B700EBD24C /* login_button_mig_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button_mig_0.png; sourceTree = "<group>"; };
+		163EA98E17A7F9B700EBD24C /* login_choose_menu_nor_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_nor_88_88.png; sourceTree = "<group>"; };
+		163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_sel_88_88.png; sourceTree = "<group>"; };
+		163EA99017A7F9B700EBD24C /* login_choose_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_register.png; sourceTree = "<group>"; };
+		163EA99117A7F9B700EBD24C /* login_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_top_bg.png; sourceTree = "<group>"; };
+		163EA99917A7FABE00EBD24C /* login_choose_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_board.png; sourceTree = "<group>"; };
 		1642B2A017A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK_armv7_armv7s.a; sourceTree = "<group>"; };
 		1683FB7A179119640081612B /* bg_mask_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_0.png; sourceTree = "<group>"; };
 		1683FB7B179119640081612B /* bg_mask_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_1.png; sourceTree = "<group>"; };
@@ -656,6 +675,20 @@
 			path = CTMBase64;
 			sourceTree = "<group>";
 		};
+		163EA98A17A7F9B700EBD24C /* login */ = {
+			isa = PBXGroup;
+			children = (
+				163EA99917A7FABE00EBD24C /* login_choose_board.png */,
+				163EA98B17A7F9B700EBD24C /* login_button_mig.png */,
+				163EA98C17A7F9B700EBD24C /* login_button_mig_0.png */,
+				163EA98E17A7F9B700EBD24C /* login_choose_menu_nor_88_88.png */,
+				163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */,
+				163EA99017A7F9B700EBD24C /* login_choose_register.png */,
+				163EA99117A7F9B700EBD24C /* login_top_bg.png */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		1683FB93179127920081612B /* playing_tips */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +733,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				163EA98A17A7F9B700EBD24C /* login */,
 				16AB8B99179EB8A40009411F /* left_menu */,
 				16F575B3179587D900277308 /* play_borad */,
 				16E77E77178DB18C006A24A6 /* play */,
@@ -899,6 +933,9 @@
 				184648481793A61700E83EBB /* LoginViewController.h */,
 				184648491793A61700E83EBB /* LoginViewController.m */,
 				1846484A1793A61700E83EBB /* LoginViewController.xib */,
+				163EA98417A7F59E00EBD24C /* LoginChooseViewController.h */,
+				163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */,
+				163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1106,6 +1143,14 @@
 				16AB8BAD179EB8A40009411F /* left_menu_yinyuejiyin.png in Resources */,
 				16AB8BAF179EBA420009411F /* left_view_0.png in Resources */,
 				16AB8BB4179EBF590009411F /* LeftViewCell.xib in Resources */,
+				163EA98817A7F59E00EBD24C /* LoginChooseViewController.xib in Resources */,
+				163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */,
+				163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */,
+				163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */,
+				163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */,
+				163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */,
+				163EA99817A7F9B700EBD24C /* login_top_bg.png in Resources */,
+				163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1186,6 +1231,7 @@
 				16AB8BB3179EBF590009411F /* LeftViewCell.m in Sources */,
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
 				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
+				163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

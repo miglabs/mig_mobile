@@ -13,6 +13,8 @@
 
 #import "AppDelegate.h"
 #import "DDMenuController.h"
+
+#import "LoginChooseViewController.h"
 #import "MainMenuViewController.h"
 
 #import "PlayViewController.h"
@@ -58,6 +60,8 @@
     _bgImageView.image = (iPhone5) ? [UIImage imageWithName:@"left_menu_bg_5" type:@"png"] : [UIImage imageWithName:@"left_menu_bg_4" type:@"png"];
     
     //top user info
+    [_btnUserAvatar addTarget:self action:@selector(doGotoLoginChoose:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:_topUserInfoView];
     
     NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"left_menu_yinyuejiyin", @"MenuImageName", @"音乐基因", @"MenuText", nil];
@@ -94,6 +98,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)doGotoLoginChoose:(id)sender{
+    
+    PLog(@"doGotoLoginChoose...");
+    
+    LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginChooseViewController];
+    [nav setNavigationBarHidden:YES];
+    
+    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
+    [menuController setRootController:nav animated:YES];
 }
 
 #pragma mark - UITableView delegate

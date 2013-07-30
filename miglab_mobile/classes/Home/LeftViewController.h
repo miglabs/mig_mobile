@@ -21,4 +21,6 @@
 @property (nonatomic, retain) UITableView *menuTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
+-(IBAction)doGotoLoginChoose:(id)sender;
+
 @end
