@@ -146,9 +146,13 @@
 #define NotificationNameModeMusicFailed                     @"NotificationNameModeMusicFailed"
 
 //获取心绪地图
-#define HTTP_MODEMAP                                        [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/moodmap.fcgi"]
-#define NotificationNameModeMapSuccess                      @"NotificationNameModeMapSuccess"
-#define NotificationNameModeMapFailed                       @"NotificationNameModeMapFailed"
+#define HTTP_MOODMAP                                        [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/moodmap.fcgi"]
+#define NotificationNameMoodMapSuccess                      @"NotificationNameMoodMapSuccess"
+#define NotificationNameMoodMapFailed                       @"NotificationNameMoodMapFailed"
 
+//获取心绪类别名称
+#define HTTP_MOODPARENT                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/moodparent.fcgi"]
+#define NotificationNameMoodParentSuccess                   @"NotificationNameMoodParentSuccess"
+#define NotificationNameMoodParentFailed                    @"NotificationNameMoodParentFailed"
 
 #endif

@@ -16,6 +16,7 @@
 #import "Song.h"
 #import "Channel.h"
 #import "Word.h"
+#import "Mood.h"
 
 @implementation MigLabAPI
 
@@ -25,7 +26,7 @@
  */
 -(void)doAuthLogin:(NSString *)tusername password:(NSString *)tpassword{
     
-    NSLog(@"username: %@, password: %@", tusername, tpassword);
+    PLog(@"username: %@, password: %@", tusername, tpassword);
     
     if (!tusername || tusername.length == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUsernameIsNull object:nil userInfo:nil];
@@ -47,7 +48,7 @@
  */
 -(void)doSsoLoginFirst:(NSString *)tusername password:(NSString *)tpassword{
     
-    NSLog(@"LOGIN_SSO_SP_URL: %@", LOGIN_SSO_SP_URL);
+    PLog(@"LOGIN_SSO_SP_URL: %@", LOGIN_SSO_SP_URL);
     
     NSURL *url = [NSURL URLWithString:LOGIN_SSO_SP_URL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -57,7 +58,7 @@
         @try {
             
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"result: %@", result);
+            PLog(@"result: %@", result);
             
             NSArray *resultList = [result componentsSeparatedByString:@"?"];
             if ([resultList count] == 2) {
@@ -70,7 +71,7 @@
                 
             } else {
                 
-                NSLog(@"doSsoLoginFirst failure...");
+                PLog(@"doSsoLoginFirst failure...");
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
                 
             }
@@ -83,7 +84,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
         
     }];
@@ -100,7 +101,7 @@
 -(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam{
     
     NSString *loginSsoSecondUrl = ssoSecondUrl;
-    NSLog(@"loginSsoSecondUrl: %@", loginSsoSecondUrl);
+    PLog(@"loginSsoSecondUrl: %@", loginSsoSecondUrl);
     
     NSURL *url = [NSURL URLWithString:loginSsoSecondUrl];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -114,7 +115,7 @@
         @try {
             
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSLog(@"result: %@", result);
+            PLog(@"result: %@", result);
             NSArray *resultList = [result componentsSeparatedByString:@"?"];
             if ([resultList count] == 2) {
                 
@@ -125,7 +126,7 @@
                 
             } else {
                 
-                NSLog(@"doSsoLoginSecond failure...");
+                PLog(@"doSsoLoginSecond failure...");
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
                 
             }
@@ -138,7 +139,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
         
     }];
@@ -155,7 +156,7 @@
 -(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam{
     
     NSString *loginSsoThirdUrl = ssoThirdUrl;
-    NSLog(@"loginSsoThirdUrl: %@", loginSsoThirdUrl);
+    PLog(@"loginSsoThirdUrl: %@", loginSsoThirdUrl);
     
     NSURL *url = [NSURL URLWithString:loginSsoThirdUrl];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -170,7 +171,7 @@
             
             NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSString *strAccessToken = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            NSLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
+            PLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
             NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:strAccessToken, @"AccessToken", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicResult];
@@ -183,7 +184,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
         
     }];
@@ -200,7 +201,7 @@
 -(void)doGetUserInfo:(NSString *)tUserName accessToken:(NSString *)tAccessToken{
     
     NSString *getUserInfoUrl = [NSString stringWithFormat:@"%@?username=%@&token=%@", GET_USER_INFO, tUserName, tAccessToken];
-    NSLog(@"getUserInfoUrl: %@", getUserInfoUrl);
+    PLog(@"getUserInfoUrl: %@", getUserInfoUrl);
     
     NSURL *url = [NSURL URLWithString:getUserInfoUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -248,7 +249,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        NSLog(@"failure: %@", error);
+        PLog(@"failure: %@", error);
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoFailed object:nil userInfo:nil];
         
     }];
@@ -1336,6 +1337,9 @@
         
         @try {
             
+//            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            PLog(@"doGetModeMusic result: %@", result);
+            
             NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             int status = [[dicJson objectForKey:@"status"] intValue];
             
@@ -1404,32 +1408,51 @@
  <!--请求GET-->
  HTTP_MODEMAP
  */
--(void)doGetModeMap:(int)uid token:(NSString *)ttoken sid:(int)tsid {
+-(void)doGetMoodMap:(int)uid token:(NSString *)ttoken{
     
-    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d&sid=%d", HTTP_MODEMAP, ttoken, uid, tsid];
-    PLog(@"mode map url: %@", url);
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d", HTTP_MOODMAP, ttoken, uid];
+    PLog(@"get mood map url: %@", url);
     
-    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:HTTP_MODEMAP]];
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         @try {
             
-            NSDictionary* dicJson = JSON;
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             int status = [[dicJson objectForKey:@"status"] intValue];
             
             if(1 == status) {
                 
-                PLog(@"operation succeeded");
+                PLog(@"get mood map operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray *moodlist = [dicTemp objectForKey:@"mood"];
+                int moodcount = [moodlist count];
+                
+                NSMutableArray* moodInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<moodcount; i++) {
+                    
+                    Mood *mood = [Mood initWithNSDictionary:[moodlist objectAtIndex:i]];
+                    [mood log];
+                    
+                    [moodInfoList addObject:mood];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodMapSuccess object:nil userInfo:dicResult];
                 
             }
             else {
                 
-                PLog(@"operation failed");
+                PLog(@"get mood map operation failed");
                 
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodMapFailed object:nil userInfo:dicResult];
                 
             }
             
@@ -1439,15 +1462,15 @@
             NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodMapFailed object:nil userInfo:dicResult];
             
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         PLog(@"failure: %@", error);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameModeMapFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodMapFailed object:nil userInfo:nil];
         
     }];
     
@@ -1455,5 +1478,79 @@
     
 }
 
+/*
+ 获取心绪类别名称
+ <!--请求GET-->
+ HTTP_MOODPARENT
+ */
+-(void)doGetMoodParent:(int)uid token:(NSString *)ttoken{
+    
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d", HTTP_MOODPARENT, ttoken, uid];
+    PLog(@"get mood parent url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get mood parent operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray *moodlist = [dicTemp objectForKey:@"mood"];
+                int moodcount = [moodlist count];
+                
+                NSMutableArray* moodInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<moodcount; i++) {
+                    
+                    Mood *mood = [Mood initWithNSDictionary:[moodlist objectAtIndex:i]];
+                    [mood log];
+                    
+                    [moodInfoList addObject:mood];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:moodInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodParentSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get mood parent operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodParentFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodParentFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodParentFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
 
 @end

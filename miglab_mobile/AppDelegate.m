@@ -219,7 +219,14 @@
         
     }
     
-    [miglabAPI doGetModeMusic:@"10026" token:@"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC" wordid:@"1" mood:@"mm"];
+    NSString *testuserid = @"10026";
+    NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";
+    [miglabAPI doGetModeMusic:testuserid token:testaccesstoken wordid:@"1" mood:@"mm"];
+    
+    testuserid = @"10000";
+    testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2";
+    [miglabAPI doGetMoodMap:[testuserid intValue] token:testaccesstoken];
+    [miglabAPI doGetMoodParent:[testuserid intValue] token:testaccesstoken];
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

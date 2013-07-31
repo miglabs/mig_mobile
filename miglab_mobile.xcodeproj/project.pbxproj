@@ -154,6 +154,7 @@
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
 		187A5667179927D200221569 /* PlayBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A5666179927D200221569 /* PlayBodyView.m */; };
 		187A5669179927E800221569 /* PlayBodyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A5668179927E800221569 /* PlayBodyView.xib */; };
+		187EADD117A8B92000456A73 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = 187EADD017A8B92000456A73 /* Mood.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
 		188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
@@ -386,6 +387,8 @@
 		187A5665179927D100221569 /* PlayBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayBodyView.h; sourceTree = "<group>"; };
 		187A5666179927D200221569 /* PlayBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayBodyView.m; sourceTree = "<group>"; };
 		187A5668179927E800221569 /* PlayBodyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayBodyView.xib; sourceTree = "<group>"; };
+		187EADCF17A8B92000456A73 /* Mood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mood.h; sourceTree = "<group>"; };
+		187EADD017A8B92000456A73 /* Mood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mood.m; sourceTree = "<group>"; };
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
@@ -661,6 +664,8 @@
 				184648671793D4D500E83EBB /* AccountOf3rdParty.m */,
 				16ACD17317A163BC00ABB456 /* Word.h */,
 				16ACD17417A163BC00ABB456 /* Word.m */,
+				187EADCF17A8B92000456A73 /* Mood.h */,
+				187EADD017A8B92000456A73 /* Mood.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1232,6 +1237,7 @@
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
 				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
 				163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */,
+				187EADD117A8B92000456A73 /* Mood.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

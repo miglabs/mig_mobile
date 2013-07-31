@@ -125,7 +125,11 @@
 /*
  获取心绪地图
  */
--(void)doGetModeMap:(int)uid token:(NSString*)ttoken sid:(int)tsid;
+-(void)doGetMoodMap:(int)uid token:(NSString *)ttoken;
 
+/*
+ 获取心绪类别名称
+ */
+-(void)doGetMoodParent:(int)uid token:(NSString *)ttoken;
 
 @end
