@@ -99,6 +99,8 @@
 		16C10E1817A9638F00DA628D /* get_password_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1517A9638F00DA628D /* get_password_back.png */; };
 		16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1617A9638F00DA628D /* get_password_by_email.png */; };
 		16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1717A9638F00DA628D /* login_edit1_bg.png */; };
+		16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C10E1D17A9673300DA628D /* GetPasswordViewController.m */; };
+		16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */; };
 		16E77E1D178DA518006A24A6 /* PCustomPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */; };
 		16E77E1E178DA518006A24A6 /* PCustomPlayerNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E19178DA518006A24A6 /* PCustomPlayerNavigationView.m */; };
 		16E77E1F178DA518006A24A6 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E1B178DA518006A24A6 /* PlayViewController.m */; };
@@ -318,6 +320,9 @@
 		16C10E1517A9638F00DA628D /* get_password_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = get_password_back.png; sourceTree = "<group>"; };
 		16C10E1617A9638F00DA628D /* get_password_by_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = get_password_by_email.png; sourceTree = "<group>"; };
 		16C10E1717A9638F00DA628D /* login_edit1_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_edit1_bg.png; sourceTree = "<group>"; };
+		16C10E1C17A9673300DA628D /* GetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPasswordViewController.h; sourceTree = "<group>"; };
+		16C10E1D17A9673300DA628D /* GetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPasswordViewController.m; sourceTree = "<group>"; };
+		16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetPasswordViewController.xib; sourceTree = "<group>"; };
 		16E77E16178DA518006A24A6 /* PCustomPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerMenuView.h; sourceTree = "<group>"; };
 		16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerMenuView.m; sourceTree = "<group>"; };
 		16E77E18178DA518006A24A6 /* PCustomPlayerNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerNavigationView.h; sourceTree = "<group>"; };
@@ -970,6 +975,9 @@
 				163EA98417A7F59E00EBD24C /* LoginChooseViewController.h */,
 				163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */,
 				163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */,
+				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
+				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
+				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1197,6 +1205,7 @@
 				16C10E1817A9638F00DA628D /* get_password_back.png in Resources */,
 				16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */,
 				16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */,
+				16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,6 +1289,7 @@
 				163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */,
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
+				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

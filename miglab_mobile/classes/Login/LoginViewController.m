@@ -10,6 +10,7 @@
 #import "MigLabConfig.h"
 #import "SVProgressHUD.h"
 #import "MigLabAPI.h"
+#import "GetPasswordViewController.h"
 
 @interface LoginViewController ()
 
@@ -84,6 +85,15 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"loginSuccess...%@", result);
+    
+}
+
+-(IBAction)doForgetPassword:(id)sender{
+    
+    PLog(@"doForgetPassword...");
+    
+    GetPasswordViewController *getPasswordViewController = [[GetPasswordViewController alloc] initWithNibName:@"GetPasswordViewController" bundle:nil];
+    [self.navigationController pushViewController:getPasswordViewController animated:YES];
     
 }
 

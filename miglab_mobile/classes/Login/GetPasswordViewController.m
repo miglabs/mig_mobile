@@ -1,23 +1,18 @@
 //
-//  RegisterOfNickNameViewController.m
+//  GetPasswordViewController.m
 //  miglab_mobile
 //
 //  Created by pig on 13-7-31.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "RegisterOfNickNameViewController.h"
-#import "MigLabConfig.h"
-#import "MigLabAPI.h"
+#import "GetPasswordViewController.h"
 
-
-@interface RegisterOfNickNameViewController ()
+@interface GetPasswordViewController ()
 
 @end
 
-@implementation RegisterOfNickNameViewController
-
-@synthesize nicknameTextField = _nicknameTextField;
+@implementation GetPasswordViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,18 +33,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(IBAction)doBack:(id)sender{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
-
--(IBAction)doRegisterFinish:(id)sender{
-    
-    PLog(@"doRegisterFinish...");
-    
 }
 
 @end

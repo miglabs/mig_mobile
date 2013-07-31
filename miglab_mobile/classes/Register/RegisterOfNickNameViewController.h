@@ -10,6 +10,9 @@
 
 @interface RegisterOfNickNameViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
+
 -(IBAction)doBack:(id)sender;
+-(IBAction)doRegisterFinish:(id)sender;
 
 @end

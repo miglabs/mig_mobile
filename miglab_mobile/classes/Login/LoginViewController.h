@@ -17,5 +17,6 @@
 -(IBAction)doLoginAction:(id)sender;
 -(void)loginFailed:(NSNotification *)tNotification;
 -(void)loginSuccess:(NSNotification *)tNotification;
+-(IBAction)doForgetPassword:(id)sender;
 
 @end
