@@ -96,6 +96,9 @@
 		16C10E0B17A94F4200DA628D /* login_edit2_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0A17A94F4200DA628D /* login_edit2_bg.png */; };
 		16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C10E0D17A9565D00DA628D /* RegisterOfNickNameViewController.m */; };
 		16C10E1017A9565E00DA628D /* RegisterOfNickNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0E17A9565D00DA628D /* RegisterOfNickNameViewController.xib */; };
+		16C10E1817A9638F00DA628D /* get_password_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1517A9638F00DA628D /* get_password_back.png */; };
+		16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1617A9638F00DA628D /* get_password_by_email.png */; };
+		16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1717A9638F00DA628D /* login_edit1_bg.png */; };
 		16E77E1D178DA518006A24A6 /* PCustomPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */; };
 		16E77E1E178DA518006A24A6 /* PCustomPlayerNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E19178DA518006A24A6 /* PCustomPlayerNavigationView.m */; };
 		16E77E1F178DA518006A24A6 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E1B178DA518006A24A6 /* PlayViewController.m */; };
@@ -312,6 +315,9 @@
 		16C10E0C17A9565D00DA628D /* RegisterOfNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterOfNickNameViewController.h; sourceTree = "<group>"; };
 		16C10E0D17A9565D00DA628D /* RegisterOfNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterOfNickNameViewController.m; sourceTree = "<group>"; };
 		16C10E0E17A9565D00DA628D /* RegisterOfNickNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterOfNickNameViewController.xib; sourceTree = "<group>"; };
+		16C10E1517A9638F00DA628D /* get_password_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = get_password_back.png; sourceTree = "<group>"; };
+		16C10E1617A9638F00DA628D /* get_password_by_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = get_password_by_email.png; sourceTree = "<group>"; };
+		16C10E1717A9638F00DA628D /* login_edit1_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_edit1_bg.png; sourceTree = "<group>"; };
 		16E77E16178DA518006A24A6 /* PCustomPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerMenuView.h; sourceTree = "<group>"; };
 		16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerMenuView.m; sourceTree = "<group>"; };
 		16E77E18178DA518006A24A6 /* PCustomPlayerNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerNavigationView.h; sourceTree = "<group>"; };
@@ -698,6 +704,9 @@
 		163EA98A17A7F9B700EBD24C /* login */ = {
 			isa = PBXGroup;
 			children = (
+				16C10E1517A9638F00DA628D /* get_password_back.png */,
+				16C10E1617A9638F00DA628D /* get_password_by_email.png */,
+				16C10E1717A9638F00DA628D /* login_edit1_bg.png */,
 				16C10E0A17A94F4200DA628D /* login_edit2_bg.png */,
 				16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */,
 				16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */,
@@ -1185,6 +1194,9 @@
 				16C10E0917A94D3800DA628D /* register_finish_button.png in Resources */,
 				16C10E0B17A94F4200DA628D /* login_edit2_bg.png in Resources */,
 				16C10E1017A9565E00DA628D /* RegisterOfNickNameViewController.xib in Resources */,
+				16C10E1817A9638F00DA628D /* get_password_back.png in Resources */,
+				16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */,
+				16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

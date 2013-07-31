@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SinaWeibo.h"
-#import "SinaWeiboRequest.h"
 
-@interface LoginViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate>
+@interface LoginViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UITextField *emailTextField;
+@property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
+
+-(IBAction)doBack:(id)sender;
 -(IBAction)doLoginAction:(id)sender;
--(IBAction)doGotoRegisterAction:(id)sender;
--(IBAction)doSinaLoginAction:(id)sender;
+-(void)loginFailed:(NSNotification *)tNotification;
+-(void)loginSuccess:(NSNotification *)tNotification;
 
 @end
