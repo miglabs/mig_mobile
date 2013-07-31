@@ -7,9 +7,11 @@
 //
 
 #import "LoginViewController.h"
+#import "MigLabConfig.h"
 #import "RegisterViewController.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
+#import "MigLabAPI.h"
 
 @interface LoginViewController ()
 

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SinaWeibo.h"
+#import "SinaWeiboRequest.h"
 
-@interface LoginChooseViewController : UIViewController
+@interface LoginChooseViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate>
 
 @property (nonatomic, retain) IBOutlet UIImageView *bgImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnTopMenu;

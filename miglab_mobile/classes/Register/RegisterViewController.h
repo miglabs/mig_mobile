@@ -10,6 +10,10 @@
 
 @interface RegisterViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UITextField *emailTextField;
+@property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
+
+-(IBAction)doBack:(id)sender;
 -(IBAction)doRegisterAction:(id)sender;
 -(void)registerFailed:(NSNotification *)tNotification;
 -(void)registerSuccess:(NSNotification *)tNotification;
