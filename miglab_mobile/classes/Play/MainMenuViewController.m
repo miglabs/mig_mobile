@@ -447,8 +447,8 @@
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if (aaMusicPlayer.isMusicPlaying) {
             [aaMusicPlayer pause];
-            [self timerStop];
         }
+        [self timerStop];
         
         [self initSongInfo];
         
@@ -1119,7 +1119,7 @@
 -(void)doDownloadFailed:(NSDictionary *)dicResult{
     
     PLog(@"doDownloadFailed...%@", dicResult);
-    [SVProgressHUD showErrorWithStatus:@"下载歌曲失败"];
+    [SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
 }
 
 -(void)doDownloadProcess:(NSDictionary *)dicProcess{
@@ -1163,7 +1163,9 @@
 }
 
 -(void)doDownloadSuccess:(NSDictionary *)dicResult{
+    
     PLog(@"doDownloadSuccess...%@", dicResult);
+    [SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
@@ -1236,6 +1238,13 @@
         aaMusicPlayer.delegate = self;
         [aaMusicPlayer play];
         [self timerStart];
+        
+        [SVProgressHUD showSuccessWithStatus:@"开始播放"];
+        
+    } else {
+        
+        [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
+        
     }
     
 }
