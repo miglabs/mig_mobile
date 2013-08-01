@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+//source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
+typedef enum {
+    SourceTypeMiglab = 0,
+    SourceTypeSinaWeibo = 1,
+    SourceTypeTencentWeibo = 2,
+    SourceTypeDouBan = 3
+} SourceType;
+
 @interface MigLabAPI : NSObject
 
 /*
@@ -36,7 +44,7 @@
 /*
  注册用户信息
  */
--(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(int)tsource;
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype;
 
 /*
  生成游客信息

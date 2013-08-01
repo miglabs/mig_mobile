@@ -1,0 +1,17 @@
+IOS:
+
+ÐÂÀËÎ¢²©£º
+
+App Key£º
+    4082577001
+
+App Secret£º
+    ffceb9ce49142b68f18d84fa216ea350 
+
+QQ¿Õ¼ä£º
+
+¶¹°ê£º
+API Key   0765fe87cdc0cd0a1631fb976942671e
+Secret    1b45aca692b49482
+
+Î¢ÐÅ£ºwx8975da7e04f500b3
