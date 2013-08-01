@@ -186,6 +186,7 @@
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
+		18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 /* End PBXBuildFile section */
 
@@ -452,6 +453,8 @@
 		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
 		18E3472B17A27A57001C46C7 /* PPlayerManagerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPlayerManagerCenter.h; sourceTree = "<group>"; };
 		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
+		18E52FC317AA33F400B0E9B3 /* PLoginNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLoginNavigationView.h; sourceTree = "<group>"; };
+		18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLoginNavigationView.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -978,6 +981,8 @@
 				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
 				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
 				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
+				18E52FC317AA33F400B0E9B3 /* PLoginNavigationView.h */,
+				18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1290,6 +1295,7 @@
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
+				18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

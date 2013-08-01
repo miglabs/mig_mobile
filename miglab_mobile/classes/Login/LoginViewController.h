@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MigLabAPI.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
+
+@property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(IBAction)doBack:(id)sender;
 -(IBAction)doLoginAction:(id)sender;
 -(void)loginFailed:(NSNotification *)tNotification;
 -(void)loginSuccess:(NSNotification *)tNotification;
+-(void)getUserInfoFailed:(NSNotification *)tNotification;
+-(void)getUserInfoSuccess:(NSNotification *)tNotification;
 -(IBAction)doForgetPassword:(id)sender;
+-(IBAction)doHideKeyBoard:(id)sender;
 
 @end
