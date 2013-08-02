@@ -29,6 +29,7 @@
 -(IBAction)doQQLogin:(id)sender;
 -(IBAction)doDouBanLogin:(id)sender;
 -(IBAction)doMiglabLogin:(id)sender;
+-(void)doGotoMainMenuView;
 
 -(void)registerFailed:(NSNotification *)tNotification;
 -(void)registerSuccess:(NSNotification *)tNotification;

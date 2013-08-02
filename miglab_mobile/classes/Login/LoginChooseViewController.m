@@ -14,6 +14,8 @@
 #import "LoginViewController.h"
 #import "SVProgressHUD.h"
 #import "UserSessionManager.h"
+#import "PDatabaseManager.h"
+#import "MainMenuViewController.h"
 
 @interface LoginChooseViewController ()
 
@@ -129,6 +131,13 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"registerSuccess: %@", result);
+    
+    if ([UserSessionManager GetInstance].currentUser.source == SourceTypeSinaWeibo) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"使用新浪微博注册成功:)"];
+        
+    }
+
     
 }
 
