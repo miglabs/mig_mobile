@@ -49,7 +49,7 @@
     
     //register
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
     
     //user
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
@@ -90,6 +90,8 @@
     
     PLog(@"doSinaWeiboLogin...");
     
+    [self removeAuthData];
+    
     SinaWeibo *sinaweibo = [self sinaweibo];
     [sinaweibo logIn];
     
@@ -113,6 +115,19 @@
     
     LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginViewController animated:YES];
+    
+}
+
+-(void)doGotoMainMenuView{
+    
+    PLog(@"doGotoMainMenuView...");
+    
+    MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+    [nav setNavigationBarHidden:YES];
+    
+    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
+    [menuController setRootController:nav animated:YES];
     
 }
 
@@ -172,17 +187,13 @@
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    int accounttype = [UserSessionManager GetInstance].currentUser.source;
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:accounttype];
     
     //goto main view
-    MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-    [nav setNavigationBarHidden:YES];
-    
-    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
-    [menuController setRootController:nav animated:YES];
+    [self doGotoMainMenuView];
     
 }
 
@@ -192,6 +203,7 @@
     //sina weibo
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (appDelegate.sinaweibo) {
+        appDelegate.sinaweibo.delegate = self;
         return appDelegate.sinaweibo;
     }
     appDelegate.sinaweibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
@@ -276,6 +288,12 @@
     if ([request.url hasSuffix:@"users/show.json"])
     {
         PLog(@"didFailWithError...%@", request.url);
+        
+        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        [databaseManager deleteUserAccountByUserName:userid];
+        
     }
 }
 
@@ -290,10 +308,22 @@
             NSString *name = [result objectForKey:@"name"];
             NSString *screenName = [result objectForKey:@"screen_name"];
             
+            //写入缓存
             [UserSessionManager GetInstance].currentUser.username = name;
             [UserSessionManager GetInstance].currentUser.nickname = screenName;
+            [UserSessionManager GetInstance].isLoggedIn = YES;
             
+            NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+            NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+            int accounttype = [UserSessionManager GetInstance].currentUser.source;
+            
+            PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+            [databaseManager insertUserAccout:name password:name userid:userid accessToken:accesstoken accountType:accounttype];
+            
+            //检查服务端是否已经记录该帐号
             [_miglabAPI doGetUserInfo:name accessToken:[UserSessionManager GetInstance].accesstoken];
+            
+            [self doGotoMainMenuView];
             
         }//if
         

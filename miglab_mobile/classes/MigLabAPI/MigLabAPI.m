@@ -640,13 +640,13 @@
  <!--请求POST-->
  HTTP_PRESENTMUSIC
  */
--(void)doPresentMusic:(int)senduid touid:(int)ttouid token:(NSString*)ttoken sid:(long)tsid {
+-(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString *)ttoken sid:(long)tsid{
     
     PLog(@"present music url: %@", HTTP_PRESENTMUSIC);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_PRESENTMUSIC]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"senduid=%d&touid=%d&token=%@&songid=%ld", senduid, ttouid, ttoken, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"senduid=%@&touid=%@&token=%@&songid=%ld", senduid, ttouid, ttoken, tsid];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -703,13 +703,13 @@
  <!--请求POST-->
  HTTP_SHAREMUSIC
  */
--(void)doShareMusic:(int)uid token:(NSString *)ttoken sid:(long)tsid platform:(int)tplatform {
+-(void)doShareMusic:(NSString *)uid token:(NSString *)ttoken sid:(long)tsid platform:(int)tplatform{
     
     PLog(@"share music url: %@", HTTP_SHAREMUSIC);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_SHAREMUSIC]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%d&token=%@&songid=%ld&platform=%d", uid, ttoken, tsid, tplatform];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%ld&platform=%d", uid, ttoken, tsid, tplatform];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -767,7 +767,7 @@
  <!--请求POST-->
  HTTP_UPLOADMUSIC
  */
--(void)doUploadMusic:(int)uid token:(NSString *)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent {
+-(void)doUploadMusic:(NSString *)uid token:(NSString *)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent{
     
     PLog(@"upload music url:%@", HTTP_UPLOADMUSIC);
     
@@ -830,9 +830,9 @@
  <!--请求GET-->
  HTTP_NEARBYUSER
  */
--(void)doGetNearbyUser:(int)uid token:(NSString *)ttoken page:(int)tpage{
+-(void)doGetNearbyUser:(NSString *)uid token:(NSString *)ttoken page:(int)tpage{
     
-    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%d&page=%d", HTTP_NEARBYUSER,  ttoken, uid, tpage];
+    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@&page=%d", HTTP_NEARBYUSER,  ttoken, uid, tpage];
     PLog(@"get nearby user url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -890,9 +890,9 @@
  <!--请求GET-->
  HTTP_GETUSERLIST
  */
--(void)doGetListFromUser:(int)uid sid:(long)tsid token:(NSString *)ttoken {
+-(void)doGetListFromUser:(NSString *)uid sid:(long)tsid token:(NSString *)ttoken{
     
-    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%d&sid=%ld", HTTP_GETUSERLIST, ttoken, uid, tsid];
+    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@&sid=%ld", HTTP_GETUSERLIST, ttoken, uid, tsid];
     PLog(@"get list from user url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -953,9 +953,9 @@
  <!--请求GET-->
  HTTP_GETPLAYINGMUSIC
  */
--(void)doGetPlayingMusicFromUser:(int)uid token:(NSString *)ttoken begin:(int)tbegin page:(int)tpage {
+-(void)doGetPlayingMusicFromUser:(NSString *)uid token:(NSString *)ttoken begin:(int)tbegin page:(int)tpage{
     
-    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%d", HTTP_GETPLAYINGMUSIC, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@", HTTP_GETPLAYINGMUSIC, ttoken, uid];
     PLog(@"playing music url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -1415,9 +1415,9 @@
  <!--请求GET-->
  HTTP_MODEMAP
  */
--(void)doGetMoodMap:(int)uid token:(NSString *)ttoken{
+-(void)doGetMoodMap:(NSString *)uid token:(NSString *)ttoken{
     
-    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d", HTTP_MOODMAP, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@", HTTP_MOODMAP, ttoken, uid];
     PLog(@"get mood map url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -1490,9 +1490,9 @@
  <!--请求GET-->
  HTTP_MOODPARENT
  */
--(void)doGetMoodParent:(int)uid token:(NSString *)ttoken{
+-(void)doGetMoodParent:(NSString *)uid token:(NSString *)ttoken{
     
-    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%d", HTTP_MOODPARENT, ttoken, uid];
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@", HTTP_MOODPARENT, ttoken, uid];
     PLog(@"get mood parent url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

@@ -17,6 +17,7 @@
 @synthesize album = _album;
 @synthesize duration = _duration;
 @synthesize songurl = _songurl;
+@synthesize hqurl = _hqurl;
 @synthesize lrcurl = _lrcurl;
 @synthesize coverurl = _coverurl;
 @synthesize like = _like;
@@ -42,6 +43,7 @@
             song.album = [dict objectForKey:@"album"];
             song.duration = [dict objectForKey:@"time"];
             song.songurl = [dict objectForKey:@"url"];
+            song.hqurl = [dict objectForKey:@"hqurl"];
             song.lrcurl = [dict objectForKey:@"lrcurl"];
             song.coverurl = [dict objectForKey:@"pic"];
             song.like = [dict objectForKey:@"like"];
@@ -58,7 +60,7 @@
 
 -(void)log{
     
-    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _lrcurl, _coverurl, _like, _wordid);
+    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid);
     
 }
 

@@ -191,7 +191,15 @@
         
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *username = [UserSessionManager GetInstance].currentUser.username;
-        [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+        
+//        [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+        
+        //根据描述词获取歌曲 test
+        //随机心情词id
+        int rnd = (rand() % 6) + 1;
+        NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
+        [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
         
     } else {
         
@@ -203,10 +211,10 @@
     
     //test data
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:50];
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
     [_songList addObjectsFromArray:tempSongInfoList];
     
-    PLog(@"rand():%d, random(): %ld", rand(), random());
+    PLog(@"rand(): %d, random(): %ld", rand(), random());
     int songListCount = [_songList count];
     int rnd = rand() % songListCount;
     _currentSongIndex = rnd;
@@ -1081,8 +1089,12 @@
     
     PLog(@"getModeMusicSuccess...");
     NSDictionary *result = [tNotification userInfo];
-    NSMutableArray* songInfoList = [result objectForKey:@"result"];
+    NSMutableArray *songInfoList = [result objectForKey:@"result"];
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
+    [_songList addObjectsFromArray:tempsonglist];
+    
     [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
     
 }

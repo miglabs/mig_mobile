@@ -232,8 +232,8 @@
     /*
     testuserid = @"10000";
     testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2";
-    [miglabAPI doGetMoodMap:[testuserid intValue] token:testaccesstoken];
-    [miglabAPI doGetMoodParent:[testuserid intValue] token:testaccesstoken];
+    [miglabAPI doGetMoodMap:testuserid token:testaccesstoken];
+    [miglabAPI doGetMoodParent:testuserid token:testaccesstoken];
     */
     
     //

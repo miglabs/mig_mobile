@@ -37,9 +37,9 @@
         _db = [FMDatabase databaseWithPath:dbpath];
         [_db open];
         
-        [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text not null, userid integer, accesstoken text, accounttype integer, logintime integer)"];
+        [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text, userid integer, accesstoken text, accounttype integer, logintime integer)"];
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
-        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer)"];
+        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
         [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
@@ -188,11 +188,11 @@
 //根据userid删除制定账号
 -(void)deleteUserAccountByUserName:(NSString *)tusername{
     
-    NSString *sql = @"delete from USER_ACCOUNT where username = ? ";
+    NSString *sql = @"delete from USER_ACCOUNT where username = ? or userid = ? ";
     PLog(@"sql: %@", sql);
     
     [_db open];
-    [_db executeUpdate:sql, tusername];
+    [_db executeUpdate:sql, tusername, tusername];
     [_db close];
     
 }
@@ -276,7 +276,7 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -296,14 +296,14 @@
     NSDate *nowDate = [NSDate date];
     NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
     
-    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
     [_db close];
     
 }
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -341,7 +341,7 @@
         NSDate *nowDate = [NSDate date];
         NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
         
     }
     
@@ -368,6 +368,7 @@
         NSString *partist = [rs stringForColumn:@"artist"];
         NSString *pduration = [rs stringForColumn:@"duration"];
         NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *phqurl = [rs stringForColumn:@"hqurl"];
         NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
         NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
         NSString *plike = [rs stringForColumn:@"like"];
@@ -379,6 +380,7 @@
         psong.artist = partist;
         psong.duration = pduration;
         psong.songurl = psongurl;
+        psong.hqurl = phqurl;
         psong.lrcurl = plrcurl;
         psong.coverurl = pcoverurl;
         psong.like = plike;

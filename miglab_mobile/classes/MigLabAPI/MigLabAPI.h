@@ -82,32 +82,32 @@ typedef enum {
 /*
  赠送歌曲
  */
--(void)doPresentMusic:(int)senduid touid:(int)ttouid token:(NSString*)ttoken sid:(long)tsid;
+-(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
 
 /*
  分享歌曲
  */
--(void)doShareMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid platform:(int)tplatform;
+-(void)doShareMusic:(NSString *)uid token:(NSString*)ttoken sid:(long)tsid platform:(int)tplatform;
 
 /*
  上传本地歌曲信息
  */
--(void)doUploadMusic:(int)uid token:(NSString*)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent;
+-(void)doUploadMusic:(NSString *)uid token:(NSString*)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent;
 
 /*
  获取附近的人
  */
--(void)doGetNearbyUser:(int)uid token:(NSString*)ttoken page:(int)tpage;
+-(void)doGetNearbyUser:(NSString *)uid token:(NSString*)ttoken page:(int)tpage;
 
 /*
  获取某个用户歌单
  */
--(void)doGetListFromUser:(int)uid sid:(long)tsid token:(NSString*)ttoken;
+-(void)doGetListFromUser:(NSString *)uid sid:(long)tsid token:(NSString*)ttoken;
 
 /*
  获取用户正在听的歌曲
  */
--(void)doGetPlayingMusicFromUser:(int)uid token:(NSString*)ttoken begin:(int)tbegin page:(int)tpage;
+-(void)doGetPlayingMusicFromUser:(NSString *)uid token:(NSString*)ttoken begin:(int)tbegin page:(int)tpage;
 
 /*
  获取频道目录
@@ -138,12 +138,12 @@ typedef enum {
 /*
  获取心绪地图
  */
--(void)doGetMoodMap:(int)uid token:(NSString *)ttoken;
+-(void)doGetMoodMap:(NSString *)uid token:(NSString *)ttoken;
 
 /*
  获取心绪类别名称
  */
--(void)doGetMoodParent:(int)uid token:(NSString *)ttoken;
+-(void)doGetMoodParent:(NSString *)uid token:(NSString *)ttoken;
 
 /*
  提交用户当前状态

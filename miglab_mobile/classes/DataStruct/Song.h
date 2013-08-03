@@ -26,6 +26,7 @@ typedef enum{
 @property (nonatomic, retain) NSString *album;                          //专辑
 @property (nonatomic, retain) NSString *duration;                       //歌曲时长
 @property (nonatomic, retain) NSString *songurl;                        //歌曲网络地址
+@property (nonatomic, retain) NSString *hqurl;                          //高质量音频url
 @property (nonatomic, retain) NSString *lrcurl;                         //歌词地址
 @property (nonatomic, retain) NSString *coverurl;                       //专辑封面图片地址
 @property (nonatomic, retain) NSString *like;
