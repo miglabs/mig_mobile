@@ -34,24 +34,27 @@
 
 #if (0 == IS_DEBUG_SERVER)
 
+#define HTTP_SSO_DOMAIN                                     @"http://sso.miglab.com/"
 #define HTTP_DOMAIN                                         @"http://open.fm.miglab.com/"
 #define HTTP_API_DOMAIN                                     @"http://open.fm.miglab.com/"
 
 #elif (1 == IS_DEBUG_SERVER)
 
+#define HTTP_SSO_DOMAIN                                     @"http://60.191.220.135/"
 #define HTTP_DOMAIN                                         @"http://42.121.14.108/"
 #define HTTP_API_DOMAIN                                     @"http://42.121.14.108/"
 
 #elif (2 == IS_DEBUG_SERVER)
 
+#define HTTP_SSO_DOMAIN                                     @"http://60.191.220.135/"
 #define HTTP_DOMAIN                                         @"http://112.124.49.59/"
 #define HTTP_API_DOMAIN                                     @"http://112.124.49.59/"
 
 #endif
 
 //登陆
-//登陆第一次验证地址
-#define LOGIN_SSO_SP_URL                                    @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
+//登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
+#define LOGIN_SSO_SP_URL                                    [NSString stringWithFormat:@"%@%@",HTTP_SSO_DOMAIN,@"cgi-bin/sp.fcgi?sp"]
 //用户名为空
 #define NotificationNameUsernameIsNull                      @"NotificationNameUsernameIsNull"
 //密码为空
