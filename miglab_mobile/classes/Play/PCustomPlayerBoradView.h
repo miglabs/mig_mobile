@@ -21,6 +21,8 @@
 @property (nonatomic, retain) UIButton *btnPlayOrPause;
 @property (nonatomic, retain) UIButton *btnNext;                                    //下一首
 
+
 -(id)initPlayerBoradView:(CGRect)frame;
+-(id)initPlayerBoradMenuView:(CGRect)frame;
 
 @end

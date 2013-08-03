@@ -42,6 +42,7 @@
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
+        [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
         
         [_db close];
     }
@@ -200,6 +201,68 @@
 -(void)deleteAllUserAccount{
     
     NSString *sql = @"delete from USER_ACCOUNT";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+/*
+ 记录请求歌曲返回数据结果
+ 1.用于有效期内缓存数据，2.确认返回歌曲url和歌名是否一致
+ */
+-(NSString *)getSongInfoJsonData:(long)tTimeoutInterval{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from SONG_JSON_INFO order by createtime desc limit 1 "];
+    PLog(@"sql: %@", sql);
+    
+    NSDate *nowDate = [NSDate date];
+    long lnowtime = [nowDate timeIntervalSince1970];
+    
+    NSString *psongjsoninfo = nil;
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long pcreatetime = [rs longForColumn:@"createtime"];
+        if (pcreatetime + tTimeoutInterval >= lnowtime) {
+            psongjsoninfo = [rs stringForColumn:@"songjsoninfo"];
+        }
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return psongjsoninfo;
+}
+
+-(NSString *)getSongInfoJsonData{
+    return [self getSongInfoJsonData:24 * 3600];
+}
+
+-(void)insertSongInfoJson:(NSString *)tSongJson{
+    
+    NSDate *nowDate = [NSDate date];
+    long lnowtime = [nowDate timeIntervalSince1970];
+    NSNumber *numCreateTime = [NSNumber numberWithLong:lnowtime];
+    
+    NSString *sql = @"insert into SONG_JSON_INFO (jsonid, songjsoninfo, createtime) values (?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, numCreateTime, tSongJson, numCreateTime];
+    [_db close];
+    
+}
+
+-(void)deleteSongInfoJson{
+    
+    NSString *sql = @"delete from SONG_JSON_INFO";
     PLog(@"sql: %@", sql);
     
     [_db open];

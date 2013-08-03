@@ -37,6 +37,15 @@
 -(void)deleteAllUserAccount;
 
 /*
+ 记录请求歌曲返回数据结果
+ 1.用于有效期内缓存数据，2.确认返回歌曲url和歌名是否一致
+ */
+-(NSString *)getSongInfoJsonData:(long)tTimeoutInterval;
+-(NSString *)getSongInfoJsonData;
+-(void)insertSongInfoJson:(NSString *)tSongJson;
+-(void)deleteSongInfoJson;
+
+/*
  歌曲数据列表记录
  */
 -(void)insertSongInfo:(Song *)tsong;

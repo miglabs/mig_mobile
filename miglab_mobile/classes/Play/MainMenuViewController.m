@@ -275,8 +275,10 @@
         }
     }
     
-    UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_play" type:@"png"];
-    [_playerBoradView.btnPlayOrPause setImage:playOrPauseImage forState:UIControlStateNormal];
+    UIImage *playNorImage = [UIImage imageWithName:@"borad_menu_play_nor" type:@"png"];
+    UIImage *playSelImage = [UIImage imageWithName:@"borad_menu_play_sel" type:@"png"];
+    [_playerBoradView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+    [_playerBoradView.btnPlayOrPause setImage:playSelImage forState:UIControlStateHighlighted];
     
 }
 
@@ -285,8 +287,10 @@
     [self timerStop];
     _playerTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
     
-    UIImage *playOrPauseImage = [UIImage imageWithName:@"borad_menu_stop" type:@"png"];
-    [_playerBoradView.btnPlayOrPause setImage:playOrPauseImage forState:UIControlStateNormal];
+    UIImage *pauseNorImage = [UIImage imageWithName:@"borad_menu_stop_nor" type:@"png"];
+    UIImage *pauseSelImage = [UIImage imageWithName:@"borad_menu_stop_sel" type:@"png"];
+    [_playerBoradView.btnPlayOrPause setImage:pauseNorImage forState:UIControlStateNormal];
+    [_playerBoradView.btnPlayOrPause setImage:pauseSelImage forState:UIControlStateHighlighted];
     //设置锁屏显示
     [self configNowPlayingInfoCenter];
     
