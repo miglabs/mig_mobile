@@ -15,7 +15,11 @@
 #define PLog(format, ...)
 #endif
 
+//友盟
 #define UMENG_APPKEY                        @"51f338a356240baf3a0723a0"
+
+//友盟统计渠道定义
+#define APP_CHANNEL_ID                      @"TEST"
 
 #define SINA_WEIBO_APP_KEY                  @"1468499793"
 #define SINA_WEIBO_APP_SECRET               @"ce6dd4ab9ae4f14aa7982a43453cc173"
