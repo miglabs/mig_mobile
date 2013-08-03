@@ -10,6 +10,7 @@
 #import "LeftViewCell.h"
 #import "UIImage+PImageCategory.h"
 #import "PCommonUtil.h"
+#import "UserSessionManager.h"
 
 #import "AppDelegate.h"
 #import "DDMenuController.h"
@@ -91,6 +92,17 @@
     descImageView.backgroundColor = [UIColor clearColor];
     descImageView.image = [UIImage imageWithName:@"left_menu_migfm" type:@"png"];
     [self.view addSubview:descImageView];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    NSURL *avatarUrl = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
+    NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
+//    _btnUserAvatar.imageURL = avatarUrl;
+//    _lblUserNickName.text = nickname;
     
 }
 

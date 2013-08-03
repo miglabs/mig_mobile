@@ -224,8 +224,7 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoSuccess object:nil userInfo:dicResult];
                 
-            }
-            else {
+            } else {
                 
                 PLog(@"get user information operation failed");
                 
@@ -521,13 +520,13 @@
  <!--请求POST-->
  HTTP_ADDFAVORITE
  */
--(void)doAddFavorite:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
+-(void)doCollectSong:(NSString *)ttoken uid:(NSString *)tuid songid:(long)tsongid{
     
-    PLog(@"add favorite url: %@", HTTP_ADDFAVORITE);
+    PLog(@"collect song url: %@", HTTP_COLLECTSONG);
     
-    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDFAVORITE]];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COLLECTSONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsongid];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -542,16 +541,15 @@
             if(1 == status) {
                 
                 PLog(@"doAddFavorite operation succeed");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteSuccess object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongSuccess object:nil userInfo:nil];
                 
-            }
-            else {
+            } else {
                 
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 PLog(@"doAddFavorite operation failed: %@", msg);
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:dicResult];
                 
             }
             
@@ -561,7 +559,7 @@
             NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:dicResult];
             
         }
         
@@ -569,7 +567,7 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
         PLog(@"doAddFavorite failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddFavoriteFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:nil];
         
     }];
     
@@ -1247,6 +1245,8 @@
 
 /*
  获取场景词描述
+ <!--请求GET-->
+ HTTP_MOODSCENE
  */
 -(void)doGetWorkOfScene:(NSString*)uid token:(NSString*)ttoken{
     
@@ -1339,6 +1339,7 @@
             
 //            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //            PLog(@"doGetModeMusic result: %@", result);
+//            NSData *tempData = [result dataUsingEncoding:NSUTF8StringEncoding];
             
             NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             int status = [[dicJson objectForKey:@"status"] intValue];
@@ -1346,6 +1347,11 @@
             if(1 == status) {
                 
                 PLog(@"get mode music operation succeeded");
+                
+                int tempwordid = 0;
+                if ([tmood isEqualToString:@"mm"]) {
+                    tempwordid = [twordid intValue];
+                }
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
                 NSArray *songlist = [dicTemp objectForKey:@"song"];
@@ -1355,6 +1361,7 @@
                 for (int i=0; i<songcount; i++) {
                     
                     Song *song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    song.wordid = tempwordid;
                     [song log];
                     
                     [songInfoList addObject:song];
@@ -1546,6 +1553,69 @@
         PLog(@"failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameMoodParentFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 提交用户当前状态
+ <!--请求POST-->
+ HTTP_ADDMOODRECORD
+ */
+-(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid{
+    
+    PLog(@"add mood record url: %@", HTTP_ADDMOODRECORD);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDMOODRECORD]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&wordid=%d&songid=%lld", ttoken, uid, twordid, tsongid];
+    PLog(@"add mood record body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"add mood record operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddMoodRecordSuccess object:nil userInfo:nil];
+            } else {
+                
+                PLog(@"add mood record operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddMoodRecordFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddMoodRecordFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddMoodRecordFailed object:nil userInfo:nil];
         
     }];
     

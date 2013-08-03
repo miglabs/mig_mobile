@@ -53,6 +53,7 @@
 @synthesize currentSongIndex = _currentSongIndex;
 @synthesize currentSong = _currentSong;
 @synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
+@synthesize hasAddMoodRecord = _hasAddMoodRecord;
 
 @synthesize miglabAPI = _miglabAPI;
 
@@ -64,13 +65,83 @@
         _isPlayViewShowing = NO;
         _checkUpdatePlayProcess = 0;
         
+        //doGetGuestInfo
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoFailed:) name:NotificationNameGetGuestFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoSuccess:) name:NotificationNameGetGuestSuccess object:nil];
+        
+        //login
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:NotificationNameLoginFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
+        
+        //user
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
+        
+        //getChannel
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelFailed:) name:NotificationNameGetChannelFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelSuccess:) name:NotificationNameGetChannelSuccess object:nil];
+        
+        //getMusicFromChannel
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelFailed:) name:NotificationNameGetChannelMusicFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelSuccess:) name:NotificationNameGetChannelMusicSuccess object:nil];
+        
+        //getModeMusic
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
+        
+        //doAddBlacklist
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistFailed:) name:NotificationNameAddBlacklistFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistSuccess:) name:NotificationNameAddBlacklistSuccess object:nil];
+        
+        //doCollectSong
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
+        
+        //doAddMoodRecord
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMoodRecordFailed:) name:NotificationNameAddMoodRecordFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMoodRecordSuccess:) name:NotificationNameAddMoodRecordSuccess object:nil];
+        
     }
     return self;
 }
 
 -(void)dealloc{
     
+    //doGetGuestInfo
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetGuestFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetGuestSuccess object:nil];
     
+    //login
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginSuccess object:nil];
+    
+    //user
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoSuccess object:nil];
+    
+    //getChannel
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetChannelFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetChannelSuccess object:nil];
+    
+    //getMusicFromChannel
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetChannelMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetChannelMusicSuccess object:nil];
+    
+    //getModeMusic
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicSuccess object:nil];
+    
+    //doAddBlacklist
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddBlacklistFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddBlacklistSuccess object:nil];
+    
+    //doCollectSong
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    //doAddMoodRecord
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddMoodRecordFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddMoodRecordSuccess object:nil];
     
 }
 
@@ -83,38 +154,6 @@
     
     //screen height
     PLog(@"kMainScreenHeight: %f", kMainScreenHeight);
-    
-    //doGetGuestInfo
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoFailed:) name:NotificationNameGetGuestFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoSuccess:) name:NotificationNameGetGuestSuccess object:nil];
-    
-    //login
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:NotificationNameLoginFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
-    
-    //user
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
-    
-    //getChannel
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelFailed:) name:NotificationNameGetChannelFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getChannelSuccess:) name:NotificationNameGetChannelSuccess object:nil];
-    
-    //getMusicFromChannel
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelFailed:) name:NotificationNameGetChannelMusicFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicFromChannelSuccess:) name:NotificationNameGetChannelMusicSuccess object:nil];
-    
-    //getModeMusic
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
-    
-    //doAddBlacklist
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistFailed:) name:NotificationNameAddBlacklistFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistSuccess:) name:NotificationNameAddBlacklistSuccess object:nil];
-    
-    //doAddFavorite
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFavoriteFailed:) name:NotificationNameAddFavoriteFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addFavoriteSuccess:) name:NotificationNameAddFavoriteSuccess object:nil];
     
     
     //构造场景选择页面
@@ -224,7 +263,7 @@
     [self becomeFirstResponder];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if (aaMusicPlayer.isMusicPlaying) {
+    if ([aaMusicPlayer isMusicPlaying]) {
         
         _currentSong = aaMusicPlayer.song;
         
@@ -406,7 +445,7 @@
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-    [_miglabAPI doAddFavorite:accesstoken uid:userid sid:_currentSong.songid];
+    [_miglabAPI doCollectSong:accesstoken uid:userid songid:_currentSong.songid];
     
 }
 
@@ -425,7 +464,7 @@
     [self stopDownload];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if (aaMusicPlayer.isMusicPlaying) {
+    if ([aaMusicPlayer isMusicPlaying]) {
         [aaMusicPlayer pause];
         [self timerStop];
     } else if (aaMusicPlayer.playerDestoried) {
@@ -449,7 +488,7 @@
         [self stopDownload];
         
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-        if (aaMusicPlayer.isMusicPlaying) {
+        if ([aaMusicPlayer isMusicPlaying]) {
             [aaMusicPlayer pause];
         }
         [self timerStop];
@@ -915,6 +954,8 @@
     User *guest = [result objectForKey:@"result"];
     [guest log];
     
+    [UserSessionManager GetInstance].currentUser = guest;
+    
     [_miglabAPI doAuthLogin:guest.username password:guest.password];
     
 }
@@ -964,6 +1005,7 @@
     
     user.password = [UserSessionManager GetInstance].currentUser.password;
     [UserSessionManager GetInstance].currentUser = user;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
@@ -976,10 +1018,10 @@
     [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
     //根据描述词获取歌曲 test
-    [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:@"1" mood:@"mm"];
-    
-    //获取频道
-//    [_miglabAPI doGetChannel:userid token:accesstoken num:10];
+    //随机心情词id
+    int rnd = (rand() % 6) + 1;
+    NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
+    [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
     
 }
 
@@ -1053,12 +1095,20 @@
     [SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
 }
 
--(void)addFavoriteFailed:(NSNotification *)tNotification{
+-(void)collectSongFailed:(NSNotification *)tNotification{
     [SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
 }
 
--(void)addFavoriteSuccess:(NSNotification *)tNotification{
+-(void)collectSongSuccess:(NSNotification *)tNotification{
     [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
+}
+
+-(void)addMoodRecordFailed:(NSNotification *)tNotification{
+    [SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
+}
+
+-(void)addMoodRecordSuccess:(NSNotification *)tNotification{
+    [SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
 }
 
 // end 登录，获取用户资料
@@ -1102,7 +1152,7 @@
         } else {
             
             PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-            if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+            if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
@@ -1123,6 +1173,11 @@
 -(void)doDownloadFailed:(NSDictionary *)dicResult{
     
     PLog(@"doDownloadFailed...%@", dicResult);
+    
+    NSString *localkey = [dicResult objectForKey:@"LocalKey"];
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteSongInfo:[localkey longLongValue]];
+    
     [SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
 }
 
@@ -1154,7 +1209,7 @@
         } else {
             
             PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-            if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+            if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
@@ -1172,7 +1227,7 @@
     [SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if (!aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+    if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
         _shouldStartPlayAfterDownloaded = NO;
         [self initAndStartPlayer];
     }
@@ -1231,7 +1286,7 @@
     }
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if (aaMusicPlayer && aaMusicPlayer.isMusicPlaying) {
+    if (aaMusicPlayer && [aaMusicPlayer isMusicPlaying]) {
         return;
     }
     
@@ -1242,11 +1297,14 @@
         aaMusicPlayer.delegate = self;
         [aaMusicPlayer play];
         [self timerStart];
+        _hasAddMoodRecord = NO;
         
         [SVProgressHUD showSuccessWithStatus:@"开始播放"];
         
     } else {
         
+        [aaMusicPlayer playerDestory];
+        _shouldStartPlayAfterDownloaded = YES;
         [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
         
     }
@@ -1333,6 +1391,22 @@
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     
     [_cdOfSongView updateProcess:playProcess];
+    
+    //大于10s，则发请求记录
+    if (currentTime > 10 && !_hasAddMoodRecord) {
+        _hasAddMoodRecord = YES;
+        [self doAddMoodRecord];
+    }
+    
+}
+
+//记录当前心情歌曲
+-(void)doAddMoodRecord{
+    
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    [_miglabAPI doAddMoodRecord:userid token:accesstoken wordid:_currentSong.wordid songid:_currentSong.songid];
     
 }
 

@@ -26,7 +26,7 @@
 /*
  * 用于切换不同域名地址
  */
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 
 #if (0 == IS_DEBUG_SERVER)
 
@@ -83,10 +83,15 @@
 #define NotificationNameGetDefaultMusicSuccess              @"NotificationNameGetDefaultMusicSuccess"
 #define NotificationNameGetDefaultMusicFailed               @"NotificationNameGetDefaultMusicFailed"
 
-//添加收藏
-#define HTTP_ADDFAVORITE                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
-#define NotificationNameAddFavoriteSuccess                  @"NotificationNameAddFavoriteSuccess"
-#define NotificationNameAddFavoriteFailed                   @"NotificationNameAddFavoriteFailed"
+//添加歌曲收藏
+#define HTTP_COLLECTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
+#define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
+#define NotificationNameCollectSongFailed                   @"NotificationNameCollectSongFailed"
+
+//取消歌曲收藏
+#define HTTP_CANCELCOLLECTEDSONG                            [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/delcltsong.fcgi"]
+#define NotificationNameCancelCollectedSongSuccess          @"NotificationNameCancelCollectedSongSuccess"
+#define NotificationNameCancelCollectedSongFailed           @"NotificationNameCancelCollectedSongFailed"
 
 //添加黑名单
 #define HTTP_ADDBLACKLIST                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hatsong.fcgi"]
@@ -154,5 +159,10 @@
 #define HTTP_MOODPARENT                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/moodparent.fcgi"]
 #define NotificationNameMoodParentSuccess                   @"NotificationNameMoodParentSuccess"
 #define NotificationNameMoodParentFailed                    @"NotificationNameMoodParentFailed"
+
+//提交用户当前状态
+#define HTTP_ADDMOODRECORD                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/moodrcd.fcgi"]
+#define NotificationNameAddMoodRecordSuccess                @"NotificationNameAddMoodRecordSuccess"
+#define NotificationNameAddMoodRecordFailed                 @"NotificationNameAddMoodRecordFailed"
 
 #endif

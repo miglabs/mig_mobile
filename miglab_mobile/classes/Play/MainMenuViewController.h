@@ -54,6 +54,7 @@
 @property (nonatomic, assign) int currentSongIndex;
 @property (nonatomic, retain) Song *currentSong;
 @property BOOL shouldStartPlayAfterDownloaded;
+@property BOOL hasAddMoodRecord;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
@@ -88,8 +89,10 @@
 -(void)getModeMusicSuccess:(NSNotification *)tNotification;
 -(void)addBlacklistFailed:(NSNotification *)tNotification;
 -(void)addBlacklistSuccess:(NSNotification *)tNotification;
--(void)addFavoriteFailed:(NSNotification *)tNotification;
--(void)addFavoriteSuccess:(NSNotification *)tNotification;
+-(void)collectSongFailed:(NSNotification *)tNotification;
+-(void)collectSongSuccess:(NSNotification *)tNotification;
+-(void)addMoodRecordFailed:(NSNotification *)tNotification;
+-(void)addMoodRecordSuccess:(NSNotification *)tNotification;
 
 //下载歌曲
 -(void)downloadFailed:(NSNotification *)tNotification;

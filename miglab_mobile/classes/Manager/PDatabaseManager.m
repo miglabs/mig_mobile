@@ -39,7 +39,7 @@
         
         [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text not null, userid integer, accesstoken text, accounttype integer, logintime integer)"];
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
-        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, createtime integer)"];
+        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
         [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
@@ -276,7 +276,7 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -292,17 +292,18 @@
     }
     
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+    NSNumber *numWordId = [NSNumber numberWithInt:tsong.wordid];
     NSDate *nowDate = [NSDate date];
     NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
     
-    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numCreateTime];
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
     [_db close];
     
 }
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -336,10 +337,11 @@
         NSLog(@"i: %d", i);
         
         NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+        NSNumber *numWordId = [NSNumber numberWithInt:tsong.wordid];
         NSDate *nowDate = [NSDate date];
         NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numCreateTime];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
         
     }
     
@@ -369,6 +371,7 @@
         NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
         NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
         NSString *plike = [rs stringForColumn:@"like"];
+        int pwordid = [rs intForColumn:@"wordid"];
         
         Song *psong = [[Song alloc] init];
         psong.songid = psongid;
@@ -379,6 +382,7 @@
         psong.lrcurl = plrcurl;
         psong.coverurl = pcoverurl;
         psong.like = plike;
+        psong.wordid = pwordid;
         psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
         psong.songCachePath = [songManager getSongCachePath:psong];
         [psong log];

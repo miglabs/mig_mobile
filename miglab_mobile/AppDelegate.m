@@ -128,7 +128,7 @@
             [UserSessionManager GetInstance].isLoggedIn = YES;
             
         } else {
-            
+            /*
             [databaseManager insertUserAccout:@"pig" password:@"pig"];
             
             User *user = [[User alloc] init];
@@ -137,7 +137,7 @@
             [UserSessionManager GetInstance].currentUser = user;
             
             PLog(@"username: %@, password: %@", user.username, user.password);
-            
+            */
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
@@ -215,19 +215,26 @@
         [miglabAPI doGetChannel:userid token:accesstoken num:10];
         [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
         
-        [miglabAPI doAddFavorite:accesstoken uid:userid sid:11741];
+        [miglabAPI doCollectSong:accesstoken uid:userid songid:11741];
         [miglabAPI doAddBlacklist:accesstoken uid:userid sid:99993];
         
+        //获取频道
+        [miglabAPI doGetChannel:userid token:accesstoken num:10];
     }
     
+    /*
     NSString *testuserid = @"10026";
     NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";
     [miglabAPI doGetModeMusic:testuserid token:testaccesstoken wordid:@"1" mood:@"mm"];
+    [miglabAPI doAddMoodRecord:testuserid token:testaccesstoken wordid:@"1" songid:99993];
+    */
     
+    /*
     testuserid = @"10000";
     testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2";
     [miglabAPI doGetMoodMap:[testuserid intValue] token:testaccesstoken];
     [miglabAPI doGetMoodParent:[testuserid intValue] token:testaccesstoken];
+    */
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

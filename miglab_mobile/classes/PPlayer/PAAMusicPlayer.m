@@ -175,8 +175,16 @@
 -(BOOL)isMusicPlaying{
     
     if (_avAudioPlayer == nil) {
+        PLog(@"_avAudioPlayer is nil...");
         return NO;
     }
+    
+    if (_avAudioPlayer.playing) {
+        PLog(@"_avAudioPlayer is playing...");
+    } else {
+        PLog(@"_avAudioPlayer is not playing...");
+    }
+    
     return _avAudioPlayer.playing;
 }
 

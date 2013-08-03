@@ -20,6 +20,7 @@
 @synthesize lrcurl = _lrcurl;
 @synthesize coverurl = _coverurl;
 @synthesize like = _like;
+@synthesize wordid = _wordid;
 
 @synthesize songCachePath = _songCachePath;
 
@@ -57,7 +58,7 @@
 
 -(void)log{
     
-    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), lrcurl(%@), coverurl(%@), like(%@)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _lrcurl, _coverurl, _like);
+    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _lrcurl, _coverurl, _like, _wordid);
     
 }
 

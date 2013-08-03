@@ -273,7 +273,7 @@
             
         } else {
             
-            if (!_aaMusicPlayer.isMusicPlaying && _shouldStartPlayAfterDownloaded) {
+            if (![_aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
@@ -324,7 +324,7 @@
 
 -(void)initAndStartPlayer{
     
-    if (_aaMusicPlayer && _aaMusicPlayer.isMusicPlaying) {
+    if (_aaMusicPlayer && [_aaMusicPlayer isMusicPlaying]) {
         return;
     }
     
@@ -591,7 +591,7 @@
         
         [self stopDownload];
         
-        if (_aaMusicPlayer.isMusicPlaying) {
+        if ([_aaMusicPlayer isMusicPlaying]) {
             [_aaMusicPlayer pause];
         }
         

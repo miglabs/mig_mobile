@@ -238,7 +238,7 @@
     //[migapi doGetChannel:uid token:token num:5];
     //[migapi doGetMusicFromChannel:uid token:token channel:17];
    // [migapi doGetModeScene:uid token:token decword:@"mood"]; //faile
-    [migapi doGetModeMusic:uid token:token wordid:@"5" mood:@"mood"];
+//    [migapi doGetModeMusic:uid token:token wordid:@"5" mood:@"mood"];
 }
 
 //

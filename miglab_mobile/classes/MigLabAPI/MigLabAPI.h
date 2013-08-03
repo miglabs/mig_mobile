@@ -67,7 +67,12 @@ typedef enum {
 /*
  收藏歌曲
  */
--(void)doAddFavorite:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
+-(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
+
+/*
+ 取消歌曲收藏
+ */
+-(void)doCancelCollectedSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
 
 /*
  歌曲拉黑
@@ -139,5 +144,10 @@ typedef enum {
  获取心绪类别名称
  */
 -(void)doGetMoodParent:(int)uid token:(NSString *)ttoken;
+
+/*
+ 提交用户当前状态
+ */
+-(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid;
 
 @end
