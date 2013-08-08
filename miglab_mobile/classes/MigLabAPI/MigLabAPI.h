@@ -150,4 +150,14 @@ typedef enum {
  */
 -(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid;
 
+/*
+ 设置用户位置 (2013-7-22)
+ */
+-(void)doSetUserPos:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation;
+
+/*
+ 查找附近的人 (2013-7-22)
+ */
+-(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
+
 @end

@@ -160,6 +160,7 @@
 		16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */; };
 		16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575CE179590BA00277308 /* borad_menu_like_sel.png */; };
 		180271EF178C019800CA9488 /* Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180271EE178C019800CA9488 /* Icon.jpg */; };
+		18275F2E17B3876400033AFF /* NearbyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18275F2D17B3876400033AFF /* NearbyUser.m */; };
 		1830B52E179D129200314A28 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830B52D179D129200314A28 /* NSData+AES256.m */; };
 		1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834106017969FC000EAAFFC /* MainMenuViewController.m */; };
 		1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1834106117969FC000EAAFFC /* MainMenuViewController.xib */; };
@@ -407,6 +408,8 @@
 		16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerBoradView.m; sourceTree = "<group>"; };
 		16F575CE179590BA00277308 /* borad_menu_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borad_menu_like_sel.png; sourceTree = "<group>"; };
 		180271EE178C019800CA9488 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
+		18275F2C17B3876400033AFF /* NearbyUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyUser.h; sourceTree = "<group>"; };
+		18275F2D17B3876400033AFF /* NearbyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyUser.m; sourceTree = "<group>"; };
 		1830B52C179D129200314A28 /* NSData+AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES256.h"; sourceTree = "<group>"; };
 		1830B52D179D129200314A28 /* NSData+AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES256.m"; sourceTree = "<group>"; };
 		1834105F17969FC000EAAFFC /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -727,6 +730,8 @@
 				16ACD17417A163BC00ABB456 /* Word.m */,
 				187EADCF17A8B92000456A73 /* Mood.h */,
 				187EADD017A8B92000456A73 /* Mood.m */,
+				18275F2C17B3876400033AFF /* NearbyUser.h */,
+				18275F2D17B3876400033AFF /* NearbyUser.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1360,6 +1365,7 @@
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
 				18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */,
+				18275F2E17B3876400033AFF /* NearbyUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

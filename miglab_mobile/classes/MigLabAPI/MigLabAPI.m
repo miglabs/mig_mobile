@@ -17,6 +17,7 @@
 #import "Channel.h"
 #import "Word.h"
 #import "Mood.h"
+#import "NearbyUser.h"
 
 @implementation MigLabAPI
 
@@ -1616,6 +1617,147 @@
         PLog(@"failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddMoodRecordFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 设置用户位置 (2013-7-22)
+ HTTP_SETUSERPOS
+ POST
+ */
+-(void)doSetUserPos:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation{
+    
+    PLog(@"set user pos url: %@", HTTP_SETUSERPOS);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_SETUSERPOS]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&location=%@", ttoken, uid, tlocation];
+    PLog(@"set user pos body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"set user pos operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSetUserPosSuccess object:nil userInfo:nil];
+            } else {
+                
+                PLog(@"set user pos operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSetUserPosFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSetUserPosFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSetUserPosFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 查找附近的人 (2013-7-22)
+ HTTP_SEARCHNEARBY
+ GET
+ */
+-(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius{
+    
+    NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&location=%@&radius=%d", HTTP_SEARCHNEARBY, ttoken, uid, tlocation, tradius];
+    PLog(@"search nearby url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+//            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            PLog(@"result: %@", result);
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"search nearby operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray *nearuserlist = [dicTemp objectForKey:@"nearUser"];
+                int nearusercount = [nearuserlist count];
+                
+                NSMutableArray *nearbyUserInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<nearusercount; i++) {
+                    
+                    NearbyUser *nearbyuser = [NearbyUser initWithNSDictionary:[nearuserlist objectAtIndex:i]];
+                    [nearbyuser log];
+                    
+                    [nearbyUserInfoList addObject:nearbyuser];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:nearbyUserInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSearchNearbySuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"search nearby operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSearchNearbyFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSearchNearbyFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSearchNearbyFailed object:nil userInfo:nil];
         
     }];
     

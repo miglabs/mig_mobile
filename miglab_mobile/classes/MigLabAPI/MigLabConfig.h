@@ -172,4 +172,14 @@
 #define NotificationNameAddMoodRecordSuccess                @"NotificationNameAddMoodRecordSuccess"
 #define NotificationNameAddMoodRecordFailed                 @"NotificationNameAddMoodRecordFailed"
 
+//设置用户位置 (2013-7-22)
+#define HTTP_SETUSERPOS                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/setuserpos.fcgi"]
+#define NotificationNameSetUserPosSuccess                   @"NotificationNameSetUserPosSuccess"
+#define NotificationNameSetUserPosFailed                    @"NotificationNameSetUserPosFailed"
+
+//查找附近的人 (2013-7-22)
+#define HTTP_SEARCHNEARBY                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/searchnearby.fcgi"]
+#define NotificationNameSearchNearbySuccess                 @"NotificationNameSearchNearbySuccess"
+#define NotificationNameSearchNearbyFailed                  @"NotificationNameSearchNearbyFailed"
+
 #endif

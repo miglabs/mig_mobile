@@ -227,6 +227,8 @@
     NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";
     [miglabAPI doGetModeMusic:testuserid token:testaccesstoken wordid:@"1" mood:@"mm"];
     [miglabAPI doAddMoodRecord:testuserid token:testaccesstoken wordid:@"1" songid:99993];
+    [miglabAPI doSetUserPos:testuserid token:testaccesstoken location:@"30.30022,120.127393"];
+    [miglabAPI doSearchNearby:testuserid token:testaccesstoken location:@"30.30022,120.127393" radius:1000];
     */
     
     /*
