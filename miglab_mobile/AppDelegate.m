@@ -19,7 +19,7 @@
 #import "MainMenuViewController.h"
 
 #import "HomeViewController.h"
-#import "User.h"
+#import "PUser.h"
 #import "UserSessionManager.h"
 #import "SinaWeibo.h"
 
@@ -118,7 +118,7 @@
         AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
         if (lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
             
-            User *user = [[User alloc] init];
+            PUser *user = [[PUser alloc] init];
             user.username = lastAccount.username;
             user.password = lastAccount.password;
             user.userid = lastAccount.accountid;

@@ -142,7 +142,7 @@
     NSDictionary* result = [tNotification userInfo];
     NSLog(@"getUserInfoSuccess...");
     
-    User* user = [result objectForKey:@"result"];
+    PUser* user = [result objectForKey:@"result"];
     [user log];
     [UserSessionManager GetInstance].currentUser = user;
     

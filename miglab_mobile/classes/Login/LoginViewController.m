@@ -126,7 +126,7 @@
     NSDictionary* result = [tNotification userInfo];
     NSLog(@"getUserInfoSuccess...%@", result);
     
-    User* user = [result objectForKey:@"result"];
+    PUser* user = [result objectForKey:@"result"];
     [user log];
     
     [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];

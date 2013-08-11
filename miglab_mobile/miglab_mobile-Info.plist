@@ -32,6 +32,16 @@
 				<string>sinaweibosso.1468499793</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>tencentopenapi</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent222222</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.2</string>

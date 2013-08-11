@@ -959,7 +959,7 @@
     NSLog(@"getGuestInfoSuccess...");
     
     NSDictionary *result = [tNotification userInfo];
-    User *guest = [result objectForKey:@"result"];
+    PUser *guest = [result objectForKey:@"result"];
     [guest log];
     
     [UserSessionManager GetInstance].currentUser = guest;
@@ -1008,7 +1008,7 @@
     NSDictionary* result = [tNotification userInfo];
     NSLog(@"getUserInfoSuccess...%@", result);
     
-    User* user = [result objectForKey:@"result"];
+    PUser* user = [result objectForKey:@"result"];
     [user log];
     
     user.password = [UserSessionManager GetInstance].currentUser.password;

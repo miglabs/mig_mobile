@@ -56,7 +56,6 @@
 		162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 162727A117ACB947000C79D3 /* play_btn_share_nor.png */; };
 		162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 162727A217ACB947000C79D3 /* play_btn_share_sel.png */; };
 		1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1627EA0E177B1CDB0049F9F5 /* qhc.caf */; };
-		1627EA21177B25600049F9F5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1627EA20177B25600049F9F5 /* User.m */; };
 		163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */; };
 		1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */; };
 		1637CA6B17B7A55300E6F132 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6A17B7A55300E6F132 /* libxml2.dylib */; };
@@ -68,6 +67,9 @@
 		1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9917B7A61F00E6F132 /* libstdc++.dylib */; };
 		1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9B17B7A63500E6F132 /* libiconv.dylib */; };
 		1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */; };
+		1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */; };
+		1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CAA617B7B9EC00E6F132 /* PUser.m */; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
 		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
@@ -295,8 +297,6 @@
 		162727A117ACB947000C79D3 /* play_btn_share_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_btn_share_nor.png; sourceTree = "<group>"; };
 		162727A217ACB947000C79D3 /* play_btn_share_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_btn_share_sel.png; sourceTree = "<group>"; };
 		1627EA0E177B1CDB0049F9F5 /* qhc.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = qhc.caf; sourceTree = "<group>"; };
-		1627EA1F177B25600049F9F5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		1627EA20177B25600049F9F5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PObjectCategory.h"; sourceTree = "<group>"; };
 		163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PObjectCategory.m"; sourceTree = "<group>"; };
 		1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libDoubanApiEngine.framework; sourceTree = "<group>"; };
@@ -338,6 +338,10 @@
 		1637CA9917B7A61F00E6F132 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1637CA9B17B7A63500E6F132 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		1637CAA517B7B9EC00E6F132 /* PUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUser.h; sourceTree = "<group>"; };
+		1637CAA617B7B9EC00E6F132 /* PUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUser.m; sourceTree = "<group>"; };
 		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -572,6 +576,7 @@
 				1642B2A117A55AF40010C4F1 /* libWeChatSDK_armv7_armv7s.a in Frameworks */,
 				1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */,
 				1637CA9317B7A5D400E6F132 /* libbaidumapapi.a in Frameworks */,
+				1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +586,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1637CAA017B7B4B400E6F132 /* TencentAPI */,
 				1637CA7217B7A5D400E6F132 /* BaiduMapApi */,
 				1637CA6117B7A4DF00E6F132 /* DoubanAPI */,
 				169C2E1017A381C2009774E7 /* UMAnalytics_Sdk_2.2.0.OpenUDID */,
@@ -778,8 +784,8 @@
 		1627EA1E177B25530049F9F5 /* DataStruct */ = {
 			isa = PBXGroup;
 			children = (
-				1627EA1F177B25600049F9F5 /* User.h */,
-				1627EA20177B25600049F9F5 /* User.m */,
+				1637CAA517B7B9EC00E6F132 /* PUser.h */,
+				1637CAA617B7B9EC00E6F132 /* PUser.m */,
 				183E022B177C33A300EE8944 /* Song.h */,
 				183E022C177C33A300EE8944 /* Song.m */,
 				CB30BAA71792873300F96FC4 /* Channel.h */,
@@ -848,6 +854,15 @@
 				1637CA9017B7A5D400E6F132 /* BMKVersion.h */,
 			);
 			path = BaiduMap;
+			sourceTree = "<group>";
+		};
+		1637CAA017B7B4B400E6F132 /* TencentAPI */ = {
+			isa = PBXGroup;
+			children = (
+				1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */,
+				1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = TencentAPI;
 			sourceTree = "<group>";
 		};
 		163BCE0F177C96DC008656D1 /* CTMBase64 */ = {
@@ -1402,6 +1417,7 @@
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
 				162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */,
 				1637CA9417B7A5D400E6F132 /* mapapi.bundle in Resources */,
+				1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1438,7 +1454,6 @@
 				162316761777397600CF8FB5 /* GuideViewController.m in Sources */,
 				1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */,
 				1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */,
-				1627EA21177B25600049F9F5 /* User.m in Sources */,
 				183E022D177C33A300EE8944 /* Song.m in Sources */,
 				183E0237177C408E00EE8944 /* HomeViewController.m in Sources */,
 				183E023D177C413800EE8944 /* TestViewController.m in Sources */,
@@ -1488,6 +1503,7 @@
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
 				18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */,
 				18275F2E17B3876400033AFF /* NearbyUser.m in Sources */,
+				1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

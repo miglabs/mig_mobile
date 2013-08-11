@@ -20,7 +20,7 @@
     @synchronized(self){
         if (nil == instance) {
             instance = [[self alloc] init];
-            instance.currentUser = [[User alloc] init];
+            instance.currentUser = [[PUser alloc] init];
         }
     }
     return instance;

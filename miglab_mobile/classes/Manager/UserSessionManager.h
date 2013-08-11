@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "User.h"
+#import "PUser.h"
 
 @interface UserSessionManager : NSObject
 
-@property (nonatomic, retain) User *currentUser;
+@property (nonatomic, retain) PUser *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;
 @property (nonatomic, retain) NSString *accesstoken;
 

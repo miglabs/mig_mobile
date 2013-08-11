@@ -220,7 +220,7 @@
                 
                 PLog(@"get user information operation succeeded");
                 
-                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                PUser* user = [PUser initWithNSDictionary:[dicJson objectForKey:@"result"]];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetUserInfoSuccess object:nil userInfo:dicResult];
@@ -291,7 +291,7 @@
                 
                 PLog(@"register operation succeeded");
                 
-                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                PUser* user = [PUser initWithNSDictionary:[dicJson objectForKey:@"result"]];
                 NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:dicResult];
@@ -360,7 +360,7 @@
                 
                 PLog(@"get guest operation succeeded");
                 
-                User* user = [User initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                PUser* user = [PUser initWithNSDictionary:[dicJson objectForKey:@"result"]];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetGuestSuccess object:nil userInfo:dicResult];
