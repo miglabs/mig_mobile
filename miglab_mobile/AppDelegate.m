@@ -22,6 +22,8 @@
 #import "PUser.h"
 #import "UserSessionManager.h"
 #import "SinaWeibo.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <libDoubanAPIEngine/DOUService.h>
 
 //test
 #import "Song.h"
@@ -96,6 +98,14 @@
     
     //网络请求指示器
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    //douban
+    DOUService *service = [DOUService sharedInstance];
+    service.clientId = DOUBAN_API_KEY;
+    service.clientSecret = DOUBAN_PRIVATE_KEY;
+    
+    //向微信注册
+    [WXApi registerApp:@"wxc7007d32a0ef5d89"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -365,6 +375,10 @@
         return [_sinaweibo handleOpenURL:url];
     }
     
+    if ([[url absoluteString] hasPrefix:@"tencent"]) {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    
     return YES;
 }
 
@@ -378,7 +392,29 @@
         return [_sinaweibo handleOpenURL:url];
     }
     
+    if ([[url absoluteString] hasPrefix:@"tencent"]) {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    
     return YES;
+}
+
+#pragma weixin
+-(void)onReq:(BaseReq *)req{
+    //onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。
+    if ([req isKindOfClass:[GetMessageFromWXReq class]]) {
+        //
+    } else if ([req isKindOfClass:[ShowMessageFromWXReq class]]) {
+        //
+    }
+    
+}
+
+-(void)onResp:(BaseResp *)resp{
+    //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        NSLog(@"resp.errCode: %d, resp.description: %@", resp.errCode, resp.description);
+    }
 }
 
 @end

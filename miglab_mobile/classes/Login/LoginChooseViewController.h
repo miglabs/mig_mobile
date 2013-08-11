@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SinaWeibo.h"
 #import "SinaWeiboRequest.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <libDoubanAPIEngine/DOUService.h>
 #import "MigLabAPI.h"
 
-@interface LoginChooseViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate>
+@interface LoginChooseViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate, TencentSessionDelegate>
 
 @property (nonatomic, retain) IBOutlet UIImageView *bgImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnTopMenu;
@@ -20,6 +22,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnQQ;
 @property (nonatomic, retain) IBOutlet UIButton *btnDouBan;
 @property (nonatomic, retain) IBOutlet UIButton *btnMiglab;
+
+//tencent
+@property (nonatomic, retain) TencentOAuth *tencentOAuth;
+@property (nonatomic, retain) NSMutableArray *permissions;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 

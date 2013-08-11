@@ -16,6 +16,7 @@
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
 #import "MainMenuViewController.h"
+#import "WebViewController.h"
 
 @interface LoginChooseViewController ()
 
@@ -30,6 +31,9 @@
 @synthesize btnQQ = _btnQQ;
 @synthesize btnDouBan = _btnDouBan;
 @synthesize btnMiglab = _btnMiglab;
+
+@synthesize tencentOAuth = _tencentOAuth;
+@synthesize permissions = _permissions;
 
 @synthesize miglabAPI = _miglabAPI;
 
@@ -56,6 +60,37 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
     
     _bgImageView.frame = kMainScreenFrame;
+    
+    //sina weibo
+    
+    //tencent
+    _permissions = [NSArray arrayWithObjects:
+                     kOPEN_PERMISSION_GET_USER_INFO,
+                     kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                     kOPEN_PERMISSION_ADD_ALBUM,
+                     kOPEN_PERMISSION_ADD_IDOL,
+                     kOPEN_PERMISSION_ADD_ONE_BLOG,
+                     kOPEN_PERMISSION_ADD_PIC_T,
+                     kOPEN_PERMISSION_ADD_SHARE,
+                     kOPEN_PERMISSION_ADD_TOPIC,
+                     kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                     kOPEN_PERMISSION_DEL_IDOL,
+                     kOPEN_PERMISSION_DEL_T,
+                     kOPEN_PERMISSION_GET_FANSLIST,
+                     kOPEN_PERMISSION_GET_IDOLLIST,
+                     kOPEN_PERMISSION_GET_INFO,
+                     kOPEN_PERMISSION_GET_OTHER_INFO,
+                     kOPEN_PERMISSION_GET_REPOST_LIST,
+                     kOPEN_PERMISSION_LIST_ALBUM,
+                     kOPEN_PERMISSION_UPLOAD_PIC,
+                     kOPEN_PERMISSION_GET_VIP_INFO,
+                     kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                     kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
+                     kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
+                     nil];
+    
+	_tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY
+											andDelegate:self];
     
     //api
     _miglabAPI = [[MigLabAPI alloc] init];
@@ -101,11 +136,30 @@
     
     PLog(@"doQQLogin...");
     
+    [_tencentOAuth authorize:_permissions inSafari:NO];
+    
 }
 
 -(IBAction)doDouBanLogin:(id)sender{
     
     PLog(@"doDouBanLogin...");
+    
+    NSString *str = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
+    
+    NSString *urlStr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    UIViewController *webViewController = [[WebViewController alloc] initWithRequestURL:url];
+    [self.navigationController pushViewController:webViewController animated:YES];
+    
+//    DOUService *service = [DOUService sharedInstance];
+//    
+//    NSString *str = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
+//    DOUQuery *query = [[DOUQuery alloc] initWithSubPath:str parameters:nil];
+//    query.apiBaseUrlString = service.apiBaseUrlString;
+//    DOUHttpRequest *req = [DOUHttpRequest requestWithQuery:query target:self];
+//    
+//    [service addRequest:req];
+    
     
 }
 
@@ -329,5 +383,53 @@
         
     }
 }
+
+//end sina weibo
+
+//tencent weibo
+
+/**
+ * Called when the user successfully logged in.
+ */
+- (void)tencentDidLogin {
+    
+	// 登录成功
+    
+    if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
+    {
+        NSLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
+        
+    }
+    else
+    {
+        NSLog(@"登录不成功 没有获取accesstoken");
+    }
+    
+}
+
+
+/**
+ * Called when the user dismissed the dialog without logging in.
+ */
+- (void)tencentDidNotLogin:(BOOL)cancelled
+{
+	if (cancelled){
+        NSLog(@"用户取消登录");
+    }
+	else {
+        NSLog(@"登录失败");
+	}
+	
+}
+
+/**
+ * Called when the notNewWork.
+ */
+-(void)tencentDidNotNetWork
+{
+    NSLog(@"无网络连接，请设置网络");
+}
+
+//end tencent weibo
 
 @end

@@ -25,6 +25,18 @@
 #define SINA_WEIBO_APP_SECRET               @"ce6dd4ab9ae4f14aa7982a43453cc173"
 #define SINA_WEIBO_APP_REDIRECTURI          @"https://api.weibo.com/oauth2/default.html"
 
+#define TENCENT_WEIBO_APP_KEY               @"222222"
+#define TENCENT_WEIBO_APP_SECRET            @""
+#define TENCENT_WEIBO_APP_REDIRECTURI       @""
+
+// 仅用于此 demo, level 较低，大量使用时会遇到访问限制。实际使用，请重新申请。
+#define DOUBAN_API_KEY                      @"04e0b2ab7ca02a8a0ea2180275e07f9e"
+#define DOUBAN_PRIVATE_KEY                  @"4275ee2fa3689a2f"
+#define DOUBAN_REDIRECTURL                  @"http://www.douban.com/location/mobile"
+
+#define WEIXIN_APP_ID                       @"wxc8d17a5ccdf1c33b"
+#define WEIXIN_APP_KEY                      @""
+
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
 /*

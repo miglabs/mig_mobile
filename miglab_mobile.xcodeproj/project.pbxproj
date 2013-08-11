@@ -70,6 +70,7 @@
 		1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */; };
 		1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CAA617B7B9EC00E6F132 /* PUser.m */; };
+		1637CAC017B7CF8200E6F132 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CABF17B7CF8200E6F132 /* WebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
 		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
@@ -342,6 +343,8 @@
 		1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		1637CAA517B7B9EC00E6F132 /* PUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUser.h; sourceTree = "<group>"; };
 		1637CAA617B7B9EC00E6F132 /* PUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUser.m; sourceTree = "<group>"; };
+		1637CABE17B7CF8200E6F132 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		1637CABF17B7CF8200E6F132 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -1011,9 +1014,6 @@
 		16EDEF2C1759AD5E001BE4E9 = {
 			isa = PBXGroup;
 			children = (
-				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
-				1637CA9B17B7A63500E6F132 /* libiconv.dylib */,
-				1637CA9917B7A61F00E6F132 /* libstdc++.dylib */,
 				16EDEF411759AD5E001BE4E9 /* miglab_mobile */,
 				16EDEF3A1759AD5E001BE4E9 /* Frameworks */,
 				16EDEF381759AD5E001BE4E9 /* Products */,
@@ -1031,6 +1031,9 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
+				1637CA9B17B7A63500E6F132 /* libiconv.dylib */,
+				1637CA9917B7A61F00E6F132 /* libstdc++.dylib */,
 				1637CA7017B7A58800E6F132 /* MobileCoreServices.framework */,
 				1637CA6E17B7A57500E6F132 /* Security.framework */,
 				1637CA6C17B7A56900E6F132 /* CFNetwork.framework */,
@@ -1161,6 +1164,8 @@
 		184648411793A5F700E83EBB /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1637CABE17B7CF8200E6F132 /* WebViewController.h */,
+				1637CABF17B7CF8200E6F132 /* WebViewController.m */,
 				184648481793A61700E83EBB /* LoginViewController.h */,
 				184648491793A61700E83EBB /* LoginViewController.m */,
 				1846484A1793A61700E83EBB /* LoginViewController.xib */,
@@ -1504,6 +1509,7 @@
 				18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */,
 				18275F2E17B3876400033AFF /* NearbyUser.m in Sources */,
 				1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */,
+				1637CAC017B7CF8200E6F132 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
