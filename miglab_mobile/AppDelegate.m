@@ -16,6 +16,8 @@
 
 #import "GuideViewController.h"
 
+#import "MusicViewController.h"
+
 #import "MainMenuViewController.h"
 
 #import "HomeViewController.h"
@@ -151,7 +153,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 3;
+        int initHomeViewType = 4;
         
         if (initHomeViewType == 0) {
             //
@@ -202,6 +204,15 @@
             
             _menuController = rootController;
             self.window.rootViewController =  rootController;
+            
+        } else if (initHomeViewType == 4) {
+            
+            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:musicViewController];
+            _navController.navigationBar.hidden = YES;
+            
+            self.window.rootViewController = _navController;
+            [self.window addSubview:self.navController.view];
             
         }
         
