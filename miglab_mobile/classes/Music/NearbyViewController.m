@@ -1,18 +1,18 @@
 //
-//  LocalViewController.m
+//  NearbyViewController.m
 //  miglab_mobile
 //
 //  Created by pig on 13-8-15.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "LocalViewController.h"
+#import "NearbyViewController.h"
 
-@interface LocalViewController ()
+@interface NearbyViewController ()
 
 @end
 
-@implementation LocalViewController
+@implementation NearbyViewController
 
 @synthesize navView = _navView;
 
@@ -39,7 +39,6 @@
     _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
     [_navView.leftButton setHidden:NO];
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
-    
     
 }
 

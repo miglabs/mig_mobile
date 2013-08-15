@@ -1,5 +1,5 @@
 //
-//  LocalViewController.h
+//  NearbyViewController.h
 //  miglab_mobile
 //
 //  Created by pig on 13-8-15.
@@ -9,7 +9,7 @@
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
 
-@interface LocalViewController : PlayerViewController
+@interface NearbyViewController : PlayerViewController
 
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
 

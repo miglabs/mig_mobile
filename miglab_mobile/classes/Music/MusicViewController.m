@@ -12,6 +12,8 @@
 #import "MusicPlayerMenuView.h"
 #import "MusicSourceMenuCell.h"
 
+#import "LikeViewController.h"
+#import "NearbyViewController.h"
 #import "LocalViewController.h"
 
 @interface MusicViewController ()
@@ -25,7 +27,7 @@
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
-@synthesize playerMenuView = _playerMenuView;
+//@synthesize playerMenuView = _playerMenuView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,10 +44,10 @@
     // Do any additional setup after loading the view from its nib.
     
     //bg
-    UIImageView *bgImageView = [[UIImageView alloc] init];
-    bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
-    bgImageView.image = [UIImage imageWithName:@"view_bg" type:@"png"];
-    [self.view addSubview:bgImageView];
+//    UIImageView *bgImageView = [[UIImageView alloc] init];
+//    bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
+//    bgImageView.image = [UIImage imageWithName:@"view_bg" type:@"png"];
+//    [self.view addSubview:bgImageView];
     
     //top
     _navView = [[MusicPlayerNavigationView alloc] initMusicNavigationView:CGRectMake(0, 0, 320, 45)];
@@ -81,15 +83,15 @@
     //    _tableTitles = [NSArray arrayWithObjects:@"音乐基因", @"歌单", @"好友", @"设置", nil];
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
-    //menu
-    _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight - 73 - 10, 297, 73)];
-    [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    _playerMenuView.lblSongInfo.text = @"迷宫仙曲－乐瑟";
-    [_playerMenuView.btnDelete addTarget:self action:@selector(doDelete:) forControlEvents:UIControlEventTouchUpInside];
-    [_playerMenuView.btnCollect addTarget:self action:@selector(doCollect:) forControlEvents:UIControlEventTouchUpInside];
-    [_playerMenuView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
-    [_playerMenuView.btnNext addTarget:self action:@selector(doNext:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_playerMenuView];
+//    //menu
+//    _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight - 73 - 10, 297, 73)];
+//    [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
+//    _playerMenuView.lblSongInfo.text = @"迷宫仙曲－乐瑟";
+//    [_playerMenuView.btnDelete addTarget:self action:@selector(doDelete:) forControlEvents:UIControlEventTouchUpInside];
+//    [_playerMenuView.btnCollect addTarget:self action:@selector(doCollect:) forControlEvents:UIControlEventTouchUpInside];
+//    [_playerMenuView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
+//    [_playerMenuView.btnNext addTarget:self action:@selector(doNext:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_playerMenuView];
     
     
 }
@@ -114,6 +116,9 @@
 
 
 -(IBAction)doPlayerAvatar:(id)sender{
+    
+    [super doPlayerAvatar:sender];
+    PLog(@"music doPlayerAvatar...");
     
 }
 
@@ -163,6 +168,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     if (indexPath.row == 0) {
+        
+        
+        
+    } else if (indexPath.row == 1) {
+        
+        LikeViewController *likeViewController = [[LikeViewController alloc] initWithNibName:@"LikeViewController" bundle:nil];
+        [self.navigationController pushViewController:likeViewController animated:YES];
+        
+    } else if (indexPath.row == 2) {
+        
+        NearbyViewController *nearbyViewController = [[NearbyViewController alloc] initWithNibName:@"NearbyViewController" bundle:nil];
+        [self.navigationController pushViewController:nearbyViewController animated:YES];
+        
+    } else if (indexPath.row == 3) {
         
         LocalViewController *localViewController = [[LocalViewController alloc] initWithNibName:@"LocalViewController" bundle:nil];
         [self.navigationController pushViewController:localViewController animated:YES];

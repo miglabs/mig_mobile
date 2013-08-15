@@ -6,18 +6,19 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "MusicPlayerNavigationView.h"
-#import "MusicPlayerMenuView.h"
+#import "PlayerViewController.h"
 
-@interface MusicViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+#import "MusicPlayerNavigationView.h"
+//#import "MusicPlayerMenuView.h"
+
+@interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) MusicPlayerNavigationView *navView;
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
-@property (nonatomic, retain) MusicPlayerMenuView *playerMenuView;
+//@property (nonatomic, retain) MusicPlayerMenuView *playerMenuView;
 
 
 -(IBAction)doNavigationAvatar:(id)sender;
@@ -25,10 +26,10 @@
 -(IBAction)doNavigationSecond:(id)sender;
 
 
--(IBAction)doPlayerAvatar:(id)sender;
--(IBAction)doDelete:(id)sender;
--(IBAction)doCollect:(id)sender;
--(IBAction)doPlayOrPause:(id)sender;
--(IBAction)doNext:(id)sender;
+//-(IBAction)doPlayerAvatar:(id)sender;
+//-(IBAction)doDelete:(id)sender;
+//-(IBAction)doCollect:(id)sender;
+//-(IBAction)doPlayOrPause:(id)sender;
+//-(IBAction)doNext:(id)sender;
 
 @end
