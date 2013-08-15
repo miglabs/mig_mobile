@@ -10,10 +10,12 @@
 #import "MusicPlayerNavigationView.h"
 #import "MusicPlayerMenuView.h"
 
-@interface MusicViewController : UIViewController
+@interface MusicViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) MusicPlayerNavigationView *navigationView;
+@property (nonatomic, retain) MusicPlayerNavigationView *navView;
 
+@property (nonatomic, retain) UITableView *bodyTableView;
+@property (nonatomic, retain) NSArray *tableTitles;
 
 @property (nonatomic, retain) MusicPlayerMenuView *playerMenuView;
 
