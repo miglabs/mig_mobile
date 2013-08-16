@@ -13,6 +13,8 @@
 #import "RightViewController.h"
 #import "WXApi.h"
 
+#import "RootViewController.h"
+
 @class SinaWeibo;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
@@ -26,5 +28,7 @@
 @property (nonatomic, retain) RightViewController *rightViewController;
 
 @property (nonatomic, retain) SinaWeibo *sinaweibo;
+
+@property (nonatomic, retain) RootViewController *tabBarController;
 
 @end

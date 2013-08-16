@@ -44,6 +44,8 @@
 
 @synthesize sinaweibo = _sinaweibo;
 
+@synthesize tabBarController = _tabBarController;
+
 //for crash
 //-(void)installUncaughtExceptionHandler
 //{
@@ -153,7 +155,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 4;
+        int initHomeViewType = 5;
         
         if (initHomeViewType == 0) {
             //
@@ -213,6 +215,27 @@
             
             self.window.rootViewController = _navController;
             [self.window addSubview:self.navController.view];
+            
+        } else if (initHomeViewType == 5) {
+            
+            HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
+            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+            
+            home.hidesBottomBarWhenPushed = YES;
+            musicViewController.hidesBottomBarWhenPushed = YES;
+            mainMenuViewController.hidesBottomBarWhenPushed = YES;
+            
+            UINavigationController *navHome = [[UINavigationController alloc] initWithRootViewController:home];
+            UINavigationController *navMusic = [[UINavigationController alloc] initWithRootViewController:musicViewController];
+            UINavigationController *navMain = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+            
+            //初始化TabBarViewController
+            _tabBarController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+            _tabBarController.viewControllers = [NSArray arrayWithObjects:navHome, navMusic, navMain, nil];
+            [_tabBarController doSelectedFirstMenu:nil];
+            
+            self.window.rootViewController = _tabBarController;
             
         }
         
