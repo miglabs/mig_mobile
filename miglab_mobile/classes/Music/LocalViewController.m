@@ -7,6 +7,7 @@
 //
 
 #import "LocalViewController.h"
+#import "AppDelegate.h"
 
 @interface LocalViewController ()
 
@@ -41,6 +42,9 @@
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     
     
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.tabBarController.rootNavMenuView.hidden = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +54,10 @@
 }
 
 -(IBAction)doBack:(id)sender{
+    
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.tabBarController.rootNavMenuView.hidden = NO;
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

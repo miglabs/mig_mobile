@@ -43,12 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //bg
-//    UIImageView *bgImageView = [[UIImageView alloc] init];
-//    bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
-//    bgImageView.image = [UIImage imageWithName:@"view_bg" type:@"png"];
-//    [self.view addSubview:bgImageView];
-    
+    /*
     //top
     _navView = [[MusicPlayerNavigationView alloc] initMusicNavigationView:CGRectMake(0, 0, 320, 45)];
     [_navView.btnAvatar addTarget:self action:@selector(doNavigationAvatar:) forControlEvents:UIControlEventTouchUpInside];
@@ -60,10 +55,12 @@
     [_navView.btnSecondMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_navView.btnSecondMenu addTarget:self action:@selector(doNavigationSecond:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_navView];
+    */
     
     //body
     _bodyTableView = [[UITableView alloc] init];
-    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+//    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(11.5, 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];
@@ -80,19 +77,10 @@
     NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", nil];
     NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", nil];
     NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", nil];
-    //    _tableTitles = [NSArray arrayWithObjects:@"音乐基因", @"歌单", @"好友", @"设置", nil];
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
-//    //menu
-//    _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight - 73 - 10, 297, 73)];
-//    [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
-//    _playerMenuView.lblSongInfo.text = @"迷宫仙曲－乐瑟";
-//    [_playerMenuView.btnDelete addTarget:self action:@selector(doDelete:) forControlEvents:UIControlEventTouchUpInside];
-//    [_playerMenuView.btnCollect addTarget:self action:@selector(doCollect:) forControlEvents:UIControlEventTouchUpInside];
-//    [_playerMenuView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
-//    [_playerMenuView.btnNext addTarget:self action:@selector(doNext:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_playerMenuView];
-    
+    //player
+    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
     
 }
 
@@ -174,7 +162,7 @@
     } else if (indexPath.row == 1) {
         
         LikeViewController *likeViewController = [[LikeViewController alloc] initWithNibName:@"LikeViewController" bundle:nil];
-        [self.navigationController pushViewController:likeViewController animated:YES];
+        [self.navigationController pushViewController:likeViewController animated:NO];
         
     } else if (indexPath.row == 2) {
         

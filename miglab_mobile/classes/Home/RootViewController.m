@@ -32,7 +32,10 @@
     
     [self hideTabBar];
     
-    _rootNavMenuView = [[RootNavigationMenuView alloc] initRootNavigationMenuView:CGRectMake(0, 0, 320, 44)];
+    _rootNavMenuView = [[RootNavigationMenuView alloc] initRootNavigationMenuView:CGRectMake(0, 20, 320, 44)];
+    [_rootNavMenuView.btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
+    [_rootNavMenuView.btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
+    [_rootNavMenuView.btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
     [_rootNavMenuView.btnMenuFirst addTarget:self action:@selector(doSelectedFirstMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuSecond addTarget:self action:@selector(doSelectedSecondMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuThird addTarget:self action:@selector(doSelectedThridMenu:) forControlEvents:UIControlEventTouchUpInside];

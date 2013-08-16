@@ -16,7 +16,9 @@
 
 #import "GuideViewController.h"
 
+#import "GeneViewController.h"
 #import "MusicViewController.h"
+#import "FriendViewController.h"
 
 #import "MainMenuViewController.h"
 
@@ -218,24 +220,35 @@
             
         } else if (initHomeViewType == 5) {
             
-            HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+            GeneViewController *geneViewController = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
             MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
-            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+            FriendViewController *friendViewController = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
             
-            home.hidesBottomBarWhenPushed = YES;
+            geneViewController.hidesBottomBarWhenPushed = YES;
             musicViewController.hidesBottomBarWhenPushed = YES;
-            mainMenuViewController.hidesBottomBarWhenPushed = YES;
+            friendViewController.hidesBottomBarWhenPushed = YES;
             
-            UINavigationController *navHome = [[UINavigationController alloc] initWithRootViewController:home];
+            UINavigationController *navGene = [[UINavigationController alloc] initWithRootViewController:geneViewController];
             UINavigationController *navMusic = [[UINavigationController alloc] initWithRootViewController:musicViewController];
-            UINavigationController *navMain = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
+            UINavigationController *navFriend = [[UINavigationController alloc] initWithRootViewController:friendViewController];
             
             //初始化TabBarViewController
             _tabBarController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-            _tabBarController.viewControllers = [NSArray arrayWithObjects:navHome, navMusic, navMain, nil];
+            _tabBarController.viewControllers = [NSArray arrayWithObjects:navGene, navMusic, navFriend, nil];
             [_tabBarController doSelectedFirstMenu:nil];
             
             self.window.rootViewController = _tabBarController;
+            
+            
+//            _tabBarController.navigationController.navigationBar.hidden = YES;
+//            _tabBarController.hidesBottomBarWhenPushed = YES;
+//            
+//            _navController = [[UINavigationController alloc] initWithRootViewController:_tabBarController];
+//            _navController.navigationBar.hidden = YES;
+//            
+//            self.window.rootViewController = _navController;
+//            [self.window addSubview:self.navController.view];
+            
             
         }
         

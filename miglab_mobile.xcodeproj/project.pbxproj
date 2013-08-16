@@ -96,16 +96,21 @@
 		1653DC0417BD107C00767E0E /* music_source_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC0317BD107C00767E0E /* music_source_separator.png */; };
 		1653DC1217BD158F00767E0E /* LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DC1017BD158F00767E0E /* LocalViewController.m */; };
 		1653DC1317BD158F00767E0E /* LocalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC1117BD158F00767E0E /* LocalViewController.xib */; };
-		1653DC1717BD1C6E00767E0E /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DC1517BD1C6E00767E0E /* BaseViewController.m */; };
-		1653DC1817BD1C6E00767E0E /* BaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC1617BD1C6E00767E0E /* BaseViewController.xib */; };
 		1653DC2217BD1E0700767E0E /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DC2017BD1E0600767E0E /* NearbyViewController.m */; };
 		1653DC2317BD1E0700767E0E /* NearbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC2117BD1E0700767E0E /* NearbyViewController.xib */; };
-		1653DC2717BD1E3600767E0E /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DC2517BD1E3500767E0E /* PlayerViewController.m */; };
-		1653DC2817BD1E3600767E0E /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC2617BD1E3600767E0E /* PlayerViewController.xib */; };
 		1653DC2C17BD221300767E0E /* LikeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DC2A17BD221200767E0E /* LikeViewController.m */; };
 		1653DC2D17BD221300767E0E /* LikeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DC2B17BD221200767E0E /* LikeViewController.xib */; };
+		165D7C8317BE5908000D08E3 /* top_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 165D7C8217BE5908000D08E3 /* top_navigation_bg.png */; };
+		165D7C9317BE60D2000D08E3 /* GeneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7C9117BE60D2000D08E3 /* GeneViewController.m */; };
+		165D7C9417BE60D2000D08E3 /* GeneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D7C9217BE60D2000D08E3 /* GeneViewController.xib */; };
+		165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7C9717BE618C000D08E3 /* BaseViewController.m */; };
+		165D7C9D17BE618C000D08E3 /* BaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D7C9817BE618C000D08E3 /* BaseViewController.xib */; };
+		165D7C9E17BE618C000D08E3 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7C9A17BE618C000D08E3 /* PlayerViewController.m */; };
+		165D7C9F17BE618C000D08E3 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D7C9B17BE618C000D08E3 /* PlayerViewController.xib */; };
+		165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7CA117BE61E3000D08E3 /* MusicPlayerMenuView.m */; };
+		165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7CA517BE6253000D08E3 /* FriendViewController.m */; };
+		165D7CA817BE6253000D08E3 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D7CA617BE6253000D08E3 /* FriendViewController.xib */; };
 		167459E217BBB63F00E636F8 /* music_default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 167459E117BBB63F00E636F8 /* music_default_avatar.png */; };
-		167459E617BBB77000E636F8 /* MusicPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167459E517BBB77000E636F8 /* MusicPlayerMenuView.m */; };
 		167459E917BBC0EA00E636F8 /* MusicPlayerNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167459E817BBC0EA00E636F8 /* MusicPlayerNavigationView.m */; };
 		1683FB81179119640081612B /* bg_mask_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7A179119640081612B /* bg_mask_0.png */; };
 		1683FB82179119640081612B /* bg_mask_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7B179119640081612B /* bg_mask_1.png */; };
@@ -416,21 +421,28 @@
 		1653DC0F17BD158E00767E0E /* LocalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalViewController.h; sourceTree = "<group>"; };
 		1653DC1017BD158F00767E0E /* LocalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalViewController.m; sourceTree = "<group>"; };
 		1653DC1117BD158F00767E0E /* LocalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalViewController.xib; sourceTree = "<group>"; };
-		1653DC1417BD1C6D00767E0E /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		1653DC1517BD1C6E00767E0E /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		1653DC1617BD1C6E00767E0E /* BaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseViewController.xib; sourceTree = "<group>"; };
 		1653DC1F17BD1E0600767E0E /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyViewController.h; sourceTree = "<group>"; };
 		1653DC2017BD1E0600767E0E /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyViewController.m; sourceTree = "<group>"; };
 		1653DC2117BD1E0700767E0E /* NearbyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearbyViewController.xib; sourceTree = "<group>"; };
-		1653DC2417BD1E3500767E0E /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
-		1653DC2517BD1E3500767E0E /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
-		1653DC2617BD1E3600767E0E /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		1653DC2917BD221100767E0E /* LikeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeViewController.h; sourceTree = "<group>"; };
 		1653DC2A17BD221200767E0E /* LikeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeViewController.m; sourceTree = "<group>"; };
 		1653DC2B17BD221200767E0E /* LikeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LikeViewController.xib; sourceTree = "<group>"; };
+		165D7C8217BE5908000D08E3 /* top_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_navigation_bg.png; sourceTree = "<group>"; };
+		165D7C9017BE60D2000D08E3 /* GeneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneViewController.h; sourceTree = "<group>"; };
+		165D7C9117BE60D2000D08E3 /* GeneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneViewController.m; sourceTree = "<group>"; };
+		165D7C9217BE60D2000D08E3 /* GeneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneViewController.xib; sourceTree = "<group>"; };
+		165D7C9617BE618C000D08E3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		165D7C9717BE618C000D08E3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		165D7C9817BE618C000D08E3 /* BaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseViewController.xib; sourceTree = "<group>"; };
+		165D7C9917BE618C000D08E3 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		165D7C9A17BE618C000D08E3 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		165D7C9B17BE618C000D08E3 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		165D7CA017BE61E3000D08E3 /* MusicPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerMenuView.h; sourceTree = "<group>"; };
+		165D7CA117BE61E3000D08E3 /* MusicPlayerMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerMenuView.m; sourceTree = "<group>"; };
+		165D7CA417BE6253000D08E3 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
+		165D7CA517BE6253000D08E3 /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
+		165D7CA617BE6253000D08E3 /* FriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		167459E117BBB63F00E636F8 /* music_default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_default_avatar.png; sourceTree = "<group>"; };
-		167459E417BBB77000E636F8 /* MusicPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerMenuView.h; sourceTree = "<group>"; };
-		167459E517BBB77000E636F8 /* MusicPlayerMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerMenuView.m; sourceTree = "<group>"; };
 		167459E717BBC0EA00E636F8 /* MusicPlayerNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerNavigationView.h; sourceTree = "<group>"; };
 		167459E817BBC0EA00E636F8 /* MusicPlayerNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerNavigationView.m; sourceTree = "<group>"; };
 		1683FB7A179119640081612B /* bg_mask_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_0.png; sourceTree = "<group>"; };
@@ -680,6 +692,9 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				165D7CA317BE623C000D08E3 /* Friend */,
+				165D7C9517BE618C000D08E3 /* Base */,
+				165D7C8F17BE60AA000D08E3 /* Gene */,
 				1684762C17BA600500F42172 /* Music */,
 				1637CAA017B7B4B400E6F132 /* TencentAPI */,
 				1637CA7217B7A5D400E6F132 /* BaiduMapApi */,
@@ -1006,6 +1021,49 @@
 			path = music_source_menu;
 			sourceTree = "<group>";
 		};
+		165D7C8117BE5908000D08E3 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				165D7C8217BE5908000D08E3 /* top_navigation_bg.png */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		165D7C8F17BE60AA000D08E3 /* Gene */ = {
+			isa = PBXGroup;
+			children = (
+				165D7C9017BE60D2000D08E3 /* GeneViewController.h */,
+				165D7C9117BE60D2000D08E3 /* GeneViewController.m */,
+				165D7C9217BE60D2000D08E3 /* GeneViewController.xib */,
+			);
+			path = Gene;
+			sourceTree = "<group>";
+		};
+		165D7C9517BE618C000D08E3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				165D7CA017BE61E3000D08E3 /* MusicPlayerMenuView.h */,
+				165D7CA117BE61E3000D08E3 /* MusicPlayerMenuView.m */,
+				165D7C9617BE618C000D08E3 /* BaseViewController.h */,
+				165D7C9717BE618C000D08E3 /* BaseViewController.m */,
+				165D7C9817BE618C000D08E3 /* BaseViewController.xib */,
+				165D7C9917BE618C000D08E3 /* PlayerViewController.h */,
+				165D7C9A17BE618C000D08E3 /* PlayerViewController.m */,
+				165D7C9B17BE618C000D08E3 /* PlayerViewController.xib */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		165D7CA317BE623C000D08E3 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				165D7CA417BE6253000D08E3 /* FriendViewController.h */,
+				165D7CA517BE6253000D08E3 /* FriendViewController.m */,
+				165D7CA617BE6253000D08E3 /* FriendViewController.xib */,
+			);
+			path = Friend;
+			sourceTree = "<group>";
+		};
 		1683FB93179127920081612B /* playing_tips */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,8 +1085,6 @@
 				1684762E17BA601D00F42172 /* MusicViewController.h */,
 				1684762F17BA601D00F42172 /* MusicViewController.m */,
 				1684763017BA601D00F42172 /* MusicViewController.xib */,
-				167459E417BBB77000E636F8 /* MusicPlayerMenuView.h */,
-				167459E517BBB77000E636F8 /* MusicPlayerMenuView.m */,
 				167459E717BBC0EA00E636F8 /* MusicPlayerNavigationView.h */,
 				167459E817BBC0EA00E636F8 /* MusicPlayerNavigationView.m */,
 				1653DBEE17BD094E00767E0E /* MusicSourceMenuCell.h */,
@@ -1037,15 +1093,9 @@
 				1653DC0F17BD158E00767E0E /* LocalViewController.h */,
 				1653DC1017BD158F00767E0E /* LocalViewController.m */,
 				1653DC1117BD158F00767E0E /* LocalViewController.xib */,
-				1653DC1417BD1C6D00767E0E /* BaseViewController.h */,
-				1653DC1517BD1C6E00767E0E /* BaseViewController.m */,
-				1653DC1617BD1C6E00767E0E /* BaseViewController.xib */,
 				1653DC1F17BD1E0600767E0E /* NearbyViewController.h */,
 				1653DC2017BD1E0600767E0E /* NearbyViewController.m */,
 				1653DC2117BD1E0700767E0E /* NearbyViewController.xib */,
-				1653DC2417BD1E3500767E0E /* PlayerViewController.h */,
-				1653DC2517BD1E3500767E0E /* PlayerViewController.m */,
-				1653DC2617BD1E3600767E0E /* PlayerViewController.xib */,
 				1653DC2917BD221100767E0E /* LikeViewController.h */,
 				1653DC2A17BD221200767E0E /* LikeViewController.m */,
 				1653DC2B17BD221200767E0E /* LikeViewController.xib */,
@@ -1104,6 +1154,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				165D7C8117BE5908000D08E3 /* home */,
 				1684763317BA613700F42172 /* music */,
 				163EA98A17A7F9B700EBD24C /* login */,
 				16AB8B99179EB8A40009411F /* left_menu */,
@@ -1613,11 +1664,14 @@
 				1653DC0217BD0C9300767E0E /* music_source_menu_like.png in Resources */,
 				1653DC0417BD107C00767E0E /* music_source_separator.png in Resources */,
 				1653DC1317BD158F00767E0E /* LocalViewController.xib in Resources */,
-				1653DC1817BD1C6E00767E0E /* BaseViewController.xib in Resources */,
 				1653DC2317BD1E0700767E0E /* NearbyViewController.xib in Resources */,
-				1653DC2817BD1E3600767E0E /* PlayerViewController.xib in Resources */,
 				1653DC2D17BD221300767E0E /* LikeViewController.xib in Resources */,
 				18E434E117BE139200DECFC7 /* RootViewController.xib in Resources */,
+				165D7C8317BE5908000D08E3 /* top_navigation_bg.png in Resources */,
+				165D7C9417BE60D2000D08E3 /* GeneViewController.xib in Resources */,
+				165D7C9D17BE618C000D08E3 /* BaseViewController.xib in Resources */,
+				165D7C9F17BE618C000D08E3 /* PlayerViewController.xib in Resources */,
+				165D7CA817BE6253000D08E3 /* FriendViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1706,16 +1760,18 @@
 				1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */,
 				1637CAC017B7CF8200E6F132 /* WebViewController.m in Sources */,
 				1684763117BA601D00F42172 /* MusicViewController.m in Sources */,
-				167459E617BBB77000E636F8 /* MusicPlayerMenuView.m in Sources */,
 				167459E917BBC0EA00E636F8 /* MusicPlayerNavigationView.m in Sources */,
 				1653DBF017BD094E00767E0E /* MusicSourceMenuCell.m in Sources */,
 				1653DC1217BD158F00767E0E /* LocalViewController.m in Sources */,
-				1653DC1717BD1C6E00767E0E /* BaseViewController.m in Sources */,
 				1653DC2217BD1E0700767E0E /* NearbyViewController.m in Sources */,
-				1653DC2717BD1E3600767E0E /* PlayerViewController.m in Sources */,
 				1653DC2C17BD221300767E0E /* LikeViewController.m in Sources */,
 				18E434E017BE139200DECFC7 /* RootViewController.m in Sources */,
 				18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */,
+				165D7C9317BE60D2000D08E3 /* GeneViewController.m in Sources */,
+				165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */,
+				165D7C9E17BE618C000D08E3 /* PlayerViewController.m in Sources */,
+				165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */,
+				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
