@@ -160,4 +160,9 @@ typedef enum {
  */
 -(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
 
+/*
+ 非注册用户获取播放列表（2013-08－17）
+ */
+-(void)doGetDefaultGuestSongs;
+
 @end

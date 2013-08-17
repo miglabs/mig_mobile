@@ -103,6 +103,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)doBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(IBAction)doShowLeftMenu:(id)sender{
     
     PLog(@"doShowLeftMenu...");
@@ -246,8 +250,8 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:accounttype];
     
-    //goto main view
-    [self doGotoMainMenuView];
+    //go back
+    [self doBack:nil];
     
 }
 
@@ -377,7 +381,7 @@
             //检查服务端是否已经记录该帐号
             [_miglabAPI doGetUserInfo:name accessToken:[UserSessionManager GetInstance].accesstoken];
             
-            [self doGotoMainMenuView];
+            [self doBack:nil];
             
         }//if
         

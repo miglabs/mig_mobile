@@ -1765,4 +1765,78 @@
     
 }
 
+/*
+ 非注册用户获取播放列表（2013-08－17）
+ */
+-(void)doGetDefaultGuestSongs{
+    
+    NSString* url = [NSString stringWithFormat:@"%@", HTTP_GETDEFAULTGUESTSONGS];
+    PLog(@"get default guest songs url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get default guest songs operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray *songlist = [dicTemp objectForKey:@"song"];
+                int songcount = [songlist count];
+                
+                NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<songcount; i++) {
+                    
+                    Song *song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    [song log];
+                    
+                    [songInfoList addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultGuestSongsSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get default guest songs operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultGuestSongsFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultGuestSongsFailed object:nil userInfo:dicResult];
+            
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get default guest songs failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDefaultGuestSongsFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+}
+
 @end

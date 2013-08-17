@@ -227,7 +227,8 @@
 -(IBAction)doShowLeftViewAction:(id)sender{
     
     PLog(@"doShowLeftViewAction...");
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] menuController] showLeftController:YES];
+//    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] menuController] showLeftController:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

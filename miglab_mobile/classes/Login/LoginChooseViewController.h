@@ -29,6 +29,7 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+-(IBAction)doBack:(id)sender;
 -(IBAction)doShowLeftMenu:(id)sender;
 -(IBAction)doGotoRegister:(id)sender;
 -(IBAction)doSinaWeiboLogin:(id)sender;

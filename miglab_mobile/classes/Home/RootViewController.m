@@ -21,6 +21,8 @@
 @synthesize dicViewControllerCache = _dicViewControllerCache;
 @synthesize currentShowViewTag = _currentShowViewTag;
 
+@synthesize miglabAPI = _miglabAPI;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

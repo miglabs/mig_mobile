@@ -12,4 +12,8 @@
 
 @property (nonatomic, retain) UIViewController *topViewcontroller;
 
+@property (nonatomic, retain) EGOImageButton *btnAvatar;
+
+-(IBAction)doAvatar:(id)sender;
+
 @end

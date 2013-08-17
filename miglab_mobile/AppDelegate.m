@@ -286,6 +286,8 @@
         [miglabAPI doGetChannel:userid token:accesstoken num:10];
     }
     
+    [miglabAPI doGetDefaultGuestSongs];
+    
     /*
     NSString *testuserid = @"10026";
     NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";

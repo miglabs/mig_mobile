@@ -194,4 +194,9 @@
 #define NotificationNameSearchNearbySuccess                 @"NotificationNameSearchNearbySuccess"
 #define NotificationNameSearchNearbyFailed                  @"NotificationNameSearchNearbyFailed"
 
+//非注册用户获取播放列表（2013-08－17）
+#define HTTP_GETDEFAULTGUESTSONGS                           [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getdefguestsongs.fcgi"]
+#define NotificationNameGetDefaultGuestSongsSuccess         @"NotificationNameGetDefaultGuestSongsSuccess"
+#define NotificationNameGetDefaultGuestSongsFailed          @"NotificationNameGetDefaultGuestSongsFailed"
+
 #endif

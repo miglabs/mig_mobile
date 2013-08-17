@@ -29,5 +29,18 @@
          landmarkName = "-doDownloadProcess:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "miglab_mobile/classes/MigLabAPI/MigLabAPI.m"
+         timestampString = "398424460.82774"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1786"
+         endingLineNumber = "1786"
+         landmarkName = "-doGetDefaultGuestSongs"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
