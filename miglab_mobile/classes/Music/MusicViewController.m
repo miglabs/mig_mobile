@@ -12,8 +12,9 @@
 #import "MusicPlayerMenuView.h"
 #import "MusicSourceMenuCell.h"
 
+#import "OnlineViewController.h"
 #import "LikeViewController.h"
-#import "NearbyViewController.h"
+#import "NearMusicViewController.h"
 #import "LocalViewController.h"
 
 @interface MusicViewController ()
@@ -59,8 +60,8 @@
     
     //body
     _bodyTableView = [[UITableView alloc] init];
-//    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
-    _bodyTableView.frame = CGRectMake(11.5, 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+//    _bodyTableView.frame = CGRectMake(11.5, 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];
@@ -80,7 +81,7 @@
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     //player
-    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
+//    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
     
 }
 
@@ -157,17 +158,18 @@
     // ...
     if (indexPath.row == 0) {
         
-        
+        OnlineViewController *onlineViewController = [[OnlineViewController alloc] initWithNibName:@"OnlineViewController" bundle:nil];
+        [self.navigationController pushViewController:onlineViewController animated:YES];
         
     } else if (indexPath.row == 1) {
         
         LikeViewController *likeViewController = [[LikeViewController alloc] initWithNibName:@"LikeViewController" bundle:nil];
-        [self.navigationController pushViewController:likeViewController animated:NO];
+        [self.navigationController pushViewController:likeViewController animated:YES];
         
     } else if (indexPath.row == 2) {
         
-        NearbyViewController *nearbyViewController = [[NearbyViewController alloc] initWithNibName:@"NearbyViewController" bundle:nil];
-        [self.navigationController pushViewController:nearbyViewController animated:YES];
+        NearMusicViewController *nearMusicViewController = [[NearMusicViewController alloc] initWithNibName:@"NearMusicViewController" bundle:nil];
+        [self.navigationController pushViewController:nearMusicViewController animated:YES];
         
     } else if (indexPath.row == 3) {
         
@@ -175,6 +177,8 @@
         [self.navigationController pushViewController:localViewController animated:YES];
         
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

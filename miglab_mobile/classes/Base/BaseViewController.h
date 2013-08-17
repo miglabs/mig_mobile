@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImage+PImageCategory.h"
 
 @interface BaseViewController : UIViewController
 

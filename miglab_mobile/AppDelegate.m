@@ -228,27 +228,16 @@
             musicViewController.hidesBottomBarWhenPushed = YES;
             friendViewController.hidesBottomBarWhenPushed = YES;
             
-            UINavigationController *navGene = [[UINavigationController alloc] initWithRootViewController:geneViewController];
-            UINavigationController *navMusic = [[UINavigationController alloc] initWithRootViewController:musicViewController];
-            UINavigationController *navFriend = [[UINavigationController alloc] initWithRootViewController:friendViewController];
-            
             //初始化TabBarViewController
             _tabBarController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-            _tabBarController.viewControllers = [NSArray arrayWithObjects:navGene, navMusic, navFriend, nil];
+            _tabBarController.viewControllers = [NSArray arrayWithObjects:geneViewController, musicViewController, friendViewController, nil];
             [_tabBarController doSelectedFirstMenu:nil];
             
-            self.window.rootViewController = _tabBarController;
+            _navController = [[UINavigationController alloc] initWithRootViewController:_tabBarController];
+            _navController.navigationBar.hidden = YES;
             
-            
-//            _tabBarController.navigationController.navigationBar.hidden = YES;
-//            _tabBarController.hidesBottomBarWhenPushed = YES;
-//            
-//            _navController = [[UINavigationController alloc] initWithRootViewController:_tabBarController];
-//            _navController.navigationBar.hidden = YES;
-//            
-//            self.window.rootViewController = _navController;
-//            [self.window addSubview:self.navController.view];
-            
+            self.window.rootViewController = _navController;
+            [self.window addSubview:self.navController.view];
             
         }
         

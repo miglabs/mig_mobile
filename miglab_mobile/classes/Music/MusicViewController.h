@@ -7,7 +7,6 @@
 //
 
 #import "PlayerViewController.h"
-
 #import "MusicPlayerNavigationView.h"
 
 @interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>

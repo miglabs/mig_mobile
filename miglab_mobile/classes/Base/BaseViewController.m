@@ -30,6 +30,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    FRAMELOG(self.view);
+    
     //bg
     UIImageView *bgImageView = [[UIImageView alloc] init];
     bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
