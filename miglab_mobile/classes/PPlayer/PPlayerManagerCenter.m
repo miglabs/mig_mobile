@@ -7,13 +7,26 @@
 //
 
 #import "PPlayerManagerCenter.h"
+#import "SongDownloadManager.h"
+#import "PDatabaseManager.h"
 #import "PAMusicPlayer.h"
 #import "PAAMusicPlayer.h"
+#import "SVProgressHUD.h"
+
+#define SONG_INIT_SIZE 30000
+
 
 @implementation PPlayerManagerCenter
 
 @synthesize playerList = _playerList;
 @synthesize dicPlayer = _dicPlayer;
+
+//正在播放的歌曲信息
+@synthesize songList = _songList;
+@synthesize currentSongIndex = _currentSongIndex;
+@synthesize currentSong = _currentSong;
+@synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
+@synthesize hasAddMoodRecord = _hasAddMoodRecord;
 
 static PPlayerManagerCenter *instance;
 
@@ -35,6 +48,9 @@ static PPlayerManagerCenter *instance;
     if (self) {
         _playerList = [[NSMutableArray alloc] init];
         _dicPlayer = [[NSMutableDictionary alloc] init];
+        //song list
+        _songList = [[NSMutableArray alloc] init];
+        _currentSongIndex = 0;
     }
     return self;
 }
@@ -117,5 +133,221 @@ static PPlayerManagerCenter *instance;
     }
     
 }
+
+//---------------------logic
+//播放控制
+-(void)doPlayOrPause{
+    
+    PLog(@"doPlayOrPause...");
+    
+    [self playCurrentSong];
+    
+}
+
+-(void)playCurrentSong{
+    
+    _currentSong = [_songList objectAtIndex:_currentSongIndex];
+    [self stopDownload];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if ([aaMusicPlayer isMusicPlaying]) {
+        [aaMusicPlayer pause];
+    } else if (aaMusicPlayer.playerDestoried) {
+        [self initSongInfo];
+    } else {
+        [aaMusicPlayer play];
+    }
+    
+}
+
+-(void)doNext{
+    
+    PLog(@"doNext...");
+    
+    if (_songList && [_songList count] > 0) {
+        
+        _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
+        _currentSong = [_songList objectAtIndex:_currentSongIndex];
+        
+        [self stopDownload];
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if ([aaMusicPlayer isMusicPlaying]) {
+            [aaMusicPlayer pause];
+        }
+        
+        [self initSongInfo];
+        
+    }
+    
+}
+
+-(void)stopDownload{
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    [songManager downloadPause];
+    
+    _shouldStartPlayAfterDownloaded = YES;
+    
+}
+
+-(void)initSongInfo{
+    
+    [self downloadSong];
+    
+}
+
+-(void)downloadSong{
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    float rate = [songManager getSongProgress:_currentSong];
+    if (rate >= 1) {
+        
+        [self initAndStartPlayer];
+        
+    } else {
+        
+        [songManager downloadStart:_currentSong delegate:self];
+        
+    }
+    
+}
+
+-(void)initAndStartPlayer{
+    
+    PLog(@"initAndStartPlayer...");
+    
+    if (!_currentSong || !_currentSong.songCachePath) {
+        PLog(@"_currentSong.songCachePath is nil...");
+        return;
+    }
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (aaMusicPlayer && [aaMusicPlayer isMusicPlaying]) {
+        return;
+    }
+    
+    aaMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [aaMusicPlayer initPlayer];
+    if (isPlayerInit) {
+        aaMusicPlayer.delegate = self;
+        [aaMusicPlayer play];
+        _hasAddMoodRecord = NO;
+        
+        [SVProgressHUD showSuccessWithStatus:@"开始播放"];
+        
+    } else {
+        
+        [aaMusicPlayer playerDestory];
+        _shouldStartPlayAfterDownloaded = YES;
+        [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
+        
+    }
+    
+}
+
+-(void)addMoodRecordFailed:(NSNotification *)tNotification{
+    [SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
+}
+
+-(void)addMoodRecordSuccess:(NSNotification *)tNotification{
+    [SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
+}
+
+#pragma PHttpDownloaderDelegate
+
+-(void)doDownloadFailed:(NSDictionary *)dicResult{
+    
+    PLog(@"doDownloadFailed...%@", dicResult);
+    
+    NSString *localkey = [dicResult objectForKey:@"LocalKey"];
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteSongInfo:[localkey longLongValue]];
+    
+    [SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
+}
+
+-(void)doDownloadProcess:(NSDictionary *)dicProcess{
+    
+//    PLog(@"downloadProcess: %@", dicProcess);
+    
+    if (_currentSong.songurl) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        songext = [songext substringFromIndex:range.location + 1];
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        long long tempfilesize = [databaseManager getSongMaxSize:_currentSong.songid type:songext];
+        if (tempfilesize <= 0) {
+            
+            long long totalBytesExpectedToRead = [[dicProcess objectForKey:@"TotalBytesExpectedToRead"] longLongValue];
+            [databaseManager setSongMaxSize:_currentSong.songid type:songext fileMaxSize:totalBytesExpectedToRead];
+            
+        }
+        
+        //
+        SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+        long long localsize = [songManager getSongLocalSize:_currentSong];
+        if (localsize < SONG_INIT_SIZE) {
+            //
+            
+        } else {
+            
+            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+            if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
+                _shouldStartPlayAfterDownloaded = NO;
+                [self initAndStartPlayer];
+            }
+            
+            
+        }
+        
+    }
+    
+}
+
+-(void)doDownloadSuccess:(NSDictionary *)dicResult{
+    
+    PLog(@"doDownloadSuccess...%@", dicResult);
+    [SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
+        _shouldStartPlayAfterDownloaded = NO;
+        [self initAndStartPlayer];
+    }
+    
+}
+
+#pragma PHttpDownloaderDelegate end
+
+#pragma PMusicPlayerDelegate
+//PAAMusicPlayer
+-(void)aaMusicPlayerTimerFunction{
+    
+    //
+    PLog(@"aaMusicPlayerTimerFunction...");
+    
+}
+
+-(void)aaMusicPlayerStoped{
+    
+}
+
+//PAMusicPlayer
+-(void)aMusicPlayerTimerFunction{
+    
+    //
+    PLog(@"aMusicPlayerTimerFunction...");
+    
+}
+
+-(void)aMusicPlayerStoped{
+    
+}
+
+#pragma PMusicPlayerDelegate end
 
 @end

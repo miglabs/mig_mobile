@@ -581,11 +581,11 @@
  <!--请求POST-->
  HTTP_ADDBLACKLIST
  */
--(void)doAddBlacklist:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
+-(void)doHateSong:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
     
-    PLog(@"add blacklist url: %@", HTTP_ADDBLACKLIST);
+    PLog(@"do hate song url: %@", HTTP_HATESONG);
     
-    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_ADDBLACKLIST]];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_HATESONG]];
     
     NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsid];
     
@@ -600,17 +600,17 @@
             
             if(1 == status) {
                 
-                PLog(@"doAddBlacklist operation succeed");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistSuccess object:nil userInfo:nil];
+                PLog(@"doHateSong operation succeed");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongSuccess object:nil userInfo:nil];
                 
             }
             else {
                 
                 NSString* msg = [dicJson objectForKey:@"msg"];
-                PLog(@"doAddBlacklist operation failed: %@", msg);
+                PLog(@"doHateSong operation failed: %@", msg);
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:dicResult];
                 
             }
             
@@ -620,15 +620,15 @@
             NSString* msg = @"解析返回数据信息失败:(";
             NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:dicResult];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:dicResult];
             
         }
         
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         
-        PLog(@"doAddBlacklist failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameAddBlacklistFailed object:nil userInfo:nil];
+        PLog(@"doHateSong failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:nil];
         
     }];
     

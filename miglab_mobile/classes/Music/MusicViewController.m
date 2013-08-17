@@ -23,8 +23,6 @@
 
 @implementation MusicViewController
 
-@synthesize navView = _navView;
-
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
@@ -43,20 +41,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    /*
-    //top
-    _navView = [[MusicPlayerNavigationView alloc] initMusicNavigationView:CGRectMake(0, 0, 320, 45)];
-    [_navView.btnAvatar addTarget:self action:@selector(doNavigationAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    _navView.lblNickName.text = @"乐瑟啊乐瑟";
-    [_navView.btnFirstMenu setTitle:@"歌单" forState:UIControlStateNormal];
-    [_navView.btnFirstMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_navView.btnFirstMenu addTarget:self action:@selector(doNavigationFirst:) forControlEvents:UIControlEventTouchUpInside];
-    [_navView.btnSecondMenu setTitle:@"歌友" forState:UIControlStateNormal];
-    [_navView.btnSecondMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_navView.btnSecondMenu addTarget:self action:@selector(doNavigationSecond:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_navView];
-    */
     
     //body
     _bodyTableView = [[UITableView alloc] init];
@@ -89,42 +73,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(IBAction)doNavigationAvatar:(id)sender{
-    
-}
-
--(IBAction)doNavigationFirst:(id)sender{
-    
-}
-
--(IBAction)doNavigationSecond:(id)sender{
-    
-}
-
-
--(IBAction)doPlayerAvatar:(id)sender{
-    
-    [super doPlayerAvatar:sender];
-    PLog(@"music doPlayerAvatar...");
-    
-}
-
--(IBAction)doDelete:(id)sender{
-    
-}
-
--(IBAction)doCollect:(id)sender{
-    
-}
-
--(IBAction)doPlayOrPause:(id)sender{
-    
-}
-
--(IBAction)doNext:(id)sender{
-    
 }
 
 #pragma mark - UITableView delegate

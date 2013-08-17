@@ -63,7 +63,7 @@
 
 -(IBAction)doAvatar:(id)sender{
     
-    PLog(@"doAvatar...");
+    PLog(@"gene doAvatar...");
     
     LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
     [_topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
@@ -79,22 +79,6 @@
     PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
     [self.navigationController presentModalViewController:playViewController animated:YES];
     [_topViewcontroller.navigationController presentModalViewController:playViewController animated:YES];
-    
-}
-
--(IBAction)doDelete:(id)sender{
-    
-}
-
--(IBAction)doCollect:(id)sender{
-    
-}
-
--(IBAction)doPlayOrPause:(id)sender{
-    
-}
-
--(IBAction)doNext:(id)sender{
     
 }
 

@@ -280,7 +280,7 @@
         [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
         
         [miglabAPI doCollectSong:accesstoken uid:userid songid:11741];
-        [miglabAPI doAddBlacklist:accesstoken uid:userid sid:99993];
+        [miglabAPI doHateSong:accesstoken uid:userid sid:99993];
         
         //获取频道
         [miglabAPI doGetChannel:userid token:accesstoken num:10];

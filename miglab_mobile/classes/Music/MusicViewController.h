@@ -7,20 +7,12 @@
 //
 
 #import "PlayerViewController.h"
-#import "MusicPlayerNavigationView.h"
 
 @interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, retain) MusicPlayerNavigationView *navView;
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
 @property (nonatomic, retain) UIViewController *topViewcontroller;
-
--(IBAction)doNavigationAvatar:(id)sender;
--(IBAction)doNavigationFirst:(id)sender;
--(IBAction)doNavigationSecond:(id)sender;
-
 
 @end

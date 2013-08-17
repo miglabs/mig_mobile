@@ -90,8 +90,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
         
         //doAddBlacklist
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistFailed:) name:NotificationNameAddBlacklistFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistSuccess:) name:NotificationNameAddBlacklistSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistFailed:) name:NotificationNameHateSongFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlacklistSuccess:) name:NotificationNameHateSongSuccess object:nil];
         
         //doCollectSong
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
@@ -132,8 +132,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicSuccess object:nil];
     
     //doAddBlacklist
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddBlacklistFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameAddBlacklistSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongSuccess object:nil];
     
     //doCollectSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
@@ -443,7 +443,7 @@
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-    [_miglabAPI doAddBlacklist:accesstoken uid:userid sid:_currentSong.songid];
+    [_miglabAPI doHateSong:accesstoken uid:userid sid:_currentSong.songid];
     
 }
 

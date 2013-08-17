@@ -20,19 +20,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "miglab_mobile/classes/Play/MainMenuViewController.m"
-         timestampString = "397233166.888645"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1200"
-         endingLineNumber = "1200"
-         landmarkName = "-doDownloadProcess:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "miglab_mobile/classes/MigLabAPI/MigLabAPI.m"
          timestampString = "398424460.82774"
          startingColumnNumber = "9223372036854775807"

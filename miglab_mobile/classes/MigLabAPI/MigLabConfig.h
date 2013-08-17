@@ -112,10 +112,10 @@
 #define NotificationNameCancelCollectedSongSuccess          @"NotificationNameCancelCollectedSongSuccess"
 #define NotificationNameCancelCollectedSongFailed           @"NotificationNameCancelCollectedSongFailed"
 
-//添加黑名单
-#define HTTP_ADDBLACKLIST                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hatsong.fcgi"]
-#define NotificationNameAddBlacklistSuccess                 @"NotificationNameAddBlacklistSuccess"
-#define NotificationNameAddBlacklistFailed                  @"NotificationNameAddBlacklistFailed"
+//歌曲拉黑
+#define HTTP_HATESONG                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hatsong.fcgi"]
+#define NotificationNameHateSongSuccess                     @"NotificationNameHateSongSuccess"
+#define NotificationNameHateSongFailed                      @"NotificationNameHateSongFailed"
 
 //赠送歌曲
 #define HTTP_PRESENTMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/sendsong.fcgi"]

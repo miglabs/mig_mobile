@@ -51,12 +51,9 @@
 -(BOOL)isMusicPlaying;
 -(void)playerPlayPause;
 
-/*
+//播放时间刷新
 -(void)timerStop;
 -(void)timerStart;
 -(void)playerTimerFunction;
-*/
-
-
 
 @end

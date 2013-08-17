@@ -77,7 +77,7 @@ typedef enum {
 /*
  歌曲拉黑
  */
--(void)doAddBlacklist:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
+-(void)doHateSong:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
 
 /*
  赠送歌曲

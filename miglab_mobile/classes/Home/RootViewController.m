@@ -11,6 +11,9 @@
 #import "MusicViewController.h"
 #import "FriendViewController.h"
 
+#import "PDatabaseManager.h"
+#import "PPlayerManagerCenter.h"
+
 @interface RootViewController ()
 
 @end
@@ -52,6 +55,19 @@
     //缓存view
     _dicViewControllerCache = [[NSMutableDictionary alloc] initWithCapacity:3];
     [self segmentAction:_rootNavMenuView.btnMenuFirst];
+    
+    //test data
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+    
+    PLog(@"rand(): %d, random(): %ld", rand(), random());
+    int songListCount = [tempSongInfoList count];
+    int rnd = rand() % songListCount;
+    
+    PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    [playerManagerCenter.songList addObjectsFromArray:tempSongInfoList];
+    playerManagerCenter.currentSongIndex = rnd;
+    playerManagerCenter.currentSong = (songListCount > 0) ? [tempSongInfoList objectAtIndex:rnd] : nil;
     
 }
 

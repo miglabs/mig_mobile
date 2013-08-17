@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PHttpDownloader.h"
+#import "PAAMusicPlayer.h"
 
 typedef enum{
     
@@ -15,10 +17,17 @@ typedef enum{
     
 } WhichPlayer;
 
-@interface PPlayerManagerCenter : NSObject
+@interface PPlayerManagerCenter : NSObject<PHttpDownloaderDelegate, PMusicPlayerDelegate>
 
 @property (nonatomic, retain) NSMutableArray *playerList;
 @property (nonatomic, retain) NSMutableDictionary *dicPlayer;
+
+//正在播放的歌曲信息
+@property (nonatomic, retain) NSMutableArray *songList;
+@property (nonatomic, assign) int currentSongIndex;
+@property (nonatomic, retain) Song *currentSong;
+@property BOOL shouldStartPlayAfterDownloaded;
+@property BOOL hasAddMoodRecord;
 
 +(PPlayerManagerCenter *)GetInstance;
 
@@ -31,5 +40,13 @@ typedef enum{
 //用于单个实例控制
 -(id)getPlayer:(WhichPlayer)whichPlayer;
 -(void)removePlayer:(WhichPlayer)whichPlayer;
+
+//播放控制
+-(void)doPlayOrPause;
+-(void)playCurrentSong;
+-(void)doNext;
+
+-(void)addMoodRecordFailed:(NSNotification *)tNotification;
+-(void)addMoodRecordSuccess:(NSNotification *)tNotification;
 
 @end
