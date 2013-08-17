@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		161F850F178032100010090F /* PAAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850C178032100010090F /* PAAMusicPlayer.m */; };
 		161F8510178032100010090F /* PAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850E178032100010090F /* PAMusicPlayer.m */; };
+		16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16212F8D17BF4E590091326E /* PTabBarViewController.m */; };
+		16212F9017BF4E590091326E /* PTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16212F8E17BF4E590091326E /* PTabBarViewController.xib */; };
+		16212F9A17BF50580091326E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16212F9817BF50580091326E /* RootViewController.m */; };
+		16212F9B17BF50580091326E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16212F9917BF50580091326E /* RootViewController.xib */; };
 		1623165D1777397600CF8FB5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316021777397600CF8FB5 /* AFHTTPClient.m */; };
 		1623165E1777397600CF8FB5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316041777397600CF8FB5 /* AFHTTPRequestOperation.m */; };
 		1623165F1777397600CF8FB5 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 162316061777397600CF8FB5 /* AFImageRequestOperation.m */; };
@@ -259,8 +263,6 @@
 		18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */; };
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
-		18E434E017BE139200DECFC7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434DE17BE139200DECFC7 /* RootViewController.m */; };
-		18E434E117BE139200DECFC7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E434DF17BE139200DECFC7 /* RootViewController.xib */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E434E517BE287100DECFC7 /* libWeChatSDK.a */; };
 		18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */; };
@@ -272,6 +274,12 @@
 		161F850C178032100010090F /* PAAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAMusicPlayer.m; sourceTree = "<group>"; };
 		161F850D178032100010090F /* PAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMusicPlayer.h; sourceTree = "<group>"; };
 		161F850E178032100010090F /* PAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAMusicPlayer.m; sourceTree = "<group>"; };
+		16212F8C17BF4E590091326E /* PTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTabBarViewController.h; sourceTree = "<group>"; };
+		16212F8D17BF4E590091326E /* PTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTabBarViewController.m; sourceTree = "<group>"; };
+		16212F8E17BF4E590091326E /* PTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTabBarViewController.xib; sourceTree = "<group>"; };
+		16212F9717BF50580091326E /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		16212F9817BF50580091326E /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		16212F9917BF50580091326E /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		162316011777397600CF8FB5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		162316021777397600CF8FB5 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		162316031777397600CF8FB5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -646,9 +654,6 @@
 		18A4512217841A0400CFFAD4 /* PDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDatabaseManager.m; sourceTree = "<group>"; };
 		18E3472B17A27A57001C46C7 /* PPlayerManagerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPlayerManagerCenter.h; sourceTree = "<group>"; };
 		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
-		18E434DD17BE139200DECFC7 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		18E434DE17BE139200DECFC7 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		18E434DF17BE139200DECFC7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationMenuView.h; sourceTree = "<group>"; };
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
 		18E434E517BE287100DECFC7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -1357,11 +1362,14 @@
 				18A451031783FCA600CFFAD4 /* RightViewController.h */,
 				18A451041783FCA600CFFAD4 /* RightViewController.m */,
 				18A451051783FCA700CFFAD4 /* RightViewController.xib */,
-				18E434DD17BE139200DECFC7 /* RootViewController.h */,
-				18E434DE17BE139200DECFC7 /* RootViewController.m */,
-				18E434DF17BE139200DECFC7 /* RootViewController.xib */,
 				18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */,
 				18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */,
+				16212F8C17BF4E590091326E /* PTabBarViewController.h */,
+				16212F8D17BF4E590091326E /* PTabBarViewController.m */,
+				16212F8E17BF4E590091326E /* PTabBarViewController.xib */,
+				16212F9717BF50580091326E /* RootViewController.h */,
+				16212F9817BF50580091326E /* RootViewController.m */,
+				16212F9917BF50580091326E /* RootViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1673,7 +1681,6 @@
 				1653DC0417BD107C00767E0E /* music_source_separator.png in Resources */,
 				1653DC1317BD158F00767E0E /* LocalViewController.xib in Resources */,
 				1653DC2D17BD221300767E0E /* LikeViewController.xib in Resources */,
-				18E434E117BE139200DECFC7 /* RootViewController.xib in Resources */,
 				165D7C8317BE5908000D08E3 /* top_navigation_bg.png in Resources */,
 				165D7C9417BE60D2000D08E3 /* GeneViewController.xib in Resources */,
 				165D7C9D17BE618C000D08E3 /* BaseViewController.xib in Resources */,
@@ -1681,6 +1688,8 @@
 				165D7CA817BE6253000D08E3 /* FriendViewController.xib in Resources */,
 				16F3521917BF241400CF9044 /* NearMusicViewController.xib in Resources */,
 				16F3521F17BF254D00CF9044 /* OnlineViewController.xib in Resources */,
+				16212F9017BF4E590091326E /* PTabBarViewController.xib in Resources */,
+				16212F9B17BF50580091326E /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1773,7 +1782,6 @@
 				1653DBF017BD094E00767E0E /* MusicSourceMenuCell.m in Sources */,
 				1653DC1217BD158F00767E0E /* LocalViewController.m in Sources */,
 				1653DC2C17BD221300767E0E /* LikeViewController.m in Sources */,
-				18E434E017BE139200DECFC7 /* RootViewController.m in Sources */,
 				18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */,
 				165D7C9317BE60D2000D08E3 /* GeneViewController.m in Sources */,
 				165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */,
@@ -1782,6 +1790,8 @@
 				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,
 				16F3521817BF241400CF9044 /* NearMusicViewController.m in Sources */,
 				16F3521E17BF254D00CF9044 /* OnlineViewController.m in Sources */,
+				16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */,
+				16212F9A17BF50580091326E /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

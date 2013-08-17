@@ -10,4 +10,6 @@
 
 @interface GeneViewController : PlayerViewController
 
+@property (nonatomic, retain) UIViewController *topViewcontroller;
+
 @end

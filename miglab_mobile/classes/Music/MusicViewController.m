@@ -28,7 +28,7 @@
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
-//@synthesize playerMenuView = _playerMenuView;
+@synthesize topViewcontroller = _topViewcontroller;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -160,21 +160,25 @@
         
         OnlineViewController *onlineViewController = [[OnlineViewController alloc] initWithNibName:@"OnlineViewController" bundle:nil];
         [self.navigationController pushViewController:onlineViewController animated:YES];
+        [_topViewcontroller.navigationController pushViewController:onlineViewController animated:YES];
         
     } else if (indexPath.row == 1) {
         
         LikeViewController *likeViewController = [[LikeViewController alloc] initWithNibName:@"LikeViewController" bundle:nil];
         [self.navigationController pushViewController:likeViewController animated:YES];
+        [_topViewcontroller.navigationController pushViewController:likeViewController animated:YES];
         
     } else if (indexPath.row == 2) {
         
         NearMusicViewController *nearMusicViewController = [[NearMusicViewController alloc] initWithNibName:@"NearMusicViewController" bundle:nil];
         [self.navigationController pushViewController:nearMusicViewController animated:YES];
+        [_topViewcontroller.navigationController pushViewController:nearMusicViewController animated:YES];
         
     } else if (indexPath.row == 3) {
         
         LocalViewController *localViewController = [[LocalViewController alloc] initWithNibName:@"LocalViewController" bundle:nil];
         [self.navigationController pushViewController:localViewController animated:YES];
+        [_topViewcontroller.navigationController pushViewController:localViewController animated:YES];
         
     }
     

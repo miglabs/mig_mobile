@@ -16,6 +16,7 @@
 
 #import "GuideViewController.h"
 
+#import "RootViewController.h"
 #import "GeneViewController.h"
 #import "MusicViewController.h"
 #import "FriendViewController.h"
@@ -157,7 +158,7 @@
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 5;
+        int initHomeViewType = 6;
         
         if (initHomeViewType == 0) {
             //
@@ -229,11 +230,28 @@
             friendViewController.hidesBottomBarWhenPushed = YES;
             
             //初始化TabBarViewController
-            _tabBarController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+            _tabBarController = [[PTabBarViewController alloc] initWithNibName:@"PTabBarViewController" bundle:nil];
             _tabBarController.viewControllers = [NSArray arrayWithObjects:geneViewController, musicViewController, friendViewController, nil];
             [_tabBarController doSelectedFirstMenu:nil];
             
             _navController = [[UINavigationController alloc] initWithRootViewController:_tabBarController];
+            _navController.navigationBar.hidden = YES;
+            
+            self.window.rootViewController = _navController;
+            [self.window addSubview:self.navController.view];
+            
+        } else if (initHomeViewType == 6) {
+            
+            GeneViewController *geneViewController = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
+            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
+            FriendViewController *friendViewController = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
+            
+            geneViewController.hidesBottomBarWhenPushed = YES;
+            musicViewController.hidesBottomBarWhenPushed = YES;
+            friendViewController.hidesBottomBarWhenPushed = YES;
+            
+            RootViewController *rootViewController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
             _navController.navigationBar.hidden = YES;
             
             self.window.rootViewController = _navController;

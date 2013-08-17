@@ -10,4 +10,6 @@
 
 @interface FriendViewController : PlayerViewController
 
+@property (nonatomic, retain) UIViewController *topViewcontroller;
+
 @end

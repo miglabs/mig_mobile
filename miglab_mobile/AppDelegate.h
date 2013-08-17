@@ -13,7 +13,7 @@
 #import "RightViewController.h"
 #import "WXApi.h"
 
-#import "RootViewController.h"
+#import "PTabBarViewController.h"
 
 @class SinaWeibo;
 
@@ -29,6 +29,6 @@
 
 @property (nonatomic, retain) SinaWeibo *sinaweibo;
 
-@property (nonatomic, retain) RootViewController *tabBarController;
+@property (nonatomic, retain) PTabBarViewController *tabBarController;
 
 @end
