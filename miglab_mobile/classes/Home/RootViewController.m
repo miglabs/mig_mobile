@@ -7,6 +7,8 @@
 //
 
 #import "RootViewController.h"
+#import "SYAppStart.h"
+
 #import "GeneViewController.h"
 #import "MusicViewController.h"
 #import "FriendViewController.h"
@@ -19,6 +21,9 @@
 @end
 
 @implementation RootViewController
+
+@synthesize isFirstWillAppear = _isFirstWillAppear;
+@synthesize isFirstDidAppear = _isFirstDidAppear;
 
 @synthesize rootNavMenuView = _rootNavMenuView;
 @synthesize dicViewControllerCache = _dicViewControllerCache;
@@ -68,6 +73,28 @@
     [playerManagerCenter.songList addObjectsFromArray:tempSongInfoList];
     playerManagerCenter.currentSongIndex = rnd;
     playerManagerCenter.currentSong = (songListCount > 0) ? [tempSongInfoList objectAtIndex:rnd] : nil;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    if (!_isFirstWillAppear) {
+        _isFirstWillAppear = YES;
+        [SYAppStart show];
+    }
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    if (!_isFirstDidAppear) {
+        _isFirstDidAppear = YES;
+        [SYAppStart hide:YES];
+    }
     
 }
 

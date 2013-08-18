@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
 		161F850F178032100010090F /* PAAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850C178032100010090F /* PAAMusicPlayer.m */; };
 		161F8510178032100010090F /* PAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850E178032100010090F /* PAMusicPlayer.m */; };
 		16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16212F8D17BF4E590091326E /* PTabBarViewController.m */; };
@@ -270,6 +271,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
+		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
 		161F850B178032100010090F /* PAAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAMusicPlayer.h; sourceTree = "<group>"; };
 		161F850C178032100010090F /* PAAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAMusicPlayer.m; sourceTree = "<group>"; };
 		161F850D178032100010090F /* PAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMusicPlayer.h; sourceTree = "<group>"; };
@@ -699,9 +702,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160E073317C076F5003F0E45 /* SYAppStart */ = {
+			isa = PBXGroup;
+			children = (
+				160E073417C076F5003F0E45 /* SYAppStart.h */,
+				160E073517C076F5003F0E45 /* SYAppStart.m */,
+			);
+			path = SYAppStart;
+			sourceTree = "<group>";
+		};
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				160E073317C076F5003F0E45 /* SYAppStart */,
 				165D7CA317BE623C000D08E3 /* Friend */,
 				165D7C9517BE618C000D08E3 /* Base */,
 				165D7C8F17BE60AA000D08E3 /* Gene */,
@@ -1792,6 +1805,7 @@
 				16F3521E17BF254D00CF9044 /* OnlineViewController.m in Sources */,
 				16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */,
 				16212F9A17BF50580091326E /* RootViewController.m in Sources */,
+				160E073617C076F5003F0E45 /* SYAppStart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

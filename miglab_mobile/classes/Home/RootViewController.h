@@ -12,6 +12,10 @@
 
 @interface RootViewController : BaseViewController
 
+//启动图标志
+@property (assign) BOOL isFirstWillAppear;
+@property (assign) BOOL isFirstDidAppear;
+
 @property (nonatomic, retain) RootNavigationMenuView *rootNavMenuView;
 @property (nonatomic, retain) NSMutableDictionary *dicViewControllerCache;
 @property (nonatomic, assign) int currentShowViewTag;

@@ -242,14 +242,6 @@
             
         } else if (initHomeViewType == 6) {
             
-            GeneViewController *geneViewController = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
-            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
-            FriendViewController *friendViewController = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
-            
-            geneViewController.hidesBottomBarWhenPushed = YES;
-            musicViewController.hidesBottomBarWhenPushed = YES;
-            friendViewController.hidesBottomBarWhenPushed = YES;
-            
             RootViewController *rootViewController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
             _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
             _navController.navigationBar.hidden = YES;
@@ -260,6 +252,9 @@
         }
         
     }//
+    
+    //显示状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     //api test
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
