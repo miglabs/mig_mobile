@@ -93,7 +93,8 @@ static UIWindow *startImageWindow = nil;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return NO;
+    return (interfaceOrientation == UIDeviceOrientationPortrait);
+//    return NO;
 }
 
 - (BOOL)shouldAutorotate {

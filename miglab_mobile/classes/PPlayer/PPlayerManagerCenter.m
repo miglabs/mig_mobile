@@ -334,6 +334,9 @@ static PPlayerManagerCenter *instance;
 
 -(void)aaMusicPlayerStoped{
     
+    PLog(@"aaMusicPlayerStoped...");
+    [self doNext];
+    
 }
 
 //PAMusicPlayer
@@ -345,6 +348,9 @@ static PPlayerManagerCenter *instance;
 }
 
 -(void)aMusicPlayerStoped{
+    
+    PLog(@"aMusicPlayerStoped...");
+    [self doNext];
     
 }
 

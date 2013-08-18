@@ -9,6 +9,7 @@
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
 #import "PlayViewController.h"
+#import "XmlParserUtil.h"
 
 @interface GeneViewController ()
 
@@ -19,6 +20,12 @@
 @synthesize topViewcontroller = _topViewcontroller;
 
 @synthesize btnAvatar = _btnAvatar;
+
+@synthesize btnGotoGene = _btnGotoGene;
+
+//音乐基因
+@synthesize geneView = _geneView;
+@synthesize btnBackFromGene = _btnBackFromGene;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +43,7 @@
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
     bodyBgImageView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    bodyBgImageView.tag = 200;
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
@@ -51,7 +59,30 @@
     [_btnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnAvatar];
     
+    
+    
+    //音乐基因
+    
+    //btnGotoGene
+    _btnGotoGene = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnGotoGene.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    [_btnGotoGene setTitle:@"goto gene" forState:UIControlStateNormal];
+    [_btnGotoGene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnGotoGene];
+    
+    //返回播放信息页面
+    [_btnBackFromGene addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
+    _geneView.frame = CGRectMake(0, 45 + 10, 320, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    [self.view addSubview:_geneView];
+    
+    
+    
+    
+    
 //    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
+    
+    //解析音乐基因
+    [NSThread detachNewThreadSelector:@selector(initGeneDataFromFile) toTarget:self withObject:nil];
     
 }
 
@@ -67,6 +98,61 @@
     
     LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
     [_topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
+    
+}
+
+-(IBAction)doGotoGene:(id)sender{
+    
+    PLog(@"doGotoGene...");
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    
+    NSInteger first = [[self.view subviews] indexOfObject:[self.view viewWithTag:200]];
+    NSInteger seconde = [[self.view subviews] indexOfObject:_geneView];
+    
+    [self.view exchangeSubviewAtIndex:first withSubviewAtIndex:seconde];
+    
+    [UIView setAnimationDelegate:self];
+    [UIView commitAnimations];
+    
+}
+
+-(IBAction)doBackFromGene:(id)sender{
+    
+    PLog(@"doBackFromGene...");
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    
+    NSInteger first = [[self.view subviews] indexOfObject:[self.view viewWithTag:200]];
+    NSInteger seconde = [[self.view subviews] indexOfObject:_geneView];
+    
+    [self.view exchangeSubviewAtIndex:seconde withSubviewAtIndex:first];
+    
+    [UIView setAnimationDelegate:self];
+    [UIView commitAnimations];
+    
+}
+
+//解析音乐基因数据
+-(void)initGeneDataFromFile{
+    
+    PLog(@"initGeneDataFromFile...");
+    
+    NSString *channelInfoXmlPath = [[NSBundle mainBundle] pathForResource:@"channelinfo" ofType:@"xml"];
+    NSLog(@"channelInfoXmlPath: %@", channelInfoXmlPath);
+    
+    NSData *channelInfoXmlData = [[NSData alloc] initWithContentsOfFile:channelInfoXmlPath];
+    
+    XmlParserUtil *xmlParserUtil = [[XmlParserUtil alloc] initWithParserDefaultElement];
+    [xmlParserUtil parserXml:channelInfoXmlData];
     
 }
 

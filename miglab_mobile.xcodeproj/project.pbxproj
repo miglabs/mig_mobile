@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
+		160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 160E073C17C08A45003F0E45 /* channelinfo.xml */; };
+		160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075317C08ECC003F0E45 /* XmlParserUtil.m */; };
+		160E075717C09C48003F0E45 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075617C09C47003F0E45 /* Scene.m */; };
+		160E075A17C09CD7003F0E45 /* Type.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075917C09CD7003F0E45 /* Type.m */; };
 		161F850F178032100010090F /* PAAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850C178032100010090F /* PAAMusicPlayer.m */; };
 		161F8510178032100010090F /* PAMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 161F850E178032100010090F /* PAMusicPlayer.m */; };
 		16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16212F8D17BF4E590091326E /* PTabBarViewController.m */; };
@@ -228,8 +232,6 @@
 		183E022D177C33A300EE8944 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E022C177C33A300EE8944 /* Song.m */; };
 		183E0237177C408E00EE8944 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E0235177C408E00EE8944 /* HomeViewController.m */; };
 		183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E0236177C408E00EE8944 /* HomeViewController.xib */; };
-		183E023D177C413800EE8944 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183E023B177C413800EE8944 /* TestViewController.m */; };
-		183E023E177C413800EE8944 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183E023C177C413800EE8944 /* TestViewController.xib */; };
 		1846483F1793A25300E83EBB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1846483C1793A25300E83EBB /* SVProgressHUD.bundle */; };
 		184648401793A25300E83EBB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846483E1793A25300E83EBB /* SVProgressHUD.m */; };
 		184648461793A60800E83EBB /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648441793A60800E83EBB /* RegisterViewController.m */; };
@@ -273,6 +275,13 @@
 /* Begin PBXFileReference section */
 		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
 		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
+		160E073C17C08A45003F0E45 /* channelinfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = channelinfo.xml; sourceTree = "<group>"; };
+		160E075217C08ECC003F0E45 /* XmlParserUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParserUtil.h; sourceTree = "<group>"; };
+		160E075317C08ECC003F0E45 /* XmlParserUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParserUtil.m; sourceTree = "<group>"; };
+		160E075517C09C47003F0E45 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		160E075617C09C47003F0E45 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
+		160E075817C09CD6003F0E45 /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
+		160E075917C09CD7003F0E45 /* Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Type.m; sourceTree = "<group>"; };
 		161F850B178032100010090F /* PAAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAAMusicPlayer.h; sourceTree = "<group>"; };
 		161F850C178032100010090F /* PAAMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAAMusicPlayer.m; sourceTree = "<group>"; };
 		161F850D178032100010090F /* PAMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAMusicPlayer.h; sourceTree = "<group>"; };
@@ -589,9 +598,6 @@
 		183E0234177C408E00EE8944 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		183E0235177C408E00EE8944 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		183E0236177C408E00EE8944 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		183E023A177C413800EE8944 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		183E023B177C413800EE8944 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		183E023C177C413800EE8944 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		1846483C1793A25300E83EBB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		1846483D1793A25300E83EBB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		1846483E1793A25300E83EBB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -733,7 +739,6 @@
 				18A451081783FD2700CFFAD4 /* DDMenuController */,
 				18A450F11783FA5E00CFFAD4 /* Manager */,
 				163BCE0F177C96DC008656D1 /* CTMBase64 */,
-				183E0239177C412D00EE8944 /* Test */,
 				183E0233177C408100EE8944 /* Home */,
 				1627EA1E177B25530049F9F5 /* DataStruct */,
 				1623168917773DC400CF8FB5 /* PPlayer */,
@@ -886,6 +891,8 @@
 				1623169317773EA800CF8FB5 /* MigLabConfig.h */,
 				163BCE0B177C9672008656D1 /* PCommonUtil.h */,
 				163BCE0C177C9672008656D1 /* PCommonUtil.m */,
+				160E075217C08ECC003F0E45 /* XmlParserUtil.h */,
+				160E075317C08ECC003F0E45 /* XmlParserUtil.m */,
 			);
 			path = MigLabAPI;
 			sourceTree = "<group>";
@@ -909,6 +916,7 @@
 		1627EA0D177B1CDB0049F9F5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				160E073C17C08A45003F0E45 /* channelinfo.xml */,
 				1627EA0E177B1CDB0049F9F5 /* qhc.caf */,
 			);
 			path = resources;
@@ -931,6 +939,10 @@
 				187EADD017A8B92000456A73 /* Mood.m */,
 				18275F2C17B3876400033AFF /* NearbyUser.h */,
 				18275F2D17B3876400033AFF /* NearbyUser.m */,
+				160E075517C09C47003F0E45 /* Scene.h */,
+				160E075617C09C47003F0E45 /* Scene.m */,
+				160E075817C09CD6003F0E45 /* Type.h */,
+				160E075917C09CD7003F0E45 /* Type.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1387,16 +1399,6 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		183E0239177C412D00EE8944 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				183E023A177C413800EE8944 /* TestViewController.h */,
-				183E023B177C413800EE8944 /* TestViewController.m */,
-				183E023C177C413800EE8944 /* TestViewController.xib */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
 		1846483B1793A25300E83EBB /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,7 +1569,6 @@
 				162316771777397600CF8FB5 /* GuideViewController.xib in Resources */,
 				1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */,
 				183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */,
-				183E023E177C413800EE8944 /* TestViewController.xib in Resources */,
 				18A451021783FC9800CFFAD4 /* LeftViewController.xib in Resources */,
 				18A451071783FCA700CFFAD4 /* RightViewController.xib in Resources */,
 				180271EF178C019800CA9488 /* Icon.jpg in Resources */,
@@ -1703,6 +1704,7 @@
 				16F3521F17BF254D00CF9044 /* OnlineViewController.xib in Resources */,
 				16212F9017BF4E590091326E /* PTabBarViewController.xib in Resources */,
 				16212F9B17BF50580091326E /* RootViewController.xib in Resources */,
+				160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1741,7 +1743,6 @@
 				1623168F17773E6F00CF8FB5 /* MigLabAPI.m in Sources */,
 				183E022D177C33A300EE8944 /* Song.m in Sources */,
 				183E0237177C408E00EE8944 /* HomeViewController.m in Sources */,
-				183E023D177C413800EE8944 /* TestViewController.m in Sources */,
 				163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */,
 				163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */,
 				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
@@ -1806,6 +1807,9 @@
 				16212F8F17BF4E590091326E /* PTabBarViewController.m in Sources */,
 				16212F9A17BF50580091326E /* RootViewController.m in Sources */,
 				160E073617C076F5003F0E45 /* SYAppStart.m in Sources */,
+				160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */,
+				160E075717C09C48003F0E45 /* Scene.m in Sources */,
+				160E075A17C09CD7003F0E45 /* Type.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

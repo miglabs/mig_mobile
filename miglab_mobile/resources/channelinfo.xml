@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<description>
+    <type>
+        <attr id = "1"  name="华语流行" dec="流行时尚元素"/>
+        <attr id = "2"  name="欧美金曲" dec="流行时尚元素"/>
+        <attr id = "3"  name="七零后"   dec="流行时尚元素"/>
+        <attr id = "4"  name="八零后"   dec="流行时尚元素"/>
+        <attr id = "5"  name="九零后"   dec="流行时尚元素"/>
+        <attr id = "6"  name="粤语经典" dec="流行时尚元素"/>
+        <attr id = "7"  name="摇滚Rock" dec="流行时尚元素"/>
+        <attr id = "8"  name="校园民谣" dec="流行时尚元素"/>
+        <attr id = "9"  name="影视同声" dec="流行时尚元素"/>
+    </type>
+    <mood>
+        <attr id = "1"  name="失恋疗伤"   dec="流行时尚元素"/>
+        <attr id = "2"  name="受到挫折"   dec="流行时尚元素"/>
+        <attr id = "3"  name="暗恋时分"   dec="流行时尚元素"/>
+        <attr id = "4"  name="寂寞孤独"   dec="流行时尚元素"/>
+        <attr id = "5"  name="思念的距离" dec="流行时尚元素"/>
+        <attr id = "6"  name="幸福甜蜜"   dec="流行时尚元素"/>
+    </mood>
+    <scenes>
+        <attr id = "1"  name="午后的下午"  dec="流行时尚元素"/>
+        <attr id = "2"  name="驾驶"       dec="流行时尚元素"/>
+        <attr id = "3"  name="工作"       dec="流行时尚元素"/>
+        <attr id = "4"  name="旅行"       dec="流行时尚元素"/>
+    </scenes>
+    <mig_channel>
+        <attr id ="1" name ="频道1" typeid="1" moodid="3" scenesid="1"/>
+        <attr id ="2" name ="频道2" typeid="2" moodid="1" scenesid="1"/>
+        <attr id ="3" name ="频道3" typeid="1" moodid="4" scenesid="1"/>
+        <attr id ="4" name ="频道4" typeid="2" moodid="1" scenesid="2"/>
+        <attr id ="5" name ="频道5" typeid="1" moodid="1" scenesid="1"/>
+        <attr id ="6" name ="频道6" typeid="1" moodid="2" scenesid="1"/>
+    </mig_channel>
+    <info_version>
+        <attr id = "1"/>
+    </info_version>
+</description>

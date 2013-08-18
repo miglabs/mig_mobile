@@ -13,6 +13,9 @@
 @property (nonatomic, retain) NSString* channelId; //频道id
 @property (nonatomic, retain) NSString* channelName; //频道名称
 @property (nonatomic, retain) NSString* channelPicUrl; //频道封面图片地址
+@property (nonatomic, assign) int typeid;
+@property (nonatomic, assign) int moodid;
+@property (nonatomic, assign) int sceneid;
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
 -(void)log;

@@ -13,6 +13,9 @@
 @synthesize channelId = _channelId;
 @synthesize channelName = _channelName;
 @synthesize channelPicUrl = _channelPicUrl;
+@synthesize typeid = _typeid;
+@synthesize moodid = _moodid;
+@synthesize sceneid = _sceneid;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict {
     
