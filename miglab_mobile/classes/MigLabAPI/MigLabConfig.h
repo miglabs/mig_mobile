@@ -199,4 +199,10 @@
 #define NotificationNameGetDefaultGuestSongsSuccess         @"NotificationNameGetDefaultGuestSongsSuccess"
 #define NotificationNameGetDefaultGuestSongsFailed          @"NotificationNameGetDefaultGuestSongsFailed"
 
+//获取收藏的歌曲(2013-08-18)
+#define HTTP_GETCLTSONGS                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getcltsongs.fcgi"]
+#define NotificationNameGetCollectedSongsSuccess            @"NotificationNameGetCollectedSongsSuccess"
+#define NotificationNameGetCollectedSongsFailed             @"NotificationNameGetCollectedSongsFailed"
+
+
 #endif

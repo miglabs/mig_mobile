@@ -1839,4 +1839,74 @@
     
 }
 
+/*
+ 获取收藏的歌曲
+ <!--请求GET-->
+ HTTP_CLTSONGS
+ */
+-(void)doGetCollectedSongs:(NSString *)uid token:(NSString *)ttoken taruid:(NSString*)ttaruid {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&taruid=%@", HTTP_GETCLTSONGS, uid, ttoken, ttaruid];
+    PLog(@"get collected songs url:%@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get collected songs succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* songlist = [dicTemp objectForKey:@"song"];
+                int songcount = [songlist count];
+                
+                NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<songcount; i++) {
+                    
+                    Song* song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    [song log];
+                    
+                    [songInfoList addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get collected music failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsFailed object:nil userInfo:dicResult];
+         
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败...";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsFailed object:nil userInfo:dicResult];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get collected songs failed");
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
 @end

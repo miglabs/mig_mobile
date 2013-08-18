@@ -58,6 +58,21 @@ typedef enum {
 
 
 /************************* 歌曲 ****************************/
+/*
+ 获取心情，场景歌曲
+ */
+-(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood num:(int)tnum;
+-(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
+
+/*
+ 获取频道的歌曲
+ */
+-(void)doGetMusicFromChannel:(NSString*)uid token:(NSString*)ttoken channel:(int)tchannel;
+
+/*
+ 获取收藏的歌曲
+ */
+-(void)doGetCollectedSongs:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid;
 
 /*
  获取默认推荐歌曲歌曲
@@ -115,11 +130,6 @@ typedef enum {
 -(void)doGetChannel:(NSString*)uid token:(NSString*)ttoken num:(int)tnum;
 
 /*
- 获取频道的歌曲
- */
--(void)doGetMusicFromChannel:(NSString*)uid token:(NSString*)ttoken channel:(int)tchannel;
-
-/*
  获取心情词描述 20130723 by pig
  */
 -(void)doGetWorkOfMood:(NSString*)uid token:(NSString*)ttoken;
@@ -128,12 +138,6 @@ typedef enum {
  获取场景词描述 20130723 by pig
  */
 -(void)doGetWorkOfScene:(NSString*)uid token:(NSString*)ttoken;
-
-/*
- 获取心情，场景歌曲
- */
--(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood num:(int)tnum;
--(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
 
 /*
  获取心绪地图
