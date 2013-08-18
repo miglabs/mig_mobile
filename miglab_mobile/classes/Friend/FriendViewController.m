@@ -8,13 +8,13 @@
 
 #import "FriendViewController.h"
 
+#import "DetailPlayerViewController.h"
+
 @interface FriendViewController ()
 
 @end
 
 @implementation FriendViewController
-
-@synthesize topViewcontroller = _topViewcontroller;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,5 +44,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//override
+-(IBAction)doPlayerAvatar:(id)sender{
+    
+    [super doPlayerAvatar:sender];
+    PLog(@"gene doPlayerAvatar...");
+    
+}
+
 
 @end

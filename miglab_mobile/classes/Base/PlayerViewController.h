@@ -12,6 +12,8 @@
 
 @interface PlayerViewController : BaseViewController
 
+@property (nonatomic, retain) UIViewController *topViewcontroller;
+
 @property (nonatomic, retain) MusicPlayerMenuView *playerMenuView;
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 

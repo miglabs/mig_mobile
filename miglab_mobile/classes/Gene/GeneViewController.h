@@ -10,8 +10,6 @@
 
 @interface GeneViewController : PlayerViewController
 
-@property (nonatomic, retain) UIViewController *topViewcontroller;
-
 @property (nonatomic, retain) EGOImageButton *btnAvatar;
 
 @property (nonatomic, retain) UIButton *btnGotoGene;        //显示音乐基因

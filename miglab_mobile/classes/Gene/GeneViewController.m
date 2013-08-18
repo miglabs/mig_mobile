@@ -8,7 +8,7 @@
 
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
-#import "PlayViewController.h"
+#import "DetailPlayerViewController.h"
 #import "XmlParserUtil.h"
 
 @interface GeneViewController ()
@@ -16,8 +16,6 @@
 @end
 
 @implementation GeneViewController
-
-@synthesize topViewcontroller = _topViewcontroller;
 
 @synthesize btnAvatar = _btnAvatar;
 
@@ -65,7 +63,7 @@
     
     //btnGotoGene
     _btnGotoGene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnGotoGene.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _btnGotoGene.frame = CGRectMake(11.5, 45 + 10 + 40, 297, kMainScreenHeight - 45 - 10  - 40 - 10 - 73 - 10);
     [_btnGotoGene setTitle:@"goto gene" forState:UIControlStateNormal];
     [_btnGotoGene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnGotoGene];
@@ -97,7 +95,7 @@
     PLog(@"gene doAvatar...");
     
     LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
-    [_topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
+    [self.topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
     
 }
 
@@ -161,10 +159,6 @@
     
     [super doPlayerAvatar:sender];
     PLog(@"gene doPlayerAvatar...");
-    
-    PlayViewController *playViewController = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil];
-    [self.navigationController presentModalViewController:playViewController animated:YES];
-    [_topViewcontroller.navigationController presentModalViewController:playViewController animated:YES];
     
 }
 

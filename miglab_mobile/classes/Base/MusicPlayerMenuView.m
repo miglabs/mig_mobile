@@ -7,8 +7,6 @@
 //
 
 #import "MusicPlayerMenuView.h"
-#import "UIImage+PImageCategory.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation MusicPlayerMenuView
 

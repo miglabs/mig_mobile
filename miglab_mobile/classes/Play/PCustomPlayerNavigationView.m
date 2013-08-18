@@ -7,7 +7,6 @@
 //
 
 #import "PCustomPlayerNavigationView.h"
-#import "UIImage+PImageCategory.h"
 
 @implementation PCustomPlayerNavigationView
 

@@ -7,16 +7,19 @@
 //
 
 #import "PlayerViewController.h"
-#import "LoginChooseViewController.h"
 #import "UserSessionManager.h"
 #import "PPlayerManagerCenter.h"
 #import "SVProgressHUD.h"
+
+#import "DetailPlayerViewController.h"
 
 @interface PlayerViewController ()
 
 @end
 
 @implementation PlayerViewController
+
+@synthesize topViewcontroller = _topViewcontroller;
 
 @synthesize playerMenuView = _playerMenuView;
 @synthesize miglabAPI = _miglabAPI;
@@ -46,6 +49,7 @@
     [_playerMenuView.btnNext addTarget:self action:@selector(doNext:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_playerMenuView];
     
+    //
     _miglabAPI = [[MigLabAPI alloc] init];
     
 }
@@ -88,8 +92,11 @@
     
     PLog(@"doPlayerAvatar...");
     
-    LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
-    [self.navigationController pushViewController:loginChooseViewController animated:YES];
+    _topViewcontroller = (_topViewcontroller != nil) ? _topViewcontroller : self;
+    
+    DetailPlayerViewController *detailPlayerViewController = [[DetailPlayerViewController alloc] initWithNibName:@"DetailPlayerViewController" bundle:nil];
+    //    [_topViewcontroller.navigationController pushViewController:detailPlayerViewController animated:YES];
+    [_topViewcontroller presentModalViewController:detailPlayerViewController animated:YES];
     
 }
 
@@ -129,6 +136,15 @@
     PLog(@"doPlayOrPause...");
     
     [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if ([aaMusicPlayer isMusicPlaying]) {
+        UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+        [_playerMenuView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    } else {
+        UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+        [_playerMenuView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+    }
     
 }
 

@@ -13,6 +13,4 @@
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
-@property (nonatomic, retain) UIViewController *topViewcontroller;
-
 @end
