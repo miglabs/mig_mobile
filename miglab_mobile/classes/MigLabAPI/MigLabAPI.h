@@ -95,6 +95,11 @@ typedef enum {
 -(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex;
 
 /*
+ 提交本地歌曲信息(2013-08-19)
+ */
+-(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
+
+/*
  收藏歌曲
  */
 -(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;

@@ -214,5 +214,10 @@
 #define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
 #define NotificationNameGetTypeSongsFailed                  @"NotificationNameGetTypeSongsFailed"
 
+//提交本地歌曲信息(2013-08-19)
+#define HTTP_RECORDLOCALSONGS                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/recordlocalsongs.fcgi"]
+#define NotificationNameRecordLocalSongsSuccess             @"NotificationNameRecordLocalSongsSuccess"
+#define NotificationNameRecordLocalSongsFailed              @"NotificationNameRecordLocalSongsFailed"
+
 
 #endif

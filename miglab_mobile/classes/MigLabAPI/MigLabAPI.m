@@ -2039,4 +2039,61 @@
     [operation start];
 }
 
+/*
+ 提交本地歌曲信息(2013-08-19)
+ <!--请求POST-->
+ HTTP_RECORDLOCALSONGS
+ */
+-(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&source=%@&urlcode=%@&name=%@", HTTP_RECORDLOCALSONGS, uid, ttoken, tsource, turlcode, tname];
+    PLog(@"record local songs url: %@", url);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:url]];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[tcontent dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        @try {
+            
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"record local songs operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"record local songs operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:dicResult];
+            
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"record local songs failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+}
+
 @end
