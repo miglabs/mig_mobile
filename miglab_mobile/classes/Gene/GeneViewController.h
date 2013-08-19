@@ -10,7 +10,7 @@
 #import "CurrentGeneView.h"
 #import "ModifyGeneView.h"
 
-@interface GeneViewController : PlayerViewController
+@interface GeneViewController : PlayerViewController<UIScrollViewDelegate>
 
 //当前基因信息
 @property (nonatomic, retain) CurrentGeneView *currentGeneView;

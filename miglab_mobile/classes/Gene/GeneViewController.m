@@ -64,6 +64,39 @@
     _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //频道
+    _modifyGeneView.channelScrollView.backgroundColor = [UIColor clearColor];
+    _modifyGeneView.channelScrollView.scrollEnabled = YES;
+    _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
+    _modifyGeneView.channelScrollView.pagingEnabled = YES;
+    _modifyGeneView.channelScrollView.delegate = self;
+    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(244 * 2, 50);
+    
+    UILabel *lblChannel = [[UILabel alloc] init];
+    lblChannel.frame = CGRectMake(44, 45 + 10 + 44 + 4, 30, 50);
+    lblChannel.backgroundColor = [UIColor clearColor];
+    lblChannel.text = [NSString stringWithFormat:@"test channel"];
+    lblChannel.textAlignment = kTextAlignmentCenter;
+    lblChannel.textColor = [UIColor redColor];
+    [_modifyGeneView.channelScrollView addSubview:lblChannel];
+    
+    for (int i=0; i<10; i++) {
+        UILabel *lblChannel = [[UILabel alloc] init];
+        lblChannel.frame = CGRectMake(0+30*i, 44 + 4, 30, 50);
+//        lblChannel.backgroundColor = [UIColor clearColor];
+        lblChannel.text = [NSString stringWithFormat:@"test-%d", i];
+        lblChannel.textAlignment = kTextAlignmentCenter;
+        lblChannel.textColor = [UIColor redColor];
+        [_modifyGeneView.channelScrollView addSubview:lblChannel];
+    }
+    
+    //类别
+    
+    //心情
+    
+    //场景
+    
     [self.view addSubview:_modifyGeneView];
     _modifyGeneView.hidden = YES;
     
