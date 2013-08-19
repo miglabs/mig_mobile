@@ -17,13 +17,11 @@
 
 @implementation GeneViewController
 
-@synthesize btnAvatar = _btnAvatar;
-
-@synthesize btnGotoGene = _btnGotoGene;
+//当前基因信息
+@synthesize currentGeneView = _currentGeneView;
 
 //音乐基因
-@synthesize geneView = _geneView;
-@synthesize btnBackFromGene = _btnBackFromGene;
+@synthesize modifyGeneView = _modifyGeneView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,42 +37,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
-    bodyBgImageView.tag = 200;
-    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    [self.view addSubview:bodyBgImageView];
-    
-    //avatar
-    UIImage *avatarNorImage = [UIImage imageWithName:@"music_default_avatar" type:@"png"];
-    _btnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:avatarNorImage];
-    _btnAvatar.frame = CGRectMake(10 + 13, 45 + 10 + 13, 36, 36);
-    _btnAvatar.layer.cornerRadius = 18;
-    _btnAvatar.layer.masksToBounds = YES;
-    _btnAvatar.layer.borderWidth = 2;
-    _btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
-    [_btnAvatar setImage:avatarNorImage forState:UIControlStateNormal];
-    [_btnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_btnAvatar];
-    
-    
+    //当前基因信息
+    NSArray *currentNib = [[NSBundle mainBundle] loadNibNamed:@"CurrentGeneView" owner:self options:nil];
+    for (id oneObject in currentNib){
+        if ([oneObject isKindOfClass:[CurrentGeneView class]]){
+            _currentGeneView = (CurrentGeneView *)oneObject;
+        }//if
+    }//for
+    _currentGeneView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
+    _currentGeneView.egoBtnAvatar.layer.cornerRadius = 22;
+    _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
+    _currentGeneView.egoBtnAvatar.layer.borderWidth = 2;
+    _currentGeneView.egoBtnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
+    [_currentGeneView.btnGotoGeneType addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_currentGeneView];
     
     //音乐基因
-    
-    //btnGotoGene
-    _btnGotoGene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnGotoGene.frame = CGRectMake(11.5, 45 + 10 + 40, 297, kMainScreenHeight - 45 - 10  - 40 - 10 - 73 - 10);
-    [_btnGotoGene setTitle:@"goto gene" forState:UIControlStateNormal];
-    [_btnGotoGene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_btnGotoGene];
-    
+    NSArray *modifyNib = [[NSBundle mainBundle] loadNibNamed:@"ModifyGeneView" owner:self options:nil];
+    for (id oneObject in modifyNib){
+        if ([oneObject isKindOfClass:[ModifyGeneView class]]){
+            _modifyGeneView = (ModifyGeneView *)oneObject;
+        }//if
+    }//for
+    _modifyGeneView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
+    _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
     //返回播放信息页面
-    [_btnBackFromGene addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
-    _geneView.frame = CGRectMake(0, 45 + 10, 320, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
-    [self.view addSubview:_geneView];
-    
-    
-    
+    [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_modifyGeneView];
+    _modifyGeneView.hidden = YES;
     
     
 //    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
@@ -108,11 +99,15 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
-    
-    NSInteger first = [[self.view subviews] indexOfObject:[self.view viewWithTag:200]];
-    NSInteger seconde = [[self.view subviews] indexOfObject:_geneView];
+    /*
+    NSInteger first = [[self.view subviews] indexOfObject:_currentGeneView];
+    NSInteger seconde = [[self.view subviews] indexOfObject:_modifyGeneView];
     
     [self.view exchangeSubviewAtIndex:first withSubviewAtIndex:seconde];
+    */
+    
+    _currentGeneView.hidden = YES;
+    _modifyGeneView.hidden = NO;
     
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
@@ -129,10 +124,8 @@
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
     
-    NSInteger first = [[self.view subviews] indexOfObject:[self.view viewWithTag:200]];
-    NSInteger seconde = [[self.view subviews] indexOfObject:_geneView];
-    
-    [self.view exchangeSubviewAtIndex:seconde withSubviewAtIndex:first];
+    _currentGeneView.hidden = NO;
+    _modifyGeneView.hidden = YES;
     
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];

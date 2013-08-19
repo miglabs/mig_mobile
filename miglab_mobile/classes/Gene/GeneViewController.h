@@ -7,16 +7,16 @@
 //
 
 #import "PlayerViewController.h"
+#import "CurrentGeneView.h"
+#import "ModifyGeneView.h"
 
 @interface GeneViewController : PlayerViewController
 
-@property (nonatomic, retain) EGOImageButton *btnAvatar;
-
-@property (nonatomic, retain) UIButton *btnGotoGene;        //显示音乐基因
+//当前基因信息
+@property (nonatomic, retain) CurrentGeneView *currentGeneView;
 
 //音乐基因
-@property (nonatomic, retain) IBOutlet UIView *geneView;
-@property (nonatomic, retain) IBOutlet UIButton *btnBackFromGene;
+@property (nonatomic, retain) ModifyGeneView *modifyGeneView;
 
 -(IBAction)doAvatar:(id)sender;
 

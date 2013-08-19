@@ -67,6 +67,16 @@
 		162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 162727A117ACB947000C79D3 /* play_btn_share_nor.png */; };
 		162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 162727A217ACB947000C79D3 /* play_btn_share_sel.png */; };
 		1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1627EA0E177B1CDB0049F9F5 /* qhc.caf */; };
+		162AAB4617C25440000E904F /* gene_choose_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4317C25440000E904F /* gene_choose_bg.png */; };
+		162AAB4717C25440000E904F /* gene_choose_bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4417C25440000E904F /* gene_choose_bg_1.png */; };
+		162AAB4B17C25451000E904F /* home_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4A17C25451000E904F /* home_navigation_bg.png */; };
+		162AAB4F17C258F0000E904F /* gene_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4C17C258F0000E904F /* gene_separator.png */; };
+		162AAB5017C258F0000E904F /* gene_src_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4D17C258F0000E904F /* gene_src_1.png */; };
+		162AAB5117C258F0000E904F /* gene_src_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB4E17C258F0000E904F /* gene_src_2.png */; };
+		162AAB5417C25CEB000E904F /* ModifyGeneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162AAB5317C25CEB000E904F /* ModifyGeneView.m */; };
+		162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5517C25D00000E904F /* ModifyGeneView.xib */; };
+		162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162AAB5817C25D25000E904F /* CurrentGeneView.m */; };
+		162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5A17C25D55000E904F /* CurrentGeneView.xib */; };
 		163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */; };
 		1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */; };
 		1637CA6B17B7A55300E6F132 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6A17B7A55300E6F132 /* libxml2.dylib */; };
@@ -372,6 +382,18 @@
 		162727A117ACB947000C79D3 /* play_btn_share_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_btn_share_nor.png; sourceTree = "<group>"; };
 		162727A217ACB947000C79D3 /* play_btn_share_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_btn_share_sel.png; sourceTree = "<group>"; };
 		1627EA0E177B1CDB0049F9F5 /* qhc.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = qhc.caf; sourceTree = "<group>"; };
+		162AAB4317C25440000E904F /* gene_choose_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_choose_bg.png; sourceTree = "<group>"; };
+		162AAB4417C25440000E904F /* gene_choose_bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_choose_bg_1.png; sourceTree = "<group>"; };
+		162AAB4A17C25451000E904F /* home_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_navigation_bg.png; sourceTree = "<group>"; };
+		162AAB4C17C258F0000E904F /* gene_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_separator.png; sourceTree = "<group>"; };
+		162AAB4D17C258F0000E904F /* gene_src_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_src_1.png; sourceTree = "<group>"; };
+		162AAB4E17C258F0000E904F /* gene_src_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_src_2.png; sourceTree = "<group>"; };
+		162AAB5217C25CEB000E904F /* ModifyGeneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyGeneView.h; sourceTree = "<group>"; };
+		162AAB5317C25CEB000E904F /* ModifyGeneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyGeneView.m; sourceTree = "<group>"; };
+		162AAB5517C25D00000E904F /* ModifyGeneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyGeneView.xib; sourceTree = "<group>"; };
+		162AAB5717C25D25000E904F /* CurrentGeneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGeneView.h; sourceTree = "<group>"; };
+		162AAB5817C25D25000E904F /* CurrentGeneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGeneView.m; sourceTree = "<group>"; };
+		162AAB5A17C25D55000E904F /* CurrentGeneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentGeneView.xib; sourceTree = "<group>"; };
 		163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PObjectCategory.h"; sourceTree = "<group>"; };
 		163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PObjectCategory.m"; sourceTree = "<group>"; };
 		1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libDoubanApiEngine.framework; sourceTree = "<group>"; };
@@ -956,6 +978,18 @@
 			path = DataStruct;
 			sourceTree = "<group>";
 		};
+		162AAB4217C25440000E904F /* gene */ = {
+			isa = PBXGroup;
+			children = (
+				162AAB4C17C258F0000E904F /* gene_separator.png */,
+				162AAB4D17C258F0000E904F /* gene_src_1.png */,
+				162AAB4E17C258F0000E904F /* gene_src_2.png */,
+				162AAB4317C25440000E904F /* gene_choose_bg.png */,
+				162AAB4417C25440000E904F /* gene_choose_bg_1.png */,
+			);
+			path = gene;
+			sourceTree = "<group>";
+		};
 		1637CA6117B7A4DF00E6F132 /* DoubanAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1102,7 @@
 		165D7C8117BE5908000D08E3 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				162AAB4A17C25451000E904F /* home_navigation_bg.png */,
 				165D7C8217BE5908000D08E3 /* top_navigation_bg.png */,
 			);
 			path = home;
@@ -1079,6 +1114,12 @@
 				165D7C9017BE60D2000D08E3 /* GeneViewController.h */,
 				165D7C9117BE60D2000D08E3 /* GeneViewController.m */,
 				165D7C9217BE60D2000D08E3 /* GeneViewController.xib */,
+				162AAB5217C25CEB000E904F /* ModifyGeneView.h */,
+				162AAB5317C25CEB000E904F /* ModifyGeneView.m */,
+				162AAB5517C25D00000E904F /* ModifyGeneView.xib */,
+				162AAB5717C25D25000E904F /* CurrentGeneView.h */,
+				162AAB5817C25D25000E904F /* CurrentGeneView.m */,
+				162AAB5A17C25D55000E904F /* CurrentGeneView.xib */,
 			);
 			path = Gene;
 			sourceTree = "<group>";
@@ -1203,6 +1244,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				162AAB4217C25440000E904F /* gene */,
 				165D7C8117BE5908000D08E3 /* home */,
 				1684763317BA613700F42172 /* music */,
 				163EA98A17A7F9B700EBD24C /* login */,
@@ -1722,6 +1764,14 @@
 				160E075F17C0A64F003F0E45 /* DetailPlayerViewController.xib in Resources */,
 				16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */,
 				16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */,
+				162AAB4617C25440000E904F /* gene_choose_bg.png in Resources */,
+				162AAB4717C25440000E904F /* gene_choose_bg_1.png in Resources */,
+				162AAB4B17C25451000E904F /* home_navigation_bg.png in Resources */,
+				162AAB4F17C258F0000E904F /* gene_separator.png in Resources */,
+				162AAB5017C258F0000E904F /* gene_src_1.png in Resources */,
+				162AAB5117C258F0000E904F /* gene_src_2.png in Resources */,
+				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
+				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1828,6 +1878,8 @@
 				160E075717C09C48003F0E45 /* Scene.m in Sources */,
 				160E075A17C09CD7003F0E45 /* Type.m in Sources */,
 				160E075E17C0A64F003F0E45 /* DetailPlayerViewController.m in Sources */,
+				162AAB5417C25CEB000E904F /* ModifyGeneView.m in Sources */,
+				162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

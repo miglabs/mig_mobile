@@ -29,7 +29,7 @@
 //    self = [super initWithFrame:CGRectMake(0, 0, 320, 45)];
     self = [super initWithFrame:frame];
     if (self) {
-        UIImage *bgImage = [UIImage imageWithName:@"top_navigation_bg" type:@"png"];
+        UIImage *bgImage = [UIImage imageWithName:@"home_navigation_bg" type:@"png"];
         UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
         bgImageView.frame = CGRectMake(0, 0, 320, 45);
         [self addSubview:bgImageView];
