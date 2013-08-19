@@ -1901,12 +1901,82 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"get collected songs failed");
+        PLog(@"get collected songs failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsFailed object:nil userInfo:nil];
     }];
     
     [operation start];
+}
+
+/*
+ 获取豆瓣的频道歌曲
+ <!--请求GET-->
+ HTTP_GETDBCHANNELSONG
+ */
+-(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&channel=%@", HTTP_GETDBCHANNELSONG, uid, ttoken, tchannel];
+    PLog(@"get douban channel song url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get douban channel song operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* songlist = [dicTemp objectForKey:@"channel"];
+                int songcount = [songlist count];
+                
+                NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<songcount; i++) {
+                    
+                    Song* song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    [song log];
+                    
+                    [songInfoList addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
+        
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongSuccess object:nil userInfo:dicResult];
+        
+            }
+            else {
+                
+                PLog(@"get douban channel song opeation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:dicResult];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get douban channel song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
 }
 
 @end

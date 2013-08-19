@@ -204,5 +204,10 @@
 #define NotificationNameGetCollectedSongsSuccess            @"NotificationNameGetCollectedSongsSuccess"
 #define NotificationNameGetCollectedSongsFailed             @"NotificationNameGetCollectedSongsFailed"
 
+//获取豆瓣的频道歌曲（2013-08-19）
+#define HTTP_GETDBCHANNELSONG                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/db_channel_song.fcgi"]
+#define NotificationNameGetDbChannelSongSuccess             @"NotificationNameGetDbChannelSongSuccess"
+#define NotificationNameGetDbChannelSongFailed              @"NotificationNameGetDbChannelSongFailed"
+
 
 #endif
