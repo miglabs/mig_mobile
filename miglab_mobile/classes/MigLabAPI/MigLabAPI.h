@@ -90,6 +90,11 @@ typedef enum {
 -(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel;
 
 /*
+ 通过整体维度获取音乐(2013-08-19)
+ */
+-(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex;
+
+/*
  收藏歌曲
  */
 -(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;

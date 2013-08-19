@@ -209,5 +209,10 @@
 #define NotificationNameGetDbChannelSongSuccess             @"NotificationNameGetDbChannelSongSuccess"
 #define NotificationNameGetDbChannelSongFailed              @"NotificationNameGetDbChannelSongFailed"
 
+//通过整体纬度获取音乐(2013-08-19)
+#define HTTP_GETTYPESONGS                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/gettypesongs.fcgi"]
+#define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
+#define NotificationNameGetTypeSongsFailed                  @"NotificationNameGetTypeSongsFailed"
+
 
 #endif
