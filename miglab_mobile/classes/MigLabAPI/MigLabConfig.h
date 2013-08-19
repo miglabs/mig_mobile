@@ -204,5 +204,20 @@
 #define NotificationNameGetCollectedSongsSuccess            @"NotificationNameGetCollectedSongsSuccess"
 #define NotificationNameGetCollectedSongsFailed             @"NotificationNameGetCollectedSongsFailed"
 
+//获取豆瓣的频道歌曲（2013-08-19）
+#define HTTP_GETDBCHANNELSONG                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/db_channel_song.fcgi"]
+#define NotificationNameGetDbChannelSongSuccess             @"NotificationNameGetDbChannelSongSuccess"
+#define NotificationNameGetDbChannelSongFailed              @"NotificationNameGetDbChannelSongFailed"
+
+//通过整体纬度获取音乐(2013-08-19)
+#define HTTP_GETTYPESONGS                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/gettypesongs.fcgi"]
+#define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
+#define NotificationNameGetTypeSongsFailed                  @"NotificationNameGetTypeSongsFailed"
+
+//提交本地歌曲信息(2013-08-19)
+#define HTTP_RECORDLOCALSONGS                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/recordlocalsongs.fcgi"]
+#define NotificationNameRecordLocalSongsSuccess             @"NotificationNameRecordLocalSongsSuccess"
+#define NotificationNameRecordLocalSongsFailed              @"NotificationNameRecordLocalSongsFailed"
+
 
 #endif

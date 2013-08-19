@@ -1901,9 +1901,196 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        PLog(@"get collected songs failed");
+        PLog(@"get collected songs failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCollectedSongsFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取豆瓣的频道歌曲
+ <!--请求GET-->
+ HTTP_GETDBCHANNELSONG
+ */
+-(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&channel=%@", HTTP_GETDBCHANNELSONG, uid, ttoken, tchannel];
+    PLog(@"get douban channel song url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get douban channel song operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* songlist = [dicTemp objectForKey:@"channel"];
+                int songcount = [songlist count];
+                
+                NSMutableArray* songInfoList = [[NSMutableArray alloc] init];
+                for (int i=0; i<songcount; i++) {
+                    
+                    Song* song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    [song log];
+                    
+                    [songInfoList addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfoList, @"result", nil];
+        
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongSuccess object:nil userInfo:dicResult];
+        
+            }
+            else {
+                
+                PLog(@"get douban channel song opeation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:dicResult];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get douban channel song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetDbChannelSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+}
+
+/*
+ 通过整体纬度获取音乐
+ <!--请求GET-->
+ HTTP_GETTYPESONGS
+ */
+-(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&moodid=%@&moodindex=%@&sceneid=%@&sceneindex=%@&channelid=%@&channelindex=%@", HTTP_GETTYPESONGS, uid, ttoken, tmoodid, tmoodindex, tsceneid, tsceneindex, tchannelid, tchannelindex];
+    PLog(@"get type songs url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get type songs operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                Song* song = [dicTemp objectForKey:@"song"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetTypeSongsSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get type songs operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetTypeSongsFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetTypeSongsFailed object:nil userInfo:dicResult];
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get type songs failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetTypeSongsFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+}
+
+/*
+ 提交本地歌曲信息(2013-08-19)
+ <!--请求POST-->
+ HTTP_RECORDLOCALSONGS
+ */
+-(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&source=%@&urlcode=%@&name=%@", HTTP_RECORDLOCALSONGS, uid, ttoken, tsource, turlcode, tname];
+    PLog(@"record local songs url: %@", url);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:url]];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[tcontent dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        @try {
+            
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"record local songs operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"record local songs operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:dicResult];
+            
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"record local songs failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordLocalSongsFailed object:nil userInfo:nil];
+        
     }];
     
     [operation start];

@@ -80,6 +80,26 @@ typedef enum {
 -(void)doGetDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
 
 /*
+ 非注册用户获取播放列表（2013-08－17）
+ */
+-(void)doGetDefaultGuestSongs;
+
+/*
+ 获取豆瓣频道歌曲(2013-08-19)
+ */
+-(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel;
+
+/*
+ 通过整体维度获取音乐(2013-08-19)
+ */
+-(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex;
+
+/*
+ 提交本地歌曲信息(2013-08-19)
+ */
+-(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
+
+/*
  收藏歌曲
  */
 -(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
@@ -163,10 +183,5 @@ typedef enum {
  查找附近的人 (2013-7-22)
  */
 -(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
-
-/*
- 非注册用户获取播放列表（2013-08－17）
- */
--(void)doGetDefaultGuestSongs;
 
 @end
