@@ -115,11 +115,6 @@ typedef enum {
 -(void)doHateSong:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
 
 /*
- 赠送歌曲
- */
--(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
-
-/*
  分享歌曲
  */
 -(void)doShareMusic:(NSString *)uid token:(NSString*)ttoken sid:(long)tsid platform:(int)tplatform;
@@ -183,5 +178,15 @@ typedef enum {
  查找附近的人 (2013-7-22)
  */
 -(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
+
+/*
+ 赠送歌曲
+ */
+-(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
+
+/*
+ 获取推送消息(2013-8-20)
+ */
+-(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec;
 
 @end

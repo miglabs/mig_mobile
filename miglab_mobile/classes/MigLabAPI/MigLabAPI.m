@@ -2096,4 +2096,42 @@
     [operation start];
 }
 
+/*
+ 获取推送消息
+ <!--请求GET-->
+ HTTP_GETPUSHMSG
+ */
+-(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&Page_index=%@&Rec_per_page=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, trec];
+    PLog(@"get push message url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get push message operation succeeded");
+                
+            }
+        }
+        @catch (NSException *exception) {
+            
+            ;
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    [operation start];
+}
+
 @end

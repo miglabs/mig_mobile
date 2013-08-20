@@ -219,5 +219,10 @@
 #define NotificationNameRecordLocalSongsSuccess             @"NotificationNameRecordLocalSongsSuccess"
 #define NotificationNameRecordLocalSongsFailed              @"NotificationNameRecordLocalSongsFailed"
 
+//获取推送消息(2013-08-20)
+#define HTTP_GETPUSHMSG                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getpushmsg.fcgi"]
+#define NotificationNameGetPushMsgSuccess                          @"NotificationNameGetPushMsgSuccess"
+#define NotificationNameGetPushMsgFailed                    @"NotificationNameGetPushMsgFailed"
+
 
 #endif
