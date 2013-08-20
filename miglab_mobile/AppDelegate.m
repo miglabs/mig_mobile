@@ -140,7 +140,9 @@
             user.userid = lastAccount.accountid;
             user.source = lastAccount.accounttype;
             [UserSessionManager GetInstance].currentUser = user;
+            [UserSessionManager GetInstance].userid = lastAccount.accountid;
             [UserSessionManager GetInstance].accesstoken = lastAccount.accesstoken;
+            [UserSessionManager GetInstance].accounttype = lastAccount.accounttype;
             [UserSessionManager GetInstance].isLoggedIn = YES;
             
         } else {

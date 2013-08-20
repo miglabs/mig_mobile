@@ -25,4 +25,15 @@
 -(IBAction)segmentAction:(id)sender;
 -(UIViewController *)getControllerBySegIndex:(int)segindex;
 
+//登录，获取用户资料
+-(void)initUserData;
+-(void)getGuestInfoFailed:(NSNotification *)tNotification;
+-(void)getGuestInfoSuccess:(NSNotification *)tNotification;
+-(void)loginFailed:(NSNotification *)tNotification;
+-(void)loginSuccess:(NSNotification *)tNotification;
+-(void)getUserInfoFailed:(NSNotification *)tNotification;
+-(void)getUserInfoSuccess:(NSNotification *)tNotification;
+-(void)getModeMusicFailed:(NSNotification *)tNotification;
+-(void)getModeMusicSuccess:(NSNotification *)tNotification;
+
 @end

@@ -11,9 +11,11 @@
 
 @interface UserSessionManager : NSObject
 
+@property (nonatomic, retain) NSString *userid;
+@property (nonatomic, retain) NSString *accesstoken;
+@property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) PUser *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;
-@property (nonatomic, retain) NSString *accesstoken;
 
 +(UserSessionManager *)GetInstance;
 

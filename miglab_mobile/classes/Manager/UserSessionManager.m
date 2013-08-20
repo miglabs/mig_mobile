@@ -10,9 +10,11 @@
 
 @implementation UserSessionManager
 
+@synthesize userid = _userid;
+@synthesize accesstoken = _accesstoken;
+@synthesize accounttype = _accounttype;
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
-@synthesize accesstoken = _accesstoken;
 
 +(UserSessionManager *)GetInstance{
     

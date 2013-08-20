@@ -16,6 +16,9 @@
 #import "PDatabaseManager.h"
 #import "PPlayerManagerCenter.h"
 
+#import "UserSessionManager.h"
+#import "SVProgressHUD.h"
+
 @interface RootViewController ()
 
 @end
@@ -36,8 +39,46 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        //doGetGuestInfo
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoFailed:) name:NotificationNameGetGuestFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGuestInfoSuccess:) name:NotificationNameGetGuestSuccess object:nil];
+        
+        //login
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:) name:NotificationNameLoginFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:NotificationNameLoginSuccess object:nil];
+        
+        //user
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
+        
+        //getModeMusic
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
+        
+        
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    //doGetGuestInfo
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetGuestFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetGuestSuccess object:nil];
+    
+    //login
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginSuccess object:nil];
+    
+    //user
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoSuccess object:nil];
+    
+    //getModeMusic
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicSuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -61,8 +102,31 @@
     _dicViewControllerCache = [[NSMutableDictionary alloc] initWithCapacity:3];
     [self segmentAction:_rootNavMenuView.btnMenuFirst];
     
-    //test data
+    
+    _miglabAPI = [[MigLabAPI alloc] init];
+    
+    //登录，获取用户资料
+    //login
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        //根据描述词获取歌曲 test
+        //随机心情词id
+        int rnd = (rand() % 6) + 1;
+        NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
+        [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
+        
+    } else {
+        
+        [self initUserData];
+        
+    }
+    
+    //test data
+    
     NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
     
     PLog(@"rand(): %d, random(): %ld", rand(), random());
@@ -186,5 +250,138 @@
     return controller;
 }
 
+//登录，获取用户资料
+-(void)initUserData{
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    AccountOf3rdParty *lastUserAccount = [databaseManager getLastLoginUserAccount];
+    if (lastUserAccount && lastUserAccount.username && lastUserAccount.password) {
+        
+        [UserSessionManager GetInstance].currentUser.username = lastUserAccount.username;
+        [UserSessionManager GetInstance].currentUser.password = lastUserAccount.password;
+        
+        [_miglabAPI doAuthLogin:lastUserAccount.username password:lastUserAccount.password];
+        
+    } else {
+        
+        [_miglabAPI doGetGuestInfo];
+        
+    }
+    
+}
+
+#pragma Miglab API notification
+
+//getGuestInfo notification
+-(void)getGuestInfoFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"getGuestInfoFailed: %@", result);
+    
+    [SVProgressHUD showErrorWithStatus:@"游客信息获取失败:("];
+    
+}
+
+-(void)getGuestInfoSuccess:(NSNotification *)tNotification{
+    
+    NSLog(@"getGuestInfoSuccess...");
+    
+    NSDictionary *result = [tNotification userInfo];
+    PUser *guest = [result objectForKey:@"result"];
+    [guest log];
+    
+    [UserSessionManager GetInstance].currentUser = guest;
+    
+    [_miglabAPI doAuthLogin:guest.username password:guest.password];
+    
+}
+
+//login notification
+-(void)loginFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"loginFailed: %@", result);
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteUserAccountByUserName:[UserSessionManager GetInstance].currentUser.username];
+    
+    [SVProgressHUD showErrorWithStatus:@"登录失败"];
+    
+}
+
+-(void)loginSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"loginSuccess: %@", result);
+    
+    NSString *accesstoken = [result objectForKey:@"AccessToken"];
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    
+    [UserSessionManager GetInstance].accesstoken = accesstoken;
+    
+    [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+}
+
+//getUserInfo notification
+-(void)getUserInfoFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSLog(@"getUserInfoFailed: %@", result);
+    [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
+    
+}
+
+-(void)getUserInfoSuccess:(NSNotification *)tNotification{
+    
+    NSDictionary* result = [tNotification userInfo];
+    NSLog(@"getUserInfoSuccess...%@", result);
+    
+    PUser* user = [result objectForKey:@"result"];
+    [user log];
+    
+    user.password = [UserSessionManager GetInstance].currentUser.password;
+    [UserSessionManager GetInstance].currentUser = user;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
+    
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    
+    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    
+    //根据描述词获取歌曲 test
+    //随机心情词id
+    int rnd = (rand() % 6) + 1;
+    NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
+    [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
+    
+}
+
+//doGetModeMusic notification
+-(void)getModeMusicFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getModeMusicFailed...%@", [result objectForKey:@"msg"]);
+    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败:("];
+    
+}
+
+-(void)getModeMusicSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getModeMusicSuccess...");
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray *songInfoList = [result objectForKey:@"result"];
+    [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
+    [[PPlayerManagerCenter GetInstance].songList addObjectsFromArray:tempsonglist];
+    
+    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
+    
+}
 
 @end
