@@ -71,20 +71,12 @@
     _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.channelScrollView.pagingEnabled = YES;
     _modifyGeneView.channelScrollView.delegate = self;
-    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(244 * 2, 50);
-    
-    UILabel *lblChannel = [[UILabel alloc] init];
-    lblChannel.frame = CGRectMake(44, 45 + 10 + 44 + 4, 30, 50);
-    lblChannel.backgroundColor = [UIColor clearColor];
-    lblChannel.text = [NSString stringWithFormat:@"test channel"];
-    lblChannel.textAlignment = kTextAlignmentCenter;
-    lblChannel.textColor = [UIColor redColor];
-    [_modifyGeneView.channelScrollView addSubview:lblChannel];
+    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(70 * 10, 50);
     
     for (int i=0; i<10; i++) {
         UILabel *lblChannel = [[UILabel alloc] init];
-        lblChannel.frame = CGRectMake(0+30*i, 44 + 4, 30, 50);
-//        lblChannel.backgroundColor = [UIColor clearColor];
+        lblChannel.frame = CGRectMake(70*i, 8, 70, 50);
+        lblChannel.backgroundColor = [UIColor clearColor];
         lblChannel.text = [NSString stringWithFormat:@"test-%d", i];
         lblChannel.textAlignment = kTextAlignmentCenter;
         lblChannel.textColor = [UIColor redColor];

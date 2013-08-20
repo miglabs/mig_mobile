@@ -7,17 +7,12 @@
 //
 
 #import "MusicViewController.h"
-#import "UIImage+PImageCategory.h"
-#import "MusicPlayerNavigationView.h"
-#import "MusicPlayerMenuView.h"
 #import "MusicSourceMenuCell.h"
 
 #import "OnlineViewController.h"
 #import "LikeViewController.h"
 #import "NearMusicViewController.h"
 #import "LocalViewController.h"
-
-#import "DetailPlayerViewController.h"
 
 @interface MusicViewController ()
 
@@ -115,25 +110,21 @@
     if (indexPath.row == 0) {
         
         OnlineViewController *onlineViewController = [[OnlineViewController alloc] initWithNibName:@"OnlineViewController" bundle:nil];
-        [self.navigationController pushViewController:onlineViewController animated:YES];
         [self.topViewcontroller.navigationController pushViewController:onlineViewController animated:YES];
         
     } else if (indexPath.row == 1) {
         
         LikeViewController *likeViewController = [[LikeViewController alloc] initWithNibName:@"LikeViewController" bundle:nil];
-        [self.navigationController pushViewController:likeViewController animated:YES];
         [self.topViewcontroller.navigationController pushViewController:likeViewController animated:YES];
         
     } else if (indexPath.row == 2) {
         
         NearMusicViewController *nearMusicViewController = [[NearMusicViewController alloc] initWithNibName:@"NearMusicViewController" bundle:nil];
-        [self.navigationController pushViewController:nearMusicViewController animated:YES];
         [self.topViewcontroller.navigationController pushViewController:nearMusicViewController animated:YES];
         
     } else if (indexPath.row == 3) {
         
         LocalViewController *localViewController = [[LocalViewController alloc] initWithNibName:@"LocalViewController" bundle:nil];
-        [self.navigationController pushViewController:localViewController animated:YES];
         [self.topViewcontroller.navigationController pushViewController:localViewController animated:YES];
         
     }

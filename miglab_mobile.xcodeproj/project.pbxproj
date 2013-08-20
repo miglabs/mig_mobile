@@ -106,6 +106,14 @@
 		163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */; };
 		163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99017A7F9B700EBD24C /* login_choose_register.png */; };
 		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
+		1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20317C3A92D009A9E3F /* MyFriendViewController.m */; };
+		1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */; };
+		1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20917C3A95D009A9E3F /* NearFriendViewController.m */; };
+		1649E20C17C3A95D009A9E3F /* NearFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20A17C3A95D009A9E3F /* NearFriendViewController.xib */; };
+		1649E21017C3A997009A9E3F /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20E17C3A997009A9E3F /* MessageViewController.m */; };
+		1649E21117C3A997009A9E3F /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20F17C3A997009A9E3F /* MessageViewController.xib */; };
+		1649E21517C3AAB5009A9E3F /* ListenMyMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E21317C3AAB5009A9E3F /* ListenMyMusicViewController.m */; };
+		1649E21617C3AAB5009A9E3F /* ListenMyMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E21417C3AAB5009A9E3F /* ListenMyMusicViewController.xib */; };
 		1653DBF017BD094E00767E0E /* MusicSourceMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1653DBEF17BD094E00767E0E /* MusicSourceMenuCell.m */; };
 		1653DBF317BD097100767E0E /* MusicSourceMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1653DBF217BD097100767E0E /* MusicSourceMenuCell.xib */; };
 		1653DBFC17BD0C6100767E0E /* music_source_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1653DBF617BD0C6100767E0E /* music_source_arrow.png */; };
@@ -460,6 +468,18 @@
 		163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_sel_88_88.png; sourceTree = "<group>"; };
 		163EA99017A7F9B700EBD24C /* login_choose_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_register.png; sourceTree = "<group>"; };
 		163EA99917A7FABE00EBD24C /* login_choose_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_board.png; sourceTree = "<group>"; };
+		1649E20217C3A92D009A9E3F /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
+		1649E20317C3A92D009A9E3F /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
+		1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFriendViewController.xib; sourceTree = "<group>"; };
+		1649E20817C3A95D009A9E3F /* NearFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearFriendViewController.h; sourceTree = "<group>"; };
+		1649E20917C3A95D009A9E3F /* NearFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearFriendViewController.m; sourceTree = "<group>"; };
+		1649E20A17C3A95D009A9E3F /* NearFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearFriendViewController.xib; sourceTree = "<group>"; };
+		1649E20D17C3A997009A9E3F /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		1649E20E17C3A997009A9E3F /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		1649E20F17C3A997009A9E3F /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		1649E21217C3AAB5009A9E3F /* ListenMyMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListenMyMusicViewController.h; sourceTree = "<group>"; };
+		1649E21317C3AAB5009A9E3F /* ListenMyMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListenMyMusicViewController.m; sourceTree = "<group>"; };
+		1649E21417C3AAB5009A9E3F /* ListenMyMusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListenMyMusicViewController.xib; sourceTree = "<group>"; };
 		1653DBEE17BD094E00767E0E /* MusicSourceMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicSourceMenuCell.h; sourceTree = "<group>"; };
 		1653DBEF17BD094E00767E0E /* MusicSourceMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicSourceMenuCell.m; sourceTree = "<group>"; };
 		1653DBF217BD097100767E0E /* MusicSourceMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicSourceMenuCell.xib; sourceTree = "<group>"; };
@@ -1149,6 +1169,18 @@
 				165D7CA417BE6253000D08E3 /* FriendViewController.h */,
 				165D7CA517BE6253000D08E3 /* FriendViewController.m */,
 				165D7CA617BE6253000D08E3 /* FriendViewController.xib */,
+				1649E20217C3A92D009A9E3F /* MyFriendViewController.h */,
+				1649E20317C3A92D009A9E3F /* MyFriendViewController.m */,
+				1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */,
+				1649E20817C3A95D009A9E3F /* NearFriendViewController.h */,
+				1649E20917C3A95D009A9E3F /* NearFriendViewController.m */,
+				1649E20A17C3A95D009A9E3F /* NearFriendViewController.xib */,
+				1649E20D17C3A997009A9E3F /* MessageViewController.h */,
+				1649E20E17C3A997009A9E3F /* MessageViewController.m */,
+				1649E20F17C3A997009A9E3F /* MessageViewController.xib */,
+				1649E21217C3AAB5009A9E3F /* ListenMyMusicViewController.h */,
+				1649E21317C3AAB5009A9E3F /* ListenMyMusicViewController.m */,
+				1649E21417C3AAB5009A9E3F /* ListenMyMusicViewController.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -1785,6 +1817,10 @@
 				162AAB5117C258F0000E904F /* gene_src_2.png in Resources */,
 				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
 				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
+				1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */,
+				1649E20C17C3A95D009A9E3F /* NearFriendViewController.xib in Resources */,
+				1649E21117C3A997009A9E3F /* MessageViewController.xib in Resources */,
+				1649E21617C3AAB5009A9E3F /* ListenMyMusicViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1894,6 +1930,10 @@
 				162AAB5417C25CEB000E904F /* ModifyGeneView.m in Sources */,
 				162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */,
 				185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */,
+				1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */,
+				1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */,
+				1649E21017C3A997009A9E3F /* MessageViewController.m in Sources */,
+				1649E21517C3AAB5009A9E3F /* ListenMyMusicViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

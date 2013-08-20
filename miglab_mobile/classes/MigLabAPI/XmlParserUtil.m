@@ -90,10 +90,10 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
     
-    PLog(@"didStartElement elementName: %@", elementName);
-    PLog(@"didStartElement namespaceURI: %@", namespaceURI);
-    PLog(@"didStartElement qName: %@", qName);
-    PLog(@"didStartElement attributeDict: %@", attributeDict);
+//    PLog(@"didStartElement elementName: %@", elementName);
+//    PLog(@"didStartElement namespaceURI: %@", namespaceURI);
+//    PLog(@"didStartElement qName: %@", qName);
+//    PLog(@"didStartElement attributeDict: %@", attributeDict);
     
     if ([elementName isEqualToString:@"type"]) {
         _currentElementValue = elementName;
@@ -158,15 +158,15 @@
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     
-    PLog(@"didEndElement elementName: %@", elementName);
-    PLog(@"didEndElement namespaceURI: %@", namespaceURI);
-    PLog(@"didEndElement qName: %@", qName);
+//    PLog(@"didEndElement elementName: %@", elementName);
+//    PLog(@"didEndElement namespaceURI: %@", namespaceURI);
+//    PLog(@"didEndElement qName: %@", qName);
     
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
     
-    PLog(@"foundCharacters string: %@", string);
+//    PLog(@"foundCharacters string: %@", string);
     
 }
 

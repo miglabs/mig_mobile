@@ -8,6 +8,9 @@
 
 #import "PlayerViewController.h"
 
-@interface FriendViewController : PlayerViewController
+@interface FriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, retain) UITableView *bodyTableView;
+@property (nonatomic, retain) NSArray *tableTitles;
 
 @end

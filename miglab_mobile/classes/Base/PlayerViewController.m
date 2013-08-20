@@ -50,6 +50,9 @@
     [self.view addSubview:_playerMenuView];
     
     //
+    _topViewcontroller = (_topViewcontroller != nil) ? _topViewcontroller : self;
+    
+    //
     _miglabAPI = [[MigLabAPI alloc] init];
     
 }
@@ -91,8 +94,6 @@
 -(IBAction)doPlayerAvatar:(id)sender{
     
     PLog(@"doPlayerAvatar...");
-    
-    _topViewcontroller = (_topViewcontroller != nil) ? _topViewcontroller : self;
     
     DetailPlayerViewController *detailPlayerViewController = [[DetailPlayerViewController alloc] initWithNibName:@"DetailPlayerViewController" bundle:nil];
     //    [_topViewcontroller.navigationController pushViewController:detailPlayerViewController animated:YES];
