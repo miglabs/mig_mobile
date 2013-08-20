@@ -258,6 +258,7 @@
 		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
+		185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F935817C330A600EBC710 /* TSLibraryImport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		187A5667179927D200221569 /* PlayBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A5666179927D200221569 /* PlayBodyView.m */; };
 		187A5669179927E800221569 /* PlayBodyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A5668179927E800221569 /* PlayBodyView.xib */; };
 		187EADD117A8B92000456A73 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = 187EADD017A8B92000456A73 /* Mood.m */; };
@@ -652,6 +653,8 @@
 		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		184648661793D4D500E83EBB /* AccountOf3rdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOf3rdParty.h; sourceTree = "<group>"; };
 		184648671793D4D500E83EBB /* AccountOf3rdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOf3rdParty.m; sourceTree = "<group>"; };
+		185F935717C330A600EBC710 /* TSLibraryImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLibraryImport.h; sourceTree = "<group>"; };
+		185F935817C330A600EBC710 /* TSLibraryImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLibraryImport.m; sourceTree = "<group>"; };
 		187A5665179927D100221569 /* PlayBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayBodyView.h; sourceTree = "<group>"; };
 		187A5666179927D200221569 /* PlayBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayBodyView.m; sourceTree = "<group>"; };
 		187A5668179927E800221569 /* PlayBodyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayBodyView.xib; sourceTree = "<group>"; };
@@ -751,6 +754,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				185F935617C330A600EBC710 /* TSLibraryImport */,
 				160E073317C076F5003F0E45 /* SYAppStart */,
 				165D7CA317BE623C000D08E3 /* Friend */,
 				165D7C9517BE618C000D08E3 /* Base */,
@@ -1541,6 +1545,15 @@
 			path = WeChatAPI;
 			sourceTree = "<group>";
 		};
+		185F935617C330A600EBC710 /* TSLibraryImport */ = {
+			isa = PBXGroup;
+			children = (
+				185F935717C330A600EBC710 /* TSLibraryImport.h */,
+				185F935817C330A600EBC710 /* TSLibraryImport.m */,
+			);
+			path = TSLibraryImport;
+			sourceTree = "<group>";
+		};
 		18A450F11783FA5E00CFFAD4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1880,6 +1893,7 @@
 				160E075E17C0A64F003F0E45 /* DetailPlayerViewController.m in Sources */,
 				162AAB5417C25CEB000E904F /* ModifyGeneView.m in Sources */,
 				162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */,
+				185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

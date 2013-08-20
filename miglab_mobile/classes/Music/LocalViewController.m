@@ -7,6 +7,8 @@
 //
 
 #import "LocalViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "TSLibraryImport.h"
 
 @interface LocalViewController ()
 
@@ -40,6 +42,9 @@
     [_navView.leftButton setHidden:NO];
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     
+    //test
+//    [self getSongListFromIPod];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +55,74 @@
 
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)getSongListFromIPod{
+    
+    NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pigDirectory = [[cachesDirectory stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]] stringByAppendingPathComponent:@"pig"];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:pigDirectory isDirectory:NULL])
+    {
+        NSError *error;
+        if (![fm createDirectoryAtPath:pigDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+            [NSException raise:@"Exception" format:[error localizedDescription]];
+        }
+    }
+    
+    MPMediaQuery *videoQuery = [[MPMediaQuery alloc] init];
+    NSArray *mediaItems = [videoQuery items];
+    for (MPMediaItem *mediaItem in mediaItems){
+        
+        NSURL *URL = (NSURL*)[mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
+        
+        if (URL) {
+            NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
+            NSString *artist = (NSString*)[mediaItem valueForProperty:MPMediaItemPropertyArtist];
+            NSString *music = [URL absoluteString];
+            
+            NSLog(@"name(%@), artist(%@), musicUrl(%@)", name, artist, music);
+            
+            
+            
+            
+        }
+    }
+    
+    __block int currentMediaIndex = 0;
+    if ([mediaItems count] > 0) {
+        
+        MPMediaItem *mediaItem = [mediaItems objectAtIndex:currentMediaIndex];
+        NSURL *mediaItemUrl = [mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
+        NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
+        
+        NSString *file = [NSString stringWithFormat:@"%@/%@", pigDirectory, name];
+        NSURL *dstUrl = [NSURL fileURLWithPath:file];
+        
+        TSLibraryImport *export = [[TSLibraryImport alloc] init];
+        [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
+            
+            currentMediaIndex++;
+            
+            MPMediaItem *mediaItem = [mediaItems objectAtIndex:currentMediaIndex];
+            NSURL *mediaItemUrl = [mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
+            NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
+            
+            NSString *file = [NSString stringWithFormat:@"%@/%@", pigDirectory, name];
+            NSURL *dstUrl = [NSURL fileURLWithPath:file];
+            
+            TSLibraryImport *export = [[TSLibraryImport alloc] init];
+            [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
+                
+                NSLog(@"complete...");
+                
+            }];
+            
+        }];
+        
+    }
+    
 }
 
 @end
