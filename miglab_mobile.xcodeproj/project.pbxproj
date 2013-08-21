@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
+		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
+		1604F0CE17C4DF680072A0D8 /* music_source_sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CD17C4DF680072A0D8 /* music_source_sort.png */; };
+		1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */; };
+		1604F0D517C4E6140072A0D8 /* music_comment_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0D017C4E6140072A0D8 /* music_comment_bg.png */; };
+		1604F0D617C4E6140072A0D8 /* music_comment_button_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0D117C4E6140072A0D8 /* music_comment_button_send.png */; };
+		1604F0D717C4E6140072A0D8 /* music_comment_input_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0D217C4E6140072A0D8 /* music_comment_input_bg.png */; };
+		1604F0D817C4E6140072A0D8 /* music_comment_player_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0D317C4E6140072A0D8 /* music_comment_player_bg.png */; };
+		1604F0DC17C4E8180072A0D8 /* MusicCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0DA17C4E8180072A0D8 /* MusicCommentViewController.m */; };
+		1604F0DD17C4E8180072A0D8 /* MusicCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0DB17C4E8180072A0D8 /* MusicCommentViewController.xib */; };
+		1604F0DF17C4E9350072A0D8 /* music_comment_player_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0DE17C4E9350072A0D8 /* music_comment_player_1.png */; };
+		1604F0E217C4EA1C0072A0D8 /* MusicCommentPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0E117C4EA1C0072A0D8 /* MusicCommentPlayerView.m */; };
+		1604F0E417C4EA710072A0D8 /* MusicCommentPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0E317C4EA710072A0D8 /* MusicCommentPlayerView.xib */; };
+		1604F0E717C4F0790072A0D8 /* MusicCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0E617C4F0790072A0D8 /* MusicCommentCell.m */; };
+		1604F0E917C4F0950072A0D8 /* MusicCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0E817C4F0950072A0D8 /* MusicCommentCell.xib */; };
+		1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */; };
+		1604F0EE17C4F2F80072A0D8 /* MusicCommentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */; };
 		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
 		160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 160E073C17C08A45003F0E45 /* channelinfo.xml */; };
 		160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075317C08ECC003F0E45 /* XmlParserUtil.m */; };
@@ -301,6 +318,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
+		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
+		1604F0CD17C4DF680072A0D8 /* music_source_sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_source_sort.png; sourceTree = "<group>"; };
+		1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_avatar_big.png; sourceTree = "<group>"; };
+		1604F0D017C4E6140072A0D8 /* music_comment_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_bg.png; sourceTree = "<group>"; };
+		1604F0D117C4E6140072A0D8 /* music_comment_button_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_button_send.png; sourceTree = "<group>"; };
+		1604F0D217C4E6140072A0D8 /* music_comment_input_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_input_bg.png; sourceTree = "<group>"; };
+		1604F0D317C4E6140072A0D8 /* music_comment_player_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_player_bg.png; sourceTree = "<group>"; };
+		1604F0D917C4E8170072A0D8 /* MusicCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicCommentViewController.h; sourceTree = "<group>"; };
+		1604F0DA17C4E8180072A0D8 /* MusicCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicCommentViewController.m; sourceTree = "<group>"; };
+		1604F0DB17C4E8180072A0D8 /* MusicCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentViewController.xib; sourceTree = "<group>"; };
+		1604F0DE17C4E9350072A0D8 /* music_comment_player_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_player_1.png; sourceTree = "<group>"; };
+		1604F0E017C4EA1C0072A0D8 /* MusicCommentPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicCommentPlayerView.h; sourceTree = "<group>"; };
+		1604F0E117C4EA1C0072A0D8 /* MusicCommentPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicCommentPlayerView.m; sourceTree = "<group>"; };
+		1604F0E317C4EA710072A0D8 /* MusicCommentPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentPlayerView.xib; sourceTree = "<group>"; };
+		1604F0E517C4F0790072A0D8 /* MusicCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicCommentCell.h; sourceTree = "<group>"; };
+		1604F0E617C4F0790072A0D8 /* MusicCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicCommentCell.m; sourceTree = "<group>"; };
+		1604F0E817C4F0950072A0D8 /* MusicCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentCell.xib; sourceTree = "<group>"; };
+		1604F0EA17C4F2E60072A0D8 /* MusicCommentInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicCommentInputView.h; sourceTree = "<group>"; };
+		1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicCommentInputView.m; sourceTree = "<group>"; };
+		1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentInputView.xib; sourceTree = "<group>"; };
 		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
 		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
 		160E073C17C08A45003F0E45 /* channelinfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = channelinfo.xml; sourceTree = "<group>"; };
@@ -1133,6 +1171,7 @@
 		1653DBF417BD0C6100767E0E /* music_source_menu */ = {
 			isa = PBXGroup;
 			children = (
+				1604F0CD17C4DF680072A0D8 /* music_source_sort.png */,
 				1653DC0317BD107C00767E0E /* music_source_separator.png */,
 				1653DC0117BD0C9300767E0E /* music_source_menu_like.png */,
 				1653DBF617BD0C6100767E0E /* music_source_arrow.png */,
@@ -1247,6 +1286,18 @@
 				1649E21E17C3B720009A9E3F /* MusicSongCell.h */,
 				1649E21F17C3B720009A9E3F /* MusicSongCell.m */,
 				1649E22117C3BB3C009A9E3F /* MusicSongCell.xib */,
+				1604F0D917C4E8170072A0D8 /* MusicCommentViewController.h */,
+				1604F0DA17C4E8180072A0D8 /* MusicCommentViewController.m */,
+				1604F0DB17C4E8180072A0D8 /* MusicCommentViewController.xib */,
+				1604F0E017C4EA1C0072A0D8 /* MusicCommentPlayerView.h */,
+				1604F0E117C4EA1C0072A0D8 /* MusicCommentPlayerView.m */,
+				1604F0E317C4EA710072A0D8 /* MusicCommentPlayerView.xib */,
+				1604F0E517C4F0790072A0D8 /* MusicCommentCell.h */,
+				1604F0E617C4F0790072A0D8 /* MusicCommentCell.m */,
+				1604F0E817C4F0950072A0D8 /* MusicCommentCell.xib */,
+				1604F0EA17C4F2E60072A0D8 /* MusicCommentInputView.h */,
+				1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */,
+				1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -1254,6 +1305,14 @@
 		1684763317BA613700F42172 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				1604F0DE17C4E9350072A0D8 /* music_comment_player_1.png */,
+				1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */,
+				1604F0D017C4E6140072A0D8 /* music_comment_bg.png */,
+				1604F0D117C4E6140072A0D8 /* music_comment_button_send.png */,
+				1604F0D217C4E6140072A0D8 /* music_comment_input_bg.png */,
+				1604F0D317C4E6140072A0D8 /* music_comment_player_bg.png */,
+				1604F0C817C4D9650072A0D8 /* music_button_search.png */,
+				1604F0C917C4D9650072A0D8 /* music_song_avatar.png */,
 				1649E21717C3B6A0009A9E3F /* music_song */,
 				16E4588A17C0C3CB00D25475 /* music_menu_stop_nor.png */,
 				16E4588517C0C26700D25475 /* music_menu_light_heart_nor.png */,
@@ -1850,6 +1909,19 @@
 				1649E21C17C3B6A0009A9E3F /* music_song_sel.png in Resources */,
 				1649E21D17C3B6A0009A9E3F /* music_song_unsel.png in Resources */,
 				1649E22217C3BB3C009A9E3F /* MusicSongCell.xib in Resources */,
+				1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */,
+				1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */,
+				1604F0CE17C4DF680072A0D8 /* music_source_sort.png in Resources */,
+				1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */,
+				1604F0D517C4E6140072A0D8 /* music_comment_bg.png in Resources */,
+				1604F0D617C4E6140072A0D8 /* music_comment_button_send.png in Resources */,
+				1604F0D717C4E6140072A0D8 /* music_comment_input_bg.png in Resources */,
+				1604F0D817C4E6140072A0D8 /* music_comment_player_bg.png in Resources */,
+				1604F0DD17C4E8180072A0D8 /* MusicCommentViewController.xib in Resources */,
+				1604F0DF17C4E9350072A0D8 /* music_comment_player_1.png in Resources */,
+				1604F0E417C4EA710072A0D8 /* MusicCommentPlayerView.xib in Resources */,
+				1604F0E917C4F0950072A0D8 /* MusicCommentCell.xib in Resources */,
+				1604F0EE17C4F2F80072A0D8 /* MusicCommentInputView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1964,6 +2036,10 @@
 				1649E21017C3A997009A9E3F /* MessageViewController.m in Sources */,
 				1649E21517C3AAB5009A9E3F /* ListenMyMusicViewController.m in Sources */,
 				1649E22017C3B720009A9E3F /* MusicSongCell.m in Sources */,
+				1604F0DC17C4E8180072A0D8 /* MusicCommentViewController.m in Sources */,
+				1604F0E217C4EA1C0072A0D8 /* MusicCommentPlayerView.m in Sources */,
+				1604F0E717C4F0790072A0D8 /* MusicCommentCell.m in Sources */,
+				1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

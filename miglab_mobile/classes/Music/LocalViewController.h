@@ -8,10 +8,16 @@
 
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
+#import "MigLabAPI.h"
 
-@interface LocalViewController : PlayerViewController
+@interface LocalViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
+
+@property (nonatomic, retain) UITableView *songTableView;
+@property (nonatomic, retain) NSMutableArray *songList;
+
+@property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(IBAction)doBack:(id)sender;
 

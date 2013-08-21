@@ -10,6 +10,7 @@
 #import "MusicSongCell.h"
 #import "Song.h"
 #import "PDatabaseManager.h"
+#import "MusicCommentViewController.h"
 
 @interface LikeViewController ()
 
@@ -56,6 +57,19 @@
     [self.view addSubview:bodyBgImageView];
     
     //body head
+    UILabel *lblDesc = [[UILabel alloc] init];
+    lblDesc.frame = CGRectMake(16, 10, 140, 21);
+    lblDesc.backgroundColor = [UIColor clearColor];
+    lblDesc.font = [UIFont systemFontOfSize:15.0f];
+    lblDesc.text = @"优先推荐以下歌曲";
+    lblDesc.textAlignment = kTextAlignmentLeft;
+    lblDesc.textColor = [UIColor whiteColor];
+    
+    UIButton *btnSort = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnSort.frame = CGRectMake(162, 8, 58, 28);
+    UIImage *sortNorImage = [UIImage imageWithName:@"music_source_sort" type:@"png"];
+    [btnSort setImage:sortNorImage forState:UIControlStateNormal];
+    
     UIButton *btnEdit = [UIButton buttonWithType:UIButtonTypeCustom];
     btnEdit.frame = CGRectMake(230, 8, 58, 28);
     UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
@@ -67,6 +81,8 @@
     
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(11.5, 45 + 10, 297, 45);
+    [headerView addSubview:lblDesc];
+    [headerView addSubview:btnSort];
     [headerView addSubview:btnEdit];
     [headerView addSubview:separatorImageView];
     [self.view addSubview:headerView];
@@ -107,6 +123,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
+    Song *tempsong = [_songList objectAtIndex:indexPath.row];
+    
+    MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
+    musicCommentViewController.song = tempsong;
+    [self.navigationController pushViewController:musicCommentViewController animated:YES];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
@@ -130,6 +152,7 @@
     
     Song *tempsong = [_songList objectAtIndex:indexPath.row];
     cell.lblSongName.text = tempsong.songname;
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
