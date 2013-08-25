@@ -252,6 +252,21 @@
 		16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1717A9638F00DA628D /* login_edit1_bg.png */; };
 		16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C10E1D17A9673300DA628D /* GetPasswordViewController.m */; };
 		16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */; };
+		16D0DAF217C9E32700EB763F /* FriendOfPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */; };
+		16D0DAF317C9E32700EB763F /* FriendOfPhotoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DAF117C9E32700EB763F /* FriendOfPhotoListViewController.xib */; };
+		16D0DAF717C9E42700EB763F /* FriendOfRecommendMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAF517C9E42700EB763F /* FriendOfRecommendMusicViewController.m */; };
+		16D0DAF817C9E42700EB763F /* FriendOfRecommendMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DAF617C9E42700EB763F /* FriendOfRecommendMusicViewController.xib */; };
+		16D0DAFC17C9E47D00EB763F /* FriendOfChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAFA17C9E47D00EB763F /* FriendOfChatViewController.m */; };
+		16D0DAFD17C9E47D00EB763F /* FriendOfChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DAFB17C9E47D00EB763F /* FriendOfChatViewController.xib */; };
+		16D0DB0117C9E4E300EB763F /* FriendOfMusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAFF17C9E4E200EB763F /* FriendOfMusicListViewController.m */; };
+		16D0DB0217C9E4E300EB763F /* FriendOfMusicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB0017C9E4E200EB763F /* FriendOfMusicListViewController.xib */; };
+		16D0DB0617C9E9A200EB763F /* FriendOfReceiveHiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB0417C9E9A100EB763F /* FriendOfReceiveHiViewController.m */; };
+		16D0DB0717C9E9A200EB763F /* FriendOfReceiveHiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB0517C9E9A100EB763F /* FriendOfReceiveHiViewController.xib */; };
+		16D0DB0B17C9EA2600EB763F /* FriendOfReceiveMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB0917C9EA2500EB763F /* FriendOfReceiveMusicViewController.m */; };
+		16D0DB0C17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB0A17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib */; };
+		16D0DB0F17C9F11800EB763F /* MessageInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB0E17C9F11700EB763F /* MessageInfoCell.m */; };
+		16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */; };
+		16D0DB1417C9F3E900EB763F /* MessageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB1317C9F3E900EB763F /* MessageInfo.m */; };
 		16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E4588517C0C26700D25475 /* music_menu_light_heart_nor.png */; };
 		16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E4588A17C0C3CB00D25475 /* music_menu_stop_nor.png */; };
 		16E77E1D178DA518006A24A6 /* PCustomPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */; };
@@ -697,6 +712,29 @@
 		16C10E1C17A9673300DA628D /* GetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPasswordViewController.h; sourceTree = "<group>"; };
 		16C10E1D17A9673300DA628D /* GetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPasswordViewController.m; sourceTree = "<group>"; };
 		16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetPasswordViewController.xib; sourceTree = "<group>"; };
+		16D0DAEF17C9E32700EB763F /* FriendOfPhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfPhotoListViewController.h; sourceTree = "<group>"; };
+		16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfPhotoListViewController.m; sourceTree = "<group>"; };
+		16D0DAF117C9E32700EB763F /* FriendOfPhotoListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfPhotoListViewController.xib; sourceTree = "<group>"; };
+		16D0DAF417C9E42700EB763F /* FriendOfRecommendMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfRecommendMusicViewController.h; sourceTree = "<group>"; };
+		16D0DAF517C9E42700EB763F /* FriendOfRecommendMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfRecommendMusicViewController.m; sourceTree = "<group>"; };
+		16D0DAF617C9E42700EB763F /* FriendOfRecommendMusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfRecommendMusicViewController.xib; sourceTree = "<group>"; };
+		16D0DAF917C9E47D00EB763F /* FriendOfChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfChatViewController.h; sourceTree = "<group>"; };
+		16D0DAFA17C9E47D00EB763F /* FriendOfChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfChatViewController.m; sourceTree = "<group>"; };
+		16D0DAFB17C9E47D00EB763F /* FriendOfChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfChatViewController.xib; sourceTree = "<group>"; };
+		16D0DAFE17C9E4E200EB763F /* FriendOfMusicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfMusicListViewController.h; sourceTree = "<group>"; };
+		16D0DAFF17C9E4E200EB763F /* FriendOfMusicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfMusicListViewController.m; sourceTree = "<group>"; };
+		16D0DB0017C9E4E200EB763F /* FriendOfMusicListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfMusicListViewController.xib; sourceTree = "<group>"; };
+		16D0DB0317C9E9A000EB763F /* FriendOfReceiveHiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfReceiveHiViewController.h; sourceTree = "<group>"; };
+		16D0DB0417C9E9A100EB763F /* FriendOfReceiveHiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfReceiveHiViewController.m; sourceTree = "<group>"; };
+		16D0DB0517C9E9A100EB763F /* FriendOfReceiveHiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfReceiveHiViewController.xib; sourceTree = "<group>"; };
+		16D0DB0817C9EA2400EB763F /* FriendOfReceiveMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfReceiveMusicViewController.h; sourceTree = "<group>"; };
+		16D0DB0917C9EA2500EB763F /* FriendOfReceiveMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfReceiveMusicViewController.m; sourceTree = "<group>"; };
+		16D0DB0A17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfReceiveMusicViewController.xib; sourceTree = "<group>"; };
+		16D0DB0D17C9F11500EB763F /* MessageInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfoCell.h; sourceTree = "<group>"; };
+		16D0DB0E17C9F11700EB763F /* MessageInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfoCell.m; sourceTree = "<group>"; };
+		16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageInfoCell.xib; sourceTree = "<group>"; };
+		16D0DB1217C9F3E900EB763F /* MessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfo.h; sourceTree = "<group>"; };
+		16D0DB1317C9F3E900EB763F /* MessageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfo.m; sourceTree = "<group>"; };
 		16E4588517C0C26700D25475 /* music_menu_light_heart_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_light_heart_nor.png; sourceTree = "<group>"; };
 		16E4588A17C0C3CB00D25475 /* music_menu_stop_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_stop_nor.png; sourceTree = "<group>"; };
 		16E77E16178DA518006A24A6 /* PCustomPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerMenuView.h; sourceTree = "<group>"; };
@@ -1142,6 +1180,8 @@
 				160E075617C09C47003F0E45 /* Scene.m */,
 				160E075817C09CD6003F0E45 /* Type.h */,
 				160E075917C09CD7003F0E45 /* Type.m */,
+				16D0DB1217C9F3E900EB763F /* MessageInfo.h */,
+				16D0DB1317C9F3E900EB763F /* MessageInfo.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1354,6 +1394,27 @@
 				1624BC4A17C7AAB100BE08A5 /* MyFriendPersonalPageViewController.h */,
 				1624BC4B17C7AAB200BE08A5 /* MyFriendPersonalPageViewController.m */,
 				1624BC4C17C7AAB300BE08A5 /* MyFriendPersonalPageViewController.xib */,
+				16D0DAEF17C9E32700EB763F /* FriendOfPhotoListViewController.h */,
+				16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */,
+				16D0DAF117C9E32700EB763F /* FriendOfPhotoListViewController.xib */,
+				16D0DAF417C9E42700EB763F /* FriendOfRecommendMusicViewController.h */,
+				16D0DAF517C9E42700EB763F /* FriendOfRecommendMusicViewController.m */,
+				16D0DAF617C9E42700EB763F /* FriendOfRecommendMusicViewController.xib */,
+				16D0DAF917C9E47D00EB763F /* FriendOfChatViewController.h */,
+				16D0DAFA17C9E47D00EB763F /* FriendOfChatViewController.m */,
+				16D0DAFB17C9E47D00EB763F /* FriendOfChatViewController.xib */,
+				16D0DAFE17C9E4E200EB763F /* FriendOfMusicListViewController.h */,
+				16D0DAFF17C9E4E200EB763F /* FriendOfMusicListViewController.m */,
+				16D0DB0017C9E4E200EB763F /* FriendOfMusicListViewController.xib */,
+				16D0DB0317C9E9A000EB763F /* FriendOfReceiveHiViewController.h */,
+				16D0DB0417C9E9A100EB763F /* FriendOfReceiveHiViewController.m */,
+				16D0DB0517C9E9A100EB763F /* FriendOfReceiveHiViewController.xib */,
+				16D0DB0817C9EA2400EB763F /* FriendOfReceiveMusicViewController.h */,
+				16D0DB0917C9EA2500EB763F /* FriendOfReceiveMusicViewController.m */,
+				16D0DB0A17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib */,
+				16D0DB0D17C9F11500EB763F /* MessageInfoCell.h */,
+				16D0DB0E17C9F11700EB763F /* MessageInfoCell.m */,
+				16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2063,6 +2124,13 @@
 				1624BC4817C7A67800BE08A5 /* user_gender_female.png in Resources */,
 				1624BC4917C7A67800BE08A5 /* user_gender_male.png in Resources */,
 				1624BC4E17C7AAB400BE08A5 /* MyFriendPersonalPageViewController.xib in Resources */,
+				16D0DAF317C9E32700EB763F /* FriendOfPhotoListViewController.xib in Resources */,
+				16D0DAF817C9E42700EB763F /* FriendOfRecommendMusicViewController.xib in Resources */,
+				16D0DAFD17C9E47D00EB763F /* FriendOfChatViewController.xib in Resources */,
+				16D0DB0217C9E4E300EB763F /* FriendOfMusicListViewController.xib in Resources */,
+				16D0DB0717C9E9A200EB763F /* FriendOfReceiveHiViewController.xib in Resources */,
+				16D0DB0C17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib in Resources */,
+				16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2186,6 +2254,14 @@
 				1624BC2C17C79E7A00BE08A5 /* FriendSearchView.m in Sources */,
 				1624BC4117C7A3BB00BE08A5 /* FriendInfoCell.m in Sources */,
 				1624BC4D17C7AAB400BE08A5 /* MyFriendPersonalPageViewController.m in Sources */,
+				16D0DAF217C9E32700EB763F /* FriendOfPhotoListViewController.m in Sources */,
+				16D0DAF717C9E42700EB763F /* FriendOfRecommendMusicViewController.m in Sources */,
+				16D0DAFC17C9E47D00EB763F /* FriendOfChatViewController.m in Sources */,
+				16D0DB0117C9E4E300EB763F /* FriendOfMusicListViewController.m in Sources */,
+				16D0DB0617C9E9A200EB763F /* FriendOfReceiveHiViewController.m in Sources */,
+				16D0DB0B17C9EA2600EB763F /* FriendOfReceiveMusicViewController.m in Sources */,
+				16D0DB0F17C9F11800EB763F /* MessageInfoCell.m in Sources */,
+				16D0DB1417C9F3E900EB763F /* MessageInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

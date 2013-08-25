@@ -1,18 +1,18 @@
 //
-//  FriendOfSayHiViewController.m
+//  FriendOfPhotoListViewController.m
 //  miglab_mobile
 //
-//  Created by pig on 13-8-23.
+//  Created by pig on 13-8-25.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "FriendOfSayHiViewController.h"
+#import "FriendOfPhotoListViewController.h"
 
-@interface FriendOfSayHiViewController ()
+@interface FriendOfPhotoListViewController ()
 
 @end
 
-@implementation FriendOfSayHiViewController
+@implementation FriendOfPhotoListViewController
 
 @synthesize navView = _navView;
 
@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"打招呼" bgImageView:@"login_navigation_bg"];
+    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"照片" bgImageView:@"login_navigation_bg"];
     [self.view addSubview:_navView];
     
     UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
@@ -52,5 +52,6 @@
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

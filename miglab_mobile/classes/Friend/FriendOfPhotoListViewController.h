@@ -1,15 +1,15 @@
 //
-//  FriendOfSayHiViewController.h
+//  FriendOfPhotoListViewController.h
 //  miglab_mobile
 //
-//  Created by pig on 13-8-23.
+//  Created by pig on 13-8-25.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
 
-@interface FriendOfSayHiViewController : PlayerViewController
+@interface FriendOfPhotoListViewController : PlayerViewController
 
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
 

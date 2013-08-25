@@ -7,6 +7,9 @@
 //
 
 #import "NearFriendViewController.h"
+#import "FriendInfoCell.h"
+#import "PUser.h"
+#import "MyFriendPersonalPageViewController.h"
 
 @interface NearFriendViewController ()
 
@@ -15,6 +18,9 @@
 @implementation NearFriendViewController
 
 @synthesize navView = _navView;
+
+@synthesize friendTableView = _friendTableView;
+@synthesize friendList = _friendList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +46,31 @@
     [_navView.leftButton setHidden:NO];
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     
+    //附近歌友
+    _friendTableView = [[UITableView alloc] init];
+    _friendTableView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    _friendTableView.dataSource = self;
+    _friendTableView.delegate = self;
+    _friendTableView.backgroundColor = [UIColor clearColor];
+    _friendTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIImageView *bodyBgImageView = [[UIImageView alloc] init];
+    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
+    _friendTableView.backgroundView = bodyBgImageView;
+    [self.view addSubview:_friendTableView];
+    
+    //
+    _friendList = [[NSMutableArray alloc] init];
+    
+    //test data
+    PUser *testfriend = [[PUser alloc] init];
+    testfriend.nickname = @"猫王爱淘汰";
+    [_friendList addObject:testfriend];
+    
+    PUser *testfriend1 = [[PUser alloc] init];
+    testfriend1.nickname = @"乐瑟乐瑟";
+    [_friendList addObject:testfriend1];
     
 }
 
@@ -51,6 +82,49 @@
 
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UITableView delegate
+
+// Called after the user changes the selection.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // ...
+    
+    MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+    [self.navigationController pushViewController:personalPageViewController animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+#pragma mark - UITableView datasource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_friendList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"FriendInfoCell";
+	FriendInfoCell *cell = (FriendInfoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"FriendInfoCell" owner:self options:nil];
+        cell = (FriendInfoCell *)[nibContents objectAtIndex:0];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+	}
+    
+    PUser *tempfriend = [_friendList objectAtIndex:indexPath.row];
+    //    cell.lblNickName.text = tempfriend.nickname;
+    
+    NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
+    
+	return cell;
+}
+
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 57;
 }
 
 @end

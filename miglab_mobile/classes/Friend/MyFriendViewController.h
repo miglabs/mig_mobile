@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSMutableArray *friendList;
 
 -(IBAction)doBack:(id)sender;
+-(IBAction)doSearch:(id)sender;
 
 @end

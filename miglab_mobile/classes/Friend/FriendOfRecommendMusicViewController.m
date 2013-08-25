@@ -1,18 +1,18 @@
 //
-//  FriendOfSayHiViewController.m
+//  FriendOfRecommendMusicViewController.m
 //  miglab_mobile
 //
-//  Created by pig on 13-8-23.
+//  Created by pig on 13-8-25.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "FriendOfSayHiViewController.h"
+#import "FriendOfRecommendMusicViewController.h"
 
-@interface FriendOfSayHiViewController ()
+@interface FriendOfRecommendMusicViewController ()
 
 @end
 
-@implementation FriendOfSayHiViewController
+@implementation FriendOfRecommendMusicViewController
 
 @synthesize navView = _navView;
 
@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"打招呼" bgImageView:@"login_navigation_bg"];
+    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"我的好友" bgImageView:@"login_navigation_bg"];
     [self.view addSubview:_navView];
     
     UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
@@ -39,6 +39,7 @@
     _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
     [_navView.leftButton setHidden:NO];
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
 }
@@ -52,5 +53,6 @@
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

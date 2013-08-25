@@ -1,18 +1,18 @@
 //
-//  FriendOfSayHiViewController.m
+//  FriendOfReceiveMusicViewController.m
 //  miglab_mobile
 //
-//  Created by pig on 13-8-23.
+//  Created by pig on 13-8-25.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "FriendOfSayHiViewController.h"
+#import "FriendOfReceiveMusicViewController.h"
 
-@interface FriendOfSayHiViewController ()
+@interface FriendOfReceiveMusicViewController ()
 
 @end
 
-@implementation FriendOfSayHiViewController
+@implementation FriendOfReceiveMusicViewController
 
 @synthesize navView = _navView;
 
@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"打招呼" bgImageView:@"login_navigation_bg"];
+    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"猫王爱淘汰(收到消息)" bgImageView:@"login_navigation_bg"];
     [self.view addSubview:_navView];
     
     UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
