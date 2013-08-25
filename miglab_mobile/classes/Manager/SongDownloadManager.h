@@ -20,6 +20,7 @@
 
 -(NSString *)getSongCacheDirectory;
 -(NSString *)getLrcCacheDirectory;
+-(NSString *)getLocalSongCacheDirectory;
 
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext;
 -(NSString *)getSongCachePath:(Song *)tsong;

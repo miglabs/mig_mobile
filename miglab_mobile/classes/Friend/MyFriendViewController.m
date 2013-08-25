@@ -9,6 +9,7 @@
 #import "MyFriendViewController.h"
 #import "FriendInfoCell.h"
 #import "PUser.h"
+#import "FriendOfAddViewController.h"
 #import "MyFriendPersonalPageViewController.h"
 
 @interface MyFriendViewController ()
@@ -46,6 +47,12 @@
     _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
     [_navView.leftButton setHidden:NO];
     [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *addFriendImage = [UIImage imageWithName:@"friend_button_add" type:@"png"];
+    [_navView.rightButton setBackgroundImage:addFriendImage forState:UIControlStateNormal];
+    _navView.rightButton.frame = CGRectMake(268, 7.5, 48, 29);
+    [_navView.rightButton setHidden:NO];
+    [_navView.rightButton addTarget:self action:@selector(doAddFriend:) forControlEvents:UIControlEventTouchUpInside];
     
     //search view
     NSArray *searchNib = [[NSBundle mainBundle] loadNibNamed:@"FriendSearchView" owner:self options:nil];
@@ -95,6 +102,15 @@
 
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)doAddFriend:(id)sender{
+    
+    PLog(@"doAddFriend...");
+    
+    FriendOfAddViewController *addViewController = [[FriendOfAddViewController alloc] initWithNibName:@"FriendOfAddViewController" bundle:nil];
+    [self.navigationController pushViewController:addViewController animated:YES];
+    
 }
 
 -(IBAction)doSearch:(id)sender{

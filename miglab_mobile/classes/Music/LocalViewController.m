@@ -106,7 +106,7 @@
     [_songList addObjectsFromArray:tempSongInfoList];
     
     //test
-//    [self getSongListFromIPod];
+    [self getSongListFromIPod];
     
 }
 
@@ -122,8 +122,27 @@
 
 -(void)getSongListFromIPod{
     
+    MPMediaQuery *videoQuery = [[MPMediaQuery alloc] init];
+    NSArray *mediaItems = [videoQuery items];
+    for (MPMediaItem *mediaItem in mediaItems){
+        
+        NSURL *URL = (NSURL*)[mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
+        
+        if (URL) {
+            NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
+            NSString *artist = (NSString*)[mediaItem valueForProperty:MPMediaItemPropertyArtist];
+            NSString *music = [URL absoluteString];
+            
+            NSLog(@"name(%@), artist(%@), musicUrl(%@)", name, artist, music);
+            
+        }
+    }
+    
+    [self exportSongFromIPod:mediaItems currentIndex:0];
+    
+    /*
     NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *pigDirectory = [[cachesDirectory stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]] stringByAppendingPathComponent:@"pig"];
+    NSString *pigDirectory = [[cachesDirectory stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]] stringByAppendingPathComponent:@"local"];
     
     NSFileManager *fm = [NSFileManager defaultManager];
     if (![fm fileExistsAtPath:pigDirectory isDirectory:NULL])
@@ -183,6 +202,63 @@
             }];
             
         }];
+        
+    }
+    */
+    
+}
+
+-(void)exportSongFromIPod:(NSArray *)tmediaitems currentIndex:(int)tcurrentindex{
+    
+    if (tcurrentindex < [tmediaitems count]) {
+        
+        __block int tempindex = tcurrentindex;
+        
+        MPMediaItem *mediaItem = [tmediaitems objectAtIndex:tempindex];
+        NSURL *mediaItemUrl = [mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
+        NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
+        NSString *artist = (NSString*)[mediaItem valueForProperty:MPMediaItemPropertyArtist];
+        
+        NSString *localDir = [[SongDownloadManager GetInstance] getSongCacheDirectory];
+        NSString *file = [NSString stringWithFormat:@"%@/%@.%@", localDir, name, [mediaItemUrl pathExtension]];
+        
+        NSDate *nowdate = [NSDate date];
+        Song *tempsong = [[Song alloc] init];
+        tempsong.songid = [nowdate timeIntervalSince1970];
+        tempsong.songname = name;
+        tempsong.artist = artist;
+        tempsong.songtype = 1;
+        tempsong.songurl = file;
+        tempsong.songCachePath = file;
+        
+        //检查是否已经导入
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm fileExistsAtPath:file]) {
+            
+            tempindex++;
+            NSLog(@"complete...%d", tempindex);
+            [self exportSongFromIPod:tmediaitems currentIndex:tempindex];
+            
+        } else {
+            
+            NSURL *dstUrl = [NSURL fileURLWithPath:file];
+            TSLibraryImport *export = [[TSLibraryImport alloc] init];
+            [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
+                
+                [[PDatabaseManager GetInstance] insertSongInfo:tempsong];
+                
+                tempindex++;
+                NSLog(@"complete...%d", tempindex);
+                [self exportSongFromIPod:tmediaitems currentIndex:tempindex];
+                
+            }];
+            
+        }
+        
+        
+    } else {
+        
+        NSLog(@"all complete...");
         
     }
     

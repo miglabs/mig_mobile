@@ -55,6 +55,14 @@
     return [super createPath:lrcCacheDirectory];
 }
 
+-(NSString *)getLocalSongCacheDirectory{
+    
+    NSString *cacheHome = [self getCacheHomeDirectory];
+    NSString *lrcCacheDirectory = [cacheHome stringByAppendingPathComponent:@"Local"];
+    
+    return [super createPath:lrcCacheDirectory];
+}
+
 -(NSString *)getSongCachePath:(long long)tsongid songExt:(NSString *)tsongext{
     return [_songCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lld%@", tsongid, tsongext]];
 }

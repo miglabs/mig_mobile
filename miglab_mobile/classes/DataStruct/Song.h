@@ -31,6 +31,7 @@ typedef enum{
 @property (nonatomic, retain) NSString *coverurl;                       //专辑封面图片地址
 @property (nonatomic, retain) NSString *like;
 @property (nonatomic, assign) int wordid;
+@property (nonatomic, assign) int songtype;                             //歌曲类型，1-本地歌曲，2-网络歌曲
 
 @property (nonatomic, retain) NSString *songCachePath;                  //本地缓存路径
 
