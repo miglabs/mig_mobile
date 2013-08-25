@@ -267,6 +267,9 @@
 		16D0DB0F17C9F11800EB763F /* MessageInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB0E17C9F11700EB763F /* MessageInfoCell.m */; };
 		16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */; };
 		16D0DB1417C9F3E900EB763F /* MessageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB1317C9F3E900EB763F /* MessageInfo.m */; };
+		16D0DB1F17CA291E00EB763F /* PhotoInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB1E17CA291C00EB763F /* PhotoInfoCell.m */; };
+		16D0DB2217CA293800EB763F /* PhotoInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DB2117CA293800EB763F /* PhotoInfoCell.xib */; };
+		16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DB2417CA2A7D00EB763F /* PhotoInfo.m */; };
 		16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E4588517C0C26700D25475 /* music_menu_light_heart_nor.png */; };
 		16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E4588A17C0C3CB00D25475 /* music_menu_stop_nor.png */; };
 		16E77E1D178DA518006A24A6 /* PCustomPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */; };
@@ -735,6 +738,11 @@
 		16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageInfoCell.xib; sourceTree = "<group>"; };
 		16D0DB1217C9F3E900EB763F /* MessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfo.h; sourceTree = "<group>"; };
 		16D0DB1317C9F3E900EB763F /* MessageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfo.m; sourceTree = "<group>"; };
+		16D0DB1D17CA291C00EB763F /* PhotoInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoInfoCell.h; sourceTree = "<group>"; };
+		16D0DB1E17CA291C00EB763F /* PhotoInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoInfoCell.m; sourceTree = "<group>"; };
+		16D0DB2117CA293800EB763F /* PhotoInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoInfoCell.xib; sourceTree = "<group>"; };
+		16D0DB2317CA2A7D00EB763F /* PhotoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoInfo.h; sourceTree = "<group>"; };
+		16D0DB2417CA2A7D00EB763F /* PhotoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoInfo.m; sourceTree = "<group>"; };
 		16E4588517C0C26700D25475 /* music_menu_light_heart_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_light_heart_nor.png; sourceTree = "<group>"; };
 		16E4588A17C0C3CB00D25475 /* music_menu_stop_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_stop_nor.png; sourceTree = "<group>"; };
 		16E77E16178DA518006A24A6 /* PCustomPlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerMenuView.h; sourceTree = "<group>"; };
@@ -1182,6 +1190,8 @@
 				160E075917C09CD7003F0E45 /* Type.m */,
 				16D0DB1217C9F3E900EB763F /* MessageInfo.h */,
 				16D0DB1317C9F3E900EB763F /* MessageInfo.m */,
+				16D0DB2317CA2A7D00EB763F /* PhotoInfo.h */,
+				16D0DB2417CA2A7D00EB763F /* PhotoInfo.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -1415,6 +1425,9 @@
 				16D0DB0D17C9F11500EB763F /* MessageInfoCell.h */,
 				16D0DB0E17C9F11700EB763F /* MessageInfoCell.m */,
 				16D0DB1017C9F12E00EB763F /* MessageInfoCell.xib */,
+				16D0DB1D17CA291C00EB763F /* PhotoInfoCell.h */,
+				16D0DB1E17CA291C00EB763F /* PhotoInfoCell.m */,
+				16D0DB2117CA293800EB763F /* PhotoInfoCell.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2131,6 +2144,7 @@
 				16D0DB0717C9E9A200EB763F /* FriendOfReceiveHiViewController.xib in Resources */,
 				16D0DB0C17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib in Resources */,
 				16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */,
+				16D0DB2217CA293800EB763F /* PhotoInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2262,6 +2276,8 @@
 				16D0DB0B17C9EA2600EB763F /* FriendOfReceiveMusicViewController.m in Sources */,
 				16D0DB0F17C9F11800EB763F /* MessageInfoCell.m in Sources */,
 				16D0DB1417C9F3E900EB763F /* MessageInfo.m in Sources */,
+				16D0DB1F17CA291E00EB763F /* PhotoInfoCell.m in Sources */,
+				16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

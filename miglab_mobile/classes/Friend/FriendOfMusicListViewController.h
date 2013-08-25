@@ -9,9 +9,12 @@
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
 
-@interface FriendOfMusicListViewController : PlayerViewController
+@interface FriendOfMusicListViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
+
+@property (nonatomic, retain) UITableView *dataTableView;
+@property (nonatomic, retain) NSMutableArray *datalist;
 
 -(IBAction)doBack:(id)sender;
 

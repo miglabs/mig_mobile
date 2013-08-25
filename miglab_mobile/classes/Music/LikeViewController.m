@@ -23,8 +23,6 @@
 @synthesize songTableView = _songTableView;
 @synthesize songList = _songList;
 
-@synthesize miglabAPI = _miglabAPI;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,13 +50,13 @@
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
     //body head
     UILabel *lblDesc = [[UILabel alloc] init];
-    lblDesc.frame = CGRectMake(16, 10, 140, 21);
+    lblDesc.frame = CGRectMake(16, 12, 140, 21);
     lblDesc.backgroundColor = [UIColor clearColor];
     lblDesc.font = [UIFont systemFontOfSize:15.0f];
     lblDesc.text = @"优先推荐以下歌曲";
@@ -80,7 +78,7 @@
     separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
     
     UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, 45 + 10, 297, 45);
+    headerView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
     [headerView addSubview:lblDesc];
     [headerView addSubview:btnSort];
     [headerView addSubview:btnEdit];
@@ -89,7 +87,7 @@
     
     //song list
     _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, 45 + 10 + 45, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
+    _songTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
     _songTableView.dataSource = self;
     _songTableView.delegate = self;
     _songTableView.backgroundColor = [UIColor clearColor];

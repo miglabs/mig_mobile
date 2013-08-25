@@ -8,7 +8,6 @@
 
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
-#import "MigLabAPI.h"
 
 @interface LikeViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
@@ -16,8 +15,6 @@
 
 @property (nonatomic, retain) UITableView *songTableView;
 @property (nonatomic, retain) NSMutableArray *songList;
-
-@property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(IBAction)doBack:(id)sender;
 
