@@ -24,6 +24,7 @@
 		1604F0E917C4F0950072A0D8 /* MusicCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0E817C4F0950072A0D8 /* MusicCommentCell.xib */; };
 		1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */; };
 		1604F0EE17C4F2F80072A0D8 /* MusicCommentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */; };
+		1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1609584617CB9E950027CBB6 /* CustomWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
 		160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 160E073C17C08A45003F0E45 /* channelinfo.xml */; };
 		160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075317C08ECC003F0E45 /* XmlParserUtil.m */; };
@@ -391,6 +392,8 @@
 		1604F0EA17C4F2E60072A0D8 /* MusicCommentInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicCommentInputView.h; sourceTree = "<group>"; };
 		1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicCommentInputView.m; sourceTree = "<group>"; };
 		1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentInputView.xib; sourceTree = "<group>"; };
+		1609584517CB9E950027CBB6 /* CustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWindow.h; sourceTree = "<group>"; };
+		1609584617CB9E950027CBB6 /* CustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWindow.m; sourceTree = "<group>"; };
 		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
 		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
 		160E073C17C08A45003F0E45 /* channelinfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = channelinfo.xml; sourceTree = "<group>"; };
@@ -1005,6 +1008,8 @@
 		162316351777397600CF8FB5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1609584517CB9E950027CBB6 /* CustomWindow.h */,
+				1609584617CB9E950027CBB6 /* CustomWindow.m */,
 				18A4511B1784023E00CFFAD4 /* NSString+PStringCategory.h */,
 				18A4511C1784023E00CFFAD4 /* NSString+PStringCategory.m */,
 				18A4510C1784017B00CFFAD4 /* PCustomNavigationBarView.h */,
@@ -2288,6 +2293,7 @@
 				16D0DB1F17CA291E00EB763F /* PhotoInfoCell.m in Sources */,
 				16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */,
 				16D0DB2917CA31E700EB763F /* FriendOfAddViewController.m in Sources */,
+				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

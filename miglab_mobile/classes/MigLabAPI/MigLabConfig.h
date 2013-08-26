@@ -21,9 +21,9 @@
 //友盟统计渠道定义
 #define APP_CHANNEL_ID                      @"TEST"
 
-#define SINA_WEIBO_APP_KEY                  @"1468499793"
-#define SINA_WEIBO_APP_SECRET               @"ce6dd4ab9ae4f14aa7982a43453cc173"
-#define SINA_WEIBO_APP_REDIRECTURI          @"https://api.weibo.com/oauth2/default.html"
+#define SINA_WEIBO_APP_KEY                  @"4082577001"
+#define SINA_WEIBO_APP_SECRET               @"ffceb9ce49142b68f18d84fa216ea350"
+#define SINA_WEIBO_APP_REDIRECTURI          @"http://open.fm.miglab.com/"
 
 #define TENCENT_WEIBO_APP_KEY               @"222222"
 #define TENCENT_WEIBO_APP_SECRET            @""
@@ -34,7 +34,7 @@
 #define DOUBAN_PRIVATE_KEY                  @"4275ee2fa3689a2f"
 #define DOUBAN_REDIRECTURL                  @"http://www.douban.com/location/mobile"
 
-#define WEIXIN_APP_ID                       @"wxc8d17a5ccdf1c33b"
+#define WEIXIN_APP_ID                       @"wx8975da7e04f500b3"
 #define WEIXIN_APP_KEY                      @""
 
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"

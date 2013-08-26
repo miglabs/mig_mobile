@@ -11,9 +11,11 @@
 #import "SinaWeiboRequest.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <libDoubanAPIEngine/DOUService.h>
+#import <libDoubanApiEngine/DOUAPIEngine.h>
 #import "MigLabAPI.h"
+#import "CustomWindow.h"
 
-@interface LoginChooseViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate, TencentSessionDelegate>
+@interface LoginChooseViewController : UIViewController<SinaWeiboDelegate, SinaWeiboRequestDelegate, TencentSessionDelegate, UIWebViewDelegate, DOUOAuthServiceDelegate>
 
 @property (nonatomic, retain) IBOutlet UIImageView *bgImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnTopMenu;
@@ -22,6 +24,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnQQ;
 @property (nonatomic, retain) IBOutlet UIButton *btnDouBan;
 @property (nonatomic, retain) IBOutlet UIButton *btnMiglab;
+
+@property (nonatomic, retain) CustomWindow *popWindow;
 
 //tencent
 @property (nonatomic, retain) TencentOAuth *tencentOAuth;

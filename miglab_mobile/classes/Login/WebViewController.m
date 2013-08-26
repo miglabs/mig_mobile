@@ -8,7 +8,8 @@
 
 #import "WebViewController.h"
 #import <libDoubanApiEngine/DOUAPIEngine.h>
-
+#import "UserSessionManager.h"
+#import "PDatabaseManager.h"
 
 static NSString * const kAPIKey = @"04e0b2ab7ca02a8a0ea2180275e07f9e";
 static NSString * const kPrivateKey = @"4275ee2fa3689a2f";
@@ -76,7 +77,7 @@ static NSString * const kRedirectUrl = @"http://www.douban.com/location/mobile";
   webView_ = [[UIWebView alloc] initWithFrame:CGRectMake(0, 
                                                          0, 
                                                          self.view.bounds.size.width, 
-                                                         self.view.bounds.size.height - 49)];
+                                                         self.view.bounds.size.height)];
   webView_.scalesPageToFit = YES;
   webView_.delegate = self;
   NSURLRequest *request = [NSURLRequest requestWithURL:requestURL_];
@@ -142,8 +143,27 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 
 - (void)OAuthClient:(DOUOAuthService *)client didAcquireSuccessDictionary:(NSDictionary *)dic {
-  NSLog(@"success!");
-  [self.navigationController popViewControllerAnimated:YES];
+    
+    NSLog(@"success!");
+    NSLog(@"dic: %@", dic);
+    
+    NSString *userid = [dic objectForKey:@"douban_user_id"];
+    NSString *accesstoken = [dic objectForKey:@"access_token"];
+    NSString *username = [dic objectForKey:@"douban_user_name"];
+    NSString *password = username;
+    int accounttype = SourceTypeDouBan;
+    
+    [UserSessionManager GetInstance].userid = userid;
+    [UserSessionManager GetInstance].accesstoken = accesstoken;
+    [UserSessionManager GetInstance].currentUser.userid = userid;
+    [UserSessionManager GetInstance].currentUser.username = username;
+    [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:accounttype];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 

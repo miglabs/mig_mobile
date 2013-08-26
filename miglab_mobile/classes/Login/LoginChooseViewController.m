@@ -18,6 +18,35 @@
 #import "MainMenuViewController.h"
 #import "WebViewController.h"
 
+@interface NSString (ParseCategory)
+- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue
+                                           outterGlue:(NSString *)outterGlue;
+@end
+
+@implementation NSString (ParseCategory)
+
+- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue
+                                           outterGlue:(NSString *)outterGlue {
+    // Explode based on outter glue
+    NSArray *firstExplode = [self componentsSeparatedByString:outterGlue];
+    NSArray *secondExplode;
+    
+    // Explode based on inner glue
+    NSInteger count = [firstExplode count];
+    NSMutableDictionary* returnDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
+    for (NSInteger i = 0; i < count; i++) {
+        secondExplode =
+        [(NSString*)[firstExplode objectAtIndex:i] componentsSeparatedByString:innerGlue];
+        if ([secondExplode count] == 2) {
+            [returnDictionary setObject:[secondExplode objectAtIndex:1]
+                                 forKey:[secondExplode objectAtIndex:0]];
+        }
+    }
+    return returnDictionary;
+}
+
+@end
+
 @interface LoginChooseViewController ()
 
 @end
@@ -31,6 +60,8 @@
 @synthesize btnQQ = _btnQQ;
 @synthesize btnDouBan = _btnDouBan;
 @synthesize btnMiglab = _btnMiglab;
+
+@synthesize popWindow = _popWindow;
 
 @synthesize tencentOAuth = _tencentOAuth;
 @synthesize permissions = _permissions;
@@ -155,6 +186,27 @@
     UIViewController *webViewController = [[WebViewController alloc] initWithRequestURL:url];
     [self.navigationController pushViewController:webViewController animated:YES];
     
+    
+    //pop
+    /*
+    UIView *tempview = [[UIView alloc] init];
+    tempview.frame = CGRectMake(0, 20, kMainScreenWidth, kMainScreenHeight);
+    UIButton *btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnClose.frame = CGRectMake(0, 0, 44, 44);
+    [btnClose addTarget:self action:@selector(doCloseDoubanLogin:) forControlEvents:UIControlEventTouchUpInside];
+    [tempview addSubview:btnClose];
+    
+    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, kMainScreenWidth, kMainScreenHeight - 44)];
+    webview.scalesPageToFit = YES;
+    webview.delegate = self;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webview loadRequest:request];
+    [tempview addSubview:webview];
+    
+    _popWindow = [[CustomWindow alloc] initWithView:tempview];
+    [_popWindow show];
+    */
+    
 //    DOUService *service = [DOUService sharedInstance];
 //    
 //    NSString *str = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
@@ -164,6 +216,14 @@
 //    
 //    [service addRequest:req];
     
+    
+}
+
+-(IBAction)doCloseDoubanLogin:(id)sender{
+    
+    PLog(@"doCloseDoubanLogin...");
+    [_popWindow setHidden:YES];
+    [_popWindow close];
     
 }
 
@@ -401,12 +461,22 @@
     
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
     {
-        NSLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
+        PLog(@"_tencentOAuth.openId: %@", _tencentOAuth.openId);
+        PLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
+        PLog(@"_tencentOAuth.expirationDate: %@", _tencentOAuth.expirationDate);
+        
+        [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
+        [UserSessionManager GetInstance].currentUser.userid = _tencentOAuth.openId;
+        [UserSessionManager GetInstance].accesstoken = _tencentOAuth.accessToken;
+        
+        if(![_tencentOAuth getUserInfo]){
+            [self showInvalidTokenOrOpenIDMessage];
+        }
         
     }
     else
     {
-        NSLog(@"登录不成功 没有获取accesstoken");
+        PLog(@"登录不成功 没有获取accesstoken");
     }
     
 }
@@ -434,6 +504,113 @@
     NSLog(@"无网络连接，请设置网络");
 }
 
+- (void)showInvalidTokenOrOpenIDMessage{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"api调用失败" message:@"可能授权已过期，请重新获取" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+/**
+ * Called when the get_user_info has response.
+ */
+- (void)getUserInfoResponse:(APIResponse*) response {
+	if (response.retCode == URLREQUEST_SUCCEED)
+	{
+        PLog(@"response.jsonResponse: %@", response.jsonResponse);
+        
+		NSMutableString *str=[NSMutableString stringWithFormat:@""];
+		for (id key in response.jsonResponse) {
+			[str appendString: [NSString stringWithFormat:@"%@:%@\n",key,[response.jsonResponse objectForKey:key]]];
+		}
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:[NSString stringWithFormat:@"%@",str]
+							  
+													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+		[alert show];
+	}
+	else
+    {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:[NSString stringWithFormat:@"%@", response.errorMsg]
+							  
+													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+		[alert show];
+	}
+//	_labelTitle.text=@"获取个人信息完成";
+    
+}
+
 //end tencent weibo
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView
+shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSURL *urlObj =  [request URL];
+    NSString *url = [urlObj absoluteString];
+    
+    
+    if ([url hasPrefix:DOUBAN_REDIRECTURL]) {
+        
+        NSString *query = [urlObj query];
+        NSMutableDictionary *parsedQuery = [query explodeToDictionaryInnerGlue:@"="
+                                                                    outterGlue:@"&"];
+        
+        //access_denied
+        NSString *error = [parsedQuery objectForKey:@"error"];
+        if (error) {
+            return NO;
+        }
+        
+        //access_accept
+        NSString *code = [parsedQuery objectForKey:@"code"];
+        DOUOAuthService *service = [DOUOAuthService sharedInstance];
+        service.authorizationURL = kTokenUrl;
+        service.delegate = self;
+        service.clientId = DOUBAN_API_KEY;
+        service.clientSecret = DOUBAN_PRIVATE_KEY;
+        service.callbackURL = DOUBAN_REDIRECTURL;
+        service.authorizationCode = code;
+        
+        [service validateAuthorizationCode];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+- (void)OAuthClient:(DOUOAuthService *)client didAcquireSuccessDictionary:(NSDictionary *)dic {
+    
+    NSLog(@"success!");
+    NSLog(@"dic: %@", dic);
+    
+    NSString *userid = [dic objectForKey:@"douban_user_id"];
+    NSString *accesstoken = [dic objectForKey:@"access_token"];
+    NSString *username = [dic objectForKey:@"douban_user_name"];
+    NSString *password = username;
+    int accounttype = SourceTypeDouBan;
+    
+    [UserSessionManager GetInstance].userid = userid;
+    [UserSessionManager GetInstance].accesstoken = accesstoken;
+    [UserSessionManager GetInstance].currentUser.userid = userid;
+    [UserSessionManager GetInstance].currentUser.username = username;
+    [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:accounttype];
+    
+    //检查服务端是否已经记录该帐号
+    [_miglabAPI doGetUserInfo:username accessToken:[UserSessionManager GetInstance].accesstoken];
+    
+    //
+    [self doBack:nil];
+    
+}
+
+- (void)OAuthClient:(DOUOAuthService *)client didFailWithError:(NSError *)error {
+    NSLog(@"Fail!");
+}
 
 @end

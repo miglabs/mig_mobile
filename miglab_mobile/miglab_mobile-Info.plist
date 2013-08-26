@@ -29,7 +29,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sinaweibosso.1468499793</string>
+				<string>sinaweibosso.</string>
+				<string>4082577001</string>
 			</array>
 		</dict>
 		<dict>
