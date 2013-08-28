@@ -121,6 +121,9 @@
         
     } else {
         
+        // testing code for Archer
+        [_miglabAPI doGetTypeSongs:@"12" token:@"fdaereafdafae" moodid:@"1" moodindex:@"1" sceneid:@"1" sceneindex:@"1" channelid:@"1" channelindex:@"1"];
+        
         [self initUserData];
         
     }

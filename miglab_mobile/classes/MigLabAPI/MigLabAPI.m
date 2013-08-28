@@ -2005,9 +2005,19 @@
                 PLog(@"get type songs operation succeeded");
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-                Song* song = [dicTemp objectForKey:@"song"];
+                NSArray* songlist = [dicTemp objectForKey:@"song"];
+                int songcount = [songlist count];
                 
-                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+                NSMutableArray* songInfos = [[NSMutableArray alloc] init];
+                
+                for(int i=0; i<songcount; i++) {
+                    
+                    Song* song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    
+                    [songInfos addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songInfos, @"result", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetTypeSongsSuccess object:nil userInfo:dicResult];
             }
