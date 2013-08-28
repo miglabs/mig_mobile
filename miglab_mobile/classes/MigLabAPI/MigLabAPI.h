@@ -100,7 +100,7 @@ typedef enum {
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
 
 /*
- 记录用户试听歌曲状态(pending)
+ 记录用户试听歌曲状态
  */
 -(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
 

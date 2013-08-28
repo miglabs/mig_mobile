@@ -2194,4 +2194,64 @@
     [operation start];
 }
 
+/*
+ 记录用户试听歌曲状态
+ <!--请求POST-->
+ HTTP_RECORDCURSONG
+ */
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
+    
+    PLog(@"record current song url: %@", HTTP_RECORDCURSONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_RECORDCURSONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&lastsong=%@&cursong=%@&mood=%@&name=%@&singer=%@&state=%@", uid, ttoken, tlastsong, tcursong, tmood, tname, tsinger, tstate];
+    PLog(@"record current song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"record current song operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"record current song operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongFailed object:nil userInfo:dicResult];
+                
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"update config file failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
 @end
