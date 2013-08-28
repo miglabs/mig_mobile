@@ -233,5 +233,14 @@
 #define NotificationNameGetPushMsgSuccess                          @"NotificationNameGetPushMsgSuccess"
 #define NotificationNameGetPushMsgFailed                    @"NotificationNameGetPushMsgFailed"
 
+//记录用户试听歌曲状态
+#define HTTP_RECORDCURSONG                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/recordcursong.fcgi"]
+#define NotificationNameRecordCurSongSuccess                @"NotificationNameRecordCurSongSuccess"
+#define NotificationNameRecordCurSongFailed                 @"NotificationNameRecordCurSongFailed"
+
+//更新音乐纬度配置文件
+#define HTTP_UPDATECONFIGFILE                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/updateconfigfile.fcgi"]
+#define NotificationNameUpdateConfigSuccess                 @"NotificationNameUpdateConfigSuccess"
+#define NotificationNameUpdateConfigFailed                  @"NotificationNameUpdateConfigFailed"
 
 #endif

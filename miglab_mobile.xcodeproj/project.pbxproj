@@ -368,6 +368,7 @@
 		18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E434E517BE287100DECFC7 /* libWeChatSDK.a */; };
 		18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -896,6 +897,8 @@
 		18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLoginNavigationView.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
+		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1202,6 +1205,8 @@
 				16D0DB1317C9F3E900EB763F /* MessageInfo.m */,
 				16D0DB2317CA2A7D00EB763F /* PhotoInfo.h */,
 				16D0DB2417CA2A7D00EB763F /* PhotoInfo.m */,
+				CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */,
+				CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2294,6 +2299,7 @@
 				16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */,
 				16D0DB2917CA31E700EB763F /* FriendOfAddViewController.m in Sources */,
 				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
+				CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

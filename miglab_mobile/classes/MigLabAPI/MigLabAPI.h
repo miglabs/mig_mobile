@@ -59,45 +59,55 @@ typedef enum {
 
 /************************* 歌曲 ****************************/
 /*
- 获取心情，场景歌曲
+ 获取心情，场景歌曲(verified, 2013-08-28)
  */
 -(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood num:(int)tnum;
 -(void)doGetModeMusic:(NSString*)uid token:(NSString*)ttoken wordid:(NSString*)twordid mood:(NSString*)tmood;
 
 /*
- 获取频道的歌曲
+ 获取频道的歌曲(verified, 2013-08-28)
  */
 -(void)doGetMusicFromChannel:(NSString*)uid token:(NSString*)ttoken channel:(int)tchannel;
 
 /*
- 获取收藏的歌曲
+ 获取收藏的歌曲(verified, 2013-08-23)
  */
 -(void)doGetCollectedSongs:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid;
 
 /*
- 获取默认推荐歌曲歌曲
+ 获取默认推荐歌曲歌曲(is this getdefsongs?)
  */
 -(void)doGetDefaultMusic:(NSString*)ttype token:(NSString*)ttoken uid:(int)tuid;
 
 /*
- 非注册用户获取播放列表（2013-08－17）
+ 非注册用户获取播放列表（verified, 2013-08－28）
  */
 -(void)doGetDefaultGuestSongs;
 
 /*
- 获取豆瓣频道歌曲(2013-08-19)
+ 获取豆瓣频道歌曲(verified, 2013-08-28)
  */
 -(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel;
 
 /*
- 通过整体维度获取音乐(2013-08-19)
+ 通过整体维度获取音乐(verified, 2013-08-28)
  */
 -(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex;
 
 /*
- 提交本地歌曲信息(2013-08-19)
+ 提交本地歌曲信息(verified, 2013-08-28)
  */
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
+
+/*
+ 记录用户试听歌曲状态(pending)
+ */
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
+
+/*
+ 更新音乐纬度配置文件
+ */
+-(void)doUpdateConfigfile:(NSString*)uid token:(NSString*)ttoken version:(NSString*)tversion;
 
 /*
  收藏歌曲

@@ -2134,4 +2134,44 @@
     [operation start];
 }
 
+/*
+ 更新音乐纬度配置文件
+ <!--请求GET-->
+ HTTP_UPDATECONFIGFILE
+ */
+-(void)doUpdateConfigfile:(NSString*)uid token:(NSString*)ttoken version:(NSString*)tversion {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&version=%@", HTTP_UPDATECONFIGFILE, uid, ttoken, tversion];
+    PLog(@"update config file url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"update config file operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+            }
+        }
+        @catch (NSException *exception) {
+            ;
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        ;
+    }];
+    
+    [operation start];
+}
+
 @end
