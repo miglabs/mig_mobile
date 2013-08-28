@@ -106,11 +106,38 @@ static NSString * const kRedirectUrl = @"http://www.douban.com/location/mobile";
 - (BOOL)webView:(UIWebView *)webView
 shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSURL *urlObj =  [request URL];
+    NSString *url = [urlObj absoluteString];
   
-  NSURL *urlObj =  [request URL];
-  NSString *url = [urlObj absoluteString];
-  
+    if ([url hasPrefix:DOUBAN_REDIRECTURL]) {
+        
+        NSString* query = [urlObj query];
+        NSMutableDictionary *parsedQuery = [query explodeToDictionaryInnerGlue:@"="
+                                                                    outterGlue:@"&"];
+        
+        //access_denied
+        NSString *error = [parsedQuery objectForKey:@"error"];
+        if (error) {
+            return NO;
+        }
+        
+        //access_accept
+        NSString *code = [parsedQuery objectForKey:@"code"];
+        DOUOAuthService *service = [DOUOAuthService sharedInstance];
+        service.authorizationURL = kTokenUrl;
+        service.delegate = self;
+        service.clientId = DOUBAN_API_KEY;
+        service.clientSecret = DOUBAN_PRIVATE_KEY;
+        service.callbackURL = DOUBAN_REDIRECTURL;
+        service.authorizationCode = code;
+        
+        [service validateAuthorizationCode];
+        
+        return NO;
+    }
    
+    /*
   if ([url hasPrefix:kRedirectUrl]) {
     
     NSString* query = [urlObj query];
@@ -137,6 +164,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
     return NO;
   }
+    */
   
   return YES;
 }

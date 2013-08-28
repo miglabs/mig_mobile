@@ -21,18 +21,27 @@
 //友盟统计渠道定义
 #define APP_CHANNEL_ID                      @"TEST"
 
+//新浪账号-音乐随我意移动版
 #define SINA_WEIBO_APP_KEY                  @"4082577001"
 #define SINA_WEIBO_APP_SECRET               @"ffceb9ce49142b68f18d84fa216ea350"
-#define SINA_WEIBO_APP_REDIRECTURI          @"http://open.fm.miglab.com/"
+#define SINA_WEIBO_APP_REDIRECTURI          @"http://42.121.14.108/3rdauth/sinaweibo/callback.php"
 
 #define TENCENT_WEIBO_APP_KEY               @"222222"
 #define TENCENT_WEIBO_APP_SECRET            @""
 #define TENCENT_WEIBO_APP_REDIRECTURI       @""
 
+#define DOUBAN_API_KEY                      @"0765fe87cdc0cd0a1631fb976942671e"
+#define DOUBAN_PRIVATE_KEY                  @"1b45aca692b49482"
+#define DOUBAN_REDIRECTURL                  @"http://42.121.14.108/3rdauth/sinaweibo/callback.php"
+
 // 仅用于此 demo, level 较低，大量使用时会遇到访问限制。实际使用，请重新申请。
-#define DOUBAN_API_KEY                      @"04e0b2ab7ca02a8a0ea2180275e07f9e"
-#define DOUBAN_PRIVATE_KEY                  @"4275ee2fa3689a2f"
-#define DOUBAN_REDIRECTURL                  @"http://www.douban.com/location/mobile"
+//#define DOUBAN_API_KEY                      @"04e0b2ab7ca02a8a0ea2180275e07f9e"
+//#define DOUBAN_PRIVATE_KEY                  @"4275ee2fa3689a2f"
+//#define DOUBAN_REDIRECTURL                  @"http://www.douban.com/location/mobile"
+
+//#define DOUBAN_API_KEY                      @"03050784c61576ff090f168e524064fd"
+//#define DOUBAN_PRIVATE_KEY                  @"42a147f6632f7b4c"
+//#define DOUBAN_REDIRECTURL                  @"http://www.douban.com/location/mobile"
 
 #define WEIXIN_APP_ID                       @"wx8975da7e04f500b3"
 #define WEIXIN_APP_KEY                      @""
