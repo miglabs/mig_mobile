@@ -18,6 +18,7 @@
 #import "Word.h"
 #import "Mood.h"
 #import "NearbyUser.h"
+#import "ConfigFileInfo.h"
 
 @implementation MigLabAPI
 
@@ -2159,16 +2160,35 @@
                 PLog(@"update config file operation succeeded");
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                ConfigFileInfo* cfi = [ConfigFileInfo initWithNSDictionary:dicTemp];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:cfi, @"result", nil];
                 
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUpdateConfigSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"update config file operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUpdateConfigFailed object:nil userInfo:dicResult];
             }
         }
         @catch (NSException *exception) {
-            ;
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUpdateConfigFailed object:nil userInfo:dicResult];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        ;
+        PLog(@"update config file failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUpdateConfigFailed object:nil userInfo:nil];
     }];
     
     [operation start];

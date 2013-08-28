@@ -14,4 +14,6 @@
 @property (nonatomic, retain) NSString* url;
 @property (nonatomic, retain) NSString* filename;
 
++(id)initWithNSDictionary:(NSDictionary *)dict;
+
 @end
