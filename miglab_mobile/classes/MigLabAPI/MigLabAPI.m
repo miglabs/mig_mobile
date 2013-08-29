@@ -2057,13 +2057,13 @@
  */
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent {
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&source=%@&urlcode=%@&name=%@", HTTP_RECORDLOCALSONGS, uid, ttoken, tsource, turlcode, tname];
+    NSString* url = [NSString stringWithFormat:@"uid=%@&token=%@&source=%@&urlcode=%@&name=%@&content=%@", uid, ttoken, tsource, turlcode, tname, tcontent];
     PLog(@"record local songs url: %@", url);
     
-    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:url]];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_RECORDLOCALSONGS]];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
-    [request setHTTPBody:[tcontent dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody:[url dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         

@@ -122,7 +122,9 @@
     } else {
         
         // testing code for Archer
-        [_miglabAPI doGetTypeSongs:@"12" token:@"fdaereafdafae" moodid:@"1" moodindex:@"1" sceneid:@"1" sceneindex:@"1" channelid:@"1" channelindex:@"1" num:@"1"];
+        //[_miglabAPI doGetTypeSongs:@"12" token:@"fdaereafdafae" moodid:@"1" moodindex:@"1" sceneid:@"1" sceneindex:@"1" channelid:@"1" channelindex:@"1" num:@"1"];
+        NSString* szcontent = @"{\"music\":[{\"name\": \"誓言\", \"singer\": \"王菲\"},{\"name\": \"暮春秋色\", \"singer\": \"窦唯\"},{\"name\": \"Don'tBreak My Heart\", \"singer\": \"黑豹乐队\"}]}";
+        [_miglabAPI doRecordLocalSongs:@"1" token:@"23232" source:@"2" urlcode:@"http://hehe.com" name:@"12121" content:szcontent];
         
         [self initUserData];
         
