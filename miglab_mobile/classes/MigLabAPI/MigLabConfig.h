@@ -32,7 +32,7 @@
 
 #define DOUBAN_API_KEY                      @"0765fe87cdc0cd0a1631fb976942671e"
 #define DOUBAN_PRIVATE_KEY                  @"1b45aca692b49482"
-#define DOUBAN_REDIRECTURL                  @"http://42.121.14.108/3rdauth/sinaweibo/callback.php"
+#define DOUBAN_REDIRECTURL                  @"http://42.121.14.108/3rdauth/douban/callback.php"
 
 // 仅用于此 demo, level 较低，大量使用时会遇到访问限制。实际使用，请重新申请。
 //#define DOUBAN_API_KEY                      @"04e0b2ab7ca02a8a0ea2180275e07f9e"

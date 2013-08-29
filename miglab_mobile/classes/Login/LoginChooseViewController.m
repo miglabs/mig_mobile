@@ -8,44 +8,12 @@
 
 #import "LoginChooseViewController.h"
 #import "MigLabConfig.h"
-#import "AppDelegate.h"
-#import "DDMenuController.h"
 #import "RegisterViewController.h"
+#import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "SVProgressHUD.h"
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
-#import "MainMenuViewController.h"
-#import "WebViewController.h"
-
-@interface NSString (ParseCategory)
-- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue
-                                           outterGlue:(NSString *)outterGlue;
-@end
-
-@implementation NSString (ParseCategory)
-
-- (NSMutableDictionary *)explodeToDictionaryInnerGlue:(NSString *)innerGlue
-                                           outterGlue:(NSString *)outterGlue {
-    // Explode based on outter glue
-    NSArray *firstExplode = [self componentsSeparatedByString:outterGlue];
-    NSArray *secondExplode;
-    
-    // Explode based on inner glue
-    NSInteger count = [firstExplode count];
-    NSMutableDictionary* returnDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
-    for (NSInteger i = 0; i < count; i++) {
-        secondExplode =
-        [(NSString*)[firstExplode objectAtIndex:i] componentsSeparatedByString:innerGlue];
-        if ([secondExplode count] == 2) {
-            [returnDictionary setObject:[secondExplode objectAtIndex:1]
-                                 forKey:[secondExplode objectAtIndex:0]];
-        }
-    }
-    return returnDictionary;
-}
-
-@end
 
 @interface LoginChooseViewController ()
 
@@ -60,8 +28,6 @@
 @synthesize btnQQ = _btnQQ;
 @synthesize btnDouBan = _btnDouBan;
 @synthesize btnMiglab = _btnMiglab;
-
-@synthesize popWindow = _popWindow;
 
 @synthesize tencentOAuth = _tencentOAuth;
 @synthesize permissions = _permissions;
@@ -138,15 +104,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)doShowLeftMenu:(id)sender{
-    
-    PLog(@"doShowLeftMenu...");
-    
-    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
-    [menuController showLeftController:YES];
-    
-}
-
 -(IBAction)doGotoRegister:(id)sender{
     
     PLog(@"doGotoRegister...");
@@ -179,51 +136,12 @@
     
     PLog(@"doDouBanLogin...");
     
-    NSString *str = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
-    
-    NSString *urlStr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    UIViewController *webViewController = [[WebViewController alloc] initWithRequestURL:url];
-    [self.navigationController pushViewController:webViewController animated:YES];
-    
-    
-    //pop
-    /*
-    UIView *tempview = [[UIView alloc] init];
-    tempview.frame = CGRectMake(0, 20, kMainScreenWidth, kMainScreenHeight);
-    UIButton *btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnClose.frame = CGRectMake(0, 0, 44, 44);
-    [btnClose addTarget:self action:@selector(doCloseDoubanLogin:) forControlEvents:UIControlEventTouchUpInside];
-    [tempview addSubview:btnClose];
-    
-    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, kMainScreenWidth, kMainScreenHeight - 44)];
-    webview.scalesPageToFit = YES;
-    webview.delegate = self;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webview loadRequest:request];
-    [tempview addSubview:webview];
-    
-    _popWindow = [[CustomWindow alloc] initWithView:tempview];
-    [_popWindow show];
-    */
-    
-//    DOUService *service = [DOUService sharedInstance];
-//    
-//    NSString *str = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
-//    DOUQuery *query = [[DOUQuery alloc] initWithSubPath:str parameters:nil];
-//    query.apiBaseUrlString = service.apiBaseUrlString;
-//    DOUHttpRequest *req = [DOUHttpRequest requestWithQuery:query target:self];
-//    
-//    [service addRequest:req];
-    
-    
-}
-
--(IBAction)doCloseDoubanLogin:(id)sender{
-    
-    PLog(@"doCloseDoubanLogin...");
-    [_popWindow setHidden:YES];
-    [_popWindow close];
+    NSString *requestUrl = [NSString stringWithFormat:@"https://www.douban.com/service/auth2/auth?client_id=%@&redirect_uri=%@&response_type=code", DOUBAN_API_KEY, DOUBAN_REDIRECTURL];
+    DoubanAuthorizeView *authorizeView = [[DoubanAuthorizeView alloc] initWithAuthRequestUrl:requestUrl delegate:self];
+    authorizeView.kAPIKey = DOUBAN_API_KEY;
+    authorizeView.kPrivateKey = DOUBAN_PRIVATE_KEY;
+    authorizeView.kRedirectUrl = DOUBAN_REDIRECTURL;
+    [authorizeView show];
     
 }
 
@@ -233,19 +151,6 @@
     
     LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginViewController animated:YES];
-    
-}
-
--(void)doGotoMainMenuView{
-    
-    PLog(@"doGotoMainMenuView...");
-    
-    MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-    [nav setNavigationBarHidden:YES];
-    
-    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
-    [menuController setRootController:nav animated:YES];
     
 }
 
@@ -265,9 +170,17 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"registerSuccess: %@", result);
     
-    if ([UserSessionManager GetInstance].currentUser.source == SourceTypeSinaWeibo) {
+    if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
         
-        [SVProgressHUD showSuccessWithStatus:@"使用新浪微博注册成功:)"];
+        [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
+        
+    } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
+        
+    } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
         
     }
 
@@ -369,9 +282,11 @@
 {
     NSLog(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
     
+    [UserSessionManager GetInstance].userid = sinaweibo.userID;
+    [UserSessionManager GetInstance].accesstoken = sinaweibo.accessToken;
+    [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
     [UserSessionManager GetInstance].currentUser.userid = sinaweibo.userID;
-    [UserSessionManager GetInstance].accesstoken = sinaweibo.accessToken;
     
     [self storeAuthData];
     [self getUserInfoFromSinaWeibo];
@@ -539,62 +454,22 @@
 
 //end tencent weibo
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - DoubanAuthorizeViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView
-shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType {
+- (void)authorizeView:(DoubanAuthorizeView *)authView didRecieveAuthorizationResult:(NSDictionary *)result{
     
-    NSURL *urlObj =  [request URL];
-    NSString *url = [urlObj absoluteString];
-    
-    
-    if ([url hasPrefix:DOUBAN_REDIRECTURL]) {
-        
-        NSString *query = [urlObj query];
-        NSMutableDictionary *parsedQuery = [query explodeToDictionaryInnerGlue:@"="
-                                                                    outterGlue:@"&"];
-        
-        //access_denied
-        NSString *error = [parsedQuery objectForKey:@"error"];
-        if (error) {
-            return NO;
-        }
-        
-        //access_accept
-        NSString *code = [parsedQuery objectForKey:@"code"];
-        DOUOAuthService *service = [DOUOAuthService sharedInstance];
-        service.authorizationURL = kTokenUrl;
-        service.delegate = self;
-        service.clientId = DOUBAN_API_KEY;
-        service.clientSecret = DOUBAN_PRIVATE_KEY;
-        service.callbackURL = DOUBAN_REDIRECTURL;
-        service.authorizationCode = code;
-        
-        [service validateAuthorizationCode];
-        
-        return NO;
-    }
-    
-    return YES;
-}
-
-
-- (void)OAuthClient:(DOUOAuthService *)client didAcquireSuccessDictionary:(NSDictionary *)dic {
-    
-    NSLog(@"success!");
-    NSLog(@"dic: %@", dic);
-    
-    NSString *userid = [dic objectForKey:@"douban_user_id"];
-    NSString *accesstoken = [dic objectForKey:@"access_token"];
-    NSString *username = [dic objectForKey:@"douban_user_name"];
+    NSString *userid = [result objectForKey:@"douban_user_id"];
+    NSString *accesstoken = [result objectForKey:@"access_token"];
+    NSString *username = [result objectForKey:@"douban_user_name"];
     NSString *password = username;
     int accounttype = SourceTypeDouBan;
     
     [UserSessionManager GetInstance].userid = userid;
     [UserSessionManager GetInstance].accesstoken = accesstoken;
+    [UserSessionManager GetInstance].accounttype = SourceTypeDouBan;
     [UserSessionManager GetInstance].currentUser.userid = userid;
     [UserSessionManager GetInstance].currentUser.username = username;
+    [UserSessionManager GetInstance].currentUser.nickname = username;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
     [UserSessionManager GetInstance].isLoggedIn = YES;
     
@@ -609,8 +484,17 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
 }
 
-- (void)OAuthClient:(DOUOAuthService *)client didFailWithError:(NSError *)error {
-    NSLog(@"Fail!");
+- (void)authorizeView:(DoubanAuthorizeView *)authView didFailWithErrorInfo:(NSDictionary *)errorInfo{
+    
+    //
+    PLog(@"authorizeView didFailWithErrorInfo...");
+    
+}
+
+- (void)authorizeViewDidCancel:(DoubanAuthorizeView *)authView{
+    //
+    PLog(@"authorizeViewDidCancel...");
+    
 }
 
 @end

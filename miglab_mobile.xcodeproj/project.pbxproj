@@ -141,7 +141,6 @@
 		1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */; };
 		1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CAA617B7B9EC00E6F132 /* PUser.m */; };
-		1637CAC017B7CF8200E6F132 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CABF17B7CF8200E6F132 /* WebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc "; }; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
 		163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF6177C67FD008656D1 /* CoreMedia.framework */; };
@@ -322,6 +321,7 @@
 		16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */; };
 		16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575CE179590BA00277308 /* borad_menu_like_sel.png */; };
 		180271EF178C019800CA9488 /* Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180271EE178C019800CA9488 /* Icon.jpg */; };
+		1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */; };
 		18275F2E17B3876400033AFF /* NearbyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18275F2D17B3876400033AFF /* NearbyUser.m */; };
 		1830B52E179D129200314A28 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830B52D179D129200314A28 /* NSData+AES256.m */; };
 		1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834106017969FC000EAAFFC /* MainMenuViewController.m */; };
@@ -366,7 +366,6 @@
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E434E517BE287100DECFC7 /* libWeChatSDK.a */; };
-		18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 /* End PBXBuildFile section */
@@ -584,8 +583,6 @@
 		1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		1637CAA517B7B9EC00E6F132 /* PUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUser.h; sourceTree = "<group>"; };
 		1637CAA617B7B9EC00E6F132 /* PUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUser.m; sourceTree = "<group>"; };
-		1637CABE17B7CF8200E6F132 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		1637CABF17B7CF8200E6F132 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		163BCDF4177C67F3008656D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		163BCDF6177C67FD008656D1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -811,6 +808,8 @@
 		16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerBoradView.m; sourceTree = "<group>"; };
 		16F575CE179590BA00277308 /* borad_menu_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borad_menu_like_sel.png; sourceTree = "<group>"; };
 		180271EE178C019800CA9488 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
+		1816E97C17CED8BE00D532EA /* DoubanAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanAuthorizeView.h; sourceTree = "<group>"; };
+		1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanAuthorizeView.m; sourceTree = "<group>"; };
 		18275F2C17B3876400033AFF /* NearbyUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyUser.h; sourceTree = "<group>"; };
 		18275F2D17B3876400033AFF /* NearbyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyUser.m; sourceTree = "<group>"; };
 		1830B52C179D129200314A28 /* NSData+AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES256.h"; sourceTree = "<group>"; };
@@ -893,8 +892,6 @@
 		18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationMenuView.h; sourceTree = "<group>"; };
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
 		18E434E517BE287100DECFC7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		18E52FC317AA33F400B0E9B3 /* PLoginNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLoginNavigationView.h; sourceTree = "<group>"; };
-		18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLoginNavigationView.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
@@ -1794,8 +1791,8 @@
 		184648411793A5F700E83EBB /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1637CABE17B7CF8200E6F132 /* WebViewController.h */,
-				1637CABF17B7CF8200E6F132 /* WebViewController.m */,
+				1816E97C17CED8BE00D532EA /* DoubanAuthorizeView.h */,
+				1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */,
 				184648481793A61700E83EBB /* LoginViewController.h */,
 				184648491793A61700E83EBB /* LoginViewController.m */,
 				1846484A1793A61700E83EBB /* LoginViewController.xib */,
@@ -1805,8 +1802,6 @@
 				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
 				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
 				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
-				18E52FC317AA33F400B0E9B3 /* PLoginNavigationView.h */,
-				18E52FC417AA33F400B0E9B3 /* PLoginNavigationView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2246,10 +2241,8 @@
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
-				18E52FC517AA33F400B0E9B3 /* PLoginNavigationView.m in Sources */,
 				18275F2E17B3876400033AFF /* NearbyUser.m in Sources */,
 				1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */,
-				1637CAC017B7CF8200E6F132 /* WebViewController.m in Sources */,
 				1684763117BA601D00F42172 /* MusicViewController.m in Sources */,
 				167459E917BBC0EA00E636F8 /* MusicPlayerNavigationView.m in Sources */,
 				1653DBF017BD094E00767E0E /* MusicSourceMenuCell.m in Sources */,
@@ -2300,6 +2293,7 @@
 				16D0DB2917CA31E700EB763F /* FriendOfAddViewController.m in Sources */,
 				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
 				CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */,
+				1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

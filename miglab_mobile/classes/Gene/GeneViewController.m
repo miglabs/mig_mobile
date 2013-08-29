@@ -66,16 +66,22 @@
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
     //频道
+    //44 44 244 58
+    int PAGE_WIDTH = 244;
+//    _modifyGeneView.channelScrollView.frame = CGRectMake(44, 44, 70, 58);
+    _modifyGeneView.channelScrollView.clipsToBounds = NO;
+//    _modifyGeneView.channelScrollView.bounds = CGRectMake(44, 44, 297, 58);
     _modifyGeneView.channelScrollView.backgroundColor = [UIColor clearColor];
     _modifyGeneView.channelScrollView.scrollEnabled = YES;
     _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.channelScrollView.pagingEnabled = YES;
     _modifyGeneView.channelScrollView.delegate = self;
-    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(70 * 10, 50);
+//    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(70 * 10, 50);
+    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(PAGE_WIDTH * 10, 50);
     
     for (int i=0; i<10; i++) {
         UILabel *lblChannel = [[UILabel alloc] init];
-        lblChannel.frame = CGRectMake(70*i, 8, 70, 50);
+        lblChannel.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH/2, 50);
         lblChannel.backgroundColor = [UIColor clearColor];
         lblChannel.text = [NSString stringWithFormat:@"test-%d", i];
         lblChannel.textAlignment = kTextAlignmentCenter;
