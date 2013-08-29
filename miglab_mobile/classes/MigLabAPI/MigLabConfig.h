@@ -243,4 +243,9 @@
 #define NotificationNameUpdateConfigSuccess                 @"NotificationNameUpdateConfigSuccess"
 #define NotificationNameUpdateConfigFailed                  @"NotificationNameUpdateConfigFailed"
 
+//添加红心歌曲
+#define HTTP_COLLECTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
+#define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
+#define NotificationNameCollectSongFailed                   @"NotificationNameCollectSongFailed"
+
 #endif

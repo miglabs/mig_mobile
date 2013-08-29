@@ -278,6 +278,9 @@
     
     [miglabAPI doGetDefaultGuestSongs];
     
+    [miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
+    [miglabAPI doCollectSong:@"1" token:@"2" sid:@"22869"];
+    
     /*
     NSString *testuserid = @"10026";
     NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";

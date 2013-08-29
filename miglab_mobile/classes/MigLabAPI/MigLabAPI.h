@@ -110,6 +110,11 @@ typedef enum {
 -(void)doUpdateConfigfile:(NSString*)uid token:(NSString*)ttoken version:(NSString*)tversion;
 
 /*
+ 添加红心歌曲
+ */
+-(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid;
+
+/*
  收藏歌曲
  */
 -(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
