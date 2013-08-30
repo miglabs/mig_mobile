@@ -14,6 +14,12 @@
 
 //当前基因信息
 @property (nonatomic, retain) CurrentGeneView *currentGeneView;
+@property (nonatomic, retain) UIButton *btnType;
+@property (nonatomic, retain) UIButton *btnMood;
+@property (nonatomic, retain) UIButton *btnScene;
+
+@property (nonatomic, retain) UIButton *btnCurrentGene;
+@property (nonatomic, assign) CGRect oldGeneFrame;
 
 //音乐基因
 @property (nonatomic, retain) ModifyGeneView *modifyGeneView;

@@ -19,6 +19,12 @@
 
 //当前基因信息
 @synthesize currentGeneView = _currentGeneView;
+@synthesize btnType = _btnType;
+@synthesize btnMood = _btnMood;
+@synthesize btnScene = _btnScene;
+
+@synthesize btnCurrentGene = _btnCurrentGene;
+@synthesize oldGeneFrame = _oldGeneFrame;
 
 //音乐基因
 @synthesize modifyGeneView = _modifyGeneView;
@@ -50,8 +56,34 @@
     _currentGeneView.egoBtnAvatar.layer.borderWidth = 2;
     _currentGeneView.egoBtnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
     [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    [_currentGeneView.btnGotoGeneType addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_currentGeneView];
+    
+    //类型
+    _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnType.frame = CGRectMake(11.5 + 20, 45 + 10 + 100, 31, 31);
+    _btnType.tag = 100;
+    UIImage *typeimage = [UIImage imageWithName:@"gene_type" type:@"png"];
+    [_btnType setImage:typeimage forState:UIControlStateNormal];
+    [_btnType addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnType];
+    
+    //心情
+    _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnMood.frame = CGRectMake(11.5 + 246, 45 + 10 + 160, 31, 31);
+    _btnMood.tag = 200;
+    UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
+    [_btnMood setImage:moodimage forState:UIControlStateNormal];
+    [_btnMood addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnMood];
+    
+    //场景
+    _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btnScene.frame = CGRectMake(11.5 + 20, 45 + 10 + 220, 31, 31);
+    _btnScene.tag = 300;
+    UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
+    [_btnScene setImage:sceneimage forState:UIControlStateNormal];
+    [_btnScene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnScene];
     
     //音乐基因
     NSArray *modifyNib = [[NSBundle mainBundle] loadNibNamed:@"ModifyGeneView" owner:self options:nil];
@@ -125,23 +157,54 @@
     
     PLog(@"doGotoGene...");
     
+    _btnCurrentGene = sender;
+    _oldGeneFrame = _btnCurrentGene.frame;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _btnCurrentGene.frame = _modifyGeneView.frame;
+        _btnCurrentGene.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _btnType.hidden = YES;
+        _btnMood.hidden = YES;
+        _btnScene.hidden = YES;
+        _currentGeneView.hidden = YES;
+        
+        _btnCurrentGene.hidden = YES;
+        _modifyGeneView.hidden = NO;
+        _modifyGeneView.alpha = 0.0f;
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
+            
+            _modifyGeneView.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }];
+    
+    /*
     CGContextRef context = UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
-    /*
+    
     NSInteger first = [[self.view subviews] indexOfObject:_currentGeneView];
     NSInteger seconde = [[self.view subviews] indexOfObject:_modifyGeneView];
     
     [self.view exchangeSubviewAtIndex:first withSubviewAtIndex:seconde];
-    */
+    
     
     _currentGeneView.hidden = YES;
     _modifyGeneView.hidden = NO;
     
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
+    */
     
 }
 
@@ -149,6 +212,65 @@
     
     PLog(@"doBackFromGene...");
     
+    
+    _modifyGeneView.alpha = 1.0f;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
+        
+        _modifyGeneView.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _modifyGeneView.hidden = YES;
+        _btnCurrentGene.hidden = NO;
+        _btnCurrentGene.alpha = 0.0f;
+        //
+        _btnType.hidden = NO;
+        _btnMood.hidden = NO;
+        _btnScene.hidden = NO;
+        _currentGeneView.hidden = NO;
+        
+        [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+            
+            _btnCurrentGene.frame = _oldGeneFrame;
+            _btnCurrentGene.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+            _btnCurrentGene.hidden = NO;
+            
+        }];
+        
+    }];
+    
+    /*
+    _modifyGeneView.alpha = 1.0f;
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
+        
+        _modifyGeneView.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _modifyGeneView.hidden = YES;
+        _btnType.hidden = NO;
+        _btnType.alpha = 0.0f;
+        
+        [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+            
+            _btnType.frame = CGRectMake(31, 133, 73, 44);
+            _btnType.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+            _btnType.hidden = NO;
+            
+        }];
+        
+    }];
+    */
+    
+    /*
     CGContextRef context = UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -160,6 +282,7 @@
     
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
+    */
     
 }
 

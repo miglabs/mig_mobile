@@ -13,7 +13,6 @@
 @synthesize lblYear = _lblYear;
 @synthesize lblMonthAndDay = _lblMonthAndDay;
 @synthesize egoBtnAvatar = _egoBtnAvatar;
-@synthesize btnGotoGeneType = _btnGotoGeneType;
 
 - (id)initWithFrame:(CGRect)frame
 {

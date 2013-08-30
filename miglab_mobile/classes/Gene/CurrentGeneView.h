@@ -14,6 +14,5 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblYear;
 @property (nonatomic, retain) IBOutlet UILabel *lblMonthAndDay;
 @property (nonatomic, retain) IBOutlet EGOImageButton *egoBtnAvatar;
-@property (nonatomic, retain) IBOutlet UIButton *btnGotoGeneType;
 
 @end
