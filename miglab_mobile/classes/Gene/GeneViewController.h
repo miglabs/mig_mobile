@@ -9,6 +9,8 @@
 #import "PlayerViewController.h"
 #import "CurrentGeneView.h"
 #import "ModifyGeneView.h"
+#import "XmlParserUtil.h"
+#import "Channel.h"
 
 @interface GeneViewController : PlayerViewController<UIScrollViewDelegate>
 
@@ -23,6 +25,9 @@
 
 //音乐基因
 @property (nonatomic, retain) ModifyGeneView *modifyGeneView;
+
+@property (nonatomic, retain) XmlParserUtil *xmlParserUtil;
+@property (nonatomic, retain) Channel *currentChannel;
 
 -(IBAction)doAvatar:(id)sender;
 

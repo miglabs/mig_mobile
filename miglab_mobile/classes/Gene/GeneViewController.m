@@ -9,7 +9,8 @@
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
 #import "DetailPlayerViewController.h"
-#import "XmlParserUtil.h"
+
+static int PAGE_WIDTH = 100;
 
 @interface GeneViewController ()
 
@@ -28,6 +29,9 @@
 
 //音乐基因
 @synthesize modifyGeneView = _modifyGeneView;
+
+@synthesize xmlParserUtil = _xmlParserUtil;
+@synthesize currentChannel = _currentChannel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -97,25 +101,28 @@
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
+    //解析音乐基因
+    [self initGeneDataFromFile];
+    
+    int channelCount = [_xmlParserUtil.channelList count];
+    
     //频道
     //44 44 244 58
-    int PAGE_WIDTH = 244;
-//    _modifyGeneView.channelScrollView.frame = CGRectMake(44, 44, 70, 58);
-    _modifyGeneView.channelScrollView.clipsToBounds = NO;
-//    _modifyGeneView.channelScrollView.bounds = CGRectMake(44, 44, 297, 58);
     _modifyGeneView.channelScrollView.backgroundColor = [UIColor clearColor];
     _modifyGeneView.channelScrollView.scrollEnabled = YES;
     _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
-    _modifyGeneView.channelScrollView.pagingEnabled = YES;
+    _modifyGeneView.channelScrollView.showsVerticalScrollIndicator = NO;
     _modifyGeneView.channelScrollView.delegate = self;
-//    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(70 * 10, 50);
-    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(PAGE_WIDTH * 10, 50);
+    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(PAGE_WIDTH * channelCount, 50);
     
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<channelCount; i++) {
+        
+        Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:i];
+        
         UILabel *lblChannel = [[UILabel alloc] init];
-        lblChannel.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH/2, 50);
+        lblChannel.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
         lblChannel.backgroundColor = [UIColor clearColor];
-        lblChannel.text = [NSString stringWithFormat:@"test-%d", i];
+        lblChannel.text = tempchannel.channelName;
         lblChannel.textAlignment = kTextAlignmentCenter;
         lblChannel.textColor = [UIColor redColor];
         [_modifyGeneView.channelScrollView addSubview:lblChannel];
@@ -131,17 +138,27 @@
     _modifyGeneView.hidden = YES;
     
     
-//    self.playerMenuView.frame = CGRectMake(11.5, kMainScreenHeight - 45 - 73 - 10, 297, 73);
-    
-    //解析音乐基因
-    [NSThread detachNewThreadSelector:@selector(initGeneDataFromFile) toTarget:self withObject:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//解析音乐基因数据
+-(void)initGeneDataFromFile{
+    
+    PLog(@"initGeneDataFromFile...");
+    
+    NSString *channelInfoXmlPath = [[NSBundle mainBundle] pathForResource:@"channelinfo" ofType:@"xml"];
+    NSLog(@"channelInfoXmlPath: %@", channelInfoXmlPath);
+    
+    NSData *channelInfoXmlData = [[NSData alloc] initWithContentsOfFile:channelInfoXmlPath];
+    
+    _xmlParserUtil = [[XmlParserUtil alloc] initWithParserDefaultElement];
+    [_xmlParserUtil parserXml:channelInfoXmlData];
+    
 }
 
 -(IBAction)doAvatar:(id)sender{
@@ -174,6 +191,24 @@
         
         _btnCurrentGene.hidden = YES;
         _modifyGeneView.hidden = NO;
+        
+    }];
+    
+    /*
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _btnCurrentGene.frame = _modifyGeneView.frame;
+        _btnCurrentGene.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _btnType.hidden = YES;
+        _btnMood.hidden = YES;
+        _btnScene.hidden = YES;
+        _currentGeneView.hidden = YES;
+        
+        _btnCurrentGene.hidden = YES;
+        _modifyGeneView.hidden = NO;
         _modifyGeneView.alpha = 0.0f;
         
         [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
@@ -185,6 +220,7 @@
         }];
         
     }];
+    */
     
     /*
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -212,7 +248,26 @@
     
     PLog(@"doBackFromGene...");
     
+    _modifyGeneView.hidden = YES;
     
+    _btnType.hidden = NO;
+    _btnMood.hidden = NO;
+    _btnScene.hidden = NO;
+    _currentGeneView.hidden = NO;
+    _btnCurrentGene.hidden = NO;
+    _btnCurrentGene.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _btnCurrentGene.frame = _oldGeneFrame;
+        _btnCurrentGene.alpha = 1.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        
+    }];
+    
+    /*
     _modifyGeneView.alpha = 1.0f;
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveEaseOut animations:^{
@@ -242,6 +297,7 @@
         }];
         
     }];
+    */
     
     /*
     _modifyGeneView.alpha = 1.0f;
@@ -286,26 +342,37 @@
     
 }
 
-//解析音乐基因数据
--(void)initGeneDataFromFile{
-    
-    PLog(@"initGeneDataFromFile...");
-    
-    NSString *channelInfoXmlPath = [[NSBundle mainBundle] pathForResource:@"channelinfo" ofType:@"xml"];
-    NSLog(@"channelInfoXmlPath: %@", channelInfoXmlPath);
-    
-    NSData *channelInfoXmlData = [[NSData alloc] initWithContentsOfFile:channelInfoXmlPath];
-    
-    XmlParserUtil *xmlParserUtil = [[XmlParserUtil alloc] initWithParserDefaultElement];
-    [xmlParserUtil parserXml:channelInfoXmlData];
-    
-}
-
 //override
 -(IBAction)doPlayerAvatar:(id)sender{
     
     [super doPlayerAvatar:sender];
     PLog(@"gene doPlayerAvatar...");
+    
+}
+
+#pragma UIScrollViewDelegate
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    if (!decelerate) {
+        int x = scrollView.contentOffset.x;
+        if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
+            [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH + 1)*PAGE_WIDTH, 0) animated:YES];
+        } else {
+            [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH)*PAGE_WIDTH, 0) animated:YES];
+        }
+    }
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    int x = scrollView.contentOffset.x;
+    if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
+        [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH + 1)*PAGE_WIDTH, 0) animated:YES];
+    } else {
+        [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH)*PAGE_WIDTH, 0) animated:YES];
+    }
     
 }
 
