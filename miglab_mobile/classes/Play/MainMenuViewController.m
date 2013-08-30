@@ -443,7 +443,7 @@
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-    [_miglabAPI doHateSong:accesstoken uid:userid sid:_currentSong.songid];
+    [_miglabAPI doHateSong:userid token:accesstoken sid:_currentSong.songid];
     
 }
 

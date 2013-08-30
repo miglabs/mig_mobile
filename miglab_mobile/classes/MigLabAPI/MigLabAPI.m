@@ -582,13 +582,13 @@
  <!--请求POST-->
  HTTP_ADDBLACKLIST
  */
--(void)doHateSong:(NSString *)ttoken uid:(NSString *)tuid sid:(long)tsid{
+-(void)doHateSong:(NSString*)uid token:(NSString *)ttoken sid:(long)tsid {
     
     PLog(@"do hate song url: %@", HTTP_HATESONG);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_HATESONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, uid, tsid];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
@@ -2319,6 +2319,65 @@
         PLog(@"collect song failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 拉黑歌曲
+ <!--请求POST-->
+ HTTP_HATESONG
+ */
+-(void)doAddHateSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid {
+    
+    PLog(@"hate song url: %@", HTTP_HATESONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_HATESONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@", uid, ttoken, tsid];
+    PLog(@"hate song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [dicJson objectForKey:@"status"];
+            
+            if(1 == status) {
+                
+                PLog(@"hate song operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"hate song operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"hate song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:nil];
     }];
     
     [operation start];

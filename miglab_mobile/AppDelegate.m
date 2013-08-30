@@ -270,7 +270,7 @@
         [miglabAPI doGetMusicFromChannel:userid token:accesstoken channel:3];
         
         [miglabAPI doCollectSong:accesstoken uid:userid songid:11741];
-        [miglabAPI doHateSong:accesstoken uid:userid sid:99993];
+        //[miglabAPI doHateSong:accesstoken uid:userid sid:99993];
         
         //获取频道
         [miglabAPI doGetChannel:userid token:accesstoken num:10];
@@ -278,8 +278,9 @@
     
     [miglabAPI doGetDefaultGuestSongs];
     
-    [miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
-    [miglabAPI doCollectSong:@"1" token:@"2" sid:@"22869"];
+    //[miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
+    //[miglabAPI doCollectSong:@"1" token:@"2" sid:@"22869"];
+    [miglabAPI doHateSong:@"1" token:@"2" sid:@"22869"];
     
     /*
     NSString *testuserid = @"10026";

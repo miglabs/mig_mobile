@@ -110,7 +110,7 @@
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-        [_miglabAPI doHateSong:accesstoken uid:userid sid:currentSong.songid];
+        [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
     }
     

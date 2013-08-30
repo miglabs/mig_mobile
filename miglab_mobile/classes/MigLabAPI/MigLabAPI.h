@@ -115,6 +115,17 @@ typedef enum {
 -(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid;
 
 /*
+ 歌曲拉黑
+ */
+-(void)doHateSong:(NSString*)uid token:(NSString *)ttoken sid:(long)tsid;
+
+
+/****************************************社交接口*******************************************/
+
+
+/****************************************保留接口*******************************************/
+
+/*
  收藏歌曲
  */
 -(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
@@ -123,11 +134,6 @@ typedef enum {
  取消歌曲收藏
  */
 -(void)doCancelCollectedSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
-
-/*
- 歌曲拉黑
- */
--(void)doHateSong:(NSString*)ttoken uid:(NSString *)tuid sid:(long)tsid;
 
 /*
  分享歌曲
