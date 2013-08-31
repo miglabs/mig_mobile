@@ -12,9 +12,11 @@
 
 @interface PlayerViewController : BaseViewController
 
+//导航指针
 @property (nonatomic, retain) UIViewController *topViewcontroller;
-
+//底部播放器
 @property (nonatomic, retain) MusicPlayerMenuView *playerMenuView;
+//接口api
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(IBAction)doPlayerAvatar:(id)sender;

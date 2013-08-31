@@ -11,6 +11,9 @@
 #import "ModifyGeneView.h"
 #import "XmlParserUtil.h"
 #import "Channel.h"
+#import "Type.h"
+#import "Mood.h"
+#import "Scene.h"
 
 @interface GeneViewController : PlayerViewController<UIScrollViewDelegate>
 
@@ -28,6 +31,9 @@
 
 @property (nonatomic, retain) XmlParserUtil *xmlParserUtil;
 @property (nonatomic, retain) Channel *currentChannel;
+@property (nonatomic, retain) Type *currentType;
+@property (nonatomic, retain) Mood *currentMood;
+@property (nonatomic, retain) Scene *currentScene;
 
 -(IBAction)doAvatar:(id)sender;
 

@@ -128,6 +128,9 @@
 		162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5517C25D00000E904F /* ModifyGeneView.xib */; };
 		162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162AAB5817C25D25000E904F /* CurrentGeneView.m */; };
 		162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5A17C25D55000E904F /* CurrentGeneView.xib */; };
+		1633F6E917D1D24F00F47DFF /* base_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6E617D1D24F00F47DFF /* base_navigation_bg.png */; };
+		1633F6EA17D1D24F00F47DFF /* base_view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6E717D1D24F00F47DFF /* base_view_bg.png */; };
+		1633F6ED17D1D39300F47DFF /* base_back_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6EC17D1D39300F47DFF /* base_back_nor.png */; };
 		163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */; };
 		1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */; };
 		1637CA6B17B7A55300E6F132 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA6A17B7A55300E6F132 /* libxml2.dylib */; };
@@ -540,6 +543,9 @@
 		162AAB5717C25D25000E904F /* CurrentGeneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGeneView.h; sourceTree = "<group>"; };
 		162AAB5817C25D25000E904F /* CurrentGeneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGeneView.m; sourceTree = "<group>"; };
 		162AAB5A17C25D55000E904F /* CurrentGeneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentGeneView.xib; sourceTree = "<group>"; };
+		1633F6E617D1D24F00F47DFF /* base_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_navigation_bg.png; sourceTree = "<group>"; };
+		1633F6E717D1D24F00F47DFF /* base_view_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_view_bg.png; sourceTree = "<group>"; };
+		1633F6EC17D1D39300F47DFF /* base_back_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_back_nor.png; sourceTree = "<group>"; };
 		163623F9177F41A800A1715C /* NSObject+PObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PObjectCategory.h"; sourceTree = "<group>"; };
 		163623FA177F41A800A1715C /* NSObject+PObjectCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PObjectCategory.m"; sourceTree = "<group>"; };
 		1637CA6217B7A4DF00E6F132 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libDoubanApiEngine.framework; sourceTree = "<group>"; };
@@ -1223,6 +1229,16 @@
 			path = gene;
 			sourceTree = "<group>";
 		};
+		1633F6E417D1D24F00F47DFF /* base */ = {
+			isa = PBXGroup;
+			children = (
+				1633F6EC17D1D39300F47DFF /* base_back_nor.png */,
+				1633F6E617D1D24F00F47DFF /* base_navigation_bg.png */,
+				1633F6E717D1D24F00F47DFF /* base_view_bg.png */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
 		1637CA6117B7A4DF00E6F132 /* DoubanAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1569,6 +1585,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1633F6E417D1D24F00F47DFF /* base */,
 				1624BC0617C784DC00BE08A5 /* friend */,
 				162AAB4217C25440000E904F /* gene */,
 				165D7C8117BE5908000D08E3 /* home */,
@@ -2163,6 +2180,9 @@
 				16D0DB2217CA293800EB763F /* PhotoInfoCell.xib in Resources */,
 				16D0DB2A17CA31E700EB763F /* FriendOfAddViewController.xib in Resources */,
 				161D5D9717D0DBE800F1056B /* gene_type.png in Resources */,
+				1633F6E917D1D24F00F47DFF /* base_navigation_bg.png in Resources */,
+				1633F6EA17D1D24F00F47DFF /* base_view_bg.png in Resources */,
+				1633F6ED17D1D39300F47DFF /* base_back_nor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@
 #import "LoginChooseViewController.h"
 #import "DetailPlayerViewController.h"
 
-static int PAGE_WIDTH = 100;
+static int PAGE_WIDTH = 122;
 
 @interface GeneViewController ()
 
@@ -32,6 +32,9 @@ static int PAGE_WIDTH = 100;
 
 @synthesize xmlParserUtil = _xmlParserUtil;
 @synthesize currentChannel = _currentChannel;
+@synthesize currentType = _currentType;
+@synthesize currentMood = _currentMood;
+@synthesize currentScene = _currentScene;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -104,10 +107,9 @@ static int PAGE_WIDTH = 100;
     //解析音乐基因
     [self initGeneDataFromFile];
     
-    int channelCount = [_xmlParserUtil.channelList count];
-    
     //频道
     //44 44 244 58
+    int channelCount = [_xmlParserUtil.channelList count];
     _modifyGeneView.channelScrollView.backgroundColor = [UIColor clearColor];
     _modifyGeneView.channelScrollView.scrollEnabled = YES;
     _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
@@ -129,10 +131,70 @@ static int PAGE_WIDTH = 100;
     }
     
     //类别
+    int typeCount = [_xmlParserUtil.typeList count];
+    _modifyGeneView.typeScrollView.backgroundColor = [UIColor clearColor];
+    _modifyGeneView.typeScrollView.scrollEnabled = YES;
+    _modifyGeneView.typeScrollView.showsHorizontalScrollIndicator = NO;
+    _modifyGeneView.typeScrollView.showsVerticalScrollIndicator = NO;
+    _modifyGeneView.typeScrollView.delegate = self;
+    _modifyGeneView.typeScrollView.contentSize = CGSizeMake(PAGE_WIDTH * typeCount, 50);
+    
+    for (int i=0; i<typeCount; i++) {
+        
+        Type *temptype = [_xmlParserUtil.typeList objectAtIndex:i];
+        
+        UILabel *lblType = [[UILabel alloc] init];
+        lblType.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblType.backgroundColor = [UIColor clearColor];
+        lblType.text = temptype.name;
+        lblType.textAlignment = kTextAlignmentCenter;
+        lblType.textColor = [UIColor redColor];
+        [_modifyGeneView.typeScrollView addSubview:lblType];
+    }
     
     //心情
+    int moodCount = [_xmlParserUtil.moodList count];
+    _modifyGeneView.moodScrollView.backgroundColor = [UIColor clearColor];
+    _modifyGeneView.moodScrollView.scrollEnabled = YES;
+    _modifyGeneView.moodScrollView.showsHorizontalScrollIndicator = NO;
+    _modifyGeneView.moodScrollView.showsVerticalScrollIndicator = NO;
+    _modifyGeneView.moodScrollView.delegate = self;
+    _modifyGeneView.moodScrollView.contentSize = CGSizeMake(PAGE_WIDTH * moodCount, 50);
+    
+    for (int i=0; i<moodCount; i++) {
+        
+        Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:i];
+        
+        UILabel *lblMood = [[UILabel alloc] init];
+        lblMood.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblMood.backgroundColor = [UIColor clearColor];
+        lblMood.text = tempmood.name;
+        lblMood.textAlignment = kTextAlignmentCenter;
+        lblMood.textColor = [UIColor redColor];
+        [_modifyGeneView.moodScrollView addSubview:lblMood];
+    }
     
     //场景
+    int sceneCount = [_xmlParserUtil.sceneList count];
+    _modifyGeneView.sceneScrollView.backgroundColor = [UIColor clearColor];
+    _modifyGeneView.sceneScrollView.scrollEnabled = YES;
+    _modifyGeneView.sceneScrollView.showsHorizontalScrollIndicator = NO;
+    _modifyGeneView.sceneScrollView.showsVerticalScrollIndicator = NO;
+    _modifyGeneView.sceneScrollView.delegate = self;
+    _modifyGeneView.sceneScrollView.contentSize = CGSizeMake(PAGE_WIDTH * sceneCount, 50);
+    
+    for (int i=0; i<sceneCount; i++) {
+        
+        Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:i];
+        
+        UILabel *lblScene = [[UILabel alloc] init];
+        lblScene.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblScene.backgroundColor = [UIColor clearColor];
+        lblScene.text = tempscene.name;
+        lblScene.textAlignment = kTextAlignmentCenter;
+        lblScene.textColor = [UIColor redColor];
+        [_modifyGeneView.sceneScrollView addSubview:lblScene];
+    }
     
     [self.view addSubview:_modifyGeneView];
     _modifyGeneView.hidden = YES;

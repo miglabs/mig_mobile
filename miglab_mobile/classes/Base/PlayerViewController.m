@@ -19,9 +19,11 @@
 
 @implementation PlayerViewController
 
+//导航指针
 @synthesize topViewcontroller = _topViewcontroller;
-
+//底部播放器
 @synthesize playerMenuView = _playerMenuView;
+//接口api
 @synthesize miglabAPI = _miglabAPI;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -96,7 +98,6 @@
     PLog(@"doPlayerAvatar...");
     
     DetailPlayerViewController *detailPlayerViewController = [[DetailPlayerViewController alloc] initWithNibName:@"DetailPlayerViewController" bundle:nil];
-    //    [_topViewcontroller.navigationController pushViewController:detailPlayerViewController animated:YES];
     [_topViewcontroller presentModalViewController:detailPlayerViewController animated:YES];
     
 }
@@ -112,6 +113,8 @@
         NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
     
 }
@@ -128,6 +131,8 @@
         NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
         [_miglabAPI doCollectSong:accesstoken uid:userid songid:currentSong.songid];
         
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
     
 }
@@ -147,6 +152,8 @@
         [_playerMenuView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
     }
     
+    [self updateSongInfo];
+    
 }
 
 -(IBAction)doNext:(id)sender{
@@ -155,22 +162,36 @@
     
     [[PPlayerManagerCenter GetInstance] doNext];
     
+    [self updateSongInfo];
+    
+    UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+    [_playerMenuView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    
 }
 
+-(void)updateSongInfo{
+    
+    Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
+    _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];
+    
+}
+
+#pragma notification
+
 -(void)hateSongFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲拉黑失败:("];
+    [SVProgressHUD showErrorWithStatus:@"拉黑歌曲失败:("];
 }
 
 -(void)hateSongSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
+    [SVProgressHUD showSuccessWithStatus:@"拉黑歌曲成功:)"];
 }
 
 -(void)collectSongFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
+    [SVProgressHUD showErrorWithStatus:@"收藏歌曲失败:("];
 }
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
+    [SVProgressHUD showSuccessWithStatus:@"收藏歌曲成功:)"];
 }
 
 @end

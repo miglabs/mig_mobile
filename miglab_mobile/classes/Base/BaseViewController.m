@@ -14,6 +14,8 @@
 
 @implementation BaseViewController
 
+@synthesize navView = _navView;
+
 @synthesize bgImageView = _bgImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,10 +35,21 @@
     FRAMELOG(self.view);
     
     //bg
-    UIImageView *bgImageView = [[UIImageView alloc] init];
-    bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
-    bgImageView.image = [UIImage imageWithName:@"view_bg" type:@"png"];
-    [self.view addSubview:bgImageView];
+    UIImage *baseViewBg = [UIImage imageWithName:@"base_view_bg" type:@"png"];
+    _bgImageView = [[EGOImageView alloc] initWithPlaceholderImage:baseViewBg];
+    _bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
+    [self.view addSubview:_bgImageView];
+    
+    //nav bar
+    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"Base Player" bgImageView:@"login_navigation_bg"];
+    [self.view addSubview:_navView];
+    
+    //back
+    UIImage *backImage = [UIImage imageWithName:@"base_back_nor" type:@"png"];
+    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
+    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
+    [_navView.leftButton setHidden:NO];
+    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -44,6 +57,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)doBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

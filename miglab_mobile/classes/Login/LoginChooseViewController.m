@@ -356,7 +356,7 @@
             //检查服务端是否已经记录该帐号
             [_miglabAPI doGetUserInfo:name accessToken:[UserSessionManager GetInstance].accesstoken];
             
-            [self doBack:nil];
+//            [self doBack:nil];
             
         }//if
         
@@ -480,7 +480,7 @@
     [_miglabAPI doGetUserInfo:username accessToken:[UserSessionManager GetInstance].accesstoken];
     
     //
-    [self doBack:nil];
+//    [self doBack:nil];
     
 }
 

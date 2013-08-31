@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageView.h"
+#import "PCustomNavigationBarView.h"
 
 @interface BaseViewController : UIViewController
 
-@property (nonatomic, retain) UIImageView *bgImageView;
+//导航
+@property (nonatomic, retain) PCustomNavigationBarView *navView;
+//背景图片
+@property (nonatomic, retain) EGOImageView *bgImageView;
+
+-(IBAction)doBack:(id)sender;
 
 @end
