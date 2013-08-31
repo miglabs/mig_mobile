@@ -42,5 +42,9 @@
 
 //解析音乐基因数据
 -(void)initGeneDataFromFile;
+-(void)checkGeneConfigfile;
+
+-(void)getUpdateConfigFailed:(NSNotification *)tNotification;
+-(void)getUpdateConfigSuccess:(NSNotification *)tNotification;
 
 @end

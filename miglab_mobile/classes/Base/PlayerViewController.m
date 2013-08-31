@@ -59,9 +59,19 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    PLog(@"PlayerViewController viewWillAppear...");
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
+    
+    PLog(@"PlayerViewController viewDidAppear...");
     
     //doHateSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hateSongFailed:) name:NotificationNameHateSongFailed object:nil];
@@ -71,11 +81,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
+    [self updateSongInfo];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    PLog(@"PlayerViewController viewWillDisappear...");
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:animated];
+    
+    PLog(@"PlayerViewController viewDidDisappear...");
     
     //doHateSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongFailed object:nil];
@@ -143,15 +165,6 @@
     
     [[PPlayerManagerCenter GetInstance] doPlayOrPause];
     
-    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if ([aaMusicPlayer isMusicPlaying]) {
-        UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
-        [_playerMenuView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
-    } else {
-        UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
-        [_playerMenuView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
-    }
-    
     [self updateSongInfo];
     
 }
@@ -170,6 +183,15 @@
 }
 
 -(void)updateSongInfo{
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if ([aaMusicPlayer isMusicPlaying]) {
+        UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+        [_playerMenuView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    } else {
+        UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+        [_playerMenuView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+    }
     
     Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
     _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];

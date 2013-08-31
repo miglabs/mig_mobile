@@ -9,6 +9,7 @@
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
 #import "DetailPlayerViewController.h"
+#import "UserSessionManager.h"
 
 static int PAGE_WIDTH = 122;
 
@@ -41,8 +42,19 @@ static int PAGE_WIDTH = 122;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdateConfigFailed:) name:NotificationNameUpdateConfigFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdateConfigSuccess:) name:NotificationNameUpdateConfigSuccess object:nil];
+        
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameUpdateConfigFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameUpdateConfigSuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -220,6 +232,19 @@ static int PAGE_WIDTH = 122;
     
     _xmlParserUtil = [[XmlParserUtil alloc] initWithParserDefaultElement];
     [_xmlParserUtil parserXml:channelInfoXmlData];
+    
+}
+
+-(void)checkGeneConfigfile{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doUpdateConfigfile:userid token:accesstoken version:[NSString stringWithFormat:@"%lld", _xmlParserUtil.version]];
+    }
+
     
 }
 
@@ -436,6 +461,23 @@ static int PAGE_WIDTH = 122;
         [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH)*PAGE_WIDTH, 0) animated:YES];
     }
     
+}
+
+#pragma notification
+
+-(void)getUpdateConfigFailed:(NSNotification *)tNotification{
+    
+    PLog(@"getUpdateConfigFailed...");
+    
+}
+
+-(void)getUpdateConfigSuccess:(NSNotification *)tNotification{
+    
+    //todo
+    /*
+     * 判断是否需要更新
+     * 然后下载新的数据更新
+     */
 }
 
 @end

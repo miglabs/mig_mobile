@@ -203,6 +203,7 @@
                 
                 GeneViewController *gene = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
                 [gene setTopViewcontroller:self];
+                [gene viewDidAppear:YES];
                 [_dicViewControllerCache setObject:gene forKey:numIndex];
                 controller = gene;
                 
@@ -220,6 +221,7 @@
                 
                 MusicViewController *music = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
                 [music setTopViewcontroller:self];
+                [music viewDidAppear:YES];
                 [_dicViewControllerCache setObject:music forKey:numIndex];
                 controller = music;
                 
@@ -236,6 +238,7 @@
                 
                 FriendViewController *friend = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
                 [friend setTopViewcontroller:self];
+                [friend viewDidAppear:YES];
                 [_dicViewControllerCache setObject:friend forKey:numIndex];
                 controller = friend;
                 
