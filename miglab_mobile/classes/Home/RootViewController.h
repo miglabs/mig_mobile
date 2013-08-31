@@ -37,8 +37,8 @@
 -(void)loginSuccess:(NSNotification *)tNotification;
 -(void)getUserInfoFailed:(NSNotification *)tNotification;
 -(void)getUserInfoSuccess:(NSNotification *)tNotification;
--(void)getModeMusicFailed:(NSNotification *)tNotification;
--(void)getModeMusicSuccess:(NSNotification *)tNotification;
+-(void)getTypeSongsFailed:(NSNotification *)tNotification;
+-(void)getTypeSongsSuccess:(NSNotification *)tNotification;
 
 -(void)setUserPosFailed:(NSNotification *)tNotification;
 -(void)setUserPosSuccess:(NSNotification *)tNotification;

@@ -54,9 +54,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoSuccess:) name:NotificationNameGetUserInfoSuccess object:nil];
         
-        //getModeMusic
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
+        //getTypeSongs
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
         //setUserPos
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUserPosFailed:) name:NotificationNameSetUserPosFailed object:nil];
@@ -80,9 +80,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoSuccess object:nil];
     
-    //getModeMusic
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicSuccess object:nil];
+    //getTypeSongs
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
     
     //setUserPos
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosFailed object:nil];
@@ -377,24 +377,26 @@
     
     [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
-    //根据描述词获取歌曲 test
-    //随机心情词id
-    int rnd = (rand() % 6) + 1;
-    NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
-    [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+    NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+    NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+    
+    [_miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:@"0" sceneid:tsceneid sceneindex:@"0" channelid:tchannelid channelindex:@"0" num:@"5"];
+    
     
 }
 
-//doGetModeMusic notification
--(void)getModeMusicFailed:(NSNotification *)tNotification{
+//getTypeSongsFailed notification
+-(void)getTypeSongsFailed:(NSNotification *)tNotification{
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getModeMusicFailed...%@", [result objectForKey:@"msg"]);
-    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败:("];
+    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
 
--(void)getModeMusicSuccess:(NSNotification *)tNotification{
+-(void)getTypeSongsSuccess:(NSNotification *)tNotification{
     
     PLog(@"getModeMusicSuccess...");
     NSDictionary *result = [tNotification userInfo];
@@ -404,7 +406,7 @@
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
     [[PPlayerManagerCenter GetInstance].songList addObjectsFromArray:tempsonglist];
     
-    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
+    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
 }
 

@@ -47,4 +47,7 @@
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification;
 -(void)getUpdateConfigSuccess:(NSNotification *)tNotification;
 
+-(void)getTypeSongsFailed:(NSNotification *)tNotification;
+-(void)getTypeSongsSuccess:(NSNotification *)tNotification;
+
 @end

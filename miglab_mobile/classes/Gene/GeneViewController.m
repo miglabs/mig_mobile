@@ -8,8 +8,7 @@
 
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
-#import "DetailPlayerViewController.h"
-#import "UserSessionManager.h"
+#import "PDatabaseManager.h"
 
 static int PAGE_WIDTH = 122;
 
@@ -43,8 +42,13 @@ static int PAGE_WIDTH = 122;
     if (self) {
         // Custom initialization
         
+        //getUpdateConfig
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdateConfigFailed:) name:NotificationNameUpdateConfigFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdateConfigSuccess:) name:NotificationNameUpdateConfigSuccess object:nil];
+        
+        //getTypeSongs
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
     }
     return self;
@@ -52,8 +56,13 @@ static int PAGE_WIDTH = 122;
 
 -(void)dealloc{
     
+    //getUpdateConfig
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameUpdateConfigFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameUpdateConfigSuccess object:nil];
+    
+    //getTypeSongs
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
     
 }
 
@@ -354,6 +363,16 @@ static int PAGE_WIDTH = 122;
         
     }];
     
+    NSString *userid = [UserSessionManager GetInstance].userid;
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+    NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+    NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+    
+    [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:@"0" sceneid:tsceneid sceneindex:@"0" channelid:tchannelid channelindex:@"0" num:@"5"];
+    
+    
     /*
     _modifyGeneView.alpha = 1.0f;
     
@@ -478,6 +497,29 @@ static int PAGE_WIDTH = 122;
      * 判断是否需要更新
      * 然后下载新的数据更新
      */
+}
+
+//getTypeSongsFailed notification
+-(void)getTypeSongsFailed:(NSNotification *)tNotification{
+    
+    NSDictionary *result = [tNotification userInfo];
+    PLog(@"getModeMusicFailed...%@", [result objectForKey:@"msg"]);
+    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
+    
+}
+
+-(void)getTypeSongsSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getModeMusicSuccess...");
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray *songInfoList = [result objectForKey:@"result"];
+    [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
+    [[PPlayerManagerCenter GetInstance].songList addObjectsFromArray:tempsonglist];
+    
+    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
+    
 }
 
 @end
