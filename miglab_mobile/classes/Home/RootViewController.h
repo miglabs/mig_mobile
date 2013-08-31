@@ -9,8 +9,12 @@
 #import "BaseViewController.h"
 #import "RootNavigationMenuView.h"
 #import "MigLabAPI.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : BaseViewController
+@interface RootViewController : BaseViewController<CLLocationManagerDelegate>
+
+//gps定位
+@property (nonatomic, retain) CLLocationManager *locationManager;
 
 //启动图标志
 @property (assign) BOOL isFirstWillAppear;
@@ -35,5 +39,8 @@
 -(void)getUserInfoSuccess:(NSNotification *)tNotification;
 -(void)getModeMusicFailed:(NSNotification *)tNotification;
 -(void)getModeMusicSuccess:(NSNotification *)tNotification;
+
+-(void)setUserPosFailed:(NSNotification *)tNotification;
+-(void)setUserPosSuccess:(NSNotification *)tNotification;
 
 @end

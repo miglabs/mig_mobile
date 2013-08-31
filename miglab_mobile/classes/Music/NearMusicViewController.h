@@ -7,20 +7,30 @@
 //
 
 #import "PlayerViewController.h"
-#import "PCustomNavigationBarView.h"
-#import "MigLabAPI.h"
+#import "MusicBodyHeadMenuView.h"
 
 //附近的好音乐
 @interface NearMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
+@property (nonatomic, retain) MusicBodyHeadMenuView *bodyHeadMenuView;
 
-@property (nonatomic, retain) UITableView *songTableView;
-@property (nonatomic, retain) NSMutableArray *songList;
+@property (nonatomic, retain) UITableView *dataTableView;
+@property (nonatomic, retain) NSMutableArray *dataList;
 
-@property (nonatomic, retain) MigLabAPI *miglabAPI;
+@property (nonatomic, assign) int dataStatus;       //1-normal，2-编辑
 
--(IBAction)doBack:(id)sender;
+@property (nonatomic, retain) NSMutableDictionary *dicSelectedSongId;
+
+-(void)loadData;
+-(void)loadNearMusicFromDatabase;
+-(void)loadNearMusicFromServer;
+
+-(void)getCollectedSongsFailed:(NSNotification *)tNotification;
+-(void)getCollectedSongsSuccess:(NSNotification *)tNotification;
+
 -(IBAction)doSearch:(id)sender;
+
+-(IBAction)doEdit:(id)sender;
+-(IBAction)doSelectedIcon:(id)sender;
 
 @end

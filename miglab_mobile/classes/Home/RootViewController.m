@@ -25,6 +25,8 @@
 
 @implementation RootViewController
 
+@synthesize locationManager = _locationManager;
+
 @synthesize isFirstWillAppear = _isFirstWillAppear;
 @synthesize isFirstDidAppear = _isFirstDidAppear;
 
@@ -56,6 +58,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicFailed:) name:NotificationNameModeMusicFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getModeMusicSuccess:) name:NotificationNameModeMusicSuccess object:nil];
         
+        //setUserPos
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUserPosFailed:) name:NotificationNameSetUserPosFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUserPosSuccess:) name:NotificationNameSetUserPosSuccess object:nil];
         
     }
     return self;
@@ -78,6 +83,10 @@
     //getModeMusic
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameModeMusicSuccess object:nil];
+    
+    //setUserPos
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosSuccess object:nil];
     
 }
 
@@ -102,8 +111,16 @@
     _dicViewControllerCache = [[NSMutableDictionary alloc] initWithCapacity:3];
     [self segmentAction:_rootNavMenuView.btnMenuFirst];
     
-    
+    //
     _miglabAPI = [[MigLabAPI alloc] init];
+    
+    //gps
+    _locationManager = [[CLLocationManager alloc] init];
+    if ([CLLocationManager locationServicesEnabled]) {
+        [_locationManager setDelegate:self];
+        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    }
     
     //登录，获取用户资料
     //login
@@ -148,6 +165,9 @@
         _isFirstWillAppear = YES;
         [SYAppStart show];
     }
+    
+    //start gps
+    [_locationManager startUpdatingLocation];
     
 }
 
@@ -343,6 +363,7 @@
     [user log];
     
     user.password = [UserSessionManager GetInstance].currentUser.password;
+    [UserSessionManager GetInstance].userid = user.userid;
     [UserSessionManager GetInstance].currentUser = user;
     [UserSessionManager GetInstance].isLoggedIn = YES;
     
@@ -385,6 +406,51 @@
     
     [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
     
+}
+
+//setUserPos
+-(void)setUserPosFailed:(NSNotification *)tNotification{
+    
+    PLog(@"setUserPosFailed...");
+    
+}
+
+-(void)setUserPosSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"setUserPosSuccess...");
+    
+}
+
+#pragma CLLocationManagerDelegate
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
+    PLog(@"[newLocation description]: %@", [newLocation description]);
+    
+    //取得经纬度
+    CLLocationCoordinate2D coordinate = newLocation.coordinate;
+    CLLocationDegrees gLatitude = coordinate.latitude;
+    CLLocationDegrees GLongitude = coordinate.longitude;
+    NSString *strLatitude = [NSString stringWithFormat:@"%g", gLatitude];
+    NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
+    NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
+    
+    [_locationManager stopUpdatingLocation];
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *strLocation = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
+        
+        [_miglabAPI doSetUserPos:userid token:accesstoken location:strLocation];
+        
+    }
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
 }
 
 @end

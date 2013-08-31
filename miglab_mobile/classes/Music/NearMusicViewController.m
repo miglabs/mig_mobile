@@ -17,12 +17,8 @@
 
 @implementation NearMusicViewController
 
-@synthesize navView = _navView;
-
-@synthesize songTableView = _songTableView;
-@synthesize songList = _songList;
-
-@synthesize miglabAPI = _miglabAPI;
+@synthesize dataTableView = _dataTableView;
+@synthesize dataList = _dataList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,20 +35,14 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"附近的好音乐" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
+    self.navView.titleLabel.text = @"附近的好音乐";
     
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
-    
+    //search
     UIImage *searchImage = [UIImage imageWithName:@"music_button_search" type:@"png"];
-    [_navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
-    _navView.rightButton.frame = CGRectMake(268, 7.5, 48, 29);
-    [_navView.rightButton setHidden:NO];
-    [_navView.rightButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
+    self.navView.rightButton.frame = CGRectMake(268, 7.5, 48, 29);
+    [self.navView.rightButton setHidden:NO];
+    [self.navView.rightButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
     
     //body
     //body bg
@@ -62,6 +52,7 @@
     [self.view addSubview:bodyBgImageView];
     
     //body head
+    /*
     UILabel *lblDesc = [[UILabel alloc] init];
     lblDesc.frame = CGRectMake(16, 10, 140, 21);
     lblDesc.backgroundColor = [UIColor clearColor];
@@ -85,25 +76,32 @@
     [headerView addSubview:btnEdit];
     [headerView addSubview:separatorImageView];
     [self.view addSubview:headerView];
+    */
+    
+    //body head
+    _bodyHeadMenuView = [[MusicBodyHeadMenuView alloc] initMusicBodyHeadMenuView];
+    _bodyHeadMenuView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
+    [self.view addSubview:_bodyHeadMenuView];
+    
+    _bodyHeadMenuView.btnSort.hidden = YES;
+    [_bodyHeadMenuView.btnEdit addTarget:self action:@selector(doEdit:) forControlEvents:UIControlEventTouchUpInside];
     
     //song list
-    _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, 45 + 10 + 45, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
-    _songTableView.dataSource = self;
-    _songTableView.delegate = self;
-    _songTableView.backgroundColor = [UIColor clearColor];
-    _songTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_songTableView];
+    _dataTableView = [[UITableView alloc] init];
+    _dataTableView.frame = CGRectMake(11.5, 45 + 10 + 45, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.dataSource = self;
+    _dataTableView.delegate = self;
+    _dataTableView.backgroundColor = [UIColor clearColor];
+    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_dataTableView];
     
     //data
-    _songList = [[NSMutableArray alloc] init];
+    _dataList = [[NSMutableArray alloc] init];
+    _dataStatus = 1;
+    _dicSelectedSongId = [[NSMutableDictionary alloc] init];
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
-    [_songList addObjectsFromArray:tempSongInfoList];
-    
-    
-    
+    //
+    [self loadData];
     
 }
 
@@ -113,13 +111,105 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)loadData{
+    
+//    [self loadNearMusicFromDatabase];
+    [self loadNearMusicFromServer];
+    
 }
+
+-(void)loadNearMusicFromDatabase{
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+    [_dataList addObjectsFromArray:tempSongInfoList];
+    
+    [_dataTableView reloadData];
+    
+}
+
+-(void)loadNearMusicFromServer{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+//        [self.miglabAPI doGetNearbyUser:<#(NSString *)#> token:<#(NSString *)#> page:<#(int)#>];
+        
+    } else {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        
+    }
+    
+}
+
+#pragma notification
+
 
 -(IBAction)doSearch:(id)sender{
     
     PLog(@"doSearch...");
+    
+}
+
+-(IBAction)doEdit:(id)sender{
+    
+    PLog(@"doEdit...");
+    
+    //todo edit
+    if (_dataStatus == 2) {
+        
+        //delete
+        NSArray *selectedSongList = [_dicSelectedSongId allKeys];
+        int selectedSongCount = [selectedSongList count];
+        for (int i=0; i<selectedSongCount; i++) {
+            
+            NSString *tempsongid = [selectedSongList objectAtIndex:i];
+            [[PDatabaseManager GetInstance] deleteSongInfo:[tempsongid longLongValue]];
+            
+        }
+        
+        _dataStatus = 1;
+        [_dataTableView reloadData];
+        
+    } else {
+        
+        _dataStatus = 2;
+        [_dataTableView reloadData];
+        
+    }
+    
+    [_dicSelectedSongId removeAllObjects];
+    
+}
+
+//选中歌曲删除
+-(IBAction)doSelectedIcon:(id)sender{
+    
+    UIButton *tempBtnIcon = sender;
+    PLog(@"doSelectedIcon...%d", tempBtnIcon.tag);
+    
+    //非编辑状态
+    if (_dataStatus != 2) {
+        return;
+    }
+    
+    NSString *key = [NSString stringWithFormat:@"%d", tempBtnIcon.tag];
+    if ([_dicSelectedSongId objectForKey:key]) {
+        
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [tempBtnIcon setImage:iconimage forState:UIControlStateNormal];
+        [_dicSelectedSongId removeObjectForKey:key];
+        
+    } else {
+        
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_sel" type:@"png"];
+        [tempBtnIcon setImage:iconimage forState:UIControlStateNormal];
+        [_dicSelectedSongId setObject:key forKey:key];
+        
+    }
     
 }
 
@@ -136,7 +226,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_songList count];
+    return [_dataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,10 +238,22 @@
         cell = (MusicSongCell *)[nibContents objectAtIndex:0];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        [cell.btnIcon addTarget:self action:@selector(doSelectedIcon:) forControlEvents:UIControlEventTouchUpInside];
 	}
     
-    Song *tempsong = [_songList objectAtIndex:indexPath.row];
+    //1-排序，2-编辑
+    if (_dataStatus == 2) {
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
+    } else {
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_listening" type:@"png"];
+        [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
+    }
+    
+    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
