@@ -23,6 +23,9 @@
 @synthesize like = _like;
 @synthesize wordid = _wordid;
 @synthesize songtype = _songtype;
+@synthesize collectnum = _collectnum;
+@synthesize commentnum = _commentnum;
+@synthesize hot = _hot;
 
 @synthesize songCachePath = _songCachePath;
 
@@ -49,6 +52,9 @@
             song.lrcurl = [dict objectForKey:@"lrcurl"];
             song.coverurl = [dict objectForKey:@"pic"];
             song.like = [dict objectForKey:@"like"];
+            song.collectnum = [[dict objectForKey:@"clt"] intValue];
+            song.commentnum = [[dict objectForKey:@"cmt"] intValue];
+            song.hot = [[dict objectForKey:@"hot"] longLongValue];
             
         }
         
