@@ -2402,7 +2402,7 @@
         @try {
             
             NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
-            int status = [dicJson objectForKey:@"status"];
+            int status = [[dicJson objectForKey:@"status"] intValue];
             
             if (1 == status) {
                 
