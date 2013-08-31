@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PUser.h"
+#import "UserGene.h"
 
 @interface UserSessionManager : NSObject
 
@@ -16,6 +17,8 @@
 @property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) PUser *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;
+
+@property (nonatomic, retain) UserGene *currentUserGene;
 
 +(UserSessionManager *)GetInstance;
 

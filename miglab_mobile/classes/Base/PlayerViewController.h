@@ -9,6 +9,9 @@
 #import "BaseViewController.h"
 #import "MusicPlayerMenuView.h"
 #import "MigLabAPI.h"
+#import "UserSessionManager.h"
+#import "PPlayerManagerCenter.h"
+#import "SVProgressHUD.h"
 
 @interface PlayerViewController : BaseViewController
 

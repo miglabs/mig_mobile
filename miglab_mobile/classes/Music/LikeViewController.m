@@ -18,18 +18,35 @@
 
 @implementation LikeViewController
 
-@synthesize navView = _navView;
+@synthesize bodyHeadMenuView = _bodyHeadMenuView;
+@synthesize sortMenuView = _sortMenuView;
 
-@synthesize songTableView = _songTableView;
-@synthesize songList = _songList;
+@synthesize dataTableView = _dataTableView;
+@synthesize dataList = _dataList;
+
+@synthesize dataStatus = _dataStatus;
+
+@synthesize dicSelectedSongId = _dicSelectedSongId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        //doGetCollectedSongs
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCollectedSongsFailed:) name:NotificationNameGetCollectedSongsFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCollectedSongsSuccess:) name:NotificationNameGetCollectedSongsSuccess object:nil];
+        
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCollectedSongsFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCollectedSongsSuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -37,15 +54,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"我喜欢的" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
-    
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    //nav title
+    self.navView.titleLabel.text = @"我喜欢的歌曲";
     
     //body
     //body bg
@@ -55,6 +65,7 @@
     [self.view addSubview:bodyBgImageView];
     
     //body head
+    /*
     UILabel *lblDesc = [[UILabel alloc] init];
     lblDesc.frame = CGRectMake(16, 12, 140, 21);
     lblDesc.backgroundColor = [UIColor clearColor];
@@ -84,24 +95,44 @@
     [headerView addSubview:btnEdit];
     [headerView addSubview:separatorImageView];
     [self.view addSubview:headerView];
+    */
+    
+    //body head
+    _bodyHeadMenuView = [[MusicBodyHeadMenuView alloc] initMusicBodyHeadMenuView];
+    _bodyHeadMenuView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
+    [self.view addSubview:_bodyHeadMenuView];
+    
+    [_bodyHeadMenuView.btnSort addTarget:self action:@selector(doSort:) forControlEvents:UIControlEventTouchUpInside];
+    [_bodyHeadMenuView.btnEdit addTarget:self action:@selector(doEdit:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //sort menu
+    _sortMenuView = [[MusicSortMenuView alloc] initMusicSortMenuView];
+//    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 45);
+    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 0);
+    [self.view addSubview:_sortMenuView];
+    
+    [_sortMenuView.btnSortFirst addTarget:self action:@selector(doSortMenu1:) forControlEvents:UIControlEventTouchUpInside];
+    [_sortMenuView.btnSortSecond addTarget:self action:@selector(doSortMenu2:) forControlEvents:UIControlEventTouchUpInside];
+    [_sortMenuView.btnSortThird addTarget:self action:@selector(doSortMenu3:) forControlEvents:UIControlEventTouchUpInside];
+    _sortMenuView.alpha = 0.0f;
+    _sortMenuView.hidden = YES;
     
     //song list
-    _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
-    _songTableView.dataSource = self;
-    _songTableView.delegate = self;
-    _songTableView.backgroundColor = [UIColor clearColor];
-    _songTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_songTableView];
+    _dataTableView = [[UITableView alloc] init];
+    _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.dataSource = self;
+    _dataTableView.delegate = self;
+    _dataTableView.backgroundColor = [UIColor clearColor];
+    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_dataTableView];
     
     //data
-    _songList = [[NSMutableArray alloc] init];
+    _dataList = [[NSMutableArray alloc] init];
+    _dataStatus = 1;
+    _dicSelectedSongId = [[NSMutableDictionary alloc] init];
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
-    [_songList addObjectsFromArray:tempSongInfoList];
-    
-//    [_songTableView reloadData];
+    //
+    [self loadData];
     
 }
 
@@ -111,8 +142,176 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)loadData{
+    
+//    [self loadMusicFromDatabase];
+    [self loadMusicFromServer];
+    
+}
+
+-(void)loadMusicFromDatabase{
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+    [_dataList addObjectsFromArray:tempSongInfoList];
+    
+    [_dataTableView reloadData];
+    
+}
+
+-(void)loadMusicFromServer{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doGetCollectedSongs:userid token:accesstoken taruid:userid];
+        
+    } else {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        
+    }
+    
+}
+
+#pragma notification
+
+-(void)getCollectedSongsFailed:(NSNotification *)tNotification{
+    
+    PLog(@"getCollectedSongsFailed...");
+    
+    [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取失败:("];
+    
+}
+
+-(void)getCollectedSongsSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getCollectedSongsSuccess...");
+    
+    [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取成功:)"];
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray *songInfoList = [result objectForKey:@"result"];
+    [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    
+    [_dataList addObjectsFromArray:songInfoList];
+    [_dataTableView reloadData];
+    
+}
+
+-(IBAction)doSort:(id)sender{
+    
+    PLog(@"doSort...");
+    
+    _sortMenuView.hidden = NO;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sortMenuView.alpha = 1.0f;
+        _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 45);
+        _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+-(IBAction)doEdit:(id)sender{
+    
+    PLog(@"doEdit...");
+    
+    [self doSortCollectedData:0];
+    
+    //todo edit
+    if (_dataStatus == 2) {
+        
+        //delete
+        NSArray *selectedSongList = [_dicSelectedSongId allKeys];
+        int selectedSongCount = [selectedSongList count];
+        for (int i=0; i<selectedSongCount; i++) {
+            
+            NSString *tempsongid = [selectedSongList objectAtIndex:i];
+            [[PDatabaseManager GetInstance] deleteSongInfo:[tempsongid longLongValue]];
+            
+        }
+        
+        _dataStatus = 1;
+        [_dataTableView reloadData];
+        
+    } else {
+        
+        _dataStatus = 2;
+        [_dataTableView reloadData];
+        
+    }
+    
+    [_dicSelectedSongId removeAllObjects];
+    
+}
+
+-(IBAction)doSortMenu1:(id)sender{
+    
+    [self doSortCollectedData:1];
+    
+}
+
+-(IBAction)doSortMenu2:(id)sender{
+    
+    [self doSortCollectedData:2];
+    
+}
+
+-(IBAction)doSortMenu3:(id)sender{
+    
+    [self doSortCollectedData:3];
+    
+}
+
+-(void)doSortCollectedData:(int)tSortType{
+    
+    PLog(@"doSortCollectedData: %d", tSortType);
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sortMenuView.alpha = 0.0f;
+        _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 0);
+        _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+        
+    } completion:^(BOOL finished) {
+        _sortMenuView.hidden = YES;
+    }];
+    
+}
+
+//选中歌曲删除
+-(IBAction)doSelectedIcon:(id)sender{
+    
+    UIButton *tempBtnIcon = sender;
+    PLog(@"doSelectedIcon...%d", tempBtnIcon.tag);
+    
+    //非编辑状态
+    if (_dataStatus != 2) {
+        return;
+    }
+    
+    NSString *key = [NSString stringWithFormat:@"%d", tempBtnIcon.tag];
+    if ([_dicSelectedSongId objectForKey:key]) {
+        
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [tempBtnIcon setImage:iconimage forState:UIControlStateNormal];
+        [_dicSelectedSongId removeObjectForKey:key];
+        
+    } else {
+        
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_sel" type:@"png"];
+        [tempBtnIcon setImage:iconimage forState:UIControlStateNormal];
+        [_dicSelectedSongId setObject:key forKey:key];
+        
+    }
+    
 }
 
 #pragma mark - UITableView delegate
@@ -121,7 +320,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
-    Song *tempsong = [_songList objectAtIndex:indexPath.row];
+    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
     
     MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
     musicCommentViewController.song = tempsong;
@@ -134,7 +333,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_songList count];
+    return [_dataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -146,9 +345,20 @@
         cell = (MusicSongCell *)[nibContents objectAtIndex:0];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        [cell.btnIcon addTarget:self action:@selector(doSelectedIcon:) forControlEvents:UIControlEventTouchUpInside];
 	}
     
-    Song *tempsong = [_songList objectAtIndex:indexPath.row];
+    //1-排序，2-编辑
+    if (_dataStatus == 2) {
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
+    } else {
+        UIImage *iconimage = [UIImage imageWithName:@"music_song_listening" type:@"png"];
+        [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
+    }
+    
+    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
     

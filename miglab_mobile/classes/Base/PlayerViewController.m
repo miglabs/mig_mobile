@@ -7,9 +7,6 @@
 //
 
 #import "PlayerViewController.h"
-#import "UserSessionManager.h"
-#import "PPlayerManagerCenter.h"
-#import "SVProgressHUD.h"
 
 #import "DetailPlayerViewController.h"
 
@@ -132,7 +129,7 @@
         
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+        NSString *userid = [UserSessionManager GetInstance].userid;
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
     } else {
@@ -150,7 +147,7 @@
         
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+        NSString *userid = [UserSessionManager GetInstance].userid;
         [_miglabAPI doCollectSong:accesstoken uid:userid songid:currentSong.songid];
         
     } else {

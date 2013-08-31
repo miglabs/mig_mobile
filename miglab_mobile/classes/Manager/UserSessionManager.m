@@ -16,6 +16,8 @@
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
 
+@synthesize currentUserGene = _currentUserGene;
+
 +(UserSessionManager *)GetInstance{
     
     static UserSessionManager *instance = nil;
@@ -23,6 +25,7 @@
         if (nil == instance) {
             instance = [[self alloc] init];
             instance.currentUser = [[PUser alloc] init];
+            instance.currentUserGene = [[UserGene alloc] init];
         }
     }
     return instance;
