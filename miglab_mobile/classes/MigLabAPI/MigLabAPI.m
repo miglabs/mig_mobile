@@ -2270,13 +2270,13 @@
  <!--POST-->
  HTTP_COLLECTSONG
  */
--(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid {
+-(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid type:(NSString*)ttype typeid:(NSString*)ttypeid {
     
     PLog(@"collect song url: %@", HTTP_COLLECTSONG);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COLLECTSONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@", uid, ttoken, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@type=%@&typeid=%@", uid, ttoken, tsid, ttype, ttypeid];
     PLog(@"collect song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
