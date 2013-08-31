@@ -280,7 +280,8 @@
     
     //[miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
     //[miglabAPI doCollectSong:@"1" token:@"2" sid:@"22869"];
-    [miglabAPI doHateSong:@"1" token:@"2" sid:@"22869"];
+    //[miglabAPI doHateSong:@"1" token:@"2" sid:@"22869"];
+    [miglabAPI doCollectAndNearNum:@"1" token:@"2" taruid:@"5" radius:@"1000" pageindex:@"0" pagesize:@"10" location:@"30.30022,120.127393"];
     
     /*
     NSString *testuserid = @"10026";

@@ -119,6 +119,11 @@ typedef enum {
  */
 -(void)doHateSong:(NSString*)uid token:(NSString *)ttoken sid:(long)tsid;
 
+/*
+ 获取收藏歌曲数量和附近人收藏数量
+ */
+-(void)doCollectAndNearNum:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
+
 
 /****************************************社交接口*******************************************/
 

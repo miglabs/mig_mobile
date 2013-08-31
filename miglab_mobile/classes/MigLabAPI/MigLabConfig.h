@@ -248,4 +248,9 @@
 #define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
 #define NotificationNameCollectSongFailed                   @"NotificationNameCollectSongFailed"
 
+//获取收藏歌曲数量和附近人收藏数量
+#define HTTP_COLLECTANDNEARNUM                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectandnearnum.fcgi"]
+#define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
+#define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
+
 #endif

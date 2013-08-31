@@ -19,6 +19,7 @@
 #import "Mood.h"
 #import "NearbyUser.h"
 #import "ConfigFileInfo.h"
+#import "CollectNum.h"
 
 @implementation MigLabAPI
 
@@ -2378,6 +2379,66 @@
         PLog(@"hate song failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHateSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取收藏歌曲数量和附近人收藏数量
+ <!--GET-->
+ HTTP_COLLECTANDNEARNUM
+ */
+-(void)doCollectAndNearNum:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&taruid=%@&radius=%@&page_index=%@&page_size=%@&location=%@", HTTP_COLLECTANDNEARNUM, uid, ttoken, ttaruid, tradius, tpageindex, tpagesize, tlocation];
+    PLog(@"collect and near number url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [dicJson objectForKey:@"status"];
+            
+            if (1 == status) {
+                
+                PLog(@"collect and near number operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                CollectNum* cn = [CollectNum initWithNSDictionary:dicTemp];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:cn, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectAndNearNumSuccess object:nil userInfo:dicResult];
+            }
+            else {
+
+                PLog(@"collect and near number operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectAndNearNumFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+        
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectAndNearNumFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"collect and near number failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectAndNearNumFailed object:nil userInfo:nil];
+        
     }];
     
     [operation start];

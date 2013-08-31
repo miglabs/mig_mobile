@@ -370,6 +370,7 @@
 		18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E434E517BE287100DECFC7 /* libWeChatSDK.a */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
+		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -871,6 +872,8 @@
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
+		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
+		CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectNum.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1177,6 +1180,8 @@
 				16D0DB2417CA2A7D00EB763F /* PhotoInfo.m */,
 				CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */,
 				CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */,
+				CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */,
+				CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2236,6 +2241,7 @@
 				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
 				CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */,
 				1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */,
+				CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

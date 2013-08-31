@@ -22,6 +22,7 @@
         
         if(dict && [dict isKindOfClass:[NSDictionary class]]) {
             
+            cfi = [[ConfigFileInfo alloc] init];
             cfi.version = [dict objectForKey:@"version"];
             cfi.url = [dict objectForKey:@"url"];
             cfi.filename = [dict objectForKey:@"filename"];
