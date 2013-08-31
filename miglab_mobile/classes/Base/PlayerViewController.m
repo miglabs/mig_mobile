@@ -65,14 +65,6 @@
     
     PLog(@"PlayerViewController viewWillAppear...");
     
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    
-    [super viewDidAppear:animated];
-    
-    PLog(@"PlayerViewController viewDidAppear...");
-    
     //doHateSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hateSongFailed:) name:NotificationNameHateSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hateSongSuccess:) name:NotificationNameHateSongSuccess object:nil];
@@ -82,6 +74,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
     [self updateSongInfo];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    PLog(@"PlayerViewController viewDidAppear...");
     
 }
 
