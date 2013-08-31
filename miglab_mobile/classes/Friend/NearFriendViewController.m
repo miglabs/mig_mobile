@@ -8,7 +8,7 @@
 
 #import "NearFriendViewController.h"
 #import "FriendInfoCell.h"
-#import "PUser.h"
+#import "NearbyUser.h"
 #import "MyFriendPersonalPageViewController.h"
 
 @interface NearFriendViewController ()
@@ -17,18 +17,29 @@
 
 @implementation NearFriendViewController
 
-@synthesize navView = _navView;
+@synthesize locationManager = _locationManager;
 
-@synthesize friendTableView = _friendTableView;
-@synthesize friendList = _friendList;
+@synthesize dataTableView = _dataTableView;
+@synthesize dataList = _dataList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbyFailed:) name:NotificationNameSearchNearbyFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbySuccess:) name:NotificationNameSearchNearbySuccess object:nil];
+        
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSearchNearbyFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSearchNearbySuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -37,40 +48,43 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"附近的歌友" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
+    self.navView.titleLabel.text = @"附近的歌友" ;
     
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    //search
+    UIImage *searchImage = [UIImage imageWithName:@"music_button_search" type:@"png"];
+    [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
+    self.navView.rightButton.frame = CGRectMake(268, 7.5, 48, 29);
+    [self.navView.rightButton setHidden:NO];
+    [self.navView.rightButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
     
     //附近歌友
-    _friendTableView = [[UITableView alloc] init];
-    _friendTableView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
-    _friendTableView.dataSource = self;
-    _friendTableView.delegate = self;
-    _friendTableView.backgroundColor = [UIColor clearColor];
-    _friendTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _dataTableView = [[UITableView alloc] init];
+    _dataTableView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    _dataTableView.dataSource = self;
+    _dataTableView.delegate = self;
+    _dataTableView.backgroundColor = [UIColor clearColor];
+    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
     bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    _friendTableView.backgroundView = bodyBgImageView;
-    [self.view addSubview:_friendTableView];
+    _dataTableView.backgroundView = bodyBgImageView;
+    [self.view addSubview:_dataTableView];
     
     //
-    _friendList = [[NSMutableArray alloc] init];
+    _dataList = [[NSMutableArray alloc] init];
     
-    //test data
-    PUser *testfriend = [[PUser alloc] init];
-    testfriend.nickname = @"猫王爱淘汰";
-    [_friendList addObject:testfriend];
+    //gps
+    _locationManager = [[CLLocationManager alloc] init];
+    if ([CLLocationManager locationServicesEnabled]) {
+        [_locationManager setDelegate:self];
+        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [_locationManager startUpdatingLocation];
+    }
     
-    PUser *testfriend1 = [[PUser alloc] init];
-    testfriend1.nickname = @"乐瑟乐瑟";
-    [_friendList addObject:testfriend1];
+    //
+    [self loadData];
     
 }
 
@@ -80,8 +94,98 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)loadData{
+    
+    [self loadNearFriendFromDatabase];
+//    [self loadNearFriendFromServer];
+    
+}
+-(void)loadNearFriendFromDatabase{
+    
+    //test data
+    NearbyUser *testfriend = [[NearbyUser alloc] init];
+    testfriend.userid = @"123";
+//    testfriend.nickname = @"猫王爱淘汰";
+    [_dataList addObject:testfriend];
+    
+    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
+    testfriend.userid = @"456";
+//    testfriend1.nickname = @"乐瑟乐瑟";
+    [_dataList addObject:testfriend1];
+    
+}
+
+-(void)loadNearFriendFromServer:(NSString *)tLocation{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn && tLocation) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doSearchNearby:userid token:accesstoken location:tLocation radius:1000 * 10];//radius单位米
+        
+    } else {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        
+    }
+    
+}
+
+#pragma notification
+
+-(void)searchNearbyFailed:(NSNotification *)tNotification{
+    
+    PLog(@"searchNearbyFailed...");
+    
+    [SVProgressHUD showErrorWithStatus:@"附近的歌友获取失败:("];
+    
+}
+
+-(void)searchNearbySuccess:(NSNotification *)tNotification{
+    
+    PLog(@"searchNearbySuccess...");
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray *nearbyUserInfoList = [result objectForKey:@"result"];
+    
+    [_dataList addObjectsFromArray:nearbyUserInfoList];
+    [_dataTableView reloadData];
+    
+}
+
+-(IBAction)doSearch:(id)sender{
+    
+    PLog(@"doSearch...");
+    
+}
+
+#pragma CLLocationManagerDelegate
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
+    PLog(@"[newLocation description]: %@", [newLocation description]);
+    
+    //取得经纬度
+    CLLocationCoordinate2D coordinate = newLocation.coordinate;
+    CLLocationDegrees gLatitude = coordinate.latitude;
+    CLLocationDegrees GLongitude = coordinate.longitude;
+    NSString *strLatitude = [NSString stringWithFormat:@"%g", gLatitude];
+    NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
+    NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
+    
+    [_locationManager stopUpdatingLocation];
+    
+    NSString *strLocation = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
+    
+    //
+    [self loadNearFriendFromServer:strLocation];
+    
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
 }
 
 #pragma mark - UITableView delegate
@@ -100,7 +204,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_friendList count];
+    return [_dataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,8 +218,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    PUser *tempfriend = [_friendList objectAtIndex:indexPath.row];
-    //    cell.lblNickName.text = tempfriend.nickname;
+    NearbyUser *tempfriend = [_dataList objectAtIndex:indexPath.row];
+    float tdistance = (float)tempfriend.distance / 1000;
+    cell.lblNickName.text = tempfriend.userid;
+    cell.lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %d", tdistance, tempfriend.cur_music];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

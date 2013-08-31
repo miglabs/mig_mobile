@@ -7,15 +7,23 @@
 //
 
 #import "PlayerViewController.h"
-#import "PCustomNavigationBarView.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface NearFriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+@interface NearFriendViewController : PlayerViewController<CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
+//gps定位
+@property (nonatomic, retain) CLLocationManager *locationManager;
 
-@property (nonatomic, retain) UITableView *friendTableView;
-@property (nonatomic, retain) NSMutableArray *friendList;
+@property (nonatomic, retain) UITableView *dataTableView;
+@property (nonatomic, retain) NSMutableArray *dataList;
 
--(IBAction)doBack:(id)sender;
+-(void)loadData;
+-(void)loadNearFriendFromDatabase;
+-(void)loadNearFriendFromServer:(NSString *)tLocation;
+
+-(void)searchNearbyFailed:(NSNotification *)tNotification;
+-(void)searchNearbySuccess:(NSNotification *)tNotification;
+
+-(IBAction)doSearch:(id)sender;
 
 @end
