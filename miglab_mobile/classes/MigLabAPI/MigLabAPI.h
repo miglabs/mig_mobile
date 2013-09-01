@@ -112,7 +112,7 @@ typedef enum {
 /*
  添加红心歌曲
  */
--(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid type:(NSString*)ttype typeid:(NSString*)ttypeid;
+-(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid modetype:(NSString*)tmodetype typeid:(NSString*)ttypeid;
 
 /*
  歌曲拉黑
