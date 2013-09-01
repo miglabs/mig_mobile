@@ -233,42 +233,6 @@ static int PAGE_WIDTH = 81;
     usergene.channel = [_xmlParserUtil.channelList objectAtIndex:3];
     [self initGeneByUserGene:usergene];
     
-    /*
-    int currentchannelid = [usergene.channel.channelId intValue];
-    if (currentchannelid > 0 && currentchannelid < channelCount) {
-        
-        CGRect channelRect = CGRectMake(PAGE_WIDTH*(currentchannelid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.channelScrollView scrollRectToVisible:channelRect animated:YES];
-        
-        int temptypeid = usergene.channel.typeid;
-        CGRect typeRect = CGRectMake(PAGE_WIDTH*(temptypeid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
-        
-        int tempmoodid = usergene.channel.moodid;
-        CGRect moodRect = CGRectMake(PAGE_WIDTH*(tempmoodid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
-        
-        int tempsceneid = usergene.channel.sceneid;
-        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(tempsceneid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
-        
-    } else {
-        
-        int currenttypeid = usergene.type.typeid;
-        CGRect typeRect = CGRectMake(PAGE_WIDTH*(currenttypeid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
-        
-        int currentmoodid = usergene.mood.typeid;
-        CGRect moodRect = CGRectMake(PAGE_WIDTH*(currentmoodid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
-        
-        int currentsceneid = usergene.scene.typeid;
-        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(currentsceneid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
-        
-    }
-    */
-    
     //检查更新
     [self checkGeneConfigfile];
     
@@ -306,37 +270,30 @@ static int PAGE_WIDTH = 81;
     [tchannel log];
     PLog(@"tchannel.channelId(%@), tchannel.channelName(%@), ttypeid(%d), tmoodid(%d), tsceneid(%d)", tchannel.channelId, tchannel.channelName, ttypeid, tmoodid, tsceneid);
     
-    int currentchannelid = [tchannel.channelId intValue];
-    if (currentchannelid > 0) {
+    int currentchannelid = [tchannel.channelId intValue] - 1;
+    if (currentchannelid >= 0) {
         
-        CGRect channelRect = CGRectMake(PAGE_WIDTH*(currentchannelid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.channelScrollView scrollRectToVisible:channelRect animated:YES];
+        [_modifyGeneView.channelScrollView setContentOffset:CGPointMake(currentchannelid*PAGE_WIDTH, 0) animated:YES];
         
-        int temptypeid = tchannel.typeid;
-        CGRect typeRect = CGRectMake(PAGE_WIDTH*(temptypeid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        int temptypeid = tchannel.typeid - 1;
+        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(temptypeid*PAGE_WIDTH, 0) animated:YES];
         
-        int tempmoodid = tchannel.moodid;
-        CGRect moodRect = CGRectMake(PAGE_WIDTH*(tempmoodid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        int tempmoodid = tchannel.moodid - 1;
+        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(tempmoodid*PAGE_WIDTH, 0) animated:YES];
         
-        int tempsceneid = tchannel.sceneid;
-        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(tempsceneid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        int tempsceneid = tchannel.sceneid - 1;
+        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(tempsceneid*PAGE_WIDTH, 0) animated:YES];
         
     } else {
         
-        int currenttypeid = ttypeid;
-        CGRect typeRect = CGRectMake(PAGE_WIDTH*(currenttypeid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        int currenttypeid = ttypeid - 1;
+        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(currenttypeid*PAGE_WIDTH, 0) animated:YES];
         
-        int currentmoodid = tmoodid;
-        CGRect moodRect = CGRectMake(PAGE_WIDTH*(currentmoodid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        int currentmoodid = tmoodid - 1;
+        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(currentmoodid*PAGE_WIDTH, 0) animated:YES];
         
-        int currentsceneid = tsceneid;
-        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(currentsceneid+1), 8, PAGE_WIDTH, 50);
-        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        int currentsceneid = tsceneid - 1;
+        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(currentsceneid*PAGE_WIDTH, 0) animated:YES];
         
     }
     
@@ -367,6 +324,11 @@ static int PAGE_WIDTH = 81;
 -(IBAction)doGotoGene:(id)sender{
     
     PLog(@"doGotoGene...");
+    
+    UserGene *currentUserGene = [UserSessionManager GetInstance].currentUserGene;
+    currentUserGene.type.typeIndx = 0;
+    currentUserGene.mood.moodIndex = 0;
+    currentUserGene.scene.sceneIndex = 0;
     
     _btnCurrentGene = sender;
     _oldGeneFrame = _btnCurrentGene.frame;
@@ -465,10 +427,13 @@ static int PAGE_WIDTH = 81;
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
     NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+    NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
     NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+    NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
     NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+    NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
     
-    [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:@"0" sceneid:tsceneid sceneindex:@"0" channelid:tchannelid channelindex:@"0" num:@"5"];
+    [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
     
     
     /*
@@ -567,6 +532,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.channel = tempchannel;
+            usergene.channel.channelIndex++;
             usergene.type.typeid = tempchannel.typeid;
             usergene.mood.typeid = tempchannel.moodid;
             usergene.scene.typeid = tempchannel.sceneid;
@@ -579,6 +545,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.type = temptype;
+            usergene.type.typeIndx++;
             
         } else if (scrollView.tag == 202) {
             
@@ -587,6 +554,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.mood = tempmood;
+            usergene.mood.moodIndex++;
             
         } else if (scrollView.tag == 203) {
             
@@ -595,6 +563,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.scene = tempscene;
+            usergene.scene.sceneIndex++;
             
         }
         

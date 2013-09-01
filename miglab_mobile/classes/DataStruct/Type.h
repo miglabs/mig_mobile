@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) int typeid;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) int typeIndx;
 
 //类别
 +(id)initWithNSDictionary:(NSDictionary*)dict;

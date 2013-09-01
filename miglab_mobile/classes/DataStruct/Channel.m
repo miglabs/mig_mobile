@@ -13,6 +13,7 @@
 @synthesize channelId = _channelId;
 @synthesize channelName = _channelName;
 @synthesize channelPicUrl = _channelPicUrl;
+@synthesize channelIndex = _channelIndex;
 @synthesize typeid = _typeid;
 @synthesize moodid = _moodid;
 @synthesize sceneid = _sceneid;
@@ -43,7 +44,7 @@
 
 -(void)log{
     
-    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), typeid(%d), moodid(%d), sceneid(%d)", _channelId, _channelName, _channelPicUrl, _typeid, _moodid, _sceneid);
+    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), channelIndex(%d), typeid(%d), moodid(%d), sceneid(%d)", _channelId, _channelName, _channelPicUrl, _channelIndex, _typeid, _moodid, _sceneid);
     
 }
 

@@ -13,6 +13,7 @@
 @property (nonatomic, assign) int day;
 @property (nonatomic, assign) int typeid;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) int moodIndex;
 
 //心情
 +(id)initWithNSDictionary:(NSDictionary*)dict;

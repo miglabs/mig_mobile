@@ -12,6 +12,7 @@
 
 @synthesize typeid = _typeid;
 @synthesize name = _name;
+@synthesize sceneIndex = _sceneIndex;
 
 //场景
 +(id)initWithNSDictionary:(NSDictionary*)dict{
@@ -37,7 +38,7 @@
 
 -(void)log{
     
-    PLog(@"Print Scene: typeid(%d), name(%@)", _typeid, _name);
+    PLog(@"Print Scene: typeid(%d), name(%@), sceneIndex(%d)", _typeid, _name, _sceneIndex);
     
 }
 

@@ -188,10 +188,13 @@
     UserSessionManager *userSessionManager = [UserSessionManager GetInstance];
     if (userSessionManager.isLoggedIn) {
         
-        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-        [_miglabAPI doCollectSong:accesstoken uid:userid songid:currentSong.songid];
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+//        NSString *moodid = [NSString stringWithFormat:@"%d", currentSong]
+        
+//        [_miglabAPI doCollectSong:userid token:accesstoken sid:currentSong.songid modetype:<#(NSString *)#> typeid:<#(NSString *)#>]
         
     }
     

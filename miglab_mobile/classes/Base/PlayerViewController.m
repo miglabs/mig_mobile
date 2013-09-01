@@ -145,10 +145,14 @@
     UserSessionManager *userSessionManager = [UserSessionManager GetInstance];
     if (userSessionManager.isLoggedIn) {
         
-        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
-        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *userid = [UserSessionManager GetInstance].userid;
-        [_miglabAPI doCollectSong:accesstoken uid:userid songid:currentSong.songid];
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+        NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
+        NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
+        
+        [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];

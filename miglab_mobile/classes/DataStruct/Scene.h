@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) int typeid;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) int sceneIndex;
 
 //场景
 +(id)initWithNSDictionary:(NSDictionary*)dict;
