@@ -162,7 +162,7 @@
         
         int isLike = [currentSong.like intValue];
         if (isLike > 0) {
-            [_miglabAPI doCancelCollectedSong:accesstoken uid:userid songid:[songid longLongValue]];
+//            [_miglabAPI doCancelCollectedSong:accesstoken uid:userid songid:[songid longLongValue]];
         } else {
             [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
         }
