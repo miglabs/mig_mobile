@@ -19,12 +19,8 @@
 
 @implementation LocalViewController
 
-@synthesize navView = _navView;
-
-@synthesize songTableView = _songTableView;
-@synthesize songList = _songList;
-
-@synthesize miglabAPI = _miglabAPI;
+@synthesize dataTableView = _dataTableView;
+@synthesize dataList = _dataList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,15 +37,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"本地音乐" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
-    
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.navView.titleLabel.text = @"本地音乐";
     
     //body
     //body bg
@@ -58,55 +46,27 @@
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
-    //body head
-    UILabel *lblDesc = [[UILabel alloc] init];
-    lblDesc.frame = CGRectMake(16, 10, 140, 21);
-    lblDesc.backgroundColor = [UIColor clearColor];
-    lblDesc.font = [UIFont systemFontOfSize:15.0f];
-    lblDesc.text = @"优先推荐以下歌曲";
-    lblDesc.textAlignment = kTextAlignmentLeft;
-    lblDesc.textColor = [UIColor whiteColor];
-    
-    UIButton *btnSort = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnSort.frame = CGRectMake(162, 8, 58, 28);
-    UIImage *sortNorImage = [UIImage imageWithName:@"music_source_sort" type:@"png"];
-    [btnSort setImage:sortNorImage forState:UIControlStateNormal];
-    
-    UIButton *btnEdit = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnEdit.frame = CGRectMake(230, 8, 58, 28);
-    UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
-    [btnEdit setImage:editNorImage forState:UIControlStateNormal];
-    
-    UIImageView *separatorImageView = [[UIImageView alloc] init];
-    separatorImageView.frame = CGRectMake(4, 45, 290, 1);
-    separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
-    
-    UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, 45 + 10, 297, 45);
-    [headerView addSubview:lblDesc];
-    [headerView addSubview:btnSort];
-    [headerView addSubview:btnEdit];
-    [headerView addSubview:separatorImageView];
-    [self.view addSubview:headerView];
+    //body head ??
     
     //song list
-    _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, 45 + 10 + 45, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
-    _songTableView.dataSource = self;
-    _songTableView.delegate = self;
-    _songTableView.backgroundColor = [UIColor clearColor];
-    _songTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_songTableView];
+    _dataTableView = [[UITableView alloc] init];
+    _dataTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.dataSource = self;
+    _dataTableView.delegate = self;
+    _dataTableView.backgroundColor = [UIColor clearColor];
+    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_dataTableView];
     
     //data
-    _songList = [[NSMutableArray alloc] init];
+    _dataList = [[NSMutableArray alloc] init];
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
-    [_songList addObjectsFromArray:tempSongInfoList];
+    //export
+    [self getSongListFromIPod];
     
     //test
-    [self getSongListFromIPod];
+//    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+//    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+//    [_dataList addObjectsFromArray:tempSongInfoList];
     
 }
 
@@ -116,12 +76,24 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)doRecordLocalSongInfo:(NSMutableArray *)datalist{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn && datalist && [datalist count] > 0) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *username = [UserSessionManager GetInstance].currentUser.username;
+        
+        [self.miglabAPI doRecordLocalSongsArray:userid token:accesstoken source:@"2" urlcode:@"0" name:username songs:datalist];
+        
+    }
+    
 }
 
 -(void)getSongListFromIPod{
     
+    NSMutableArray *localDataList = [[NSMutableArray alloc] init];
+    
     MPMediaQuery *videoQuery = [[MPMediaQuery alloc] init];
     NSArray *mediaItems = [videoQuery items];
     for (MPMediaItem *mediaItem in mediaItems){
@@ -135,76 +107,20 @@
             
             NSLog(@"name(%@), artist(%@), musicUrl(%@)", name, artist, music);
             
+            Song *tempsong = [[Song alloc] init];
+            tempsong.songname = (name && name.length > 1) ? name : @"";
+            tempsong.artist = (artist && artist.length > 1) ? artist : @"";
+            [localDataList addObject:tempsong];
         }
     }
     
+    [_dataList addObjectsFromArray:localDataList];
+    
+    //commit
+    [self doRecordLocalSongInfo:localDataList];
+    
+    //export
     [self exportSongFromIPod:mediaItems currentIndex:0];
-    
-    /*
-    NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *pigDirectory = [[cachesDirectory stringByAppendingPathComponent:[[NSProcessInfo processInfo] processName]] stringByAppendingPathComponent:@"local"];
-    
-    NSFileManager *fm = [NSFileManager defaultManager];
-    if (![fm fileExistsAtPath:pigDirectory isDirectory:NULL])
-    {
-        NSError *error;
-        if (![fm createDirectoryAtPath:pigDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
-            [NSException raise:@"Exception" format:[error localizedDescription]];
-        }
-    }
-    
-    MPMediaQuery *videoQuery = [[MPMediaQuery alloc] init];
-    NSArray *mediaItems = [videoQuery items];
-    for (MPMediaItem *mediaItem in mediaItems){
-        
-        NSURL *URL = (NSURL*)[mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
-        
-        if (URL) {
-            NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
-            NSString *artist = (NSString*)[mediaItem valueForProperty:MPMediaItemPropertyArtist];
-            NSString *music = [URL absoluteString];
-            
-            NSLog(@"name(%@), artist(%@), musicUrl(%@)", name, artist, music);
-            
-            
-            
-            
-        }
-    }
-    
-    __block int currentMediaIndex = 0;
-    if ([mediaItems count] > 0) {
-        
-        MPMediaItem *mediaItem = [mediaItems objectAtIndex:currentMediaIndex];
-        NSURL *mediaItemUrl = [mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
-        NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
-        
-        NSString *file = [NSString stringWithFormat:@"%@/%@", pigDirectory, name];
-        NSURL *dstUrl = [NSURL fileURLWithPath:file];
-        
-        TSLibraryImport *export = [[TSLibraryImport alloc] init];
-        [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
-            
-            currentMediaIndex++;
-            
-            MPMediaItem *mediaItem = [mediaItems objectAtIndex:currentMediaIndex];
-            NSURL *mediaItemUrl = [mediaItem valueForProperty:MPMediaItemPropertyAssetURL];
-            NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
-            
-            NSString *file = [NSString stringWithFormat:@"%@/%@", pigDirectory, name];
-            NSURL *dstUrl = [NSURL fileURLWithPath:file];
-            
-            TSLibraryImport *export = [[TSLibraryImport alloc] init];
-            [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
-                
-                NSLog(@"complete...");
-                
-            }];
-            
-        }];
-        
-    }
-    */
     
 }
 
@@ -277,7 +193,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_songList count];
+    return [_dataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -291,7 +207,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    Song *tempsong = [_songList objectAtIndex:indexPath.row];
+    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
     cell.lblSongName.text = tempsong.songname;
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
