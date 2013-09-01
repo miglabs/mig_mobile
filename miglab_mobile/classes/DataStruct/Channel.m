@@ -43,7 +43,7 @@
 
 -(void)log{
     
-    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@)", _channelId, _channelName, _channelPicUrl);
+    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), typeid(%d), moodid(%d), sceneid(%d)", _channelId, _channelName, _channelPicUrl, _typeid, _moodid, _sceneid);
     
 }
 

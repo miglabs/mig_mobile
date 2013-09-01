@@ -26,12 +26,12 @@
         <attr id = "4"  name="旅行"       dec="流行时尚元素"/>
     </scenes>
     <mig_channel>
-        <attr id ="1" name ="频道1" typeid="1" moodid="3" scenesid="1"/>
-        <attr id ="2" name ="频道2" typeid="2" moodid="1" scenesid="1"/>
-        <attr id ="3" name ="频道3" typeid="1" moodid="4" scenesid="1"/>
-        <attr id ="4" name ="频道4" typeid="2" moodid="1" scenesid="2"/>
-        <attr id ="5" name ="频道5" typeid="1" moodid="1" scenesid="1"/>
-        <attr id ="6" name ="频道6" typeid="1" moodid="2" scenesid="1"/>
+        <attr id ="1" name ="频道1" typeid="1" moodid="3" scenesid="2"/>
+        <attr id ="2" name ="频道2" typeid="2" moodid="1" scenesid="4"/>
+        <attr id ="3" name ="频道3" typeid="5" moodid="4" scenesid="1"/>
+        <attr id ="4" name ="频道4" typeid="8" moodid="6" scenesid="3"/>
+        <attr id ="5" name ="频道5" typeid="4" moodid="2" scenesid="1"/>
+        <attr id ="6" name ="频道6" typeid="9" moodid="5" scenesid="4"/>
     </mig_channel>
     <info_version>
         <attr id = "1"/>

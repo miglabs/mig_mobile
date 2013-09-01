@@ -42,6 +42,8 @@
 
 //解析音乐基因数据
 -(void)initGeneDataFromFile;
+-(void)initGeneByUserGene:(UserGene *)usergene;
+-(void)initGene:(Channel *)tchannel typeId:(int)ttypeid moodId:(int)tmoodid sceneId:(int)tsceneid;
 -(void)checkGeneConfigfile;
 
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification;

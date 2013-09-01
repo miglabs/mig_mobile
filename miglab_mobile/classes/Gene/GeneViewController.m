@@ -10,7 +10,7 @@
 #import "LoginChooseViewController.h"
 #import "PDatabaseManager.h"
 
-static int PAGE_WIDTH = 122;
+static int PAGE_WIDTH = 81;
 
 @interface GeneViewController ()
 
@@ -136,18 +136,20 @@ static int PAGE_WIDTH = 122;
     _modifyGeneView.channelScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.channelScrollView.showsVerticalScrollIndicator = NO;
     _modifyGeneView.channelScrollView.delegate = self;
-    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(PAGE_WIDTH * channelCount, 50);
+    _modifyGeneView.channelScrollView.contentSize = CGSizeMake(PAGE_WIDTH * (channelCount+2), 50);
+    _modifyGeneView.channelScrollView.tag = 200;
     
     for (int i=0; i<channelCount; i++) {
         
         Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:i];
         
         UILabel *lblChannel = [[UILabel alloc] init];
-        lblChannel.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblChannel.frame = CGRectMake(PAGE_WIDTH*(i+1), 8, PAGE_WIDTH, 50);
         lblChannel.backgroundColor = [UIColor clearColor];
         lblChannel.text = tempchannel.channelName;
         lblChannel.textAlignment = kTextAlignmentCenter;
-        lblChannel.textColor = [UIColor redColor];
+        lblChannel.textColor = [UIColor whiteColor];
+        lblChannel.font = [UIFont systemFontOfSize:15.0f];
         [_modifyGeneView.channelScrollView addSubview:lblChannel];
     }
     
@@ -158,18 +160,20 @@ static int PAGE_WIDTH = 122;
     _modifyGeneView.typeScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.typeScrollView.showsVerticalScrollIndicator = NO;
     _modifyGeneView.typeScrollView.delegate = self;
-    _modifyGeneView.typeScrollView.contentSize = CGSizeMake(PAGE_WIDTH * typeCount, 50);
+    _modifyGeneView.typeScrollView.contentSize = CGSizeMake(PAGE_WIDTH * (typeCount+2), 50);
+    _modifyGeneView.typeScrollView.tag = 201;
     
     for (int i=0; i<typeCount; i++) {
         
         Type *temptype = [_xmlParserUtil.typeList objectAtIndex:i];
         
         UILabel *lblType = [[UILabel alloc] init];
-        lblType.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblType.frame = CGRectMake(PAGE_WIDTH*(i+1), 8, PAGE_WIDTH, 50);
         lblType.backgroundColor = [UIColor clearColor];
         lblType.text = temptype.name;
         lblType.textAlignment = kTextAlignmentCenter;
-        lblType.textColor = [UIColor redColor];
+        lblType.textColor = [UIColor whiteColor];
+        lblType.font = [UIFont systemFontOfSize:15.0f];
         [_modifyGeneView.typeScrollView addSubview:lblType];
     }
     
@@ -180,18 +184,20 @@ static int PAGE_WIDTH = 122;
     _modifyGeneView.moodScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.moodScrollView.showsVerticalScrollIndicator = NO;
     _modifyGeneView.moodScrollView.delegate = self;
-    _modifyGeneView.moodScrollView.contentSize = CGSizeMake(PAGE_WIDTH * moodCount, 50);
+    _modifyGeneView.moodScrollView.contentSize = CGSizeMake(PAGE_WIDTH * (moodCount+2), 50);
+    _modifyGeneView.moodScrollView.tag = 202;
     
     for (int i=0; i<moodCount; i++) {
         
         Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:i];
         
         UILabel *lblMood = [[UILabel alloc] init];
-        lblMood.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblMood.frame = CGRectMake(PAGE_WIDTH*(i+1), 8, PAGE_WIDTH, 50);
         lblMood.backgroundColor = [UIColor clearColor];
         lblMood.text = tempmood.name;
         lblMood.textAlignment = kTextAlignmentCenter;
-        lblMood.textColor = [UIColor redColor];
+        lblMood.textColor = [UIColor whiteColor];
+        lblMood.font = [UIFont systemFontOfSize:15.0f];
         [_modifyGeneView.moodScrollView addSubview:lblMood];
     }
     
@@ -202,24 +208,69 @@ static int PAGE_WIDTH = 122;
     _modifyGeneView.sceneScrollView.showsHorizontalScrollIndicator = NO;
     _modifyGeneView.sceneScrollView.showsVerticalScrollIndicator = NO;
     _modifyGeneView.sceneScrollView.delegate = self;
-    _modifyGeneView.sceneScrollView.contentSize = CGSizeMake(PAGE_WIDTH * sceneCount, 50);
+    _modifyGeneView.sceneScrollView.contentSize = CGSizeMake(PAGE_WIDTH * (sceneCount+2), 50);
+    _modifyGeneView.sceneScrollView.tag = 203;
     
     for (int i=0; i<sceneCount; i++) {
         
         Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:i];
         
         UILabel *lblScene = [[UILabel alloc] init];
-        lblScene.frame = CGRectMake(PAGE_WIDTH*i, 8, PAGE_WIDTH, 50);
+        lblScene.frame = CGRectMake(PAGE_WIDTH*(i+1), 8, PAGE_WIDTH, 50);
         lblScene.backgroundColor = [UIColor clearColor];
         lblScene.text = tempscene.name;
         lblScene.textAlignment = kTextAlignmentCenter;
-        lblScene.textColor = [UIColor redColor];
+        lblScene.textColor = [UIColor whiteColor];
+        lblScene.font = [UIFont systemFontOfSize:15.0f];
         [_modifyGeneView.sceneScrollView addSubview:lblScene];
     }
     
     [self.view addSubview:_modifyGeneView];
     _modifyGeneView.hidden = YES;
     
+    //init gene 4 show
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    usergene.channel = [_xmlParserUtil.channelList objectAtIndex:3];
+    [self initGeneByUserGene:usergene];
+    
+    /*
+    int currentchannelid = [usergene.channel.channelId intValue];
+    if (currentchannelid > 0 && currentchannelid < channelCount) {
+        
+        CGRect channelRect = CGRectMake(PAGE_WIDTH*(currentchannelid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.channelScrollView scrollRectToVisible:channelRect animated:YES];
+        
+        int temptypeid = usergene.channel.typeid;
+        CGRect typeRect = CGRectMake(PAGE_WIDTH*(temptypeid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        
+        int tempmoodid = usergene.channel.moodid;
+        CGRect moodRect = CGRectMake(PAGE_WIDTH*(tempmoodid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        
+        int tempsceneid = usergene.channel.sceneid;
+        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(tempsceneid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        
+    } else {
+        
+        int currenttypeid = usergene.type.typeid;
+        CGRect typeRect = CGRectMake(PAGE_WIDTH*(currenttypeid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        
+        int currentmoodid = usergene.mood.typeid;
+        CGRect moodRect = CGRectMake(PAGE_WIDTH*(currentmoodid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        
+        int currentsceneid = usergene.scene.typeid;
+        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(currentsceneid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        
+    }
+    */
+    
+    //检查更新
+    [self checkGeneConfigfile];
     
 }
 
@@ -241,6 +292,53 @@ static int PAGE_WIDTH = 122;
     
     _xmlParserUtil = [[XmlParserUtil alloc] initWithParserDefaultElement];
     [_xmlParserUtil parserXml:channelInfoXmlData];
+    
+}
+
+-(void)initGeneByUserGene:(UserGene *)usergene{
+    
+    [self initGene:usergene.channel typeId:usergene.type.typeid moodId:usergene.mood.typeid sceneId:usergene.scene.typeid];
+    
+}
+
+-(void)initGene:(Channel *)tchannel typeId:(int)ttypeid moodId:(int)tmoodid sceneId:(int)tsceneid{
+    
+    [tchannel log];
+    PLog(@"tchannel.channelId(%@), tchannel.channelName(%@), ttypeid(%d), tmoodid(%d), tsceneid(%d)", tchannel.channelId, tchannel.channelName, ttypeid, tmoodid, tsceneid);
+    
+    int currentchannelid = [tchannel.channelId intValue];
+    if (currentchannelid > 0) {
+        
+        CGRect channelRect = CGRectMake(PAGE_WIDTH*(currentchannelid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.channelScrollView scrollRectToVisible:channelRect animated:YES];
+        
+        int temptypeid = tchannel.typeid;
+        CGRect typeRect = CGRectMake(PAGE_WIDTH*(temptypeid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        
+        int tempmoodid = tchannel.moodid;
+        CGRect moodRect = CGRectMake(PAGE_WIDTH*(tempmoodid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        
+        int tempsceneid = tchannel.sceneid;
+        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(tempsceneid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        
+    } else {
+        
+        int currenttypeid = ttypeid;
+        CGRect typeRect = CGRectMake(PAGE_WIDTH*(currenttypeid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.typeScrollView scrollRectToVisible:typeRect animated:YES];
+        
+        int currentmoodid = tmoodid;
+        CGRect moodRect = CGRectMake(PAGE_WIDTH*(currentmoodid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.moodScrollView scrollRectToVisible:moodRect animated:YES];
+        
+        int currentsceneid = tsceneid;
+        CGRect sceneRect = CGRectMake(PAGE_WIDTH*(currentsceneid+1), 8, PAGE_WIDTH, 50);
+        [_modifyGeneView.sceneScrollView scrollRectToVisible:sceneRect animated:YES];
+        
+    }
     
 }
 
@@ -448,25 +546,58 @@ static int PAGE_WIDTH = 122;
     
 }
 
-//override
--(IBAction)doPlayerAvatar:(id)sender{
-    
-    [super doPlayerAvatar:sender];
-    PLog(@"gene doPlayerAvatar...");
-    
-}
-
 #pragma UIScrollViewDelegate
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     if (!decelerate) {
         int x = scrollView.contentOffset.x;
+        int pageIndex = x / PAGE_WIDTH;
+        
         if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
-            [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH + 1)*PAGE_WIDTH, 0) animated:YES];
-        } else {
-            [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH)*PAGE_WIDTH, 0) animated:YES];
+            pageIndex++;
         }
+        [scrollView setContentOffset:CGPointMake(pageIndex*PAGE_WIDTH, 0) animated:YES];
+        
+        int channelCount = [_xmlParserUtil.channelList count];
+        if (scrollView.tag == 200 && pageIndex < channelCount) {
+            
+            Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:pageIndex];
+            [tempchannel log];
+            
+            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+            usergene.channel = tempchannel;
+            usergene.type.typeid = tempchannel.typeid;
+            usergene.mood.typeid = tempchannel.moodid;
+            usergene.scene.typeid = tempchannel.sceneid;
+            [self initGeneByUserGene:usergene];
+            
+        } else if (scrollView.tag == 201) {
+            
+            Type *temptype = [_xmlParserUtil.typeList objectAtIndex:pageIndex];
+            [temptype log];
+            
+            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+            usergene.type = temptype;
+            
+        } else if (scrollView.tag == 202) {
+            
+            Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:pageIndex];
+            [tempmood log];
+            
+            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+            usergene.mood = tempmood;
+            
+        } else if (scrollView.tag == 203) {
+            
+            Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:pageIndex];
+            [tempscene log];
+            
+            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+            usergene.scene = tempscene;
+            
+        }
+        
     }
     
 }
@@ -474,10 +605,50 @@ static int PAGE_WIDTH = 122;
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     int x = scrollView.contentOffset.x;
+    int pageIndex = x / PAGE_WIDTH;
+    
     if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
-        [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH + 1)*PAGE_WIDTH, 0) animated:YES];
-    } else {
-        [scrollView setContentOffset:CGPointMake((x / PAGE_WIDTH)*PAGE_WIDTH, 0) animated:YES];
+        pageIndex++;
+    }
+    [scrollView setContentOffset:CGPointMake(pageIndex*PAGE_WIDTH, 0) animated:YES];
+    
+    int channelCount = [_xmlParserUtil.channelList count];
+    if (scrollView.tag == 200 && pageIndex < channelCount) {
+        
+        Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:pageIndex];
+        [tempchannel log];
+        
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        usergene.channel = tempchannel;
+        usergene.type.typeid = tempchannel.typeid;
+        usergene.mood.typeid = tempchannel.moodid;
+        usergene.scene.typeid = tempchannel.sceneid;
+        [self initGeneByUserGene:usergene];
+        
+    } else if (scrollView.tag == 201) {
+        
+        Type *temptype = [_xmlParserUtil.typeList objectAtIndex:pageIndex];
+        [temptype log];
+        
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        usergene.type = temptype;
+        
+    } else if (scrollView.tag == 202) {
+        
+        Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:pageIndex];
+        [tempmood log];
+        
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        usergene.mood = tempmood;
+        
+    } else if (scrollView.tag == 203) {
+        
+        Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:pageIndex];
+        [tempscene log];
+        
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        usergene.scene = tempscene;
+        
     }
     
 }
