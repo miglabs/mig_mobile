@@ -125,18 +125,7 @@
     //登录，获取用户资料
     //login
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    if ([UserSessionManager GetInstance].isLoggedIn) {
-        
-        NSString *userid = [UserSessionManager GetInstance].userid;
-        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        
-        //根据描述词获取歌曲 test
-        //随机心情词id
-        int rnd = (rand() % 6) + 1;
-        NSString *tempwordid = [NSString stringWithFormat:@"%d", rnd];
-        [_miglabAPI doGetModeMusic:userid token:accesstoken wordid:tempwordid mood:@"mm"];
-        
-    } else {
+    if (![UserSessionManager GetInstance].isLoggedIn) {
         
         [self initUserData];
         
@@ -391,7 +380,7 @@
 -(void)getTypeSongsFailed:(NSNotification *)tNotification{
     
     NSDictionary *result = [tNotification userInfo];
-    PLog(@"getModeMusicFailed...%@", [result objectForKey:@"msg"]);
+    PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }

@@ -68,7 +68,7 @@
 
 -(void)log{
     
-    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d), songtype(%d)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid, _songtype);
+    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d), songtype(%d), collectnum(%d), commentnum(%d), hot(%lld)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid, _songtype, _collectnum, _commentnum, _hot);
     
 }
 

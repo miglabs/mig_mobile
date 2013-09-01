@@ -9,6 +9,7 @@
 #import "GeneViewController.h"
 #import "LoginChooseViewController.h"
 #import "PDatabaseManager.h"
+#import "ConfigFileInfo.h"
 
 static int PAGE_WIDTH = 81;
 
@@ -233,6 +234,9 @@ static int PAGE_WIDTH = 81;
     usergene.channel = [_xmlParserUtil.channelList objectAtIndex:3];
     [self initGeneByUserGene:usergene];
     
+    //加载歌曲
+    [self loadTypeSongs];
+    
     //检查更新
     [self checkGeneConfigfile];
     
@@ -295,6 +299,29 @@ static int PAGE_WIDTH = 81;
         int currentsceneid = tsceneid - 1;
         [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(currentsceneid*PAGE_WIDTH, 0) animated:YES];
         
+    }
+    
+}
+
+//根据音乐基因获取歌曲
+-(void)loadTypeSongs{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+        NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
+        NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+        NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
+        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+        NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
+        
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
     
 }
@@ -423,6 +450,9 @@ static int PAGE_WIDTH = 81;
         
     }];
     
+    [self loadTypeSongs];
+    
+    /*
     NSString *userid = [UserSessionManager GetInstance].userid;
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
@@ -434,7 +464,7 @@ static int PAGE_WIDTH = 81;
     NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
     
     [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
-    
+    */
     
     /*
     _modifyGeneView.alpha = 1.0f;
@@ -637,13 +667,16 @@ static int PAGE_WIDTH = 81;
      * 判断是否需要更新
      * 然后下载新的数据更新
      */
+    NSDictionary *result = [tNotification userInfo];
+    ConfigFileInfo *configInfo = [result objectForKey:@"result"];
+    
 }
 
 //getTypeSongsFailed notification
 -(void)getTypeSongsFailed:(NSNotification *)tNotification{
     
     NSDictionary *result = [tNotification userInfo];
-    PLog(@"getModeMusicFailed...%@", [result objectForKey:@"msg"]);
+    PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
