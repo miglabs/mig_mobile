@@ -12,6 +12,7 @@
 #import "PAMusicPlayer.h"
 #import "PAAMusicPlayer.h"
 #import "SVProgressHUD.h"
+#import "UserSessionManager.h"
 
 #define SONG_INIT_SIZE 30000
 
@@ -26,7 +27,9 @@
 @synthesize currentSongIndex = _currentSongIndex;
 @synthesize currentSong = _currentSong;
 @synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
+
 @synthesize hasAddMoodRecord = _hasAddMoodRecord;
+@synthesize lastSongId = _lastSongId;
 
 static PPlayerManagerCenter *instance;
 
@@ -227,6 +230,8 @@ static PPlayerManagerCenter *instance;
         return;
     }
     
+    //记录前一首歌id
+    _lastSongId = [NSString stringWithFormat:@"%lld", aaMusicPlayer.song.songid];
     aaMusicPlayer.song = _currentSong;
     
     BOOL isPlayerInit = [aaMusicPlayer initPlayer];
@@ -329,6 +334,25 @@ static PPlayerManagerCenter *instance;
     
     //
     PLog(@"aaMusicPlayerTimerFunction...");
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (!_hasAddMoodRecord && aaMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {
+        
+        _hasAddMoodRecord = YES;
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *templastsongid = (_lastSongId && _lastSongId.length > 0) ? _lastSongId : @"0";
+        NSString *tempcurrentsongid = [NSString stringWithFormat:@"%lld", _currentSong.songid];
+        NSString *moodid  = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUserGene.mood.typeid];
+        NSString *tempcurrentsongname = _currentSong.songname;
+        NSString *tempcurrentartist = _currentSong.artist;
+        NSString *networkstatus = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].networkStatus];
+        
+        MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+        [miglabAPI doRecordCurrentSong:userid token:accesstoken lastsong:templastsongid cursong:tempcurrentsongid mood:moodid name:tempcurrentsongname singer:tempcurrentartist state:networkstatus];
+        
+    }
     
 }
 
