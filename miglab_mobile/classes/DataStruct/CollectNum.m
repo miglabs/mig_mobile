@@ -34,4 +34,9 @@
     return cn;
 }
 
+-(void)log {
+    
+    PLog(@"Print CollectNum: mynum(%d), nearnum(%d)", _mynum, _nearnum);
+}
+
 @end

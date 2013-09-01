@@ -36,4 +36,9 @@
     return cfi;
 }
 
+-(void)log {
+    
+    PLog(@"Print ConfigFileInfo: filename(%@), url(%@), version(%@)", _filename, _url, _version);
+}
+
 @end

@@ -15,5 +15,6 @@
 @property (nonatomic, retain) NSString* filename;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict;
+-(void)log;
 
 @end

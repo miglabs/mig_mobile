@@ -14,5 +14,6 @@
 @property (nonatomic, assign) int nearnum;
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
+-(void)log;
 
 @end
