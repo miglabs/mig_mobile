@@ -53,6 +53,7 @@
 -(NSMutableArray *)getSongInfoList:(int)trowcount;
 -(void)deleteSongInfo:(long long)tlocalkey;
 -(void)deleteAllSongInfo;
+-(void)updateSongInfoOfLike:(long long)tlocalkey like:(NSString *)tlike;
 
 /*
  描述词记录(心情，场景)

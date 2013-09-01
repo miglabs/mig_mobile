@@ -27,7 +27,9 @@ typedef enum{
 @property (nonatomic, assign) int currentSongIndex;
 @property (nonatomic, retain) Song *currentSong;
 @property BOOL shouldStartPlayAfterDownloaded;
+
 @property BOOL hasAddMoodRecord;
+@property (nonatomic, retain) NSString *lastSongId;
 
 +(PPlayerManagerCenter *)GetInstance;
 

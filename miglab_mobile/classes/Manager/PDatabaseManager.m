@@ -39,7 +39,7 @@
         
         [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text, userid integer, accesstoken text, accounttype integer, logintime integer)"];
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
-        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer)"];
+        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
         [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
@@ -276,7 +276,7 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -295,15 +295,18 @@
     NSNumber *numWordId = [NSNumber numberWithInt:tsong.wordid];
     NSDate *nowDate = [NSDate date];
     NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
+    NSNumber *numCollectNum = [NSNumber numberWithInt:tsong.collectnum];
+    NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
+    NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
     
-    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime, numCollectNum, numCommentNum, numHot];
     [_db close];
     
 }
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, wordid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -340,8 +343,11 @@
         NSNumber *numWordId = [NSNumber numberWithInt:tsong.wordid];
         NSDate *nowDate = [NSDate date];
         NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
+        NSNumber *numCollectNum = [NSNumber numberWithInt:tsong.collectnum];
+        NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
+        NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, numWordId, numCreateTime, numCollectNum, numCommentNum, numHot];
         
     }
     
@@ -373,6 +379,9 @@
         NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
         NSString *plike = [rs stringForColumn:@"like"];
         int pwordid = [rs intForColumn:@"wordid"];
+        int pcollectnum = [rs intForColumn:@"collectnum"];
+        int pcommentnum = [rs intForColumn:@"commentnum"];
+        long long phot = [rs longLongIntForColumn:@"hot"];
         
         Song *psong = [[Song alloc] init];
         psong.songid = psongid;
@@ -385,6 +394,9 @@
         psong.coverurl = pcoverurl;
         psong.like = plike;
         psong.wordid = pwordid;
+        psong.collectnum = pcollectnum;
+        psong.commentnum = pcommentnum;
+        psong.hot = phot;
         psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
         psong.songCachePath = [songManager getSongCachePath:psong];
         [psong log];
@@ -415,6 +427,20 @@
     
     [_db open];
     [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+-(void)updateSongInfoOfLike:(long long)tlocalkey like:(NSString *)tlike{
+    
+    NSString *sql = @"update SONG_LOCAL_INFO set like = ? where songid = ?";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSNumber *numSongId = [NSNumber numberWithLongLong:tlocalkey];
+    
+    [_db executeUpdate:sql, tlike, numSongId];
     [_db close];
     
 }

@@ -17,6 +17,7 @@
 @synthesize isLoggedIn = _isLoggedIn;
 
 @synthesize currentUserGene = _currentUserGene;
+@synthesize networkStatus = _networkStatus;
 
 +(UserSessionManager *)GetInstance{
     
