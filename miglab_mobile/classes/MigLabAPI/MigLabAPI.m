@@ -519,66 +519,6 @@
 }
 
 /*
-添加歌曲到收藏列表
- <!--请求POST-->
- HTTP_ADDFAVORITE
- */
--(void)doCollectSong:(NSString *)ttoken uid:(NSString *)tuid songid:(long)tsongid{
-    
-    PLog(@"collect song url: %@", HTTP_COLLECTSONG);
-    
-    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COLLECTSONG]];
-    
-    NSString* httpBody = [NSString stringWithFormat:@"token=%@&uid=%@&songid=%ld", ttoken, tuid, tsongid];
-    
-    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
-    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
-        @try {
-            
-            NSDictionary* dicJson = JSON;
-            int status = [[dicJson objectForKey:@"status"] intValue];
-            
-            if(1 == status) {
-                
-                PLog(@"doAddFavorite operation succeed");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongSuccess object:nil userInfo:nil];
-                
-            } else {
-                
-                NSString* msg = [dicJson objectForKey:@"msg"];
-                PLog(@"doAddFavorite operation failed: %@", msg);
-                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:dicResult];
-                
-            }
-            
-        }
-        @catch (NSException *exception) {
-            
-            NSString* msg = @"解析返回数据信息失败:(";
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:dicResult];
-            
-        }
-        
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
-        PLog(@"doAddFavorite failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectSongFailed object:nil userInfo:nil];
-        
-    }];
-    
-    [operation start];
-    
-}
-
-/*
  添加黑名单
  <!--请求POST-->
  HTTP_ADDBLACKLIST
@@ -2270,13 +2210,13 @@
  <!--POST-->
  HTTP_COLLECTSONG
  */
--(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid type:(NSString*)ttype typeid:(NSString*)ttypeid {
+-(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid modetype:(NSString*)tmodetype typeid:(NSString*)ttypeid {
     
     PLog(@"collect song url: %@", HTTP_COLLECTSONG);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COLLECTSONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@type=%@&typeid=%@", uid, ttoken, tsid, ttype, ttypeid];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@&modetype=%@&typeid=%@", uid, ttoken, tsid, tmodetype, ttypeid];
     PLog(@"collect song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];

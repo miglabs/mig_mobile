@@ -112,7 +112,7 @@ typedef enum {
 /*
  添加红心歌曲
  */
--(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid type:(NSString*)ttype typeid:(NSString*)ttypeid;
+-(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid modetype:(NSString*)tmodetype typeid:(NSString*)ttypeid;
 
 /*
  歌曲拉黑
@@ -125,15 +125,18 @@ typedef enum {
 -(void)doCollectAndNearNum:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
 
 
+/****************************************推送接口*******************************************/
+
+/*
+ 获取推送消息(2013-8-20)
+ */
+-(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec;
+
+
 /****************************************社交接口*******************************************/
 
 
 /****************************************保留接口*******************************************/
-
-/*
- 收藏歌曲
- */
--(void)doCollectSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
 
 /*
  取消歌曲收藏
@@ -209,10 +212,5 @@ typedef enum {
  赠送歌曲
  */
 -(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
-
-/*
- 获取推送消息(2013-8-20)
- */
--(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec;
 
 @end
