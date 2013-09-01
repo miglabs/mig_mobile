@@ -2046,6 +2046,8 @@
     if(tsong != nil) {
         
         NSString* songcontent = [NSString stringWithFormat:@"{\"music\":[{\"name\":\"%@\",\"singer\":\"%@\"}]}", tsong.songname, tsong.artist];
+
+        PLog(@"do record local song single: %@", songcontent);
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:songcontent];
     }
@@ -2075,6 +2077,8 @@
         }
         
         NSString* tcontent = [NSString stringWithFormat:@"{\"music\":[%@]}", maincontent];
+        
+        PLog(@"do record local song array: %@", tcontent);
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:tcontent];
     }
