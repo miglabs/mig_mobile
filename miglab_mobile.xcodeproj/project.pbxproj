@@ -126,6 +126,9 @@
 		162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5517C25D00000E904F /* ModifyGeneView.xib */; };
 		162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162AAB5817C25D25000E904F /* CurrentGeneView.m */; };
 		162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5A17C25D55000E904F /* CurrentGeneView.xib */; };
+		1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1632E50B17D347400089291C /* libWeChatSDK.a */; };
+		1632E50F17D349380089291C /* MusicSourceEditMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1632E50E17D349380089291C /* MusicSourceEditMenuView.m */; };
+		1632E51117D349510089291C /* MusicSourceEditMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1632E51017D349510089291C /* MusicSourceEditMenuView.xib */; };
 		1633F6E917D1D24F00F47DFF /* base_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6E617D1D24F00F47DFF /* base_navigation_bg.png */; };
 		1633F6EA17D1D24F00F47DFF /* base_view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6E717D1D24F00F47DFF /* base_view_bg.png */; };
 		1633F6ED17D1D39300F47DFF /* base_back_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1633F6EC17D1D39300F47DFF /* base_back_nor.png */; };
@@ -372,7 +375,6 @@
 		18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A4512217841A0400CFFAD4 /* PDatabaseManager.m */; };
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
-		18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E434E517BE287100DECFC7 /* libWeChatSDK.a */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
@@ -545,6 +547,10 @@
 		162AAB5717C25D25000E904F /* CurrentGeneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGeneView.h; sourceTree = "<group>"; };
 		162AAB5817C25D25000E904F /* CurrentGeneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGeneView.m; sourceTree = "<group>"; };
 		162AAB5A17C25D55000E904F /* CurrentGeneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentGeneView.xib; sourceTree = "<group>"; };
+		1632E50B17D347400089291C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		1632E50D17D349370089291C /* MusicSourceEditMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicSourceEditMenuView.h; sourceTree = "<group>"; };
+		1632E50E17D349380089291C /* MusicSourceEditMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicSourceEditMenuView.m; sourceTree = "<group>"; };
+		1632E51017D349510089291C /* MusicSourceEditMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicSourceEditMenuView.xib; sourceTree = "<group>"; };
 		1633F6E617D1D24F00F47DFF /* base_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_navigation_bg.png; sourceTree = "<group>"; };
 		1633F6E717D1D24F00F47DFF /* base_view_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_view_bg.png; sourceTree = "<group>"; };
 		1633F6EC17D1D39300F47DFF /* base_back_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_back_nor.png; sourceTree = "<group>"; };
@@ -880,7 +886,6 @@
 		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
 		18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationMenuView.h; sourceTree = "<group>"; };
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
-		18E434E517BE287100DECFC7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
@@ -917,7 +922,7 @@
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
 				1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */,
 				1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */,
-				18E434E617BE287100DECFC7 /* libWeChatSDK.a in Frameworks */,
+				1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,6 +1441,9 @@
 				1604F0EA17C4F2E60072A0D8 /* MusicCommentInputView.h */,
 				1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */,
 				1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */,
+				1632E50D17D349370089291C /* MusicSourceEditMenuView.h */,
+				1632E50E17D349380089291C /* MusicSourceEditMenuView.m */,
+				1632E51017D349510089291C /* MusicSourceEditMenuView.xib */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -1804,7 +1812,7 @@
 		1846485F1793ACF700E83EBB /* WeChatAPI */ = {
 			isa = PBXGroup;
 			children = (
-				18E434E517BE287100DECFC7 /* libWeChatSDK.a */,
+				1632E50B17D347400089291C /* libWeChatSDK.a */,
 				184648621793ACF700E83EBB /* WXApi.h */,
 				184648631793ACF700E83EBB /* WXApiObject.h */,
 			);
@@ -2113,6 +2121,7 @@
 				1633F73817D2216800F47DFF /* music_source_menu_online.png in Resources */,
 				1633F73917D2216800F47DFF /* music_source_separator.png in Resources */,
 				1633F73A17D2216800F47DFF /* music_source_sort.png in Resources */,
+				1632E51117D349510089291C /* MusicSourceEditMenuView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2252,6 +2261,7 @@
 				1633F73D17D2217600F47DFF /* UserGene.m in Sources */,
 				1633F74217D2219300F47DFF /* MusicBodyHeadMenuView.m in Sources */,
 				1633F74317D2219300F47DFF /* MusicSortMenuView.m in Sources */,
+				1632E50F17D349380089291C /* MusicSourceEditMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2353,6 +2363,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2385,6 +2396,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
