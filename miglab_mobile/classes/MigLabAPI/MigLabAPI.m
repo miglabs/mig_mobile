@@ -2043,7 +2043,12 @@
 
 -(void)doRecordLocalSongsSingle:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname song:(Song *)tsong {
     
-    
+    if(tsong != nil) {
+        
+        NSString* songcontent = [NSString stringWithFormat:@"{\"music\":[{\"name\":\"%@\",\"singer\":\"%@\"}]}", tsong.songname, tsong.artist];
+        
+        [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:songcontent];
+    }
 }
 
 -(void)doRecordLocalSongsArray:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname songs:(NSArray *)tsongs {
@@ -2051,13 +2056,27 @@
     if(tsongs != nil) {
         
         int songcount = [tsongs count];
+        NSMutableString* maincontent = [[NSMutableString alloc] init];
         
         for (int i=0; i<songcount; i++) {
             
             Song* song = [tsongs objectAtIndex:i];
             
-            [self doRecordLocalSongsSingle:uid token:ttoken source:tsource urlcode:turlcode name:tname song:song];
+            NSString* singlesong = [NSString stringWithFormat:@"{\"name\":\"%@\",\"singer\":\"%@\"}", song.songname, song.artist];
+            
+            if(0 == i) {
+                
+                [maincontent appendString:singlesong];
+            }
+            else {
+                
+                [maincontent appendFormat:@",%@", singlesong];
+            }
         }
+        
+        NSString* tcontent = [NSString stringWithFormat:@"{\"music\":[%@]}", maincontent];
+        
+        [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:tcontent];
     }
 }
 
