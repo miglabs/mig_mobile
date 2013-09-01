@@ -70,6 +70,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
+    //doCancelCollectedSong
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongFailed:) name:NotificationNameCancelCollectedSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongSuccess:) name:NotificationNameCancelCollectedSongSuccess object:nil];
+    
     [self updateSongInfo];
     
 }
@@ -101,6 +105,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongSuccess object:nil];
     
     //doCollectSong
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    //doCancelCollectedSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
     
@@ -152,7 +160,13 @@
         NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
         NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
-        [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+        int isLike = [currentSong.like intValue];
+        if (isLike > 0) {
+            [_miglabAPI doCancelCollectedSong:accesstoken uid:userid songid:[songid longLongValue]];
+        } else {
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+        }
+        
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
@@ -197,6 +211,19 @@
     Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
     _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];
     
+    int isLike = [currentsong.like intValue];
+    if (isLike > 0) {
+        
+        UIImage *darkHeartImage = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
+        [_playerMenuView.btnCollect setImage:darkHeartImage forState:UIControlStateNormal];
+        
+    } else {
+        
+        UIImage *lightHeartImage = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
+        [_playerMenuView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
+        
+    }
+    
 }
 
 #pragma notification
@@ -214,7 +241,33 @@
 }
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
+    
+    Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
+    currentsong.like = @"1";
+    
+    [[PDatabaseManager GetInstance] updateSongInfoOfLike:currentsong.songid like:@"1"];
+    
+    UIImage *darkHeartImage = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
+    [_playerMenuView.btnCollect setImage:darkHeartImage forState:UIControlStateNormal];
+    
     [SVProgressHUD showSuccessWithStatus:@"收藏歌曲成功:)"];
+}
+
+-(void)cancelCollectedSongFailed:(NSNotification *)tNotification{
+    [SVProgressHUD showErrorWithStatus:@"取消收藏歌曲失败:("];
+}
+
+-(void)cancelCollectedSongSuccess:(NSNotification *)tNotification{
+    
+    Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
+    currentsong.like = @"0";
+    
+    [[PDatabaseManager GetInstance] updateSongInfoOfLike:currentsong.songid like:@"0"];
+    
+    UIImage *lightHeartImage = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
+    [_playerMenuView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
+    
+    [SVProgressHUD showSuccessWithStatus:@"取消收藏歌曲成功:)"];
 }
 
 @end

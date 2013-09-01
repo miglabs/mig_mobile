@@ -12,6 +12,7 @@
 #import "UserSessionManager.h"
 #import "PPlayerManagerCenter.h"
 #import "SVProgressHUD.h"
+#import "PDatabaseManager.h"
 
 @interface PlayerViewController : BaseViewController
 
@@ -32,5 +33,7 @@
 -(void)hateSongSuccess:(NSNotification *)tNotification;
 -(void)collectSongFailed:(NSNotification *)tNotification;
 -(void)collectSongSuccess:(NSNotification *)tNotification;
+-(void)cancelCollectedSongFailed:(NSNotification *)tNotification;
+-(void)cancelCollectedSongSuccess:(NSNotification *)tNotification;
 
 @end

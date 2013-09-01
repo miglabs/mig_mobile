@@ -431,6 +431,20 @@
     
 }
 
+-(void)updateSongInfoOfLike:(long long)tlocalkey like:(NSString *)tlike{
+    
+    NSString *sql = @"update SONG_LOCAL_INFO set like = ? where songid = ?";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSNumber *numSongId = [NSNumber numberWithLongLong:tlocalkey];
+    
+    [_db executeUpdate:sql, tlike, numSongId];
+    [_db close];
+    
+}
+
 /*
  描述词记录(心情，场景)
  */
