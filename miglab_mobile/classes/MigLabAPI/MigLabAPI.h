@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Song.h"
+#import "Channel.h"
+#import "Word.h"
+#import "Mood.h"
+#import "NearbyUser.h"
+#import "ConfigFileInfo.h"
+#import "CollectNum.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
 typedef enum {
@@ -98,6 +105,8 @@ typedef enum {
  提交本地歌曲信息(verified, 2013-08-28)
  */
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
+-(void)doRecordLocalSongsSingle:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname song:(Song*)tsong;
+-(void)doRecordLocalSongsArray:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname songs:(NSArray*)tsongs;
 
 /*
  记录用户试听歌曲状态

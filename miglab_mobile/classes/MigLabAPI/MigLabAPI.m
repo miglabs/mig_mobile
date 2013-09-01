@@ -13,13 +13,6 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "UserSessionManager.h"
-#import "Song.h"
-#import "Channel.h"
-#import "Word.h"
-#import "Mood.h"
-#import "NearbyUser.h"
-#import "ConfigFileInfo.h"
-#import "CollectNum.h"
 
 @implementation MigLabAPI
 
@@ -2046,6 +2039,26 @@
     }];
     
     [operation start];
+}
+
+-(void)doRecordLocalSongsSingle:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname song:(Song *)tsong {
+    
+    
+}
+
+-(void)doRecordLocalSongsArray:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname songs:(NSArray *)tsongs {
+    
+    if(tsongs != nil) {
+        
+        int songcount = [tsongs count];
+        
+        for (int i=0; i<songcount; i++) {
+            
+            Song* song = [tsongs objectAtIndex:i];
+            
+            [self doRecordLocalSongsSingle:uid token:ttoken source:tsource urlcode:turlcode name:tname song:song];
+        }
+    }
 }
 
 /*
