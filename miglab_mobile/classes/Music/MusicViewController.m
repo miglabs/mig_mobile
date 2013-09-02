@@ -21,6 +21,9 @@
 
 @implementation MusicViewController
 
+@synthesize sourceEditMenuView = _sourceEditMenuView;
+@synthesize sourceEditData = _sourceEditData;
+
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
@@ -51,6 +54,32 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //edit menu
+    NSArray *sourceEditMenuNib = [[NSBundle mainBundle] loadNibNamed:@"MusicSourceEditMenuView" owner:self options:nil];
+    for (id oneObject in sourceEditMenuNib){
+        if ([oneObject isKindOfClass:[MusicSourceEditMenuView class]]){
+            _sourceEditMenuView = (MusicSourceEditMenuView *)oneObject;
+        }//if
+    }//for
+    _sourceEditMenuView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    [_sourceEditMenuView.btnBack addTarget:self action:@selector(doBackFromSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnOnline.tag = 0;
+    [_sourceEditMenuView.btnOnline addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnCollected.tag = 1;
+    [_sourceEditMenuView.btnCollected addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnNearby.tag = 2;
+    [_sourceEditMenuView.btnNearby addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnIPod.tag = 3;
+    [_sourceEditMenuView.btnIPod addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_sourceEditMenuView];
+    _sourceEditMenuView.hidden = YES;
+    
+    NSMutableDictionary *dicEdit0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"EditName", @"在线推荐", @"MenuText", @"1", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"EditName", @"我喜欢的", @"MenuText", @"0", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"EditName", @"附近的好音乐", @"MenuText", @"1", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"EditName", @"本地音乐", @"MenuText", @"1", @"IsSelected", nil];
+    _sourceEditData = [NSArray arrayWithObjects:dicEdit0, dicEdit1, dicEdit2, dicEdit3, nil];
     
     //body
     _bodyTableView = [[UITableView alloc] init];
@@ -149,6 +178,71 @@
     
 }
 
+-(IBAction)doShowSourceEdit:(id)sender{
+    
+    PLog(@"doShowSourceEdit...");
+    
+    _sourceEditMenuView.alpha = 0.0f;
+    _sourceEditMenuView.hidden = NO;
+    _bodyTableView.alpha = 1.0f;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sourceEditMenuView.alpha = 1.0f;
+        _bodyTableView.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _bodyTableView.hidden = YES;
+        
+    }];
+    
+}
+
+-(IBAction)doBackFromSourceEdit:(id)sender{
+    
+    PLog(@"doBackFromSourceEdit...");
+    
+    _sourceEditMenuView.alpha = 1.0f;
+    _bodyTableView.alpha = 0.0f;
+    _bodyTableView.hidden = NO;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sourceEditMenuView.alpha = 0.0f;
+        _bodyTableView.alpha = 1.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _sourceEditMenuView.hidden = YES;
+        
+    }];
+    
+    //todo edit data
+    
+    
+}
+
+-(IBAction)doEditSelected:(id)sender{
+    
+    UIButton *btnEdit = sender;
+    
+    PLog(@"doSelected: %d", btnEdit.tag);
+    
+    NSMutableDictionary *dicEdit = [_sourceEditData objectAtIndex:btnEdit.tag];
+    NSString *strIsSelected = [dicEdit objectForKey:@"IsSelected"];
+    if ([strIsSelected intValue] > 0) {
+        [dicEdit setValue:@"0" forKey:@"IsSelected"];
+        UIImage *iconUnSelImage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [btnEdit setImage:iconUnSelImage forState:UIControlStateNormal];
+    } else {
+        [dicEdit setValue:@"1" forKey:@"IsSelected"];
+        UIImage *iconSelImage = [UIImage imageWithName:@"music_song_sel" type:@"png"];
+        [btnEdit setImage:iconSelImage forState:UIControlStateNormal];
+    }
+    
+}
+
 #pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
@@ -186,6 +280,7 @@
     btnEdit.frame = CGRectMake(230, 8, 58, 28);
     UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
     [btnEdit setImage:editNorImage forState:UIControlStateNormal];
+    [btnEdit addTarget:self action:@selector(doShowSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *separatorImageView = [[UIImageView alloc] init];
     separatorImageView.frame = CGRectMake(4, 45, 290, 1);
