@@ -61,6 +61,7 @@
 -(void)insertIPodSongInfo:(Song *)tsong;
 -(NSMutableArray *)getIPodSongInfoList:(int)trowcount;
 -(Song *)getIPodSongInfo:(NSString *)tsongname;
+-(int)getIPodSongCount;
 -(void)deleteIPodSongInfo:(long long)tlocalkey;
 -(void)deleteAllIPodSongInfo;
 

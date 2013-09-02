@@ -67,10 +67,10 @@
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
     
-    NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"0", @"MenuTip", nil];
-    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"90", @"MenuTip", nil];
-    NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"909", @"MenuTip", nil];
-    NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", @"0", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"0", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"90", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"909", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", @"0", @"MenuTip", nil];
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     //gps
@@ -123,16 +123,27 @@
     
     NSDictionary *result = [tNotification userInfo];
     _collectNum = [result objectForKey:@"result"];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%dMB流量", 45];
     NSString *strCollectNum = [NSString stringWithFormat:@"%d", _collectNum.mynum];
     NSString *strNearNum = [NSString stringWithFormat:@"%d", _collectNum.nearnum];
+    int ipodNum = [[PDatabaseManager GetInstance] getIPodSongCount];
+    NSString *strIPodNum = [NSString stringWithFormat:@"%d", ipodNum];
+    
+    //download song
+    NSMutableDictionary *dicMenu0 = [_tableTitles objectAtIndex:0];
+    [dicMenu0 setValue:strDownloadDataDesc forKey:@"MenuTip"];
     
     //collected
-    NSDictionary *dicMenu1 = [_tableTitles objectAtIndex:1];
+    NSMutableDictionary *dicMenu1 = [_tableTitles objectAtIndex:1];
     [dicMenu1 setValue:strCollectNum forKey:@"MenuTip"];
     
     //near
-    NSDictionary *dicMenu2 = [_tableTitles objectAtIndex:2];
+    NSMutableDictionary *dicMenu2 = [_tableTitles objectAtIndex:2];
     [dicMenu2 setValue:strNearNum forKey:@"MenuTip"];
+    
+    //ipod
+    NSMutableDictionary *dicMenu3 = [_tableTitles objectAtIndex:3];
+    [dicMenu3 setValue:strIPodNum forKey:@"MenuTip"];
     
     [_bodyTableView reloadData];
     
@@ -238,16 +249,28 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NSDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
+    NSMutableDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
     cell.menuImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
     
-    int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
-    if (nMenuTip > 0) {
-        cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
-        cell.lblTipNum.hidden = NO;
+    if (indexPath.row == 0) {
+        
+        cell.lblTipNum.text = [dicMenu objectForKey:@"MenuTip"];
+        CGRect tipframe = cell.lblTipNum.frame;
+        tipframe.origin.x += 15.0f;
+        cell.lblTipNum.frame = tipframe;
+        cell.arrowImageView.hidden = YES;
+        
     } else {
-        cell.lblTipNum.hidden = YES;
+        
+        int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
+        if (nMenuTip > 0) {
+            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
+            cell.lblTipNum.hidden = NO;
+        } else {
+            cell.lblTipNum.hidden = YES;
+        }
+        
     }
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);

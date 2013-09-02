@@ -571,6 +571,29 @@
     return psong;
 }
 
+-(int)getIPodSongCount{
+    
+    int songCount = 0;
+    
+    NSString *sql = @"select count(1) as songcount from IPOD_SONG_INFO";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        songCount = [rs intForColumn:@"songcount"];
+        PLog(@"songcount: %d", songCount);
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return songCount;
+}
+
 -(void)deleteIPodSongInfo:(long long)tlocalkey{
     
     NSString *sql = [NSString stringWithFormat:@"delete from IPOD_SONG_INFO where songid = %lld ", tlocalkey];
