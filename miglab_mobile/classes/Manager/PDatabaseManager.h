@@ -56,6 +56,15 @@
 -(void)updateSongInfoOfLike:(long long)tlocalkey like:(NSString *)tlike;
 
 /*
+ 导入本地歌曲记录
+ */
+-(void)insertIPodSongInfo:(Song *)tsong;
+-(NSMutableArray *)getIPodSongInfoList:(int)trowcount;
+-(Song *)getIPodSongInfo:(NSString *)tsongname;
+-(void)deleteIPodSongInfo:(long long)tlocalkey;
+-(void)deleteAllIPodSongInfo;
+
+/*
  描述词记录(心情，场景)
  */
 -(void)insertWordInfo:(Word *)tword;
