@@ -1,19 +1,18 @@
 //
-//  FriendOfAddViewController.m
+//  SettingViewController.m
 //  miglab_mobile
 //
-//  Created by pig on 13-8-25.
+//  Created by pig on 13-9-3.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "FriendOfAddViewController.h"
-#import "FriendOfAddDetailViewController.h"
+#import "SettingViewController.h"
 
-@interface FriendOfAddViewController ()
+@interface SettingViewController ()
 
 @end
 
-@implementation FriendOfAddViewController
+@implementation SettingViewController
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
@@ -35,11 +34,11 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     //nav bar
-    self.navView.titleLabel.text = @"添加好友";
+    self.navView.titleLabel.text = @"设置";
     self.bgImageView.hidden = YES;
     
     //body
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10) style:UITableViewStyleGrouped];
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -47,9 +46,11 @@
     _dataTableView.scrollEnabled = NO;
     [self.view addSubview:_dataTableView];
     
-    NSArray *section0 = [NSArray arrayWithObjects:@"从手机通讯录里添加", nil];
-    NSArray *section1 = [NSArray arrayWithObjects:@"从新浪微博添加好友", @"从腾讯微博添加好友", nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"功能", @"意见反馈", nil];
+    NSArray *section2 = [NSArray arrayWithObjects:@"关于miglab", nil];
+    _datalist = [NSArray arrayWithObjects:section0, section1, section2, nil];
+    
     
 }
 
@@ -65,33 +66,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
-    FriendOfAddDetailViewController *addDetail = [[FriendOfAddDetailViewController alloc] initWithNibName:@"FriendOfAddDetailViewController" bundle:nil];
-    
-    
-    if (indexPath.section == 0) {
-        
-        //todo
-        addDetail.addDetailTitle = @"手机通讯录";
-        addDetail.addDetailType = 1;
-        
-    } else if (indexPath.section == 1) {
-        
-        if (indexPath.row == 0) {
-            
-            addDetail.addDetailTitle = @"新浪微博好友";
-            addDetail.addDetailType = 2;
-            
-        } else if (indexPath.row == 1) {
-            
-            addDetail.addDetailTitle = @"腾讯微博好友";
-            addDetail.addDetailType = 3;
-            
-        }
-        
-    }
-    
-    [self.navigationController pushViewController:addDetail animated:YES];
-    
     //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -101,7 +75,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -110,7 +84,7 @@
     NSArray *sectionMenu = [_datalist objectAtIndex:section];
     return sectionMenu.count;
     
-//    return [_datalist count];
+    //    return [_datalist count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,6 +118,11 @@
         
         NSArray *section1 = [_datalist objectAtIndex:indexPath.section];
         lblDesc.text = [section1 objectAtIndex:indexPath.row];
+        
+    } else if (indexPath.section == 2) {
+        
+        NSArray *section2 = [_datalist objectAtIndex:indexPath.section];
+        lblDesc.text = [section2 objectAtIndex:indexPath.row];
         
     }
     

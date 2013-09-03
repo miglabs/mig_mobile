@@ -258,6 +258,9 @@
 		16BE5D1717D61DA300802DE1 /* friend_user_songlist_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D1517D61DA300802DE1 /* friend_user_songlist_tip.png */; };
 		16BE5D1B17D61E7300802DE1 /* FriendOfAddDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE5D1917D61E7300802DE1 /* FriendOfAddDetailViewController.m */; };
 		16BE5D1C17D61E7300802DE1 /* FriendOfAddDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D1A17D61E7300802DE1 /* FriendOfAddDetailViewController.xib */; };
+		16BE5D1F17D6247B00802DE1 /* setting_button_logout_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */; };
+		16BE5D2417D6249C00802DE1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE5D2217D6249C00802DE1 /* SettingViewController.m */; };
+		16BE5D2517D6249C00802DE1 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D2317D6249C00802DE1 /* SettingViewController.xib */; };
 		16C10DFC17A9477E00DA628D /* login_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10DFB17A9477E00DA628D /* login_navigation_bg.png */; };
 		16C10E0517A94D3800DA628D /* login_back_arrow_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */; };
 		16C10E0617A94D3800DA628D /* login_back_arrow_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */; };
@@ -717,6 +720,10 @@
 		16BE5D1817D61E7300802DE1 /* FriendOfAddDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfAddDetailViewController.h; sourceTree = "<group>"; };
 		16BE5D1917D61E7300802DE1 /* FriendOfAddDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfAddDetailViewController.m; sourceTree = "<group>"; };
 		16BE5D1A17D61E7300802DE1 /* FriendOfAddDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfAddDetailViewController.xib; sourceTree = "<group>"; };
+		16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_button_logout_bg.png; sourceTree = "<group>"; };
+		16BE5D2117D6249C00802DE1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		16BE5D2217D6249C00802DE1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		16BE5D2317D6249C00802DE1 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		16C10DFB17A9477E00DA628D /* login_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_navigation_bg.png; sourceTree = "<group>"; };
 		16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_back_arrow_nor.png; sourceTree = "<group>"; };
 		16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_back_arrow_sel.png; sourceTree = "<group>"; };
@@ -960,6 +967,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				16BE5D2017D6248700802DE1 /* Setting */,
 				185F935617C330A600EBC710 /* TSLibraryImport */,
 				160E073317C076F5003F0E45 /* SYAppStart */,
 				165D7CA317BE623C000D08E3 /* Friend */,
@@ -1548,9 +1556,28 @@
 			path = left_menu;
 			sourceTree = "<group>";
 		};
+		16BE5D1D17D6247B00802DE1 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
+		16BE5D2017D6248700802DE1 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				16BE5D2117D6249C00802DE1 /* SettingViewController.h */,
+				16BE5D2217D6249C00802DE1 /* SettingViewController.m */,
+				16BE5D2317D6249C00802DE1 /* SettingViewController.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				16BE5D1D17D6247B00802DE1 /* setting */,
 				1633F6E417D1D24F00F47DFF /* base */,
 				1624BC0617C784DC00BE08A5 /* friend */,
 				162AAB4217C25440000E904F /* gene */,
@@ -2159,6 +2186,8 @@
 				16BE5D1617D61DA300802DE1 /* friend_user_photo_tip.png in Resources */,
 				16BE5D1717D61DA300802DE1 /* friend_user_songlist_tip.png in Resources */,
 				16BE5D1C17D61E7300802DE1 /* FriendOfAddDetailViewController.xib in Resources */,
+				16BE5D1F17D6247B00802DE1 /* setting_button_logout_bg.png in Resources */,
+				16BE5D2517D6249C00802DE1 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2300,6 +2329,7 @@
 				1633F74317D2219300F47DFF /* MusicSortMenuView.m in Sources */,
 				1632E50F17D349380089291C /* MusicSourceEditMenuView.m in Sources */,
 				16BE5D1B17D61E7300802DE1 /* FriendOfAddDetailViewController.m in Sources */,
+				16BE5D2417D6249C00802DE1 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
