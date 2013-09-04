@@ -1627,7 +1627,7 @@
  HTTP_SEARCHNEARBY
  GET
  */
--(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius{
+-(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius {
     
     NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&location=%@&radius=%d", HTTP_SEARCHNEARBY, ttoken, uid, tlocation, tradius];
     PLog(@"search nearby url: %@", url);

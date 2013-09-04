@@ -163,6 +163,11 @@ typedef enum {
  */
 -(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
 
+/*
+ 赠送歌曲
+ */
+-(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
+
 /****************************************保留接口*******************************************/
 
 
@@ -220,10 +225,5 @@ typedef enum {
  提交用户当前状态
  */
 -(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid;
-
-/*
- 赠送歌曲
- */
--(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
 
 @end
