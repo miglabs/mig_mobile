@@ -2454,6 +2454,8 @@
             }
             else {
                 
+                PLog(@"delete collect song operation failed");
+                
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
@@ -2473,6 +2475,66 @@
         PLog(@"delete collect song failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取歌曲信息
+ GET
+ HTTP_GETSONGINFO
+ */
+-(void)doGetSongInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@", HTTP_GETSONGINFO, uid, ttoken, tsongid];
+    PLog(@"get song info url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get song info operation succeeded");
+                
+                Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"song"]];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get song info operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:dicResult];
+        }
+     
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get song info failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:nil];
     }];
     
     [operation start];

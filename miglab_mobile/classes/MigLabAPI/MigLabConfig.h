@@ -258,4 +258,9 @@
 #define NotificationNameDeleteCollectSongSuccess            @"NotificationNameDeleteCollectSongSuccess"
 #define NotificationNameDeleteCollectSongFailed             @"NotificationNameDeleteCollectSongFailed"
 
+//获取歌曲信息
+#define HTTP_GETSONGINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getsonginfo.fcgi"]
+#define NotificationNameGetSongInfoSuccess                  @"NotificationNameGetSongInfoSuccess"
+#define NotificationNameGetSongInfoFailed                   @"NotificationNameGetSongInfoFailed"
+
 #endif
