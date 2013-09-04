@@ -2420,4 +2420,62 @@
     [operation start];
 }
 
+/*
+ 删除收藏歌曲
+ POST
+ HTTP_DELETECOLLECTSONG
+ */
+-(void)doDeleteCollectedSong:(NSString*)uid token:(NSString *)ttoken songid:(NSString*)tsongid {
+    
+    PLog(@"delete collect song url: %@", HTTP_DELETECOLLECTSONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_DELETECOLLECTSONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@", uid, ttoken, tsongid];
+    PLog(@"delete collect song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"delete collect song operation succeed");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"delete collect song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
 @end

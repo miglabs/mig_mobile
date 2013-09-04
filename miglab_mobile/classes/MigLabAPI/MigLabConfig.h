@@ -253,4 +253,9 @@
 #define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
 #define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
 
+//删除收藏歌曲
+#define HTTP_DELETECOLLECTSONG                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/delcltsong.fcgi"]
+#define NotificationNameDeleteCollectSongSuccess            @"NotificationNameDeleteCollectSongSuccess"
+#define NotificationNameDeleteCollectSongFailed             @"NotificationNameDeleteCollectSongFailed"
+
 #endif

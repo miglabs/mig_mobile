@@ -278,6 +278,8 @@
         
     }
     
+    [miglabAPI doSearchNearby:@"1" token:@"3" location:@"30.30022,120.127393" radius:@"500"];
+    
     
     
     //[miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
