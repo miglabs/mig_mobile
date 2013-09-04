@@ -155,6 +155,10 @@
         [SYAppStart show];
     }
     
+    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
     //start gps
     [_locationManager startUpdatingLocation];
     
@@ -168,6 +172,81 @@
         _isFirstDidAppear = YES;
         [SYAppStart hide:YES];
     }
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    //End recieving events
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+    
+    
+}
+
+-(BOOL)canBecomeFirstResponder{
+    return YES;
+}
+
+-(void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    
+    //if it is a remote control event handle it correctly
+    if (event.type == UIEventTypeRemoteControl) {
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
+                [self doPlayOrPause:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPlay:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPause...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlStop:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlStop...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlNextTrack...");
+                [self doNext:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPreviousTrack...");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+}
+
+-(IBAction)doPlayOrPause:(id)sender{
+    
+    PLog(@"RootViewController doPlayOrPause...");
+    
+    [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+    
+}
+
+-(IBAction)doNext:(id)sender{
+    
+    PLog(@"RootViewController doNext...");
+    
+    [[PPlayerManagerCenter GetInstance] doNext];
     
 }
 

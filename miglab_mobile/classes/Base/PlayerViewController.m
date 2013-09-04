@@ -7,6 +7,7 @@
 //
 
 #import "PlayerViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 #import "DetailPlayerViewController.h"
 
@@ -62,6 +63,10 @@
     
     PLog(@"PlayerViewController viewWillAppear...");
     
+    //Once the view has loaded then we can register to begin recieving controls and we can become the first responder
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
     //doHateSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hateSongFailed:) name:NotificationNameHateSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hateSongSuccess:) name:NotificationNameHateSongSuccess object:nil];
@@ -73,6 +78,7 @@
     //doCancelCollectedSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongFailed:) name:NotificationNameCancelCollectedSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongSuccess:) name:NotificationNameCancelCollectedSongSuccess object:nil];
+    
     
     [self updateSongInfo];
     
@@ -100,6 +106,10 @@
     
     PLog(@"PlayerViewController viewDidDisappear...");
     
+    //End recieving events
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+    
     //doHateSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameHateSongSuccess object:nil];
@@ -111,6 +121,55 @@
     //doCancelCollectedSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    
+}
+
+-(BOOL)canBecomeFirstResponder{
+    return YES;
+}
+
+-(void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    
+    //if it is a remote control event handle it correctly
+    if (event.type == UIEventTypeRemoteControl) {
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
+                [self doPlayOrPause:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPlay:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPause...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlStop:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlStop...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlNextTrack...");
+                [self doNext:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPreviousTrack...");
+                break;
+            }
+            default:
+                break;
+        }
+    }
     
 }
 
@@ -209,6 +268,7 @@
     }
     
     Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
+    _playerMenuView.btnAvatar.imageURL = [NSURL URLWithString:currentsong.coverurl];
     _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];
     
     int isLike = [currentsong.like intValue];
@@ -221,6 +281,29 @@
         
         UIImage *lightHeartImage = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
         [_playerMenuView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
+        
+    }
+    
+    if (currentsong && currentsong.songname && currentsong.artist) {
+        [self configNowPlayingInfoCenter:currentsong];
+    }
+
+    
+}
+
+-(void)configNowPlayingInfoCenter:(Song *)currentSong{
+    
+    if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
+        
+        UIImage *songcover = [_playerMenuView.btnAvatar imageForState:UIControlStateNormal];
+        
+        NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:currentSong.songname forKey:MPMediaItemPropertyTitle];
+        [dict setObject:currentSong.artist forKey:MPMediaItemPropertyArtist];
+        MPMediaItemArtwork * mArt = [[MPMediaItemArtwork alloc] initWithImage:songcover];
+        [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
+        [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = nil;
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
         
     }
     

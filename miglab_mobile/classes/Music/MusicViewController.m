@@ -21,6 +21,9 @@
 
 @implementation MusicViewController
 
+@synthesize sourceEditMenuView = _sourceEditMenuView;
+@synthesize sourceEditData = _sourceEditData;
+
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
@@ -52,6 +55,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //edit menu
+    NSArray *sourceEditMenuNib = [[NSBundle mainBundle] loadNibNamed:@"MusicSourceEditMenuView" owner:self options:nil];
+    for (id oneObject in sourceEditMenuNib){
+        if ([oneObject isKindOfClass:[MusicSourceEditMenuView class]]){
+            _sourceEditMenuView = (MusicSourceEditMenuView *)oneObject;
+        }//if
+    }//for
+    _sourceEditMenuView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    [_sourceEditMenuView.btnBack addTarget:self action:@selector(doBackFromSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnOnline.tag = 0;
+    [_sourceEditMenuView.btnOnline addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnCollected.tag = 1;
+    [_sourceEditMenuView.btnCollected addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnNearby.tag = 2;
+    [_sourceEditMenuView.btnNearby addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    _sourceEditMenuView.btnIPod.tag = 3;
+    [_sourceEditMenuView.btnIPod addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_sourceEditMenuView];
+    _sourceEditMenuView.hidden = YES;
+    
+    NSMutableDictionary *dicEdit0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"EditName", @"在线推荐", @"MenuText", @"1", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"EditName", @"我喜欢的", @"MenuText", @"0", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"EditName", @"附近的好音乐", @"MenuText", @"1", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"EditName", @"本地音乐", @"MenuText", @"1", @"IsSelected", nil];
+    _sourceEditData = [NSArray arrayWithObjects:dicEdit0, dicEdit1, dicEdit2, dicEdit3, nil];
+    
     //body
     _bodyTableView = [[UITableView alloc] init];
     _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
@@ -67,10 +96,10 @@
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
     
-    NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"0", @"MenuTip", nil];
-    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"90", @"MenuTip", nil];
-    NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"909", @"MenuTip", nil];
-    NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", @"0", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"0", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"90", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"909", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", @"0", @"MenuTip", nil];
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     //gps
@@ -123,18 +152,94 @@
     
     NSDictionary *result = [tNotification userInfo];
     _collectNum = [result objectForKey:@"result"];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%dMB流量", 45];
     NSString *strCollectNum = [NSString stringWithFormat:@"%d", _collectNum.mynum];
     NSString *strNearNum = [NSString stringWithFormat:@"%d", _collectNum.nearnum];
+    int ipodNum = [[PDatabaseManager GetInstance] getIPodSongCount];
+    NSString *strIPodNum = [NSString stringWithFormat:@"%d", ipodNum];
+    
+    //download song
+    NSMutableDictionary *dicMenu0 = [_tableTitles objectAtIndex:0];
+    [dicMenu0 setValue:strDownloadDataDesc forKey:@"MenuTip"];
     
     //collected
-    NSDictionary *dicMenu1 = [_tableTitles objectAtIndex:1];
+    NSMutableDictionary *dicMenu1 = [_tableTitles objectAtIndex:1];
     [dicMenu1 setValue:strCollectNum forKey:@"MenuTip"];
     
     //near
-    NSDictionary *dicMenu2 = [_tableTitles objectAtIndex:2];
+    NSMutableDictionary *dicMenu2 = [_tableTitles objectAtIndex:2];
     [dicMenu2 setValue:strNearNum forKey:@"MenuTip"];
     
+    //ipod
+    NSMutableDictionary *dicMenu3 = [_tableTitles objectAtIndex:3];
+    [dicMenu3 setValue:strIPodNum forKey:@"MenuTip"];
+    
     [_bodyTableView reloadData];
+    
+}
+
+-(IBAction)doShowSourceEdit:(id)sender{
+    
+    PLog(@"doShowSourceEdit...");
+    
+    _sourceEditMenuView.alpha = 0.0f;
+    _sourceEditMenuView.hidden = NO;
+    _bodyTableView.alpha = 1.0f;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sourceEditMenuView.alpha = 1.0f;
+        _bodyTableView.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _bodyTableView.hidden = YES;
+        
+    }];
+    
+}
+
+-(IBAction)doBackFromSourceEdit:(id)sender{
+    
+    PLog(@"doBackFromSourceEdit...");
+    
+    _sourceEditMenuView.alpha = 1.0f;
+    _bodyTableView.alpha = 0.0f;
+    _bodyTableView.hidden = NO;
+    
+    [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        _sourceEditMenuView.alpha = 0.0f;
+        _bodyTableView.alpha = 1.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        _sourceEditMenuView.hidden = YES;
+        
+    }];
+    
+    //todo edit data
+    
+    
+}
+
+-(IBAction)doEditSelected:(id)sender{
+    
+    UIButton *btnEdit = sender;
+    
+    PLog(@"doSelected: %d", btnEdit.tag);
+    
+    NSMutableDictionary *dicEdit = [_sourceEditData objectAtIndex:btnEdit.tag];
+    NSString *strIsSelected = [dicEdit objectForKey:@"IsSelected"];
+    if ([strIsSelected intValue] > 0) {
+        [dicEdit setValue:@"0" forKey:@"IsSelected"];
+        UIImage *iconUnSelImage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
+        [btnEdit setImage:iconUnSelImage forState:UIControlStateNormal];
+    } else {
+        [dicEdit setValue:@"1" forKey:@"IsSelected"];
+        UIImage *iconSelImage = [UIImage imageWithName:@"music_song_sel" type:@"png"];
+        [btnEdit setImage:iconSelImage forState:UIControlStateNormal];
+    }
     
 }
 
@@ -175,6 +280,7 @@
     btnEdit.frame = CGRectMake(230, 8, 58, 28);
     UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
     [btnEdit setImage:editNorImage forState:UIControlStateNormal];
+    [btnEdit addTarget:self action:@selector(doShowSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *separatorImageView = [[UIImageView alloc] init];
     separatorImageView.frame = CGRectMake(4, 45, 290, 1);
@@ -238,16 +344,28 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NSDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
+    NSMutableDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
     cell.menuImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
     
-    int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
-    if (nMenuTip > 0) {
-        cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
-        cell.lblTipNum.hidden = NO;
+    if (indexPath.row == 0) {
+        
+        cell.lblTipNum.text = [dicMenu objectForKey:@"MenuTip"];
+        CGRect tipframe = cell.lblTipNum.frame;
+        tipframe.origin.x += 15.0f;
+        cell.lblTipNum.frame = tipframe;
+        cell.arrowImageView.hidden = YES;
+        
     } else {
-        cell.lblTipNum.hidden = YES;
+        
+        int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
+        if (nMenuTip > 0) {
+            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
+            cell.lblTipNum.hidden = NO;
+        } else {
+            cell.lblTipNum.hidden = YES;
+        }
+        
     }
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);

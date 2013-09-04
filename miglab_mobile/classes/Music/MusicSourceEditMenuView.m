@@ -10,6 +10,13 @@
 
 @implementation MusicSourceEditMenuView
 
+@synthesize btnBack = _btnBack;
+@synthesize btnOnline = _btnOnline;
+@synthesize btnCollected = _btnCollected;
+@synthesize btnNearby = _btnNearby;
+@synthesize btnIPod = _btnIPod;
+@synthesize btnImportFromOther = _btnImportFromOther;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

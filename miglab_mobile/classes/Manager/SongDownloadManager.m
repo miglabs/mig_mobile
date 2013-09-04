@@ -55,10 +55,10 @@
     return [super createPath:lrcCacheDirectory];
 }
 
--(NSString *)getLocalSongCacheDirectory{
+-(NSString *)getIPodSongCacheDirectory{
     
     NSString *cacheHome = [self getCacheHomeDirectory];
-    NSString *lrcCacheDirectory = [cacheHome stringByAppendingPathComponent:@"Local"];
+    NSString *lrcCacheDirectory = [cacheHome stringByAppendingPathComponent:@"IPod"];
     
     return [super createPath:lrcCacheDirectory];
 }

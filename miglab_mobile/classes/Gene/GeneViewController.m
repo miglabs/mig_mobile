@@ -10,6 +10,7 @@
 #import "LoginChooseViewController.h"
 #import "PDatabaseManager.h"
 #import "ConfigFileInfo.h"
+#import "SettingViewController.h"
 
 static int PAGE_WIDTH = 81;
 
@@ -343,8 +344,18 @@ static int PAGE_WIDTH = 81;
     
     PLog(@"gene doAvatar...");
     
-    LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
-    [self.topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        SettingViewController *settingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
+        [self.topViewcontroller.navigationController pushViewController:settingViewController animated:YES];
+        
+    } else {
+        
+        LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
+        [self.topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
+        
+    }
+    
     
 }
 

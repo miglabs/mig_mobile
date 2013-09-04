@@ -8,9 +8,13 @@
 
 #import "PlayerViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MusicSourceEditMenuView.h"
 #import "CollectNum.h"
 
 @interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+
+@property (nonatomic, retain) MusicSourceEditMenuView *sourceEditMenuView;
+@property (nonatomic, retain) NSArray *sourceEditData;
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
@@ -23,5 +27,10 @@
 
 -(void)getCollectAndNearNumFailed:(NSNotification *)tNotification;
 -(void)getCollectAndNearNumSuccess:(NSNotification *)tNotification;
+
+-(IBAction)doShowSourceEdit:(id)sender;
+
+-(IBAction)doBackFromSourceEdit:(id)sender;
+-(IBAction)doEditSelected:(id)sender;
 
 @end

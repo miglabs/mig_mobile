@@ -109,7 +109,7 @@
             
             Song *tempsong = [[Song alloc] init];
             tempsong.songname = (name && name.length > 1) ? name : @"";
-            tempsong.artist = (artist && artist.length > 1) ? artist : @"";
+            tempsong.artist = (artist && artist.length > 1) ? artist : @"未知演唱者";
             [localDataList addObject:tempsong];
         }
     }
@@ -135,16 +135,15 @@
         NSString *name = (NSString *)[mediaItem valueForProperty:MPMediaItemPropertyTitle];
         NSString *artist = (NSString*)[mediaItem valueForProperty:MPMediaItemPropertyArtist];
         
-        NSString *localDir = [[SongDownloadManager GetInstance] getSongCacheDirectory];
+        NSString *localDir = [[SongDownloadManager GetInstance] getIPodSongCacheDirectory];
         NSString *file = [NSString stringWithFormat:@"%@/%@.%@", localDir, name, [mediaItemUrl pathExtension]];
         
         NSDate *nowdate = [NSDate date];
         Song *tempsong = [[Song alloc] init];
         tempsong.songid = [nowdate timeIntervalSince1970];
-        tempsong.songname = name;
-        tempsong.artist = artist;
+        tempsong.songname = (name && name.length > 1) ? name : @"";
+        tempsong.artist = (artist && artist.length > 1) ? artist : @"未知演唱者";;
         tempsong.songtype = 1;
-        tempsong.songurl = file;
         tempsong.songCachePath = file;
         
         //检查是否已经导入
@@ -161,7 +160,7 @@
             TSLibraryImport *export = [[TSLibraryImport alloc] init];
             [export importAsset:mediaItemUrl toURL:dstUrl completionBlock:^(TSLibraryImport *import) {
                 
-                [[PDatabaseManager GetInstance] insertSongInfo:tempsong];
+                [[PDatabaseManager GetInstance] insertIPodSongInfo:tempsong];
                 
                 tempindex++;
                 NSLog(@"complete...%d", tempindex);
@@ -208,7 +207,9 @@
 	}
     
     Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"来自IPod"];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

@@ -41,7 +41,12 @@
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, wordid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
+        
+        //ipod song
+        [_db executeUpdate:@"create table if not exists IPOD_SONG_INFO (songid integer, songname text, artist text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, cachepath text, createtime integer)"];
+        
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
+        
         [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
         
         [_db close];
@@ -441,6 +446,172 @@
     NSNumber *numSongId = [NSNumber numberWithLongLong:tlocalkey];
     
     [_db executeUpdate:sql, tlike, numSongId];
+    [_db close];
+    
+}
+
+/*
+ 导入本地歌曲记录
+ */
+-(void)insertIPodSongInfo:(Song *)tsong{
+    
+    NSString *sql = @"insert into IPOD_SONG_INFO (songid, songname, artist, duration, songurl, hqurl, lrcurl, coverurl, like, cachepath, createtime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select * from IPOD_SONG_INFO where songname ＝ '%@' ", tsong.songname];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        PLog(@"is exists...");
+        return;
+    }
+    
+    NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
+    NSDate *nowDate = [NSDate date];
+    NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
+    
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.songCachePath, numCreateTime];
+    [_db close];
+    
+}
+
+-(NSMutableArray *)getIPodSongInfoList:(int)trowcount{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from IPOD_SONG_INFO order by createtime desc limit %d ", trowcount];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *songInfoList = [[NSMutableArray alloc] init];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long long psongid = [rs longLongIntForColumn:@"songid"];
+        NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *partist = [rs stringForColumn:@"artist"];
+        NSString *pduration = [rs stringForColumn:@"duration"];
+        NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *phqurl = [rs stringForColumn:@"hqurl"];
+        NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
+        NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
+        NSString *plike = [rs stringForColumn:@"like"];
+        NSString *pcachepath = [rs stringForColumn:@"cachepath"];
+        
+        Song *psong = [[Song alloc] init];
+        psong.songid = psongid;
+        psong.songname = psongname;
+        psong.artist = partist;
+        psong.duration = pduration;
+        psong.songurl = psongurl;
+        psong.hqurl = phqurl;
+        psong.lrcurl = plrcurl;
+        psong.coverurl = pcoverurl;
+        psong.like = plike;
+        psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+        psong.songCachePath = pcachepath;
+        psong.songtype = 1;//1-ipod歌曲
+        [psong log];
+        
+        [songInfoList addObject:psong];
+    }
+    
+    [_db close];
+    
+    return songInfoList;
+    
+}
+
+-(Song *)getIPodSongInfo:(NSString *)tsongname{
+    
+    Song *psong = nil;
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from IPOD_SONG_INFO where songname ＝ '%@' ", tsongname];
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long long psongid = [rs longLongIntForColumn:@"songid"];
+        NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *partist = [rs stringForColumn:@"artist"];
+        NSString *pduration = [rs stringForColumn:@"duration"];
+        NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *phqurl = [rs stringForColumn:@"hqurl"];
+        NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
+        NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
+        NSString *plike = [rs stringForColumn:@"like"];
+        NSString *pcachepath = [rs stringForColumn:@"cachepath"];
+        
+        psong = [[Song alloc] init];
+        psong.songid = psongid;
+        psong.songname = psongname;
+        psong.artist = partist;
+        psong.duration = pduration;
+        psong.songurl = psongurl;
+        psong.hqurl = phqurl;
+        psong.lrcurl = plrcurl;
+        psong.coverurl = pcoverurl;
+        psong.like = plike;
+        psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+        psong.songCachePath = pcachepath;
+        psong.songtype = 1;//1-ipod歌曲
+        [psong log];
+        
+    }
+    
+    [_db close];
+    
+    return psong;
+}
+
+-(int)getIPodSongCount{
+    
+    int songCount = 0;
+    
+    NSString *sql = @"select count(1) as songcount from IPOD_SONG_INFO";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        songCount = [rs intForColumn:@"songcount"];
+        PLog(@"songcount: %d", songCount);
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return songCount;
+}
+
+-(void)deleteIPodSongInfo:(long long)tlocalkey{
+    
+    NSString *sql = [NSString stringWithFormat:@"delete from IPOD_SONG_INFO where songid = %lld ", tlocalkey];
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+-(void)deleteAllIPodSongInfo{
+    
+    NSString *sql = @"delete from IPOD_SONG_INFO";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
     [_db close];
     
 }

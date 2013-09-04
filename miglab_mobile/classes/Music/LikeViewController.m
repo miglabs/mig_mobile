@@ -211,7 +211,7 @@
         
         _sortMenuView.alpha = 1.0f;
         _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 45);
-        _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+        _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 45 - 10 - 73 - 10);
         
     } completion:^(BOOL finished) {
         
