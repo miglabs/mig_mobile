@@ -7,6 +7,11 @@
 //
 
 #import "SettingViewController.h"
+#import "SettingOfModifyNicknameViewController.h"
+#import "SettingOfPrivacyViewController.h"
+#import "SettingOfFunctionViewController.h"
+#import "UMFeedback.h"
+#import "UserSessionManager.h"
 
 @interface SettingViewController ()
 
@@ -38,7 +43,7 @@
     self.bgImageView.hidden = YES;
     
     //body
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10) style:UITableViewStyleGrouped];
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45 + 10, 320, kMainScreenHeight - 45 - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -65,6 +70,49 @@
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
+    
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            
+            SettingOfModifyNicknameViewController *modifyNickname = [[SettingOfModifyNicknameViewController alloc] initWithNibName:@"SettingOfModifyNicknameViewController" bundle:nil];
+            [self.navigationController pushViewController:modifyNickname animated:YES];
+            
+        }
+        
+    } else if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            
+            SettingOfPrivacyViewController *privacy = [[SettingOfPrivacyViewController alloc] initWithNibName:@"SettingOfPrivacyViewController" bundle:nil];
+            [self.navigationController pushViewController:privacy animated:YES];
+            
+        } else if (indexPath.row == 1) {
+            
+            SettingOfFunctionViewController *function = [[SettingOfFunctionViewController alloc] initWithNibName:@"SettingOfFunctionViewController" bundle:nil];
+            [self.navigationController pushViewController:function animated:YES];
+            
+        } else if (indexPath.row == 2) {
+            
+            //反馈加入用户昵称
+            NSString *userid = [UserSessionManager GetInstance].userid;
+            NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
+            userid = userid ? userid : @"UserIdIsNull";
+            nickname = nickname ? nickname : @"NickNameIsNull";
+            NSString *strUserInfo = [NSString stringWithFormat:@"%@-%@", userid, nickname];
+            NSDictionary *dicUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:strUserInfo, @"USER_INFO", nil];
+            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:dicUserInfo];
+            
+//            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];
+//            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:[NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"a", @"b", @"c", nil] forKey:@"hello"]];
+            
+        }
+        
+    } else if (indexPath.section == 2) {
+        
+        //todo
+        
+    }
     
     //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
