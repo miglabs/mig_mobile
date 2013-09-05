@@ -99,7 +99,7 @@
             NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
             userid = userid ? userid : @"UserIdIsNull";
             nickname = nickname ? nickname : @"NickNameIsNull";
-            NSString *strUserInfo = [NSString stringWithFormat:@"%@-%@", userid, nickname];
+            NSString *strUserInfo = [NSString stringWithFormat:@"%@(%@)", nickname, userid];
             NSDictionary *dicUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:strUserInfo, @"USER_INFO", nil];
             [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:dicUserInfo];
             

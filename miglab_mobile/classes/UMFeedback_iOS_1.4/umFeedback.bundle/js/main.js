@@ -105,7 +105,9 @@ function submitForm(language) {
         result.gender = gender
     }
 
-
+    result.remark ={};
+    result.contact = {};
+    
 //自定义字段，目前有提供了两个自定义Hash可用
 //contact 用于传递联系方式，比如email,qq,phone等
 //remark 用于传递备注信息，比如用户名,网址等等
@@ -114,13 +116,10 @@ function submitForm(language) {
 //    if (!!email) {
 //        result.contact.email = email;
 //    }
-//    var userName = document.getElementById("user_name").value;
-//    if (!!userName) {
-//        result.remark.userName = userName;
-//    }
-
-    result.remark ={};
-    result.contact = {};
+    var userName = document.getElementById("user_name").value;
+    if (!!userName) {
+        result.remark.userName = userName;
+    }
 
     if (!!rate) {
         result.remark.rate = rate
@@ -142,6 +141,8 @@ function submitForm(language) {
 
 function initFormValues(values_json){
     FeedbackJSON = values_json["FeedbackJSON"];
+    user_name = FeedbackJSON["USER_INFO"];
+    $("#user_name").val(user_name);
 //    alert()和console.log()方法都无法使用，只能用content来显示文本来调试
 //    $("#content").val(JSON.stringify(FeedbackJSON));
 }
