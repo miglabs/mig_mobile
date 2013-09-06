@@ -2186,13 +2186,13 @@
  <!--请求POST-->
  HTTP_RECORDCURSONG
  */
--(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood typeid:(NSString*)ttypeid name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
     
     PLog(@"record current song url: %@", HTTP_RECORDCURSONG);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_RECORDCURSONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&lastsong=%@&cursong=%@&mood=%@&name=%@&singer=%@&state=%@", uid, ttoken, tlastsong, tcursong, tmood, tname, tsinger, tstate];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&lastsong=%@&cursong=%@&mood=%@&name=%@&singer=%@&state=%@&typeid=%@", uid, ttoken, tlastsong, tcursong, tmood, tname, tsinger, tstate, ttypeid];
     PLog(@"record current song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];

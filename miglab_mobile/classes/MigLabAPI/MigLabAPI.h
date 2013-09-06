@@ -111,7 +111,7 @@ typedef enum {
 /*
  记录用户试听歌曲状态
  */
--(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood typeid:(NSString*)ttypeid name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
 
 /*
  更新音乐纬度配置文件
