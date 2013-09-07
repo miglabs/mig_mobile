@@ -11,6 +11,7 @@
 #import "MusicCommentPlayerView.h"
 #import "MusicCommentInputView.h"
 #import "Song.h"
+#import "MigLabAPI.h"
 
 //歌曲评论页面
 @interface MusicCommentViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -25,7 +26,13 @@
 
 @property (nonatomic, retain) Song *song;
 
--(IBAction)doBack:(id)sender;
+@property (nonatomic, retain) MigLabAPI *miglabAPI;
+
+-(IBAction)doPlayOrPause:(id)sender;
+-(IBAction)doCollectedOrCancel:(id)sender;
+-(IBAction)doHate:(id)sender;
+-(IBAction)doShare:(id)sender;
+
 -(IBAction)doHideKeyboard:(id)sender;
 
 @end

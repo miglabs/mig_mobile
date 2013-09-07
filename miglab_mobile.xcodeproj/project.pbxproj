@@ -175,6 +175,7 @@
 		163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */; };
 		163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99017A7F9B700EBD24C /* login_choose_register.png */; };
 		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
+		1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCBE17DB0BE5004179E4 /* pinyin.c */; };
 		1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20317C3A92D009A9E3F /* MyFriendViewController.m */; };
 		1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */; };
 		1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20917C3A95D009A9E3F /* NearFriendViewController.m */; };
@@ -626,6 +627,8 @@
 		163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_sel_88_88.png; sourceTree = "<group>"; };
 		163EA99017A7F9B700EBD24C /* login_choose_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_register.png; sourceTree = "<group>"; };
 		163EA99917A7FABE00EBD24C /* login_choose_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_board.png; sourceTree = "<group>"; };
+		1641CCBE17DB0BE5004179E4 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		1641CCBF17DB0BE5004179E4 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		1649E20217C3A92D009A9E3F /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		1649E20317C3A92D009A9E3F /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFriendViewController.xib; sourceTree = "<group>"; };
@@ -988,6 +991,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1641CCBD17DB0BE5004179E4 /* PinYin */,
 				18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */,
 				16BE5D2017D6248700802DE1 /* Setting */,
 				185F935617C330A600EBC710 /* TSLibraryImport */,
@@ -1331,6 +1335,15 @@
 				163EA99017A7F9B700EBD24C /* login_choose_register.png */,
 			);
 			path = login;
+			sourceTree = "<group>";
+		};
+		1641CCBD17DB0BE5004179E4 /* PinYin */ = {
+			isa = PBXGroup;
+			children = (
+				1641CCBE17DB0BE5004179E4 /* pinyin.c */,
+				1641CCBF17DB0BE5004179E4 /* pinyin.h */,
+			);
+			path = PinYin;
 			sourceTree = "<group>";
 		};
 		165D7C8117BE5908000D08E3 /* home */ = {
@@ -2378,6 +2391,7 @@
 				18A0EA0A17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m in Sources */,
 				18A0EA0F17D6DBAC004B8BB6 /* SettingOfPrivacyViewController.m in Sources */,
 				18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */,
+				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,8 @@
 
 @synthesize song = _song;
 
+@synthesize miglabAPI = _miglabAPI;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,6 +75,15 @@
     _commentPlayerView.frame = CGRectMake(11.5, 45 + 10, 297, 110);
     [self.view addSubview:_commentPlayerView];
     
+    _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+    _commentPlayerView.lblSongName.text = _song.songname;
+    _commentPlayerView.lblSongArtist.text = _song.artist;
+    [_commentPlayerView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentPlayerView.btnCollect addTarget:self action:@selector(doCollectedOrCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentPlayerView.btnDelete addTarget:self action:@selector(doHate:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentPlayerView.btnShare addTarget:self action:@selector(doShare:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     //song list
     _commentTableView = [[UITableView alloc] init];
     _commentTableView.frame = CGRectMake(11.5, 45 + 10 + 110 + 10, 297, kMainScreenHeight - 45 - 10 - 110 - 10 - 10 - 49);
@@ -101,8 +112,7 @@
     [self.view addSubview:_commentInputView];
     
     //
-    _commentPlayerView.lblSongName.text = _song.songname;
-    _commentPlayerView.lblSongArtist.text = _song.artist;
+    
     
 }
 
@@ -112,8 +122,63 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(IBAction)doPlayOrPause:(id)sender{
+    
+    PLog(@"doPlayOrPause...");
+    
+    [[PPlayerManagerCenter GetInstance] doInsertPlay:_song];
+    
+}
+
+-(IBAction)doCollectedOrCancel:(id)sender{
+    
+    PLog(@"doCollect...");
+    
+    UserSessionManager *userSessionManager = [UserSessionManager GetInstance];
+    if (userSessionManager.isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+        NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
+        NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
+        
+        int isLike = [currentSong.like intValue];
+        if (isLike > 0) {
+            [_miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:songid];
+        } else {
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+        }
+        
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+    }
+    
+}
+
+-(IBAction)doHate:(id)sender{
+    
+    PLog(@"doDelete...");
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+    }
+    
+}
+
+-(IBAction)doShare:(id)sender{
+    
+    PLog(@"doShare...");
+    
 }
 
 -(IBAction)doHideKeyboard:(id)sender{

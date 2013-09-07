@@ -185,6 +185,27 @@ static PPlayerManagerCenter *instance;
     
 }
 
+-(void)doInsertPlay:(Song *)tInsertSong{
+    
+    PLog(@"doInsertPlay...");
+    [tInsertSong log];
+    
+    [_songList insertObject:tInsertSong atIndex:0];
+    _currentSongIndex = 0;
+    _currentSong = tInsertSong;
+    
+    [self stopDownload];
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if ([aaMusicPlayer isMusicPlaying]) {
+        [aaMusicPlayer pause];
+    }
+    
+    [self initSongInfo];
+    
+    
+}
+
 -(void)stopDownload{
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];

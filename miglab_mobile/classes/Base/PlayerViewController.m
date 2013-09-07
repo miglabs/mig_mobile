@@ -76,8 +76,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
     //doCancelCollectedSong
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongFailed:) name:NotificationNameCancelCollectedSongFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongSuccess:) name:NotificationNameCancelCollectedSongSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongFailed:) name:NotificationNameDeleteCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongSuccess:) name:NotificationNameDeleteCollectSongSuccess object:nil];
     
     
     [self updateSongInfo];
@@ -253,6 +253,30 @@
     
     UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
     [_playerMenuView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    
+    //获取更多歌曲
+    int tempCurrentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
+    if (tempCurrentSongIndex + 1 >= [PPlayerManagerCenter GetInstance].songList.count) {
+        
+        if ([UserSessionManager GetInstance].isLoggedIn) {
+            
+            NSString *userid = [UserSessionManager GetInstance].userid;
+            NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+            NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+            NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
+            NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+            NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
+            NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+            NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
+            
+            [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
+            
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        }//if
+        
+    }//if
     
 }
 
