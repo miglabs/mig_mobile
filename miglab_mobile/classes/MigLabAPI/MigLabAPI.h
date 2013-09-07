@@ -14,6 +14,7 @@
 #import "NearbyUser.h"
 #import "ConfigFileInfo.h"
 #import "CollectNum.h"
+#import "NearMusicState.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
 typedef enum {
@@ -167,6 +168,11 @@ typedef enum {
  赠送歌曲
  */
 -(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
+
+/*
+ 附近人的音乐
+ */
+-(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
 
 /****************************************保留接口*******************************************/
 
