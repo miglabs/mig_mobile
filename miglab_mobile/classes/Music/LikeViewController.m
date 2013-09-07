@@ -144,7 +144,7 @@
 
 -(void)loadData{
     
-//    [self loadMusicFromDatabase];
+    [self loadMusicFromDatabase];
     [self loadMusicFromServer];
     
 }
@@ -152,7 +152,7 @@
 -(void)loadMusicFromDatabase{
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+    NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
     [_dataList addObjectsFromArray:tempSongInfoList];
     
     [_dataTableView reloadData];
@@ -194,9 +194,18 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
-    [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
+    int songInfoCount = [songInfoList count];
     
-    [_dataList addObjectsFromArray:songInfoList];
+    for (int i=0; i<songInfoCount; i++) {
+        Song *collectedSong = [songInfoList objectAtIndex:i];
+        collectedSong.like = @"1";
+    }
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertSongInfoList:songInfoList];
+    NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
+    
+    [_dataList addObjectsFromArray:tempSongInfoList];
     [_dataTableView reloadData];
     
 }
@@ -254,17 +263,73 @@
 
 -(IBAction)doSortMenu1:(id)sender{
     
+    NSArray *sortByCollectedNum = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        if (tsong1.collectnum > tsong2.collectnum) {
+            return NSOrderedAscending;
+        } else if (tsong1.collectnum < tsong2.collectnum) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+        
+    }];
+    
+    @synchronized(_dataList){
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByCollectedNum];
+        [_dataTableView reloadData];
+    }
+    
     [self doSortCollectedData:1];
     
 }
 
 -(IBAction)doSortMenu2:(id)sender{
     
+    NSArray *sortByHotNum = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        if (tsong1.hot > tsong2.hot) {
+            return NSOrderedAscending;
+        } else if (tsong1.hot < tsong2.hot) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+        
+    }];
+    
+    @synchronized(_dataList){
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByHotNum];
+        [_dataTableView reloadData];
+    }
+    
     [self doSortCollectedData:2];
     
 }
 
 -(IBAction)doSortMenu3:(id)sender{
+    
+    NSArray *sortByPinYin = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        
+        return [tsong1.pinyin compare:tsong2.pinyin];
+        
+    }];
+    
+    @synchronized(_dataList){
+        
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByPinYin];
+        [_dataTableView reloadData];
+    }
     
     [self doSortCollectedData:3];
     

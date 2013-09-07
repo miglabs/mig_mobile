@@ -7,6 +7,7 @@
 //
 
 #import "PDatabaseManager.h"
+#import "pinyin.h"
 
 @implementation PDatabaseManager
 
@@ -42,7 +43,7 @@
         [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
         
         //song cache
-        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
+        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         
         //ipod song
@@ -292,8 +293,10 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
+    
+    NSString *pinYinResult = [[NSString alloc] init];
     
     [_db open];
     
@@ -305,6 +308,18 @@
         
         PLog(@"is exists...");
         return;
+    }
+    
+    if (tsong.songname) {
+        
+        for (int i=0; i<tsong.songname.length; i++) {
+            NSString *singlePinYinLetter = [[NSString stringWithFormat:@"%c", pinyinFirstLetter([tsong.songname characterAtIndex:i])] uppercaseString];
+            
+            pinYinResult = [pinYinResult stringByAppendingString:singlePinYinLetter];
+        }
+        
+        tsong.pinyin = pinYinResult;
+        pinYinResult = @"";
     }
     
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
@@ -322,8 +337,10 @@
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
+    
+    NSString *pinYinResult = [[NSString alloc] init];
     
     [_db open];
     
@@ -355,6 +372,18 @@
         }
         NSLog(@"i: %d", i);
         
+        if (tsong.songname) {
+            
+            for (int i=0; i<tsong.songname.length; i++) {
+                NSString *singlePinYinLetter = [[NSString stringWithFormat:@"%c", pinyinFirstLetter([tsong.songname characterAtIndex:i])] uppercaseString];
+                
+                pinYinResult = [pinYinResult stringByAppendingString:singlePinYinLetter];
+            }
+            
+            tsong.pinyin = pinYinResult;
+            pinYinResult = @"";
+        }
+        
         NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
         NSNumber *numTypeId = [NSNumber numberWithInt:tsong.tid];
         NSDate *nowDate = [NSDate date];
@@ -363,7 +392,7 @@
         NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
         NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.pinyin, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot];
         
     }
     
@@ -387,6 +416,7 @@
         
         long long psongid = [rs longLongIntForColumn:@"songid"];
         NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *ppinyin = [rs stringForColumn:@"pinyin"];
         NSString *partist = [rs stringForColumn:@"artist"];
         NSString *ppubtime = [rs stringForColumn:@"pubtime"];
         NSString *palbum = [rs stringForColumn:@"album"];
@@ -405,6 +435,69 @@
         Song *psong = [[Song alloc] init];
         psong.songid = psongid;
         psong.songname = psongname;
+        psong.pinyin = ppinyin;
+        psong.artist = partist;
+        psong.pubtime = ppubtime;
+        psong.album = palbum;
+        psong.duration = pduration;
+        psong.songurl = psongurl;
+        psong.hqurl = phqurl;
+        psong.lrcurl = plrcurl;
+        psong.coverurl = pcoverurl;
+        psong.like = plike;
+        psong.type = ptype;
+        psong.tid = ptypeid;
+        psong.collectnum = pcollectnum;
+        psong.commentnum = pcommentnum;
+        psong.hot = phot;
+        psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+        psong.songCachePath = [songManager getSongCachePath:psong];
+        [psong log];
+        
+        [songInfoList addObject:psong];
+    }
+    
+    [_db close];
+    
+    return songInfoList;
+}
+
+-(NSMutableArray *)getLikeSongInfoList:(int)trowcount{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where like = '1' order by createtime desc limit %d ", trowcount];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *songInfoList = [[NSMutableArray alloc] init];
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long long psongid = [rs longLongIntForColumn:@"songid"];
+        NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *ppinyin = [rs stringForColumn:@"pinyin"];
+        NSString *partist = [rs stringForColumn:@"artist"];
+        NSString *ppubtime = [rs stringForColumn:@"pubtime"];
+        NSString *palbum = [rs stringForColumn:@"album"];
+        NSString *pduration = [rs stringForColumn:@"duration"];
+        NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *phqurl = [rs stringForColumn:@"hqurl"];
+        NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
+        NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
+        NSString *plike = [rs stringForColumn:@"like"];
+        NSString *ptype = [rs stringForColumn:@"type"];
+        int ptypeid = [rs intForColumn:@"typeid"];
+        int pcollectnum = [rs intForColumn:@"collectnum"];
+        int pcommentnum = [rs intForColumn:@"commentnum"];
+        long long phot = [rs longLongIntForColumn:@"hot"];
+        
+        Song *psong = [[Song alloc] init];
+        psong.songid = psongid;
+        psong.songname = psongname;
+        psong.pinyin = ppinyin;
         psong.artist = partist;
         psong.pubtime = ppubtime;
         psong.album = palbum;

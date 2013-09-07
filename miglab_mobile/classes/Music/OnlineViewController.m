@@ -117,7 +117,7 @@
 -(void)loadOnlineMusicFromDatabase{
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:500];
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:200];
     [_dataList addObjectsFromArray:tempSongInfoList];
     
     [_dataTableView reloadData];
@@ -202,17 +202,73 @@
 
 -(IBAction)doSortMenu1:(id)sender{
     
+    NSArray *sortByCollectedNum = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        if (tsong1.collectnum > tsong2.collectnum) {
+            return NSOrderedAscending;
+        } else if (tsong1.collectnum < tsong2.collectnum) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+        
+    }];
+    
+    @synchronized(_dataList){
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByCollectedNum];
+        [_dataTableView reloadData];
+    }
+    
     [self doSortOnlinedData:1];
     
 }
 
 -(IBAction)doSortMenu2:(id)sender{
     
+    NSArray *sortByHotNum = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        if (tsong1.hot > tsong2.hot) {
+            return NSOrderedAscending;
+        } else if (tsong1.hot < tsong2.hot) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+        
+    }];
+    
+    @synchronized(_dataList){
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByHotNum];
+        [_dataTableView reloadData];
+    }
+    
     [self doSortOnlinedData:2];
     
 }
 
 -(IBAction)doSortMenu3:(id)sender{
+    
+    NSArray *sortByPinYin = [_dataList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        Song *tsong1 = obj1;
+        Song *tsong2 = obj2;
+        
+        return [tsong1.pinyin compare:tsong2.pinyin];
+        
+    }];
+    
+    @synchronized(_dataList){
+        
+        [_dataList removeAllObjects];
+        [_dataList addObjectsFromArray:sortByPinYin];
+        [_dataTableView reloadData];
+    }
     
     [self doSortOnlinedData:3];
     

@@ -21,6 +21,7 @@ typedef enum{
 
 @property (nonatomic, assign) long long songid;                         //歌曲id
 @property (nonatomic, retain) NSString *songname;                       //歌曲名称
+@property (nonatomic, retain) NSString *pinyin;                         //歌曲名称拼音
 @property (nonatomic, retain) NSString *artist;                         //原唱
 @property (nonatomic, retain) NSString *pubtime;                        //发行时间
 @property (nonatomic, retain) NSString *album;                          //专辑

@@ -445,12 +445,20 @@
     
     [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
+    /*
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
     NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
     NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
     NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-    
     [_miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:@"0" sceneid:tsceneid sceneindex:@"0" channelid:tchannelid channelindex:@"0" num:@"5"];
+    */
+    
+    //gene
+    NSNumber *numGeneIndex = [NSNumber numberWithInt:100];
+    GeneViewController *tempGene = [_dicViewControllerCache objectForKey:numGeneIndex];
+    [tempGene loadTypeSongs];
+    
+    
     
     
 }

@@ -12,6 +12,7 @@
 
 @synthesize songid = _songid;
 @synthesize songname = _songname;
+@synthesize pinyin = _pinyin;
 @synthesize artist = _artist;
 @synthesize pubtime = _pubtime;
 @synthesize album = _album;
