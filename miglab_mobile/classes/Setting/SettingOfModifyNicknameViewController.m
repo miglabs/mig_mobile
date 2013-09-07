@@ -14,6 +14,8 @@
 
 @implementation SettingOfModifyNicknameViewController
 
+@synthesize nicknameTextField = _nicknameTextField;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,6 +36,7 @@
     self.navView.titleLabel.text = @"修改昵称";
     self.bgImageView.hidden = YES;
     
+    //body
     
     
 }
@@ -42,6 +45,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)doSaveNickname:(id)sender{
+    
+    PLog(@"doSaveNickname...");
+    
 }
 
 @end
