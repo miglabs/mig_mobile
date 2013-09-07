@@ -24,9 +24,9 @@
             
             nms = [[NearMusicState alloc] init];
             
-            nms->_songstate = [dict objectForKey:@"songstat"];
+            nms->_songstate = [[dict objectForKey:@"songstat"] intValue];
             nms->_song = [Song initWithNSDictionary:[dict objectForKey:@"music"]];
-            nms->_nearuser = [NearbyUser initWithNSDictionary:[dict objectForKey:@"user"]];
+            nms->_nearuser = [NearbyUser initWithNSDictionary:[dict objectForKey:@"users"]];
         }
     }
     @catch (NSException *exception) {

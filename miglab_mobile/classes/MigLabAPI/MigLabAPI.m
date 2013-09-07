@@ -2554,6 +2554,8 @@
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        bool SuccessButNULL = false; // 0:failed, 1:succeeded but null
        
         @try {
             
@@ -2564,7 +2566,10 @@
                 
                 PLog(@"do get near music operation succeeded");
                 
+                SuccessButNULL = true;
+                
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
                 NSArray* nearmusicstate = [dicTemp objectForKey:@"nearUser"];
                 int nmscount = [nearmusicstate count];
                 
@@ -2593,10 +2598,18 @@
         }
         @catch (NSException *exception) {
             
-            NSString* msg = @"解析返回数据失败";
-            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:dicResult];
+            if (SuccessButNULL) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:nil];
+            }
+            else {
+                
+                NSString* msg = @"解析返回数据失败";
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:dicResult];
+                
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
