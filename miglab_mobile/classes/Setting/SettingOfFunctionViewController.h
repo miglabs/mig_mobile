@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface SettingOfFunctionViewController : BaseViewController
+@interface SettingOfFunctionViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, retain) UITableView *dataTableView;
+@property (nonatomic, retain) NSMutableArray *datalist;
 
 @end
