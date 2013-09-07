@@ -6,17 +6,16 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "MigLabAPI.h"
 
-@interface LoginViewController : UIViewController<UITextFieldDelegate>
+@interface LoginViewController : BaseViewController<UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
--(IBAction)doBack:(id)sender;
 -(IBAction)doLoginAction:(id)sender;
 -(void)loginFailed:(NSNotification *)tNotification;
 -(void)loginSuccess:(NSNotification *)tNotification;

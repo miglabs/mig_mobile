@@ -54,7 +54,8 @@
     NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
     NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"功能", @"意见反馈", nil];
     NSArray *section2 = [NSArray arrayWithObjects:@"关于miglab", nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, section2, nil];
+    NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
+    _datalist = [NSArray arrayWithObjects:section0, section1, section2, section3, nil];
     
     
 }
@@ -63,6 +64,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)doLogout:(id)sender{
+    
+    PLog(@"doLogout...");
+    
+    UIAlertView *tempAlertView = [[UIAlertView alloc] initWithTitle:nil message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [tempAlertView show];
+    
+}
+
+#pragma UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1) {
+        
+        [[UserSessionManager GetInstance] doLogout];
+        
+        [self doBack:nil];
+        
+    }
+    
 }
 
 #pragma mark - UITableView delegate
@@ -112,6 +136,11 @@
         
         //todo
         
+    } else if (indexPath.section == 3) {
+        
+        //todo
+        [self doLogout:nil];
+        
     }
     
     //
@@ -123,7 +152,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -132,7 +161,6 @@
     NSArray *sectionMenu = [_datalist objectAtIndex:section];
     return sectionMenu.count;
     
-    //    return [_datalist count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -171,6 +199,22 @@
         
         NSArray *section2 = [_datalist objectAtIndex:indexPath.section];
         lblDesc.text = [section2 objectAtIndex:indexPath.row];
+        
+    } else if (indexPath.section == 3) {
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSArray *section3 = [_datalist objectAtIndex:indexPath.section];
+        NSString *desc = [section3 objectAtIndex:indexPath.row];
+        
+        UIImage *logoutImage = [UIImage imageWithName:@"setting_button_logout_bg" type:@"png"];
+        UIButton *btnLogout = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnLogout setBackgroundImage:logoutImage forState:UIControlStateNormal];
+        [btnLogout setTitle:desc forState:UIControlStateNormal];
+        
+        cell.backgroundView = btnLogout;
+        
+        arrowimage.hidden = YES;
         
     }
     

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface GetPasswordViewController : UIViewController
+@interface GetPasswordViewController : BaseViewController
 
 @end

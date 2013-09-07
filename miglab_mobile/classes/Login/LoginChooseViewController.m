@@ -354,7 +354,8 @@
             [databaseManager insertUserAccout:name password:name userid:userid accessToken:accesstoken accountType:accounttype];
             
             //检查服务端是否已经记录该帐号
-            [_miglabAPI doGetUserInfo:name accessToken:[UserSessionManager GetInstance].accesstoken];
+            NSString *encodeName = [PCommonUtil encodeUrlParameter:name];
+            [_miglabAPI doGetUserInfo:encodeName accessToken:[UserSessionManager GetInstance].accesstoken];
             
 //            [self doBack:nil];
             

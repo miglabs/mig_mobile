@@ -22,5 +22,6 @@
 @property (nonatomic, assign) int networkStatus;   //0－未知，1-wlan，2-cache，3-2g，3g网络
 
 +(UserSessionManager *)GetInstance;
+-(void)doLogout;
 
 @end

@@ -8,9 +8,11 @@
 
 #import "BaseViewController.h"
 
-@interface SettingViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SettingViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
+
+-(IBAction)doLogout:(id)sender;
 
 @end

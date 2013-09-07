@@ -32,4 +32,14 @@
     return instance;
 }
 
+-(void)doLogout{
+    
+    _userid = nil;
+    _accesstoken = nil;
+    _currentUser = [[PUser alloc] init];
+    _currentUserGene = [[UserGene alloc] init];
+    _isLoggedIn = NO;
+    
+}
+
 @end

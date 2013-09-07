@@ -27,6 +27,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
+    
+    //nav bar
+    self.navView.titleLabel.text = @"忘记密码";
+    self.bgImageView.hidden = YES;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
