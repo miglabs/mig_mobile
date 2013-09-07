@@ -10,4 +10,8 @@
 
 @interface SettingOfModifyNicknameViewController : BaseViewController
 
+@property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
+
+-(IBAction)doSaveNickname:(id)sender;
+
 @end

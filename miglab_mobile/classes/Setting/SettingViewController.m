@@ -173,7 +173,7 @@
 	}
     
     //desc
-    UILabel *lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 200, 24)];
+    UILabel *lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 24)];
     [lblDesc setBackgroundColor:[UIColor clearColor]];
     [lblDesc setTextAlignment:kTextAlignmentLeft];
     [lblDesc setFont:[UIFont systemFontOfSize:15]];
@@ -181,7 +181,7 @@
     [cell.contentView addSubview:lblDesc];
     
     //arrow
-    UIImageView *arrowimage = [[UIImageView alloc] initWithFrame:CGRectMake(250, 16, 8, 12)];
+    UIImageView *arrowimage = [[UIImageView alloc] initWithFrame:CGRectMake(280, 16, 8, 12)];
     arrowimage.image = [UIImage imageNamed:@"friend_add_friend_arrow.png"];
     [cell.contentView addSubview:arrowimage];
     
@@ -189,6 +189,20 @@
         
         NSArray *section0 = [_datalist objectAtIndex:indexPath.section];
         lblDesc.text = [section0 objectAtIndex:indexPath.row];
+        
+        //content
+        UILabel *lblContent = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 260, 24)];
+        [lblContent setBackgroundColor:[UIColor clearColor]];
+        [lblContent setTextAlignment:kTextAlignmentRight];
+        [lblContent setFont:[UIFont systemFontOfSize:15]];
+        [lblContent setTextColor:[UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f]];
+        [cell.contentView addSubview:lblContent];
+        
+        if (indexPath.row == 0) {
+            lblContent.text = [UserSessionManager GetInstance].currentUser.nickname;
+        } else if (indexPath.row == 1) {
+            lblContent.text = [UserSessionManager GetInstance].currentUser.birthday;
+        }
         
     } else if (indexPath.section == 1) {
         

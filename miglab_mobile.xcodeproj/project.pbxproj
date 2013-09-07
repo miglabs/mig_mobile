@@ -176,6 +176,7 @@
 		163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99017A7F9B700EBD24C /* login_choose_register.png */; };
 		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
 		1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCBE17DB0BE5004179E4 /* pinyin.c */; };
+		1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */; };
 		1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20317C3A92D009A9E3F /* MyFriendViewController.m */; };
 		1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */; };
 		1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20917C3A95D009A9E3F /* NearFriendViewController.m */; };
@@ -630,6 +631,7 @@
 		163EA99917A7FABE00EBD24C /* login_choose_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_board.png; sourceTree = "<group>"; };
 		1641CCBE17DB0BE5004179E4 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		1641CCBF17DB0BE5004179E4 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_nickname_modify_bg.png; sourceTree = "<group>"; };
 		1649E20217C3A92D009A9E3F /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		1649E20317C3A92D009A9E3F /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFriendViewController.xib; sourceTree = "<group>"; };
@@ -1599,6 +1601,7 @@
 		16BE5D1D17D6247B00802DE1 /* setting */ = {
 			isa = PBXGroup;
 			children = (
+				1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */,
 				16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */,
 			);
 			path = setting;
@@ -2251,6 +2254,7 @@
 				18A0EA1017D6DBAC004B8BB6 /* SettingOfPrivacyViewController.xib in Resources */,
 				18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */,
 				18A0EA1B17D6E0C2004B8BB6 /* umFeedback.bundle in Resources */,
+				1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
