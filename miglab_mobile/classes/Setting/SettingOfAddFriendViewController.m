@@ -1,20 +1,18 @@
 //
-//  SettingOfPrivacyViewController.m
+//  SettingOfAddFriendViewController.m
 //  miglab_mobile
 //
-//  Created by apple on 13-9-4.
+//  Created by pig on 13-9-7.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "SettingOfPrivacyViewController.h"
 #import "SettingOfAddFriendViewController.h"
-#import "SettingOfFriendManagerViewController.h"
 
-@interface SettingOfPrivacyViewController ()
+@interface SettingOfAddFriendViewController ()
 
 @end
 
-@implementation SettingOfPrivacyViewController
+@implementation SettingOfAddFriendViewController
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
@@ -36,7 +34,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     //nav bar
-    self.navView.titleLabel.text = @"隐私设置";
+    self.navView.titleLabel.text = @"加好友权限设置";
     self.bgImageView.hidden = YES;
     
     //body
@@ -48,10 +46,9 @@
     _dataTableView.scrollEnabled = NO;
     [self.view addSubview:_dataTableView];
     
-    NSArray *section0 = [NSArray arrayWithObjects:@"歌单共享", nil];
-    NSArray *section1 = [NSArray arrayWithObjects:@"定位服务", nil];
-    NSArray *section2 = [NSArray arrayWithObjects:@"加好友权限", @"黑名单管理", nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, section2, nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"加我为好友时需要验证", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"回复歌友自动添加对方为好友", nil];
+    _datalist = [NSArray arrayWithObjects:section0, section1, nil];
     
     
 }
@@ -68,31 +65,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
-    if (indexPath.section == 0) {
-        
-        //
-        
-    } else if (indexPath.section == 1) {
-        
-        //
-        
-    } else if (indexPath.section == 2) {
-        
-        //todo
-        if (indexPath.row == 0) {
-            
-            SettingOfAddFriendViewController *settingOfAddFriend = [[SettingOfAddFriendViewController alloc] initWithNibName:@"SettingOfAddFriendViewController" bundle:nil];
-            [self.navigationController pushViewController:settingOfAddFriend animated:YES];
-            
-        } else if (indexPath.row == 1) {
-            
-            SettingOfFriendManagerViewController *friendManager = [[SettingOfFriendManagerViewController alloc] initWithNibName:@"SettingOfFriendManagerViewController" bundle:nil];
-            [self.navigationController pushViewController:friendManager animated:YES];
-            
-        }
-        
-    }
-    
     //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -102,7 +74,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -116,9 +88,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     
     if (section == 0) {
-        return @"允许歌友们借用我的歌单播放歌曲";
+        return @"需要通过你验证后才能成为好友";
     } else if (section == 1) {
-        return @"可以查看附近的歌友并显示彼此的距离";
+        return @"关闭后仅仅只是对话";
     }
     
     return nil;
@@ -169,16 +141,6 @@
         switchframe.origin.y = (44 - switchframe.size.height) / 2;
         dataSwitch.frame = switchframe;
         [cell.contentView addSubview:dataSwitch];
-        
-    } else if (indexPath.section == 2) {
-        
-        //arrow
-        UIImageView *arrowimage = [[UIImageView alloc] initWithFrame:CGRectMake(280, 16, 8, 12)];
-        arrowimage.image = [UIImage imageNamed:@"friend_add_friend_arrow.png"];
-        [cell.contentView addSubview:arrowimage];
-        
-        NSArray *section2 = [_datalist objectAtIndex:indexPath.section];
-        lblDesc.text = [section2 objectAtIndex:indexPath.row];
         
     }
     

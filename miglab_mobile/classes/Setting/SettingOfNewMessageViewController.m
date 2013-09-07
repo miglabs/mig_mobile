@@ -1,20 +1,18 @@
 //
-//  SettingOfFunctionViewController.m
+//  SettingOfNewMessageViewController.m
 //  miglab_mobile
 //
-//  Created by apple on 13-9-4.
+//  Created by pig on 13-9-7.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "SettingOfFunctionViewController.h"
 #import "SettingOfNewMessageViewController.h"
-#import "SettingOfNetworkAndLimitViewController.h"
 
-@interface SettingOfFunctionViewController ()
+@interface SettingOfNewMessageViewController ()
 
 @end
 
-@implementation SettingOfFunctionViewController
+@implementation SettingOfNewMessageViewController
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
@@ -36,7 +34,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     //nav bar
-    self.navView.titleLabel.text = @"功能设置";
+    self.navView.titleLabel.text = @"新消息设置";
     self.bgImageView.hidden = YES;
     
     //body
@@ -48,7 +46,7 @@
     _dataTableView.scrollEnabled = NO;
     [self.view addSubview:_dataTableView];
     
-    _datalist = [NSArray arrayWithObjects:@"新消息提醒", @"设定网络与流量限额", @"定时收听", @"定时停止收听", @"缓存歌曲数设定", @"耳机线控操作", @"已过滤歌曲", nil];
+    _datalist = [NSArray arrayWithObjects:@"开启消息提醒", @"声音", @"震动", nil];
     
     
 }
@@ -64,18 +62,6 @@
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
-    
-    if (indexPath.row == 0) {
-        
-        SettingOfNewMessageViewController *newMessage = [[SettingOfNewMessageViewController alloc] initWithNibName:@"SettingOfNewMessageViewController" bundle:nil];
-        [self.navigationController pushViewController:newMessage animated:YES];
-        
-    } else if (indexPath.row == 1) {
-        
-        SettingOfNetworkAndLimitViewController *networkAndLimit = [[SettingOfNetworkAndLimitViewController alloc] initWithNibName:@"SettingOfNetworkAndLimitViewController" bundle:nil];
-        [self.navigationController pushViewController:networkAndLimit animated:YES];
-        
-    }
     
     //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -97,6 +83,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellAccessoryDisclosureIndicator reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     
     //desc
@@ -107,40 +94,16 @@
     [lblDesc setTextColor:[UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f]];
     [cell.contentView addSubview:lblDesc];
     
-    //arrow
-    UIImageView *arrowimage = [[UIImageView alloc] initWithFrame:CGRectMake(280, 16, 8, 12)];
-    arrowimage.image = [UIImage imageNamed:@"friend_add_friend_arrow.png"];
-    [cell.contentView addSubview:arrowimage];
-    
-    //desc
+    //
     lblDesc.text = [_datalist objectAtIndex:indexPath.row];
     
-    if (indexPath.row > 1 && indexPath.row < 5) {
-        
-        //content
-        UILabel *lblContent = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 260, 24)];
-        [lblContent setBackgroundColor:[UIColor clearColor]];
-        [lblContent setTextAlignment:kTextAlignmentRight];
-        [lblContent setFont:[UIFont systemFontOfSize:13]];
-        [lblContent setTextColor:[UIColor grayColor]];
-        [cell.contentView addSubview:lblContent];
-        
-        if (indexPath.row == 2) {
-            
-            lblContent.text = @"未设定";
-            
-        } else if (indexPath.row == 3) {
-            
-            lblContent.text = @"60分钟后";
-            
-        } else if (indexPath.row == 4) {
-            
-            lblContent.text = @"1/200";
-            
-        }
-        
-    }
-    
+    //switch
+    UISwitch *dataSwitch = [[UISwitch alloc] init];
+    CGRect switchframe = dataSwitch.frame;
+    switchframe.origin.x = 290 - switchframe.size.width;
+    switchframe.origin.y = (44 - switchframe.size.height) / 2;
+    dataSwitch.frame = switchframe;
+    [cell.contentView addSubview:dataSwitch];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

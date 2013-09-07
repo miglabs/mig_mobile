@@ -1,14 +1,14 @@
 //
-//  SettingOfPrivacyViewController.h
+//  SettingOfAddFriendViewController.h
 //  miglab_mobile
 //
-//  Created by apple on 13-9-4.
+//  Created by pig on 13-9-7.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
 #import "BaseViewController.h"
 
-@interface SettingOfPrivacyViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SettingOfAddFriendViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
