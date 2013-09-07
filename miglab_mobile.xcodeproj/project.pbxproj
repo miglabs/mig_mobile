@@ -177,6 +177,16 @@
 		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
 		1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCBE17DB0BE5004179E4 /* pinyin.c */; };
 		1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */; };
+		1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCD717DB685E004179E4 /* SettingOfAddFriendViewController.m */; };
+		1641CCDA17DB685E004179E4 /* SettingOfAddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCD817DB685E004179E4 /* SettingOfAddFriendViewController.xib */; };
+		1641CCDF17DB688F004179E4 /* SettingOfFriendManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCDD17DB688F004179E4 /* SettingOfFriendManagerViewController.m */; };
+		1641CCE017DB688F004179E4 /* SettingOfFriendManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCDE17DB688F004179E4 /* SettingOfFriendManagerViewController.xib */; };
+		1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCE217DB68B7004179E4 /* SettingOfNewMessageViewController.m */; };
+		1641CCE517DB68B7004179E4 /* SettingOfNewMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCE317DB68B7004179E4 /* SettingOfNewMessageViewController.xib */; };
+		1641CCE917DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCE717DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.m */; };
+		1641CCEA17DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCE817DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.xib */; };
+		1641CCEE17DB6A3B004179E4 /* SettingOfLimitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCEC17DB6A3A004179E4 /* SettingOfLimitViewController.m */; };
+		1641CCEF17DB6A3B004179E4 /* SettingOfLimitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCED17DB6A3A004179E4 /* SettingOfLimitViewController.xib */; };
 		1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20317C3A92D009A9E3F /* MyFriendViewController.m */; };
 		1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */; };
 		1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1649E20917C3A95D009A9E3F /* NearFriendViewController.m */; };
@@ -632,6 +642,21 @@
 		1641CCBE17DB0BE5004179E4 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		1641CCBF17DB0BE5004179E4 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_nickname_modify_bg.png; sourceTree = "<group>"; };
+		1641CCD617DB685E004179E4 /* SettingOfAddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfAddFriendViewController.h; sourceTree = "<group>"; };
+		1641CCD717DB685E004179E4 /* SettingOfAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfAddFriendViewController.m; sourceTree = "<group>"; };
+		1641CCD817DB685E004179E4 /* SettingOfAddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfAddFriendViewController.xib; sourceTree = "<group>"; };
+		1641CCDC17DB688F004179E4 /* SettingOfFriendManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfFriendManagerViewController.h; sourceTree = "<group>"; };
+		1641CCDD17DB688F004179E4 /* SettingOfFriendManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfFriendManagerViewController.m; sourceTree = "<group>"; };
+		1641CCDE17DB688F004179E4 /* SettingOfFriendManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfFriendManagerViewController.xib; sourceTree = "<group>"; };
+		1641CCE117DB68B7004179E4 /* SettingOfNewMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfNewMessageViewController.h; sourceTree = "<group>"; };
+		1641CCE217DB68B7004179E4 /* SettingOfNewMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfNewMessageViewController.m; sourceTree = "<group>"; };
+		1641CCE317DB68B7004179E4 /* SettingOfNewMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfNewMessageViewController.xib; sourceTree = "<group>"; };
+		1641CCE617DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfNetworkAndLimitViewController.h; sourceTree = "<group>"; };
+		1641CCE717DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfNetworkAndLimitViewController.m; sourceTree = "<group>"; };
+		1641CCE817DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfNetworkAndLimitViewController.xib; sourceTree = "<group>"; };
+		1641CCEB17DB6A3A004179E4 /* SettingOfLimitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfLimitViewController.h; sourceTree = "<group>"; };
+		1641CCEC17DB6A3A004179E4 /* SettingOfLimitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfLimitViewController.m; sourceTree = "<group>"; };
+		1641CCED17DB6A3A004179E4 /* SettingOfLimitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfLimitViewController.xib; sourceTree = "<group>"; };
 		1649E20217C3A92D009A9E3F /* MyFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendViewController.h; sourceTree = "<group>"; };
 		1649E20317C3A92D009A9E3F /* MyFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendViewController.m; sourceTree = "<group>"; };
 		1649E20417C3A92D009A9E3F /* MyFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFriendViewController.xib; sourceTree = "<group>"; };
@@ -1622,6 +1647,21 @@
 				18A0EA1117D6DC68004B8BB6 /* SettingOfFunctionViewController.h */,
 				18A0EA1217D6DC69004B8BB6 /* SettingOfFunctionViewController.m */,
 				18A0EA1317D6DC69004B8BB6 /* SettingOfFunctionViewController.xib */,
+				1641CCD617DB685E004179E4 /* SettingOfAddFriendViewController.h */,
+				1641CCD717DB685E004179E4 /* SettingOfAddFriendViewController.m */,
+				1641CCD817DB685E004179E4 /* SettingOfAddFriendViewController.xib */,
+				1641CCDC17DB688F004179E4 /* SettingOfFriendManagerViewController.h */,
+				1641CCDD17DB688F004179E4 /* SettingOfFriendManagerViewController.m */,
+				1641CCDE17DB688F004179E4 /* SettingOfFriendManagerViewController.xib */,
+				1641CCE117DB68B7004179E4 /* SettingOfNewMessageViewController.h */,
+				1641CCE217DB68B7004179E4 /* SettingOfNewMessageViewController.m */,
+				1641CCE317DB68B7004179E4 /* SettingOfNewMessageViewController.xib */,
+				1641CCE617DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.h */,
+				1641CCE717DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.m */,
+				1641CCE817DB6A23004179E4 /* SettingOfNetworkAndLimitViewController.xib */,
+				1641CCEB17DB6A3A004179E4 /* SettingOfLimitViewController.h */,
+				1641CCEC17DB6A3A004179E4 /* SettingOfLimitViewController.m */,
+				1641CCED17DB6A3A004179E4 /* SettingOfLimitViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2255,6 +2295,11 @@
 				18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */,
 				18A0EA1B17D6E0C2004B8BB6 /* umFeedback.bundle in Resources */,
 				1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */,
+				1641CCDA17DB685E004179E4 /* SettingOfAddFriendViewController.xib in Resources */,
+				1641CCE017DB688F004179E4 /* SettingOfFriendManagerViewController.xib in Resources */,
+				1641CCE517DB68B7004179E4 /* SettingOfNewMessageViewController.xib in Resources */,
+				1641CCEA17DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.xib in Resources */,
+				1641CCEF17DB6A3B004179E4 /* SettingOfLimitViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2402,6 +2447,11 @@
 				18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */,
 				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
 				CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */,
+				1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */,
+				1641CCDF17DB688F004179E4 /* SettingOfFriendManagerViewController.m in Sources */,
+				1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */,
+				1641CCE917DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.m in Sources */,
+				1641CCEE17DB6A3B004179E4 /* SettingOfLimitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
