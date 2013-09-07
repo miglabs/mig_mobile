@@ -180,7 +180,7 @@
     }
     
     if (_avAudioPlayer.playing) {
-        PLog(@"_avAudioPlayer is playing...");
+//        PLog(@"_avAudioPlayer is playing...");
     } else {
         PLog(@"_avAudioPlayer is not playing...");
     }

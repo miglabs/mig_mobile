@@ -261,12 +261,17 @@ static PPlayerManagerCenter *instance;
         [aaMusicPlayer play];
         _hasAddMoodRecord = NO;
         
+        NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:dicPlayerInfo];
         [SVProgressHUD showSuccessWithStatus:@"开始播放"];
         
     } else {
         
         [aaMusicPlayer playerDestory];
         _shouldStartPlayAfterDownloaded = YES;
+        
+        NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStop object:nil userInfo:dicPlayerInfo];
         [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
         
     }
@@ -354,7 +359,7 @@ static PPlayerManagerCenter *instance;
 -(void)aaMusicPlayerTimerFunction{
     
     //
-    PLog(@"aaMusicPlayerTimerFunction...");
+//    PLog(@"aaMusicPlayerTimerFunction...");
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (!_hasAddMoodRecord && aaMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {

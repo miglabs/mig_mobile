@@ -14,7 +14,7 @@
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
 
-@interface PlayerViewController : BaseViewController
+@interface PlayerViewController : BaseViewController<EGOImageButtonDelegate>
 
 //导航指针
 @property (nonatomic, retain) UIViewController *topViewcontroller;
@@ -35,5 +35,7 @@
 -(void)collectSongSuccess:(NSNotification *)tNotification;
 -(void)cancelCollectedSongFailed:(NSNotification *)tNotification;
 -(void)cancelCollectedSongSuccess:(NSNotification *)tNotification;
+-(void)playerStart:(NSNotification *)tNotification;
+-(void)playerStop:(NSNotification *)tNotification;
 
 @end

@@ -17,16 +17,39 @@
 
 @implementation NearMusicViewController
 
+@synthesize locationManager = _locationManager;
+
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
+
+@synthesize pageIndex = _pageIndex;
+@synthesize pageSize = _pageSize;
+@synthesize isLoadMore = _isLoadMore;
+@synthesize location = _location;
+
+@synthesize dataStatus = _dataStatus;
+
+@synthesize dicSelectedSongId = _dicSelectedSongId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearMusicFailed:) name:NotificationNameGetNearMusicFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearMusicSuccess:) name:NotificationNameGetNearMusicSuccess object:nil];
+        
+        
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetNearMusicFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetNearMusicSuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -52,33 +75,6 @@
     [self.view addSubview:bodyBgImageView];
     
     //body head
-    /*
-    UILabel *lblDesc = [[UILabel alloc] init];
-    lblDesc.frame = CGRectMake(16, 10, 140, 21);
-    lblDesc.backgroundColor = [UIColor clearColor];
-    lblDesc.font = [UIFont systemFontOfSize:15.0f];
-    lblDesc.text = @"优先推荐以下歌曲";
-    lblDesc.textAlignment = kTextAlignmentLeft;
-    lblDesc.textColor = [UIColor whiteColor];
-    
-    UIButton *btnEdit = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnEdit.frame = CGRectMake(230, 8, 58, 28);
-    UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
-    [btnEdit setImage:editNorImage forState:UIControlStateNormal];
-    
-    UIImageView *separatorImageView = [[UIImageView alloc] init];
-    separatorImageView.frame = CGRectMake(4, 45, 290, 1);
-    separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
-    
-    UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, 45 + 10, 297, 45);
-    [headerView addSubview:lblDesc];
-    [headerView addSubview:btnEdit];
-    [headerView addSubview:separatorImageView];
-    [self.view addSubview:headerView];
-    */
-    
-    //body head
     _bodyHeadMenuView = [[MusicBodyHeadMenuView alloc] initMusicBodyHeadMenuView];
     _bodyHeadMenuView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
     [self.view addSubview:_bodyHeadMenuView];
@@ -100,6 +96,15 @@
     _dataStatus = 1;
     _dicSelectedSongId = [[NSMutableDictionary alloc] init];
     
+    //gps
+    _locationManager = [[CLLocationManager alloc] init];
+    if ([CLLocationManager locationServicesEnabled]) {
+        [_locationManager setDelegate:self];
+        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [_locationManager startUpdatingLocation];
+    }
+    
     //
     [self loadData];
     
@@ -114,7 +119,7 @@
 -(void)loadData{
     
 //    [self loadNearMusicFromDatabase];
-    [self loadNearMusicFromServer];
+//    [self loadNearMusicFromServer:<#(NSString *)#>];
     
 }
 
@@ -128,14 +133,20 @@
     
 }
 
--(void)loadNearMusicFromServer{
+-(void)loadNearMusicFromServer:(NSString *)tLocation{
+    
+    if (!tLocation) {
+        return;
+    }
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
-//        [self.miglabAPI doGetNearbyUser:<#(NSString *)#> token:<#(NSString *)#> page:<#(int)#>];
+        _pageIndex = (_isLoadMore) ? _pageIndex++ : 0;
+        
+        [self.miglabAPI doGetNearMusic:userid token:accesstoken radius:@"1000" pageindex:[NSString stringWithFormat:@"%d", _pageIndex] pagesize:[NSString stringWithFormat:@"%d", _pageSize] location:tLocation];
         
     } else {
         
@@ -213,6 +224,72 @@
     
 }
 
+#pragma CLLocationManagerDelegate
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
+    PLog(@"[newLocation description]: %@", [newLocation description]);
+    
+    //取得经纬度
+    CLLocationCoordinate2D coordinate = newLocation.coordinate;
+    CLLocationDegrees gLatitude = coordinate.latitude;
+    CLLocationDegrees GLongitude = coordinate.longitude;
+    NSString *strLatitude = [NSString stringWithFormat:@"%g", gLatitude];
+    NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
+    NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
+    
+    [_locationManager stopUpdatingLocation];
+    
+    //
+    _location = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
+    [self loadNearMusicFromServer:_location];
+    
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
+}
+
+#pragma notification
+
+-(void)getNearMusicFailed:(NSNotification *)tNotification{
+    
+    PLog(@"getNearMusicFailed...");
+    
+    [SVProgressHUD showErrorWithStatus:@"附近的好音乐获取失败:("];
+    
+}
+
+-(void)getNearMusicSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getNearMusicSuccess...");
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSMutableArray *nearbyUserInfoList = [result objectForKey:@"result"];
+    int nearbyusercount = [nearbyUserInfoList count];
+    
+    _isLoadMore = (nearbyusercount == _pageSize);
+    
+    if (nearbyusercount > 0) {
+        
+        for (int i=0; i<nearbyusercount; i++) {
+            
+            NearMusicState *nms = [nearbyUserInfoList objectAtIndex:i];
+            [nms log];
+            
+        }
+        
+        if (_pageIndex == 0) {
+            [_dataList removeAllObjects];
+        }
+        [_dataList addObjectsFromArray:nearbyUserInfoList];
+        [_dataTableView reloadData];
+        
+    }
+    
+}
+
 #pragma mark - UITableView delegate
 
 // Called after the user changes the selection.
@@ -250,7 +327,8 @@
         [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
     }
     
-    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    NearMusicState *nms = [_dataList objectAtIndex:indexPath.row];
+    Song *tempsong = nms.song;
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];

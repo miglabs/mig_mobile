@@ -8,14 +8,23 @@
 
 #import "PlayerViewController.h"
 #import "MusicBodyHeadMenuView.h"
+#import <CoreLocation/CoreLocation.h>
 
 //附近的好音乐
-@interface NearMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+@interface NearMusicViewController : PlayerViewController<CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+//gps定位
+@property (nonatomic, retain) CLLocationManager *locationManager;
 
 @property (nonatomic, retain) MusicBodyHeadMenuView *bodyHeadMenuView;
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *dataList;
+
+@property (nonatomic, assign) int pageIndex;
+@property (nonatomic, assign) int pageSize;
+@property (nonatomic, assign) BOOL isLoadMore;
+@property (nonatomic, retain) NSString *location;   //gps坐标
 
 @property (nonatomic, assign) int dataStatus;       //1-normal，2-编辑
 
@@ -23,10 +32,10 @@
 
 -(void)loadData;
 -(void)loadNearMusicFromDatabase;
--(void)loadNearMusicFromServer;
+-(void)loadNearMusicFromServer:(NSString *)tLocation;
 
--(void)getCollectedSongsFailed:(NSNotification *)tNotification;
--(void)getCollectedSongsSuccess:(NSNotification *)tNotification;
+-(void)getNearMusicFailed:(NSNotification *)tNotification;
+-(void)getNearMusicSuccess:(NSNotification *)tNotification;
 
 -(IBAction)doSearch:(id)sender;
 

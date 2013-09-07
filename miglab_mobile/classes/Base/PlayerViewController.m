@@ -41,6 +41,7 @@
     
     //menu
     _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight - 73 - 10, 297, 73)];
+    _playerMenuView.btnAvatar.delegate = self;
     [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
     _playerMenuView.lblSongInfo.text = @"迷宫仙曲－乐瑟";
     [_playerMenuView.btnDelete addTarget:self action:@selector(doDelete:) forControlEvents:UIControlEventTouchUpInside];
@@ -78,6 +79,10 @@
     //doCancelCollectedSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongFailed:) name:NotificationNameDeleteCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelCollectedSongSuccess:) name:NotificationNameDeleteCollectSongSuccess object:nil];
+    
+    //doPlayOrPause
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStart:) name:NotificationNamePlayerStart object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStop:) name:NotificationNamePlayerStop object:nil];
     
     
     [self updateSongInfo];
@@ -122,6 +127,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
     
+    //doPlayOrPause
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStart object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStop object:nil];
     
 }
 
@@ -309,23 +317,25 @@
     }
     
     if (currentsong && currentsong.songname && currentsong.artist) {
-        [self configNowPlayingInfoCenter:currentsong];
+        [self configNowPlayingInfoCenter:currentsong artwork:nil];
     }
 
     
 }
 
--(void)configNowPlayingInfoCenter:(Song *)currentSong{
+-(void)configNowPlayingInfoCenter:(Song *)currentSong artwork:(UIImage *)tArtwork{
     
     if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
-        
-        UIImage *songcover = [_playerMenuView.btnAvatar imageForState:UIControlStateNormal];
         
         NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
         [dict setObject:currentSong.songname forKey:MPMediaItemPropertyTitle];
         [dict setObject:currentSong.artist forKey:MPMediaItemPropertyArtist];
-        MPMediaItemArtwork * mArt = [[MPMediaItemArtwork alloc] initWithImage:songcover];
-        [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
+        
+        if (tArtwork) {
+            MPMediaItemArtwork * mArt = [[MPMediaItemArtwork alloc] initWithImage:tArtwork];
+            [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
+        }
+        
         [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = nil;
         [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
         
@@ -375,6 +385,36 @@
     [_playerMenuView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
     
     [SVProgressHUD showSuccessWithStatus:@"取消收藏歌曲成功:)"];
+}
+
+-(void)playerStart:(NSNotification *)tNotification{
+    
+    PLog(@"playerStart...");
+    
+    [self updateSongInfo];
+    
+}
+
+-(void)playerStop:(NSNotification *)tNotification{
+    
+    PLog(@"playerStop...");
+    
+    [self updateSongInfo];
+    
+}
+
+#pragma EGOImageButtonDelegate
+
+- (void)imageButtonLoadedImage:(EGOImageButton*)imageButton{
+    
+    if (imageButton) {
+        
+        Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
+        UIImage *songcover = [_playerMenuView.btnAvatar imageForState:UIControlStateNormal];
+        [self configNowPlayingInfoCenter:currentsong artwork:songcover];
+        
+    }
+    
 }
 
 @end

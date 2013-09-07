@@ -10,6 +10,9 @@
 #import "PHttpDownloader.h"
 #import "PAAMusicPlayer.h"
 
+#define NotificationNamePlayerStart             @"NotificationNamePlayerStart"
+#define NotificationNamePlayerStop              @"NotificationNamePlayerStop"
+
 typedef enum{
     
     WhichPlayer_AVPlayer = 0,

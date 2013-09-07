@@ -48,6 +48,8 @@
 
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
+#define PAGE_SIZE                           20
+
 /*
  * 用于切换不同域名地址
  */
