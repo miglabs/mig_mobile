@@ -263,4 +263,9 @@
 #define NotificationNameGetSongInfoSuccess                  @"NotificationNameGetSongInfoSuccess"
 #define NotificationNameGetSongInfoFailed                   @"NotificationNameGetSongInfoFailed"
 
+//附近人的音乐
+#define HTTP_GETNEARMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/nearmusic.fcgi"]
+#define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"
+#define NotificationNameGetNearMusicFailed                  @"NotificationNameGetNearMusicFailed"
+
 #endif

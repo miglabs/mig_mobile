@@ -2540,4 +2540,86 @@
     [operation start];
 }
 
+/*
+ 附近人的音乐
+ GET
+ HTTP_GETNEARMUSIC
+ */
+-(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&page_index=%@&page_size=%@&location=%@", HTTP_GETNEARMUSIC, uid, ttoken, tradius, tpageindex, tpagesize, tlocation];
+    PLog(@"get near music url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        bool SuccessButNULL = false; // 0:failed, 1:succeeded but null
+       
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"do get near music operation succeeded");
+                
+                SuccessButNULL = true;
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                NSArray* nearmusicstate = [dicTemp objectForKey:@"nearUser"];
+                int nmscount = [nearmusicstate count];
+                
+                NSMutableArray* nmsInfos = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<nmscount; i++) {
+                    
+                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[nearmusicstate objectAtIndex:i]];
+                    
+                    [nmsInfos addObject:nms];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:nmsInfos, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"do get near music operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            if (SuccessButNULL) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:nil];
+            }
+            else {
+                
+                NSString* msg = @"解析返回数据失败";
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:dicResult];
+                
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get near music failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearMusicFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
 @end

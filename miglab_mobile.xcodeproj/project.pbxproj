@@ -398,6 +398,7 @@
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DC17DB540000E3BA90 /* NearMusicState.m */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
 /* End PBXBuildFile section */
@@ -939,6 +940,8 @@
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CBB425DB17DB540000E3BA90 /* NearMusicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicState.h; sourceTree = "<group>"; };
+		CBB425DC17DB540000E3BA90 /* NearMusicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicState.m; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
@@ -1264,6 +1267,8 @@
 				CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */,
 				CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */,
 				CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */,
+				CBB425DB17DB540000E3BA90 /* NearMusicState.h */,
+				CBB425DC17DB540000E3BA90 /* NearMusicState.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2396,6 +2401,7 @@
 				18A0EA0F17D6DBAC004B8BB6 /* SettingOfPrivacyViewController.m in Sources */,
 				18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */,
 				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
+				CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

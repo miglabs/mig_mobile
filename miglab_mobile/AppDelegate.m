@@ -278,8 +278,11 @@
         
     }
     
+    
+    [miglabAPI doGetNearMusic:@"1" token:@"2" radius:@"10000" pageindex:@"1" pagesize:@"5" location:@"30.30022,120.127393"];
+    //[miglabAPI doDeleteCollectedSong:@"1" token:@"2" songid:@"22869"];
     //[miglabAPI doGetSongInfo:@"1" token:@"2" songid:@"22869"];
-    [miglabAPI doRecordCurrentSong:@"1" token:@"2" lastsong:@"22869" cursong:@"22869" mode:@"1" typeid:@"1" name:@"hehh" singer:@"archer" state:@"1"];
+    //[miglabAPI doRecordCurrentSong:@"1" token:@"2" lastsong:@"22869" cursong:@"22869" mode:@"1" typeid:@"1" name:@"hehh" singer:@"archer" state:@"1"];
     
     
     //[miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
