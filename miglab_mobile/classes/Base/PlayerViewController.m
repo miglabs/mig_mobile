@@ -301,7 +301,17 @@
     
     Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
     _playerMenuView.btnAvatar.imageURL = [NSURL URLWithString:currentsong.coverurl];
-    _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];
+    
+    if (currentsong.songname && currentsong.artist) {
+        _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];
+    } else if (currentsong.songname) {
+        _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@", currentsong.songname];
+    } else if (currentsong.artist) {
+        _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@", currentsong.artist];
+    } else {
+        _playerMenuView.lblSongInfo.text = @"无敌仙曲－乐瑟乐瑟";
+    }
+    
     
     int isLike = [currentsong.like intValue];
     if (isLike > 0) {

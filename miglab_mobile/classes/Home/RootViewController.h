@@ -27,6 +27,7 @@
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(IBAction)segmentAction:(id)sender;
+-(void)doUpdateView:(int)viewtag;
 -(UIViewController *)getControllerBySegIndex:(int)segindex;
 
 //登录，获取用户资料

@@ -162,6 +162,9 @@
     //start gps
     [_locationManager startUpdatingLocation];
     
+    //
+    [self doUpdateView:_currentShowViewTag];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -263,6 +266,12 @@
     _currentShowViewTag = tempButton.tag;
     NSLog(@"_currentShowViewTag: %d", _currentShowViewTag);
     
+    [self doUpdateView:_currentShowViewTag];
+    
+}
+
+-(void)doUpdateView:(int)viewtag{
+    
     //remove
     UIView *oldShowView = [self.view viewWithTag:999];
     [oldShowView removeFromSuperview];
@@ -286,6 +295,7 @@
             if (controller) {
                 //update
                 GeneViewController *oldGene = (GeneViewController *)controller;
+                [oldGene viewWillAppear:YES];
                 
             } else {
                 
@@ -304,6 +314,7 @@
             if (controller) {
                 //update
                 MusicViewController *oldMusic = (MusicViewController *)controller;
+                [oldMusic viewWillAppear:YES];
                 
             } else {
                 
@@ -321,6 +332,7 @@
             if (controller) {
                 //update
                 FriendViewController *oldFriend = (FriendViewController *)controller;
+                [oldFriend viewWillAppear:YES];
                 
             } else {
                 

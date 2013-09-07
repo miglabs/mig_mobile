@@ -75,6 +75,8 @@
     _commentPlayerView.frame = CGRectMake(11.5, 45 + 10, 297, 110);
     [self.view addSubview:_commentPlayerView];
     
+    _commentPlayerView.btnAvatar.layer.cornerRadius = 38;
+    _commentPlayerView.btnAvatar.layer.masksToBounds = YES;
     _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
     _commentPlayerView.lblSongName.text = _song.songname;
     _commentPlayerView.lblSongArtist.text = _song.artist;
