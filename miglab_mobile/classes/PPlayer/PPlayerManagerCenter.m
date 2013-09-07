@@ -365,14 +365,14 @@ static PPlayerManagerCenter *instance;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *templastsongid = (_lastSongId && _lastSongId.length > 0) ? _lastSongId : @"0";
         NSString *tempcurrentsongid = [NSString stringWithFormat:@"%lld", _currentSong.songid];
-        NSString *mood  = [NSString stringWithFormat:@"%@", _currentSong.type];
+        NSString *mode  = [NSString stringWithFormat:@"%@", _currentSong.type];
         NSString *typeid = [NSString stringWithFormat:@"%d", _currentSong.tid];
         NSString *tempcurrentsongname = _currentSong.songname;
         NSString *tempcurrentartist = _currentSong.artist;
         NSString *networkstatus = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].networkStatus];
         
         MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-        [miglabAPI doRecordCurrentSong:userid token:accesstoken lastsong:templastsongid cursong:tempcurrentsongid mood:mood typeid:typeid name:tempcurrentsongname singer:tempcurrentartist state:networkstatus];
+        [miglabAPI doRecordCurrentSong:userid token:accesstoken lastsong:templastsongid cursong:tempcurrentsongid mode:mode typeid:typeid name:tempcurrentsongname singer:tempcurrentartist state:networkstatus];
         
     }
     
