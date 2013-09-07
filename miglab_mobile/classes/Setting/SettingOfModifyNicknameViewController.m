@@ -7,6 +7,7 @@
 //
 
 #import "SettingOfModifyNicknameViewController.h"
+#import "UserSessionManager.h"
 
 @interface SettingOfModifyNicknameViewController ()
 
@@ -15,6 +16,7 @@
 @implementation SettingOfModifyNicknameViewController
 
 @synthesize nicknameTextField = _nicknameTextField;
+@synthesize lblErrorMessage = _lblErrorMessage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +39,10 @@
     self.bgImageView.hidden = YES;
     
     //body
-    
+    _nicknameTextField.delegate = self;
+    _nicknameTextField.returnKeyType = UIReturnKeyDone;
+    _nicknameTextField.textColor = [UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f];
+    _nicknameTextField.text = [UserSessionManager GetInstance].currentUser.nickname;
     
 }
 
@@ -51,6 +56,23 @@
     
     PLog(@"doSaveNickname...");
     
+}
+
+-(IBAction)doHideKeyBoard:(id)sender{
+    
+    PLog(@"doHideKeyBoard...");
+    
+    [_nicknameTextField resignFirstResponder];
+    
+}
+
+#pragma UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self doSaveNickname:nil];
+    
+    return YES;
 }
 
 @end

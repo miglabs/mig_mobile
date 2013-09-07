@@ -8,10 +8,12 @@
 
 #import "BaseViewController.h"
 
-@interface SettingOfModifyNicknameViewController : BaseViewController
+@interface SettingOfModifyNicknameViewController : BaseViewController<UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
+@property (nonatomic, retain) IBOutlet UILabel *lblErrorMessage;
 
 -(IBAction)doSaveNickname:(id)sender;
+-(IBAction)doHideKeyBoard:(id)sender;
 
 @end
