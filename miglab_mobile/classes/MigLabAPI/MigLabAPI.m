@@ -1627,7 +1627,7 @@
  HTTP_SEARCHNEARBY
  GET
  */
--(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius{
+-(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius {
     
     NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&location=%@&radius=%d", HTTP_SEARCHNEARBY, ttoken, uid, tlocation, tradius];
     PLog(@"search nearby url: %@", url);
@@ -2046,6 +2046,8 @@
     if(tsong != nil) {
         
         NSString* songcontent = [NSString stringWithFormat:@"{\"music\":[{\"name\":\"%@\",\"singer\":\"%@\"}]}", tsong.songname, tsong.artist];
+
+        PLog(@"do record local song single: %@", songcontent);
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:songcontent];
     }
@@ -2075,6 +2077,8 @@
         }
         
         NSString* tcontent = [NSString stringWithFormat:@"{\"music\":[%@]}", maincontent];
+        
+        PLog(@"do record local song array: %@", tcontent);
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:tcontent];
     }
@@ -2182,13 +2186,13 @@
  <!--请求POST-->
  HTTP_RECORDCURSONG
  */
--(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood typeid:(NSString*)ttypeid name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
     
     PLog(@"record current song url: %@", HTTP_RECORDCURSONG);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_RECORDCURSONG]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&lastsong=%@&cursong=%@&mood=%@&name=%@&singer=%@&state=%@", uid, ttoken, tlastsong, tcursong, tmood, tname, tsinger, tstate];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&lastsong=%@&cursong=%@&mood=%@&name=%@&singer=%@&state=%@&typeid=%@", uid, ttoken, tlastsong, tcursong, tmood, tname, tsinger, tstate, ttypeid];
     PLog(@"record current song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
@@ -2411,6 +2415,126 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCollectAndNearNumFailed object:nil userInfo:nil];
         
+    }];
+    
+    [operation start];
+}
+
+/*
+ 删除收藏歌曲
+ POST
+ HTTP_DELETECOLLECTSONG
+ */
+-(void)doDeleteCollectedSong:(NSString*)uid token:(NSString *)ttoken songid:(NSString*)tsongid {
+    
+    PLog(@"delete collect song url: %@", HTTP_DELETECOLLECTSONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_DELETECOLLECTSONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@", uid, ttoken, tsongid];
+    PLog(@"delete collect song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"delete collect song operation succeed");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"delete collect song operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"delete collect song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDeleteCollectSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取歌曲信息
+ GET
+ HTTP_GETSONGINFO
+ */
+-(void)doGetSongInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@", HTTP_GETSONGINFO, uid, ttoken, tsongid];
+    PLog(@"get song info url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get song info operation succeeded");
+                
+                Song* song = [Song initWithNSDictionary:[dicJson objectForKey:@"song"]];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:song, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get song info operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:dicResult];
+        }
+     
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get song info failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongInfoFailed object:nil userInfo:nil];
     }];
     
     [operation start];

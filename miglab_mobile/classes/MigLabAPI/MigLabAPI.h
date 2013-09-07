@@ -111,7 +111,7 @@ typedef enum {
 /*
  记录用户试听歌曲状态
  */
--(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
+-(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mood:(NSString*)tmood typeid:(NSString*)ttypeid name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate;
 
 /*
  更新音乐纬度配置文件
@@ -133,6 +133,15 @@ typedef enum {
  */
 -(void)doCollectAndNearNum:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
 
+/*
+ 删除收藏歌曲
+ */
+-(void)doDeleteCollectedSong:(NSString*)uid token:(NSString *)ttoken songid:(NSString*)tsongid;
+
+/*
+ 获取歌曲信息
+ */
+-(void)doGetSongInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid;
 
 /****************************************推送接口*******************************************/
 
@@ -144,13 +153,23 @@ typedef enum {
 
 /****************************************社交接口*******************************************/
 
+/*
+ 设置用户位置 (2013-7-22)
+ */
+-(void)doSetUserPos:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation;
+
+/*
+ 查找附近的人 (2013-7-22)
+ */
+-(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
+
+/*
+ 赠送歌曲
+ */
+-(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
 
 /****************************************保留接口*******************************************/
 
-/*
- 取消歌曲收藏
- */
--(void)doCancelCollectedSong:(NSString*)ttoken uid:(NSString *)tuid songid:(long)tsongid;
 
 /*
  分享歌曲
@@ -206,20 +225,5 @@ typedef enum {
  提交用户当前状态
  */
 -(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid;
-
-/*
- 设置用户位置 (2013-7-22)
- */
--(void)doSetUserPos:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation;
-
-/*
- 查找附近的人 (2013-7-22)
- */
--(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius;
-
-/*
- 赠送歌曲
- */
--(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString*)ttoken sid:(long)tsid;
 
 @end

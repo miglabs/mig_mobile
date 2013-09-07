@@ -26,6 +26,8 @@
 @synthesize collectnum = _collectnum;
 @synthesize commentnum = _commentnum;
 @synthesize hot = _hot;
+@synthesize type = _type;
+@synthesize tid = _tid;
 
 @synthesize songCachePath = _songCachePath;
 
@@ -55,6 +57,8 @@
             song.collectnum = [[dict objectForKey:@"clt"] intValue];
             song.commentnum = [[dict objectForKey:@"cmt"] intValue];
             song.hot = [[dict objectForKey:@"hot"] longLongValue];
+            song.type = [dict objectForKey:@"type"];
+            song.tid = [[dict objectForKey:@"tid"] intValue];
             
         }
         
@@ -68,7 +72,7 @@
 
 -(void)log{
     
-    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d), songtype(%d), collectnum(%d), commentnum(%d), hot(%lld)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid, _songtype, _collectnum, _commentnum, _hot);
+    PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d), songtype(%d), collectnum(%d), commentnum(%d), hot(%lld), type(%@), tid(%d)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid, _songtype, _collectnum, _commentnum, _hot, _type, _tid);
     
 }
 

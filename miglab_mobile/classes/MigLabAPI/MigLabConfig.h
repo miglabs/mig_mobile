@@ -253,4 +253,14 @@
 #define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
 #define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
 
+//删除收藏歌曲
+#define HTTP_DELETECOLLECTSONG                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/delcltsong.fcgi"]
+#define NotificationNameDeleteCollectSongSuccess            @"NotificationNameDeleteCollectSongSuccess"
+#define NotificationNameDeleteCollectSongFailed             @"NotificationNameDeleteCollectSongFailed"
+
+//获取歌曲信息
+#define HTTP_GETSONGINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getsonginfo.fcgi"]
+#define NotificationNameGetSongInfoSuccess                  @"NotificationNameGetSongInfoSuccess"
+#define NotificationNameGetSongInfoFailed                   @"NotificationNameGetSongInfoFailed"
+
 #endif
