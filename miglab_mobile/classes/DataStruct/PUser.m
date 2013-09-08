@@ -21,6 +21,7 @@
 @synthesize age = _age;
 @synthesize source = _source;
 @synthesize head = _head;
+@synthesize token = _token;
 
 @synthesize mainAccount = _mainAccount;
 @synthesize account2 = _account2;
@@ -46,6 +47,7 @@
             user.age = [[dict objectForKey:@"age"] intValue];
             user.source = [[dict objectForKey:@"source"] intValue];
             user.head = [dict objectForKey:@"head"];
+            user.token = [dict objectForKey:@"token"];
             
         }
         
@@ -59,7 +61,7 @@
 
 -(void)log{
     
-    PLog(@"Print User: username(%@), password(%@), userid(%@), nickname(%@), gender(%d), type(%d), birthday(%@), location(%@), age(%d), source(%d), head(%@)", _username, _password, _userid, _nickname, _gender, _type, _birthday, _location, _age, _source, _head);
+    PLog(@"Print User: username(%@), password(%@), userid(%@), nickname(%@), gender(%d), type(%d), birthday(%@), location(%@), age(%d), source(%d), head(%@), token(%@)", _username, _password, _userid, _nickname, _gender, _type, _birthday, _location, _age, _source, _head, _token);
     
 }
 

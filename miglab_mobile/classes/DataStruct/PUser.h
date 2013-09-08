@@ -22,6 +22,7 @@
 @property (nonatomic, assign) int age;
 @property (nonatomic, assign) int source;
 @property (nonatomic, retain) NSString *head;
+@property (nonatomic, retain) NSString* token;
 
 @property (nonatomic, retain) AccountOf3rdParty *mainAccount;
 @property (nonatomic, retain) AccountOf3rdParty *account2;
