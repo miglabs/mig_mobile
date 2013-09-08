@@ -258,7 +258,7 @@
  <!--请求POST-->
  HTTP_REGISTER
  */
--(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype{
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession sex:(NSString*)tsex {
     
     NSString* registerUrl = HTTP_REGISTER;
     PLog(@"registerUrl: %@", registerUrl);
@@ -266,7 +266,7 @@
     NSURL* url = [NSURL URLWithString:registerUrl];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
-    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d", tusername, tpassword, tnickname, tsourcetype];
+    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d&session=%@&sex=%@", tusername, tpassword, tnickname, tsourcetype, tsession, tsex];
     PLog(@"httpBody: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
@@ -328,6 +328,18 @@
     
     [operation start];
     
+}
+
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype {
+    
+    if( SourceTypeMiglab == tsourcetype) {
+        
+        NSString* sex = @"";
+        NSString* tsession = @"";
+        tnickname = @"";
+        
+        [self doRegister:tusername password:tpassword nickname:tnickname source:tsourcetype session:tsession sex:sex];
+    }
 }
 
 /*
