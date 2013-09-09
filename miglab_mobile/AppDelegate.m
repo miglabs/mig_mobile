@@ -250,7 +250,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     //api test
-    /*
+    
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
@@ -276,16 +276,13 @@
         [miglabAPI doGetDefaultGuestSongs];
         
     }
-    */
     
-<<<<<<< HEAD
+    
     //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
-    [miglabAPI doGetSongComment:@"1" token:@"2" songid:@"22869" count:@"1" fromid:@"1"];
+    [miglabAPI doGetSongComment:@"1" token:@"2" songid:@"12323" count:@"1" fromid:@"1"];
     //[miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
-=======
     
 //    [miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
->>>>>>> 2d584983f996bb02db32fd8498475d5708f44b3e
     //[miglabAPI doGetNearMusic:@"1" token:@"2" radius:@"10000" pageindex:@"1" pagesize:@"5" location:@"30.30022,120.127393"];
     //[miglabAPI doDeleteCollectedSong:@"1" token:@"2" songid:@"22869"];
     //[miglabAPI doGetSongInfo:@"1" token:@"2" songid:@"22869"];

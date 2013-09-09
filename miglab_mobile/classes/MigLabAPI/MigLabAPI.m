@@ -2721,7 +2721,7 @@
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
                 NSString* tsongid = [dicTemp objectForKey:@"songid"];
                 
-                NSArray* comments = [dicJson objectForKey:@"comments"];
+                NSArray* comments = [dicTemp objectForKey:@"comments"];
                 int commentcount = [comments count];
                 
                 NSMutableArray* commentInfo = [[NSMutableArray alloc] init];
