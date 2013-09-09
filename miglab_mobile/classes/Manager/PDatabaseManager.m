@@ -41,7 +41,7 @@
         //user info
         [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text, userid integer, accesstoken text, accounttype integer, logintime integer)"];
         
-        [_db executeUpdate:@"create table if not exists USER_INFO (accountid text not null, userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text, token text)"];
+        [_db executeUpdate:@"create table if not exists USER_INFO (accountid text not null, userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text, token text, logintime integer)"];
         
         //song cache
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
@@ -147,7 +147,7 @@
     NSNumber *numAccountType = [NSNumber numberWithInt:taccounttype];
     NSNumber *numLoginTime = [NSNumber numberWithLong:loginTime];
     
-    NSString *sql = @"insert into USER_ACCOUNT (username, password, userid, accesstoken, accounttype, logintime) values (?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into USER_ACCOUNT (password, userid, accesstoken, accounttype, logintime, username) values (?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
@@ -158,12 +158,12 @@
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
-        sql = @"update USER_ACCOUNT set username = ? , password = ? , userid = ? , accesstoken = ? , accounttype = ? , logintime = ? ";
+        sql = @"update USER_ACCOUNT set password = ? , userid = ? , accesstoken = ? , accounttype = ? , logintime = ? where username = ? ";
         PLog(@"sql: %@", sql);
         break;
     }
     
-    [_db executeUpdate:sql, encodeUsername, encodePassword, tuserid, taccesstoken, numAccountType, numLoginTime];
+    [_db executeUpdate:sql, encodePassword, tuserid, taccesstoken, numAccountType, numLoginTime, encodeUsername];
     [_db close];
     
 }
@@ -243,12 +243,12 @@
     NSNumber *numAccountType = [NSNumber numberWithInt:tuser.source];
     
     
-    NSString *sql = @"insert into USER_INFO (accountid, userid, username, nickname, gender, type, birthday, location, age, source, head, token, logintime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into USER_INFO (userid, username, nickname, gender, type, birthday, location, age, source, head, token, logintime, accountid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     [_db open];
     
-    NSString *checksql = [NSString stringWithFormat:@"select username from USER_INFO where accountid = '%@' ", taccountid];
+    NSString *checksql = [NSString stringWithFormat:@"select userid from USER_INFO where accountid = '%@' ", taccountid];
     PLog(@"checksql: %@", checksql);
     
     FMResultSet *rs = [_db executeQuery:checksql];
@@ -259,7 +259,13 @@
         break;
     }
     
-    [_db executeUpdate:sql, tuser.userid, tuser.username, tuser.nickname, numGender, numType, tuser.birthday, tuser.location, numAge, numAccountType, tuser.head, tuser.token, numLoginTime, taccountid];
+    BOOL isOk = [_db executeUpdate:sql, tuser.userid, tuser.username, tuser.nickname, numGender, numType, tuser.birthday, tuser.location, numAge, numAccountType, tuser.head, tuser.token, numLoginTime, taccountid];
+    if (isOk) {
+        PLog(@"insertUserInfo success...");
+    } else {
+        PLog(@"insertUserInfo failure...");
+    }
+    
     [_db close];
     
 }

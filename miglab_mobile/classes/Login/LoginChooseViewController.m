@@ -182,6 +182,10 @@
         tempUser.source = SourceTypeSinaWeibo;
         
         [databaseManager insertUserInfo:tempUser accountId:tempUser.sinaAccount.accountid];
+        [databaseManager insertUserAccout:tempUser.sinaAccount.username password:tempUser.sinaAccount.username userid:tempUser.sinaAccount.accountid accessToken:tempUser.sinaAccount.accesstoken accountType:tempUser.sinaAccount.accounttype];
+        
+        PUser *checkuser = [databaseManager getUserInfoByAccountId:tempUser.sinaAccount.accountid];
+        [checkuser log];
         
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
         
@@ -191,6 +195,7 @@
         tempUser.source = SourceTypeTencentWeibo;
         
         [databaseManager insertUserInfo:tempUser accountId:tempUser.tencentAccount.accountid];
+        [databaseManager insertUserAccout:tempUser.tencentAccount.username password:tempUser.tencentAccount.username userid:tempUser.tencentAccount.accountid accessToken:tempUser.tencentAccount.accesstoken accountType:tempUser.tencentAccount.accounttype];
         
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
         
@@ -200,6 +205,7 @@
         tempUser.source = SourceTypeDouBan;
         
         [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
+        [databaseManager insertUserAccout:tempUser.doubanAccount.username password:tempUser.doubanAccount.username userid:tempUser.doubanAccount.accountid accessToken:tempUser.doubanAccount.accesstoken accountType:tempUser.doubanAccount.accounttype];
         
     }
     
@@ -207,9 +213,6 @@
     [UserSessionManager GetInstance].userid = tempUser.userid;
     [UserSessionManager GetInstance].accesstoken = tempUser.token;
     [UserSessionManager GetInstance].isLoggedIn = YES;
-    
-    
-    [databaseManager insertUserAccout:tempUser.username password:tempUser.username userid:tempUser.userid accessToken:tempUser.token accountType:tempUser.source];
     
     //go back
     [self doBack:nil];
