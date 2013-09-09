@@ -23,9 +23,9 @@
 @synthesize head = _head;
 @synthesize token = _token;
 
-@synthesize mainAccount = _mainAccount;
-@synthesize account2 = _account2;
-@synthesize account3 = _account3;
+@synthesize sinaAccount = _sinaAccount;
+@synthesize tencentAccount = _tencentAccount;
+@synthesize doubanAccount = _doubanAccount;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict{
     
@@ -62,6 +62,9 @@
 -(void)log{
     
     PLog(@"Print User: username(%@), password(%@), userid(%@), nickname(%@), gender(%d), type(%d), birthday(%@), location(%@), age(%d), source(%d), head(%@), token(%@)", _username, _password, _userid, _nickname, _gender, _type, _birthday, _location, _age, _source, _head, _token);
+    [_sinaAccount log];
+    [_tencentAccount log];
+    [_doubanAccount log];
     
 }
 

@@ -24,9 +24,9 @@
 @property (nonatomic, retain) NSString *head;
 @property (nonatomic, retain) NSString* token;
 
-@property (nonatomic, retain) AccountOf3rdParty *mainAccount;
-@property (nonatomic, retain) AccountOf3rdParty *account2;
-@property (nonatomic, retain) AccountOf3rdParty *account3;
+@property (nonatomic, retain) AccountOf3rdParty *sinaAccount;
+@property (nonatomic, retain) AccountOf3rdParty *tencentAccount;
+@property (nonatomic, retain) AccountOf3rdParty *doubanAccount;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict;
 -(void)log;

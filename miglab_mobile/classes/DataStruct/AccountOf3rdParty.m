@@ -15,10 +15,12 @@
 @synthesize accounttype = _accounttype;
 @synthesize accountid = _accountid;
 @synthesize accesstoken = _accesstoken;
+@synthesize expirationdate = _expirationdate;
+@synthesize strexpirationdate = _strexpirationdate;
 
 -(void)log{
     
-    PLog(@"Print AccountOf3rdParty: username(%@), password(%@), accounttype(%d), accountid(%@), accesstoken(%@)", _username, _password, _accounttype, _accountid, _accesstoken);
+    PLog(@"Print AccountOf3rdParty: username(%@), password(%@), accounttype(%d), accountid(%@), accesstoken(%@), expirationdate(%@), strexpirationdate(%@)", _username, _password, _accounttype, _accountid, _accesstoken, _expirationdate, _strexpirationdate);
     
 }
 

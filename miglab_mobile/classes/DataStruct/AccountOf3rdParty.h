@@ -15,6 +15,8 @@
 @property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) NSString *accountid;
 @property (nonatomic, retain) NSString *accesstoken;
+@property (nonatomic, retain) NSDate *expirationdate;
+@property (nonatomic, retain) NSString *strexpirationdate;
 
 -(void)log;
 
