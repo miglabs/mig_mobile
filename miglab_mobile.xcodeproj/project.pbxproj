@@ -409,6 +409,7 @@
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DC17DB540000E3BA90 /* NearMusicState.m */; };
+		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
 /* End PBXBuildFile section */
@@ -967,6 +968,8 @@
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CBB425DB17DB540000E3BA90 /* NearMusicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicState.h; sourceTree = "<group>"; };
 		CBB425DC17DB540000E3BA90 /* NearMusicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicState.m; sourceTree = "<group>"; };
+		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
+		CBB425DF17DE18C400E3BA90 /* SongComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongComment.m; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
@@ -1294,6 +1297,8 @@
 				CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */,
 				CBB425DB17DB540000E3BA90 /* NearMusicState.h */,
 				CBB425DC17DB540000E3BA90 /* NearMusicState.m */,
+				CBB425DE17DE18C400E3BA90 /* SongComment.h */,
+				CBB425DF17DE18C400E3BA90 /* SongComment.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2452,6 +2457,7 @@
 				1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */,
 				1641CCE917DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.m in Sources */,
 				1641CCEE17DB6A3B004179E4 /* SettingOfLimitViewController.m in Sources */,
+				CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

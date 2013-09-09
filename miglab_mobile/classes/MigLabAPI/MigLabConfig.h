@@ -270,4 +270,14 @@
 #define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"
 #define NotificationNameGetNearMusicFailed                  @"NotificationNameGetNearMusicFailed"
 
+// 评论歌曲
+#define HTTP_COMMENTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/commentsong.fcgi"]
+#define NotificationNameCommentSongSuccess                  @"NotificationNameCommentSongSuccess"
+#define NotificationNameCommentSongFailed                   @"NotificationNameCommentSongFailed"
+
+// 获取歌曲评论
+#define HTTP_GETCOMMENT                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/get_comment.fcgi"]
+#define NotificationNameGetCommentSuccess                  @"NotificationNameGetCommentSuccess"
+#define NotificationNameGetCommentFailed                   @"NotificationNameGetCommentFailed"
+
 #endif
