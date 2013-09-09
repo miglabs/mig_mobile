@@ -71,7 +71,7 @@
     if (strEMail && strPassword) {
         
         MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-        [miglabAPI doRegister:strEMail password:strPassword nickname:strEMail source:0];
+        [miglabAPI doRegister:strEMail password:strPassword nickname:strEMail source:SourceTypeMiglab];
         
     }
     

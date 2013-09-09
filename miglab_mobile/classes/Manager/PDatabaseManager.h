@@ -13,6 +13,7 @@
 #import "Song.h"
 #import "SongDownloadManager.h"
 #import "Word.h"
+#import "PUser.h"
 
 @interface PDatabaseManager : PFileManager
 
@@ -35,6 +36,15 @@
 -(void)deleteUserAccountByUserName:(NSString *)tusername;
 //清空账号
 -(void)deleteAllUserAccount;
+
+//记录用户信息
+-(void)insertUserInfo:(PUser *)tuser accountId:(NSString *)taccountid;
+//根据第三方唯一taccountid获取用户信息
+-(PUser *)getUserInfoByAccountId:(NSString *)taccountid;
+//根据第三方唯一taccountid删除用户信息
+-(void)deleteUserInfoByAccountId:(NSString *)taccountid;
+//清空用户信息
+-(void)deleteAllUserInfo;
 
 /*
  记录请求歌曲返回数据结果

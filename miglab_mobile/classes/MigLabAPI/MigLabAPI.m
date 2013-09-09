@@ -2701,7 +2701,7 @@
  */
 -(void)doGetSongComment:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid count:(NSString*)tcount fromid:(NSString*)tfromid {
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@count=%@&fromid=%@", HTTP_GETCOMMENT, uid, ttoken, tsongid, tcount, tfromid];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&count=%@&fromid=%@", HTTP_GETCOMMENT, uid, ttoken, tsongid, tcount, tfromid];
     PLog(@"get song comment url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

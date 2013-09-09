@@ -40,7 +40,8 @@
         
         //user info
         [_db executeUpdate:@"create table if not exists USER_ACCOUNT (username text not null, password text, userid integer, accesstoken text, accounttype integer, logintime integer)"];
-        [_db executeUpdate:@"create table if not exists USER_INFO (userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text)"];
+        
+        [_db executeUpdate:@"create table if not exists USER_INFO (accountid text not null, userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text, token text)"];
         
         //song cache
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
@@ -218,6 +219,115 @@
 -(void)deleteAllUserAccount{
     
     NSString *sql = @"delete from USER_ACCOUNT";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+//记录用户信息
+-(void)insertUserInfo:(PUser *)tuser accountId:(NSString *)taccountid{
+    
+    if (!tuser) {
+        return;
+    }
+    
+    NSDate *nowDate = [NSDate date];
+    long loginTime = [nowDate timeIntervalSince1970];
+    NSNumber *numLoginTime = [NSNumber numberWithLong:loginTime];
+    NSNumber *numGender = [NSNumber numberWithInt:tuser.gender];
+    NSNumber *numType = [NSNumber numberWithInt:tuser.type];
+    NSNumber *numAge = [NSNumber numberWithInt:tuser.age];
+    NSNumber *numAccountType = [NSNumber numberWithInt:tuser.source];
+    
+    
+    NSString *sql = @"insert into USER_INFO (accountid, userid, username, nickname, gender, type, birthday, location, age, source, head, token, logintime) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select username from USER_INFO where accountid = '%@' ", taccountid];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        sql = @"update USER_INFO set userid = ? , username = ? , nickname = ? , gender = ? , type = ? , birthday = ? , location = ? , age = ? , source = ? , head = ? , token = ? , logintime = ? where accountid = ? ";
+        PLog(@"sql: %@", sql);
+        break;
+    }
+    
+    [_db executeUpdate:sql, tuser.userid, tuser.username, tuser.nickname, numGender, numType, tuser.birthday, tuser.location, numAge, numAccountType, tuser.head, tuser.token, numLoginTime, taccountid];
+    [_db close];
+    
+}
+
+//根据第三方唯一taccountid获取用户信息
+-(PUser *)getUserInfoByAccountId:(NSString *)taccountid{
+    
+    PUser *tempuser = nil;
+    
+    NSString *sql = [NSString stringWithFormat:@"select userid, username, nickname, gender, type, birthday, location, age, source, head, token from USER_INFO where accountid = '%@' ", taccountid];
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        NSString *puserid = [rs stringForColumn:@"userid"];
+        NSString *pusername = [rs stringForColumn:@"username"];
+        NSString *pnickname = [rs stringForColumn:@"nickname"];
+        int pgender = [rs intForColumn:@"gender"];
+        int ptype = [rs intForColumn:@"type"];
+        NSString *pbirthday = [rs stringForColumn:@"birthday"];
+        NSString *plocation = [rs stringForColumn:@"location"];
+        int page = [rs intForColumn:@"age"];
+        int psource = [rs intForColumn:@"source"];
+        NSString *phead = [rs stringForColumn:@"head"];
+        NSString *ptoken = [rs stringForColumn:@"token"];
+        
+        tempuser = [[PUser alloc] init];
+        tempuser.userid = puserid;
+        tempuser.username = pusername;
+        tempuser.nickname = pnickname;
+        tempuser.gender = pgender;
+        tempuser.type = ptype;
+        tempuser.birthday = pbirthday;
+        tempuser.location = plocation;
+        tempuser.age = page;
+        tempuser.source = psource;
+        tempuser.head = phead;
+        tempuser.token = ptoken;
+        [tempuser log];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return tempuser;
+    
+}
+
+//根据第三方唯一taccountid删除用户信息
+-(void)deleteUserInfoByAccountId:(NSString *)taccountid{
+    
+    NSString *sql = @"delete from USER_INFO where accountid = ? ";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, taccountid];
+    [_db close];
+    
+}
+
+//清空用户信息
+-(void)deleteAllUserInfo{
+    
+    NSString *sql = @"delete from USER_INFO";
     PLog(@"sql: %@", sql);
     
     [_db open];
