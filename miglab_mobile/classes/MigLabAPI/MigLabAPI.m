@@ -2634,4 +2634,144 @@
     [operation start];
 }
 
+/*
+ 评论歌曲
+ POST
+ HTTP_COMMENTSONG
+ */
+-(void)doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid comment:(NSString*)tcomment {
+
+    PLog(@"comment song url: %@", HTTP_COMMENTSONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COMMENTSONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@&comment=%@", uid, ttoken, tsongid, tcomment];
+    PLog(@"comment song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(status == 1) {
+                
+                PLog(@"comment song operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"comment song operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:dicResult];
+        }
+     
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"comment song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取歌曲评论
+ GET
+ HTTP_GETCOMMENT
+ */
+-(void)doGetSongComment:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid count:(NSString*)tcount fromid:(NSString*)tfromid {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&count=%@&fromid=%@", HTTP_GETCOMMENT, uid, ttoken, tsongid, tcount, tfromid];
+    PLog(@"get song comment url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operaion = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operaion setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get comment operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSString* tsongid = [dicTemp objectForKey:@"songid"];
+                
+                NSArray* comments = [dicTemp objectForKey:@"comments"];
+                int commentcount = [comments count];
+                
+                NSMutableArray* commentInfo = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<commentcount; i++) {
+                    
+                    SongComment* sc = [SongComment initWithNSDictionary:[comments objectAtIndex:i]];
+                    sc.songid = tsongid;
+                    
+                    [commentInfo addObject:sc];
+                }
+                
+                if (commentcount == 0) {
+                    
+                    //没有评论，发送nil
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentSuccess object:nil userInfo:nil];
+                }
+                else {
+                    
+                    NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:commentInfo, @"result", nil];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentSuccess object:nil userInfo:dicResult];
+                }
+            }
+            else {
+                
+                PLog(@"get comment operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get comment failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentFailed object:nil userInfo:nil];
+    }];
+    
+    [operaion start];
+}
+
 @end

@@ -15,6 +15,7 @@
 #import "ConfigFileInfo.h"
 #import "CollectNum.h"
 #import "NearMusicState.h"
+#import "SongComment.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
 typedef enum {
@@ -174,6 +175,16 @@ typedef enum {
  附近人的音乐
  */
 -(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
+
+/*
+ 评论歌曲
+ */
+-(void)doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid comment:(NSString*)tcomment;
+
+/*
+ 获取歌曲评论
+ */
+-(void)doGetSongComment:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid count:(NSString*)tcount fromid:(NSString*)tfromid;
 
 /****************************************保留接口*******************************************/
 
