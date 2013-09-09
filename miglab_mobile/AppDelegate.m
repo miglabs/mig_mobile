@@ -134,15 +134,13 @@
         AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
         if (lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
             
-            PUser *user = [[PUser alloc] init];
-            user.username = lastAccount.username;
-            user.password = lastAccount.password;
-            user.userid = lastAccount.accountid;
-            user.source = lastAccount.accounttype;
-            [UserSessionManager GetInstance].currentUser = user;
-            [UserSessionManager GetInstance].userid = lastAccount.accountid;
-            [UserSessionManager GetInstance].accesstoken = lastAccount.accesstoken;
-            [UserSessionManager GetInstance].accounttype = lastAccount.accounttype;
+            PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
+            tempuser.password = lastAccount.password;
+            
+            [UserSessionManager GetInstance].currentUser = tempuser;
+            [UserSessionManager GetInstance].userid = tempuser.userid;
+            [UserSessionManager GetInstance].accesstoken = tempuser.token;
+            [UserSessionManager GetInstance].accounttype = tempuser.source;
             [UserSessionManager GetInstance].isLoggedIn = YES;
             
         } else {
@@ -252,6 +250,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     //api test
+    /*
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
@@ -277,9 +276,10 @@
         [miglabAPI doGetDefaultGuestSongs];
         
     }
+    */
     
     
-    [miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
+//    [miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
     //[miglabAPI doGetNearMusic:@"1" token:@"2" radius:@"10000" pageindex:@"1" pagesize:@"5" location:@"30.30022,120.127393"];
     //[miglabAPI doDeleteCollectedSong:@"1" token:@"2" songid:@"22869"];
     //[miglabAPI doGetSongInfo:@"1" token:@"2" songid:@"22869"];

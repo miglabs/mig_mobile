@@ -172,12 +172,16 @@
     PUser *tempUser = [result objectForKey:@"result"];
     [tempUser log];
     
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    
     if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
         
         [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
         
         tempUser.sinaAccount = [UserSessionManager GetInstance].currentUser.sinaAccount;
         tempUser.source = SourceTypeSinaWeibo;
+        
+        [databaseManager insertUserInfo:tempUser accountId:tempUser.sinaAccount.accountid];
         
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
         
@@ -186,12 +190,16 @@
         tempUser.tencentAccount = [UserSessionManager GetInstance].currentUser.tencentAccount;
         tempUser.source = SourceTypeTencentWeibo;
         
+        [databaseManager insertUserInfo:tempUser accountId:tempUser.tencentAccount.accountid];
+        
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
         
         [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
         
         tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
         tempUser.source = SourceTypeDouBan;
+        
+        [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
         
     }
     
@@ -200,7 +208,7 @@
     [UserSessionManager GetInstance].accesstoken = tempUser.token;
     [UserSessionManager GetInstance].isLoggedIn = YES;
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    
     [databaseManager insertUserAccout:tempUser.username password:tempUser.username userid:tempUser.userid accessToken:tempUser.token accountType:tempUser.source];
     
     //go back

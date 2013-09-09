@@ -118,7 +118,7 @@
     if (indexPath.row > 1 && indexPath.row < 5) {
         
         //content
-        UILabel *lblContent = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 260, 24)];
+        UILabel *lblContent = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 255, 24)];
         [lblContent setBackgroundColor:[UIColor clearColor]];
         [lblContent setTextAlignment:kTextAlignmentRight];
         [lblContent setFont:[UIFont systemFontOfSize:13]];
