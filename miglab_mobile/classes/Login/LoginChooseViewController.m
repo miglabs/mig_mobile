@@ -168,22 +168,43 @@
 -(void)registerSuccess:(NSNotification *)tNotification{
     
     NSDictionary *result = [tNotification userInfo];
-    NSLog(@"registerSuccess: %@", result);
+    NSLog(@"registerSuccess...");
+    PUser *tempUser = [result objectForKey:@"result"];
+    [tempUser log];
     
     if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
         
         [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
         
+        tempUser.sinaAccount = [UserSessionManager GetInstance].currentUser.sinaAccount;
+        tempUser.source = SourceTypeSinaWeibo;
+        
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
         
         [SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
+        
+        tempUser.tencentAccount = [UserSessionManager GetInstance].currentUser.tencentAccount;
+        tempUser.source = SourceTypeTencentWeibo;
         
     } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
         
         [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
         
+        tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
+        tempUser.source = SourceTypeDouBan;
+        
     }
-
+    
+    [UserSessionManager GetInstance].currentUser = tempUser;
+    [UserSessionManager GetInstance].userid = tempUser.userid;
+    [UserSessionManager GetInstance].accesstoken = tempUser.token;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:tempUser.username password:tempUser.username userid:tempUser.userid accessToken:tempUser.token accountType:tempUser.source];
+    
+    //go back
+    [self doBack:nil];
     
 }
 
@@ -193,11 +214,6 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getUserInfoFailed: %@", result);
     [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
-    
-    NSString *username = [UserSessionManager GetInstance].currentUser.username;
-    NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
-    
-    [_miglabAPI doRegister:username password:username nickname:nickname source:SourceTypeSinaWeibo];
     
 }
 
@@ -282,11 +298,15 @@
 {
     NSLog(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
     
-    [UserSessionManager GetInstance].userid = sinaweibo.userID;
-    [UserSessionManager GetInstance].accesstoken = sinaweibo.accessToken;
+    AccountOf3rdParty *sinaAccount = [[AccountOf3rdParty alloc] init];
+    sinaAccount.accountid = sinaweibo.userID;
+    sinaAccount.accesstoken = sinaweibo.accessToken;
+    sinaAccount.expirationdate = sinaweibo.expirationDate;
+    sinaAccount.accounttype = SourceTypeSinaWeibo;
+    
     [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
+    [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
-    [UserSessionManager GetInstance].currentUser.userid = sinaweibo.userID;
     
     [self storeAuthData];
     [self getUserInfoFromSinaWeibo];
@@ -340,24 +360,22 @@
             
             NSString *name = [result objectForKey:@"name"];
             NSString *screenName = [result objectForKey:@"screen_name"];
+            NSString *gender = [result objectForKey:@"gender"];
             
             //写入缓存
-            [UserSessionManager GetInstance].currentUser.username = name;
-            [UserSessionManager GetInstance].currentUser.nickname = screenName;
-            [UserSessionManager GetInstance].isLoggedIn = YES;
+            [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
+            if ([gender isEqualToString:@"m"]) {
+                gender = [NSString stringWithFormat:@"%d", 1];
+            } else {
+                gender = [NSString stringWithFormat:@"%d", 0];
+            }
             
-            NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-            NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-            int accounttype = [UserSessionManager GetInstance].currentUser.source;
+            //
+            NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
+            SourceType accounttype = [UserSessionManager GetInstance].accounttype;
             
-            PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-            [databaseManager insertUserAccout:name password:name userid:userid accessToken:accesstoken accountType:accounttype];
-            
-            //检查服务端是否已经记录该帐号
-            NSString *encodeName = [PCommonUtil encodeUrlParameter:name];
-            [_miglabAPI doGetUserInfo:encodeName accessToken:[UserSessionManager GetInstance].accesstoken];
-            
-//            [self doBack:nil];
+            //注册和登录合并，第三方平台直接使用注册接口登录
+            [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
             
         }//if
         
@@ -381,9 +399,15 @@
         PLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
         PLog(@"_tencentOAuth.expirationDate: %@", _tencentOAuth.expirationDate);
         
+        AccountOf3rdParty *tencentAccount = [[AccountOf3rdParty alloc] init];
+        tencentAccount.accountid = _tencentOAuth.openId;
+        tencentAccount.accesstoken = _tencentOAuth.accessToken;
+        tencentAccount.expirationdate = _tencentOAuth.expirationDate;
+        tencentAccount.accounttype = SourceTypeTencentWeibo;
+        
+        [UserSessionManager GetInstance].accounttype = SourceTypeTencentWeibo;
+        [UserSessionManager GetInstance].currentUser.tencentAccount = tencentAccount;
         [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
-        [UserSessionManager GetInstance].currentUser.userid = _tencentOAuth.openId;
-        [UserSessionManager GetInstance].accesstoken = _tencentOAuth.accessToken;
         
         if(![_tencentOAuth getUserInfo]){
             [self showInvalidTokenOrOpenIDMessage];
@@ -433,6 +457,27 @@
 	{
         PLog(@"response.jsonResponse: %@", response.jsonResponse);
         
+        NSDictionary *result = response.jsonResponse;
+        NSString *name = [result objectForKey:@"nickname"];
+        NSString *screenName = [result objectForKey:@"nickname"];
+        NSString *gender = [result objectForKey:@"gender"];
+        
+        //写入缓存
+        [UserSessionManager GetInstance].currentUser.tencentAccount.username = name;
+        if ([gender isEqualToString:@"男"]) {
+            gender = [NSString stringWithFormat:@"%d", 1];
+        } else {
+            gender = [NSString stringWithFormat:@"%d", 0];
+        }
+        
+        //
+        NSString *userid = [UserSessionManager GetInstance].currentUser.tencentAccount.accountid;
+        SourceType accounttype = [UserSessionManager GetInstance].accounttype;
+        
+        //注册和登录合并，第三方平台直接使用注册接口登录
+        [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
+        
+        /*
 		NSMutableString *str=[NSMutableString stringWithFormat:@""];
 		for (id key in response.jsonResponse) {
 			[str appendString: [NSString stringWithFormat:@"%@:%@\n",key,[response.jsonResponse objectForKey:key]]];
@@ -441,6 +486,7 @@
 							  
 													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
 		[alert show];
+        */
 	}
 	else
     {
@@ -449,7 +495,6 @@
 													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
 		[alert show];
 	}
-//	_labelTitle.text=@"获取个人信息完成";
     
 }
 
@@ -459,29 +504,27 @@
 
 - (void)authorizeView:(DoubanAuthorizeView *)authView didRecieveAuthorizationResult:(NSDictionary *)result{
     
-    NSString *userid = [result objectForKey:@"douban_user_id"];
-    NSString *accesstoken = [result objectForKey:@"access_token"];
-    NSString *username = [result objectForKey:@"douban_user_name"];
-    NSString *password = username;
-    int accounttype = SourceTypeDouBan;
+    NSString *douban_user_id = [result objectForKey:@"douban_user_id"];
+    NSString *access_token = [result objectForKey:@"access_token"];
+    NSString *douban_user_name = [result objectForKey:@"douban_user_name"];
+    NSString *expires_in = [result objectForKey:@"expires_in"];
+    NSString *gender = @"0";
     
-    [UserSessionManager GetInstance].userid = userid;
-    [UserSessionManager GetInstance].accesstoken = accesstoken;
-    [UserSessionManager GetInstance].accounttype = SourceTypeDouBan;
-    [UserSessionManager GetInstance].currentUser.userid = userid;
-    [UserSessionManager GetInstance].currentUser.username = username;
-    [UserSessionManager GetInstance].currentUser.nickname = username;
-    [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
-    [UserSessionManager GetInstance].isLoggedIn = YES;
+    AccountOf3rdParty *doubanAccount = [[AccountOf3rdParty alloc] init];
+    doubanAccount.accountid = douban_user_id;
+    doubanAccount.accesstoken = access_token;
+    doubanAccount.expirationdate = [NSDate dateWithTimeIntervalSince1970:[expires_in longLongValue]];
+    doubanAccount.accounttype = SourceTypeDouBan;
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:accounttype];
-    
-    //检查服务端是否已经记录该帐号
-    [_miglabAPI doGetUserInfo:username accessToken:[UserSessionManager GetInstance].accesstoken];
+    [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
+    [UserSessionManager GetInstance].currentUser.doubanAccount = doubanAccount;
+    [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
     
     //
-//    [self doBack:nil];
+    SourceType accounttype = [UserSessionManager GetInstance].accounttype;
+    
+    //注册和登录合并，第三方平台直接使用注册接口登录
+    [_miglabAPI doRegister:douban_user_name password:douban_user_name nickname:douban_user_name source:accounttype session:douban_user_id sex:gender];
     
 }
 
