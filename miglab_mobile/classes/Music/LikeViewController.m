@@ -205,6 +205,7 @@
     [databaseManager insertSongInfoList:songInfoList];
     NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
     
+    [_dataList removeAllObjects];
     [_dataList addObjectsFromArray:tempSongInfoList];
     [_dataTableView reloadData];
     

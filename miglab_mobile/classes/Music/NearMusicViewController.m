@@ -331,7 +331,8 @@
     Song *tempsong = nms.song;
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
+    NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, @"未缓存"];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
