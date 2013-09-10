@@ -8,6 +8,7 @@
 
 #import "MusicCommentViewController.h"
 #import "MusicCommentCell.h"
+#import "SongComment.h"
 
 @interface MusicCommentViewController ()
 
@@ -18,8 +19,8 @@
 @synthesize navView = _navView;
 @synthesize commentPlayerView = _commentPlayerView;
 
-@synthesize commentTableView = _commentTableView;
-@synthesize commentList = _commentList;
+@synthesize dataTableView = _dataTableView;
+@synthesize dataList = _dataList;
 
 @synthesize commentInputView = _commentInputView;
 
@@ -27,11 +28,19 @@
 
 @synthesize miglabAPI = _miglabAPI;
 
+@synthesize pageIndex = _pageIndex;
+@synthesize pageSize = _pageSize;
+@synthesize isLoadMore = _isLoadMore;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        //getCommentList
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListFailed:) name:NotificationNameGetCommentFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListSuccess::) name:NotificationNameGetCommentSuccess object:nil];
         
         //监听键盘高度的变换
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -47,6 +56,13 @@
         
     }
     return self;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCommentFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCommentSuccess object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -87,19 +103,19 @@
     
     
     //song list
-    _commentTableView = [[UITableView alloc] init];
-    _commentTableView.frame = CGRectMake(11.5, 45 + 10 + 110 + 10, 297, kMainScreenHeight - 45 - 10 - 110 - 10 - 10 - 49);
-    _commentTableView.dataSource = self;
-    _commentTableView.delegate = self;
-    _commentTableView.backgroundColor = [UIColor clearColor];
-    _commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _dataTableView = [[UITableView alloc] init];
+    _dataTableView.frame = CGRectMake(11.5, 45 + 10 + 110 + 10, 297, kMainScreenHeight - 45 - 10 - 110 - 10 - 10 - 49);
+    _dataTableView.dataSource = self;
+    _dataTableView.delegate = self;
+    _dataTableView.backgroundColor = [UIColor clearColor];
+    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = _commentTableView.frame;
+    bodyBgImageView.frame = _dataTableView.frame;
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    _commentTableView.backgroundView = bodyBgImageView;
+    _dataTableView.backgroundView = bodyBgImageView;
     
-    [self.view addSubview:_commentTableView];
+    [self.view addSubview:_dataTableView];
     
     
     //comment input view
@@ -111,9 +127,16 @@
     }//for
     _commentInputView.frame = CGRectMake(0, kMainScreenHeight - 49, kMainScreenWidth, 49);
     _commentInputView.commentTextField.delegate = self;
+    [_commentInputView.btnSendComent addTarget:self action:@selector(doCommentSong:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commentInputView];
     
     //
+    _miglabAPI = [[MigLabAPI alloc] init];
+    _pageIndex = 0;
+    _pageSize = PAGE_SIZE;
+    
+    //data
+    [self loadData];
     
     
 }
@@ -122,6 +145,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)loadData{
+    
+    [self loadCommentListFromServer];
+    
+}
+
+-(void)loadCommentListFromServer{
+    
+    NSString *userid = [UserSessionManager GetInstance].userid;
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
+    NSString *strPageSize = [NSString stringWithFormat:@"%d", _pageSize];
+    
+    int commentcount = [_dataList count];
+    SongComment *tempcomment = (commentcount > 0) ? [_dataList objectAtIndex:commentcount - 1] : nil;
+    NSString *strFromId = (tempcomment) ? tempcomment.cid : @"0";
+    
+    _pageIndex = [strFromId intValue];
+    
+    [_miglabAPI doGetSongComment:userid token:accesstoken songid:songid count:strPageSize fromid:strFromId];
+    
 }
 
 -(IBAction)doPlayOrPause:(id)sender{
@@ -183,9 +229,63 @@
     
 }
 
+-(IBAction)doCommentSong:(id)sender{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
+        NSString *commentcontent = _commentInputView.commentTextField.text;
+        
+        [_miglabAPI doCommentSong:userid token:accesstoken songid:songid comment:commentcontent];
+        
+    }
+    
+}
+
 -(IBAction)doHideKeyboard:(id)sender{
     
     [self autoMovekeyBoard:0];
+    
+}
+
+#pragma notification
+
+-(void)getCommentListFailed:(NSNotification *)tNotification{
+    
+    PLog(@"getCommentListFailed...");
+    
+    [SVProgressHUD showErrorWithStatus:@"歌曲评论信息获取失败:("];
+    
+}
+
+-(void)getCommentListSuccess:(NSNotification *)tNotification{
+    
+    PLog(@"getCommentListSuccess...");
+    
+    NSDictionary *result = [tNotification userInfo];
+    NSArray *commentlist = [result objectForKey:@"result"];
+    int commentlistcount = [commentlist count];
+    
+    _isLoadMore = (commentlistcount == _pageSize);
+    
+    if (commentlistcount > 0) {
+        
+        for (int i=0; i<commentlistcount; i++) {
+            
+            SongComment *tempcomment = [commentlist objectAtIndex:i];
+            [tempcomment log];
+            
+        }
+        
+        if (_pageIndex == 0) {
+            [_dataList removeAllObjects];
+        }
+        [_dataList addObjectsFromArray:commentlist];
+        [_dataTableView reloadData];
+        
+    }
     
 }
 
@@ -202,7 +302,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_commentList count];
+    return [_dataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -215,6 +315,17 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
+    
+    SongComment *tempcomment = [_dataList objectAtIndex:indexPath.row];
+    cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
+    cell.lblNickname.text = tempcomment.user.nickname;
+    if (tempcomment.user.gender > 0) {
+        cell.genderImageView.image = [UIImage imageWithName:@"user_gender_male" type:@"png"];
+    } else {
+        cell.genderImageView.image = [UIImage imageWithName:@"user_gender_female" type:@"png"];
+    }
+    cell.lblTime.text = tempcomment.createdtime;
+    cell.lblContent.text = tempcomment.text;
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
@@ -229,23 +340,23 @@
 #pragma textfield delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
-    _commentTableView.frame = CGRectMake(0, 0, 320, kMainScreenHeight - 210);
+    _dataTableView.frame = CGRectMake(0, 0, 320, kMainScreenHeight - 210);
     [self scrollTableToFoot:YES];
 }
 
 -(IBAction)resiginTextField:(id)sender{
-    _commentTableView.frame = CGRectMake(0, 20, 320, kMainScreenHeight);
+    _dataTableView.frame = CGRectMake(0, 20, 320, kMainScreenHeight);
 }
 
 - (void)scrollTableToFoot:(BOOL)animated {
-    NSInteger s = [_commentTableView numberOfSections];
+    NSInteger s = [_dataTableView numberOfSections];
     if (s<1) return;
-    NSInteger r = [_commentTableView numberOfRowsInSection:s-1];
+    NSInteger r = [_dataTableView numberOfRowsInSection:s-1];
     if (r<1) return;
     
     NSIndexPath *ip = [NSIndexPath indexPathForRow:r-1 inSection:s-1];
     
-    [_commentTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    [_dataTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:animated];
 }
 
 #pragma mark -
@@ -294,7 +405,7 @@
 -(void) autoMovekeyBoard: (float) h{
     
 	_commentInputView.frame = CGRectMake(0.0f, (float)(kMainScreenHeight-h-49), 320.0f, 49.0f);
-	_commentTableView.frame = CGRectMake(0.0f, 44.0f, 320.0f,(float)(kMainScreenHeight-h-44-49));
+	_dataTableView.frame = CGRectMake(0.0f, 44.0f, 320.0f,(float)(kMainScreenHeight-h-44-49));
     
 }
 

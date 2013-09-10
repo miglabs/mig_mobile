@@ -19,8 +19,8 @@
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
 @property (nonatomic, retain) MusicCommentPlayerView *commentPlayerView;
 
-@property (nonatomic, retain) UITableView *commentTableView;
-@property (nonatomic, retain) NSMutableArray *commentList;
+@property (nonatomic, retain) UITableView *dataTableView;
+@property (nonatomic, retain) NSMutableArray *dataList;
 
 @property (nonatomic, retain) MusicCommentInputView *commentInputView;
 
@@ -28,11 +28,24 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+@property (nonatomic, assign) int pageIndex;
+@property (nonatomic, assign) int pageSize;
+@property (nonatomic, assign) BOOL isLoadMore;
+
+-(void)loadData;
+-(void)loadCommentListFromServer;
+
+-(void)getCommentListFailed:(NSNotification *)tNotification;
+-(void)getCommentListSuccess:(NSNotification *)tNotification;
+
 -(IBAction)doPlayOrPause:(id)sender;
 -(IBAction)doCollectedOrCancel:(id)sender;
 -(IBAction)doHate:(id)sender;
 -(IBAction)doShare:(id)sender;
 
+-(IBAction)doCommentSong:(id)sender;
 -(IBAction)doHideKeyboard:(id)sender;
+
+
 
 @end

@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageButton.h"
 
 @interface MusicCommentCell : UITableViewCell
+
+@property (nonatomic, retain) IBOutlet EGOImageButton *btnAvatar;
+@property (nonatomic, retain) IBOutlet UILabel *lblNickname;
+@property (nonatomic, retain) IBOutlet UIImageView *genderImageView;
+@property (nonatomic, retain) IBOutlet UILabel *lblTime;
+@property (nonatomic, retain) IBOutlet UILabel *lblContent;
+
+-(void)updateCellView;
 
 @end
