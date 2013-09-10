@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Icon.jpg</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pig.test</string>
+	<string>com.companytest.mobilektv</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
