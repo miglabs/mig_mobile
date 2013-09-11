@@ -2709,6 +2709,8 @@
     
     [operaion setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        bool bReturnSucceed = false;
+        
         @try {
             
             NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
@@ -2717,6 +2719,8 @@
             if(1 == status) {
                 
                 PLog(@"get comment operation succeeded");
+                
+                bReturnSucceed = true;
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
                 NSString* tsongid = [dicTemp objectForKey:@"songid"];
@@ -2748,12 +2752,22 @@
             }
             else {
                 
-                PLog(@"get comment operation failed");
-                
-                NSString* msg = [dicJson objectForKey:@"msg"];
-                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentFailed object:nil userInfo:dicResult];
+                if(bReturnSucceed) {
+                    
+                    // return succeeded, but there is no comment
+                    PLog(@"get comment operation succeeded, no comment");
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentSuccess object:nil userInfo:nil];
+                }
+                else {
+                    
+                    PLog(@"get comment operation failed");
+                    
+                    NSString* msg = [dicJson objectForKey:@"msg"];
+                    NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetCommentFailed object:nil userInfo:dicResult];
+                }
             }
         }
         @catch (NSException *exception) {
