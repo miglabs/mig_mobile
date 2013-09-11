@@ -473,6 +473,13 @@ static int PAGE_WIDTH = 81;
         
     }];
     
+    /*
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    _currentGeneView.lblTypeDesc.text = usergene.type.name;
+    _currentGeneView.lblMoodDesc.text = usergene.mood.name;
+    _currentGeneView.lblSceneDesc.text = usergene.scene.name;
+    */
+    
     [self loadTypeSongs];
     
     /*

@@ -244,7 +244,6 @@
 						<string key="NSFrame">{{59, 225}, {218, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -298,6 +297,30 @@
 						<reference key="destination" ref="357665002"/>
 					</object>
 					<int key="connectionID">11</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lblTypeDesc</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="595563742"/>
+					</object>
+					<int key="connectionID">18</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lblMoodDesc</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="895554512"/>
+					</object>
+					<int key="connectionID">19</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lblSceneDesc</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="382269617"/>
+					</object>
+					<int key="connectionID">20</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -410,7 +433,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">17</int>
+			<int key="maxID">20</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -420,6 +443,9 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="egoBtnAvatar">EGOImageButton</string>
 						<string key="lblMonthAndDay">UILabel</string>
+						<string key="lblMoodDesc">UILabel</string>
+						<string key="lblSceneDesc">UILabel</string>
+						<string key="lblTypeDesc">UILabel</string>
 						<string key="lblYear">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -429,6 +455,18 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="lblMonthAndDay">
 							<string key="name">lblMonthAndDay</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblMoodDesc">
+							<string key="name">lblMoodDesc</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblSceneDesc">
+							<string key="name">lblSceneDesc</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblTypeDesc">
+							<string key="name">lblTypeDesc</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lblYear">
