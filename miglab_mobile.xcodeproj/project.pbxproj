@@ -246,6 +246,8 @@
 		1684764B17BA791600F42172 /* music_menu_next_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764317BA791600F42172 /* music_menu_next_sel.png */; };
 		1684764C17BA791600F42172 /* music_menu_play_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764417BA791600F42172 /* music_menu_play_nor.png */; };
 		1684764D17BA791600F42172 /* music_menu_play_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764517BA791600F42172 /* music_menu_play_sel.png */; };
+		168D8C9017E0A5D800DD9CC2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 168D8C8E17E0A5D800DD9CC2 /* Icon.png */; };
+		168D8C9117E0A5D800DD9CC2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 168D8C8F17E0A5D800DD9CC2 /* Icon@2x.png */; };
 		169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 169C2E1117A381C2009774E7 /* libMobClickLibrary.a */; };
 		169C2E1617A38AC7009774E7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 169C2E1517A38AC7009774E7 /* libz.dylib */; };
 		16AB8BA4179EB8A40009411F /* left_menu_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16AB8B9A179EB8A40009411F /* left_menu_arrow.png */; };
@@ -354,7 +356,6 @@
 		16F575C9179587D900277308 /* player_borad_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575BE179587D900277308 /* player_borad_bg.png */; };
 		16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */; };
 		16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F575CE179590BA00277308 /* borad_menu_like_sel.png */; };
-		180271EF178C019800CA9488 /* Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180271EE178C019800CA9488 /* Icon.jpg */; };
 		1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */; };
 		18275F2E17B3876400033AFF /* NearbyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18275F2D17B3876400033AFF /* NearbyUser.m */; };
 		1830B52E179D129200314A28 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830B52D179D129200314A28 /* NSData+AES256.m */; };
@@ -732,6 +733,8 @@
 		1684764317BA791600F42172 /* music_menu_next_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_next_sel.png; sourceTree = "<group>"; };
 		1684764417BA791600F42172 /* music_menu_play_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_play_nor.png; sourceTree = "<group>"; };
 		1684764517BA791600F42172 /* music_menu_play_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_play_sel.png; sourceTree = "<group>"; };
+		168D8C8E17E0A5D800DD9CC2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		168D8C8F17E0A5D800DD9CC2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		169C2E1117A381C2009774E7 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		169C2E1217A381C2009774E7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		169C2E1517A38AC7009774E7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -868,7 +871,6 @@
 		16F575CB17958B2300277308 /* PCustomPlayerBoradView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPlayerBoradView.h; sourceTree = "<group>"; };
 		16F575CC17958B2300277308 /* PCustomPlayerBoradView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPlayerBoradView.m; sourceTree = "<group>"; };
 		16F575CE179590BA00277308 /* borad_menu_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = borad_menu_like_sel.png; sourceTree = "<group>"; };
-		180271EE178C019800CA9488 /* Icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Icon.jpg; sourceTree = "<group>"; };
 		1816E97C17CED8BE00D532EA /* DoubanAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanAuthorizeView.h; sourceTree = "<group>"; };
 		1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanAuthorizeView.m; sourceTree = "<group>"; };
 		18275F2C17B3876400033AFF /* NearbyUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyUser.h; sourceTree = "<group>"; };
@@ -1810,7 +1812,8 @@
 		16EDEF421759AD5E001BE4E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				180271EE178C019800CA9488 /* Icon.jpg */,
+				168D8C8E17E0A5D800DD9CC2 /* Icon.png */,
+				168D8C8F17E0A5D800DD9CC2 /* Icon@2x.png */,
 				16EDEF431759AD5E001BE4E9 /* miglab_mobile-Info.plist */,
 				16EDEF441759AD5E001BE4E9 /* InfoPlist.strings */,
 				16EDEF471759AD5E001BE4E9 /* main.m */,
@@ -2077,7 +2080,6 @@
 				183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */,
 				18A451021783FC9800CFFAD4 /* LeftViewController.xib in Resources */,
 				18A451071783FCA700CFFAD4 /* RightViewController.xib in Resources */,
-				180271EF178C019800CA9488 /* Icon.jpg in Resources */,
 				16E77E20178DA518006A24A6 /* PlayViewController.xib in Resources */,
 				16E77E8D178DB18C006A24A6 /* bottom_control_bg.png in Resources */,
 				16E77E8E178DB18C006A24A6 /* btn_delete_nor.png in Resources */,
@@ -2305,6 +2307,8 @@
 				1641CCE517DB68B7004179E4 /* SettingOfNewMessageViewController.xib in Resources */,
 				1641CCEA17DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.xib in Resources */,
 				1641CCEF17DB6A3B004179E4 /* SettingOfLimitViewController.xib in Resources */,
+				168D8C9017E0A5D800DD9CC2 /* Icon.png in Resources */,
+				168D8C9117E0A5D800DD9CC2 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2559,7 +2563,6 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2593,7 +2596,6 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

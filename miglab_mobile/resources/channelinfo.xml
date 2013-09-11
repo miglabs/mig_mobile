@@ -2,36 +2,41 @@
 <description>
     <type>
         <attr id = "1"  name="华语流行" dec="流行时尚元素"/>
-        <attr id = "2"  name="欧美金曲" dec="流行时尚元素"/>
-        <attr id = "3"  name="七零后"   dec="流行时尚元素"/>
-        <attr id = "4"  name="八零后"   dec="流行时尚元素"/>
-        <attr id = "5"  name="九零后"   dec="流行时尚元素"/>
-        <attr id = "6"  name="粤语经典" dec="流行时尚元素"/>
-        <attr id = "7"  name="摇滚Rock" dec="流行时尚元素"/>
-        <attr id = "8"  name="校园民谣" dec="流行时尚元素"/>
-        <attr id = "9"  name="影视同声" dec="流行时尚元素"/>
+        <attr id = "2"  name="欧美金曲" dec="欧美金曲元素"/>
+        <attr id = "3"  name="七零后"   dec="七零后元素"/>
+        <attr id = "4"  name="八零后"   dec="八零后元素"/>
+        <attr id = "5"  name="九零后"   dec="九零后元素"/>
+        <attr id = "6"  name="粤语经典" dec="粤语经典元素"/>
+        <attr id = "7"  name="影视同声" dec="影视同声元素"/>
+        <attr id = "8"  name="轻音乐" dec="轻音乐元素"/>
     </type>
     <mood>
-        <attr id = "1"  name="失恋疗伤"   dec="流行时尚元素"/>
-        <attr id = "2"  name="受到挫折"   dec="流行时尚元素"/>
-        <attr id = "3"  name="暗恋时分"   dec="流行时尚元素"/>
-        <attr id = "4"  name="寂寞孤独"   dec="流行时尚元素"/>
-        <attr id = "5"  name="思念的距离" dec="流行时尚元素"/>
-        <attr id = "6"  name="幸福甜蜜"   dec="流行时尚元素"/>
+        <attr id = "1"  name="失恋疗伤"   dec="错过了日出可以等待，错过了美景可以在来，错过了流星可以等待，错过了爱情却不会回来"/>
+        <attr id = "2"  name="受到挫折"   dec="对勇气的最大考验，就是看一个人能否做到败而不馁"/>
+        <attr id = "3"  name="暗恋时分"   dec="爱情毕竟是两个人的你情我愿，仍是一个人的甜甜暗恋，爱或不爱是不是都要说出来"/>
+        <attr id = "4"  name="寂寞孤独"   dec="不愿意醒来时，台灯投射在墙上只有我孤独的身影"/>
+        <attr id = "5"  name="思念的距离" dec="我的心很乱，像旋在风浪里的一片树叶，一会儿被抛到这儿，一会儿又被抛到那儿"/>
+        <attr id = "6"  name="幸福甜蜜"   dec="爱情也像海一样深沉，我给你的越多，我自己就越丰富，因为两者都是没有穷尽的"/>
     </mood>
     <scenes>
-        <attr id = "1"  name="午后的下午"  dec="流行时尚元素"/>
-        <attr id = "2"  name="驾驶"       dec="流行时尚元素"/>
-        <attr id = "3"  name="工作"       dec="流行时尚元素"/>
-        <attr id = "4"  name="旅行"       dec="流行时尚元素"/>
+        <attr id = "1"  name="午后"       dec="慵懒的午后。调皮的阳光不安分地跃上窗台，轻巧地挤入绿色的百叶，偷偷探窥那熟睡的香甜"/>
+        <attr id = "2"  name="午休"       dec="梅子留酸软齿牙， 芭蕉分绿与窗纱。 日长睡起无情思， 闲看儿童捉柳花"/>
+        <attr id = "3"  name="驾驶"       dec="一路上有这样旋律陪伴，沿途的风景更美了"/>
+        <attr id = "4"  name="工作"       dec="放松心态，完全进入工作状态"/>
+        <attr id = "5"  name="旅行"       dec="有音乐就有路，有音乐就有美丽的风景"/>
+        <attr id = "6"  name="运动"       dec="运动不止，生命不息"/>
     </scenes>
     <mig_channel>
-        <attr id ="1" name ="频道1" typeid="1" moodid="3" scenesid="2"/>
-        <attr id ="2" name ="频道2" typeid="2" moodid="1" scenesid="4"/>
-        <attr id ="3" name ="频道3" typeid="5" moodid="4" scenesid="1"/>
-        <attr id ="4" name ="频道4" typeid="8" moodid="6" scenesid="3"/>
-        <attr id ="5" name ="频道5" typeid="4" moodid="2" scenesid="1"/>
-        <attr id ="6" name ="频道6" typeid="9" moodid="5" scenesid="4"/>
+        <attr id ="1" name ="模式√1"        typeid="1" moodid="1" scenesid="1"/>
+        <attr id ="2" name ="模式√4"        typeid="4" moodid="6" scenesid="2"/>
+        <attr id ="3" name ="模式ctg²α"     typeid="2" moodid="2" scenesid="3"/>
+        <attr id ="4" name ="模式2²"        typeid="7" moodid="5" scenesid="4"/>
+        <attr id ="5" name ="模式5*4-5*3"   typeid="5" moodid="3" scenesid="5"/>
+        <attr id ="6" name ="模式1+2+3"     typeid="2" moodid="4" scenesid="6"/>
+        <attr id ="7" name ="模式√(6*8+1)"  typeid="6" moodid="5" scenesid="1"/>
+        <attr id ="8" name ="模式2³"        typeid="1" moodid="2" scenesid="2"/>
+        <attr id ="9" name ="模式3²"        typeid="3" moodid="3" scenesid="3"/>
+        <attr id ="10" name ="模式3²+1"      typeid="8" moodid="2" scenesid="4"/> 
     </mig_channel>
     <info_version>
         <attr id = "1"/>
