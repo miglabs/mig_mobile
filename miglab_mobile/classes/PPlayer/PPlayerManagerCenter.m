@@ -190,18 +190,30 @@ static PPlayerManagerCenter *instance;
     PLog(@"doInsertPlay...");
     [tInsertSong log];
     
-    [_songList insertObject:tInsertSong atIndex:0];
-    _currentSongIndex = 0;
-    _currentSong = tInsertSong;
+    _currentSong = [_songList objectAtIndex:_currentSongIndex];
     
-    [self stopDownload];
+    if (_currentSong.songid == tInsertSong.songid) {
+        
+        [self playCurrentSong];
     
-    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if ([aaMusicPlayer isMusicPlaying]) {
-        [aaMusicPlayer pause];
+    } else {
+        
+        [_songList insertObject:tInsertSong atIndex:0];
+        _currentSongIndex = 0;
+        _currentSong = tInsertSong;
+        
+        [self stopDownload];
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if ([aaMusicPlayer isMusicPlaying]) {
+            [aaMusicPlayer pause];
+        }
+        
+        [self initSongInfo];
+        
     }
     
-    [self initSongInfo];
+    
     
     
 }

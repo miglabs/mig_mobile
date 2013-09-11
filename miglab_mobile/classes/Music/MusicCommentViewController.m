@@ -174,6 +174,7 @@
     
     PLog(@"doPlayOrPause...");
     
+    
     [[PPlayerManagerCenter GetInstance] doInsertPlay:_song];
     
 }

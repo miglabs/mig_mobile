@@ -81,6 +81,18 @@ static int PAGE_WIDTH = 81;
         }//if
     }//for
     _currentGeneView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
+    //date
+    NSArray *monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
+    //year
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger uitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    
+    NSDate *nowDate = [NSDate date];
+    NSDateComponents *comps = [calendar components:uitFlags fromDate:nowDate];
+    _currentGeneView.lblYear.text = [NSString stringWithFormat:@"%d", comps.year];
+    _currentGeneView.lblMonthAndDay.text = [NSString stringWithFormat:@"%@ %d", [monthlist objectAtIndex:comps.month - 1], comps.day];
+    
+    //avatar
     _currentGeneView.egoBtnAvatar.layer.cornerRadius = 22;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
     _currentGeneView.egoBtnAvatar.layer.borderWidth = 2;
