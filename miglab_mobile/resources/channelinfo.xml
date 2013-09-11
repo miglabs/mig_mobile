@@ -7,8 +7,16 @@
         <attr id = "4"  name="八零后"   dec="八零后元素"/>
         <attr id = "5"  name="九零后"   dec="九零后元素"/>
         <attr id = "6"  name="粤语经典" dec="粤语经典元素"/>
-        <attr id = "7"  name="影视同声" dec="影视同声元素"/>
-        <attr id = "8"  name="轻音乐" dec="轻音乐元素"/>
+        <attr id = "7"  name="摇滚" dec="摇滚元素"/>
+        <attr id = "8"  name="校园民谣" dec="校园民谣元素"/>
+        <attr id = "9"  name="影视同声" dec="影视同声元素"/>
+        <attr id = "10"  name="爵士乐"  dec="爵士乐元素"/>
+        <attr id = "11"  name="电音之声" dec="电音之声元素"/>
+        <attr id = "12"  name="说唱RAP" dec="说唱RAP元素"/>
+        <attr id = "13"  name="RnB"    dec="RnB声元素"/>
+        <attr id = "14"  name="日语"   dec="日语元素"/>
+        <attr id = "15"  name="韩语"   dec="韩语元素"/>
+        <attr id = "16"  name="轻音乐" dec="轻音乐元素"/>
     </type>
     <mood>
         <attr id = "1"  name="失恋疗伤"   dec="错过了日出可以等待，错过了美景可以在来，错过了流星可以等待，错过了爱情却不会回来"/>
@@ -30,13 +38,19 @@
         <attr id ="1" name ="模式√1"        typeid="1" moodid="1" scenesid="1"/>
         <attr id ="2" name ="模式√4"        typeid="4" moodid="6" scenesid="2"/>
         <attr id ="3" name ="模式ctg²α"     typeid="2" moodid="2" scenesid="3"/>
-        <attr id ="4" name ="模式2²"        typeid="7" moodid="5" scenesid="4"/>
+        <attr id ="4" name ="模式2²"        typeid="9" moodid="5" scenesid="4"/>
         <attr id ="5" name ="模式5*4-5*3"   typeid="5" moodid="3" scenesid="5"/>
-        <attr id ="6" name ="模式1+2+3"     typeid="2" moodid="4" scenesid="6"/>
-        <attr id ="7" name ="模式√(6*8+1)"  typeid="6" moodid="5" scenesid="1"/>
-        <attr id ="8" name ="模式2³"        typeid="1" moodid="2" scenesid="2"/>
-        <attr id ="9" name ="模式3²"        typeid="3" moodid="3" scenesid="3"/>
-        <attr id ="10" name ="模式3²+1"      typeid="8" moodid="2" scenesid="4"/> 
+        <attr id ="6" name ="模式1+2+3"     typeid="8" moodid="4" scenesid="6"/>
+        <attr id ="7" name ="模式3*2+1"  typeid="6" moodid="5" scenesid="1"/>
+        <attr id ="8" name ="模式2³"        typeid="7" moodid="2" scenesid="2"/>
+        <attr id ="9" name ="模式3²"       typeid="3" moodid="3" scenesid="3"/>
+        <attr id ="10" name ="模式3²+1"     typeid="16" moodid="2" scenesid="4"/> 
+        <attr id ="11" name ="模式3²+2"     typeid="13" moodid="5" scenesid="5"/> 
+        <attr id ="12" name ="模式3²+3"     typeid="10" moodid="1" scenesid="3"/> 
+        <attr id ="13" name ="模式√169"     typeid="14" moodid="6" scenesid="2"/> 
+        <attr id ="14" name ="模式3²+5"     typeid="11" moodid="2" scenesid="4"/> 
+        <attr id ="15" name ="模式5²-5*2"     typeid="15" moodid="6" scenesid="1"/> 
+        <attr id ="16" name ="模式2^4"     typeid="12" moodid="1" scenesid="4"/> 
     </mig_channel>
     <info_version>
         <attr id = "1"/>
