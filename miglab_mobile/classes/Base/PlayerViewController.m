@@ -207,6 +207,11 @@
         NSString *userid = [UserSessionManager GetInstance].userid;
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
+        int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
+        [[PPlayerManagerCenter GetInstance].songList removeObjectAtIndex:currentSongIndex];
+        [[PDatabaseManager GetInstance] deleteSongInfo:currentSong.songid];
+        [self doNext:nil];
+        
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
