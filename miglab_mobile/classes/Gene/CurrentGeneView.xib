@@ -169,7 +169,7 @@
 					<object class="IBUIImageView" id="726571567">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{246, 160}, {31, 31}}</string>
+						<string key="NSFrame">{{246, 170}, {31, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="108974297"/>
@@ -181,7 +181,7 @@
 					<object class="IBUIImageView" id="108974297">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 220}, {31, 31}}</string>
+						<string key="NSFrame">{{20, 240}, {31, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="382269617"/>
@@ -193,7 +193,7 @@
 					<object class="IBUILabel" id="595563742">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{59, 105}, {218, 21}}</string>
+						<string key="NSFrame">{{59, 86}, {218, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="895554512"/>
@@ -206,6 +206,7 @@
 						<string key="IBUIText">旅行中</string>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUINumberOfLines">0</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="565361623">
 							<int key="type">1</int>
 							<double key="pointSize">20</double>
@@ -216,11 +217,12 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">218</double>
 					</object>
 					<object class="IBUILabel" id="895554512">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 165}, {218, 21}}</string>
+						<string key="NSFrame">{{20, 156}, {218, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="726571567"/>
@@ -233,28 +235,32 @@
 						<string key="IBUIText">心情甚好</string>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUINumberOfLines">0</int>
 						<int key="IBUITextAlignment">2</int>
+						<int key="IBUILineBreakMode">5</int>
 						<reference key="IBUIFontDescription" ref="565361623"/>
 						<reference key="IBUIFont" ref="176523808"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">218</double>
 					</object>
 					<object class="IBUILabel" id="382269617">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{59, 225}, {218, 21}}</string>
+						<string key="NSFrame">{{59, 226}, {218, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">享受一段咖啡色的音乐吧erwersdf但是发生地</string>
+						<string key="IBUIText">慵懒的午后。调皮的阳光不安分地跃上窗台，轻巧地挤入绿色的百叶，偷偷探窥那熟睡的香甜</string>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<int key="IBUINumberOfLines">2</int>
-						<int key="IBUILineBreakMode">1</int>
+						<int key="IBUINumberOfLines">0</int>
+						<int key="IBUILineBreakMode">5</int>
 						<reference key="IBUIFontDescription" ref="565361623"/>
 						<reference key="IBUIFont" ref="176523808"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -364,11 +370,11 @@
 							<reference ref="905073592"/>
 							<reference ref="981450457"/>
 							<reference ref="495548164"/>
-							<reference ref="726571567"/>
-							<reference ref="108974297"/>
 							<reference ref="595563742"/>
 							<reference ref="895554512"/>
+							<reference ref="726571567"/>
 							<reference ref="382269617"/>
+							<reference ref="108974297"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

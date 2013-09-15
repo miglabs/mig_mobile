@@ -111,7 +111,7 @@ static int PAGE_WIDTH = 81;
     
     //心情
     _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnMood.frame = CGRectMake(11.5 + 246, 45 + 10 + 160, 31, 31);
+    _btnMood.frame = CGRectMake(11.5 + 246, 45 + 10 + 170, 31, 31);
     _btnMood.tag = 200;
     UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnMood setImage:moodimage forState:UIControlStateNormal];
@@ -120,7 +120,7 @@ static int PAGE_WIDTH = 81;
     
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, 45 + 10 + 220, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, 45 + 10 + 240, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
@@ -370,19 +370,19 @@ static int PAGE_WIDTH = 81;
         UIImage *typeimage = [UIImage imageNamed:usergene.type.picname];
         [_btnType setImage:typeimage forState:UIControlStateNormal];
         _currentGeneView.typeImageView.image = typeimage;
-        _currentGeneView.lblTypeDesc.text = usergene.type.name;
+        _currentGeneView.lblTypeDesc.text = usergene.type.desc;
         
         //mood
         UIImage *moodimage = [UIImage imageNamed:usergene.mood.picname];
         [_btnMood setImage:moodimage forState:UIControlStateNormal];
         _currentGeneView.moodImageView.image = moodimage;
-        _currentGeneView.lblMoodDesc.text = usergene.mood.name;
+        _currentGeneView.lblMoodDesc.text = usergene.mood.desc;
         
         //scene
         UIImage *sceneimage = [UIImage imageNamed:usergene.scene.picname];
         [_btnScene setImage:sceneimage forState:UIControlStateNormal];
         _currentGeneView.sceneImageView.image = sceneimage;
-        _currentGeneView.lblSceneDesc.text = usergene.scene.name;
+        _currentGeneView.lblSceneDesc.text = usergene.scene.desc;
         
         //记录音乐基因
         [[PDatabaseManager GetInstance] insertUserGene:usergene userId:userid];
