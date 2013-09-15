@@ -303,8 +303,10 @@
     // ...
     if (indexPath.row == 0) {
         
+        /*
         OnlineViewController *onlineViewController = [[OnlineViewController alloc] initWithNibName:@"OnlineViewController" bundle:nil];
         [self.topViewcontroller.navigationController pushViewController:onlineViewController animated:YES];
+        */
         
     } else if (indexPath.row == 1) {
         
