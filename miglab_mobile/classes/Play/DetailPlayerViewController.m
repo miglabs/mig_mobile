@@ -30,6 +30,9 @@
 @synthesize playerTimer = _playerTimer;
 @synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
 
+//分享选择
+@synthesize shareAchtionSheet = _shareAchtionSheet;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -151,6 +154,34 @@
     
     PLog(@"doShareAction...");
     
+    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    [_shareAchtionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    
+//    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 320, 150)];
+//    [pickerView setBackgroundColor:[UIColor blueColor]];
+//    pickerView.tag = 101;
+//    pickerView.delegate = self;
+//    pickerView.dataSource = self;
+//    pickerView.showsSelectionIndicator = YES;
+    
+//    [_shareAchtionSheet addSubview:pickerView];
+    
+    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"完成", nil]];
+    [button setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [button setFrame:CGRectMake(270, 20, 50, 30)];
+    [button addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+    [_shareAchtionSheet addSubview:button];
+    
+    [_shareAchtionSheet showInView:self.view];
+    [_shareAchtionSheet setBounds:CGRectMake(0, 0, 320, 400)];
+    [_shareAchtionSheet setBackgroundColor:[UIColor whiteColor]];
+    
+}
+
+-(void)segmentAction:(UISegmentedControl *)seg{
+    NSInteger index = seg.selectedSegmentIndex;
+    NSLog(@"index: %d", index);
+    [_shareAchtionSheet dismissWithClickedButtonIndex:index animated:YES];
 }
 
 -(IBAction)doDeleteAction:(id)sender{

@@ -33,8 +33,12 @@
 @property (nonatomic, retain) NSTimer *playerTimer;
 @property (nonatomic, assign) int checkUpdatePlayProcess;
 
+//分享选择
+@property (nonatomic, retain) UIActionSheet *shareAchtionSheet;
+
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
+-(void)segmentAction:(UISegmentedControl *)seg;
 
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;
