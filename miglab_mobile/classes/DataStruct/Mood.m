@@ -14,6 +14,9 @@
 @synthesize typeid = _typeid;
 @synthesize name = _name;
 @synthesize moodIndex = _moodIndex;
+@synthesize picname = _picname;
+@synthesize desc = _desc;
+@synthesize changenum = _changenum;
 
 //心情
 +(id)initWithNSDictionary:(NSDictionary*)dict{
@@ -40,7 +43,7 @@
 
 -(void)log{
     
-    PLog(@"Print Mood: day(%d), typeid(%d), name(%@), moodIndex(%d)", _day, _typeid, _name, _moodIndex);
+    PLog(@"Print Mood: day(%d), typeid(%d), name(%@), moodIndex(%d), picname(%@), desc(%@)", _day, _typeid, _name, _moodIndex, _picname, _desc);
     
 }
 

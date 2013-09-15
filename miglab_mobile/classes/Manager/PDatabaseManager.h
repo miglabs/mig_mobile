@@ -14,6 +14,7 @@
 #import "SongDownloadManager.h"
 #import "Word.h"
 #import "PUser.h"
+#import "UserGene.h"
 
 @interface PDatabaseManager : PFileManager
 
@@ -45,6 +46,13 @@
 -(void)deleteUserInfoByAccountId:(NSString *)taccountid;
 //清空用户信息
 -(void)deleteAllUserInfo;
+
+//记录用户音乐基因
+-(void)insertUserGene:(UserGene *)tusergene userId:(NSString *)tuserid;
+//根据用户userid获取音乐基因信息
+-(UserGene *)getUserGeneByUserId:(NSString *)tuserid;
+-(void)deleteUserGeneByUserId:(NSString *)tuserid;
+-(void)deleteUserGene;
 
 /*
  记录请求歌曲返回数据结果

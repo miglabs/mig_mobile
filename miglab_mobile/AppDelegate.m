@@ -135,13 +135,18 @@
         if (lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
             
             PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
-            tempuser.password = lastAccount.password;
+            if (tempuser) {
+                
+                tempuser.password = lastAccount.password;
+                
+                [UserSessionManager GetInstance].currentUser = tempuser;
+                [UserSessionManager GetInstance].userid = tempuser.userid;
+                [UserSessionManager GetInstance].accesstoken = tempuser.token;
+                [UserSessionManager GetInstance].accounttype = tempuser.source;
+                [UserSessionManager GetInstance].isLoggedIn = YES;
+            }
             
-            [UserSessionManager GetInstance].currentUser = tempuser;
-            [UserSessionManager GetInstance].userid = tempuser.userid;
-            [UserSessionManager GetInstance].accesstoken = tempuser.token;
-            [UserSessionManager GetInstance].accounttype = tempuser.source;
-            [UserSessionManager GetInstance].isLoggedIn = YES;
+            
             
         } else {
             /*

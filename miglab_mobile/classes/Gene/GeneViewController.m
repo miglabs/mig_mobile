@@ -243,9 +243,7 @@ static int PAGE_WIDTH = 81;
     _modifyGeneView.hidden = YES;
     
     //init gene 4 show
-    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-    usergene.channel = [_xmlParserUtil.channelList objectAtIndex:3];
-    [self initGeneByUserGene:usergene];
+    [self initGeneDataByCache];
     
     //加载歌曲
     [self loadTypeSongs];
@@ -276,41 +274,78 @@ static int PAGE_WIDTH = 81;
     
 }
 
--(void)initGeneByUserGene:(UserGene *)usergene{
+-(void)initGeneDataByCache{
     
-    [self initGene:usergene.channel typeId:usergene.type.typeid moodId:usergene.mood.typeid sceneId:usergene.scene.typeid];
+    PLog(@"initGeneDataByCache...");
+    
+    @try {
+        
+        UserGene *tempusergene = [[PDatabaseManager GetInstance] getUserGeneByUserId:[UserSessionManager GetInstance].userid];
+        if (tempusergene) {
+            
+            tempusergene.channel = [_xmlParserUtil.channelList objectAtIndex:tempusergene.channel.channelIndex];
+            tempusergene.type = [_xmlParserUtil.typeList objectAtIndex:tempusergene.type.typeIndex];
+            tempusergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempusergene.mood.moodIndex];
+            tempusergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempusergene.scene.sceneIndex];
+            
+            [UserSessionManager GetInstance].currentUserGene = tempusergene;
+            
+        } else {
+            
+            tempusergene = [UserSessionManager GetInstance].currentUserGene;
+            tempusergene.channel = [_xmlParserUtil.channelList objectAtIndex:3];
+            tempusergene.type = [_xmlParserUtil.typeList objectAtIndex:tempusergene.channel.typeindex];
+            tempusergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempusergene.channel.moodindex];
+            tempusergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempusergene.channel.sceneindex];
+            
+        }
+        
+        [self initGeneByUserGene:tempusergene];
+        
+    }
+    @catch (NSException *exception) {
+        PLog(@"initGeneDataByCache failed...please check");
+        [SVProgressHUD showErrorWithStatus:@"初始化音乐基因出错:("];
+    }
     
 }
 
--(void)initGene:(Channel *)tchannel typeId:(int)ttypeid moodId:(int)tmoodid sceneId:(int)tsceneid{
+-(void)initGeneByUserGene:(UserGene *)usergene{
+    
+    [self initGene:usergene.channel typeIndex:usergene.type.typeIndex moodIndex:usergene.mood.moodIndex sceneIndex:usergene.scene.sceneIndex];
+    
+}
+
+-(void)initGene:(Channel *)tchannel typeIndex:(int)ttypeindex moodIndex:(int)tmoodindex sceneIndex:(int)tsceneindex{
     
     [tchannel log];
-    PLog(@"tchannel.channelId(%@), tchannel.channelName(%@), ttypeid(%d), tmoodid(%d), tsceneid(%d)", tchannel.channelId, tchannel.channelName, ttypeid, tmoodid, tsceneid);
+    PLog(@"tchannel.channelId(%@), tchannel.channelName(%@), tchannel.channelIndex(%d), ttypeindex(%d), tmoodindex(%d), tsceneindex(%d)", tchannel.channelId, tchannel.channelName, tchannel.channelIndex, ttypeindex, tmoodindex, tsceneindex);
     
-    int currentchannelid = [tchannel.channelId intValue] - 1;
-    if (currentchannelid >= 0) {
+    int currentchannelindex = tchannel.channelIndex;
+    if (currentchannelindex >= 0) {
         
-        [_modifyGeneView.channelScrollView setContentOffset:CGPointMake(currentchannelid*PAGE_WIDTH, 0) animated:YES];
+        int currentChannelPosition = currentchannelindex;
+        [_modifyGeneView.channelScrollView setContentOffset:CGPointMake(currentChannelPosition*PAGE_WIDTH, 0) animated:YES];
         
-        int temptypeid = tchannel.typeid - 1;
-        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(temptypeid*PAGE_WIDTH, 0) animated:YES];
+        int currentTypePosition = tchannel.typeindex;
+        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(currentTypePosition*PAGE_WIDTH, 0) animated:YES];
         
-        int tempmoodid = tchannel.moodid - 1;
-        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(tempmoodid*PAGE_WIDTH, 0) animated:YES];
+        int currentMoodPosition = tchannel.moodindex;
+        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(currentMoodPosition*PAGE_WIDTH, 0) animated:YES];
         
-        int tempsceneid = tchannel.sceneid - 1;
-        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(tempsceneid*PAGE_WIDTH, 0) animated:YES];
+        int currentScenePosition = tchannel.sceneindex;
+        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(currentScenePosition*PAGE_WIDTH, 0) animated:YES];
         
     } else {
         
-        int currenttypeid = ttypeid - 1;
-        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(currenttypeid*PAGE_WIDTH, 0) animated:YES];
+        int currentTypePosition = ttypeindex;
+        [_modifyGeneView.typeScrollView setContentOffset:CGPointMake(currentTypePosition*PAGE_WIDTH, 0) animated:YES];
         
-        int currentmoodid = tmoodid - 1;
-        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(currentmoodid*PAGE_WIDTH, 0) animated:YES];
+        int currentMoodPosition = tmoodindex;
+        [_modifyGeneView.moodScrollView setContentOffset:CGPointMake(currentMoodPosition*PAGE_WIDTH, 0) animated:YES];
         
-        int currentsceneid = tsceneid - 1;
-        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(currentsceneid*PAGE_WIDTH, 0) animated:YES];
+        int currentScenePosition = tsceneindex;
+        [_modifyGeneView.sceneScrollView setContentOffset:CGPointMake(currentScenePosition*PAGE_WIDTH, 0) animated:YES];
         
     }
     
@@ -325,13 +360,16 @@ static int PAGE_WIDTH = 81;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
-        NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
+        NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
         NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
-        NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
+        NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
         NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-        NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
+        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
         
-        [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
+        //记录音乐基因
+        [[PDatabaseManager GetInstance] insertUserGene:usergene userId:userid];
+        
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:@"5"];
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
@@ -376,9 +414,12 @@ static int PAGE_WIDTH = 81;
     PLog(@"doGotoGene...");
     
     UserGene *currentUserGene = [UserSessionManager GetInstance].currentUserGene;
-    currentUserGene.type.typeIndx = 0;
-    currentUserGene.mood.moodIndex = 0;
-    currentUserGene.scene.sceneIndex = 0;
+    currentUserGene.type.changenum = 0;
+    currentUserGene.mood.changenum = 0;
+    currentUserGene.scene.changenum = 0;
+    
+    //
+//    [self initGeneByUserGene:currentUserGene];
     
     _btnCurrentGene = sender;
     _oldGeneFrame = _btnCurrentGene.frame;
@@ -592,10 +633,10 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.channel = tempchannel;
-            usergene.channel.channelIndex++;
-            usergene.type.typeid = tempchannel.typeid;
-            usergene.mood.typeid = tempchannel.moodid;
-            usergene.scene.typeid = tempchannel.sceneid;
+            usergene.channel.changenum++;
+            usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
+            usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
+            usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
             [self initGeneByUserGene:usergene];
             
         } else if (scrollView.tag == 201) {
@@ -605,7 +646,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.type = temptype;
-            usergene.type.typeIndx++;
+            usergene.type.changenum++;
             
         } else if (scrollView.tag == 202) {
             
@@ -614,7 +655,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.mood = tempmood;
-            usergene.mood.moodIndex++;
+            usergene.mood.changenum++;
             
         } else if (scrollView.tag == 203) {
             
@@ -623,7 +664,7 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.scene = tempscene;
-            usergene.scene.sceneIndex++;
+            usergene.scene.changenum++;
             
         }
         
@@ -649,9 +690,9 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.channel = tempchannel;
-        usergene.type.typeid = tempchannel.typeid;
-        usergene.mood.typeid = tempchannel.moodid;
-        usergene.scene.typeid = tempchannel.sceneid;
+        usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
+        usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
+        usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
         [self initGeneByUserGene:usergene];
         
     } else if (scrollView.tag == 201) {

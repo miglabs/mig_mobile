@@ -12,7 +12,10 @@
 
 @synthesize typeid = _typeid;
 @synthesize name = _name;
-@synthesize typeIndx = _typeIndx;
+@synthesize typeIndex = _typeIndex;
+@synthesize picname = _picname;
+@synthesize desc = _desc;
+@synthesize changenum = _changenum;
 
 //类别
 +(id)initWithNSDictionary:(NSDictionary*)dict{
@@ -38,7 +41,7 @@
 
 -(void)log{
     
-    PLog(@"Print Type: typeid(%d), name(%@), typeIndx(%d)", _typeid, _name, _typeIndx);
+    PLog(@"Print Type: typeid(%d), name(%@), typeIndex(%d), picname(%@), desc(%@)", _typeid, _name, _typeIndex, _picname, _desc);
     
 }
 

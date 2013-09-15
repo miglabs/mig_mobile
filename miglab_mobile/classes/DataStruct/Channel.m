@@ -14,9 +14,13 @@
 @synthesize channelName = _channelName;
 @synthesize channelPicUrl = _channelPicUrl;
 @synthesize channelIndex = _channelIndex;
-@synthesize typeid = _typeid;
-@synthesize moodid = _moodid;
-@synthesize sceneid = _sceneid;
+//@synthesize typeid = _typeid;
+@synthesize typeindex = _typeindex;
+//@synthesize moodid = _moodid;
+@synthesize moodindex = _moodindex;
+//@synthesize sceneid = _sceneid;
+@synthesize sceneindex = _sceneindex;
+@synthesize changenum = _changenum;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict {
     
@@ -44,7 +48,8 @@
 
 -(void)log{
     
-    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), channelIndex(%d), typeid(%d), moodid(%d), sceneid(%d)", _channelId, _channelName, _channelPicUrl, _channelIndex, _typeid, _moodid, _sceneid);
+//    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), channelIndex(%d), typeid(%d), typeindex(%d), moodid(%d), moodindex(%d), sceneid(%d), sceneindex(%d)", _channelId, _channelName, _channelPicUrl, _channelIndex, _typeid, _typeindex, _moodid, _moodindex, _sceneid, _sceneindex);
+    PLog(@"Print Channel: channelId(%@), channelName(%@), channelPicUrl(%@), channelIndex(%d), typeid(%d), typeindex(%d), moodid(%d), moodindex(%d), sceneid(%d), sceneindex(%d)", _channelId, _channelName, _channelPicUrl, _channelIndex, _typeindex, _typeindex, _moodindex, _moodindex, _sceneindex, _sceneindex);
     
 }
 

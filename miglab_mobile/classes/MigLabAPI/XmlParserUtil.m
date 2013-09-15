@@ -18,6 +18,7 @@
 @synthesize currentElementValue = _currentElementValue;
 @synthesize storingCharacterData = _storingCharacterData;
 @synthesize version = _version;
+@synthesize updateurl = _updateurl;
 
 @synthesize typeList = _typeList;
 @synthesize moodList = _moodList;
@@ -46,7 +47,7 @@
 
 -(id)initWithParserDefaultElement{
     
-    return [self initWithParserElements:[NSArray arrayWithObjects:@"description", @"type", @"mood", @"scenes", @"attr", @"mig_channel", @"channel", @"info_version", nil]];
+    return [self initWithParserElements:[NSArray arrayWithObjects:@"description", @"updateurl", @"type", @"mood", @"scenes", @"attr", @"mig_channel", @"info_version", nil]];
 }
 
 -(BOOL)parserXml:(NSData *)xmlData{
@@ -74,7 +75,7 @@
     }
     
     
-    NSLog(@"_typeList: %d, _moodList: %d, _sceneList: %d, _channelList: %d, version: %lld", [_typeList count], [_moodList count], [_sceneList count], [_channelList count], _version);
+    NSLog(@"_updateurl: %@, _typeList: %d, _moodList: %d, _sceneList: %d, _channelList: %d, version: %lld", _updateurl, [_typeList count], [_moodList count], [_sceneList count], [_channelList count], _version);
     
     
     return (_version > 0);
@@ -95,9 +96,12 @@
 //    PLog(@"didStartElement qName: %@", qName);
 //    PLog(@"didStartElement attributeDict: %@", attributeDict);
     
-    if ([elementName isEqualToString:@"type"]) {
+    if ([elementName isEqualToString:@"updateurl"]) {
         _currentElementValue = elementName;
         _typeList = [[NSMutableArray alloc] init];
+    } else if ([elementName isEqualToString:@"type"]) {
+        _currentElementValue = elementName;
+        _moodList = [[NSMutableArray alloc] init];
     } else if ([elementName isEqualToString:@"mood"]) {
         _currentElementValue = elementName;
         _moodList = [[NSMutableArray alloc] init];
@@ -116,6 +120,9 @@
             Type *tempType = [[Type alloc] init];
             tempType.typeid = [[attributeDict objectForKey:@"id"] intValue];
             tempType.name = [attributeDict objectForKey:@"name"];
+            tempType.typeIndex = [[attributeDict objectForKey:@"index"] intValue] - 1;
+            tempType.picname = [attributeDict objectForKey:@"picname"];
+            tempType.desc = [attributeDict objectForKey:@"dec"];
             
             [_typeList addObject:tempType];
             
@@ -124,6 +131,9 @@
             Mood *tempMood = [[Mood alloc] init];
             tempMood.typeid = [[attributeDict objectForKey:@"id"] intValue];
             tempMood.name = [attributeDict objectForKey:@"name"];
+            tempMood.moodIndex = [[attributeDict objectForKey:@"index"] intValue] - 1;
+            tempMood.picname = [attributeDict objectForKey:@"picname"];
+            tempMood.desc = [attributeDict objectForKey:@"dec"];
             
             [_moodList addObject:tempMood];
             
@@ -132,6 +142,9 @@
             Scene *tempScene = [[Scene alloc] init];
             tempScene.typeid = [[attributeDict objectForKey:@"id"] intValue];
             tempScene.name = [attributeDict objectForKey:@"name"];
+            tempScene.sceneIndex = [[attributeDict objectForKey:@"index"] intValue] - 1;
+            tempScene.picname = [attributeDict objectForKey:@"picname"];
+            tempScene.desc = [attributeDict objectForKey:@"dec"];
             
             [_sceneList addObject:tempScene];
             
@@ -140,14 +153,17 @@
             Channel *tempChannel = [[Channel alloc] init];
             tempChannel.channelId = [attributeDict objectForKey:@"id"];
             tempChannel.channelName = [attributeDict objectForKey:@"name"];
-            tempChannel.typeid = [[attributeDict objectForKey:@"typeid"] intValue];
-            tempChannel.moodid = [[attributeDict objectForKey:@"moodid"] intValue];
-            tempChannel.sceneid = [[attributeDict objectForKey:@"scenesid"] intValue];
+            tempChannel.typeindex = [[attributeDict objectForKey:@"typeindex"] intValue] - 1;
+            tempChannel.moodindex = [[attributeDict objectForKey:@"moodindex"] intValue] - 1;
+            tempChannel.sceneindex = [[attributeDict objectForKey:@"sceneindex"] intValue] - 1;
+            tempChannel.channelIndex = [[attributeDict objectForKey:@"index"] intValue] - 1;
             
             [_channelList addObject:tempChannel];
             
         } else if ([_currentElementValue isEqualToString:@"info_version"]) {
             _version = [[attributeDict objectForKey:@"id"] intValue];
+        } else if ([_currentElementValue isEqualToString:@"updateurl"]) {
+            _updateurl = [attributeDict objectForKey:@"id"];
         }
         
     }

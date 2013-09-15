@@ -43,6 +43,8 @@
         
         [_db executeUpdate:@"create table if not exists USER_INFO (accountid text not null, userid text not null, username text, nickname text, gender integer, type integer, birthday text, location text, age integer, source integer, head text, token text, logintime integer)"];
         
+        [_db executeUpdate:@"create table if not exists USER_GENE (userid text not null, channelindex integer, typeindex integer, moodindex integer, sceneindex integer)"];
+        
         //song cache
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
@@ -334,6 +336,101 @@
 -(void)deleteAllUserInfo{
     
     NSString *sql = @"delete from USER_INFO";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql];
+    [_db close];
+    
+}
+
+//记录用户音乐基因
+-(void)insertUserGene:(UserGene *)tusergene userId:(NSString *)tuserid{
+    
+    if (!tusergene) {
+        return;
+    }
+    
+    NSNumber *numChannelIndex = [NSNumber numberWithInt:tusergene.channel.channelIndex];
+    NSNumber *numTypeIndex = [NSNumber numberWithInt:tusergene.type.typeIndex];
+    NSNumber *numMoodIndex = [NSNumber numberWithInt:tusergene.mood.moodIndex];
+    NSNumber *numSceneIndex = [NSNumber numberWithInt:tusergene.scene.sceneIndex];
+    
+    
+    NSString *sql = @"insert into USER_GENE (channelindex, typeindex, moodindex, sceneindex, userid) values (?, ?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select userid from USER_GENE where userid = '%@' ", tuserid];
+    PLog(@"checksql: %@", checksql);
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    while ([rs next]) {
+        
+        sql = @"update USER_GENE set channelindex = ? , typeindex = ? , moodindex = ? , sceneindex = ? where userid = ? ";
+        PLog(@"sql: %@", sql);
+        break;
+    }
+    
+    BOOL isOk = [_db executeUpdate:sql, numChannelIndex, numTypeIndex, numMoodIndex, numSceneIndex, tuserid];
+    if (isOk) {
+        PLog(@"insertUserGene success...%@", tuserid);
+    } else {
+        PLog(@"insertUserGene failure...%@", tuserid);
+    }
+    
+    [_db close];
+    
+}
+
+//根据用户userid获取音乐基因信息
+-(UserGene *)getUserGeneByUserId:(NSString *)tuserid{
+    
+    UserGene *tempusergene = nil;
+    
+    NSString *sql = [NSString stringWithFormat:@"select userid, channelindex, typeindex, moodindex, sceneindex from USER_GENE where userid = '%@' ", tuserid];
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        int pchannelindex = [rs intForColumn:@"channelindex"];
+        int ptypeindex = [rs intForColumn:@"typeindex"];
+        int pmoodindex = [rs intForColumn:@"moodindex"];
+        int psceneindex = [rs intForColumn:@"sceneindex"];
+        
+        tempusergene = [[UserGene alloc] init];
+        tempusergene.channel.channelIndex = pchannelindex;
+        tempusergene.type.typeIndex = ptypeindex;
+        tempusergene.mood.moodIndex = pmoodindex;
+        tempusergene.scene.sceneIndex = psceneindex;
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return tempusergene;
+    
+}
+
+-(void)deleteUserGeneByUserId:(NSString *)tuserid{
+    
+    NSString *sql = @"delete from USER_GENE where userid = ? ";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, tuserid];
+    [_db close];
+    
+}
+
+-(void)deleteUserGene{
+    
+    NSString *sql = @"delete from USER_GENE";
     PLog(@"sql: %@", sql);
     
     [_db open];

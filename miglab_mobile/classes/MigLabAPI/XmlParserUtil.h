@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSString *currentElementValue;//节点值
 @property (nonatomic, assign) BOOL storingCharacterData;//当前节点是否要记录
 @property (nonatomic, assign) long long version;//数据版本
+@property (nonatomic, retain) NSString *updateurl;
 
 @property (nonatomic, retain) NSMutableArray *typeList;
 @property (nonatomic, retain) NSMutableArray *moodList;

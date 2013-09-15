@@ -30,22 +30,22 @@
         <attr index = "6" id = "6"  picname="scene_6.png" name="运动"       dec="运动不止，生命不息"/>
     </scenes>
     <mig_channel>
-        <attr id ="1" name ="模式√1"        typeid="1" moodid="1" scenesid="1"/>
-        <attr id ="2" name ="模式√4"        typeid="4" moodid="6" scenesid="2"/>
-        <attr id ="3" name ="模式ctg²α"     typeid="2" moodid="2" scenesid="3"/>
-        <attr id ="4" name ="模式2²"        typeid="9" moodid="5" scenesid="4"/>
-        <attr id ="5" name ="模式5*4-5*3"   typeid="5" moodid="3" scenesid="5"/>
-        <attr id ="6" name ="模式1+2+3"     typeid="8" moodid="4" scenesid="6"/>
-        <attr id ="7" name ="模式3*2+1"  typeid="6" moodid="5" scenesid="1"/>
-        <attr id ="8" name ="模式2³"        typeid="7" moodid="2" scenesid="2"/>
-        <attr id ="9" name ="模式3²"       typeid="3" moodid="3" scenesid="3"/>
-        <attr id ="10" name ="模式3²+1"     typeid="16" moodid="2" scenesid="4"/> 
-        <attr id ="11" name ="模式3²+2"     typeid="13" moodid="5" scenesid="5"/> 
-        <attr id ="12" name ="模式3²+3"     typeid="10" moodid="1" scenesid="3"/> 
-        <attr id ="13" name ="模式√169"     typeid="14" moodid="6" scenesid="2"/> 
-        <attr id ="14" name ="模式3²+5"     typeid="11" moodid="2" scenesid="4"/> 
-        <attr id ="15" name ="模式5²-5*2"     typeid="15" moodid="6" scenesid="1"/> 
-        <attr id ="16" name ="模式2^4"     typeid="12" moodid="1" scenesid="4"/> 
+        <attr index = "1" id ="1" name ="模式√1"        typeindex="1" moodindex="1" sceneindex="1"/>
+        <attr index = "2" id ="2" name ="模式√4"        typeindex="4" moodindex="6" sceneindex="2"/>
+        <attr index = "3" id ="3" name ="模式ctg²α"     typeindex="2" moodindex="2" sceneindex="3"/>
+        <attr index = "4" id ="4" name ="模式2²"        typeindex="7" moodindex="5" sceneindex="4"/>
+        <attr index = "5" id ="5" name ="模式5*4-5*3"   typeindex="5" moodindex="3" sceneindex="5"/>
+        <attr index = "6" id ="6" name ="模式1+2+3"     typeindex="8" moodindex="4" sceneindex="6"/>
+        <attr index = "7" id ="7" name ="模式3*2+1"  typeindex="6" moodindex="5" sceneindex="1"/>
+        <attr index = "8" id ="8" name ="模式2³"        typeindex="7" moodindex="2" sceneindex="2"/>
+        <attr index = "9" id ="9" name ="模式3²"       typeindex="3" moodindex="3" sceneindex="3"/>
+        <attr index = "10" id ="10" name ="模式3²+1"     typeindex="8" moodindex="2" sceneindex="4"/>
+        <attr index = "11" id ="11" name ="模式3²+2"     typeindex="8" moodindex="5" sceneindex="5"/>
+        <attr index = "12" id ="12" name ="模式3²+3"     typeindex="7" moodindex="1" sceneindex="3"/>
+        <attr index = "13" id ="13" name ="模式√169"     typeindex="8" moodindex="6" sceneindex="2"/>
+        <attr index = "14" id ="14" name ="模式3²+5"     typeindex="7" moodindex="2" sceneindex="4"/>
+        <attr index = "15" id ="15" name ="模式5²-5*2"     typeindex="8" moodindex="6" sceneindex="1"/>
+        <attr index = "16" id ="16" name ="模式2^4"     typeindex="7" moodindex="1" sceneindex="4"/> 
     </mig_channel>
     <info_version>
         <attr id = "1"/>

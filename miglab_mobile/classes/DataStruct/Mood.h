@@ -14,6 +14,9 @@
 @property (nonatomic, assign) int typeid;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) int moodIndex;
+@property (nonatomic, retain) NSString *picname;
+@property (nonatomic, retain) NSString *desc;
+@property (nonatomic, assign) int changenum;
 
 //心情
 +(id)initWithNSDictionary:(NSDictionary*)dict;

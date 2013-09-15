@@ -12,7 +12,10 @@
 
 @property (nonatomic, assign) int typeid;
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, assign) int typeIndx;
+@property (nonatomic, assign) int typeIndex;
+@property (nonatomic, retain) NSString *picname;
+@property (nonatomic, retain) NSString *desc;
+@property (nonatomic, assign) int changenum;
 
 //类别
 +(id)initWithNSDictionary:(NSDictionary*)dict;
