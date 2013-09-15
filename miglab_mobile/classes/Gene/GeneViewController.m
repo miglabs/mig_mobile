@@ -366,6 +366,24 @@ static int PAGE_WIDTH = 81;
         NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
         NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
         
+        //type
+        UIImage *typeimage = [UIImage imageNamed:usergene.type.picname];
+        [_btnType setImage:typeimage forState:UIControlStateNormal];
+        _currentGeneView.typeImageView.image = typeimage;
+        _currentGeneView.lblTypeDesc.text = usergene.type.name;
+        
+        //mood
+        UIImage *moodimage = [UIImage imageNamed:usergene.mood.picname];
+        [_btnMood setImage:moodimage forState:UIControlStateNormal];
+        _currentGeneView.moodImageView.image = moodimage;
+        _currentGeneView.lblMoodDesc.text = usergene.mood.name;
+        
+        //scene
+        UIImage *sceneimage = [UIImage imageNamed:usergene.scene.picname];
+        [_btnScene setImage:sceneimage forState:UIControlStateNormal];
+        _currentGeneView.sceneImageView.image = sceneimage;
+        _currentGeneView.lblSceneDesc.text = usergene.scene.name;
+        
         //记录音乐基因
         [[PDatabaseManager GetInstance] insertUserGene:usergene userId:userid];
         
@@ -514,13 +532,7 @@ static int PAGE_WIDTH = 81;
         
     }];
     
-    /*
-    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-    _currentGeneView.lblTypeDesc.text = usergene.type.name;
-    _currentGeneView.lblMoodDesc.text = usergene.mood.name;
-    _currentGeneView.lblSceneDesc.text = usergene.scene.name;
-    */
-    
+    //
     [self loadTypeSongs];
     
     /*

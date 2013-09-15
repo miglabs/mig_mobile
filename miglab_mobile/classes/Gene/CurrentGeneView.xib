@@ -322,6 +322,30 @@
 					</object>
 					<int key="connectionID">20</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">typeImageView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="495548164"/>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sceneImageView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="108974297"/>
+					</object>
+					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">moodImageView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="726571567"/>
+					</object>
+					<int key="connectionID">25</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -433,7 +457,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -447,6 +471,9 @@
 						<string key="lblSceneDesc">UILabel</string>
 						<string key="lblTypeDesc">UILabel</string>
 						<string key="lblYear">UILabel</string>
+						<string key="moodImageView">UIImageView</string>
+						<string key="sceneImageView">UIImageView</string>
+						<string key="typeImageView">UIImageView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="egoBtnAvatar">
@@ -472,6 +499,18 @@
 						<object class="IBToOneOutletInfo" key="lblYear">
 							<string key="name">lblYear</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="moodImageView">
+							<string key="name">moodImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sceneImageView">
+							<string key="name">sceneImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="typeImageView">
+							<string key="name">typeImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

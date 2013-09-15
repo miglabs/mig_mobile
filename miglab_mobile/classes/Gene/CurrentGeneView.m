@@ -13,8 +13,11 @@
 @synthesize lblYear = _lblYear;
 @synthesize lblMonthAndDay = _lblMonthAndDay;
 @synthesize egoBtnAvatar = _egoBtnAvatar;
+@synthesize typeImageView = _typeImageView;
 @synthesize lblTypeDesc = _lblTypeDesc;
+@synthesize moodImageView = _moodImageView;
 @synthesize lblMoodDesc = _lblMoodDesc;
+@synthesize sceneImageView = _sceneImageView;
 @synthesize lblSceneDesc = _lblSceneDesc;
 
 - (id)initWithFrame:(CGRect)frame
