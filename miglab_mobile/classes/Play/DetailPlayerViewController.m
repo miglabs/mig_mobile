@@ -11,6 +11,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
+#import "PDatabaseManager.h"
 
 @interface DetailPlayerViewController ()
 
@@ -21,13 +22,13 @@
 @synthesize topPlayerInfoView = _topPlayerInfoView;
 
 @synthesize lblSongInfo = _lblSongInfo;
-@synthesize showInfoPageControl = _showInfoPageControl;
-
-@synthesize songInfoScrollView = _songInfoScrollView;
 
 @synthesize cdOfSongView = _cdOfSongView;
 
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
+
+@synthesize playerTimer = _playerTimer;
+@synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,33 +54,14 @@
     
     //song info label
     _lblSongInfo = [[UILabel alloc] init];
-    _lblSongInfo.frame = CGRectMake(0, 60, kMainScreenWidth, 21);
+    _lblSongInfo.frame = CGRectMake(0, 70, kMainScreenWidth, 21);
     _lblSongInfo.backgroundColor = [UIColor clearColor];
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
     _lblSongInfo.textColor = [UIColor whiteColor];
     _lblSongInfo.shadowOffset = CGSizeMake(0, 1);
     _lblSongInfo.text = @"乐瑟 - 无敌仙曲";
+    _lblSongInfo.font = [UIFont systemFontOfSize:20.0f];
     [self.view addSubview:_lblSongInfo];
-    
-    //song of page
-    _showInfoPageControl = [[PCustomPageControl alloc] init];
-    _showInfoPageControl.backgroundColor = [UIColor clearColor];
-    _showInfoPageControl.frame = CGRectMake(0, 90, kMainScreenWidth, 15);
-    _showInfoPageControl.numberOfPages = 2;
-    _showInfoPageControl.currentPage = 0;
-    _showInfoPageControl.imagePageStateNormal = [UIImage imageWithName:@"page_nor" type:@"png"];
-    _showInfoPageControl.imagePageStateHighlighted = [UIImage imageWithName:@"page_sel" type:@"png"];
-    [self.view addSubview:_showInfoPageControl];
-    
-    //song info
-    _songInfoScrollView = [[UIScrollView alloc] init];
-    _songInfoScrollView.backgroundColor = [UIColor clearColor];
-    _songInfoScrollView.frame = CGRectMake(0, 100, kMainScreenWidth, kMainScreenHeight - 100 - 90);
-    _songInfoScrollView.scrollEnabled = YES;
-    _songInfoScrollView.showsHorizontalScrollIndicator = NO;
-    _songInfoScrollView.pagingEnabled = YES;
-    _songInfoScrollView.delegate = self;
-    _songInfoScrollView.contentSize = CGSizeMake(kMainScreenWidth * 2, kMainScreenHeight - 100 - 90);
     
     //song of cd view
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PlayBodyView" owner:self options:nil];
@@ -88,7 +70,7 @@
             _cdOfSongView = (PlayBodyView *)oneObject;
         }//if
     }//for
-    _cdOfSongView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - 100 - 90);
+    _cdOfSongView.frame = CGRectMake(0, 100, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
     _cdOfSongView.coverOfSongEGOImageView.tag = 2000;
     _cdOfSongView.coverOfSongEGOImageView.delegate = self;
@@ -100,12 +82,12 @@
     _cdOfSongView.btnCdOfSong.adjustsImageWhenHighlighted = NO;
     [_cdOfSongView.btnCdOfSong addTarget:self action:@selector(doPlayOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    _cdOfSongView.lrcOfSongTextView.hidden = YES;
+    
     //初始化进度指示
     [_cdOfSongView updateProcess:0.01];
     
-    [_songInfoScrollView addSubview:_cdOfSongView];
-    
-    [self.view addSubview:_songInfoScrollView];
+    [self.view addSubview:_cdOfSongView];
     
     //bottom
     _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight - 90, 320, 90)];
@@ -114,7 +96,6 @@
     [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_bottomPlayerMenuView];
     
-    //
     
 }
 
@@ -129,6 +110,9 @@
     //doCollectSong
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
+    
+    //data
+    [self initSongInfo];
     
 }
 
@@ -155,6 +139,9 @@
 -(IBAction)doShowMenuViewAction:(id)sender{
     
     PLog(@"doShowMenuViewAction...");
+    
+    [self timerStop];
+    
 //    [self.navigationController popViewControllerAnimated:YES];
     [self dismissModalViewControllerAnimated:YES];
     
@@ -177,6 +164,13 @@
         NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
+        int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
+        [[PPlayerManagerCenter GetInstance].songList removeObjectAtIndex:currentSongIndex];
+        [[PDatabaseManager GetInstance] deleteSongInfo:currentSong.songid];
+        [self doNextAction:nil];
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
     
 }
@@ -192,10 +186,19 @@
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
-//        NSString *moodid = [NSString stringWithFormat:@"%d", currentSong]
+        NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
+        NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
-//        [_miglabAPI doCollectSong:userid token:accesstoken sid:currentSong.songid modetype:<#(NSString *)#> typeid:<#(NSString *)#>]
+        int isLike = [currentSong.like intValue];
+        if (isLike > 0) {
+            [_miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:songid];
+        } else {
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+        }
         
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
     
 }
@@ -238,8 +241,16 @@
 
 -(void)initSongInfo{
     
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    _topPlayerInfoView.lblPlayingSongInfo.text = usergene.type.desc;
+    
     Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
-    _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentSong.songname, currentSong.artist];
+    _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
+    _cdOfSongView.coverOfSongEGOImageView.imageURL = [NSURL URLWithString:currentSong.coverurl];
+    
+//    _cdOfSongView.lrcOfSongTextView.text = usergene.scene.desc;
+    
+    [self timerStart];
     
 }
 
@@ -261,17 +272,69 @@
     
 }
 
-#pragma UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//播放时间刷新
+-(void)timerStop{
     
-    int page = 0;
-    CGFloat pageWidth = scrollView.frame.size.width;
-    page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    _showInfoPageControl.currentPage = page;
+    @synchronized(self){
+        if (_playerTimer) {
+            if ([_playerTimer isValid]) {
+                [_playerTimer invalidate];
+            }
+            _playerTimer = nil;
+        }
+    }
     
 }
 
-#pragma UIScrollViewDelegate end
+-(void)timerStart{
+    
+    [self timerStop];
+    _playerTimer = [NSTimer scheduledTimerWithTimeInterval:PlayerTimerFunctionInterval target:self selector:@selector(playerTimerFunction) userInfo:nil repeats:YES];
+    
+}
+
+-(void)playerTimerFunction{
+
+    PLog(@"playerTimerFunction...");
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (![aaMusicPlayer isMusicPlaying]) {
+        
+        [self timerStop];
+        
+    }
+    
+    //更新播放信息
+    [self doUpdateForPlaying];
+    
+}
+
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying{
+    
+    [_topPlayerInfoView doUpdatePlayingTip];
+    [_cdOfSongView doRotateSongCover];
+    [self doUpdateProcess];
+    
+}
+
+//根据圆圈的比率，刷新圆盘进度
+-(void)doUpdateProcess{
+    
+    if (_checkUpdatePlayProcess < 10) {
+        _checkUpdatePlayProcess++;
+        return;
+    }
+    _checkUpdatePlayProcess = 0;
+    
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    long duration = aaMusicPlayer.getDuration;
+    long currentTime = aaMusicPlayer.getCurrentTime;
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    
+    [_cdOfSongView updateProcess:playProcess];
+    
+}
 
 #pragma EGOImageViewDelegate
 - (void)imageViewLoadedImage:(EGOImageView*)imageView{

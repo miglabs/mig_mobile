@@ -124,8 +124,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
     
     //doCancelCollectedSong
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameDeleteCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameDeleteCollectSongSuccess object:nil];
     
     //doPlayOrPause
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStart object:nil];

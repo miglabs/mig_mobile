@@ -10,26 +10,28 @@
 #import "EGOImageView.h"
 #import "EGOImageButton.h"
 #import "PCustomPlayerNavigationView.h"
-#import "PCustomPageControl.h"
 #import "PlayBodyView.h"
 #import "PCustomPlayerMenuView.h"
 
 #import "MigLabAPI.h"
 
-@interface DetailPlayerViewController : BaseViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
 @property (nonatomic, retain) UILabel *lblSongInfo;
-@property (nonatomic, retain) PCustomPageControl *showInfoPageControl;
-
-@property (nonatomic, retain) UIScrollView *songInfoScrollView;
 
 @property (nonatomic, retain) PlayBodyView *cdOfSongView;
 
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
+
+/*
+ 使用播放计时器控制统一控制刷新，预留后续的歌词刷新
+ */
+@property (nonatomic, retain) NSTimer *playerTimer;
+@property (nonatomic, assign) int checkUpdatePlayProcess;
 
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
@@ -46,5 +48,13 @@
 
 -(void)initSongInfo;
 -(void)configNowPlayingInfoCenter;               //锁屏封面
+
+//播放时间刷新
+-(void)timerStop;
+-(void)timerStart;
+-(void)playerTimerFunction;
+
+//播放时刷新所有对于view的数据
+-(void)doUpdateForPlaying;
 
 @end

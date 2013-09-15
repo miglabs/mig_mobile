@@ -35,9 +35,9 @@
         _btnMenu = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnMenu.frame = CGRectMake(3, 23, 44, 44);
         UIImage *menuNorImage = [UIImage imageWithName:@"play_btn_menu_nor" type:@"png"];
-        UIImage *menuSelImage = [UIImage imageWithName:@"play_btn_menu_sel" type:@"png"];
+//        UIImage *menuSelImage = [UIImage imageWithName:@"play_btn_menu_sel" type:@"png"];
         [_btnMenu setImage:menuNorImage forState:UIControlStateNormal];
-        [_btnMenu setImage:menuSelImage forState:UIControlStateHighlighted];
+//        [_btnMenu setImage:menuSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnMenu];
         
         //播放中标化图表
@@ -60,9 +60,9 @@
         _btnShare = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnShare.frame = CGRectMake(271, 23, 44, 44);
         UIImage *shareNorImage = [UIImage imageWithName:@"play_btn_share_nor" type:@"png"];
-        UIImage *shareSelImage = [UIImage imageWithName:@"play_btn_share_sel" type:@"png"];
+//        UIImage *shareSelImage = [UIImage imageWithName:@"play_btn_share_sel" type:@"png"];
         [_btnShare setImage:shareNorImage forState:UIControlStateNormal];
-        [_btnShare setImage:shareSelImage forState:UIControlStateHighlighted];
+//        [_btnShare setImage:shareSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnShare];
         
         _playingTipIndex = 0;

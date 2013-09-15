@@ -63,6 +63,15 @@
     
 }
 
+//旋转歌曲封面
+-(void)doRotateSongCover{
+    
+    CGAffineTransform transformTmp = _coverOfSongEGOImageView.transform;
+    transformTmp = CGAffineTransformRotate(transformTmp, ROTATE_ANGLE);
+    _coverOfSongEGOImageView.transform = transformTmp;
+    
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
