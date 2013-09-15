@@ -295,14 +295,7 @@
 
 -(void)playerTimerFunction{
 
-    PLog(@"playerTimerFunction...");
-    
-    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if (![aaMusicPlayer isMusicPlaying]) {
-        
-        [self timerStop];
-        
-    }
+//    PLog(@"playerTimerFunction...");
     
     //更新播放信息
     [self doUpdateForPlaying];
@@ -333,6 +326,11 @@
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     
     [_cdOfSongView updateProcess:playProcess];
+    
+    //如果未播放就停止
+    if (![aaMusicPlayer isMusicPlaying]) {
+        [self timerStop];
+    }
     
 }
 
