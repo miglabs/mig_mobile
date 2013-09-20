@@ -258,7 +258,7 @@
  <!--请求POST-->
  HTTP_REGISTER
  */
--(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession sex:(NSString*)tsex {
+-(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession sex:(NSString*)tsex birthday:(NSString*)tbirthday location:(NSString*)tlocation head:(NSString*)thead{
     
     NSString* registerUrl = HTTP_REGISTER;
     PLog(@"registerUrl: %@", registerUrl);
@@ -266,7 +266,7 @@
     NSURL* url = [NSURL URLWithString:registerUrl];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
-    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d&session=%@&sex=%@", tusername, tpassword, tnickname, tsourcetype, tsession, tsex];
+    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&nickname=%@&source=%d&session=%@&sex=%@&birthday=%@&location=%@&head=%@", tusername, tpassword, tnickname, tsourcetype, tsession, tsex, tbirthday, tlocation, thead];
     PLog(@"httpBody: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
@@ -328,6 +328,15 @@
     
     [operation start];
     
+}
+
+-(void)doRegister:(NSString *)tusername password:(NSString *)tpassword nickname:(NSString *)tnickname source:(SourceType)tsourcetype session:(NSString *)tsession sex:(NSString *)tsex {
+    
+    NSString* tbirthday = @"0";
+    NSString* tlocation = @"0";
+    NSString* thead = @"0";
+    
+    [self doRegister:tusername password:tpassword nickname:tnickname source:tsourcetype session:tsession sex:tsex birthday:tbirthday location:tlocation head:thead];
 }
 
 -(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype {
