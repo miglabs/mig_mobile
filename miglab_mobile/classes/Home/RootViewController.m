@@ -96,12 +96,6 @@
     // Do any additional setup after loading the view from its nib.
     
     _rootNavMenuView = [[RootNavigationMenuView alloc] initRootNavigationMenuView:CGRectMake(0, 0, 320, 44)];
-    _rootNavMenuView.btnMenuFirst.tag = 100;
-    _rootNavMenuView.btnMenuSecond.tag = 101;
-    _rootNavMenuView.btnMenuThird.tag = 102;
-    [_rootNavMenuView.btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
-    [_rootNavMenuView.btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
-    [_rootNavMenuView.btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
     [_rootNavMenuView.btnMenuFirst addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuSecond addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuThird addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -266,6 +260,7 @@
     _currentShowViewTag = tempButton.tag;
     NSLog(@"_currentShowViewTag: %d", _currentShowViewTag);
     
+    [_rootNavMenuView setSelectedMenu:_currentShowViewTag - 100];
     [self doUpdateView:_currentShowViewTag];
     
 }

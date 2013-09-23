@@ -11,6 +11,7 @@
 
 @implementation RootNavigationMenuView
 
+@synthesize bgImageView = _bgImageView;
 @synthesize btnMenuFirst = _btnMenuFirst;
 @synthesize btnMenuSecond = _btnMenuSecond;
 @synthesize btnMenuThird = _btnMenuThird;
@@ -30,38 +31,46 @@
     self = [super initWithFrame:frame];
     if (self) {
         UIImage *bgImage = [UIImage imageWithName:@"home_navigation_bg" type:@"png"];
-        UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
-        bgImageView.frame = CGRectMake(0, 0, 320, 45);
-        [self addSubview:bgImageView];
+        _bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+        _bgImageView.frame = CGRectMake(0, 0, 320, 45);
+        [self addSubview:_bgImageView];
         
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(7, 2, 97, 40)];
+        UIImage *separatorImage = [UIImage imageWithName:@"home_navigation_separator" type:@"png"];
+        UIImageView *separatorImageView01 = [[UIImageView alloc] initWithImage:separatorImage];
+        separatorImageView01.frame = CGRectMake(106, 0, 1, 43);
+        [self addSubview:separatorImageView01];
+        
+        UIImageView *separatorImageView12 = [[UIImageView alloc] initWithImage:separatorImage];
+        separatorImageView12.frame = CGRectMake(213, 0, 1, 43);
+        [self addSubview:separatorImageView12];
+        
+        UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_menu_sel" type:@"png"];
+        UIColor *menuSelColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
+        
+        //first
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 106, 43)];
         _btnMenuFirst.tag = 100;
-//        UIImage *firstNorImage = [UIImage imageNamed:@"pfm_recommend_nor.png"];
-//        UIImage *firstSelImage = [UIImage imageNamed:@"pfm_recommend_sel.png"];
-//        [_btnMenuFirst setImage:firstNorImage forState:UIControlStateNormal];
-//        [_btnMenuFirst setImage:firstSelImage forState:UIControlStateHighlighted];
-//        [_btnMenuFirst setImage:firstSelImage forState:UIControlStateSelected];
-        [_btnMenuFirst setTitle:@"first" forState:UIControlStateNormal];
+        [_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
         [self addSubview:_btnMenuFirst];
         
-        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(112, 2, 97, 40)];
+        //second
+        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(107, 0, 106, 43)];
         _btnMenuSecond.tag = 101;
-//        UIImage *secondNorImage = [UIImage imageNamed:@"pfm_personal_center_nor.png"];
-//        UIImage *secondSelImage = [UIImage imageNamed:@"pfm_personal_center_sel.png"];
-//        [_btnMenuSecond setImage:secondNorImage forState:UIControlStateNormal];
-//        [_btnMenuSecond setImage:secondSelImage forState:UIControlStateHighlighted];
-//        [_btnMenuSecond setImage:secondSelImage forState:UIControlStateSelected];
-        [_btnMenuSecond setTitle:@"second" forState:UIControlStateNormal];
+        [_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
         [self addSubview:_btnMenuSecond];
         
-        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(217, 2, 97, 40)];
+        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(214, 0,106, 43)];
         _btnMenuThird.tag = 102;
-//        UIImage *thirdNorImage = [UIImage imageNamed:@"pfm_more_nor.png"];
-//        UIImage *thirdSelImage = [UIImage imageNamed:@"pfm_more_sel.png"];
-//        [_btnMenuThird setImage:thirdNorImage forState:UIControlStateNormal];
-//        [_btnMenuThird setImage:thirdSelImage forState:UIControlStateHighlighted];
-//        [_btnMenuThird setImage:thirdSelImage forState:UIControlStateSelected];
-        [_btnMenuThird setTitle:@"third" forState:UIControlStateNormal];
+        [_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
         [self addSubview:_btnMenuThird];
         
     }

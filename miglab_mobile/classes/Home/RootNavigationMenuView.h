@@ -10,6 +10,7 @@
 
 @interface RootNavigationMenuView : UIView
 
+@property (nonatomic, retain) UIImageView *bgImageView;
 @property (nonatomic, retain) UIButton *btnMenuFirst;
 @property (nonatomic, retain) UIButton *btnMenuSecond;
 @property (nonatomic, retain) UIButton *btnMenuThird;
