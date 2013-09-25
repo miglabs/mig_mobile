@@ -31,6 +31,10 @@
 @synthesize tid = _tid;
 
 @synthesize songCachePath = _songCachePath;
+@synthesize channelid = _channelid;
+@synthesize typeid = _typeid;
+@synthesize moodid = _moodid;
+@synthesize sceneid = _sceneid;
 
 @synthesize whereIsTheSong = _whereIsTheSong;
 
