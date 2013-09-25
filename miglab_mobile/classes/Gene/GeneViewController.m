@@ -645,7 +645,9 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.channel = tempchannel;
-            usergene.channel.changenum++;
+            usergene.type.changenum = -1;
+            usergene.mood.changenum = -1;
+            usergene.scene.changenum = -1;
             usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
             usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
             usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
@@ -658,7 +660,9 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.type = temptype;
-            usergene.type.changenum++;
+            usergene.mood.changenum = -1;
+            usergene.scene.changenum = -1;
+            usergene.channel.changenum = -1;
             
         } else if (scrollView.tag == 202) {
             
@@ -667,7 +671,9 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.mood = tempmood;
-            usergene.mood.changenum++;
+            usergene.type.changenum = -1;
+            usergene.scene.changenum = -1;
+            usergene.channel.changenum = -1;
             
         } else if (scrollView.tag == 203) {
             
@@ -676,7 +682,9 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.scene = tempscene;
-            usergene.scene.changenum++;
+            usergene.type.changenum = -1;
+            usergene.mood.changenum = -1;
+            usergene.channel.changenum = -1;
             
         }
         
@@ -702,6 +710,9 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.channel = tempchannel;
+        usergene.type.changenum = -1;
+        usergene.mood.changenum = -1;
+        usergene.scene.changenum = -1;
         usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
         usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
         usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
@@ -714,6 +725,9 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.type = temptype;
+        usergene.mood.changenum = -1;
+        usergene.scene.changenum = -1;
+        usergene.channel.changenum = -1;
         
     } else if (scrollView.tag == 202) {
         
@@ -722,6 +736,9 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.mood = tempmood;
+        usergene.type.changenum = -1;
+        usergene.scene.changenum = -1;
+        usergene.channel.changenum = -1;
         
     } else if (scrollView.tag == 203) {
         
@@ -730,6 +747,9 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.scene = tempscene;
+        usergene.type.changenum = -1;
+        usergene.mood.changenum = -1;
+        usergene.channel.changenum = -1;
         
     }
     
