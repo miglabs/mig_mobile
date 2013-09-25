@@ -11,6 +11,7 @@
 #import "SettingOfPrivacyViewController.h"
 #import "SettingOfFunctionViewController.h"
 #import "UMFeedback.h"
+#import "SettingOfAboutViewController.h"
 #import "UserSessionManager.h"
 
 @interface SettingViewController ()
@@ -53,7 +54,7 @@
     
     NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
     NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"功能", @"意见反馈", nil];
-    NSArray *section2 = [NSArray arrayWithObjects:@"关于miglab", nil];
+    NSArray *section2 = [NSArray arrayWithObjects:@"关于Music Soulmate", nil];
     NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
     _datalist = [NSArray arrayWithObjects:section0, section1, section2, section3, nil];
     
@@ -135,6 +136,8 @@
     } else if (indexPath.section == 2) {
         
         //todo
+        SettingOfAboutViewController *about = [[SettingOfAboutViewController alloc] initWithNibName:@"SettingOfAboutViewController" bundle:nil];
+        [self.navigationController pushViewController:about animated:YES];
         
     } else if (indexPath.section == 3) {
         

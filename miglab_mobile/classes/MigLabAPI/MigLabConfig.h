@@ -15,6 +15,9 @@
 #define PLog(format, ...)
 #endif
 
+//app id
+#define APPLE_ID 577680501
+
 //友盟
 #define UMENG_APPKEY                        @"51f338a356240baf3a0723a0"
 
