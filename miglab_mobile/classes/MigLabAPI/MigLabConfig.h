@@ -26,8 +26,8 @@
 #define SINA_WEIBO_APP_SECRET               @"ffceb9ce49142b68f18d84fa216ea350"
 #define SINA_WEIBO_APP_REDIRECTURI          @"http://42.121.14.108/3rdauth/sinaweibo/callback.php"
 
-#define TENCENT_WEIBO_APP_KEY               @"222222"
-#define TENCENT_WEIBO_APP_SECRET            @""
+#define TENCENT_WEIBO_APP_KEY               @"100525100"//@"222222"
+#define TENCENT_WEIBO_APP_SECRET            @"1ead0b3a8e5ab032a8cd15d10f4ed61c"
 #define TENCENT_WEIBO_APP_REDIRECTURI       @""
 
 #define DOUBAN_API_KEY                      @"0765fe87cdc0cd0a1631fb976942671e"

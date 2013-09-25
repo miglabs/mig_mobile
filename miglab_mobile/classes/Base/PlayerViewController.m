@@ -271,25 +271,35 @@
     int tempCurrentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
     if (tempCurrentSongIndex + 1 >= [PPlayerManagerCenter GetInstance].songList.count) {
         
-        if ([UserSessionManager GetInstance].isLoggedIn) {
-            
-            NSString *userid = [UserSessionManager GetInstance].userid;
-            NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-            UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-            NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
-            NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
-            NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
-            NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
-            NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-            NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
-            
-            [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
-            
-        } else {
-            [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
-        }//if
+        //根据音乐基因获取歌曲
+        [self loadTypeSongs];
         
     }//if
+    
+}
+
+//根据音乐基因获取歌曲
+-(void)loadTypeSongs{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        NSString *ttypeid = [NSString stringWithFormat:@"%d", usergene.type.typeid];
+        NSString *ttypenum = [NSString stringWithFormat:@"%d", usergene.type.changenum];
+        NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+        NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
+        NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+        NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
+        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
+        
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:@"5"];
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+    }
     
 }
 

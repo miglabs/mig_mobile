@@ -1940,9 +1940,9 @@
  <!--请求GET-->
  HTTP_GETTYPESONGS
  */
--(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex num:(NSString*)tnum {
+-(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken typeid:(NSString *)ttypeid typeindex:(NSString *)ttypeindex moodid:(NSString *)tmoodid moodindex:(NSString *)tmoodindex sceneid:(NSString *)tsceneid sceneindex:(NSString *)tsceneindex channelid:(NSString *)tchannelid channelindex:(NSString *)tchannelindex num:(NSString *)tnum{
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&moodid=%@&moodindex=%@&sceneid=%@&sceneindex=%@&channelid=%@&channelindex=%@&num=%@", HTTP_GETTYPESONGS, uid, ttoken, tmoodid, tmoodindex, tsceneid, tsceneindex, tchannelid, tchannelindex, tnum];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&typeid=%@&typeindex=%@&moodid=%@&moodindex=%@&sceneid=%@&sceneindex=%@&channelid=%@&channelindex=%@&num=%@", HTTP_GETTYPESONGS, uid, ttoken, ttypeid, ttypeindex, tmoodid, tmoodindex, tsceneid, tsceneindex, tchannelid, tchannelindex, tnum];
     PLog(@"get type songs url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

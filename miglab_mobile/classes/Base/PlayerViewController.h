@@ -29,6 +29,9 @@
 -(IBAction)doPlayOrPause:(id)sender;
 -(IBAction)doNext:(id)sender;
 
+//根据音乐基因获取歌曲
+-(void)loadTypeSongs;
+
 -(void)hateSongFailed:(NSNotification *)tNotification;
 -(void)hateSongSuccess:(NSNotification *)tNotification;
 -(void)collectSongFailed:(NSNotification *)tNotification;

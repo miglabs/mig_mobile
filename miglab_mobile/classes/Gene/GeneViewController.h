@@ -45,7 +45,7 @@
 -(void)initGeneDataByCache;
 -(void)initGeneByUserGene:(UserGene *)usergene;
 -(void)initGene:(Channel *)tchannel typeIndex:(int)ttypeindex moodIndex:(int)tmoodindex sceneIndex:(int)tsceneindex;
--(void)loadTypeSongs;   //根据音乐基因获取歌曲
+-(void)loadSongsByGene;   //根据音乐基因获取歌曲
 -(void)checkGeneConfigfile;
 
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification;

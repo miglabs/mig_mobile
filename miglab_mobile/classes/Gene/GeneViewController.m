@@ -246,7 +246,7 @@ static int PAGE_WIDTH = 81;
     [self initGeneDataByCache];
     
     //加载歌曲
-    [self loadTypeSongs];
+    [self loadSongsByGene];
     
     //检查更新
     [self checkGeneConfigfile];
@@ -352,19 +352,12 @@ static int PAGE_WIDTH = 81;
 }
 
 //根据音乐基因获取歌曲
--(void)loadTypeSongs{
+-(void)loadSongsByGene{
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         NSString *userid = [UserSessionManager GetInstance].userid;
-        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
-        NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
-        NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
-        NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
-        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
         
         //type
         UIImage *typeimage = [UIImage imageNamed:usergene.type.picname];
@@ -387,7 +380,7 @@ static int PAGE_WIDTH = 81;
         //记录音乐基因
         [[PDatabaseManager GetInstance] insertUserGene:usergene userId:userid];
         
-        [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:@"5"];
+        [super loadTypeSongs];
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
@@ -533,21 +526,7 @@ static int PAGE_WIDTH = 81;
     }];
     
     //
-    [self loadTypeSongs];
-    
-    /*
-    NSString *userid = [UserSessionManager GetInstance].userid;
-    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-    NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
-    NSString *tmoodindex = [NSString stringWithFormat:@"%d", usergene.mood.moodIndex];
-    NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
-    NSString *tsceneindex = [NSString stringWithFormat:@"%d", usergene.scene.sceneIndex];
-    NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-    NSString *tchannelindex = [NSString stringWithFormat:@"%d", usergene.channel.channelIndex];
-    
-    [self.miglabAPI doGetTypeSongs:userid token:accesstoken moodid:tmoodid moodindex:tmoodindex sceneid:tsceneid sceneindex:tsceneindex channelid:tchannelid channelindex:tchannelindex num:@"5"];
-    */
+    [self loadSongsByGene];
     
     /*
     _modifyGeneView.alpha = 1.0f;
@@ -645,9 +624,6 @@ static int PAGE_WIDTH = 81;
             
             UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
             usergene.channel = tempchannel;
-            usergene.type.changenum = -1;
-            usergene.mood.changenum = -1;
-            usergene.scene.changenum = -1;
             usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
             usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
             usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
@@ -710,9 +686,6 @@ static int PAGE_WIDTH = 81;
         
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         usergene.channel = tempchannel;
-        usergene.type.changenum = -1;
-        usergene.mood.changenum = -1;
-        usergene.scene.changenum = -1;
         usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
         usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
         usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
