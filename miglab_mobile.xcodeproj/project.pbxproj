@@ -449,6 +449,7 @@
 		18A6021817F2956400344C5B /* weixin_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A6020717F2956400344C5B /* weixin_normal@2x.png */; };
 		18A6021E17F295B400344C5B /* UIFont+PFontCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6021D17F295B400344C5B /* UIFont+PFontCategory.m */; };
 		18A6022117F2A29400344C5B /* ShareChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6022017F2A29300344C5B /* ShareChooseView.m */; };
+		18A6022417F2E35200344C5B /* MSYH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18A6022317F2E35200344C5B /* MSYH.ttf */; };
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
@@ -1050,6 +1051,7 @@
 		18A6021D17F295B400344C5B /* UIFont+PFontCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+PFontCategory.m"; sourceTree = "<group>"; };
 		18A6021F17F2A29300344C5B /* ShareChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareChooseView.h; sourceTree = "<group>"; };
 		18A6022017F2A29300344C5B /* ShareChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareChooseView.m; sourceTree = "<group>"; };
+		18A6022317F2E35200344C5B /* MSYH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MSYH.ttf; sourceTree = "<group>"; };
 		18E3472B17A27A57001C46C7 /* PPlayerManagerCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPlayerManagerCenter.h; sourceTree = "<group>"; };
 		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
 		18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationMenuView.h; sourceTree = "<group>"; };
@@ -1350,6 +1352,7 @@
 		1627EA0D177B1CDB0049F9F5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				18A6022317F2E35200344C5B /* MSYH.ttf */,
 				160E073C17C08A45003F0E45 /* channelinfo.xml */,
 				1627EA0E177B1CDB0049F9F5 /* qhc.caf */,
 			);
@@ -2515,6 +2518,7 @@
 				18A6021617F2956400344C5B /* sina_weibo_normal@2x.png in Resources */,
 				18A6021717F2956400344C5B /* sms_normal@2x.png in Resources */,
 				18A6021817F2956400344C5B /* weixin_normal@2x.png in Resources */,
+				18A6022417F2E35200344C5B /* MSYH.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
