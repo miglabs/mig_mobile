@@ -15,7 +15,7 @@
 
 #import "MigLabAPI.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
@@ -38,7 +38,7 @@
 
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
--(void)segmentAction:(UISegmentedControl *)seg;
+-(IBAction)doGotoShareView:(id)sender;
 
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;

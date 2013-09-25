@@ -13,8 +13,9 @@
     #import <Foundation/Foundation.h>
 
     //by pig
-    #import "UIImage+PImageCategory.h"
     #import "NSObject+PObjectCategory.h"
+    #import "UIImage+PImageCategory.h"
+    #import "UIFont+PFontCategory.h"
     #import "MigLabConfig.h"
     #import "PCommonUtil.h"
     #import "MigLabAPI.h"

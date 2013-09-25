@@ -12,6 +12,7 @@
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
+#import "ShareChooseView.h"
 
 @interface DetailPlayerViewController ()
 
@@ -154,34 +155,76 @@
     
     PLog(@"doShareAction...");
     
-    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    [_shareAchtionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
-//    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, 320, 150)];
-//    [pickerView setBackgroundColor:[UIColor blueColor]];
-//    pickerView.tag = 101;
-//    pickerView.delegate = self;
-//    pickerView.dataSource = self;
-//    pickerView.showsSelectionIndicator = YES;
+    ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
+    [shareSelectedView.btnFirst addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    [shareSelectedView.btnSix addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
-//    [_shareAchtionSheet addSubview:pickerView];
-    
-    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"完成", nil]];
-    [button setSegmentedControlStyle:UISegmentedControlStyleBar];
-    [button setFrame:CGRectMake(270, 20, 50, 30)];
-    [button addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-    [_shareAchtionSheet addSubview:button];
+    [_shareAchtionSheet addSubview:shareSelectedView];
     
     [_shareAchtionSheet showInView:self.view];
-    [_shareAchtionSheet setBounds:CGRectMake(0, 0, 320, 400)];
-    [_shareAchtionSheet setBackgroundColor:[UIColor whiteColor]];
     
 }
 
--(void)segmentAction:(UISegmentedControl *)seg{
-    NSInteger index = seg.selectedSegmentIndex;
-    NSLog(@"index: %d", index);
-    [_shareAchtionSheet dismissWithClickedButtonIndex:index animated:YES];
+-(IBAction)doGotoShareView:(id)sender{
+    
+    UIButton *btnShare = sender;
+    PLog(@"btnShare.tag: %d", btnShare.tag);
+    
+    switch (btnShare.tag) {
+        case 201:
+        {
+            //qqzone
+            
+        }
+            break;
+        case 202:
+        {
+            //sinaweibo
+            
+        }
+            break;
+        case 203:
+        {
+            //weixin
+            
+        }
+            break;
+        case 204:
+        {
+            //tencentweibo
+            
+        }
+            break;
+        case 205:
+        {
+            //renren
+            
+        }
+            break;
+        case 206:
+        {
+            //sms
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+#pragma UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    PLog(@"actionSheet clickedButtonAtIndex: %d", buttonIndex);
 }
 
 -(IBAction)doDeleteAction:(id)sender{
