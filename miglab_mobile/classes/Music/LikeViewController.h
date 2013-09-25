@@ -31,6 +31,7 @@
 
 -(IBAction)doSort:(id)sender;
 -(IBAction)doEdit:(id)sender;
+-(void)deleteSelectedLikeSongs:(NSString *)tSelectedSongs;
 
 -(IBAction)doSortMenu1:(id)sender;
 -(IBAction)doSortMenu2:(id)sender;

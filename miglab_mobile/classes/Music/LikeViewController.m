@@ -153,8 +153,9 @@
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
-    [_dataList addObjectsFromArray:tempSongInfoList];
     
+    [_dataList removeAllObjects];
+    [_dataList addObjectsFromArray:tempSongInfoList];
     [_dataTableView reloadData];
     
 }
@@ -239,6 +240,7 @@
     if (_dataStatus == 2) {
         
         //delete
+        NSMutableString *selectedSongId = [[NSMutableString alloc] init];
         NSArray *selectedSongList = [_dicSelectedSongId allKeys];
         int selectedSongCount = [selectedSongList count];
         for (int i=0; i<selectedSongCount; i++) {
@@ -246,10 +248,17 @@
             NSString *tempsongid = [selectedSongList objectAtIndex:i];
             [[PDatabaseManager GetInstance] deleteSongInfo:[tempsongid longLongValue]];
             
+            [selectedSongId appendFormat:@"%@,", tempsongid];
+        }
+        
+        //do delete
+        if (selectedSongId.length > 0) {
+            NSString *tempSongId = [selectedSongId substringToIndex:selectedSongId.length - 1];
+            [self deleteSelectedLikeSongs:tempSongId];
         }
         
         _dataStatus = 1;
-        [_dataTableView reloadData];
+        [self loadMusicFromDatabase];
         
     } else {
         
@@ -259,6 +268,22 @@
     }
     
     [_dicSelectedSongId removeAllObjects];
+    
+}
+
+//批量删除收藏歌曲
+-(void)deleteSelectedLikeSongs:(NSString *)tSelectedSongs{
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:tSelectedSongs];
+        
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+    }
     
 }
 
