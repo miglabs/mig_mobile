@@ -59,7 +59,9 @@
         _lblSongInfo.textColor = [UIColor whiteColor];
         _lblSongInfo.textAlignment = kTextAlignmentLeft;
         _lblSongInfo.text = @"name-artist";
-        _lblSongInfo.font = [UIFont fontName:@"MicrosoftYaHei" size:10.0f];//[UIFont systemFontOfSize:14.0];
+//        _lblSongInfo.font = [UIFont fontName:@"MicrosoftYaHei" size:10.0f];
+//        _lblSongInfo.font = [UIFont fontName:@"STHeitiTC-Light" size:10.0f];
+        _lblSongInfo.font = [UIFont fontName:@"STHeitiTC-Medium" size:10.0f];
         [self addSubview:_lblSongInfo];
         
         //delete

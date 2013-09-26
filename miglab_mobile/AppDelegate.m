@@ -282,30 +282,6 @@
         
     }
     
-    //test font
-    
-    NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
-    NSArray *fontNames;
-    NSInteger indFamily, indFont;
-    NSLog(@"[familyNames count]: %d", [familyNames count]);
-    for (indFamily=0; indFamily<[familyNames count]; ++indFamily)
-    {
-        NSLog(@"Family name: %@", [familyNames objectAtIndex:indFamily]);
-        fontNames = [[NSArray alloc] initWithArray:
-                     [UIFont fontNamesForFamilyName:
-                      [familyNames objectAtIndex:indFamily]]];
-//        NSLog(@"[fontNames count]: %d", [fontNames count]);
-        for (indFont=0; indFont<[fontNames count]; ++indFont)
-        {
-//            NSLog(@"    Font name: %@", [fontNames objectAtIndex:indFont]);
-        }
-    }
-    
-    UIFont *test = [UIFont systemFontOfSize:10.0f];
-    NSLog(@"[test fontName]: %@", [test fontName]);
-    
-    //test
-    
     //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
     [miglabAPI doGetSongComment:@"1" token:@"2" songid:@"12323" count:@"1" fromid:@"1"];
     //[miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];

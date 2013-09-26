@@ -87,6 +87,10 @@
     return [self getLrcCachePath:tsong.songid lrcExt:lrcext];
 }
 
+-(long long)getSongCacheFileSize{
+    return [super getFileSizeForDir:_songCacheDirectory];
+}
+
 -(long long)getSongMaxSize:(Song *)tsong{
     
     NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];

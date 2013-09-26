@@ -62,11 +62,7 @@
         NSString *fullPath = [dir stringByAppendingPathComponent:[filelist objectAtIndex:i]];
         NSLog(@"fullPath: %@", fullPath);
         
-        if ([fileManager fileExistsAtPath:fullPath isDirectory:YES]) {
-            size += [self getFileSizeForDir:fullPath];
-        } else {
-            size += [self getLocalFileSize:fullPath];
-        }
+        size += [self getLocalFileSize:fullPath];
         
     }
     

@@ -108,8 +108,24 @@
         [_locationManager setDelegate:self];
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
         [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-        [_locationManager startUpdatingLocation];
+//        [_locationManager startUpdatingLocation];
     }
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [_locationManager startUpdatingLocation];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [_locationManager stopUpdatingLocation];
     
 }
 
@@ -144,6 +160,15 @@
     
     PLog(@"getCollectAndNearNumFailed...");
     
+    long long filesize = [[SongDownloadManager GetInstance] getSongCacheFileSize];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/(1024*1024)];
+    
+    //download song
+    NSMutableDictionary *dicMenu0 = [_tableTitles objectAtIndex:0];
+    [dicMenu0 setValue:strDownloadDataDesc forKey:@"MenuTip"];
+    
+    [_bodyTableView reloadData];
+    
 }
 
 -(void)getCollectAndNearNumSuccess:(NSNotification *)tNotification{
@@ -152,7 +177,9 @@
     
     NSDictionary *result = [tNotification userInfo];
     _collectNum = [result objectForKey:@"result"];
-    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%dMB流量", 45];
+    
+    long long filesize = [[SongDownloadManager GetInstance] getSongCacheFileSize];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/(1024*1024)];
     NSString *strCollectNum = [NSString stringWithFormat:@"%d", _collectNum.mynum];
     NSString *strNearNum = [NSString stringWithFormat:@"%d", _collectNum.nearnum];
     int ipodNum = [[PDatabaseManager GetInstance] getIPodSongCount];
