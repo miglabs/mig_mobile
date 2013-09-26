@@ -329,10 +329,19 @@
     
     NearMusicState *nms = [_dataList objectAtIndex:indexPath.row];
     Song *tempsong = nms.song;
+    
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
+    cell.lblSongName.font = [UIFont fontName:@"STHeitiTC-Medium" size:15.0f];
+    
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, @"未缓存"];
+    NSString *songDesc = @"未缓存";
+    long long filesize = [[SongDownloadManager GetInstance] getSongLocalSize:tempsong];
+    if (filesize > 0) {
+        songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];
+    }
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, songDesc];
+    cell.lblSongArtistAndDesc.font = [UIFont fontName:@"STHeitiTC-Medium" size:10.0f];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

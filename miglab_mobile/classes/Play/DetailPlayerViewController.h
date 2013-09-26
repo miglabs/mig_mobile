@@ -35,6 +35,8 @@
 
 //分享选择
 @property (nonatomic, retain) UIActionSheet *shareAchtionSheet;
+//截图
+@property (nonatomic, retain) UIImage *screenCaptureImage;
 
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;

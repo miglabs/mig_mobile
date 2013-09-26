@@ -48,7 +48,7 @@
         [_titleLabel setText:tTitle];
         [_titleLabel setTextAlignment:UITextAlignmentCenter];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
-        [_titleLabel setFont:[UIFont systemFontOfSize:20.0f]];
+        [_titleLabel setFont:[UIFont fontName:@"STHeitiTC-Medium" size:17.0f]];
         [_titleLabel setTextColor:[UIColor whiteColor]];
         [_titleLabel setShadowOffset:CGSizeMake(0, 1)];
         [self addSubview:_titleLabel];

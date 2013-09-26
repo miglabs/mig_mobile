@@ -33,6 +33,7 @@
 
 //分享选择
 @synthesize shareAchtionSheet = _shareAchtionSheet;
+@synthesize screenCaptureImage = _screenCaptureImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -155,6 +156,14 @@
     
     PLog(@"doShareAction...");
     
+    //截屏
+    CGSize size = CGSizeMake(kMainScreenWidth, kMainScreenHeight);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+    _screenCaptureImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //
     _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];

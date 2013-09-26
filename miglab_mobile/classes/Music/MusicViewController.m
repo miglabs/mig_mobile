@@ -161,7 +161,7 @@
     PLog(@"getCollectAndNearNumFailed...");
     
     long long filesize = [[SongDownloadManager GetInstance] getSongCacheFileSize];
-    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/(1024*1024)];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/1000000];
     
     //download song
     NSMutableDictionary *dicMenu0 = [_tableTitles objectAtIndex:0];
@@ -179,7 +179,7 @@
     _collectNum = [result objectForKey:@"result"];
     
     long long filesize = [[SongDownloadManager GetInstance] getSongCacheFileSize];
-    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/(1024*1024)];
+    NSString *strDownloadDataDesc = [NSString stringWithFormat:@"已消耗%lldMB流量", filesize/1000000];
     NSString *strCollectNum = [NSString stringWithFormat:@"%d", _collectNum.mynum];
     NSString *strNearNum = [NSString stringWithFormat:@"%d", _collectNum.nearnum];
     int ipodNum = [[PDatabaseManager GetInstance] getIPodSongCount];
