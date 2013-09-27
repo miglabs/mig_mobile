@@ -112,7 +112,7 @@ static int PAGE_WIDTH = 81;
     
     //类型
     _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnType.frame = CGRectMake(11.5 + 20, 45 + 10 + 100, 31, 31);
+    _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100, 31, 31);
     _btnType.tag = 100;
     UIImage *typeimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnType setImage:typeimage forState:UIControlStateNormal];
@@ -121,7 +121,7 @@ static int PAGE_WIDTH = 81;
     
     //心情
     _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnMood.frame = CGRectMake(11.5 + 246, 45 + 10 + 170, 31, 31);
+    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 170, 31, 31);
     _btnMood.tag = 200;
     UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnMood setImage:moodimage forState:UIControlStateNormal];
@@ -130,7 +130,7 @@ static int PAGE_WIDTH = 81;
     
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, 45 + 10 + 240, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 240, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
@@ -144,8 +144,8 @@ static int PAGE_WIDTH = 81;
             _modifyGeneView = (ModifyGeneView *)oneObject;
         }//if
     }//for
-    _modifyGeneView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
-    _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
+    _modifyGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
+    _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
