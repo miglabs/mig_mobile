@@ -22,6 +22,7 @@ static int PAGE_WIDTH = 81;
 
 //当前基因信息
 @synthesize currentGeneView = _currentGeneView;
+@synthesize monthlist = _monthlist;
 @synthesize btnType = _btnType;
 @synthesize btnMood = _btnMood;
 @synthesize btnScene = _btnScene;
@@ -73,6 +74,10 @@ static int PAGE_WIDTH = 81;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //当前基因信息
     NSArray *currentNib = [[NSBundle mainBundle] loadNibNamed:@"CurrentGeneView" owner:self options:nil];
     for (id oneObject in currentNib){
@@ -80,17 +85,14 @@ static int PAGE_WIDTH = 81;
             _currentGeneView = (CurrentGeneView *)oneObject;
         }//if
     }//for
-    _currentGeneView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 -10);
+    _currentGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
+    //month --date
+    _monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
     //date
-    NSArray *monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
-    //year
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSInteger uitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    
-    NSDate *nowDate = [NSDate date];
-    NSDateComponents *comps = [calendar components:uitFlags fromDate:nowDate];
-    _currentGeneView.lblYear.text = [NSString stringWithFormat:@"%d", comps.year];
-    _currentGeneView.lblMonthAndDay.text = [NSString stringWithFormat:@"%@ %d", [monthlist objectAtIndex:comps.month - 1], comps.day];
+    _currentGeneView.lblYear.textColor = [UIColor brownColor];
+    _currentGeneView.lblYear.font = [UIFont fontOfApp:20.0f];
+    _currentGeneView.lblMonthAndDay.textColor = [UIColor brownColor];
+    _currentGeneView.lblMonthAndDay.font = [UIFont fontOfApp:18.0f];
     
     //avatar
     _currentGeneView.egoBtnAvatar.layer.cornerRadius = 22;
@@ -99,6 +101,14 @@ static int PAGE_WIDTH = 81;
     _currentGeneView.egoBtnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
     [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_currentGeneView];
+    
+    //desc
+    _currentGeneView.lblTypeDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblTypeDesc.font = [UIFont fontOfApp:20.0f];
+    _currentGeneView.lblMoodDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
+    _currentGeneView.lblSceneDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblSceneDesc.font = [UIFont fontOfApp:20.0f];
     
     //类型
     _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -253,10 +263,40 @@ static int PAGE_WIDTH = 81;
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    //刷新日期
+    [self updateDate];
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//更新日期显示
+-(void)updateDate{
+    
+    //date
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger uitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    
+    NSDate *nowDate = [NSDate date];
+    NSDateComponents *comps = [calendar components:uitFlags fromDate:nowDate];
+    _currentGeneView.lblYear.text = [NSString stringWithFormat:@"%d", comps.year];
+    NSString *strMonthAndDay = [NSString stringWithFormat:@"%@ %d", [_monthlist objectAtIndex:comps.month - 1], comps.day];
+    PLog(@"strMonthAndDay: %@, strMonthAndDay.length: %d", strMonthAndDay, strMonthAndDay.length);
+//    _currentGeneView.lblMonthAndDay.text = [NSString stringWithFormat:@"%@ %d", [_monthlist objectAtIndex:comps.month - 1], comps.day];
+    [_currentGeneView.lblMonthAndDay setText:strMonthAndDay afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        UIColor *dayColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
+        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[dayColor CGColor] range:NSMakeRange(4, strMonthAndDay.length - 4)];
+        return mutableAttributedString;
+    }];
+    
 }
 
 //解析音乐基因数据

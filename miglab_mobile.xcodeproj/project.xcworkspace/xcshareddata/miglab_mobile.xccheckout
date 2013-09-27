@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E45E4DEF-6616-45D1-AF95-C04DCC32A3FC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>miglab_mobile</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A210BA21-4505-47CE-976A-1F6B219AA70C</key>
+		<string>https://github.com/miglabs/mig_mobile</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>miglab_mobile.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A210BA21-4505-47CE-976A-1F6B219AA70C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/miglabs/mig_mobile</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A210BA21-4505-47CE-976A-1F6B219AA70C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A210BA21-4505-47CE-976A-1F6B219AA70C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mig_mobile</string>
+		</dict>
+	</array>
+</dict>
+</plist>

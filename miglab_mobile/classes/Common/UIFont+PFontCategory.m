@@ -18,13 +18,12 @@
     return [UIFont systemFontOfSize:fontSize];
 }
 
-+(UIFont *)fontWithType:(PFontType)pFontType{
-    
-    if (pFontType == PFontTypeNormal0) {
-        return [UIFont systemFontOfSize:14.0f];
-    }
-    
-    return [UIFont systemFontOfSize:14.0f];
+/*
+ * 20  26   30  34
+ * 四种混用
+ */
++(UIFont *)fontOfApp:(CGFloat)fontSize{
+    return [UIFont fontWithName:@"STHeitiTC-Medium" size:fontSize];
 }
 
 @end

@@ -409,6 +409,8 @@
 		187A5669179927E800221569 /* PlayBodyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A5668179927E800221569 /* PlayBodyView.xib */; };
 		187EADD117A8B92000456A73 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = 187EADD017A8B92000456A73 /* Mood.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
+		188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */; };
+		188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188A20B917F5638000D4E753 /* CoreText.framework */; };
 		188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */; };
 		18A0EA0A17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0EA0817D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m */; };
 		18A0EA0B17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0EA0917D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.xib */; };
@@ -995,6 +997,9 @@
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
+		188A20B617F55C0B00D4E753 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		188A20B917F5638000D4E753 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		188E060E1797D7D200AFE89D /* UINavigationController+PAnimationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PAnimationCategory.h"; sourceTree = "<group>"; };
 		188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PAnimationCategory.m"; sourceTree = "<group>"; };
 		18A0EA0717D6DA38004B8BB6 /* SettingOfModifyNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfModifyNicknameViewController.h; sourceTree = "<group>"; };
@@ -1081,6 +1086,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */,
 				1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */,
 				1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */,
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
@@ -1124,6 +1130,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				188A20B517F55C0B00D4E753 /* TTTAttributedLabel */,
 				1641CCBD17DB0BE5004179E4 /* PinYin */,
 				18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */,
 				16BE5D2017D6248700802DE1 /* Setting */,
@@ -1929,6 +1936,7 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				188A20B917F5638000D4E753 /* CoreText.framework */,
 				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
 				1637CA9B17B7A63500E6F132 /* libiconv.dylib */,
 				1637CA9917B7A61F00E6F132 /* libstdc++.dylib */,
@@ -2139,6 +2147,15 @@
 				185F935817C330A600EBC710 /* TSLibraryImport.m */,
 			);
 			path = TSLibraryImport;
+			sourceTree = "<group>";
+		};
+		188A20B517F55C0B00D4E753 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				188A20B617F55C0B00D4E753 /* TTTAttributedLabel.h */,
+				188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */ = {
@@ -2690,6 +2707,7 @@
 				18A6022117F2A29400344C5B /* ShareChooseView.m in Sources */,
 				16B2A3C717F311DD00E7F7E6 /* SettingOfAboutViewController.m in Sources */,
 				16B2A3CC17F31C9300E7F7E6 /* SettingOfFeedbackViewController.m in Sources */,
+				188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2779,7 +2797,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
-					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMFeedback_iOS_1.4\"",
 				);
@@ -2813,7 +2830,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
-					"\"$(SRCROOT)/miglab_mobile/classes/BaiduMapApi\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMFeedback_iOS_1.4\"",
 				);

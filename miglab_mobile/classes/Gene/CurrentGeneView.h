@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "EGOImageButton.h"
+#import <CoreText/CoreText.h>
+#import "TTTAttributedLabel.h"
 
 @interface CurrentGeneView : UIView
 
 @property (nonatomic, retain) IBOutlet UILabel *lblYear;
-@property (nonatomic, retain) IBOutlet UILabel *lblMonthAndDay;
+@property (nonatomic, retain) IBOutlet TTTAttributedLabel *lblMonthAndDay;
 @property (nonatomic, retain) IBOutlet EGOImageButton *egoBtnAvatar;
 @property (nonatomic, retain) IBOutlet UIImageView *typeImageView;
 @property (nonatomic, retain) IBOutlet UILabel *lblTypeDesc;
