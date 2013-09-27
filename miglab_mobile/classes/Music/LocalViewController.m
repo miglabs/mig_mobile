@@ -36,13 +36,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav bar
     self.navView.titleLabel.text = @"本地音乐";
     
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
@@ -50,7 +54,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -209,7 +213,11 @@
     Song *tempsong = [_dataList objectAtIndex:indexPath.row];
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"来自IPod"];
+    cell.lblSongName.font = [UIFont fontOfApp:15.0f];
+    
+    NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, @"来自IPod"];
+    cell.lblSongArtistAndDesc.font = [UIFont fontOfApp:10.0f];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
