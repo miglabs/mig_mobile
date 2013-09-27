@@ -89,9 +89,9 @@ static int PAGE_WIDTH = 81;
     //month --date
     _monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
     //date
-    _currentGeneView.lblYear.textColor = [UIColor brownColor];
+    _currentGeneView.lblYear.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblYear.font = [UIFont fontOfApp:20.0f];
-    _currentGeneView.lblMonthAndDay.textColor = [UIColor brownColor];
+    _currentGeneView.lblMonthAndDay.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblMonthAndDay.font = [UIFont fontOfApp:18.0f];
     
     //avatar
@@ -103,11 +103,11 @@ static int PAGE_WIDTH = 81;
     [self.view addSubview:_currentGeneView];
     
     //desc
-    _currentGeneView.lblTypeDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblTypeDesc.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblTypeDesc.font = [UIFont fontOfApp:20.0f];
-    _currentGeneView.lblMoodDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblMoodDesc.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
-    _currentGeneView.lblSceneDesc.textColor = [UIColor brownColor];
+    _currentGeneView.lblSceneDesc.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblSceneDesc.font = [UIFont fontOfApp:20.0f];
     
     //类型
@@ -149,6 +149,11 @@ static int PAGE_WIDTH = 81;
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
+    _modifyGeneView.lblChannel.font = [UIFont fontOfApp:17.0f];
+    _modifyGeneView.lblType.font = [UIFont fontOfApp:17.0f];
+    _modifyGeneView.lblMood.font = [UIFont fontOfApp:17.0f];
+    _modifyGeneView.lblScene.font = [UIFont fontOfApp:17.0f];
+    
     //解析音乐基因
     [self initGeneDataFromFile];
     
@@ -173,7 +178,7 @@ static int PAGE_WIDTH = 81;
         lblChannel.text = tempchannel.channelName;
         lblChannel.textAlignment = kTextAlignmentCenter;
         lblChannel.textColor = [UIColor whiteColor];
-        lblChannel.font = [UIFont systemFontOfSize:15.0f];
+        lblChannel.font = [UIFont fontOfApp:15.0f];
         [_modifyGeneView.channelScrollView addSubview:lblChannel];
     }
     
@@ -197,7 +202,7 @@ static int PAGE_WIDTH = 81;
         lblType.text = temptype.name;
         lblType.textAlignment = kTextAlignmentCenter;
         lblType.textColor = [UIColor whiteColor];
-        lblType.font = [UIFont systemFontOfSize:15.0f];
+        lblType.font = [UIFont fontOfApp:15.0f];
         [_modifyGeneView.typeScrollView addSubview:lblType];
     }
     
@@ -221,7 +226,7 @@ static int PAGE_WIDTH = 81;
         lblMood.text = tempmood.name;
         lblMood.textAlignment = kTextAlignmentCenter;
         lblMood.textColor = [UIColor whiteColor];
-        lblMood.font = [UIFont systemFontOfSize:15.0f];
+        lblMood.font = [UIFont fontOfApp:15.0f];
         [_modifyGeneView.moodScrollView addSubview:lblMood];
     }
     

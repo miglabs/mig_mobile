@@ -23,6 +23,8 @@
  * 四种混用
  */
 +(UIFont *)fontOfApp:(CGFloat)fontSize{
+//    return [UIFont fontName:@"MicrosoftYaHei" size:fontSize];
+//    return [UIFont fontName:@"STHeitiTC-Light" size:fontSize];
     return [UIFont fontWithName:@"STHeitiTC-Medium" size:fontSize];
 }
 

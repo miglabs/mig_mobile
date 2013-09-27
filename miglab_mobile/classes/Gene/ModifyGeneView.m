@@ -12,6 +12,10 @@
 
 @synthesize bodyBgImageView = _bodyBgImageView;
 @synthesize btnBack = _btnBack;
+@synthesize lblChannel = _lblChannel;
+@synthesize lblType = _lblType;
+@synthesize lblMood = _lblMood;
+@synthesize lblScene = _lblScene;
 @synthesize channelScrollView = _channelScrollView;
 @synthesize typeScrollView = _typeScrollView;
 @synthesize moodScrollView = _moodScrollView;

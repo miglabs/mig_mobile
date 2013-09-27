@@ -375,10 +375,12 @@
     
     NSMutableDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
     cell.menuImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
+    cell.lblMenu.font = [UIFont fontOfApp:17.0f];
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
     
     if (indexPath.row == 0) {
         
+        cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
         cell.lblTipNum.text = [dicMenu objectForKey:@"MenuTip"];
         CGRect tipframe = cell.lblTipNum.frame;
         tipframe.origin.x += 15.0f;
@@ -389,6 +391,7 @@
         
         int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
         if (nMenuTip > 0) {
+            cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
             cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
             cell.lblTipNum.hidden = NO;
         } else {
