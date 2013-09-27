@@ -54,6 +54,7 @@
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
+        _btnMenuFirst.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuFirst];
         
         //second
@@ -63,6 +64,7 @@
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
+        _btnMenuSecond.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuSecond];
         
         _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(214, 0,106, 43)];
@@ -71,6 +73,7 @@
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
+        _btnMenuThird.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuThird];
         
     }
