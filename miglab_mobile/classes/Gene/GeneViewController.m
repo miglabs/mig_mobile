@@ -811,9 +811,15 @@ static int PAGE_WIDTH = 81;
     
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
-    int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
-    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempsonglist.count)];
-    [[PPlayerManagerCenter GetInstance].songList insertObjects:tempsonglist atIndexes:indexs];
+    
+    PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    if (playerManagerCenter.songList.count > 0) {
+        playerManagerCenter.currentSongIndex = 0;
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tempsonglist.count)];
+        [playerManagerCenter.songList insertObjects:tempsonglist atIndexes:indexs];
+    } else {
+        [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
+    }
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     

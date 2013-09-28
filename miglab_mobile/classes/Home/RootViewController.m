@@ -127,18 +127,23 @@
     
     //test data
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoListByUserGene:tusergene rowCount:20];
+    NSMutableArray *tempsonglist = [databaseManager getSongInfoListByUserGene:tusergene rowCount:20];
     
     PLog(@"rand(): %d, random(): %ld", rand(), random());
-    int songListCount = [tempSongInfoList count];
+    int songListCount = [tempsonglist count];
     int rnd = rand() % songListCount;
     
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
-    int currentSongIndex = playerManagerCenter.currentSongIndex;
-    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempSongInfoList.count)];
-    [playerManagerCenter.songList insertObjects:tempSongInfoList atIndexes:indexs];
+    if (playerManagerCenter.songList.count > 0) {
+        playerManagerCenter.currentSongIndex = 0;
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tempsonglist.count)];
+        [playerManagerCenter.songList insertObjects:tempsonglist atIndexes:indexs];
+    } else {
+        [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
+    }
+    
     playerManagerCenter.currentSongIndex = rnd;
-    playerManagerCenter.currentSong = (songListCount > 0) ? [tempSongInfoList objectAtIndex:rnd] : nil;
+    playerManagerCenter.currentSong = (songListCount > 0) ? [tempsonglist objectAtIndex:rnd] : nil;
     
 }
 
@@ -490,9 +495,15 @@
     
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
-    int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
-    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempsonglist.count)];
-    [[PPlayerManagerCenter GetInstance].songList insertObjects:tempsonglist atIndexes:indexs];
+    
+    PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    if (playerManagerCenter.songList.count > 0) {
+        playerManagerCenter.currentSongIndex = 0;
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tempsonglist.count)];
+        [playerManagerCenter.songList insertObjects:tempsonglist atIndexes:indexs];
+    } else {
+        [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
+    }
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
