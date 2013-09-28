@@ -59,16 +59,14 @@
         _lblSongInfo.textColor = [UIColor whiteColor];
         _lblSongInfo.textAlignment = kTextAlignmentLeft;
         _lblSongInfo.text = @"name-artist";
-//        _lblSongInfo.font = [UIFont fontName:@"MicrosoftYaHei" size:10.0f];
-//        _lblSongInfo.font = [UIFont fontName:@"STHeitiTC-Light" size:10.0f];
-        _lblSongInfo.font = [UIFont fontName:@"STHeitiTC-Medium" size:10.0f];
+        _lblSongInfo.font = [UIFont fontOfApp:10.0f];
         [self addSubview:_lblSongInfo];
         
         //delete
         _btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnDelete.frame = CGRectMake(92, 15, 44, 44);
         UIImage *removeNorImage = [UIImage imageWithName:@"music_menu_delete_nor" type:@"png"];
-        UIImage *removeSelImage = [UIImage imageWithName:@"music_menu_delete_sel" type:@"png"];
+//        UIImage *removeSelImage = [UIImage imageWithName:@"music_menu_delete_sel" type:@"png"];
         [_btnDelete setImage:removeNorImage forState:UIControlStateNormal];
 //        [_btnDelete setImage:removeSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnDelete];
@@ -77,7 +75,7 @@
         _btnCollect = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnCollect.frame = CGRectMake(146, 15, 44, 44);
         UIImage *likeNorImage = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
-        UIImage *likeSelImage = [UIImage imageWithName:@"music_menu_dark_heart_sel" type:@"png"];
+//        UIImage *likeSelImage = [UIImage imageWithName:@"music_menu_dark_heart_sel" type:@"png"];
         [_btnCollect setImage:likeNorImage forState:UIControlStateNormal];
 //        [_btnCollect setImage:likeSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnCollect];
@@ -86,7 +84,7 @@
         _btnPlayOrPause = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnPlayOrPause.frame = CGRectMake(198, 15, 44, 44);
         UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
-        UIImage *playSelImage = [UIImage imageWithName:@"music_menu_play_sel" type:@"png"];
+//        UIImage *playSelImage = [UIImage imageWithName:@"music_menu_play_sel" type:@"png"];
         [_btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
 //        [_btnPlayOrPause setImage:playSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnPlayOrPause];
@@ -95,7 +93,7 @@
         _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnNext.frame = CGRectMake(248, 15, 44, 44);
         UIImage *nextNorImage = [UIImage imageWithName:@"music_menu_next_nor" type:@"png"];
-        UIImage *nextSelImage = [UIImage imageWithName:@"music_menu_next_sel" type:@"png"];
+//        UIImage *nextSelImage = [UIImage imageWithName:@"music_menu_next_sel" type:@"png"];
         [_btnNext setImage:nextNorImage forState:UIControlStateNormal];
 //        [_btnNext setImage:nextSelImage forState:UIControlStateHighlighted];
         [self addSubview:_btnNext];

@@ -36,7 +36,7 @@
         _lblDesc = [[UILabel alloc] init];
         _lblDesc.frame = CGRectMake(16, 12, 140, 21);
         _lblDesc.backgroundColor = [UIColor clearColor];
-        _lblDesc.font = [UIFont fontName:@"STHeitiTC-Medium" size:13.0f];//[UIFont systemFontOfSize:15.0f];
+        _lblDesc.font = [UIFont fontOfApp:13.0f];
         _lblDesc.text = @"优先推荐以下歌曲";
         _lblDesc.textAlignment = kTextAlignmentLeft;
         _lblDesc.textColor = [UIColor whiteColor];

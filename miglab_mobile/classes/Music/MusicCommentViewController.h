@@ -16,7 +16,8 @@
 //歌曲评论页面
 @interface MusicCommentViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
+@property (nonatomic, retain) UIView *bodyView;
+
 @property (nonatomic, retain) MusicCommentPlayerView *commentPlayerView;
 
 @property (nonatomic, retain) UITableView *dataTableView;

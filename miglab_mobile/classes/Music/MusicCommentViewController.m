@@ -16,7 +16,8 @@
 
 @implementation MusicCommentViewController
 
-@synthesize navView = _navView;
+@synthesize bodyView = _bodyView;
+
 @synthesize commentPlayerView = _commentPlayerView;
 
 @synthesize dataTableView = _dataTableView;
@@ -70,17 +71,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"当前评论歌曲" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    //nav title
+    self.navView.titleLabel.text = @"评论当前歌曲";
     
     //body
+    _bodyView = [[UIView alloc] init];
+    _bodyView.frame = CGRectMake(0, posy + 10, kMainScreenWidth, kMainScreenHeight - posy - 10 - 10 - 49);
+    _bodyView.backgroundColor = [UIColor clearColor];
+    
     //player
     NSArray *commentPlayerNib = [[NSBundle mainBundle] loadNibNamed:@"MusicCommentPlayerView" owner:self options:nil];
     for (id oneObject in commentPlayerNib){
@@ -88,14 +90,18 @@
             _commentPlayerView = (MusicCommentPlayerView *)oneObject;
         }//if
     }//for
-    _commentPlayerView.frame = CGRectMake(11.5, 45 + 10, 297, 110);
-    [self.view addSubview:_commentPlayerView];
+    _commentPlayerView.frame = CGRectMake(11.5, 0, 297, 110);
+    [_bodyView addSubview:_commentPlayerView];
     
     _commentPlayerView.btnAvatar.layer.cornerRadius = 38;
     _commentPlayerView.btnAvatar.layer.masksToBounds = YES;
+    _commentPlayerView.btnAvatar.layer.borderWidth = 2;
+    _commentPlayerView.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
     _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
     _commentPlayerView.lblSongName.text = _song.songname;
+    _commentPlayerView.lblSongName.font = [UIFont fontOfApp:17.0f];
     _commentPlayerView.lblSongArtist.text = _song.artist;
+    _commentPlayerView.lblSongArtist.font = [UIFont fontOfApp:17.0f];
     [_commentPlayerView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
     [_commentPlayerView.btnCollect addTarget:self action:@selector(doCollectedOrCancel:) forControlEvents:UIControlEventTouchUpInside];
     [_commentPlayerView.btnDelete addTarget:self action:@selector(doHate:) forControlEvents:UIControlEventTouchUpInside];
@@ -104,7 +110,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 45 + 10 + 110 + 10, 297, kMainScreenHeight - 45 - 10 - 110 - 10 - 10 - 49);
+    _dataTableView.frame = CGRectMake(11.5, 110 + 10, 297, kMainScreenHeight - posy - 10 - 10 - 49 - 110 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -115,8 +121,9 @@
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _dataTableView.backgroundView = bodyBgImageView;
     
-    [self.view addSubview:_dataTableView];
+    [_bodyView addSubview:_dataTableView];
     
+    [self.view insertSubview:_bodyView belowSubview:self.navView];
     
     //comment input view
     NSArray *commentinputNib = [[NSBundle mainBundle] loadNibNamed:@"MusicCommentInputView" owner:self options:nil];
@@ -182,7 +189,7 @@
 -(IBAction)doCollectedOrCancel:(id)sender{
     
     PLog(@"doCollect...");
-    
+    /*
     UserSessionManager *userSessionManager = [UserSessionManager GetInstance];
     if (userSessionManager.isLoggedIn) {
         
@@ -204,7 +211,7 @@
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
-    
+    */
 }
 
 -(IBAction)doHate:(id)sender{
@@ -232,16 +239,25 @@
 
 -(IBAction)doCommentSong:(id)sender{
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+    NSString *commentcontent = _commentInputView.commentTextField.text;
+    PLog(@"commentcontent: %@", commentcontent);
+    
+    if ([NSString checkDataIsNull:commentcontent]) {
+        [SVProgressHUD showErrorWithStatus:@"亲，您忘记输入内容咯～"];
+    }
+    
+    if ([UserSessionManager GetInstance].isLoggedIn && commentcontent.length > 5) {
         
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
-        NSString *commentcontent = _commentInputView.commentTextField.text;
+        
         
         [_miglabAPI doCommentSong:userid token:accesstoken songid:songid comment:commentcontent];
         
     }
+    
+    [_commentInputView.commentTextField resignFirstResponder];
     
 }
 
@@ -319,14 +335,17 @@
     
     SongComment *tempcomment = [_dataList objectAtIndex:indexPath.row];
     cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
-    cell.lblNickname.text = tempcomment.user.nickname;
+    cell.lblNickname.text = tempcomment.user.nickname ? tempcomment.user.nickname: @"未知用户";
+    cell.lblNickname.font = [UIFont fontOfApp:17.0f];
     if (tempcomment.user.gender > 0) {
         cell.genderImageView.image = [UIImage imageWithName:@"user_gender_male" type:@"png"];
     } else {
         cell.genderImageView.image = [UIImage imageWithName:@"user_gender_female" type:@"png"];
     }
     cell.lblTime.text = tempcomment.createdtime;
+    cell.lblTime.font = [UIFont fontOfApp:10.0f];
     cell.lblContent.text = tempcomment.text;
+    cell.lblContent.font = [UIFont fontOfApp:13.0f];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
@@ -341,12 +360,34 @@
 #pragma textfield delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     
-    _dataTableView.frame = CGRectMake(0, 0, 320, kMainScreenHeight - 210);
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        //textfield移动高度
+        CGRect textFrame = textField.frame;
+        float height = textFrame.origin.y - 49;
+        
+        //nav
+        CGRect navViewFrame = self.navView.frame;
+        float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+        CGRect bodyFrame = _bodyView.frame;
+        bodyFrame.origin.y = posy + 10 - height;
+        _bodyView.frame = bodyFrame;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
     [self scrollTableToFoot:YES];
 }
 
 -(IBAction)resiginTextField:(id)sender{
-    _dataTableView.frame = CGRectMake(0, 20, 320, kMainScreenHeight);
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    CGRect bodyFrame = _bodyView.frame;
+    bodyFrame.origin.y = posy + 10;
+    _bodyView.frame = bodyFrame;
 }
 
 - (void)scrollTableToFoot:(BOOL)animated {
@@ -405,8 +446,22 @@
 
 -(void) autoMovekeyBoard: (float) h{
     
-	_commentInputView.frame = CGRectMake(0.0f, (float)(kMainScreenHeight-h-49), 320.0f, 49.0f);
-	_dataTableView.frame = CGRectMake(0.0f, 44.0f, 320.0f,(float)(kMainScreenHeight-h-44-49));
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
+        
+        //nav
+        CGRect navViewFrame = self.navView.frame;
+        float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+        CGRect bodyFrame = _bodyView.frame;
+        bodyFrame.origin.y = posy + 10 - h;
+        _bodyView.frame = bodyFrame;
+        
+        _commentInputView.frame = CGRectMake(0.0f, (float)(kMainScreenHeight-h-49), 320.0f, 49.0f);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
     
 }
 

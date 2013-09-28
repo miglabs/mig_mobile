@@ -54,52 +54,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav title
     self.navView.titleLabel.text = @"我喜欢的歌曲";
     
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
     //body head
-    /*
-    UILabel *lblDesc = [[UILabel alloc] init];
-    lblDesc.frame = CGRectMake(16, 12, 140, 21);
-    lblDesc.backgroundColor = [UIColor clearColor];
-    lblDesc.font = [UIFont systemFontOfSize:15.0f];
-    lblDesc.text = @"优先推荐以下歌曲";
-    lblDesc.textAlignment = kTextAlignmentLeft;
-    lblDesc.textColor = [UIColor whiteColor];
-    
-    UIButton *btnSort = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnSort.frame = CGRectMake(162, 8, 58, 28);
-    UIImage *sortNorImage = [UIImage imageWithName:@"music_source_sort" type:@"png"];
-    [btnSort setImage:sortNorImage forState:UIControlStateNormal];
-    
-    UIButton *btnEdit = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnEdit.frame = CGRectMake(230, 8, 58, 28);
-    UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
-    [btnEdit setImage:editNorImage forState:UIControlStateNormal];
-    
-    UIImageView *separatorImageView = [[UIImageView alloc] init];
-    separatorImageView.frame = CGRectMake(4, 45, 290, 1);
-    separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
-    
-    UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
-    [headerView addSubview:lblDesc];
-    [headerView addSubview:btnSort];
-    [headerView addSubview:btnEdit];
-    [headerView addSubview:separatorImageView];
-    [self.view addSubview:headerView];
-    */
-    
-    //body head
     _bodyHeadMenuView = [[MusicBodyHeadMenuView alloc] initMusicBodyHeadMenuView];
-    _bodyHeadMenuView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
+    _bodyHeadMenuView.frame = CGRectMake(11.5, posy + 10, 297, 45);
     [self.view addSubview:_bodyHeadMenuView];
     
     [_bodyHeadMenuView.btnSort addTarget:self action:@selector(doSort:) forControlEvents:UIControlEventTouchUpInside];
@@ -108,7 +79,7 @@
     //sort menu
     _sortMenuView = [[MusicSortMenuView alloc] initMusicSortMenuView];
 //    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 45);
-    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 0);
+    _sortMenuView.frame = CGRectMake(11.5, posy + 10 + 45, 297, 0);
     [self.view addSubview:_sortMenuView];
     
     [_sortMenuView.btnSortFirst addTarget:self action:@selector(doSortMenu1:) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +90,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45, 297, kMainScreenHeight - posy - 10 - 45 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -451,7 +422,7 @@
     Song *tempsong = [_dataList objectAtIndex:indexPath.row];
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
-    cell.lblSongName.font = [UIFont fontName:@"STHeitiTC-Medium" size:15.0f];
+    cell.lblSongName.font = [UIFont fontOfApp:15.0f];
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
     NSString *songDesc = @"未缓存";
@@ -460,7 +431,7 @@
         songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];
     }
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, songDesc];
-    cell.lblSongArtistAndDesc.font = [UIFont fontName:@"STHeitiTC-Medium" size:10.0f];
+    cell.lblSongArtistAndDesc.font = [UIFont fontOfApp:10.0f];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

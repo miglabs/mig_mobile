@@ -6,16 +6,10 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-typedef enum {
-    PFontTypeNormal0,
-    PFontTypeNormal1,
-    PFontTypeNormal2
-} PFontType;
-
 @interface UIFont (PFontCategory)
 
 +(UIFont *)fontName:(NSString *)fontName size:(CGFloat)fontSize;
 +(UIFont *)fontOfSystem:(CGFloat)fontSize;
-+(UIFont *)fontWithType:(PFontType)pFontType;
++(UIFont *)fontOfApp:(CGFloat)fontSize;
 
 @end
