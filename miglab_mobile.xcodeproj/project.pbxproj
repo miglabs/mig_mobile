@@ -2738,8 +2738,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2754,8 +2754,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2769,8 +2769,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2778,8 +2778,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2788,8 +2788,8 @@
 		16EDEF561759AD5E001BE4E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\"",
@@ -2811,8 +2811,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2821,8 +2821,8 @@
 		16EDEF571759AD5E001BE4E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianhua Ming (5VGP7E5QS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\"",
@@ -2844,8 +2844,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F17324B8-F4E7-45F6-9E0D-D0F3DEB35AFF";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
