@@ -32,7 +32,7 @@
     if (self) {
         
         NSString *cacheHomeDir = [self getCacheHomeDirectory];
-        NSString *dbpath = [cacheHomeDir stringByAppendingPathComponent:@"user.sqlite"];
+        NSString *dbpath = [cacheHomeDir stringByAppendingPathComponent:@"20130928user.sqlite"];
         NSLog(@"dbpath: %@", dbpath);
         
         _db = [FMDatabase databaseWithPath:dbpath];
@@ -46,7 +46,7 @@
         [_db executeUpdate:@"create table if not exists USER_GENE (userid text not null, channelindex integer, typeindex integer, moodindex integer, sceneindex integer)"];
         
         //song cache
-        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, typeid integer, createtime integer, collectnum integer, commentnum integer, hot integer)"];
+        [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, tid integer, createtime integer, collectnum integer, commentnum integer, hot integer, channelid text, typeid text, moodid text, sceneid text)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
         
         //ipod song
@@ -69,14 +69,6 @@
     
     NSMutableArray *psonginfolist = [self getDefaultSongInfoList];
     [self insertSongInfoList:psonginfolist];
-    
-//    int songinfocount = [psonginfolist count];
-//    for (int i=0; i<songinfocount; i++) {
-//        
-//        Song *psong = [psonginfolist objectAtIndex:i];
-//        
-//        [self insertSongInfo:psong];
-//    }
     
     PLog(@"initDataInfo end...............................................");
 }
@@ -506,7 +498,7 @@
  */
 -(void)insertSongInfo:(Song *)tsong{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, tid, createtime, collectnum, commentnum, hot, channelid, typeid, moodid, sceneid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     NSString *pinYinResult = [[NSString alloc] init];
@@ -543,14 +535,14 @@
     NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
     NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
     
-    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot];
+    [_db executeUpdate:sql, numSongId, tsong.songname, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot, tsong.channelid, tsong.typeid, tsong.moodid, tsong.sceneid];
     [_db close];
     
 }
 
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist{
     
-    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, typeid, createtime, collectnum, commentnum, hot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, tid, createtime, collectnum, commentnum, hot, channelid, typeid, moodid, sceneid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
     NSString *pinYinResult = [[NSString alloc] init];
@@ -605,7 +597,7 @@
         NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
         NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
         
-        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.pinyin, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot];
+        [_db executeUpdate:sql, numSongId, tsong.songname, tsong.pinyin, tsong.artist, tsong.pubtime, tsong.album, tsong.duration, tsong.songurl, tsong.hqurl, tsong.lrcurl, tsong.coverurl, tsong.like, tsong.type, numTypeId, numCreateTime, numCollectNum, numCommentNum, numHot, tsong.channelid, tsong.typeid, tsong.moodid, tsong.sceneid];
         
     }
     
@@ -640,10 +632,14 @@
         NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
         NSString *plike = [rs stringForColumn:@"like"];
         NSString *ptype = [rs stringForColumn:@"type"];
-        int ptypeid = [rs intForColumn:@"typeid"];
+        int ptid = [rs intForColumn:@"tid"];
         int pcollectnum = [rs intForColumn:@"collectnum"];
         int pcommentnum = [rs intForColumn:@"commentnum"];
         long long phot = [rs longLongIntForColumn:@"hot"];
+        NSString *pchannelid = [rs stringForColumn:@"channelid"];
+        NSString *ptypeid = [rs stringForColumn:@"typeid"];
+        NSString *pmoodid = [rs stringForColumn:@"moodid"];
+        NSString *psceneid = [rs stringForColumn:@"sceneid"];
         
         Song *psong = [[Song alloc] init];
         psong.songid = psongid;
@@ -659,12 +655,16 @@
         psong.coverurl = pcoverurl;
         psong.like = plike;
         psong.type = ptype;
-        psong.tid = ptypeid;
+        psong.tid = ptid;
         psong.collectnum = pcollectnum;
         psong.commentnum = pcommentnum;
         psong.hot = phot;
         psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
         psong.songCachePath = [songManager getSongCachePath:psong];
+        psong.channelid = pchannelid;
+        psong.typeid = ptypeid;
+        psong.moodid = pmoodid;
+        psong.sceneid = psceneid;
         [psong log];
         
         [songInfoList addObject:psong];
@@ -673,6 +673,78 @@
     [_db close];
     
     return songInfoList;
+}
+
+//根据用户音乐基因获取指定数量的歌曲
+-(NSMutableArray *)getSongInfoListByUserGene:(UserGene *)tusergene rowCount:(int)trowcount{
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where typeid = %d or moodid = %d or sceneid = %d order by createtime desc limit %d ", tusergene.type.typeid, tusergene.mood.typeid, tusergene.scene.typeid, trowcount];
+    PLog(@"sql: %@", sql);
+    
+    NSMutableArray *songInfoList = [[NSMutableArray alloc] init];
+    
+    SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    while ([rs next]) {
+        
+        long long psongid = [rs longLongIntForColumn:@"songid"];
+        NSString *psongname = [rs stringForColumn:@"songname"];
+        NSString *ppinyin = [rs stringForColumn:@"pinyin"];
+        NSString *partist = [rs stringForColumn:@"artist"];
+        NSString *ppubtime = [rs stringForColumn:@"pubtime"];
+        NSString *palbum = [rs stringForColumn:@"album"];
+        NSString *pduration = [rs stringForColumn:@"duration"];
+        NSString *psongurl = [rs stringForColumn:@"songurl"];
+        NSString *phqurl = [rs stringForColumn:@"hqurl"];
+        NSString *plrcurl = [rs stringForColumn:@"lrcurl"];
+        NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
+        NSString *plike = [rs stringForColumn:@"like"];
+        NSString *ptype = [rs stringForColumn:@"type"];
+        int ptid = [rs intForColumn:@"tid"];
+        int pcollectnum = [rs intForColumn:@"collectnum"];
+        int pcommentnum = [rs intForColumn:@"commentnum"];
+        long long phot = [rs longLongIntForColumn:@"hot"];
+        NSString *pchannelid = [rs stringForColumn:@"channelid"];
+        NSString *ptypeid = [rs stringForColumn:@"typeid"];
+        NSString *pmoodid = [rs stringForColumn:@"moodid"];
+        NSString *psceneid = [rs stringForColumn:@"sceneid"];
+        
+        Song *psong = [[Song alloc] init];
+        psong.songid = psongid;
+        psong.songname = psongname;
+        psong.pinyin = ppinyin;
+        psong.artist = partist;
+        psong.pubtime = ppubtime;
+        psong.album = palbum;
+        psong.duration = pduration;
+        psong.songurl = psongurl;
+        psong.hqurl = phqurl;
+        psong.lrcurl = plrcurl;
+        psong.coverurl = pcoverurl;
+        psong.like = plike;
+        psong.type = ptype;
+        psong.tid = ptid;
+        psong.collectnum = pcollectnum;
+        psong.commentnum = pcommentnum;
+        psong.hot = phot;
+        psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
+        psong.songCachePath = [songManager getSongCachePath:psong];
+        psong.channelid = pchannelid;
+        psong.typeid = ptypeid;
+        psong.moodid = pmoodid;
+        psong.sceneid = psceneid;
+        [psong log];
+        
+        [songInfoList addObject:psong];
+    }
+    
+    [_db close];
+    
+    return songInfoList;
+    
 }
 
 -(NSMutableArray *)getLikeSongInfoList:(int)trowcount{
@@ -702,10 +774,14 @@
         NSString *pcoverurl = [rs stringForColumn:@"coverurl"];
         NSString *plike = [rs stringForColumn:@"like"];
         NSString *ptype = [rs stringForColumn:@"type"];
-        int ptypeid = [rs intForColumn:@"typeid"];
+        int ptid = [rs intForColumn:@"typeid"];
         int pcollectnum = [rs intForColumn:@"collectnum"];
         int pcommentnum = [rs intForColumn:@"commentnum"];
         long long phot = [rs longLongIntForColumn:@"hot"];
+        NSString *pchannelid = [rs stringForColumn:@"channelid"];
+        NSString *ptypeid = [rs stringForColumn:@"typeid"];
+        NSString *pmoodid = [rs stringForColumn:@"moodid"];
+        NSString *psceneid = [rs stringForColumn:@"sceneid"];
         
         Song *psong = [[Song alloc] init];
         psong.songid = psongid;
@@ -721,12 +797,16 @@
         psong.coverurl = pcoverurl;
         psong.like = plike;
         psong.type = ptype;
-        psong.tid = ptypeid;
+        psong.tid = ptid;
         psong.collectnum = pcollectnum;
         psong.commentnum = pcommentnum;
         psong.hot = phot;
         psong.whereIsTheSong = WhereIsTheSong_IN_CACHE;
         psong.songCachePath = [songManager getSongCachePath:psong];
+        psong.channelid = pchannelid;
+        psong.typeid = ptypeid;
+        psong.moodid = pmoodid;
+        psong.sceneid = psceneid;
         [psong log];
         
         [songInfoList addObject:psong];

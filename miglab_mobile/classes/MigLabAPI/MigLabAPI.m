@@ -1968,6 +1968,10 @@
                 for(int i=0; i<songcount; i++) {
                     
                     Song* song = [Song initWithNSDictionary:[songlist objectAtIndex:i]];
+                    song.channelid = tchannelid;
+                    song.typeid = ttypeid;
+                    song.moodid = tmoodid;
+                    song.sceneid = tsceneid;
                     
                     [songInfos addObject:song];
                 }

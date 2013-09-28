@@ -40,10 +40,10 @@ typedef enum{
 @property (nonatomic, assign) long long hot;                            //收听次数
 
 @property (nonatomic, retain) NSString *songCachePath;                  //本地缓存路径
-@property (nonatomic, assign) int channelid;                            //频道id
-@property (nonatomic, assign) int typeid;                               //类别id
-@property (nonatomic, assign) int moodid;                               //心情id
-@property (nonatomic, assign) int sceneid;                              //场景id
+@property (nonatomic, retain) NSString *channelid;                      //频道id
+@property (nonatomic, retain) NSString *typeid;                         //类别id
+@property (nonatomic, retain) NSString *moodid;                         //心情id
+@property (nonatomic, retain) NSString *sceneid;                        //场景id
 
 /*
  0-app中打包的歌曲

@@ -69,6 +69,7 @@
 -(void)insertSongInfo:(Song *)tsong;
 -(void)insertSongInfoList:(NSMutableArray *)tsonginfolist;
 -(NSMutableArray *)getSongInfoList:(int)trowcount;
+-(NSMutableArray *)getSongInfoListByUserGene:(UserGene *)tusergene rowCount:(int)trowcount;
 -(NSMutableArray *)getLikeSongInfoList:(int)trowcount;
 -(void)deleteSongInfo:(long long)tlocalkey;
 -(void)deleteAllSongInfo;

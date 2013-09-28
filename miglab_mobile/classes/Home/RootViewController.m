@@ -126,15 +126,17 @@
     }
     
     //test data
-    
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+    UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
+    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoListByUserGene:tusergene rowCount:20];
     
     PLog(@"rand(): %d, random(): %ld", rand(), random());
     int songListCount = [tempSongInfoList count];
     int rnd = rand() % songListCount;
     
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
-    [playerManagerCenter.songList addObjectsFromArray:tempSongInfoList];
+    int currentSongIndex = playerManagerCenter.currentSongIndex;
+    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempSongInfoList.count)];
+    [playerManagerCenter.songList insertObjects:tempSongInfoList atIndexes:indexs];
     playerManagerCenter.currentSongIndex = rnd;
     playerManagerCenter.currentSong = (songListCount > 0) ? [tempSongInfoList objectAtIndex:rnd] : nil;
     
@@ -486,8 +488,11 @@
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
-    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
-    [[PPlayerManagerCenter GetInstance].songList addObjectsFromArray:tempsonglist];
+    UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
+    int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
+    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempsonglist.count)];
+    [[PPlayerManagerCenter GetInstance].songList insertObjects:tempsonglist atIndexes:indexs];
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     

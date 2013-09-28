@@ -149,6 +149,10 @@ static PPlayerManagerCenter *instance;
 
 -(void)playCurrentSong{
     
+    if ([_songList count] < 1) {
+        return;
+    }
+    
     _currentSong = [_songList objectAtIndex:_currentSongIndex];
     [self stopDownload];
     

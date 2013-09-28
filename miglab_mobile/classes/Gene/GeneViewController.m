@@ -809,8 +809,11 @@ static int PAGE_WIDTH = 81;
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
-    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
-    [[PPlayerManagerCenter GetInstance].songList addObjectsFromArray:tempsonglist];
+    UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
+    int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
+    NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(currentSongIndex, tempsonglist.count)];
+    [[PPlayerManagerCenter GetInstance].songList insertObjects:tempsonglist atIndexes:indexs];
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
