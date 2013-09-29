@@ -295,7 +295,7 @@
         NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
         NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
         
-        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:@"5"];
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:[NSString stringWithFormat:@"%d", GET_TYPE_SONGS_NUM]];
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];

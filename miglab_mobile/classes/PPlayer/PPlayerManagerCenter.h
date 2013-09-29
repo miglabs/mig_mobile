@@ -51,6 +51,7 @@ typedef enum{
 -(void)playCurrentSong;
 -(void)doNext;
 -(void)doInsertPlay:(Song *)tInsertSong;
+-(void)doUpdateSongList:(NSMutableArray *)tSongList;
 
 -(void)addMoodRecordFailed:(NSNotification *)tNotification;
 -(void)addMoodRecordSuccess:(NSNotification *)tNotification;

@@ -127,12 +127,16 @@
     
     //test data
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
-    NSMutableArray *tempsonglist = [databaseManager getSongInfoListByUserGene:tusergene rowCount:20];
+    NSMutableArray *tempsonglist = [databaseManager getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
     PLog(@"rand(): %d, random(): %ld", rand(), random());
     int songListCount = [tempsonglist count];
     int rnd = rand() % songListCount;
     
+    PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    [playerManagerCenter doUpdateSongList:tempsonglist];
+    
+    /*
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {
         playerManagerCenter.currentSongIndex = 0;
@@ -141,6 +145,7 @@
     } else {
         [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
     }
+    */
     
     playerManagerCenter.currentSongIndex = rnd;
     playerManagerCenter.currentSong = (songListCount > 0) ? [tempsonglist objectAtIndex:rnd] : nil;
@@ -482,6 +487,12 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
+    
+    UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
+    
+    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
@@ -494,8 +505,10 @@
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
-    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
+    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    /*
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {
         playerManagerCenter.currentSongIndex = 0;
@@ -504,6 +517,7 @@
     } else {
         [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
     }
+    */
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     

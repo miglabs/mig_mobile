@@ -508,10 +508,17 @@
     NSString *checksql = [NSString stringWithFormat:@"select * from SONG_LOCAL_INFO where songid = %lld ", tsong.songid];
     PLog(@"checksql: %@", checksql);
     
+    NSDate *nowDate = [NSDate date];
+    long lCreateTime = [nowDate timeIntervalSince1970];
+    
     FMResultSet *rs = [_db executeQuery:checksql];
     while ([rs next]) {
         
         PLog(@"is exists...");
+        
+        NSString *updatesql = [NSString stringWithFormat:@"update SONG_LOCAL_INFO set createtime = %ld where songid = %lld ", lCreateTime, tsong.songid];
+        [_db executeUpdate:updatesql];
+        
         return;
     }
     
@@ -529,8 +536,7 @@
     
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
     NSNumber *numTypeId = [NSNumber numberWithInt:tsong.tid];
-    NSDate *nowDate = [NSDate date];
-    NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
+    NSNumber *numCreateTime = [NSNumber numberWithLong:lCreateTime];
     NSNumber *numCollectNum = [NSNumber numberWithInt:tsong.collectnum];
     NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
     NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];
@@ -571,8 +577,15 @@
             break;
         }
         
+        NSDate *nowDate = [NSDate date];
+        long lCreateTime = [nowDate timeIntervalSince1970];
+        
         if (isExists) {
             PLog(@"is exists...");
+            
+            NSString *updatesql = [NSString stringWithFormat:@"update SONG_LOCAL_INFO set createtime = %ld where songid = %lld ", lCreateTime, tsong.songid];
+            [_db executeUpdate:updatesql];
+            
             continue;
         }
         NSLog(@"i: %d", i);
@@ -591,8 +604,7 @@
         
         NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
         NSNumber *numTypeId = [NSNumber numberWithInt:tsong.tid];
-        NSDate *nowDate = [NSDate date];
-        NSNumber *numCreateTime = [NSNumber numberWithLong:[nowDate timeIntervalSince1970]];
+        NSNumber *numCreateTime = [NSNumber numberWithLong:lCreateTime];
         NSNumber *numCollectNum = [NSNumber numberWithInt:tsong.collectnum];
         NSNumber *numCommentNum = [NSNumber numberWithInt:tsong.commentnum];
         NSNumber *numHot = [NSNumber numberWithLongLong:tsong.hot];

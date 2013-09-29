@@ -217,8 +217,21 @@ static PPlayerManagerCenter *instance;
         
     }
     
+}
+
+//更新播放列表
+-(void)doUpdateSongList:(NSMutableArray *)tSongList{
     
+    PLog(@"doUpdateSongList...%d", [tSongList count]);
     
+    PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    if (playerManagerCenter.songList.count > 0) {
+        playerManagerCenter.currentSongIndex = 0;
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tSongList.count)];
+        [playerManagerCenter.songList insertObjects:tSongList atIndexes:indexs];
+    } else {
+        [playerManagerCenter.songList addObjectsFromArray:tSongList];
+    }
     
 }
 

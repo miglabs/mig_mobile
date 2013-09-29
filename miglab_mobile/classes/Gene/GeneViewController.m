@@ -798,6 +798,12 @@ static int PAGE_WIDTH = 81;
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
+    
+    UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
+    
+    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
@@ -810,8 +816,10 @@ static int PAGE_WIDTH = 81;
     [[PDatabaseManager GetInstance] insertSongInfoList:songInfoList];
     
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
-    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:20];
+    NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
+    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    /*
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {
         playerManagerCenter.currentSongIndex = 0;
@@ -820,6 +828,7 @@ static int PAGE_WIDTH = 81;
     } else {
         [playerManagerCenter.songList addObjectsFromArray:tempsonglist];
     }
+    */
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
