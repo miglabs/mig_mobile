@@ -187,6 +187,12 @@ typedef enum {
  */
 -(void)doGetSongComment:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid count:(NSString*)tcount fromid:(NSString*)tfromid;
 
+/*
+ 获取周围谁在听你的歌及消息
+ 这个接口会发出两个消息，一个是消息信息，一个是谁在听你的音乐
+ */
+-(void)doGetMyNearMusicMsg:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+
 /****************************************保留接口*******************************************/
 
 

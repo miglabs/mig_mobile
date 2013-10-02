@@ -286,4 +286,11 @@
 #define NotificationNameGetCommentSuccess                  @"NotificationNameGetCommentSuccess"
 #define NotificationNameGetCommentFailed                   @"NotificationNameGetCommentFailed"
 
+// 获取周围谁在听你的歌及消息
+#define HTTP_GETMYNEARMUSICMSG                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/musicfri.fcgi"]
+#define NotificationNameGetMyNearMusicSuccess               @"NotificationNameGetMyNearMusicSuccess"
+#define NotificationNameGetMyNearMusicFailed                @"NotificationNameGetMyNearMusicFailed"
+#define NotificationNameGetMyNearMsgSuccess                 @"NotificationNameGetMyNearMsgSuccess"
+#define NotificationNameGetMyNearMsgFailed                  @"NotificationNameGetMyNearMsgFailed"
+
 #endif
