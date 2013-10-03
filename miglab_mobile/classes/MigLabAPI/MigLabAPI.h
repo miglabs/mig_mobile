@@ -16,6 +16,7 @@
 #import "CollectNum.h"
 #import "NearMusicState.h"
 #import "SongComment.h"
+#import "NearMessageState.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
 typedef enum {
@@ -189,9 +190,13 @@ typedef enum {
 
 /*
  获取周围谁在听你的歌及消息
- 这个接口会发出两个消息，一个是消息信息，一个是谁在听你的音乐
  */
--(void)doGetMyNearMusicMsg:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+-(void)doGetMyNearMusicMsgNumber:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+
+/*
+ 获取周围谁在听你红心的歌曲
+ */
+-(void)doGetSameMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
 
 /****************************************保留接口*******************************************/
 

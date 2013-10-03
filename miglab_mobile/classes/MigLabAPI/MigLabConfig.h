@@ -59,7 +59,7 @@
 /*
  * 用于切换不同域名地址
  */
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 
 #if (0 == IS_DEBUG_SERVER)
 
@@ -287,10 +287,13 @@
 #define NotificationNameGetCommentFailed                   @"NotificationNameGetCommentFailed"
 
 // 获取周围谁在听你的歌及消息
-#define HTTP_GETMYNEARMUSICMSG                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/musicfri.fcgi"]
-#define NotificationNameGetMyNearMusicSuccess               @"NotificationNameGetMyNearMusicSuccess"
-#define NotificationNameGetMyNearMusicFailed                @"NotificationNameGetMyNearMusicFailed"
-#define NotificationNameGetMyNearMsgSuccess                 @"NotificationNameGetMyNearMsgSuccess"
-#define NotificationNameGetMyNearMsgFailed                  @"NotificationNameGetMyNearMsgFailed"
+#define HTTP_GETMYNEARMUSICMSGNUM                           [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/musicfri.fcgi"]
+#define NotificationNameGetMyNearMusicMsgNumSuccess               @"NotificationNameGetMyNearMusicMsgNumSuccess"
+#define NotificationNameGetMyNearMusicMsgNumFailed                @"NotificationNameGetMyNearMusicMsgNumFailed"
+
+// 获取周围谁在听你红心的歌曲
+#define HTTP_GETSANMEMUSIC                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/samemusic.fcgi"]
+#define NotificationNameGetSameMusicSuccess                 @"NotificationNameGetSameMusicSuccess"
+#define NotificationNameGetSameMusicFailed                  @"NotificationNameGetSameMusicFailed"
 
 #endif
