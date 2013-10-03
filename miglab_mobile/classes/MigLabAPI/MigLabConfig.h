@@ -283,17 +283,22 @@
 
 // 获取歌曲评论
 #define HTTP_GETCOMMENT                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/get_comment.fcgi"]
-#define NotificationNameGetCommentSuccess                  @"NotificationNameGetCommentSuccess"
-#define NotificationNameGetCommentFailed                   @"NotificationNameGetCommentFailed"
+#define NotificationNameGetCommentSuccess                   @"NotificationNameGetCommentSuccess"
+#define NotificationNameGetCommentFailed                    @"NotificationNameGetCommentFailed"
 
 // 获取周围谁在听你的歌及消息
 #define HTTP_GETMYNEARMUSICMSGNUM                           [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/musicfri.fcgi"]
-#define NotificationNameGetMyNearMusicMsgNumSuccess               @"NotificationNameGetMyNearMusicMsgNumSuccess"
-#define NotificationNameGetMyNearMusicMsgNumFailed                @"NotificationNameGetMyNearMusicMsgNumFailed"
+#define NotificationNameGetMyNearMusicMsgNumSuccess         @"NotificationNameGetMyNearMusicMsgNumSuccess"
+#define NotificationNameGetMyNearMusicMsgNumFailed          @"NotificationNameGetMyNearMusicMsgNumFailed"
 
 // 获取周围谁在听你红心的歌曲
 #define HTTP_GETSANMEMUSIC                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/samemusic.fcgi"]
 #define NotificationNameGetSameMusicSuccess                 @"NotificationNameGetSameMusicSuccess"
 #define NotificationNameGetSameMusicFailed                  @"NotificationNameGetSameMusicFailed"
+
+// 获取周围的人及音乐
+#define HTTP_GETNEARUSER                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/nearuser.fcgi"]
+#define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
+#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
 
 #endif

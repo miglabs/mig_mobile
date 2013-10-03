@@ -2828,6 +2828,11 @@
                 
                 int msg_num = [[dicJson objectForKey:@"msg_num"] intValue];
                 int music_num = [[dicJson objectForKey:@"music_num"] intValue];
+                
+                int num[2] = {msg_num, music_num};
+                
+                //NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:num, @"result", nil];
+                
                                 
             }
             else {
@@ -2865,7 +2870,7 @@
 -(void)doGetSameMusic:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETSANMEMUSIC, uid, ttoken, tradius, tlocation];
-    PLog(@"get my nearby music and message url:%@", url);
+    PLog(@"get same music url:%@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -2920,6 +2925,74 @@
         PLog(@"get my same music failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSameMusicFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+/*
+ 获取周围谁在听你红心的歌曲
+ GET
+ HTTP_GETSAMEMUSIC
+ */
+-(void)doGetNearUser:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETNEARUSER, uid, ttoken, tradius, tlocation];
+    PLog(@"get near user url:%@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get near user operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* musicarray = [dicTemp objectForKey:@"nearUser"];
+                int musicarraycount = [musicarray count];
+                
+                NSMutableArray* musicList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<musicarraycount; i++) {
+                    
+                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[musicarray objectAtIndex:i]];
+                    [musicList addObject:nms];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:musicList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearUserSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get my same music operation failed");
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearUserFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearUserFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get my same music failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetNearUserFailed object:nil userInfo:nil];
     }];
     
     [operation start];

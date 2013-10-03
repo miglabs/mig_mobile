@@ -195,8 +195,10 @@ typedef enum {
 
 /*
  获取周围谁在听你红心的歌曲
+ 获取周围的人及歌曲
  */
 -(void)doGetSameMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+-(void)doGetNearUser:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
 
 /****************************************保留接口*******************************************/
 
