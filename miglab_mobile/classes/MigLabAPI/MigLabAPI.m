@@ -2807,7 +2807,7 @@
  GET
  HTTP_GETMYNEARMUSICMSGNUM
  */
--(void)doGetMyNearMusicMsgNum:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+-(void)doGetMyNearMusicMsgNumber:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETMYNEARMUSICMSGNUM, uid, ttoken, tradius, tlocation];
     PLog(@"get my nearby music and message url:%@", url);
@@ -2829,10 +2829,13 @@
                 int msg_num = [[dicJson objectForKey:@"msg_num"] intValue];
                 int music_num = [[dicJson objectForKey:@"music_num"] intValue];
                 
-                int num[2] = {msg_num, music_num};
+                NSMutableArray* numarray = [[NSMutableArray alloc] init];
+                [numarray addObject:[NSNumber numberWithInt:msg_num]];
+                [numarray addObject:[NSNumber numberWithInt:music_num]];
                 
-                //NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:num, @"result", nil];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:numarray, @"result", nil];
                 
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetMyNearMusicMsgNumSuccess object:nil userInfo:dicResult];
                                 
             }
             else {
