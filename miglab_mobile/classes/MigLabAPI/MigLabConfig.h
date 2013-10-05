@@ -306,4 +306,9 @@
 #define NotificationNameGetSongHistorySuccess               @"NotificationNameGetSongHistorySuccess"
 #define NotificationNameGetSongHistoryFailed                @"NotificationNameGetSongHistoryFailed"
 
+// 打招呼
+#define HTTP_SAYHELLO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/sayhello.fcgi"]
+#define NotificationNameSayHelloSuccess                     @"NotificationNameSayHelloSuccess"
+#define NotificationNameSayHelloFailed                      @"NotificationNameSayHelloFailed"
+
 #endif

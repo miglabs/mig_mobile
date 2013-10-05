@@ -3074,5 +3074,66 @@
     [operation start];
 }
 
+/*
+ 打招呼
+ HTTP_SAYHELLO
+ POST
+ */
+-(void)doSayHello:(NSString *)uid token:(NSString *)ttoken touid:(NSString *)ttouid msg:(NSString *)tmsg {
+    
+    PLog(@"say hello url: %@", HTTP_SAYHELLO);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_SAYHELLO]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&msg=%@", uid, ttoken, ttouid, tmsg];
+    PLog(@"say hello body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"say hello operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSayHelloSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"say hello operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSayHelloFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSayHelloFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"say hello failure: %@", error);
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSayHelloFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
 
 @end

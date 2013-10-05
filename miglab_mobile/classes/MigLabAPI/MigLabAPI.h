@@ -205,6 +205,11 @@ typedef enum {
 -(void)doGetSameMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
 -(void)doGetNearUser:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
 
+/*
+ 打招呼
+ */
+-(void)doSayHello:(NSString*)uid token:(NSString*)ttoken touid:(NSString*)ttouid msg:(NSString*)tmsg;
+
 /****************************************保留接口*******************************************/
 
 
