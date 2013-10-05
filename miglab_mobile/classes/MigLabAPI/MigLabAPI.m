@@ -3001,4 +3001,78 @@
     [operation start];
 }
 
+/*
+ 获取用户听歌记录
+ HTTP_GETSONGHISTORY
+ GET
+ */
+-(void)doGetSongHistory:(NSString *)uid token:(NSString *)ttoken fromid:(NSString *)tfromid count:(NSString *)tcount {
+    
+    NSString* szfromid = [tfromid isEqualToString:@""] ? @"" : [NSString stringWithFormat:@"&fromid=%@", tfromid];
+    NSString* szcount = [tcount isEqualToString:@""] ? @"" : [NSString stringWithFormat:@"&count=%@", tcount];
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@%@%@&islike=0", HTTP_GETSONGHISTORY, uid, ttoken, szfromid, szcount];
+    PLog(@"get song history url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get user song history operation succeeded");
+                
+                NSArray* songArray = [dicJson objectForKey:@"history"];
+                int songArrayCount = [songArray count];
+                
+                NSMutableArray* songLists = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<songArrayCount; i++) {
+                    
+                    Song* song = [Song initWithNSDictionary:[songArray objectAtIndex:i]];
+                    
+                    [songLists addObject:song];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:songLists, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongHistorySuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get user song history operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongHistoryFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败...";
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongHistoryFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get user song history failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSongHistoryFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+
 @end

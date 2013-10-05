@@ -301,4 +301,9 @@
 #define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
 #define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
 
+// 获取用户听歌记录
+#define HTTP_GETSONGHISTORY                                 [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getuserhis.fcgi"]
+#define NotificationNameGetSongHistorySuccess               @"NotificationNameGetSongHistorySuccess"
+#define NotificationNameGetSongHistoryFailed                @"NotificationNameGetSongHistoryFailed"
+
 #endif

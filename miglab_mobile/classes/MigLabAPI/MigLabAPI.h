@@ -148,6 +148,11 @@ typedef enum {
  */
 -(void)doGetSongInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid;
 
+/*
+ 获取用户听歌记录(及红心歌单)
+ */
+-(void)doGetSongHistory:(NSString*)uid token:(NSString*)ttoken fromid:(NSString*)tfromid count:(NSString*)tcount;
+
 /****************************************推送接口*******************************************/
 
 /*

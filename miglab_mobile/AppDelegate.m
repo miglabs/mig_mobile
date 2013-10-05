@@ -282,7 +282,8 @@
         
     }
     
-    [miglabAPI doGetMyNearMusicMsgNumber:@"10343" token:@"121" radius:@"10000" location:@"30.292207031178,120.0855621569"];
+    [miglabAPI doGetSongHistory:@"10343" token:@"12222" fromid:@"" count:@""];
+    //[miglabAPI doGetMyNearMusicMsgNumber:@"10343" token:@"121" radius:@"10000" location:@"30.292207031178,120.0855621569"];
     //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
     //[miglabAPI doGetSongComment:@"1" token:@"2" songid:@"12323" count:@"1" fromid:@"1"];
     //[miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
