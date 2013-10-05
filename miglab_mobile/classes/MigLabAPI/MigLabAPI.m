@@ -2113,9 +2113,9 @@
  <!--请求GET-->
  HTTP_GETPUSHMSG
  */
--(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec {
+-(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize {
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&Page_index=%@&Rec_per_page=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, trec];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&Page_index=%@&Rec_per_page=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, tpagesize];
     PLog(@"get push message url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -2132,15 +2132,45 @@
                 
                 PLog(@"get push message operation succeeded");
                 
+                NSArray* infoArray = [dicJson objectForKey:@"result"];
+                int infoArrayCount = [infoArray count];
+                
+                NSMutableArray* infoList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<infoArrayCount; i++) {
+                    
+                    MessageInfo* msginfo = [MessageInfo initWithNSDictionary:[infoArray objectAtIndex:i]];
+                    
+                    [infoList addObject:msginfo];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:infoList, @"result", nil];
+        
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetPushMsgSuccess object:nil userInfo:dicResult];
+                
+            }
+            else {
+                
+                PLog(@"get push message operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetPushMsgFailed object:nil userInfo:dicResult];
             }
         }
         @catch (NSException *exception) {
             
-            ;
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetPushMsgFailed object:nil userInfo:dicResult];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        PLog(@"get push message failure: %@", error);
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetPushMsgFailed object:nil userInfo:nil];
     }];
     
     [operation start];

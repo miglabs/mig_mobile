@@ -155,11 +155,6 @@ typedef enum {
 
 /****************************************推送接口*******************************************/
 
-/*
- 获取推送消息(2013-8-20)
- */
--(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex rec:(NSString*)trec;
-
 
 /****************************************社交接口*******************************************/
 
@@ -209,6 +204,11 @@ typedef enum {
  打招呼
  */
 -(void)doSayHello:(NSString*)uid token:(NSString*)ttoken touid:(NSString*)ttouid msg:(NSString*)tmsg;
+
+/*
+ 获取推送消息
+ */
+-(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize;
 
 /****************************************保留接口*******************************************/
 

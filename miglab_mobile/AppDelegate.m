@@ -282,8 +282,9 @@
         
     }
     
-    [miglabAPI doPresentMusic:@"12304" token:@"13333" touid:@"13222" sid:@"22869"];
-    //[miglabAPI doSayHello:@"10343" token:@"12222" touid:@"10342" msg:@"hehe"];
+    //[miglabAPI doPresentMusic:@"10343" token:@"12222" touid:@"10343" sid:@"22869"];
+    [miglabAPI doSayHello:@"10343" token:@"12222" touid:@"10343" msg:@"hehe"];
+    //[miglabAPI doGetPushMsg:@"10343" token:@"12222" pageindex:@"1" pagesize:@"5"];
     //[miglabAPI doGetSongHistory:@"10343" token:@"12222" fromid:@"" count:@""];
     //[miglabAPI doGetMyNearMusicMsgNumber:@"10343" token:@"121" radius:@"10000" location:@"30.292207031178,120.0855621569"];
     //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
