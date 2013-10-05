@@ -597,42 +597,43 @@
  <!--请求POST-->
  HTTP_PRESENTMUSIC
  */
--(void)doPresentMusic:(NSString *)senduid touid:(NSString *)ttouid token:(NSString *)ttoken sid:(long)tsid{
+-(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(long)tsid {
     
     PLog(@"present music url: %@", HTTP_PRESENTMUSIC);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_PRESENTMUSIC]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"senduid=%@&touid=%@&token=%@&songid=%ld", senduid, ttouid, ttoken, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&songid=%ld", uid, ttoken, ttouid, tsid];
+    PLog(@"present song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
     [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
     
-    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         @try {
             
-            NSDictionary* dicJson = JSON;
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             int status = [[dicJson objectForKey:@"status"] intValue];
             
             if(1 == status) {
                 
-                PLog(@"operation succeeded");
+                PLog(@"present song operation succeeded");
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicSuccess object:nil userInfo:nil];
                 
             }
             else {
                 
-                PLog(@"operation failed");
+                PLog(@"present song operation failed");
                 
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicFailed object:nil userInfo:dicResult];
-                
             }
-            
         }
         @catch (NSException *exception) {
             
@@ -642,13 +643,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicFailed object:nil userInfo:dicResult];
             
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        
-        PLog(@"failure: %@", error);
+        PLog(@"present song failure: %@", error);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePresentMusicFailed object:nil userInfo:nil];
-        
     }];
     
     [operation start];

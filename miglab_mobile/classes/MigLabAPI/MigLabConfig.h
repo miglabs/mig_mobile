@@ -135,7 +135,7 @@
 #define NotificationNameHateSongFailed                      @"NotificationNameHateSongFailed"
 
 //赠送歌曲
-#define HTTP_PRESENTMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/sendsong.fcgi"]
+#define HTTP_PRESENTMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/presentsong.fcgi"]
 #define NotificationNamePresentMusicSuccess                 @"NotificationNamePresentMusicSuccess"
 #define NotificationNamePresentMusicFailed                  @"NotificationNamePresentMusicFailed"
 
