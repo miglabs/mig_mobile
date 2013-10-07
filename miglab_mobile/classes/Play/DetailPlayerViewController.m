@@ -13,6 +13,7 @@
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
 #import "ShareChooseView.h"
+#import "ShareViewController.h"
 
 @interface DetailPlayerViewController ()
 
@@ -225,7 +226,14 @@
             
         default:
             break;
-    }
+    }//switch
+    
+    [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    
+    //
+    ShareViewController *shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+    //    [self.navigationController pushViewController:shareViewController animated:YES];
+    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
