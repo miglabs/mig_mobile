@@ -7,12 +7,17 @@
 //
 
 #import "BaseViewController.h"
+#import "ShareContentView.h"
+#import "ShareMenuView.h"
 
-@interface ShareViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ShareViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 
+@property (nonatomic, retain) ShareContentView *shareContentView;
+
 -(IBAction)doShare:(id)sender;
+-(IBAction)doHideKeyborad:(id)sender;
 
 @end

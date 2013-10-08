@@ -7,7 +7,6 @@
 //
 
 #import "ShareViewController.h"
-#import "ShareMenuCell.h"
 
 @interface ShareViewController ()
 
@@ -17,6 +16,8 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
+
+@synthesize shareContentView = _shareContentView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,12 +49,12 @@
     [self.view addSubview:_dataTableView];
     
     NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_myfriend_tip", @"MenuImageName", @"写点什么吧!", @"MenuText", nil];
-    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_listening_tip", @"MenuImageName", @"分享到新浪微博", @"MenuText", nil];
-    NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_nearby_tip", @"MenuImageName", @"分享到腾讯微博", @"MenuText", nil];
-    NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_message_tip", @"MenuImageName", @"分享到QQ空间", @"MenuText", nil];
+    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"share_sinaweibo_share_icon.png", @"MenuImageName", @"分享到新浪微博", @"MenuText", nil];
+    NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"share_tencentweibo_share_icon.png", @"MenuImageName", @"分享到腾讯微博", @"MenuText", nil];
+    NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"share_qqzone_share_icon.png", @"MenuImageName", @"分享到QQ空间", @"MenuText", nil];
     NSArray *section0 = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
-    NSDictionary *dicMenu10 = [NSDictionary dictionaryWithObjectsAndKeys:@"", @"分享", nil];
+    NSDictionary *dicMenu10 = [NSDictionary dictionaryWithObjectsAndKeys:@"share_button_share_bg.png", @"MenuImageName", @"分享", @"MenuText", nil];
     NSArray *section1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _datalist = [NSArray arrayWithObjects:section0, section1, nil];
     
@@ -74,7 +75,25 @@
 
 -(IBAction)doShare:(id)sender{
     
-//    PLog();
+    PLog(@"doShare...");
+    
+}
+
+-(IBAction)doHideKeyborad:(id)sender{
+    
+    PLog(@"doHideKeyborad...");
+    
+    [_shareContentView.tvShareContent resignFirstResponder];
+    
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     
 }
 
@@ -108,13 +127,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"ShareMenuCell";
-	ShareMenuCell *cell = (ShareMenuCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"TableViewCell";
+	UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"ShareMenuCell" owner:self options:nil];
-        cell = (ShareMenuCell *)[nibContents objectAtIndex:0];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellAccessoryDisclosureIndicator reuseIdentifier:CellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                _shareContentView = [[ShareContentView alloc] initShareContentView];
+                _shareContentView.tag = 111;
+                [cell.contentView addSubview:_shareContentView];
+            } else {
+                ShareMenuView *shareMenuView = [[ShareMenuView alloc] initShareMenuView];
+                shareMenuView.tag = 222;
+                [cell.contentView addSubview:shareMenuView];
+            }
+        } else if (indexPath.section == 1) {
+            
+            UIButton *btnShare = [UIButton buttonWithType:UIButtonTypeCustom];
+            btnShare.frame = CGRectMake(0, 0, 300, 44);
+            btnShare.tag = 333;
+            [btnShare setBackgroundImage:[UIImage imageNamed:@"share_button_share_bg.png"] forState:UIControlStateNormal];
+            [btnShare setTitle:@"分享" forState:UIControlStateNormal];
+            cell.backgroundView = btnShare;
+            
+        }
+        
 	}
     
     NSArray *section0 = [_datalist objectAtIndex:indexPath.section];
@@ -124,13 +164,15 @@
         
         if (indexPath.row == 0) {
             
-            //edit
+            //edit _shareContentView
+//            ShareContentView *tempView = (ShareContentView *)[cell.contentView viewWithTag:111];
+            _shareContentView.tvShareContent.returnKeyType = UIReturnKeyDone;
             
-        } else if (indexPath.row == 1) {
+        } else {
             
-            
-            cell.iconImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
-            cell.lblDesc.text = [dicMenu objectForKey:@"MenuText"];
+            ShareMenuView *tempView = (ShareMenuView *)[cell.contentView viewWithTag:222];
+            tempView.iconImageView.image = [UIImage imageNamed:[dicMenu objectForKey:@"MenuImageName"]];
+            tempView.lblDesc.text = [dicMenu objectForKey:@"MenuText"];
             
         }
         
@@ -138,13 +180,22 @@
         
     } else if (indexPath.section == 1) {
         
-//       PLog()
+        //
         
     }
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;
+}
+
+-(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 97;
+    }
+    
+    return 45;
 }
 
 @end
