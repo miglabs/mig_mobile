@@ -58,6 +58,10 @@
     NSArray *section1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _datalist = [NSArray arrayWithObjects:section0, section1, nil];
     
+    //
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHideKeyborad:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+//    [self.view addGestureRecognizer:tapGestureRecognizer];
     
 }
 
@@ -87,14 +91,54 @@
     
 }
 
-#pragma mark - UITextViewDelegate
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+-(IBAction)doShowAt:(id)sender{
+    
+    PLog(@"doShowAt...");
     
 }
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+#pragma mark - UITextViewDelegate
+
+//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+//    
+//    PLog(@"textViewShouldBeginEditing...");
+//    
+//}
+//
+//- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+//    
+//    PLog(@"textViewShouldEndEditing...");
+//    
+//}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    //textview长度为0
+    if (_shareContentView.tvShareContent.text.length == 0) {
+        //判断是否为删除键
+        if ([text isEqualToString:@""]) {
+            _shareContentView.lblPlaceHolder.hidden = NO;
+        } else {
+            _shareContentView.lblPlaceHolder.hidden = YES;
+        }
+    } else if (_shareContentView.tvShareContent.text.length == 1) {
+        //判断是否为删除键
+        if ([text isEqualToString:@""]) {
+            _shareContentView.lblPlaceHolder.hidden = NO;
+        } else {
+            _shareContentView.lblPlaceHolder.hidden = YES;
+        }
+    } else {
+        _shareContentView.lblPlaceHolder.hidden = YES;
+    }
+    
+    
+    return YES;
 }
 
 #pragma mark - UITableView delegate
@@ -103,7 +147,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
+    PLog(@"didSelectRowAtIndexPath, indexPath.section: %d, indexPath.row: %d", indexPath.section, indexPath.row);
     
+    if (indexPath.section == 1) {
+        [self doShare:nil];
+    }
     
     //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -131,13 +179,17 @@
 	UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellAccessoryDisclosureIndicator reuseIdentifier:CellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 _shareContentView = [[ShareContentView alloc] initShareContentView];
                 _shareContentView.tag = 111;
+                _shareContentView.tvShareContent.delegate = self;
+                _shareContentView.tvShareContent.returnKeyType = UIReturnKeyDone;
+                
+                [_shareContentView.btnAt addTarget:self action:@selector(doShowAt:) forControlEvents:UIControlEventTouchUpInside];
+                
                 [cell.contentView addSubview:_shareContentView];
             } else {
                 ShareMenuView *shareMenuView = [[ShareMenuView alloc] initShareMenuView];
@@ -166,7 +218,7 @@
             
             //edit _shareContentView
 //            ShareContentView *tempView = (ShareContentView *)[cell.contentView viewWithTag:111];
-            _shareContentView.tvShareContent.returnKeyType = UIReturnKeyDone;
+            
             
         } else {
             

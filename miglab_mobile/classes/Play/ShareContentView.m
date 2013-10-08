@@ -11,6 +11,7 @@
 @implementation ShareContentView
 
 @synthesize tvShareContent = _tvShareContent;
+@synthesize lblPlaceHolder = _lblPlaceHolder;
 @synthesize btnAt = _btnAt;
 
 - (id)initWithFrame:(CGRect)frame
@@ -35,6 +36,15 @@
         _tvShareContent.backgroundColor = [UIColor clearColor];
         _tvShareContent.font = [UIFont fontOfApp:15.0f];
         [self addSubview:_tvShareContent];
+        
+        _lblPlaceHolder = [[UILabel alloc] init];
+        _lblPlaceHolder.frame = CGRectMake(15, 10, 290, 21);
+        _lblPlaceHolder.backgroundColor = [UIColor clearColor];
+        _lblPlaceHolder.font = [UIFont fontOfApp:15.0f];
+        _lblPlaceHolder.textAlignment = kTextAlignmentLeft;
+        _lblPlaceHolder.textColor = [UIColor grayColor];
+        _lblPlaceHolder.text = @"写点什么吧～";
+        [self addSubview:_lblPlaceHolder];
         
         _btnAt = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnAt.frame = CGRectMake(265, 64, 26, 26);

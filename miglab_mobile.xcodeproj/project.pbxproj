@@ -31,8 +31,6 @@
 		160E075A17C09CD7003F0E45 /* Type.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075917C09CD7003F0E45 /* Type.m */; };
 		160E075E17C0A64F003F0E45 /* DetailPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075C17C0A64F003F0E45 /* DetailPlayerViewController.m */; };
 		160E075F17C0A64F003F0E45 /* DetailPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 160E075D17C0A64F003F0E45 /* DetailPlayerViewController.xib */; };
-		16184E3C1802F07E00E6E627 /* ShareMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16184E371802F07E00E6E627 /* ShareMenuCell.m */; };
-		16184E3D1802F07E00E6E627 /* ShareMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16184E381802F07E00E6E627 /* ShareMenuCell.xib */; };
 		16184E3E1802F07E00E6E627 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16184E3A1802F07E00E6E627 /* ShareViewController.m */; };
 		16184E3F1802F07E00E6E627 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16184E3B1802F07E00E6E627 /* ShareViewController.xib */; };
 		16184E471802F09F00E6E627 /* share_button_share_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16184E411802F09F00E6E627 /* share_button_share_bg.png */; };
@@ -414,8 +412,6 @@
 		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
-		184C47F81803F3BB004D7523 /* ShareContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C47F71803F3BB004D7523 /* ShareContentCell.m */; };
-		184C47FA1803F3CD004D7523 /* ShareContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184C47F91803F3CD004D7523 /* ShareContentCell.xib */; };
 		184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 184C47FB1803F6E1004D7523 /* share_at_icon.png */; };
 		184C47FF1803F8C4004D7523 /* ShareContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C47FE1803F8C3004D7523 /* ShareContentView.m */; };
 		184C48021803F8E5004D7523 /* ShareMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C48011803F8E5004D7523 /* ShareMenuView.m */; };
@@ -516,9 +512,6 @@
 		160E075B17C0A64F003F0E45 /* DetailPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPlayerViewController.h; sourceTree = "<group>"; };
 		160E075C17C0A64F003F0E45 /* DetailPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPlayerViewController.m; sourceTree = "<group>"; };
 		160E075D17C0A64F003F0E45 /* DetailPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPlayerViewController.xib; sourceTree = "<group>"; };
-		16184E361802F07E00E6E627 /* ShareMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareMenuCell.h; sourceTree = "<group>"; };
-		16184E371802F07E00E6E627 /* ShareMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareMenuCell.m; sourceTree = "<group>"; };
-		16184E381802F07E00E6E627 /* ShareMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareMenuCell.xib; sourceTree = "<group>"; };
 		16184E391802F07E00E6E627 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		16184E3A1802F07E00E6E627 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		16184E3B1802F07E00E6E627 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -1016,9 +1009,6 @@
 		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		184648661793D4D500E83EBB /* AccountOf3rdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOf3rdParty.h; sourceTree = "<group>"; };
 		184648671793D4D500E83EBB /* AccountOf3rdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOf3rdParty.m; sourceTree = "<group>"; };
-		184C47F61803F3BB004D7523 /* ShareContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareContentCell.h; sourceTree = "<group>"; };
-		184C47F71803F3BB004D7523 /* ShareContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareContentCell.m; sourceTree = "<group>"; };
-		184C47F91803F3CD004D7523 /* ShareContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareContentCell.xib; sourceTree = "<group>"; };
 		184C47FB1803F6E1004D7523 /* share_at_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_at_icon.png; sourceTree = "<group>"; };
 		184C47FD1803F8C3004D7523 /* ShareContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareContentView.h; sourceTree = "<group>"; };
 		184C47FE1803F8C3004D7523 /* ShareContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareContentView.m; sourceTree = "<group>"; };
@@ -1897,9 +1887,6 @@
 		16E77E15178DA517006A24A6 /* Play */ = {
 			isa = PBXGroup;
 			children = (
-				16184E361802F07E00E6E627 /* ShareMenuCell.h */,
-				16184E371802F07E00E6E627 /* ShareMenuCell.m */,
-				16184E381802F07E00E6E627 /* ShareMenuCell.xib */,
 				16184E391802F07E00E6E627 /* ShareViewController.h */,
 				16184E3A1802F07E00E6E627 /* ShareViewController.m */,
 				16184E3B1802F07E00E6E627 /* ShareViewController.xib */,
@@ -1923,9 +1910,6 @@
 				160E075D17C0A64F003F0E45 /* DetailPlayerViewController.xib */,
 				18A6021F17F2A29300344C5B /* ShareChooseView.h */,
 				18A6022017F2A29300344C5B /* ShareChooseView.m */,
-				184C47F61803F3BB004D7523 /* ShareContentCell.h */,
-				184C47F71803F3BB004D7523 /* ShareContentCell.m */,
-				184C47F91803F3CD004D7523 /* ShareContentCell.xib */,
 				184C47FD1803F8C3004D7523 /* ShareContentView.h */,
 				184C47FE1803F8C3004D7523 /* ShareContentView.m */,
 				184C48001803F8E5004D7523 /* ShareMenuView.h */,
@@ -2614,7 +2598,6 @@
 				16B2A3C817F311DD00E7F7E6 /* SettingOfAboutViewController.xib in Resources */,
 				16B2A3CD17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib in Resources */,
 				188A20BC17F57F7600D4E753 /* MSYH.ttf in Resources */,
-				16184E3D1802F07E00E6E627 /* ShareMenuCell.xib in Resources */,
 				16184E3F1802F07E00E6E627 /* ShareViewController.xib in Resources */,
 				16184E471802F09F00E6E627 /* share_button_share_bg.png in Resources */,
 				16184E481802F09F00E6E627 /* share_cd_share_layer.png in Resources */,
@@ -2622,7 +2605,6 @@
 				16184E4A1802F09F00E6E627 /* share_sinaweibo_share_icon.png in Resources */,
 				16184E4B1802F09F00E6E627 /* share_songcover_share_layer.png in Resources */,
 				16184E4C1802F09F00E6E627 /* share_tencentweibo_share_icon.png in Resources */,
-				184C47FA1803F3CD004D7523 /* ShareContentCell.xib in Resources */,
 				184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2783,9 +2765,7 @@
 				16B2A3CC17F31C9300E7F7E6 /* SettingOfFeedbackViewController.m in Sources */,
 				188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */,
 				CB68C6BB17FC03CB00264893 /* NearMessageState.m in Sources */,
-				16184E3C1802F07E00E6E627 /* ShareMenuCell.m in Sources */,
 				16184E3E1802F07E00E6E627 /* ShareViewController.m in Sources */,
-				184C47F81803F3BB004D7523 /* ShareContentCell.m in Sources */,
 				184C47FF1803F8C4004D7523 /* ShareContentView.m in Sources */,
 				184C48021803F8E5004D7523 /* ShareMenuView.m in Sources */,
 			);

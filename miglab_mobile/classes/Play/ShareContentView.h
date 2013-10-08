@@ -11,6 +11,7 @@
 @interface ShareContentView : UIView
 
 @property (nonatomic, retain) UITextView *tvShareContent;
+@property (nonatomic, retain) UILabel *lblPlaceHolder;
 @property (nonatomic, retain) UIButton *btnAt;
 
 -(id)initShareContentView;

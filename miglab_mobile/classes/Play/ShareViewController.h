@@ -19,5 +19,6 @@
 
 -(IBAction)doShare:(id)sender;
 -(IBAction)doHideKeyborad:(id)sender;
+-(IBAction)doShowAt:(id)sender;
 
 @end
