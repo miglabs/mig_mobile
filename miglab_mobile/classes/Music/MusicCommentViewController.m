@@ -242,11 +242,12 @@
     NSString *commentcontent = _commentInputView.commentTextField.text;
     PLog(@"commentcontent: %@", commentcontent);
     
-    if ([NSString checkDataIsNull:commentcontent]) {
+    if ([NSString checkDataIsNull:commentcontent] == nil) {
         [SVProgressHUD showErrorWithStatus:@"亲，您忘记输入内容咯～"];
+        return;
     }
     
-    if ([UserSessionManager GetInstance].isLoggedIn && commentcontent.length > 5) {
+    if ([UserSessionManager GetInstance].isLoggedIn && commentcontent.length >= 1) {
         
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
@@ -257,6 +258,7 @@
         
     }
     
+    _commentInputView.commentTextField.text = @"";
     [_commentInputView.commentTextField resignFirstResponder];
     
 }
