@@ -14,6 +14,7 @@
 #import "PDatabaseManager.h"
 #import "ShareChooseView.h"
 #import "ShareViewController.h"
+#import "WXApi.h"
 
 @interface DetailPlayerViewController ()
 
@@ -78,6 +79,7 @@
     }//for
     _cdOfSongView.frame = CGRectMake(0, 100, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
+    _cdOfSongView.coverOfSongEGOImageView.placeholderImage = [UIImage imageWithName:@"song_cover" type:@"png"];
     _cdOfSongView.coverOfSongEGOImageView.tag = 2000;
     _cdOfSongView.coverOfSongEGOImageView.delegate = self;
     _cdOfSongView.coverOfSongEGOImageView.layer.cornerRadius = 98;
@@ -202,7 +204,8 @@
         case 203:
         {
             //weixin
-            
+            [self doShare2WeiXin];
+            return;
         }
             break;
         case 204:
@@ -234,6 +237,62 @@
     ShareViewController *shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     //    [self.navigationController pushViewController:shareViewController animated:YES];
     [self presentModalViewController:shareViewController animated:YES];
+    
+}
+
+-(void)doShare2WeiXin{
+    
+    PLog(@"doShare2WeiXin...");
+    
+    //分享到微信朋友圈
+    if (![WXApi isWXAppInstalled]) {
+        NSLog(@"你的iPhone上还没有安装微信，无法使用此功能，请先下载");
+        return;
+    }
+    
+    if (![WXApi isWXAppSupportApi]) {
+        NSLog(@"你当前的微信版本过低，无法支持此功能，请更新微信至最新版本");
+        return;
+    }
+    
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
+    UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
+    UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
+    
+    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline发送到朋友圈，默认值为WXSceneSession
+    /*
+     WXMediaMessage *message = [WXMediaMessage message];
+     message.title = [UserSessionManager GetInstance].currentRunUser.nickname;
+     message.description = descText;
+     
+     WXImageObject *ext = [WXImageObject object];
+     ext.imageData = UIImagePNGRepresentation(image);
+     message.mediaObject = ext;
+     
+     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+     req.bText = NO;
+     req.message = message;
+     req.scene = scene;//选择发送到朋友圈，默认值为WXSceneSession，发送到会话
+     
+     [WXApi sendReq:req];
+     */
+    
+    //
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = currentSong.artist;
+    message.description = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
+    [message setThumbImage:shareImage];
+    
+    WXMusicObject *ext = [WXMusicObject object];
+    ext.musicUrl = currentSong.songurl;
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    [WXApi sendReq:req];
     
 }
 

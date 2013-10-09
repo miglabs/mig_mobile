@@ -111,7 +111,7 @@
     service.clientSecret = DOUBAN_PRIVATE_KEY;
     
     //向微信注册
-    [WXApi registerApp:@"wxc7007d32a0ef5d89"];
+    [WXApi registerApp:WEIXIN_APP_ID];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

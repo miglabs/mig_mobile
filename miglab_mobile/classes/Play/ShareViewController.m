@@ -83,6 +83,35 @@
     
 }
 
+-(void)doShare2SinaWeibo{
+    
+    PLog(@"doShare2SinaWeibo...");
+    
+}
+
+-(void)doShare2TencentWeibo{
+    
+    PLog(@"doShare2TencentWeibo...");
+    
+//    TCAddShareDic *params = [TCAddShareDic dictionary];
+//    params.paramTitle = @"腾讯内部addShare接口测试";
+//    params.paramComment = @"风云乔帮主";
+//    params.paramSummary =  @"乔布斯被认为是计算机与娱乐业界的标志性人物，同时人们也把他视作麦金塔计算机、iPod、iTunes、iPad、iPhone等知名数字产品的缔造者，这些风靡全球亿万人的电子产品，深刻地改变了现代通讯、娱乐乃至生活的方式。";
+//    params.paramImages = @"http://img1.gtimg.com/tech/pics/hv1/95/153/847/55115285.jpg";
+//    params.paramUrl = @"http://www.qq.com";
+//	
+//	if(![_tencentOAuth addShareWithParams:params]){
+//        [self showInvalidTokenOrOpenIDMessage];
+//    }
+    
+}
+
+-(void)doShare2QQZone{
+    
+    PLog(@"doShare2QQZone...");
+    
+}
+
 -(IBAction)doHideKeyborad:(id)sender{
     
     PLog(@"doHideKeyborad...");

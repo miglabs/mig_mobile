@@ -18,6 +18,10 @@
 @property (nonatomic, retain) ShareContentView *shareContentView;
 
 -(IBAction)doShare:(id)sender;
+-(void)doShare2SinaWeibo;
+-(void)doShare2TencentWeibo;
+-(void)doShare2QQZone;
+
 -(IBAction)doHideKeyborad:(id)sender;
 -(IBAction)doShowAt:(id)sender;
 

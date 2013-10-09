@@ -41,6 +41,7 @@
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 -(IBAction)doGotoShareView:(id)sender;
+-(void)doShare2WeiXin;
 
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;
