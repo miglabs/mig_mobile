@@ -12,6 +12,8 @@
 
 @interface BaseViewController : UIViewController
 
+//适配ios7
+@property (nonatomic, assign) int topDistance;
 //导航
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
 //背景图片

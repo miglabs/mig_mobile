@@ -40,7 +40,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //menu
-    _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight - 73 - 10, 297, 73)];
+    _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight + self.topDistance - 73 - 10, 297, 73)];
     _playerMenuView.btnAvatar.delegate = self;
     [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
     _playerMenuView.lblSongInfo.text = @"迷宫仙曲－乐瑟";
