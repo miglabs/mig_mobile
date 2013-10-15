@@ -37,9 +37,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-44, ios7-64
+    
     //body
     _bodyTableView = [[UITableView alloc] init];
-    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];
@@ -47,7 +51,7 @@
     _bodyTableView.scrollEnabled = NO;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];

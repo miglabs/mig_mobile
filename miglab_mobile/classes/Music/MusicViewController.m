@@ -55,6 +55,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-44, ios7-64
+    
     //edit menu
     NSArray *sourceEditMenuNib = [[NSBundle mainBundle] loadNibNamed:@"MusicSourceEditMenuView" owner:self options:nil];
     for (id oneObject in sourceEditMenuNib){
@@ -62,7 +66,7 @@
             _sourceEditMenuView = (MusicSourceEditMenuView *)oneObject;
         }//if
     }//for
-    _sourceEditMenuView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _sourceEditMenuView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     [_sourceEditMenuView.btnBack addTarget:self action:@selector(doBackFromSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
     _sourceEditMenuView.btnOnline.tag = 0;
     [_sourceEditMenuView.btnOnline addTarget:self action:@selector(doEditSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -83,7 +87,7 @@
     
     //body
     _bodyTableView = [[UITableView alloc] init];
-    _bodyTableView.frame = CGRectMake(11.5, 45 + 10, 297, kMainScreenHeight - 45 - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];

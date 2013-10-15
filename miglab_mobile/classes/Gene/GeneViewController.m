@@ -76,7 +76,7 @@ static int PAGE_WIDTH = 81;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
-    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-44, ios7-64
     
     //当前基因信息
     NSArray *currentNib = [[NSBundle mainBundle] loadNibNamed:@"CurrentGeneView" owner:self options:nil];
@@ -85,7 +85,7 @@ static int PAGE_WIDTH = 81;
             _currentGeneView = (CurrentGeneView *)oneObject;
         }//if
     }//for
-    _currentGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
+    _currentGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 -10);
     //month --date
     _monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
     //date
@@ -144,8 +144,8 @@ static int PAGE_WIDTH = 81;
             _modifyGeneView = (ModifyGeneView *)oneObject;
         }//if
     }//for
-    _modifyGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
-    _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight - posy - 10 - 10 - 73 -10);
+    _modifyGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 -10);
+    _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 -10);
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
