@@ -15,6 +15,7 @@
 @property (nonatomic, retain) UIButton *leftButton;
 @property (nonatomic, retain) UIButton *rightButton;
 
+- (id)initCustomNavigationBarView:(NSString *)tTitle;
 - (id)initWithTitle:(NSString *)tTitle bgImageView:(NSString *)tImageName;
 
 @end
