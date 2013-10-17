@@ -7,12 +7,7 @@
 //
 
 #import "PlayerViewController.h"
-#import "PCustomNavigationBarView.h"
 
 @interface ListenMyMusicViewController : PlayerViewController
-
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
-
--(IBAction)doBack:(id)sender;
 
 @end

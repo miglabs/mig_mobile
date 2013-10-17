@@ -41,7 +41,12 @@
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 -(IBAction)doGotoShareView:(id)sender;
+-(void)doShare2QQZone;
+-(void)doShare2SinaWeibo;
 -(void)doShare2WeiXin;
+-(void)doShare2TencentWeibo;
+-(void)doShare2Renren;
+-(void)doSHare2Sms;
 
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;

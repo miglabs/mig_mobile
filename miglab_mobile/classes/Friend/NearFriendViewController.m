@@ -47,26 +47,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav bar
-    self.navView.titleLabel.text = @"附近的歌友" ;
+    self.navView.titleLabel.text = @"附近的歌友";
     
     //search
     UIImage *searchImage = [UIImage imageWithName:@"music_button_search" type:@"png"];
     [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
-    self.navView.rightButton.frame = CGRectMake(268, 7.5, 48, 29);
+    self.navView.rightButton.frame = CGRectMake(268, 7.5 + self.topDistance, 48, 29);
     [self.navView.rightButton setHidden:NO];
     [self.navView.rightButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
     
     //附近歌友
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _dataTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_dataTableView];
@@ -214,6 +218,7 @@
     if (cell == nil) {
         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"FriendInfoCell" owner:self options:nil];
         cell = (FriendInfoCell *)[nibContents objectAtIndex:0];
+        cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}

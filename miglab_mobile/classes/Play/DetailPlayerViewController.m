@@ -192,13 +192,13 @@
         case 201:
         {
             //qqzone
-            
+            [self doShare2QQZone];
         }
             break;
         case 202:
         {
             //sinaweibo
-            
+            [self doShare2SinaWeibo];
         }
             break;
         case 203:
@@ -211,19 +211,20 @@
         case 204:
         {
             //tencentweibo
-            
+            [self doShare2TencentWeibo];
         }
             break;
         case 205:
         {
             //renren
-            
+            [self doShare2Renren];
         }
             break;
         case 206:
         {
             //sms
-            
+            [self doSHare2Sms];
+            return;
         }
             break;
             
@@ -237,6 +238,18 @@
     ShareViewController *shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     //    [self.navigationController pushViewController:shareViewController animated:YES];
     [self presentModalViewController:shareViewController animated:YES];
+    
+}
+
+-(void)doShare2QQZone{
+    
+    PLog(@"doShare2QQZone...");
+    
+}
+
+-(void)doShare2SinaWeibo{
+    
+    PLog(@"doShare2SinaWeibo...");
     
 }
 
@@ -293,6 +306,24 @@
     req.message = message;
     req.scene = WXSceneTimeline;
     [WXApi sendReq:req];
+    
+}
+
+-(void)doShare2TencentWeibo{
+    
+    PLog(@"doShare2TencentWeibo...");
+    
+}
+
+-(void)doShare2Renren{
+    
+    PLog(@"doShare2Renren...");
+    
+}
+
+-(void)doSHare2Sms{
+    
+    PLog(@"doSHare2Sms...");
     
 }
 
