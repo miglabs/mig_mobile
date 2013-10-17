@@ -260,6 +260,7 @@ static PPlayerManagerCenter *instance;
         
     } else {
         
+        [songManager.downloader setDownloadCount:3];
         [songManager downloadStart:_currentSong delegate:self];
         
     }
@@ -325,6 +326,8 @@ static PPlayerManagerCenter *instance;
     NSNumber *downloadcount = [dicResult objectForKey:@"DownloadCount"];
     int nDownloadCount = [downloadcount intValue];
     if (nDownloadCount > 0) {
+        
+        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"nDownloadCount: %d", nDownloadCount]];
         
         [self stopDownload];
         SongDownloadManager *songManager = [SongDownloadManager GetInstance];
