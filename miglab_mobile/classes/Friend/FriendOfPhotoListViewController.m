@@ -68,7 +68,7 @@
     
     //photo table view
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45 + 5, 297, kMainScreenHeight + self.topDistance - posy - 10 - 45 - 5 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45 + 5, 297, kMainScreenHeight + self.topDistance - posy - 10 - 45 - 5 - 5 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];

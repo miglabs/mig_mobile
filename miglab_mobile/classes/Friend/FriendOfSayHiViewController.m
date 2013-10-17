@@ -14,8 +14,6 @@
 
 @implementation FriendOfSayHiViewController
 
-@synthesize navView = _navView;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,15 +28,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"打招呼" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    //nav bar
+    self.navView.titleLabel.text = @"打招呼";
     
     
 }
