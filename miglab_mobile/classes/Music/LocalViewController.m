@@ -46,7 +46,7 @@
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - posy - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
@@ -54,7 +54,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight - 45 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 45 - 10 - 45 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];

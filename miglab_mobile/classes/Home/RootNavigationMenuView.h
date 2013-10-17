@@ -15,6 +15,7 @@
 @property (nonatomic, retain) UIButton *btnMenuSecond;
 @property (nonatomic, retain) UIButton *btnMenuThird;
 
+-(id)initRootNavigationMenuView;
 -(id)initRootNavigationMenuView:(CGRect)frame;
 -(void)setSelectedMenu:(int)aIndex;
 
