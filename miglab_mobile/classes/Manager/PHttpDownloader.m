@@ -16,6 +16,7 @@
 @synthesize cachePath = _cachePath;
 @synthesize isReadyToDownload = _isReadyToDownload;
 @synthesize delegate = _delegate;
+@synthesize downloadCount = _downloadCount;
 
 #define kCheckDownloadProcessCount 8
 
@@ -28,6 +29,7 @@
         NSString *tempLocalKey = _localKey;
         id<PHttpDownloaderDelegate> tempdelegate = _delegate;
         __block int checkDownloadProcessCount = kCheckDownloadProcessCount;
+        NSNumber *tempDownloadCount = [NSNumber numberWithInt:_downloadCount];
         
         //local file size
         long long offset = [super getLocalFileSize:_cachePath];
@@ -52,7 +54,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             PLog(@"failure: %@", error);
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:tempLocalKey, @"LocalKey", nil];
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:tempLocalKey, @"LocalKey", tempDownloadCount, @"DownloadCount", nil];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameDownloadFailed object:nil userInfo:dicResult];
             if (tempdelegate && [tempdelegate respondsToSelector:@selector(doDownloadFailed:)]) {
                 [tempdelegate doDownloadFailed:dicResult];

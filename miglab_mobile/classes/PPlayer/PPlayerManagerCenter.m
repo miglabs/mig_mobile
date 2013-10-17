@@ -321,6 +321,19 @@ static PPlayerManagerCenter *instance;
     
     PLog(@"doDownloadFailed...%@", dicResult);
     
+    //检测歌曲下载次数
+    NSNumber *downloadcount = [dicResult objectForKey:@"DownloadCount"];
+    int nDownloadCount = [downloadcount intValue];
+    if (nDownloadCount > 0) {
+        
+        [self stopDownload];
+        SongDownloadManager *songManager = [SongDownloadManager GetInstance];
+        [songManager.downloader setDownloadCount:nDownloadCount-1];
+        [songManager downloadStart:_currentSong delegate:self];
+        
+        return;
+    }
+    
     NSString *localkey = [dicResult objectForKey:@"LocalKey"];
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteSongInfo:[localkey longLongValue]];

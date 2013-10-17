@@ -33,6 +33,7 @@
 @property (nonatomic, retain) NSString *cachePath;                              //缓存路径
 @property (assign) BOOL isReadyToDownload;                                      //是否初始化
 @property (nonatomic, assign) id<PHttpDownloaderDelegate> delegate;
+@property (nonatomic, assign) int downloadCount;                                //同一首歌曲尝试下载次数
 
 -(BOOL)initDownloader;
 -(void)doStart;
