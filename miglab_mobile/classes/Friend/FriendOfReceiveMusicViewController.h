@@ -7,12 +7,8 @@
 //
 
 #import "BaseViewController.h"
-#import "PCustomNavigationBarView.h"
 
 @interface FriendOfReceiveMusicViewController : BaseViewController
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
-
--(IBAction)doBack:(id)sender;
 
 @end

@@ -16,8 +16,6 @@
 
 @implementation FriendOfPhotoListViewController
 
-@synthesize navView = _navView;
-
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
 
@@ -35,20 +33,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //nav bar
-    _navView = [[PCustomNavigationBarView alloc] initWithTitle:@"照片" bgImageView:@"login_navigation_bg"];
-    [self.view addSubview:_navView];
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
-    UIImage *backImage = [UIImage imageWithName:@"login_back_arrow_nor" type:@"png"];
-    [_navView.leftButton setBackgroundImage:backImage forState:UIControlStateNormal];
-    _navView.leftButton.frame = CGRectMake(4, 0, 44, 44);
-    [_navView.leftButton setHidden:NO];
-    [_navView.leftButton addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    //nav bar
+    self.navView.titleLabel.text = @"照片";
     
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
@@ -66,14 +61,14 @@
     separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
     
     UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
+    headerView.frame = CGRectMake(11.5, posy + 10, 297, 45);
     [headerView addSubview:lblDesc];
     [headerView addSubview:separatorImageView];
     [self.view addSubview:headerView];
     
     //photo table view
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45 + 5, 297, kMainScreenHeight - 44 - 10 - 45 - 5 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45 + 5, 297, kMainScreenHeight + self.topDistance - posy - 10 - 45 - 5 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -101,10 +96,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
@@ -127,6 +118,7 @@
     if (cell == nil) {
         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"PhotoInfoCell" owner:self options:nil];
         cell = (PhotoInfoCell *)[nibContents objectAtIndex:0];
+        cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}

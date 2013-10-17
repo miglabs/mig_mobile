@@ -7,20 +7,16 @@
 //
 
 #import "PlayerViewController.h"
-#import "PCustomNavigationBarView.h"
 #import "FriendMessageUserHead.h"
 
 @interface MyFriendPersonalPageViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
 @property (nonatomic, retain) FriendMessageUserHead *userHeadView;
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
 @property (nonatomic, assign) BOOL isFriend;
-
--(IBAction)doBack:(id)sender;
 
 -(IBAction)doRecommendMusic:(id)sender; //推荐ta歌曲
 -(IBAction)doSendMessage:(id)sender;    //发消息
