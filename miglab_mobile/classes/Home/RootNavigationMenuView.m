@@ -45,18 +45,18 @@
         
         UIImage *separatorImage = [UIImage imageWithName:@"home_navigation_separator" type:@"png"];
         UIImageView *separatorImageView01 = [[UIImageView alloc] initWithImage:separatorImage];
-        separatorImageView01.frame = CGRectMake(106, 0 + topdistance, 1, 43);
+        separatorImageView01.frame = CGRectMake(106, 0 + topdistance, 1, 42);
         [self addSubview:separatorImageView01];
         
         UIImageView *separatorImageView12 = [[UIImageView alloc] initWithImage:separatorImage];
-        separatorImageView12.frame = CGRectMake(213, 0 + topdistance, 1, 43);
+        separatorImageView12.frame = CGRectMake(213, 0 + topdistance, 1, 42);
         [self addSubview:separatorImageView12];
         
         UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_menu_sel" type:@"png"];
         UIColor *menuSelColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
         
         //first
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 + topdistance, 106, 43)];
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 + topdistance, 106, 42)];
         _btnMenuFirst.tag = 100;
         [_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -66,7 +66,7 @@
         [self addSubview:_btnMenuFirst];
         
         //second
-        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(107, 0 + topdistance, 106, 43)];
+        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(107, 0 + topdistance, 106, 42)];
         _btnMenuSecond.tag = 101;
         [_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
         _btnMenuSecond.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuSecond];
         
-        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(214, 0 + topdistance,106, 43)];
+        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(214, 0 + topdistance,106, 42)];
         _btnMenuThird.tag = 102;
         [_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
