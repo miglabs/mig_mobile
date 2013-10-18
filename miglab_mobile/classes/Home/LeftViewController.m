@@ -15,7 +15,6 @@
 #import "AppDelegate.h"
 #import "DDMenuController.h"
 
-#import "LoginChooseViewController.h"
 #import "MainMenuViewController.h"
 
 #import "PlayViewController.h"
@@ -116,13 +115,6 @@
     
     PLog(@"doGotoLoginChoose...");
     
-    LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginChooseViewController];
-    [nav setNavigationBarHidden:YES];
-    
-    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
-    [menuController setRootController:nav animated:YES];
 }
 
 #pragma mark - UITableView delegate

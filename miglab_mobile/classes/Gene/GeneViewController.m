@@ -7,10 +7,10 @@
 //
 
 #import "GeneViewController.h"
-#import "LoginChooseViewController.h"
 #import "PDatabaseManager.h"
 #import "ConfigFileInfo.h"
 #import "SettingViewController.h"
+#import "LoginMenuViewController.h"
 
 static int PAGE_WIDTH = 81;
 
@@ -457,8 +457,8 @@ static int PAGE_WIDTH = 81;
         
     } else {
         
-        LoginChooseViewController *loginChooseViewController = [[LoginChooseViewController alloc] initWithNibName:@"LoginChooseViewController" bundle:nil];
-        [self.topViewcontroller.navigationController pushViewController:loginChooseViewController animated:YES];
+        LoginMenuViewController *loginMenuViewController = [[LoginMenuViewController alloc] initWithNibName:@"LoginMenuViewController" bundle:nil];
+        [self.topViewcontroller.navigationController pushViewController:loginMenuViewController animated:YES];
         
     }
     

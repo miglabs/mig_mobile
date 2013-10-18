@@ -179,8 +179,6 @@
 		163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF8177C680D008656D1 /* AVFoundation.framework */; };
 		163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE0C177C9672008656D1 /* PCommonUtil.m */; };
 		163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 163BCE11177C96DC008656D1 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */; };
-		163EA98817A7F59E00EBD24C /* LoginChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */; };
 		163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98B17A7F9B700EBD24C /* login_button_mig.png */; };
 		163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98C17A7F9B700EBD24C /* login_button_mig_0.png */; };
 		163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98E17A7F9B700EBD24C /* login_choose_menu_nor_88_88.png */; };
@@ -260,6 +258,10 @@
 		1684764B17BA791600F42172 /* music_menu_next_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764317BA791600F42172 /* music_menu_next_sel.png */; };
 		1684764C17BA791600F42172 /* music_menu_play_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764417BA791600F42172 /* music_menu_play_nor.png */; };
 		1684764D17BA791600F42172 /* music_menu_play_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764517BA791600F42172 /* music_menu_play_sel.png */; };
+		16896058181171C00031902F /* LoginMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16896053181171C00031902F /* LoginMenuCell.m */; };
+		16896059181171C00031902F /* LoginMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16896054181171C00031902F /* LoginMenuCell.xib */; };
+		1689605A181171C00031902F /* LoginMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16896056181171C00031902F /* LoginMenuViewController.m */; };
+		1689605B181171C00031902F /* LoginMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16896057181171C00031902F /* LoginMenuViewController.xib */; };
 		168D8C9017E0A5D800DD9CC2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 168D8C8E17E0A5D800DD9CC2 /* Icon.png */; };
 		168D8C9117E0A5D800DD9CC2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 168D8C8F17E0A5D800DD9CC2 /* Icon@2x.png */; };
 		1697325317E5BC8700F4AA6E /* mood_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1697323D17E5BC8700F4AA6E /* mood_1.png */; };
@@ -709,9 +711,6 @@
 		163BCE10177C96DC008656D1 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		163BCE11177C96DC008656D1 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		163BCE12177C96DC008656D1 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		163EA98417A7F59E00EBD24C /* LoginChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginChooseViewController.h; sourceTree = "<group>"; };
-		163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginChooseViewController.m; sourceTree = "<group>"; };
-		163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginChooseViewController.xib; sourceTree = "<group>"; };
 		163EA98B17A7F9B700EBD24C /* login_button_mig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button_mig.png; sourceTree = "<group>"; };
 		163EA98C17A7F9B700EBD24C /* login_button_mig_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button_mig_0.png; sourceTree = "<group>"; };
 		163EA98E17A7F9B700EBD24C /* login_choose_menu_nor_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_nor_88_88.png; sourceTree = "<group>"; };
@@ -812,6 +811,12 @@
 		1684764317BA791600F42172 /* music_menu_next_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_next_sel.png; sourceTree = "<group>"; };
 		1684764417BA791600F42172 /* music_menu_play_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_play_nor.png; sourceTree = "<group>"; };
 		1684764517BA791600F42172 /* music_menu_play_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_play_sel.png; sourceTree = "<group>"; };
+		16896052181171C00031902F /* LoginMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMenuCell.h; sourceTree = "<group>"; };
+		16896053181171C00031902F /* LoginMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginMenuCell.m; sourceTree = "<group>"; };
+		16896054181171C00031902F /* LoginMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginMenuCell.xib; sourceTree = "<group>"; };
+		16896055181171C00031902F /* LoginMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginMenuViewController.h; sourceTree = "<group>"; };
+		16896056181171C00031902F /* LoginMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginMenuViewController.m; sourceTree = "<group>"; };
+		16896057181171C00031902F /* LoginMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginMenuViewController.xib; sourceTree = "<group>"; };
 		168D8C8E17E0A5D800DD9CC2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		168D8C8F17E0A5D800DD9CC2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		1697323D17E5BC8700F4AA6E /* mood_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mood_1.png; sourceTree = "<group>"; };
@@ -2115,14 +2120,17 @@
 		184648411793A5F700E83EBB /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				16896052181171C00031902F /* LoginMenuCell.h */,
+				16896053181171C00031902F /* LoginMenuCell.m */,
+				16896054181171C00031902F /* LoginMenuCell.xib */,
+				16896055181171C00031902F /* LoginMenuViewController.h */,
+				16896056181171C00031902F /* LoginMenuViewController.m */,
+				16896057181171C00031902F /* LoginMenuViewController.xib */,
 				1816E97C17CED8BE00D532EA /* DoubanAuthorizeView.h */,
 				1816E97D17CED8BE00D532EA /* DoubanAuthorizeView.m */,
 				184648481793A61700E83EBB /* LoginViewController.h */,
 				184648491793A61700E83EBB /* LoginViewController.m */,
 				1846484A1793A61700E83EBB /* LoginViewController.xib */,
-				163EA98417A7F59E00EBD24C /* LoginChooseViewController.h */,
-				163EA98517A7F59E00EBD24C /* LoginChooseViewController.m */,
-				163EA98617A7F59E00EBD24C /* LoginChooseViewController.xib */,
 				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
 				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
 				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
@@ -2393,7 +2401,6 @@
 				16AB8BAD179EB8A40009411F /* left_menu_yinyuejiyin.png in Resources */,
 				16AB8BAF179EBA420009411F /* left_view_0.png in Resources */,
 				16AB8BB4179EBF590009411F /* LeftViewCell.xib in Resources */,
-				163EA98817A7F59E00EBD24C /* LoginChooseViewController.xib in Resources */,
 				163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */,
 				163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */,
 				163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */,
@@ -2465,6 +2472,7 @@
 				162AAB5017C258F0000E904F /* gene_src_1.png in Resources */,
 				162AAB5117C258F0000E904F /* gene_src_2.png in Resources */,
 				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
+				16896059181171C00031902F /* LoginMenuCell.xib in Resources */,
 				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
 				1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */,
 				1649E20C17C3A95D009A9E3F /* NearFriendViewController.xib in Resources */,
@@ -2578,6 +2586,7 @@
 				1697326217E5BC8700F4AA6E /* type_3.png in Resources */,
 				1697326317E5BC8700F4AA6E /* type_4.png in Resources */,
 				1697326417E5BC8700F4AA6E /* type_5.png in Resources */,
+				1689605B181171C00031902F /* LoginMenuViewController.xib in Resources */,
 				1697326517E5BC8700F4AA6E /* type_6.png in Resources */,
 				1697326617E5BC8700F4AA6E /* type_9.png in Resources */,
 				1635D96717F06C6C00B392BB /* home_navigation_menu_sel.png in Resources */,
@@ -2625,6 +2634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16EDEF481759AD5E001BE4E9 /* main.m in Sources */,
+				1689605A181171C00031902F /* LoginMenuViewController.m in Sources */,
 				16EDEF4C1759AD5E001BE4E9 /* AppDelegate.m in Sources */,
 				1623165D1777397600CF8FB5 /* AFHTTPClient.m in Sources */,
 				1623165E1777397600CF8FB5 /* AFHTTPRequestOperation.m in Sources */,
@@ -2665,6 +2675,7 @@
 				18A451061783FCA700CFFAD4 /* RightViewController.m in Sources */,
 				18A4510B1783FD2700CFFAD4 /* DDMenuController.m in Sources */,
 				18A451161784017B00CFFAD4 /* PCustomNavigationBarView.m in Sources */,
+				16896058181171C00031902F /* LoginMenuCell.m in Sources */,
 				18A451171784017B00CFFAD4 /* PCustomTabBarItemView.m in Sources */,
 				18A451181784017B00CFFAD4 /* PCustomTabBarView.m in Sources */,
 				18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */,
@@ -2692,7 +2703,6 @@
 				16AB8BB3179EBF590009411F /* LeftViewCell.m in Sources */,
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
 				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
-				163EA98717A7F59E00EBD24C /* LoginChooseViewController.m in Sources */,
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,

@@ -22,6 +22,12 @@
 
 @implementation LoginViewController
 
+@synthesize textBgImageView = _textBgImageView;
+@synthesize emailTextField = _emailTextField;
+@synthesize passwordTextField = _passwordTextField;
+@synthesize btnLogin = _btnLogin;
+@synthesize btnForget = _btnForget;
+
 @synthesize miglabAPI = _miglabAPI;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,6 +48,16 @@
     return self;
 }
 
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoSuccess object:nil];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,20 +69,28 @@
     self.navView.titleLabel.text = @"mig账号登录";
     self.bgImageView.hidden = YES;
     
+    CGRect textbgframe = _textBgImageView.frame;
+    textbgframe.origin.y += self.topDistance;
+    _textBgImageView.frame = textbgframe;
+    
+    CGRect emailframe = _emailTextField.frame;
+    emailframe.origin.y += self.topDistance;
+    _emailTextField.frame = emailframe;
+    
+    CGRect passwordframe = _passwordTextField.frame;
+    passwordframe.origin.y += self.topDistance;
+    _passwordTextField.frame = passwordframe;
+    
+    CGRect loginframe = _btnLogin.frame;
+    loginframe.origin.y += self.topDistance;
+    _btnLogin.frame = loginframe;
+    
+    CGRect forgetframe = _btnForget.frame;
+    forgetframe.origin.y += self.topDistance;
+    _btnForget.frame = forgetframe;
+    
     //
     _miglabAPI = [[MigLabAPI alloc] init];
-    
-}
-
--(void)dealloc{
-    
-    //login
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLoginSuccess object:nil];
-    
-    //user
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoSuccess object:nil];
     
 }
 

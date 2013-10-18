@@ -74,7 +74,7 @@
     //search
     UIImage *searchImage = [UIImage imageWithName:@"login_choose_register" type:@"png"];
     [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
-    self.navView.rightButton.frame = CGRectMake(268, 7.5 + self.topDistance, 48, 29);
+    self.navView.rightButton.frame = CGRectMake(262, 7.5 + self.topDistance, 48, 29);
     [self.navView.rightButton setHidden:NO];
     [self.navView.rightButton addTarget:self action:@selector(doGotoRegister:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -596,6 +596,20 @@
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
+    
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            [self doSinaWeiboLogin:nil];
+        } else if (indexPath.row == 1) {
+            [self doQQLogin:nil];
+        } else if (indexPath.row == 2) {
+            [self doDouBanLogin:nil];
+        }
+        
+    } else if (indexPath.section == 1) {
+        [self doMiglabLogin:nil];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

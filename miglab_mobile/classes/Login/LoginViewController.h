@@ -11,8 +11,11 @@
 
 @interface LoginViewController : BaseViewController<UITextFieldDelegate>
 
+@property (nonatomic, retain) IBOutlet UIImageView *textBgImageView;
 @property (nonatomic, retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, retain) IBOutlet UIButton *btnLogin;
+@property (nonatomic, retain) IBOutlet UIButton *btnForget;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 

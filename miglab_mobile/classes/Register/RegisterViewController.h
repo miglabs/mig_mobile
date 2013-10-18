@@ -6,14 +6,15 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : BaseViewController
 
+@property (nonatomic, retain) IBOutlet UIImageView *textBgImageView;
 @property (nonatomic, retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic, retain) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, retain) IBOutlet UIButton *btnRegister;
 
--(IBAction)doBack:(id)sender;
 -(IBAction)doRegisterAction:(id)sender;
 -(void)registerFailed:(NSNotification *)tNotification;
 -(void)registerSuccess:(NSNotification *)tNotification;
