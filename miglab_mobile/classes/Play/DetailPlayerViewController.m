@@ -54,14 +54,14 @@
     self.navView.hidden = YES;
     
     //top
-    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20, kMainScreenWidth, 44)];
+    _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20 + self.topDistance, kMainScreenWidth, 44)];
     [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowMenuViewAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topPlayerInfoView.btnShare addTarget:self action:@selector(doShareAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_topPlayerInfoView];
     
     //song info label
     _lblSongInfo = [[UILabel alloc] init];
-    _lblSongInfo.frame = CGRectMake(0, 70, kMainScreenWidth, 21);
+    _lblSongInfo.frame = CGRectMake(0, 70 + self.topDistance, kMainScreenWidth, 21);
     _lblSongInfo.backgroundColor = [UIColor clearColor];
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
     _lblSongInfo.textColor = [UIColor whiteColor];
@@ -77,7 +77,7 @@
             _cdOfSongView = (PlayBodyView *)oneObject;
         }//if
     }//for
-    _cdOfSongView.frame = CGRectMake(0, 100, kMainScreenWidth, kMainScreenHeight - 100 - 90);
+    _cdOfSongView.frame = CGRectMake(0, 100 + self.topDistance, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
     _cdOfSongView.coverOfSongEGOImageView.placeholderImage = [UIImage imageWithName:@"song_cover" type:@"png"];
     _cdOfSongView.coverOfSongEGOImageView.tag = 2000;
@@ -98,7 +98,7 @@
     [self.view addSubview:_cdOfSongView];
     
     //bottom
-    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight - 90, 320, 90)];
+    _bottomPlayerMenuView = [[PCustomPlayerMenuView alloc] initPlayerMenuView:CGRectMake(0, kMainScreenHeight + self.topDistance - 90, 320, 90)];
     [_bottomPlayerMenuView.btnRemove addTarget:self action:@selector(doDeleteAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnLike addTarget:self action:@selector(doCollectAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
