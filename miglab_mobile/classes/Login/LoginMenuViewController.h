@@ -24,4 +24,15 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+-(IBAction)doGotoRegister:(id)sender;
+-(IBAction)doSinaWeiboLogin:(id)sender;
+-(IBAction)doQQLogin:(id)sender;
+-(IBAction)doDouBanLogin:(id)sender;
+-(IBAction)doMiglabLogin:(id)sender;
+
+-(void)registerFailed:(NSNotification *)tNotification;
+-(void)registerSuccess:(NSNotification *)tNotification;
+-(void)getUserInfoFailed:(NSNotification *)tNotification;
+-(void)getUserInfoSuccess:(NSNotification *)tNotification;
+
 @end
