@@ -15,6 +15,7 @@
 
 @implementation SettingOfModifyNicknameViewController
 
+@synthesize textBgImageView = _textBgImageView;
 @synthesize nicknameTextField = _nicknameTextField;
 @synthesize lblErrorMessage = _lblErrorMessage;
 
@@ -38,11 +39,23 @@
     self.navView.titleLabel.text = @"修改昵称";
     self.bgImageView.hidden = YES;
     
+    CGRect textbgframe = _textBgImageView.frame;
+    textbgframe.origin.y += self.topDistance;
+    _textBgImageView.frame = textbgframe;
+    
     //body
+    CGRect nicknameframe = _nicknameTextField.frame;
+    nicknameframe.origin.y += self.topDistance;
+    _nicknameTextField.frame = nicknameframe;
     _nicknameTextField.delegate = self;
     _nicknameTextField.returnKeyType = UIReturnKeyDone;
     _nicknameTextField.textColor = [UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f];
     _nicknameTextField.text = [UserSessionManager GetInstance].currentUser.nickname;
+    
+    //error
+    CGRect errormessageframe = _lblErrorMessage.frame;
+    errormessageframe.origin.y += self.topDistance;
+    _lblErrorMessage.frame = errormessageframe;
     
 }
 

@@ -33,12 +33,16 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav bar
     self.navView.titleLabel.text = @"加好友权限设置";
     self.bgImageView.hidden = YES;
     
     //body
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45 + 10, 320, kMainScreenHeight - 45 - 10) style:UITableViewStyleGrouped];
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 10, 320, kMainScreenHeight + self.topDistance - posy - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -48,7 +52,7 @@
     
     NSArray *section0 = [NSArray arrayWithObjects:@"加我为好友时需要验证", nil];
     NSArray *section1 = [NSArray arrayWithObjects:@"回复歌友自动添加对方为好友", nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, nil];
+    _datalist = [NSMutableArray arrayWithObjects:section0, section1, nil];
     
     
 }

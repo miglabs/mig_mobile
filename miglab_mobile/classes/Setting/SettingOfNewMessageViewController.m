@@ -33,12 +33,16 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
+    //nav
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav bar
     self.navView.titleLabel.text = @"新消息设置";
     self.bgImageView.hidden = YES;
     
     //body
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45 + 10, 320, kMainScreenHeight - 45 - 10) style:UITableViewStyleGrouped];
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 10, 320, kMainScreenHeight + self.topDistance - posy - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -46,7 +50,7 @@
     _dataTableView.scrollEnabled = NO;
     [self.view addSubview:_dataTableView];
     
-    _datalist = [NSArray arrayWithObjects:@"开启消息提醒", @"声音", @"震动", nil];
+    _datalist = [NSMutableArray arrayWithObjects:@"开启消息提醒", @"声音", @"震动", nil];
     
     
 }

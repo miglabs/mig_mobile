@@ -10,6 +10,7 @@
 
 @interface SettingOfModifyNicknameViewController : BaseViewController<UITextFieldDelegate>
 
+@property (nonatomic, retain) IBOutlet UIImageView *textBgImageView;
 @property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
 @property (nonatomic, retain) IBOutlet UILabel *lblErrorMessage;
 
