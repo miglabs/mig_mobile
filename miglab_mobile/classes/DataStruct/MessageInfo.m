@@ -25,6 +25,8 @@
     
     if(dict && [dict isKindOfClass:[NSDictionary class]]) {
         
+        msginfo = [[MessageInfo alloc] init];
+        
         NSDictionary* dicDetail = [dict objectForKey:@"detail"];
         
         msginfo.content = [dicDetail objectForKey:@"msg"];
