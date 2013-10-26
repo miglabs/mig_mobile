@@ -26,8 +26,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMessageSuccess:) name:NotificationNameGetPushMsgSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMessageFailed:) name:NotificationNameGetPushMsgFailed object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetPushMsgSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetPushMsgFailed object:nil];
 }
 
 - (void)viewDidLoad
@@ -59,17 +67,34 @@
     //
     _datalist = [[NSMutableArray alloc] init];
     
+    [self loadMessageFromServer];
+    
     //
-    MessageInfo *mi0 = [[MessageInfo alloc] init];
-    mi0.content = @"使对方看";
-    mi0.messagetype = 1;
-    [_datalist addObject:mi0];
+//    MessageInfo *mi0 = [[MessageInfo alloc] init];
+//    mi0.content = @"使对方看";
+//    mi0.messagetype = 1;
+//    [_datalist addObject:mi0];
+//    
+//    MessageInfo *mi1 = [[MessageInfo alloc] init];
+//    mi1.content = @"使对方看w额投入";
+//    mi1.messagetype = 2;
+//    [_datalist addObject:mi1];
     
-    MessageInfo *mi1 = [[MessageInfo alloc] init];
-    mi1.content = @"使对方看w额投入";
-    mi1.messagetype = 2;
-    [_datalist addObject:mi1];
+}
+
+-(void)loadMessageFromServer {
     
+    if([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doGetPushMsg:userid token:accesstoken pageindex:@"0" pagesize:@"10"];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,10 +122,24 @@
         
     }
     
-    
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+#pragma mark - notification
+
+-(void)loadMessageSuccess:(NSNotification *)tNotification {
+    
+    NSDictionary* result = [tNotification userInfo];
+    NSMutableArray* messages = [result objectForKey:@"result"];
+    
+    [_datalist addObjectsFromArray:messages];
+    [_dataTableView reloadData];
+}
+
+-(void)loadMessageFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
 }
 
 #pragma mark - UITableView datasource
@@ -122,7 +161,21 @@
 	}
     
     MessageInfo *messageInfo = [_datalist objectAtIndex:indexPath.row];
-    cell.lblMessageType.text = @"使地方 评论了song";
+    NSString* username = messageInfo.userInfo.nickname;
+    
+    if(messageInfo.messagetype == 2) {
+        
+        cell.lblMessageType.text = [NSString stringWithFormat:@"%@送了一首歌曲给你", username];
+    }
+    else if(messageInfo.messagetype == 3) {
+        
+        cell.lblMessageType.text = [NSString stringWithFormat:@"%@评论了你个歌曲", username];
+    }
+    else {
+        
+        cell.lblMessageType.text = [NSString stringWithFormat:@"%@给你打了一个招呼", username];
+    }
+    
     cell.lblContent.text = messageInfo.content;
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);

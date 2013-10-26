@@ -13,4 +13,12 @@
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 
+-(void)loadData;
+-(void)loadMessageFromDatabase;
+-(void)loadMessageFromServer;
+
+-(void)loadMessageFailed:(NSNotification *)tNotification;
+-(void)loadMessageSuccess:(NSNotification *)tNotification;
+
+
 @end

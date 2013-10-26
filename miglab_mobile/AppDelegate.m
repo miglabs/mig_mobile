@@ -149,16 +149,16 @@
             
             
         } else {
-            /*
-            [databaseManager insertUserAccout:@"pig" password:@"pig"];
             
-            User *user = [[User alloc] init];
-            user.username = @"archer1234";
+            [databaseManager insertUserAccout:@"liujun2458@163.com" password:@"123456"];
+            
+            PUser *user = [[PUser alloc] init];
+            user.username = @"liujun2458@163.com";
             user.password = @"123456";
             [UserSessionManager GetInstance].currentUser = user;
             
             PLog(@"username: %@, password: %@", user.username, user.password);
-            */
+            
         }
         
         //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
@@ -282,9 +282,9 @@
         
     }
     
-    //[miglabAPI doPresentMusic:@"10343" token:@"12222" touid:@"10343" sid:@"22869"];
-    [miglabAPI doSayHello:@"10343" token:@"12222" touid:@"10343" msg:@"hehe"];
-    //[miglabAPI doGetPushMsg:@"10343" token:@"12222" pageindex:@"1" pagesize:@"5"];
+    //[miglabAPI doPresentMusic:userid token:accesstoken touid:userid sid:22869];
+    //[miglabAPI doSayHello:userid token:accesstoken touid:userid msg:@"hehe"];
+    //[miglabAPI doGetPushMsg:userid token:accesstoken pageindex:@"1" pagesize:@"5"];
     //[miglabAPI doGetSongHistory:@"10343" token:@"12222" fromid:@"" count:@""];
     //[miglabAPI doGetMyNearMusicMsgNumber:@"10343" token:@"121" radius:@"10000" location:@"30.292207031178,120.0855621569"];
     //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
