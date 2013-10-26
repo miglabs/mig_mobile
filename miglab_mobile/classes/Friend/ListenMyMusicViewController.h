@@ -7,7 +7,21 @@
 //
 
 #import "PlayerViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface ListenMyMusicViewController : PlayerViewController
+@interface ListenMyMusicViewController : PlayerViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+//gps 定位
+@property (nonatomic, retain) CLLocationManager* locationManager;
+
+@property (nonatomic, retain) UITableView* dataTableView;
+@property (nonatomic, retain) NSMutableArray* dataList;
+
+-(void)loadData;
+-(void)loadNearFriendFromDatabase;
+-(void)LoadListeningMyFavorateMusic:(NSString*)location;
+
+-(void)LoadListeningMyFavorateMusicSuccess:(NSNotification*)tNotification;
+-(void)LoadListeningMyFavorateMusicFailed:(NSNotification*)tNotification;
 
 @end
