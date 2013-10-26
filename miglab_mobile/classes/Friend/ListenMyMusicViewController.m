@@ -1,4 +1,4 @@
-//
+      //
 //  ListenMyMusicViewController.m
 //  miglab_mobile
 //
@@ -10,7 +10,7 @@
 #import "FriendInfoCell.h"
 #include "NearMusicState.h"
 
-NSString* szListenMyMusicRadius = @"500";
+NSString* szListenMyMusicRadius = @"10000";
 
 @interface ListenMyMusicViewController ()
 
@@ -33,6 +33,12 @@ NSString* szListenMyMusicRadius = @"500";
         
     }
     return self;
+}
+
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetSameMusicSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetSameMusicFailed object:nil];
 }
 
 - (void)viewDidLoad
@@ -87,15 +93,15 @@ NSString* szListenMyMusicRadius = @"500";
 -(void)loadNearFriendFromDatabase{
     
     //test data
-    NearbyUser *testfriend = [[NearbyUser alloc] init];
-    testfriend.userid = @"123";
-    //    testfriend.nickname = @"猫王爱淘汰";
-    [_dataList addObject:testfriend];
-    
-    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
-    testfriend.userid = @"456";
-    //    testfriend1.nickname = @"乐瑟乐瑟";
-    [_dataList addObject:testfriend1];
+//    NearbyUser *testfriend = [[NearbyUser alloc] init];
+//    testfriend.userid = @"123";
+//    //    testfriend.nickname = @"猫王爱淘汰";
+//    [_dataList addObject:testfriend];
+//    
+//    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
+//    testfriend.userid = @"456";
+//    //    testfriend1.nickname = @"乐瑟乐瑟";
+//    [_dataList addObject:testfriend1];
     
 }
 
@@ -110,7 +116,8 @@ NSString* szListenMyMusicRadius = @"500";
     NSString* userid = [UserSessionManager GetInstance].userid;
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     
-    [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:szListenMyMusicRadius location:location];
+    //junliu fixed, for debug
+    [self.miglabAPI doGetSameMusic:@"10343" token:accesstoken radius:@"10000" location:@"30.292207031178,120.0855621569"];
 }
 
 #pragma notification
@@ -118,9 +125,9 @@ NSString* szListenMyMusicRadius = @"500";
 -(void)LoadListeningMyFavorateMusicSuccess:(NSNotification *)tNotification {
     
     NSDictionary* result = [tNotification userInfo];
-    NearMusicState* nms = [result objectForKey:@"result"];
+    NSMutableArray* nms = [result objectForKey:@"result"];
     
-    [_dataList addObjectsFromArray:nms.nearuser];
+    [_dataList addObjectsFromArray:nms];
     [_dataTableView reloadData];
 }
 
@@ -176,10 +183,12 @@ NSString* szListenMyMusicRadius = @"500";
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NearbyUser *tempfriend = [_dataList objectAtIndex:indexPath.row];
+    NearMusicState* nms = [_dataList objectAtIndex:indexPath.row];
+    NearbyUser *tempfriend = [nms nearuser];
+    Song* song = [nms song];
     float tdistance = (float)tempfriend.distance / 1000;
     cell.lblNickName.text = tempfriend.userid;
-    cell.lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %d", tdistance, tempfriend.cur_music];
+    cell.lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", tdistance, [song songname]];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
