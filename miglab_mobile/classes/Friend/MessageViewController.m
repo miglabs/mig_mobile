@@ -176,22 +176,7 @@
 	}
     
     MessageInfo *messageInfo = [_datalist objectAtIndex:indexPath.row];
-    NSString* username = messageInfo.userInfo.nickname;
-    
-    if(messageInfo.messagetype == 2) {
-        
-        cell.lblMessageType.text = [NSString stringWithFormat:@"%@送了一首歌曲给你", username];
-    }
-    else if(messageInfo.messagetype == 3) {
-        
-        cell.lblMessageType.text = [NSString stringWithFormat:@"%@评论了你个歌曲", username];
-    }
-    else {
-        
-        cell.lblMessageType.text = [NSString stringWithFormat:@"%@给你打了一个招呼", username];
-    }
-    
-    cell.lblContent.text = messageInfo.content;
+    [cell updateMessageInfoCellData:messageInfo];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

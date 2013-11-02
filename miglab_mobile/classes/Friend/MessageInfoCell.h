@@ -14,5 +14,8 @@
 @property (nonatomic, retain) IBOutlet EGOImageButton *btnAvatar;
 @property (nonatomic, retain) IBOutlet UILabel *lblMessageType;
 @property (nonatomic, retain) IBOutlet UILabel *lblContent;
+@property (nonatomic, retain) MessageInfo* msginfo;
+
+-(void)updateMessageInfoCellData:(MessageInfo*)msg;
 
 @end
