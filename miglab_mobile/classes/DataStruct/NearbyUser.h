@@ -15,6 +15,11 @@
 @property (nonatomic, retain) NSString *longitude;
 @property (nonatomic, assign) long distance;
 @property (nonatomic, assign) int cur_music;
+@property (nonatomic, retain) NSString* nickname;
+@property (nonatomic, retain) NSString* sex;
+@property (nonatomic, retain) NSString* songstat;
+@property (nonatomic, retain) NSString* songname;
+@property (nonatomic, retain) NSString* singer;
 
 //附近的人
 +(id)initWithNSDictionary:(NSDictionary*)dict;

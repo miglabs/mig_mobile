@@ -15,6 +15,11 @@
 @synthesize longitude = _longitude;
 @synthesize distance = _distance;
 @synthesize cur_music = _cur_music;
+@synthesize nickname = _nickname;
+@synthesize sex = _sex;
+@synthesize songstat = _songstat;
+@synthesize songname = _songname;
+@synthesize singer = _singer;
 
 //附近的人
 +(id)initWithNSDictionary:(NSDictionary*)dict{
@@ -31,7 +36,10 @@
             nearbyuser.longitude = [dict objectForKey:@"longitude"];
             nearbyuser.distance = [[dict objectForKey:@"distance"] longValue];
             nearbyuser.cur_music = [[dict objectForKey:@"cur_music"] intValue];
-            
+            nearbyuser.nickname = [dict objectForKey:@"nickname"];
+            nearbyuser.sex = [dict objectForKey:@"sex"];
+            nearbyuser.songstat = [dict objectForKey:@"songstat"];
+            nearbyuser.singer = [dict objectForKey:@"name"];
         }
     }
     @catch (NSException *exception) {
