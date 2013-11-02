@@ -9,6 +9,7 @@
 #import "ListenMyMusicViewController.h"
 #import "FriendInfoCell.h"
 #include "NearMusicState.h"
+#import "MyFriendPersonalPageViewController.h"
 
 NSString* szListenMyMusicRadius = @"10000";
 
@@ -93,11 +94,12 @@ NSString* szListenMyMusicRadius = @"10000";
 -(void)loadNearFriendFromDatabase{
     
     //test data
-//    NearbyUser *testfriend = [[NearbyUser alloc] init];
-//    testfriend.userid = @"123";
-//    //    testfriend.nickname = @"猫王爱淘汰";
-//    [_dataList addObject:testfriend];
-//    
+    NearMusicState *testfriend = [[NearMusicState alloc] init];
+    testfriend.nearuser  = [[NearbyUser alloc] init];
+    testfriend.nearuser.nickname = @"lj_archer";
+    testfriend.nearuser.userid = @"123";
+    [_dataList addObject:testfriend];
+//
 //    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
 //    testfriend.userid = @"456";
 //    //    testfriend1.nickname = @"乐瑟乐瑟";
@@ -161,7 +163,19 @@ NSString* szListenMyMusicRadius = @"10000";
 // called after the user changes the selection
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSInteger row = indexPath.row;
+    NearbyUser* userinfo = (NearbyUser*)((NearMusicState*)[_dataList objectAtIndex:row]).nearuser;
+    
+    MyFriendPersonalPageViewController* friendPersonalView = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+    
+    friendPersonalView.userinfo = userinfo;
+    [self.navigationController pushViewController:friendPersonalView animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - uitableview datasource
