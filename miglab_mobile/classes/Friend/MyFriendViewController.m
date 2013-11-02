@@ -152,7 +152,7 @@
 	}
     
     PUser *tempfriend = [_friendList objectAtIndex:indexPath.row];
-//    cell.lblNickName.text = tempfriend.nickname;
+    cell.lblNickName.text = tempfriend.nickname;
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
