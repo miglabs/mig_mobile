@@ -11,6 +11,7 @@
 #import "MessageInfo.h"
 #import "FriendOfReceiveHiViewController.h"
 #import "FriendOfReceiveMusicViewController.h"
+#import "MyFriendPersonalPageViewController.h"
 
 @interface MessageViewController ()
 
@@ -20,6 +21,7 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
+@synthesize userinfo = _userinfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,15 +72,19 @@
     [self loadMessageFromServer];
     
     //
-//    MessageInfo *mi0 = [[MessageInfo alloc] init];
-//    mi0.content = @"使对方看";
-//    mi0.messagetype = 1;
-//    [_datalist addObject:mi0];
-//    
-//    MessageInfo *mi1 = [[MessageInfo alloc] init];
-//    mi1.content = @"使对方看w额投入";
-//    mi1.messagetype = 2;
-//    [_datalist addObject:mi1];
+    MessageInfo *mi0 = [[MessageInfo alloc] init];
+    mi0.userInfo = [[NearbyUser alloc] init];
+    mi0.userInfo.nickname = @"liujun";
+    mi0.content = @"使对方看";
+    mi0.messagetype = 1;
+    [_datalist addObject:mi0];
+    
+    MessageInfo *mi1 = [[MessageInfo alloc] init];
+    mi1.userInfo = [[NearbyUser alloc] init];
+    mi1.userInfo.nickname = @"liujun";
+    mi1.content = @"使对方看w额投入";
+    mi1.messagetype = 3;
+    [_datalist addObject:mi1];
     
 }
 
@@ -106,20 +112,25 @@
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
-    
     MessageInfo *messageInfo = [_datalist objectAtIndex:indexPath.row];
-    if (messageInfo.messagetype == 1) {
-        
+    NearbyUser* user = messageInfo.userInfo;
+    
+    if (messageInfo.messagetype == 1 || messageInfo.messagetype == 3) {
+        // 打招呼
         FriendOfReceiveHiViewController *receiveHiViewController = [[FriendOfReceiveHiViewController alloc] initWithNibName:@"FriendOfReceiveHiViewController" bundle:nil];
+        receiveHiViewController.msginfo = messageInfo;
         [self.navigationController pushViewController:receiveHiViewController animated:YES];
         
+//    } else if (messageInfo.messagetype == 3) {
+//        // 评论歌曲
+//        MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+//        receiveMusicViewController.userinfo = user;
+//        [self.navigationController pushViewController:receiveMusicViewController animated:YES];
+        
     } else if (messageInfo.messagetype == 2) {
+        // 送歌
         
-        FriendOfReceiveMusicViewController *receiveMusicViewController = [[FriendOfReceiveMusicViewController alloc] initWithNibName:@"FriendOfReceiveMusicViewController" bundle:nil];
-        [self.navigationController pushViewController:receiveMusicViewController animated:YES];
-        
-    } else if (messageInfo.messagetype == 3) {
-        
+        //        FriendOfReceiveMusicViewController *receiveMusicViewController = [[FriendOfReceiveMusicViewController alloc] initWithNibName:@"FriendOfReceiveMusicViewController" bundle:nil];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

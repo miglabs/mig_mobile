@@ -10,5 +10,4 @@
 
 @interface FriendOfReceiveMusicViewController : BaseViewController
 
-
 @end

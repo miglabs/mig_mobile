@@ -36,7 +36,7 @@
         msginfo.time = [dicDetail objectForKey:@"time"];
         msginfo.song = [Song initWithNSDictionary:[dicDetail objectForKey:@"song"]];
         
-        msginfo.userInfo = [PUser initWithNSDictionary:[dict objectForKey:@"userinfo"]];
+        msginfo.userInfo = [NearbyUser initWithNSDictionary:[dict objectForKey:@"userinfo"]];
         
         NSString* type = [dict objectForKey:@"type"];
         

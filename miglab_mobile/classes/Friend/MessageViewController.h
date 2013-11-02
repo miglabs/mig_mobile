@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
+@property (nonatomic, retain) NearbyUser* userinfo;
 
 -(void)loadData;
 -(void)loadMessageFromDatabase;

@@ -15,6 +15,7 @@
 @implementation FriendOfReceiveHiViewController
 
 @synthesize userHeadView = _userHeadView;
+@synthesize msginfo = _msginfo;
 
 @synthesize messageContentView = _messageContentView;
 
@@ -37,13 +38,24 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
     //nav bar
-    self.navView.titleLabel.text = @"猫王爱淘汰(收到消息)";
+    NSString* name = _msginfo.userInfo.nickname;
+    
+    if (_msginfo.messagetype == 1) {
+        // 打招呼
+        self.navView.titleLabel.text = [NSString stringWithFormat:@"%@(收到消息)", name];
+    }
+    else if (_msginfo.messagetype == 3) {
+        // 评论歌曲
+        self.navView.titleLabel.text = [NSString stringWithFormat:@"%@(收到歌曲评论)", name];
+    }
     
     //user head view
     NSArray *userHeadNib = [[NSBundle mainBundle] loadNibNamed:@"FriendMessageUserHead" owner:self options:nil];
+    NearbyUser* user = _msginfo.userInfo;
     for (id oneObject in userHeadNib){
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
+            _userHeadView.userinfo = user;
         }//if
     }//for
     _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
@@ -51,7 +63,8 @@
     
     //message
     _messageContentView.frame = CGRectMake(11.5, posy + 10 + 129 + 10, 297, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + 73 + 10) );
-    [self.view addSubview:_messageContentView];
+    
+//    [self.view addSubview:_messageContentView];
     
 }
 

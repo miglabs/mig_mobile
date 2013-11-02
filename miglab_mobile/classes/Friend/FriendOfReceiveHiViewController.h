@@ -12,6 +12,7 @@
 @interface FriendOfReceiveHiViewController : PlayerViewController
 
 @property (nonatomic, retain) FriendMessageUserHead *userHeadView;
+@property (nonatomic, retain) MessageInfo* msginfo;
 
 @property (nonatomic, retain) IBOutlet UIView *messageContentView;
 
