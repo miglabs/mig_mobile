@@ -75,14 +75,14 @@
     MessageInfo *mi0 = [[MessageInfo alloc] init];
     mi0.userInfo = [[NearbyUser alloc] init];
     mi0.userInfo.nickname = @"liujun";
-    mi0.content = @"使对方看";
+    mi0.content = @"使对方看董翔是基佬~~~~~";
     mi0.messagetype = 1;
     [_datalist addObject:mi0];
     
     MessageInfo *mi1 = [[MessageInfo alloc] init];
     mi1.userInfo = [[NearbyUser alloc] init];
     mi1.userInfo.nickname = @"liujun";
-    mi1.content = @"使对方看w额投入";
+    mi1.content = @"你这首太难听了，和董翔一个品位";
     mi1.messagetype = 3;
     [_datalist addObject:mi1];
     

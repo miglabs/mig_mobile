@@ -42,11 +42,11 @@
     
     if (_msginfo.messagetype == 1) {
         // 打招呼
-        self.navView.titleLabel.text = [NSString stringWithFormat:@"%@(收到消息)", name];
+        self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的消息", name];
     }
     else if (_msginfo.messagetype == 3) {
         // 评论歌曲
-        self.navView.titleLabel.text = [NSString stringWithFormat:@"%@(收到歌曲评论)", name];
+        self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的歌曲评论", name];
     }
     
     //user head view
@@ -56,6 +56,7 @@
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
             _userHeadView.userinfo = user;
+            [_userHeadView initFriendMessageUserHead];
         }//if
     }//for
     _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
@@ -64,7 +65,33 @@
     //message
     _messageContentView.frame = CGRectMake(11.5, posy + 10 + 129 + 10, 297, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + 73 + 10) );
     
-//    [self.view addSubview:_messageContentView];
+    UILabel* contenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
+    if (_msginfo.messagetype == 1) {
+        
+        contenttitle.text = @"对方给你打了一个招呼";
+    }
+    else if (_msginfo.messagetype == 3) {
+        
+        contenttitle.text = @"对方给你的歌曲评论";
+    }
+    else {
+        
+        contenttitle.text = @"";
+    }
+    contenttitle.backgroundColor = [UIColor clearColor];
+    contenttitle.textColor = [UIColor whiteColor];
+    //[contenttitle setFont:[UIFont fontWithName:@"Arial" size:18.0]];
+    contenttitle.textAlignment = UITextAlignmentLeft;
+    [_messageContentView addSubview:contenttitle];
+    
+    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, 257, 80)];
+    textcontent.text = _msginfo.content;
+    textcontent.backgroundColor = [UIColor clearColor];
+    textcontent.textAlignment = UITextAlignmentLeft;
+    //[contenttitle setFont:[UIFont fontWithName:@"Arial" size:14.0]];
+    [_messageContentView addSubview:textcontent];
+    
+    [self.view addSubview:_messageContentView];
     
 }
 
