@@ -55,8 +55,7 @@
     for (id oneObject in userHeadNib){
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
-            _userHeadView.userinfo = user;
-            [_userHeadView initFriendMessageUserHead];
+            [_userHeadView updateFriendMessageUserHead:user];
         }//if
     }//for
     _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);

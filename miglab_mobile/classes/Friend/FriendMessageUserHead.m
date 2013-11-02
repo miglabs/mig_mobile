@@ -27,13 +27,22 @@
     return self;
 }
 
--(void)initFriendMessageUserHead {
+-(void)updateFriendMessageUserHead:(NearbyUser*)user {
+    _userinfo = user;
     
     _lblNickName.text = _userinfo.nickname;
     _lblListening.text = _userinfo.songname;
     
-    //TODO 初始化个人信息
-    //_lblUserInfo.text = [NSString stringWithFormat:@"%@岁           %@km", ]
+    //初始化个人信息
+    if (_userinfo.distance < 1000.0) {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"距离您有%.0fm", (float)_userinfo.distance];
+    }
+    else {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"距离您有%.0fkm", _userinfo.distance/1000.0];
+    }
+    _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
 }
 
 /*

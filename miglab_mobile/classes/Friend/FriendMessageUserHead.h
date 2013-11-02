@@ -20,6 +20,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnSayHi;
 @property (nonatomic, retain) IBOutlet UIButton *btnAddBlack;
 
--(void)initFriendMessageUserHead;
+-(void)updateFriendMessageUserHead:(NearbyUser*)user;
 
 @end

@@ -17,6 +17,7 @@
 @synthesize sinaTipImageView = _sinaTipImageView;
 @synthesize tencentTipImageView = _tencentTipImageView;
 @synthesize doubanTipImageView = _doubanTipImageView;
+@synthesize userinfo = _userinfo;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -32,6 +33,22 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)updateFriendInfoCellData:(NearbyUser*)user {
+    _userinfo = user;
+    
+    _lblNickName.text = _userinfo.nickname;
+    _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000, _userinfo.songname];
+    
+    if ([_userinfo.sex isEqualToString:@"0"]) {
+        
+        _genderImageView.image = [UIImage imageNamed:@"user_gender_female"];
+    }
+    else {
+        
+        _genderImageView.image = [UIImage imageNamed:@"user_gender_male"];
+    }
 }
 
 @end

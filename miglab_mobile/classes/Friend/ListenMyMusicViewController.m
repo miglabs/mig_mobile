@@ -98,6 +98,9 @@ NSString* szListenMyMusicRadius = @"10000";
     testfriend.nearuser  = [[NearbyUser alloc] init];
     testfriend.nearuser.nickname = @"lj_archer";
     testfriend.nearuser.userid = @"123";
+    testfriend.nearuser.songname = @"非常好听的歌";
+    testfriend.nearuser.distance = 10;
+    testfriend.nearuser.sex = @"1";
     [_dataList addObject:testfriend];
 //
 //    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
@@ -199,10 +202,7 @@ NSString* szListenMyMusicRadius = @"10000";
     
     NearMusicState* nms = [_dataList objectAtIndex:indexPath.row];
     NearbyUser *tempfriend = [nms nearuser];
-    Song* song = [nms song];
-    float tdistance = (float)tempfriend.distance / 1000;
-    cell.lblNickName.text = tempfriend.userid;
-    cell.lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", tdistance, [song songname]];
+    [cell updateFriendInfoCellData:tempfriend];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

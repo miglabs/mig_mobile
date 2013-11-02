@@ -31,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2.3km | 正在听－离歌" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5">
-                    <rect key="frame" x="53" y="30" width="124" height="21"/>
+                    <rect key="frame" x="53" y="30" width="233" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -60,6 +60,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="genderImageView" destination="6" id="eYA-zs-tWV"/>
                 <outlet property="lblNickName" destination="4" id="0k2-4q-K9R"/>
                 <outlet property="lblUserInfo" destination="5" id="Feb-J3-xAN"/>
             </connections>
