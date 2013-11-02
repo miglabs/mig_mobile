@@ -11,11 +11,15 @@
 
 @interface FriendMessageUserHead : UIView
 
+@property (nonatomic, assign) NearbyUser* userinfo;
+
 @property (nonatomic, retain) IBOutlet UILabel *lblListening;
 @property (nonatomic, retain) IBOutlet EGOImageButton *btnAvatar;
 @property (nonatomic, retain) IBOutlet UILabel *lblNickName;
 @property (nonatomic, retain) IBOutlet UILabel *lblUserInfo;
 @property (nonatomic, retain) IBOutlet UIButton *btnSayHi;
 @property (nonatomic, retain) IBOutlet UIButton *btnAddBlack;
+
+-(void)initFriendMessageUserHead;
 
 @end

@@ -14,11 +14,18 @@
 
 @implementation FriendOfSayHiViewController
 
+@synthesize text = _text;
+@synthesize lblinfo = _lblinfo;
+@synthesize touserid = _touserid;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doSayHelloSuccess:) name:NotificationNameSayHelloSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doSayHelloFailed:) name:NotificationNameSayHelloFailed object:nil];
     }
     return self;
 }
@@ -35,7 +42,26 @@
     //nav bar
     self.navView.titleLabel.text = @"打招呼";
     
+    UIImage* sureImage = [UIImage imageWithName:@"friend_sayhi_button_ok" type:@"png"];
+    [self.navView.rightButton setBackgroundImage:sureImage forState:UIControlStateNormal];
+    self.navView.rightButton.frame = CGRectMake(268, 7.5+self.topDistance, 48, 29);
+    [self.navView.rightButton setHidden:NO];
+    [self.navView.rightButton addTarget:self action:@selector(doSayHello:) forControlEvents:UIControlEventTouchUpInside];
     
+    _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(11.5, 80, 297, 60)];
+    _lblinfo.text = @"想对Ta说些什么呢？";
+    
+    _text = [[UITextField alloc] initWithFrame:CGRectMake(11.5, 150, 297, 50)];
+    _text.placeholder = @"你想说些什么...";
+    _text.textAlignment = UITextAlignmentLeft;
+    _text.borderStyle = 3;
+    _text.clearsOnBeginEditing = YES;
+    _text.keyboardType = UIKeyboardTypeDefault;
+    _text.returnKeyType = UIReturnKeyDone;
+    _text.delegate = self;
+    
+    [self.view addSubview:_lblinfo];
+    [self.view addSubview:_text];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,5 +73,40 @@
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(IBAction)doSayHello:(id)sender {
+    
+    NSString* userid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    
+    NSString* touserid = _touserid;
+    NSString* content = [_text text];
+    
+    [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
+}
+
+-(void)doSayHelloSuccess:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:@"打招呼成功啦！！！"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)doSayHelloFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:@"打招呼失败了:("];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - textfield delegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [_text resignFirstResponder];
+    
+    return YES;
+}
+
 
 @end

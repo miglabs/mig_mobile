@@ -10,6 +10,7 @@
 
 @implementation FriendMessageUserHead
 
+@synthesize userinfo = _userinfo;
 @synthesize lblListening = _lblListening;
 @synthesize btnAvatar = _btnAvatar;
 @synthesize lblNickName = _lblNickName;
@@ -24,6 +25,15 @@
         // Initialization code
     }
     return self;
+}
+
+-(void)initFriendMessageUserHead {
+    
+    _lblNickName.text = _userinfo.nickname;
+    _lblListening.text = _userinfo.songname;
+    
+    //TODO 初始化个人信息
+    //_lblUserInfo.text = [NSString stringWithFormat:@"%@岁           %@km", ]
 }
 
 /*

@@ -109,12 +109,12 @@
     //test data
     NearbyUser *testfriend = [[NearbyUser alloc] init];
     testfriend.userid = @"123";
-//    testfriend.nickname = @"猫王爱淘汰";
+    testfriend.nickname = @"猫王爱淘汰1";
     [_dataList addObject:testfriend];
     
     NearbyUser *testfriend1 = [[NearbyUser alloc] init];
     testfriend.userid = @"456";
-//    testfriend1.nickname = @"乐瑟乐瑟";
+    testfriend1.nickname = @"乐瑟乐瑟2";
     [_dataList addObject:testfriend1];
     
 }
@@ -199,6 +199,9 @@
     // ...
     
     MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+    
+    NSInteger row = indexPath.row;
+    personalPageViewController.userinfo = (NearbyUser*)[_dataList objectAtIndex:row];
     [self.navigationController pushViewController:personalPageViewController animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

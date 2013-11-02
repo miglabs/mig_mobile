@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
+@property (nonatomic, retain) NearbyUser* userinfo;
 
 @property (nonatomic, assign) BOOL isFriend;
 

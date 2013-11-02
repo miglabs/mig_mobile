@@ -8,6 +8,15 @@
 
 #import "PlayerViewController.h"
 
-@interface FriendOfSayHiViewController : PlayerViewController
+@interface FriendOfSayHiViewController : PlayerViewController<UITextFieldDelegate>
+
+@property (nonatomic, retain) UITextField* text;
+@property (nonatomic, retain) UILabel* lblinfo;
+@property (nonatomic, retain) NSString* touserid;
+
+-(IBAction)doSayHello:(id)sender;
+
+-(void)doSayHelloSuccess:(NSNotification*)tNotification;
+-(void)doSayHelloFailed:(NSNotification *)tNotification;
 
 @end

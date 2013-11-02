@@ -23,11 +23,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        PLog(@"-----------junliu uiviewtablecell initwithstyle");
-        
-        _lblNickName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        _lblNickName.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_lblNickName];
     }
     return self;
 }

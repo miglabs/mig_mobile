@@ -24,6 +24,7 @@
 
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
+@synthesize userinfo = _userinfo;
 
 @synthesize isFriend = _isFriend;
 
@@ -48,13 +49,15 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
     //nav bar
-    self.navView.titleLabel.text = @"猫王爱淘汰";
+    self.navView.titleLabel.text = _userinfo.nickname;
     
     //user head
     NSArray *userHeadNib = [[NSBundle mainBundle] loadNibNamed:@"FriendMessageUserHead" owner:self options:nil];
     for (id oneObject in userHeadNib){
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
+            _userHeadView.userinfo = _userinfo;
+            [_userHeadView initFriendMessageUserHead];
         }//if
     }//for
     _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
@@ -120,6 +123,7 @@
     PLog(@"doSayHi...");
     
     FriendOfSayHiViewController *sayHiViewController = [[FriendOfSayHiViewController alloc] initWithNibName:@"FriendOfSayHiViewController" bundle:nil];
+    sayHiViewController.touserid = _userinfo.userid;
     [self.navigationController pushViewController:sayHiViewController animated:YES];
     
 }
