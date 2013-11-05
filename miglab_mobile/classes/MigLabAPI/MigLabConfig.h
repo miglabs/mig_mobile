@@ -311,4 +311,9 @@
 #define NotificationNameSayHelloSuccess                     @"NotificationNameSayHelloSuccess"
 #define NotificationNameSayHelloFailed                      @"NotificationNameSayHelloFailed"
 
+// 获取歌友
+#define HTTP_GETMUSICUSER                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getmusicuser.fcgi"]
+#define NotificationNameGetMusicUserSuccess                 @"NotificationNameGetMusicUserSuccess"
+#define NotificationNameGetMusicUserFailed                  @"NotificationNameGetMusicUserFailed"
+
 #endif

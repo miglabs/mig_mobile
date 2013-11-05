@@ -16,6 +16,13 @@
 @property (nonatomic, retain) UITableView *friendTableView;
 @property (nonatomic, retain) NSMutableArray *friendList;
 
+-(void)loadData;
+-(void)loadMusicUserFromServer;
+-(void)loadMusicUserFromDatabase;
+
+-(void)getMusicUserSuccess:(NSNotification*)tNotification;
+-(void)getMusicUserFailed:(NSNotification *)tNotification;
+
 -(IBAction)doAddFriend:(id)sender;
 
 -(IBAction)doSearch:(id)sender;

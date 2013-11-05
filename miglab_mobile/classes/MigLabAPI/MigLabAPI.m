@@ -3164,5 +3164,73 @@
     [operation start];
 }
 
+/*
+ 获取歌友
+ GET
+ HTTP_GETMUSICUSER
+ */
+-(void)doGetMusicUser:(NSString *)uid token:(NSString *)ttoken fromid:(NSString *)tfromid count:(NSString *)tcount {
+    
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&fromid=%@&count=%@", HTTP_GETMUSICUSER, uid, ttoken, tfromid, tcount];
+    PLog(@"get music user url: %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get music user opration succeeded");
+                
+                NSArray* userArray = [dicJson objectForKey:@"result"];
+                int userArrayCount = [userArray count];
+                
+                NSMutableArray* userList = [[NSMutableArray alloc] init];
+                
+                for (int i=0; i<userArrayCount; i++) {
+                    
+                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[userArray objectAtIndex:i]];
+                    
+                    [userList addObject:nms];
+                }
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:userList, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetMusicUserSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get music user opration failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetMusicUserFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetMusicUserFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get music user failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetMusicUserFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
 
 @end

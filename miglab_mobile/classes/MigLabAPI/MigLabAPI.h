@@ -210,6 +210,11 @@ typedef enum {
  */
 -(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize;
 
+/*
+ 获取歌友
+ */
+-(void)doGetMusicUser:(NSString*)uid token:(NSString*)ttoken fromid:(NSString*)tfromid count:(NSString*)tcount;
+
 /****************************************保留接口*******************************************/
 
 

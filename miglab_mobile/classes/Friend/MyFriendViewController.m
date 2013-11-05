@@ -28,6 +28,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicUserSuccess:) name:NotificationNameGetMusicUserSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMusicUserFailed:) name:NotificationNameGetMusicUserFailed object:nil];
     }
     return self;
 }
@@ -94,7 +97,63 @@
     testfriend1.songname = @"真的想睡觉";
     [_friendList addObject:testfriend1];
     
+    [self loadData];
+    
 }
+
+-(void)loadData {
+    
+    [self loadMusicUserFromDatabase];
+    [self loadMusicUserFromServer];
+}
+
+-(void)loadMusicUserFromDatabase {
+    
+    
+}
+
+-(void)loadMusicUserFromServer {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [self.miglabAPI doGetMusicUser:userid token:accesstoken fromid:@"0" count:@"10"];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦~~"];
+    }
+}
+
+#pragma mark - notification
+
+-(void)getMusicUserFailed:(NSNotification *)tNotification {
+    
+    PLog(@"get music user failed");
+    [SVProgressHUD showErrorWithStatus:@"获取歌友失败:("];
+}
+
+-(void)getMusicUserSuccess:(NSNotification *)tNotification {
+    
+    NSDictionary* result = [tNotification userInfo];
+    NSMutableArray* userList = [result objectForKey:@"result"];
+    
+    int userlistcount = [userList count];
+    
+    for (int i=0; i<userlistcount; i++) {
+        
+        NearMusicState* nms = [userList objectAtIndex:i];
+        NearbyUser* user = nms.nearuser;
+        user.songname = nms.song.songname;
+        
+        [_friendList addObject:user];
+    }
+    
+    [_friendTableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
