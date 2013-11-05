@@ -120,7 +120,7 @@
     NearbyUser* user = messageInfo.userInfo;
     
     if (messageInfo.messagetype == 1 || messageInfo.messagetype == 3) {
-        // 打招呼
+        // 打招呼, 评论歌曲
         FriendOfReceiveHiViewController *receiveHiViewController = [[FriendOfReceiveHiViewController alloc] initWithNibName:@"FriendOfReceiveHiViewController" bundle:nil];
         receiveHiViewController.msginfo = messageInfo;
         [self.navigationController pushViewController:receiveHiViewController animated:YES];

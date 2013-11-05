@@ -39,7 +39,15 @@
     _userinfo = user;
     
     _lblNickName.text = _userinfo.nickname;
-    _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000, _userinfo.songname];
+    
+    if (!_userinfo.songname) {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000];
+    }
+    else {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000, _userinfo.songname];
+    }
     
     if ([_userinfo.sex isEqualToString:@"0"]) {
         

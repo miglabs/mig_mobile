@@ -21,6 +21,7 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
+@synthesize isUpdatedLocation = _isUpdatedLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +47,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isUpdatedLocation = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -174,24 +177,32 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
-    PLog(@"[newLocation description]: %@", [newLocation description]);
+    if (_isUpdatedLocation) {
+        
+        return;
+    }
+    else {
     
-    //取得经纬度
-    CLLocationCoordinate2D coordinate = newLocation.coordinate;
-    CLLocationDegrees gLatitude = coordinate.latitude;
-    CLLocationDegrees GLongitude = coordinate.longitude;
-    NSString *strLatitude = [NSString stringWithFormat:@"%g", gLatitude];
-    NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
-    NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
+        PLog(@"[newLocation description]: %@", [newLocation description]);
+        
+        //取得经纬度
+        CLLocationCoordinate2D coordinate = newLocation.coordinate;
+        CLLocationDegrees gLatitude = coordinate.latitude;
+        CLLocationDegrees GLongitude = coordinate.longitude;
+        NSString *strLatitude = [NSString stringWithFormat:@"%g", gLatitude];
+        NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
+        NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
+        
+        [_locationManager stopUpdatingLocation];
+        
+        NSString *strLocation = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
+        
+        //
+        [self loadNearFriendFromServer:strLocation];
+        
+        _isUpdatedLocation = YES;
     
-    [_locationManager stopUpdatingLocation];
-    
-    NSString *strLocation = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
-    
-    //
-    [self loadNearFriendFromServer:strLocation];
-    
-    
+    }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{

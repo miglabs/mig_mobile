@@ -51,8 +51,8 @@
     _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(11.5, 80, 297, 60)];
     _lblinfo.text = @"想对Ta说些什么呢？";
     
-    _text = [[UITextField alloc] initWithFrame:CGRectMake(11.5, 150, 297, 50)];
-    _text.placeholder = @"你想说些什么...";
+    _text = [[UITextField alloc] initWithFrame:CGRectMake(11.5, 140, 297, 50)];
+    _text.placeholder = @"...";
     _text.textAlignment = UITextAlignmentLeft;
     _text.borderStyle = 3;
     _text.clearsOnBeginEditing = YES;

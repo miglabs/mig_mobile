@@ -42,7 +42,7 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
     //nav bar
-    self.navView.titleLabel.text = @"我的好友";
+    self.navView.titleLabel.text = @"我的歌友";
     
     UIImage *addFriendImage = [UIImage imageWithName:@"friend_button_add" type:@"png"];
     [self.navView.rightButton setBackgroundImage:addFriendImage forState:UIControlStateNormal];

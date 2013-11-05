@@ -22,6 +22,7 @@ NSString* szListenMyMusicRadius = @"10000";
 @synthesize locationManager = _locationManager;
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
+@synthesize isUpdatedLocation = _isUpdatedLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +47,8 @@ NSString* szListenMyMusicRadius = @"10000";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isUpdatedLocation = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -145,15 +148,24 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
-    CLLocationCoordinate2D coord = newLocation.coordinate;
-    CLLocationDegrees gLatitude = coord.latitude;
-    CLLocationDegrees gLongitude = coord.longitude;
+    if (_isUpdatedLocation) {
+        
+        return;
+    }
+    else {
     
-    NSString*  szCurLocation = [NSString stringWithFormat:@"%@,%@", [NSString stringWithFormat:@"%g", gLatitude], [NSString stringWithFormat:@"%g", gLongitude]];
-    
-    [_locationManager stopUpdatingLocation];
-    
-    [self LoadListeningMyFavorateMusic:szCurLocation];
+        CLLocationCoordinate2D coord = newLocation.coordinate;
+        CLLocationDegrees gLatitude = coord.latitude;
+        CLLocationDegrees gLongitude = coord.longitude;
+        
+        NSString*  szCurLocation = [NSString stringWithFormat:@"%@,%@", [NSString stringWithFormat:@"%g", gLatitude], [NSString stringWithFormat:@"%g", gLongitude]];
+        
+        [_locationManager stopUpdatingLocation];
+        
+        [self LoadListeningMyFavorateMusic:szCurLocation];
+     
+        _isUpdatedLocation = YES;
+    }
 }
 
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {

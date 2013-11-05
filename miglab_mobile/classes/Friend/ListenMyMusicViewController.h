@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) UITableView* dataTableView;
 @property (nonatomic, retain) NSMutableArray* dataList;
+@property (nonatomic, assign) BOOL isUpdatedLocation;
 
 -(void)loadData;
 -(void)loadNearFriendFromDatabase;

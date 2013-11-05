@@ -56,7 +56,7 @@
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
     
-    NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_myfriend_tip", @"MenuImageName", @"我的好友", @"MenuText", nil];
+    NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_myfriend_tip", @"MenuImageName", @"我的歌友", @"MenuText", nil];
     NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_listening_tip", @"MenuImageName", @"谁在听你爱的歌", @"MenuText", nil];
     NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_nearby_tip", @"MenuImageName", @"附近的歌友", @"MenuText", nil];
     NSDictionary *dicMenu3 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_message_tip", @"MenuImageName", @"消息", @"MenuText", nil];

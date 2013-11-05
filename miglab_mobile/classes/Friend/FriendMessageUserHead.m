@@ -42,7 +42,16 @@
         
         _lblUserInfo.text = [NSString stringWithFormat:@"距离您有%.0fkm", _userinfo.distance/1000.0];
     }
-    _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
+    
+    if (!_userinfo.songname) {
+        
+        _lblListening.text = @"未开启音乐之旅";
+    }
+    else {
+        
+        _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
+    }
+    
 }
 
 /*
