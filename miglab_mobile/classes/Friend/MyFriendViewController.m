@@ -47,27 +47,27 @@
     //nav bar
     self.navView.titleLabel.text = @"我的歌友";
     
-    UIImage *addFriendImage = [UIImage imageWithName:@"friend_button_add" type:@"png"];
-    [self.navView.rightButton setBackgroundImage:addFriendImage forState:UIControlStateNormal];
-    self.navView.rightButton.frame = CGRectMake(268, 7.5 + self.topDistance, 48, 29);
-    [self.navView.rightButton setHidden:NO];
-    [self.navView.rightButton addTarget:self action:@selector(doAddFriend:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //search view
-    NSArray *searchNib = [[NSBundle mainBundle] loadNibNamed:@"FriendSearchView" owner:self options:nil];
-    for (id oneObject in searchNib){
-        if ([oneObject isKindOfClass:[FriendSearchView class]]){
-            _searchView = (FriendSearchView *)oneObject;
-        }//if
-    }//for
-    _searchView.frame = CGRectMake(11.5, posy + 10, 297, 44);
-    _searchView.searchTextField.delegate = self;
-    [_searchView.btnSearch addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_searchView];
-    
+//    UIImage *addFriendImage = [UIImage imageWithName:@"friend_button_add" type:@"png"];
+//    [self.navView.rightButton setBackgroundImage:addFriendImage forState:UIControlStateNormal];
+//    self.navView.rightButton.frame = CGRectMake(268, 7.5 + self.topDistance, 48, 29);
+//    [self.navView.rightButton setHidden:NO];
+//    [self.navView.rightButton addTarget:self action:@selector(doAddFriend:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    //search view
+//    NSArray *searchNib = [[NSBundle mainBundle] loadNibNamed:@"FriendSearchView" owner:self options:nil];
+//    for (id oneObject in searchNib){
+//        if ([oneObject isKindOfClass:[FriendSearchView class]]){
+//            _searchView = (FriendSearchView *)oneObject;
+//        }//if
+//    }//for
+//    _searchView.frame = CGRectMake(11.5, posy + 10, 297, 44);
+//    _searchView.searchTextField.delegate = self;
+//    [_searchView.btnSearch addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_searchView];
+//    
     //search result view
     _friendTableView = [[UITableView alloc] init];
-    _friendTableView.frame = CGRectMake(11.5, posy + 10 + 44 + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 44 - 10 - 10 - 73 - 10);
+    _friendTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 73 - 10 - 10);
     _friendTableView.dataSource = self;
     _friendTableView.delegate = self;
     _friendTableView.backgroundColor = [UIColor clearColor];

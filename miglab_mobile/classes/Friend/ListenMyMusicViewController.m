@@ -141,7 +141,7 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(void)LoadListeningMyFavorateMusicFailed:(NSNotification *)tNotification {
     
-    
+    [SVProgressHUD showErrorWithStatus:@"获取听你爱的歌失败了:("];
 }
 
 #pragma CLLocationManagerDelegate
