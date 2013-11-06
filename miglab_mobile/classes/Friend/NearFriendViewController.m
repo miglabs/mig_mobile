@@ -219,6 +219,7 @@
     
     NSInteger row = indexPath.row;
     personalPageViewController.userinfo = (NearbyUser*)[_dataList objectAtIndex:row];
+    personalPageViewController.isFriend = NO;
     [self.navigationController pushViewController:personalPageViewController animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -19,6 +19,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblUserInfo;
 @property (nonatomic, retain) IBOutlet UIButton *btnSayHi;
 @property (nonatomic, retain) IBOutlet UIButton *btnAddBlack;
+@property (nonatomic, assign) BOOL isFriend;
 
 -(void)updateFriendMessageUserHead:(NearbyUser*)user;
 

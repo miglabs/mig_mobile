@@ -56,6 +56,7 @@
     for (id oneObject in userHeadNib){
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
+            _userHeadView.isFriend = _isFriend;
             [_userHeadView updateFriendMessageUserHead:_userinfo];
         }//if
     }//for
@@ -64,13 +65,13 @@
     
     if (_isFriend) {
         
-        [_userHeadView.btnSayHi addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
-        [_userHeadView.btnAddBlack addTarget:self action:@selector(doSendMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [_userHeadView.btnSayHi addTarget:self action:@selector(doSendMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [_userHeadView.btnAddBlack addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
         
         [_userHeadView.btnSayHi addTarget:self action:@selector(doSayHi:) forControlEvents:UIControlEventTouchUpInside];
-        [_userHeadView.btnAddBlack addTarget:self action:@selector(doAddBlack:) forControlEvents:UIControlEventTouchUpInside];
+        [_userHeadView.btnAddBlack addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     

@@ -194,6 +194,7 @@
     
     MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
     personalPageViewController.userinfo = user;
+    personalPageViewController.isFriend = YES;
     [self.navigationController pushViewController:personalPageViewController animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
