@@ -109,22 +109,22 @@
 }
 -(void)loadNearFriendFromDatabase{
     
-    //test data
-    NearbyUser *testfriend = [[NearbyUser alloc] init];
-    testfriend.userid = @"123";
-    testfriend.nickname = @"猫王爱淘汰1";
-    testfriend.distance = 20000;
-    testfriend.sex = @"0";
-    testfriend.songname = @"黑色星期一";
-    [_dataList addObject:testfriend];
-    
-    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
-    testfriend1.userid = @"456";
-    testfriend1.nickname = @"乐瑟乐瑟2";
-    testfriend1.distance = 543453;
-    testfriend1.sex = @"1";
-    testfriend1.songname = @"正常的歌曲";
-    [_dataList addObject:testfriend1];
+//    //test data
+//    NearbyUser *testfriend = [[NearbyUser alloc] init];
+//    testfriend.userid = @"123";
+//    testfriend.nickname = @"猫王爱淘汰1";
+//    testfriend.distance = 20000;
+//    testfriend.sex = @"0";
+//    testfriend.songname = @"黑色星期一";
+//    [_dataList addObject:testfriend];
+//    
+//    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
+//    testfriend1.userid = @"456";
+//    testfriend1.nickname = @"乐瑟乐瑟2";
+//    testfriend1.distance = 543453;
+//    testfriend1.sex = @"1";
+//    testfriend1.songname = @"正常的歌曲";
+//    [_dataList addObject:testfriend1];
     
 }
 

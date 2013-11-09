@@ -82,21 +82,6 @@
     //
     _friendList = [[NSMutableArray alloc] init];
     
-    //test data
-    NearbyUser *testfriend = [[NearbyUser alloc] init];
-    testfriend.nickname = @"猫王爱淘汰";
-    testfriend.songname = @"机器猫";
-    testfriend.sex = @"1";
-    testfriend.distance = 423472;
-    [_friendList addObject:testfriend];
-    
-    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
-    testfriend1.nickname = @"乐瑟乐瑟";
-    testfriend1.distance = 90;
-    testfriend1.sex = @"0";
-    testfriend1.songname = @"真的想睡觉";
-    [_friendList addObject:testfriend1];
-    
     [self loadData];
     
 }
@@ -108,8 +93,21 @@
 }
 
 -(void)loadMusicUserFromDatabase {
-    
-    
+//    
+//    //test data
+//    NearbyUser *testfriend = [[NearbyUser alloc] init];
+//    testfriend.nickname = @"猫王爱淘汰";
+//    testfriend.songname = @"机器猫";
+//    testfriend.sex = @"1";
+//    testfriend.distance = 423472;
+//    [_friendList addObject:testfriend];
+//    
+//    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
+//    testfriend1.nickname = @"乐瑟乐瑟";
+//    testfriend1.distance = 90;
+//    testfriend1.sex = @"0";
+//    testfriend1.songname = @"真的想睡觉";
+//    [_friendList addObject:testfriend1];
 }
 
 -(void)loadMusicUserFromServer {

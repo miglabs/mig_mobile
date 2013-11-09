@@ -597,13 +597,13 @@
  <!--请求POST-->
  HTTP_PRESENTMUSIC
  */
--(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(long)tsid {
+-(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSString*)tsid {
     
     PLog(@"present music url: %@", HTTP_PRESENTMUSIC);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_PRESENTMUSIC]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&songid=%ld", uid, ttoken, ttouid, tsid];
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&songid=%@", uid, ttoken, ttouid, tsid];
     PLog(@"present song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
@@ -3187,7 +3187,8 @@
                 
                 PLog(@"get music user opration succeeded");
                 
-                NSArray* userArray = [dicJson objectForKey:@"result"];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSArray* userArray = [dicTemp objectForKey:@"nearUser"];
                 int userArrayCount = [userArray count];
                 
                 NSMutableArray* userList = [[NSMutableArray alloc] init];

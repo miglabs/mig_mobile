@@ -21,7 +21,7 @@
 
 -(void)loadData;
 
--(void)LoadMyMusicFromLocal;
+-(void)LoadMyMusicFromDatabase;
 
 -(void)LoadMyMusicFromServer;
 -(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification;

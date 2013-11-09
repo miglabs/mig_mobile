@@ -69,27 +69,36 @@
     //
     _datalist = [[NSMutableArray alloc] init];
     
+    [self loadData];
+    
+}
+
+-(void)loadData {
+    
+    [self loadMessageFromDatabase];
     [self loadMessageFromServer];
-    
-    //
-    MessageInfo *mi0 = [[MessageInfo alloc] init];
-    mi0.userInfo = [[NearbyUser alloc] init];
-    mi0.userInfo.nickname = @"liujun";
-    mi0.content = @"使对方看董翔是基佬~~~~~";
-    mi0.messagetype = 1;
-    mi0.userInfo.distance = 200.0;
-    mi0.userInfo.songname = @"老鼠爱西米";
-    [_datalist addObject:mi0];
-    
-    MessageInfo *mi1 = [[MessageInfo alloc] init];
-    mi1.userInfo = [[NearbyUser alloc] init];
-    mi1.userInfo.nickname = @"liujun";
-    mi1.content = @"你这首太难听了，和董翔一个品位";
-    mi1.messagetype = 3;
-    mi1.userInfo.distance = 1000000.0;
-    mi1.userInfo.songname = @"董翔是坏蛋";
-    [_datalist addObject:mi1];
-    
+}
+
+-(void)loadMessageFromDatabase {
+//
+//    // test
+//    MessageInfo *mi0 = [[MessageInfo alloc] init];
+//    mi0.userInfo = [[NearbyUser alloc] init];
+//    mi0.userInfo.nickname = @"liujun";
+//    mi0.content = @"使对方看董翔是基佬~~~~~";
+//    mi0.messagetype = 1;
+//    mi0.userInfo.distance = 200.0;
+//    mi0.userInfo.songname = @"老鼠爱西米";
+//    [_datalist addObject:mi0];
+//    
+//    MessageInfo *mi1 = [[MessageInfo alloc] init];
+//    mi1.userInfo = [[NearbyUser alloc] init];
+//    mi1.userInfo.nickname = @"liujun";
+//    mi1.content = @"你这首太难听了，和董翔一个品位";
+//    mi1.messagetype = 3;
+//    mi1.userInfo.distance = 1000000.0;
+//    mi1.userInfo.songname = @"董翔是坏蛋";
+//    [_datalist addObject:mi1];
 }
 
 -(void)loadMessageFromServer {

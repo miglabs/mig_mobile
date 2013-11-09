@@ -72,16 +72,17 @@
 
 -(void)loadData {
     
-    [self LoadMyMusicFromLocal];
+    [self LoadMyMusicFromDatabase];
     [self LoadMyMusicFromServer];
 }
 
--(void)LoadMyMusicFromLocal {
+-(void)LoadMyMusicFromDatabase {
     
-    Song* song = [[Song alloc] init];
-    song.artist = @"liujun";
-    song.songname = @"hehe";
-    [_songData addObject:song];
+//    //test
+//    Song* song = [[Song alloc] init];
+//    song.artist = @"liujun";
+//    song.songname = @"hehe";
+//    [_songData addObject:song];
 }
 
 -(void)LoadMyMusicFromServer {
@@ -177,6 +178,13 @@
     
     Song* song = (Song*)[_songData objectAtIndex:indexPath.row];
     [self SendMusicToUser:[NSString stringWithFormat:@"%lld", song.songid]];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
 }
 
 @end
