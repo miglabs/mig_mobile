@@ -15,8 +15,8 @@
 @synthesize btnAvatar = _btnAvatar;
 @synthesize lblNickName = _lblNickName;
 @synthesize lblUserInfo = _lblUserInfo;
-@synthesize btnSayHi = _btnSayHi;
-@synthesize btnAddBlack = _btnAddBlack;
+@synthesize btnSay = _btnSay;
+@synthesize btnSendSong = _btnSendSong;
 @synthesize isFriend = _isFriend;
 
 - (id)initWithFrame:(CGRect)frame
@@ -53,14 +53,14 @@
         _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
     }
     
-    [_btnAddBlack setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
+    [_btnSendSong setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
     if (_isFriend) {
         
-        [_btnSayHi setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
+        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
     }
     else {
         
-        [_btnSayHi setBackgroundImage:[UIImage imageNamed:@"friend_message_replay.png"] forState:UIControlStateNormal];
+        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_message_replay.png"] forState:UIControlStateNormal];
     }
 }
 

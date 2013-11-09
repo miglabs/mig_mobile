@@ -23,6 +23,6 @@
 -(IBAction)doSendMessage:(id)sender;    //发消息
 
 -(IBAction)doSayHi:(id)sender;      //打招呼
--(IBAction)doAddBlack:(id)sender;   //拉进黑名单
+-(IBAction)doAddBlack:(id)sender;   //拉进黑名单, TODO:暂时不用此接口
 
 @end

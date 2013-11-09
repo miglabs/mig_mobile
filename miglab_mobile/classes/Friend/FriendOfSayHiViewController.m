@@ -50,6 +50,7 @@
     
     _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(11.5, 80, 297, 60)];
     _lblinfo.text = @"想对Ta说些什么呢？";
+    [self.view addSubview:_lblinfo];
     
     _text = [[UITextField alloc] initWithFrame:CGRectMake(11.5, 140, 297, 50)];
     _text.placeholder = @"...";
@@ -60,7 +61,6 @@
     _text.returnKeyType = UIReturnKeyDone;
     _text.delegate = self;
     
-    [self.view addSubview:_lblinfo];
     [self.view addSubview:_text];
 }
 

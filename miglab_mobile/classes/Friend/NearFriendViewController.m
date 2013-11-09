@@ -104,7 +104,7 @@
 -(void)loadData{
     
     [self loadNearFriendFromDatabase];
-//    [self loadNearFriendFromServer];
+    //[self loadNearFriendFromServer];
     
 }
 -(void)loadNearFriendFromDatabase{

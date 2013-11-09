@@ -63,16 +63,15 @@
     _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
     [self.view addSubview:_userHeadView];
     
+    [_userHeadView.btnSendSong addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
+    
     if (_isFriend) {
         
-        [_userHeadView.btnSayHi addTarget:self action:@selector(doSendMessage:) forControlEvents:UIControlEventTouchUpInside];
-        [_userHeadView.btnAddBlack addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
+        [_userHeadView.btnSay addTarget:self action:@selector(doSendMessage:) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
         
-        [_userHeadView.btnSayHi addTarget:self action:@selector(doSayHi:) forControlEvents:UIControlEventTouchUpInside];
-        [_userHeadView.btnAddBlack addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [_userHeadView.btnSay addTarget:self action:@selector(doSayHi:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     //body menu
@@ -106,8 +105,10 @@
 //推荐ta歌曲
 -(IBAction)doRecommendMusic:(id)sender{
     
-    PLog(@"doRecommendMusic...");
-    
+    // 跳转到送歌页面
+    FriendOfRecommendMusicViewController* sendsongViewController = [[FriendOfRecommendMusicViewController alloc] initWithNibName:@"FriendOfRecommendMusicViewController" bundle:nil];
+    sendsongViewController.toUserInfo = _userinfo;
+    [self.navigationController pushViewController:sendsongViewController animated:YES];
 }
 
 //发消息

@@ -9,10 +9,26 @@
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
 
-@interface FriendOfRecommendMusicViewController : PlayerViewController
+@interface FriendOfRecommendMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) PCustomNavigationBarView *navView;
+@property (nonatomic, retain) UITableView* songTableView;
+@property (nonatomic, retain) NSMutableArray* songData;
+
+@property (nonatomic, retain) NearbyUser* toUserInfo;
+@property (nonatomic, assign) BOOL isSendingSong;
 
 -(IBAction)doBack:(id)sender;
+
+-(void)loadData;
+
+-(void)LoadMyMusicFromLocal;
+
+-(void)LoadMyMusicFromServer;
+-(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification;
+-(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification;
+
+-(void)SendMusicToUser:(NSString*)songid;
+-(void)SendMusicToUserSuccess:(NSNotification*)tNotification;
+-(void)SendMusicToUserFailed:(NSNotification*)tNotification;
 
 @end

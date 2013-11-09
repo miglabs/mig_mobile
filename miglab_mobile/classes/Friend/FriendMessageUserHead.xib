@@ -79,9 +79,9 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="btnAddBlack" destination="11" id="17"/>
                 <outlet property="btnAvatar" destination="7" id="13"/>
-                <outlet property="btnSayHi" destination="10" id="16"/>
+                <outlet property="btnSay" destination="11" id="DRd-1j-mmU"/>
+                <outlet property="btnSendSong" destination="10" id="joF-aE-XfN"/>
                 <outlet property="lblListening" destination="6" id="12"/>
                 <outlet property="lblNickName" destination="8" id="14"/>
                 <outlet property="lblUserInfo" destination="9" id="15"/>
