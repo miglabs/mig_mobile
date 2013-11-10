@@ -11,8 +11,8 @@
 
 @interface FriendOfRecommendMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) UITableView* songTableView;
-@property (nonatomic, retain) NSMutableArray* songData;
+@property (nonatomic, retain) UITableView* sendsongTableView;
+@property (nonatomic, retain) NSMutableArray* sendsongData;
 
 @property (nonatomic, retain) NearbyUser* toUserInfo;
 @property (nonatomic, assign) BOOL isSendingSong;
@@ -20,12 +20,6 @@
 -(IBAction)doBack:(id)sender;
 
 -(void)loadData;
-
--(void)LoadMyMusicFromDatabase;
-
--(void)LoadMyMusicFromServer;
--(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification;
--(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification;
 
 -(void)SendMusicToUser:(NSString*)songid;
 -(void)SendMusicToUserSuccess:(NSNotification*)tNotification;

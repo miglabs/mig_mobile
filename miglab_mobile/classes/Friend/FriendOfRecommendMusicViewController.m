@@ -7,7 +7,7 @@
 //
 
 #import "FriendOfRecommendMusicViewController.h"
-#import "MusicSongCell.h"
+#import "SendSongInfoCell.h"
 #import "Song.h"
 
 @interface FriendOfRecommendMusicViewController ()
@@ -16,18 +16,16 @@
 
 @implementation FriendOfRecommendMusicViewController
 
-@synthesize songTableView = _songTableView;
-@synthesize songData = _songData;
 @synthesize toUserInfo = _toUserInfo;
 @synthesize isSendingSong = _isSendingSong;
+@synthesize sendsongTableView = _sendsongTableView;
+@synthesize sendsongData = _sendsongData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadMyMusicFromServerSuccess:) name:NotificationNameGetSongHistorySuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadMyMusicFromServerFailed:) name:NotificationNameGetSongHistoryFailed object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SendMusicToUserSuccess:) name:NotificationNamePresentMusicSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SendMusicToUserFailed:) name:NotificationNamePresentMusicFailed object:nil];
@@ -42,24 +40,25 @@
     
     _isSendingSong = NO;
     
-    CGRect navframe = self.navView.frame;
-    float posy = navframe.origin.y + navframe.size.height;
-    self.navView.titleLabel.text = @"想赠送哪首歌呢?";
+    self.navView.titleLabel.text = @"填写或选择推荐歌曲";
     
-    _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight + self.topDistance - posy - 103);
-    _songTableView.dataSource = self;
-    _songTableView.delegate = self;
-    _songTableView.backgroundColor = [UIColor clearColor];
-    _songTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;
+    
+    _sendsongTableView = [[UITableView alloc] init];
+    _sendsongTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight + self.topDistance - posy - 103);
+    _sendsongTableView.dataSource = self;
+    _sendsongTableView.delegate = self;
+    _sendsongTableView.backgroundColor = [UIColor clearColor];
+    _sendsongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView* bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight + self.topDistance - 147);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 147);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    _songTableView.backgroundView = bodyBgImageView;
-    [self.view addSubview:_songTableView];
+    _sendsongTableView.backgroundView = bodyBgImageView;
+    [self.view addSubview:_sendsongTableView];
     
-    _songData = [[NSMutableArray alloc] init];
+    _sendsongData = [[NSMutableArray alloc] init];
     
     [self loadData];
 }
@@ -72,25 +71,11 @@
 
 -(void)loadData {
     
-    [self LoadMyMusicFromDatabase];
-    [self LoadMyMusicFromServer];
-}
-
--(void)LoadMyMusicFromDatabase {
+    Song* song1 = [[Song alloc] init];
+    song1.songname = @"liujun";
+    song1.artist = @"archer";
     
-//    //test
-//    Song* song = [[Song alloc] init];
-//    song.artist = @"liujun";
-//    song.songname = @"hehe";
-//    [_songData addObject:song];
-}
-
--(void)LoadMyMusicFromServer {
-    
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* token = [UserSessionManager GetInstance].accesstoken;
-    
-    [self.miglabAPI doGetSongHistory:userid token:token fromid:@"0" count:@"10"];
+    [_sendsongData addObject:song1];
 }
 
 -(IBAction)doBack:(id)sender{
@@ -107,20 +92,6 @@
 }
 
 #pragma mark - Notification center
-
--(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification {
-    
-    [SVProgressHUD showErrorWithStatus:@"获取歌曲列表失败:("];
-}
-
--(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification {
-    
-    NSDictionary* result = [tNotification userInfo];
-    NSMutableArray* songs = [result objectForKey:@"result"];
-    
-    [_songData addObjectsFromArray:songs];
-    [_songTableView reloadData];
-}
 
 -(void)SendMusicToUserFailed:(NSNotification *)tNotification {
     
@@ -139,26 +110,22 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [_songData count];
+    return [_sendsongData count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"MusicSongCell";
-	MusicSongCell *cell = (MusicSongCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString* CellIdentifier = @"SendSongInfoCell";
+    SendSongInfoCell* cell = (SendSongInfoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
-        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MusicSongCell" owner:self options:nil];
-        cell = (MusicSongCell *)[nibContents objectAtIndex:0];
+        
+        NSArray* nibContents = [[NSBundle mainBundle] loadNibNamed:@"SendSongInfoCell" owner:self options:nil];
+        cell = (SendSongInfoCell*)[nibContents objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	}
-    
-    Song *tempsong = [_songData objectAtIndex:indexPath.row];
-    cell.lblSongName.text = tempsong.songname;
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, tempsong.songtype==1?@"已缓存":@"未缓存"];
-    
-    NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     
 	return cell;
 }
@@ -176,7 +143,7 @@
         return;
     }
     
-    Song* song = (Song*)[_songData objectAtIndex:indexPath.row];
+    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
     [self SendMusicToUser:[NSString stringWithFormat:@"%lld", song.songid]];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
