@@ -58,6 +58,12 @@
     _sendsongTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_sendsongTableView];
     
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(11.5, 200, 100, 100);
+    [btn setTitle:@"添加歌曲" forState:UIControlStateNormal];
+    [btn addTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [self.view addSubview:btn];
+    
     _sendsongData = [[NSMutableArray alloc] init];
     
     [self loadData];
