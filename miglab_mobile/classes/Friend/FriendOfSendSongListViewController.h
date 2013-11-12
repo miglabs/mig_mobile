@@ -8,10 +8,21 @@
 
 #import "PlayerViewController.h"
 
-@interface FriendOfSendSongListViewController : PlayerViewController <UITableViewDataSource, UITableViewDelegate>
+@protocol FriendOfSendSongListViewControllerDelegate <NSObject>
+
+-(void)didChooseTheSong:(Song*)cursong;
+
+@end
+
+@interface FriendOfSendSongListViewController : PlayerViewController <UITableViewDataSource, UITableViewDelegate> {
+    
+    NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
+}
 
 @property (nonatomic, retain) UITableView* songTableView;
 @property (nonatomic, retain) NSMutableArray* songData;
+@property (nonatomic, retain) Song* chosedSong;
+@property (nonatomic, retain) NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
 
 -(void)loadData;
 

@@ -8,8 +8,9 @@
 
 #import "PlayerViewController.h"
 #import "PCustomNavigationBarView.h"
+#import "FriendOfSendSongListViewController.h"
 
-@interface FriendOfRecommendMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FriendOfRecommendMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, FriendOfSendSongListViewControllerDelegate>
 
 @property (nonatomic, retain) UITableView* sendsongTableView;
 @property (nonatomic, retain) NSMutableArray* sendsongData;
@@ -18,6 +19,8 @@
 @property (nonatomic, assign) BOOL isSendingSong;
 
 -(IBAction)doBack:(id)sender;
+
+-(void)doGetSongList:(id)sender;
 
 -(void)loadData;
 

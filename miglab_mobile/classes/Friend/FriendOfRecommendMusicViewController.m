@@ -61,7 +61,7 @@
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn.frame = CGRectMake(11.5, 200, 100, 100);
     [btn setTitle:@"添加歌曲" forState:UIControlStateNormal];
-    [btn addTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
+    [btn addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:btn];
     
     _sendsongData = [[NSMutableArray alloc] init];
@@ -86,6 +86,13 @@
 
 -(IBAction)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)doGetSongList:(id)sender {
+    
+    FriendOfSendSongListViewController* sendsongView = [[FriendOfSendSongListViewController alloc] initWithNibName:@"FriendOfSendSongListViewController" bundle:nil];
+    sendsongView.delegate = self;
+    [self.navigationController pushViewController:sendsongView animated:YES];
 }
 
 -(void)SendMusicToUser:(NSString *)songid {
@@ -158,6 +165,15 @@
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
+}
+
+#pragma mark - FriendOfSendSongList Delegate
+
+-(void)didChooseTheSong:(Song *)cursong {
+    
+    [_sendsongData addObject:cursong];
+    
+    [_sendsongTableView reloadData];
 }
 
 @end

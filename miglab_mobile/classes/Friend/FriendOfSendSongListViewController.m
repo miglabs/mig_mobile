@@ -17,7 +17,7 @@
 
 @synthesize songTableView = _songTableView;
 @synthesize songData = _songData;
-
+@synthesize chosedSong = _chosedSong;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -129,7 +129,16 @@
     
     Song* song = [_songData objectAtIndex:indexPath.row];
     
-    
+    if (song) {
+        
+        [self.delegate didChooseTheSong:song];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:@"请选择一首歌"];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 @end
