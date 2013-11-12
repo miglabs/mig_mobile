@@ -6,20 +6,22 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "PlayerViewController.h"
-#import "PCustomNavigationBarView.h"
+#import "BaseViewController.h"
+#import "SongOfSendEmptyTipsView.h"
+#import "SVProgressHUD.h"
 
-@interface FriendOfRecommendMusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FriendOfRecommendMusicViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView* sendsongTableView;
 @property (nonatomic, retain) NSMutableArray* sendsongData;
 
+@property (nonatomic, retain) SongOfSendEmptyTipsView *emptyTipsView;
+
 @property (nonatomic, retain) NearbyUser* toUserInfo;
 @property (nonatomic, assign) BOOL isSendingSong;
 
--(IBAction)doBack:(id)sender;
-
 -(void)loadData;
+-(void)showOrHideEmptyTips;
 
 -(void)SendMusicToUser:(NSString*)songid;
 -(void)SendMusicToUserSuccess:(NSNotification*)tNotification;

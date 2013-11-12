@@ -328,6 +328,14 @@
 		16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1717A9638F00DA628D /* login_edit1_bg.png */; };
 		16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C10E1D17A9673300DA628D /* GetPasswordViewController.m */; };
 		16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */; };
+		16CDC6071832585E00035634 /* SongOfSendInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDC6061832585E00035634 /* SongOfSendInfoCell.m */; };
+		16CDC6091832589200035634 /* SongOfSendInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC6081832589200035634 /* SongOfSendInfoCell.xib */; };
+		16CDC60D18325AC200035634 /* send_song_of_add_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60A18325AC200035634 /* send_song_of_add_button.png */; };
+		16CDC60E18325AC200035634 /* send_song_of_cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */; };
+		16CDC60F18325AC200035634 /* send_song_of_empty_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */; };
+		16CDC6111832604800035634 /* send_song_of_default_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC6101832604800035634 /* send_song_of_default_head.png */; };
+		16CDC6141832673B00035634 /* SongOfSendEmptyTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */; };
+		16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */; };
 		16D0DAF217C9E32700EB763F /* FriendOfPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */; };
 		16D0DAF317C9E32700EB763F /* FriendOfPhotoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D0DAF117C9E32700EB763F /* FriendOfPhotoListViewController.xib */; };
 		16D0DAF717C9E42700EB763F /* FriendOfRecommendMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAF517C9E42700EB763F /* FriendOfRecommendMusicViewController.m */; };
@@ -896,6 +904,16 @@
 		16C10E1C17A9673300DA628D /* GetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPasswordViewController.h; sourceTree = "<group>"; };
 		16C10E1D17A9673300DA628D /* GetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPasswordViewController.m; sourceTree = "<group>"; };
 		16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetPasswordViewController.xib; sourceTree = "<group>"; };
+		16CDC6051832585E00035634 /* SongOfSendInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongOfSendInfoCell.h; sourceTree = "<group>"; };
+		16CDC6061832585E00035634 /* SongOfSendInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongOfSendInfoCell.m; sourceTree = "<group>"; };
+		16CDC6081832589200035634 /* SongOfSendInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongOfSendInfoCell.xib; sourceTree = "<group>"; };
+		16CDC60A18325AC200035634 /* send_song_of_add_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_add_button.png; sourceTree = "<group>"; };
+		16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_cell_bg.png; sourceTree = "<group>"; };
+		16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_empty_tip.png; sourceTree = "<group>"; };
+		16CDC6101832604800035634 /* send_song_of_default_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_default_head.png; sourceTree = "<group>"; };
+		16CDC6121832673B00035634 /* SongOfSendEmptyTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongOfSendEmptyTipsView.h; sourceTree = "<group>"; };
+		16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongOfSendEmptyTipsView.m; sourceTree = "<group>"; };
+		16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongOfSendEmptyTipsView.xib; sourceTree = "<group>"; };
 		16D0DAEF17C9E32700EB763F /* FriendOfPhotoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfPhotoListViewController.h; sourceTree = "<group>"; };
 		16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfPhotoListViewController.m; sourceTree = "<group>"; };
 		16D0DAF117C9E32700EB763F /* FriendOfPhotoListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfPhotoListViewController.xib; sourceTree = "<group>"; };
@@ -1383,6 +1401,10 @@
 		1624BC0617C784DC00BE08A5 /* friend */ = {
 			isa = PBXGroup;
 			children = (
+				16CDC6101832604800035634 /* send_song_of_default_head.png */,
+				16CDC60A18325AC200035634 /* send_song_of_add_button.png */,
+				16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */,
+				16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */,
 				16BE5D1417D61DA300802DE1 /* friend_user_photo_tip.png */,
 				16BE5D1517D61DA300802DE1 /* friend_user_songlist_tip.png */,
 				16BE5D0917D61D8600802DE1 /* friend_add_button.png */,
@@ -1664,6 +1686,12 @@
 				CBD3A38B182FB946008AA163 /* SendSongInfoCell.h */,
 				CBD3A38C182FB946008AA163 /* SendSongInfoCell.m */,
 				CBD3A38E182FB95C008AA163 /* SendSongInfoCell.xib */,
+				16CDC6051832585E00035634 /* SongOfSendInfoCell.h */,
+				16CDC6061832585E00035634 /* SongOfSendInfoCell.m */,
+				16CDC6081832589200035634 /* SongOfSendInfoCell.xib */,
+				16CDC6121832673B00035634 /* SongOfSendEmptyTipsView.h */,
+				16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */,
+				16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2350,6 +2378,7 @@
 				16EDEF4E1759AD5E001BE4E9 /* Default.png in Resources */,
 				16EDEF501759AD5E001BE4E9 /* Default@2x.png in Resources */,
 				16EDEF521759AD5E001BE4E9 /* Default-568h@2x.png in Resources */,
+				16CDC60F18325AC200035634 /* send_song_of_empty_tip.png in Resources */,
 				162316771777397600CF8FB5 /* GuideViewController.xib in Resources */,
 				1627EA0F177B1CDB0049F9F5 /* qhc.caf in Resources */,
 				183E0238177C408E00EE8944 /* HomeViewController.xib in Resources */,
@@ -2382,6 +2411,7 @@
 				1683FB87179119640081612B /* btn_like_sel.png in Resources */,
 				1683FB98179127920081612B /* playing_tip_1.png in Resources */,
 				1683FB99179127920081612B /* playing_tip_2.png in Resources */,
+				16CDC6111832604800035634 /* send_song_of_default_head.png in Resources */,
 				1683FB9A179127920081612B /* playing_tip_3.png in Resources */,
 				1683FB9B179127920081612B /* playing_tip_4.png in Resources */,
 				1683FB9F1791295B0081612B /* playing_tip_5.png in Resources */,
@@ -2434,6 +2464,7 @@
 				16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */,
 				16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */,
 				16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */,
+				16CDC60E18325AC200035634 /* send_song_of_cell_bg.png in Resources */,
 				1627279217ACB39A000C79D3 /* borad_menu_dark_heart_nor.png in Resources */,
 				1627279317ACB39A000C79D3 /* borad_menu_dark_heart_sel.png in Resources */,
 				1627279417ACB39A000C79D3 /* borad_menu_delete_nor.png in Resources */,
@@ -2511,6 +2542,7 @@
 				1624BC0D17C784DC00BE08A5 /* friend_message_body_bg.png in Resources */,
 				1624BC0E17C784DC00BE08A5 /* friend_message_content_bg.png in Resources */,
 				1624BC0F17C784DC00BE08A5 /* friend_message_replay.png in Resources */,
+				16CDC60D18325AC200035634 /* send_song_of_add_button.png in Resources */,
 				1624BC1017C784DC00BE08A5 /* friend_message_user_head_bg.png in Resources */,
 				1624BC1617C7861600BE08A5 /* FriendOfSayHiViewController.xib in Resources */,
 				1624BC1B17C786A300BE08A5 /* FriendMessageUserHead.xib in Resources */,
@@ -2607,10 +2639,12 @@
 				1689605B181171C00031902F /* LoginMenuViewController.xib in Resources */,
 				1697326517E5BC8700F4AA6E /* type_6.png in Resources */,
 				1697326617E5BC8700F4AA6E /* type_9.png in Resources */,
+				16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */,
 				1635D96717F06C6C00B392BB /* home_navigation_menu_sel.png in Resources */,
 				1635D96A17F06C7800B392BB /* gene_avatar_unlogin.png in Resources */,
 				1635D96C17F06C8100B392BB /* about_icon.png in Resources */,
 				1635D97017F07D5000B392BB /* home_navigation_separator.png in Resources */,
+				16CDC6091832589200035634 /* SongOfSendInfoCell.xib in Resources */,
 				18A6020817F2956400344C5B /* qq_weibo_icon.png in Resources */,
 				18A6020917F2956400344C5B /* qq_weibo_icon@2x.png in Resources */,
 				18A6020A17F2956400344C5B /* qq_weibo_icon_disabled@2x.png in Resources */,
@@ -2724,6 +2758,7 @@
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
 				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
+				16CDC6141832673B00035634 /* SongOfSendEmptyTipsView.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
 				18275F2E17B3876400033AFF /* NearbyUser.m in Sources */,
@@ -2736,6 +2771,7 @@
 				18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */,
 				165D7C9317BE60D2000D08E3 /* GeneViewController.m in Sources */,
 				165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */,
+				16CDC6071832585E00035634 /* SongOfSendInfoCell.m in Sources */,
 				165D7C9E17BE618C000D08E3 /* PlayerViewController.m in Sources */,
 				165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */,
 				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,

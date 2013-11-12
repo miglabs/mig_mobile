@@ -20,6 +20,7 @@
 @synthesize isSendingSong = _isSendingSong;
 @synthesize sendsongTableView = _sendsongTableView;
 @synthesize sendsongData = _sendsongData;
+@synthesize emptyTipsView = _emptyTipsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +42,7 @@
     _isSendingSong = NO;
     
     self.navView.titleLabel.text = @"填写或选择推荐歌曲";
+    self.bgImageView.hidden = YES;
     
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
@@ -52,21 +54,17 @@
     _sendsongTableView.backgroundColor = [UIColor clearColor];
     _sendsongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UIImageView* bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 147);
-    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    _sendsongTableView.backgroundView = bodyBgImageView;
-    [self.view addSubview:_sendsongTableView];
-    
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(11.5, 200, 100, 100);
-    [btn setTitle:@"添加歌曲" forState:UIControlStateNormal];
-    [btn addTarget:self action:nil forControlEvents:UIControlEventAllTouchEvents];
-    [self.view addSubview:btn];
-    
     _sendsongData = [[NSMutableArray alloc] init];
     
     [self loadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [self showOrHideEmptyTips];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,20 +79,39 @@
     song1.songname = @"liujun";
     song1.artist = @"archer";
     
-    [_sendsongData addObject:song1];
+//    [_sendsongData addObject:song1];
 }
 
--(IBAction)doBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)showOrHideEmptyTips{
+    
+    if (_sendsongData.count == 0) {
+        if (_emptyTipsView == nil) {
+            
+            NSArray *emptiTipsNib = [[NSBundle mainBundle] loadNibNamed:@"SongOfSendEmptyTipsView" owner:self options:nil];
+            for (id oneObject in emptiTipsNib) {
+                if ([oneObject isKindOfClass:[SongOfSendEmptyTipsView class]]) {
+                    _emptyTipsView = (SongOfSendEmptyTipsView *)oneObject;
+                }//if
+            }//for
+            _emptyTipsView.frame = CGRectMake(50, 200, 220, 99);
+            [self.view addSubview:_emptyTipsView];
+        }
+        _emptyTipsView.hidden = NO;
+        [self.view bringSubviewToFront:_emptyTipsView];
+    } else {
+        _emptyTipsView.hidden = YES;
+        [self.view sendSubviewToBack:_emptyTipsView];
+    }
+    
 }
 
 -(void)SendMusicToUser:(NSString *)songid {
     
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    
-    _isSendingSong = YES;
-    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:songid];
+//    NSString* userid = [UserSessionManager GetInstance].userid;
+//    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+//    
+//    _isSendingSong = YES;
+//    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:songid];
 }
 
 #pragma mark - Notification center
@@ -102,14 +119,14 @@
 -(void)SendMusicToUserFailed:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
-    [SVProgressHUD showErrorWithStatus:@"赠送歌曲失败:("];
+//    [SVProgressHUD showErrorWithStatus:@"赠送歌曲失败:("];
 }
 
 -(void)SendMusicToUserSuccess:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
     
-    [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
+//    [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
 }
 
 #pragma mark - table view delegate
