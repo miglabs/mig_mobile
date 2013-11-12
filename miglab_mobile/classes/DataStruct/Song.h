@@ -45,6 +45,8 @@ typedef enum{
 @property (nonatomic, retain) NSString *moodid;                         //心情id
 @property (nonatomic, retain) NSString *sceneid;                        //场景id
 
+@property (nonatomic, retain) NSString* presentMsg;                     //赠送歌曲时附带的消息，不能从服务端获取
+
 /*
  0-app中打包的歌曲
  1-手机库中的歌曲

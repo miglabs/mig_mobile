@@ -19,12 +19,12 @@
 @property (nonatomic, assign) BOOL isSendingSong;
 
 -(IBAction)doBack:(id)sender;
-
 -(void)doGetSongList:(id)sender;
+-(void)doSendSong:(id)sender;
 
 -(void)loadData;
 
--(void)SendMusicToUser:(NSString*)songid;
+-(void)SendMusicToUser;
 -(void)SendMusicToUserSuccess:(NSNotification*)tNotification;
 -(void)SendMusicToUserFailed:(NSNotification*)tNotification;
 

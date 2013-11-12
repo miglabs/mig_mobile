@@ -171,7 +171,7 @@ typedef enum {
 /*
  赠送歌曲
  */
--(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSString*)tsid;
+-(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSArray*)tsid;
 
 /*
  附近人的音乐

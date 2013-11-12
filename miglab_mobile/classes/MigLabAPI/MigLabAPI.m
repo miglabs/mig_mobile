@@ -597,13 +597,34 @@
  <!--请求POST-->
  HTTP_PRESENTMUSIC
  */
--(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSString*)tsid {
+-(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSArray*)tsid {
     
     PLog(@"present music url: %@", HTTP_PRESENTMUSIC);
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_PRESENTMUSIC]];
     
-    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&songid=%@", uid, ttoken, ttouid, tsid];
+    int sendSongCount = [tsid count];
+    NSMutableString* mainstring = [[NSMutableString alloc] init];
+    
+    for (int i=0; i<sendSongCount; i++) {
+        
+        Song* cursong = [tsid objectAtIndex:i];
+        
+        NSString* singlesong = [NSString stringWithFormat:@"{\"songid\":\"%lld\",\"msg\":\"%@\"}", cursong.songid, cursong.presentMsg];
+        
+        if (0 == i) {
+            
+            [mainstring appendString:singlesong];
+        }
+        else {
+            
+            [mainstring appendString:[NSString stringWithFormat:@",%@", singlesong]];
+        }
+    }
+    
+    NSString* msg = [NSString stringWithFormat:@"{\"song\":[%@]}", mainstring];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&touid=%@&msg=%@", uid, ttoken, ttouid, msg];
     PLog(@"present song body: %@", httpBody);
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];

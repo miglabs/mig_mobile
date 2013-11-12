@@ -42,6 +42,12 @@
     
     self.navView.titleLabel.text = @"填写或选择推荐歌曲";
     
+    UIImage* sureImage = [UIImage imageWithName:@"friend_sayhi_button_ok" type:@"png"];
+    [self.navView.rightButton setBackgroundImage:sureImage forState:UIControlStateNormal];
+    self.navView.rightButton.frame = CGRectMake(268, 7.5+self.topDistance, 48, 29);
+    [self.navView.rightButton setHidden:NO];
+    [self.navView.rightButton addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
+    
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
     
@@ -95,13 +101,18 @@
     [self.navigationController pushViewController:sendsongView animated:YES];
 }
 
--(void)SendMusicToUser:(NSString *)songid {
+-(void)doSendSong:(id)sender {
+    
+    [self SendMusicToUser];
+}
+
+-(void)SendMusicToUser {
     
     NSString* userid = [UserSessionManager GetInstance].userid;
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     
     _isSendingSong = YES;
-    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:songid];
+    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
 }
 
 #pragma mark - Notification center
@@ -149,15 +160,15 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (_isSendingSong) {
-        
-        [SVProgressHUD showErrorWithStatus:@"正在赠送歌曲，清稍后"];
-        return;
-    }
-    
-    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
-    [self SendMusicToUser:[NSString stringWithFormat:@"%lld", song.songid]];
+//    
+//    if (_isSendingSong) {
+//        
+//        [SVProgressHUD showErrorWithStatus:@"正在赠送歌曲，清稍后"];
+//        return;
+//    }
+//    
+//    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
+//    [self SendMusicToUser];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -171,7 +182,9 @@
 
 -(void)didChooseTheSong:(Song *)cursong {
     
-    [_sendsongData addObject:cursong];
+    Song* getsong = cursong;
+    getsong.presentMsg = @"董翔是鸭子";
+    [_sendsongData addObject:getsong];
     
     [_sendsongTableView reloadData];
 }
