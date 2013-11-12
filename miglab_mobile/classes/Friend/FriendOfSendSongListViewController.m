@@ -37,6 +37,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _miglabAPI = [[MigLabAPI alloc] init];
+    
     self.navView.titleLabel.text = @"选择您要赠送的歌曲";
     
     CGRect navViewFrame = self.navView.frame;

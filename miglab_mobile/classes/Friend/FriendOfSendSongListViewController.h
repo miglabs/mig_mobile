@@ -22,6 +22,7 @@
 @property (nonatomic, retain) UITableView* songTableView;
 @property (nonatomic, retain) NSMutableArray* songData;
 @property (nonatomic, retain) Song* chosedSong;
+
 @property (nonatomic, assign) id<FriendOfSendSongListViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;

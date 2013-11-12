@@ -21,6 +21,7 @@
 @synthesize sendsongTableView = _sendsongTableView;
 @synthesize sendsongData = _sendsongData;
 @synthesize emptyTipsView = _emptyTipsView;
+@synthesize miglabAPI = _miglabAPI;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,10 +40,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _isSendingSong = NO;
-    
     self.navView.titleLabel.text = @"填写或选择推荐歌曲";
     self.bgImageView.hidden = YES;
+    
+    UIImage* sureImage = [UIImage imageWithName:@"friend_sayhi_button_ok" type:@"png"];
+    [self.navView.rightButton setBackgroundImage:sureImage forState:UIControlStateNormal];
+    self.navView.rightButton.frame = CGRectMake(268, 7.5+self.topDistance, 48, 29);
+    [self.navView.rightButton setHidden:NO];
+    [self.navView.rightButton addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
     
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
@@ -58,6 +63,9 @@
     
     //待送歌列表
     _sendsongData = [[NSMutableArray alloc] init];
+    
+    _isSendingSong = NO;
+    _miglabAPI = [[MigLabAPI alloc] init];
     
 }
 
@@ -98,12 +106,15 @@
             
             //添加歌曲
             [_emptyTipsView.btnSendSongOfAdd addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchUpInside];
+            
         }
         _emptyTipsView.hidden = NO;
         [self.view bringSubviewToFront:_emptyTipsView];
+        _sendsongTableView.hidden = YES;
     } else {
         _emptyTipsView.hidden = YES;
         [self.view sendSubviewToBack:_emptyTipsView];
+        _sendsongTableView.hidden = NO;
     }
     
 }
@@ -116,13 +127,18 @@
     
 }
 
--(void)SendMusicToUser:(NSString *)songid {
+-(void)doSendSong:(id)sender {
     
-//    NSString* userid = [UserSessionManager GetInstance].userid;
-//    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-//    
-//    _isSendingSong = YES;
-//    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:songid];
+    [self SendMusicToUser];
+}
+
+-(void)SendMusicToUser {
+    
+    NSString* userid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    
+    _isSendingSong = YES;
+    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
 }
 
 #pragma mark - Notification center
@@ -173,24 +189,42 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (_isSendingSong) {
-        
-        [SVProgressHUD showErrorWithStatus:@"正在赠送歌曲，清稍后"];
-        return;
-    }
-    
-    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
-    [self SendMusicToUser:[NSString stringWithFormat:@"%lld", song.songid]];
+//    
+//    if (_isSendingSong) {
+//        
+//        [SVProgressHUD showErrorWithStatus:@"正在赠送歌曲，清稍后"];
+//        return;
+//    }
+//    
+//    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
+//    [self SendMusicToUser];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIImage *addImage = [UIImage imageWithName:@"send_song_of_add_button" type:@"png"];
+    UIButton *btnSendSongOfAdd = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnSendSongOfAdd.frame = CGRectMake(200, 10, 118, 36);
+    [btnSendSongOfAdd setImage:addImage forState:UIControlStateNormal];
+    [btnSendSongOfAdd addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return btnSendSongOfAdd;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 57;
 }
 
 #pragma mark - FriendOfSendSongList Delegate
 
 -(void)didChooseTheSong:(Song *)cursong {
     
-    [_sendsongData addObject:cursong];
+    Song* getsong = cursong;
+    getsong.presentMsg = @"董翔是鸭子";
+    [_sendsongData addObject:getsong];
     
 }
 

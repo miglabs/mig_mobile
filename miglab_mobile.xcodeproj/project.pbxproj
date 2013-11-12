@@ -487,8 +487,6 @@
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
 		CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */; };
-		CBD3A38D182FB946008AA163 /* SendSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A38C182FB946008AA163 /* SendSongInfoCell.m */; };
-		CBD3A38F182FB95C008AA163 /* SendSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A38E182FB95C008AA163 /* SendSongInfoCell.xib */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
 /* End PBXBuildFile section */
@@ -1139,9 +1137,6 @@
 		CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfSendSongListViewController.h; sourceTree = "<group>"; };
 		CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfSendSongListViewController.m; sourceTree = "<group>"; };
 		CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfSendSongListViewController.xib; sourceTree = "<group>"; };
-		CBD3A38B182FB946008AA163 /* SendSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSongInfoCell.h; sourceTree = "<group>"; };
-		CBD3A38C182FB946008AA163 /* SendSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSongInfoCell.m; sourceTree = "<group>"; };
-		CBD3A38E182FB95C008AA163 /* SendSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendSongInfoCell.xib; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
@@ -1683,9 +1678,6 @@
 				CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */,
 				CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */,
 				CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */,
-				CBD3A38B182FB946008AA163 /* SendSongInfoCell.h */,
-				CBD3A38C182FB946008AA163 /* SendSongInfoCell.m */,
-				CBD3A38E182FB95C008AA163 /* SendSongInfoCell.xib */,
 				16CDC6051832585E00035634 /* SongOfSendInfoCell.h */,
 				16CDC6061832585E00035634 /* SongOfSendInfoCell.m */,
 				16CDC6081832589200035634 /* SongOfSendInfoCell.xib */,
@@ -2491,7 +2483,6 @@
 				1684764617BA791600F42172 /* music_menu_dark_heart_nor.png in Resources */,
 				1684764717BA791600F42172 /* music_menu_dark_heart_sel.png in Resources */,
 				1684764817BA791600F42172 /* music_menu_delete_nor.png in Resources */,
-				CBD3A38F182FB95C008AA163 /* SendSongInfoCell.xib in Resources */,
 				1684764917BA791600F42172 /* music_menu_delete_sel.png in Resources */,
 				1684764A17BA791600F42172 /* music_menu_next_nor.png in Resources */,
 				1684764B17BA791600F42172 /* music_menu_next_sel.png in Resources */,
@@ -2694,7 +2685,6 @@
 				162316601777397600CF8FB5 /* AFJSONRequestOperation.m in Sources */,
 				162316611777397600CF8FB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				162316621777397600CF8FB5 /* AFPropertyListRequestOperation.m in Sources */,
-				CBD3A38D182FB946008AA163 /* SendSongInfoCell.m in Sources */,
 				162316631777397600CF8FB5 /* AFURLConnectionOperation.m in Sources */,
 				162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */,
 				162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */,
