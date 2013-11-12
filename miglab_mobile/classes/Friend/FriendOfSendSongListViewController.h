@@ -6,7 +6,10 @@
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "PlayerViewController.h"
+#import "BaseViewController.h"
+#import "SVProgressHUD.h"
+#import "UserSessionManager.h"
+#import "MigLabAPI.h"
 
 @protocol FriendOfSendSongListViewControllerDelegate <NSObject>
 
@@ -14,15 +17,14 @@
 
 @end
 
-@interface FriendOfSendSongListViewController : PlayerViewController <UITableViewDataSource, UITableViewDelegate> {
-    
-    NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
-}
+@interface FriendOfSendSongListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView* songTableView;
 @property (nonatomic, retain) NSMutableArray* songData;
 @property (nonatomic, retain) Song* chosedSong;
-@property (nonatomic, retain) NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
+@property (nonatomic, assign) id<FriendOfSendSongListViewControllerDelegate> delegate;
+
+@property (nonatomic, retain) MigLabAPI *miglabAPI;
 
 -(void)loadData;
 

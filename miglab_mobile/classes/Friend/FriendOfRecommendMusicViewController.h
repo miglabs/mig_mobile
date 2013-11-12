@@ -11,7 +11,7 @@
 #import "SVProgressHUD.h"
 #import "FriendOfSendSongListViewController.h"
 
-@interface FriendOfRecommendMusicViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FriendOfRecommendMusicViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, FriendOfSendSongListViewControllerDelegate>
 
 @property (nonatomic, retain) UITableView* sendsongTableView;
 @property (nonatomic, retain) NSMutableArray* sendsongData;
@@ -21,10 +21,10 @@
 @property (nonatomic, retain) NearbyUser* toUserInfo;
 @property (nonatomic, assign) BOOL isSendingSong;
 
--(void)doGetSongList:(id)sender;
-
--(void)loadData;
+-(void)doUpdateView;
 -(void)showOrHideEmptyTips;
+
+-(void)doGetSongList:(id)sender;
 
 -(void)SendMusicToUser:(NSString*)songid;
 -(void)SendMusicToUserSuccess:(NSNotification*)tNotification;

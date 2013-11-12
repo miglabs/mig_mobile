@@ -18,6 +18,8 @@
 @synthesize songTableView = _songTableView;
 @synthesize songData = _songData;
 @synthesize chosedSong = _chosedSong;
+@synthesize delegate = _delegate;
+@synthesize miglabAPI = _miglabAPI;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +57,8 @@
     
     _songData = [[NSMutableArray alloc] init];
     
+    _miglabAPI = [[MigLabAPI alloc] init];
+    
     [self loadData];
 }
 
@@ -62,6 +66,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)doBack:(id)sender{
+    
+    [super doBack:sender];
+    [self dismissModalViewControllerAnimated:YES];
+    
 }
 
 -(void)loadData {
@@ -74,7 +85,7 @@
     NSString* userid = [UserSessionManager GetInstance].userid;
     NSString* token = [UserSessionManager GetInstance].accesstoken;
     
-    [self.miglabAPI doGetSongHistory:userid token:token fromid:@"0" count:@"10"];
+    [_miglabAPI doGetSongHistory:userid token:token fromid:@"0" count:@"10"];
 }
 
 #pragma mark - Notification
@@ -132,7 +143,7 @@
     if (song) {
         
         [self.delegate didChooseTheSong:song];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self doBack:nil];
     }
     else {
         

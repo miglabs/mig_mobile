@@ -7,7 +7,7 @@
 //
 
 #import "FriendOfRecommendMusicViewController.h"
-#import "SendSongInfoCell.h"
+#import "SongOfSendInfoCell.h"
 #import "Song.h"
 
 @interface FriendOfRecommendMusicViewController ()
@@ -47,23 +47,25 @@
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
     
+    //已选歌曲列表
     _sendsongTableView = [[UITableView alloc] init];
     _sendsongTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight + self.topDistance - posy - 103);
     _sendsongTableView.dataSource = self;
     _sendsongTableView.delegate = self;
     _sendsongTableView.backgroundColor = [UIColor clearColor];
     _sendsongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_sendsongTableView];
     
+    //待送歌列表
     _sendsongData = [[NSMutableArray alloc] init];
     
-    [self loadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     
-    [self showOrHideEmptyTips];
+    [self doUpdateView];
     
 }
 
@@ -73,13 +75,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)loadData {
+-(void)doUpdateView{
     
-    Song* song1 = [[Song alloc] init];
-    song1.songname = @"liujun";
-    song1.artist = @"archer";
+    [_sendsongTableView reloadData];
+    [self showOrHideEmptyTips];
     
-//    [_sendsongData addObject:song1];
 }
 
 -(void)showOrHideEmptyTips{
@@ -95,6 +95,9 @@
             }//for
             _emptyTipsView.frame = CGRectMake(50, 200, 220, 99);
             [self.view addSubview:_emptyTipsView];
+            
+            //添加歌曲
+            [_emptyTipsView.btnSendSongOfAdd addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchUpInside];
         }
         _emptyTipsView.hidden = NO;
         [self.view bringSubviewToFront:_emptyTipsView];
@@ -107,9 +110,10 @@
 
 -(void)doGetSongList:(id)sender {
     
-//    FriendOfSendSongListViewController* sendsongView = [[FriendOfSendSongListViewController alloc] initWithNibName:@"FriendOfSendSongListViewController" bundle:nil];
-//    sendsongView.delegate = self;
-//    [self.navigationController pushViewController:sendsongView animated:YES];
+    FriendOfSendSongListViewController* sendsongView = [[FriendOfSendSongListViewController alloc] initWithNibName:@"FriendOfSendSongListViewController" bundle:nil];
+    sendsongView.delegate = self;
+    [self presentModalViewController:sendsongView animated:YES];
+    
 }
 
 -(void)SendMusicToUser:(NSString *)songid {
@@ -126,14 +130,14 @@
 -(void)SendMusicToUserFailed:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
-//    [SVProgressHUD showErrorWithStatus:@"赠送歌曲失败:("];
+    [SVProgressHUD showErrorWithStatus:@"赠送歌曲失败:("];
 }
 
 -(void)SendMusicToUserSuccess:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
     
-//    [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
+    [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
 }
 
 #pragma mark - table view delegate
@@ -145,24 +149,27 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString* CellIdentifier = @"SendSongInfoCell";
-    SendSongInfoCell* cell = (SendSongInfoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString* CellIdentifier = @"SongOfSendInfoCell";
+    SongOfSendInfoCell* cell = (SongOfSendInfoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         
-        NSArray* nibContents = [[NSBundle mainBundle] loadNibNamed:@"SendSongInfoCell" owner:self options:nil];
-        cell = (SendSongInfoCell*)[nibContents objectAtIndex:0];
+        NSArray* nibContents = [[NSBundle mainBundle] loadNibNamed:@"SongOfSendInfoCell" owner:self options:nil];
+        cell = (SongOfSendInfoCell*)[nibContents objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
+    cell.lblSongInfo.text = [NSString stringWithFormat:@"%@/%@", song.songname, song.artist];
     
 	return cell;
 }
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 57;
+    return 125;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,18 +186,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-}
-
 #pragma mark - FriendOfSendSongList Delegate
 
 -(void)didChooseTheSong:(Song *)cursong {
     
     [_sendsongData addObject:cursong];
     
-    [_sendsongTableView reloadData];
 }
 
 @end
