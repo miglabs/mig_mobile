@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "SongOfSendEmptyTipsView.h"
 #import "SVProgressHUD.h"
+#import "FriendOfSendSongListViewController.h"
 
 @interface FriendOfRecommendMusicViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +20,8 @@
 
 @property (nonatomic, retain) NearbyUser* toUserInfo;
 @property (nonatomic, assign) BOOL isSendingSong;
+
+-(void)doGetSongList:(id)sender;
 
 -(void)loadData;
 -(void)showOrHideEmptyTips;

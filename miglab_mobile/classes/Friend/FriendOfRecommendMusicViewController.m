@@ -105,6 +105,13 @@
     
 }
 
+-(void)doGetSongList:(id)sender {
+    
+//    FriendOfSendSongListViewController* sendsongView = [[FriendOfSendSongListViewController alloc] initWithNibName:@"FriendOfSendSongListViewController" bundle:nil];
+//    sendsongView.delegate = self;
+//    [self.navigationController pushViewController:sendsongView animated:YES];
+}
+
 -(void)SendMusicToUser:(NSString *)songid {
     
 //    NSString* userid = [UserSessionManager GetInstance].userid;
@@ -175,6 +182,15 @@
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
+}
+
+#pragma mark - FriendOfSendSongList Delegate
+
+-(void)didChooseTheSong:(Song *)cursong {
+    
+    [_sendsongData addObject:cursong];
+    
+    [_sendsongTableView reloadData];
 }
 
 @end
