@@ -1,14 +1,19 @@
 //
-//  SendSongInfoCell.m
+//  SongOfSendInfoCell.m
 //  miglab_mobile
 //
-//  Created by Archer_LJ on 13-11-10.
+//  Created by pig on 13-11-12.
 //  Copyright (c) 2013年 pig. All rights reserved.
 //
 
-#import "SendSongInfoCell.h"
+#import "SongOfSendInfoCell.h"
 
-@implementation SendSongInfoCell
+@implementation SongOfSendInfoCell
+
+@synthesize headEGOImageView = _headEGOImageView;
+@synthesize lblPlaceHolder = _lblPlaceHolder;
+@synthesize tvRecommendContent = _tvRecommendContent;
+@synthesize lblSongInfo = _lblSongInfo;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

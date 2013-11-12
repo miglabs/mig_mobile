@@ -18,6 +18,7 @@
 @synthesize songTableView = _songTableView;
 @synthesize songData = _songData;
 @synthesize chosedSong = _chosedSong;
+@synthesize miglabAPI = _miglabAPI;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +35,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _miglabAPI = [[MigLabAPI alloc] init];
     
     self.navView.titleLabel.text = @"选择您要赠送的歌曲";
     

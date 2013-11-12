@@ -14,7 +14,7 @@
 
 @end
 
-@interface FriendOfSendSongListViewController : PlayerViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface FriendOfSendSongListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate> {
     
     NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
 }
@@ -22,6 +22,7 @@
 @property (nonatomic, retain) UITableView* songTableView;
 @property (nonatomic, retain) NSMutableArray* songData;
 @property (nonatomic, retain) Song* chosedSong;
+@property (nonatomic, retain) MigLabAPI* miglabAPI;
 @property (nonatomic, retain) NSObject<FriendOfSendSongListViewControllerDelegate>* delegate;
 
 -(void)loadData;
