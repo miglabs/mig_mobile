@@ -200,16 +200,18 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    int selectedSongHeight = 125;
-    int selectedSongCount = [_sendsongData count];
-    
     UIImage *addImage = [UIImage imageWithName:@"send_song_of_add_button" type:@"png"];
     UIButton *btnSendSongOfAdd = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnSendSongOfAdd.frame = CGRectMake(200, 10 + selectedSongCount * selectedSongHeight, 118, 36);
+    btnSendSongOfAdd.frame = CGRectMake(165, 10, 118, 36);
     [btnSendSongOfAdd setImage:addImage forState:UIControlStateNormal];
     [btnSendSongOfAdd addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchUpInside];
     
-    return btnSendSongOfAdd;
+    UIView* cell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 118, 36)];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    [cell addSubview:btnSendSongOfAdd];
+    
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
