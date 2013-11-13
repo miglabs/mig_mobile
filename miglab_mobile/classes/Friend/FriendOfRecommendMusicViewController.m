@@ -22,6 +22,7 @@
 @synthesize sendsongData = _sendsongData;
 @synthesize emptyTipsView = _emptyTipsView;
 @synthesize miglabAPI = _miglabAPI;
+@synthesize curEditSong = _curEditSong;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +43,7 @@
     
     self.navView.titleLabel.text = @"填写或选择推荐歌曲";
     self.bgImageView.hidden = YES;
+    _curEditSong = -1;
     
     UIImage* sureImage = [UIImage imageWithName:@"friend_sayhi_button_ok" type:@"png"];
     [self.navView.rightButton setBackgroundImage:sureImage forState:UIControlStateNormal];
@@ -140,6 +142,7 @@
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
         _isSendingSong = YES;
+        
         [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
     }
 }
@@ -182,6 +185,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.tvRecommendContent.delegate = self;
+    cell.tvRecommendContent.text = @"点击添加推荐语";
+    cell.tvRecommendContent.returnKeyType = UIReturnKeyDone;
+    
     Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
     cell.lblSongInfo.text = [NSString stringWithFormat:@"%@/%@", song.songname, song.artist];
     
@@ -194,6 +201,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SongOfSendInfoCell* curCell = (SongOfSendInfoCell*)[self.sendsongTableView cellForRowAtIndexPath:indexPath];
+    
+    _curEditSong = indexPath.row;
+    [curCell.tvRecommendContent becomeFirstResponder];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -223,10 +235,31 @@
 
 -(void)didChooseTheSong:(Song *)cursong {
     
-    Song* getsong = cursong;
-    getsong.presentMsg = @"董翔是鸭子";
-    [_sendsongData addObject:getsong];
+    [_sendsongData addObject:cursong];
     
+}
+
+#pragma mark - UITextView Delegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        NSString* presentmsg = textView.text;
+        
+        if (_curEditSong > -1) {
+            
+            Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
+            curSong.presentMsg = presentmsg;
+            _curEditSong = -1;
+        }
+        
+        [textView resignFirstResponder];
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
