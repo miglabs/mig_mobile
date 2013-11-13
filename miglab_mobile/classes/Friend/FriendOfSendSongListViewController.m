@@ -45,7 +45,7 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
     
     _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight+self.topDistance-posy-103);
+    _songTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight+self.topDistance-posy-30);
     _songTableView.dataSource = self;
     _songTableView.delegate = self;
     _songTableView.backgroundColor = [UIColor clearColor];

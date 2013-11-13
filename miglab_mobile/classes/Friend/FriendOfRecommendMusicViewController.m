@@ -54,7 +54,7 @@
     
     //已选歌曲列表
     _sendsongTableView = [[UITableView alloc] init];
-    _sendsongTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight + self.topDistance - posy - 103);
+    _sendsongTableView.frame = CGRectMake(11.5, posy, 297, kMainScreenHeight + self.topDistance - posy);
     _sendsongTableView.dataSource = self;
     _sendsongTableView.delegate = self;
     _sendsongTableView.backgroundColor = [UIColor clearColor];
@@ -134,11 +134,14 @@
 
 -(void)SendMusicToUser {
     
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    
-    _isSendingSong = YES;
-    [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
+    if (_isSendingSong == NO) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        _isSendingSong = YES;
+        [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
+    }
 }
 
 #pragma mark - Notification center
@@ -154,6 +157,8 @@
     _isSendingSong = NO;
     
     [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - table view delegate
@@ -189,24 +194,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    if (_isSendingSong) {
-//        
-//        [SVProgressHUD showErrorWithStatus:@"正在赠送歌曲，清稍后"];
-//        return;
-//    }
-//    
-//    Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
-//    [self SendMusicToUser];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
+    int selectedSongHeight = 125;
+    int selectedSongCount = [_sendsongData count];
+    
     UIImage *addImage = [UIImage imageWithName:@"send_song_of_add_button" type:@"png"];
     UIButton *btnSendSongOfAdd = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnSendSongOfAdd.frame = CGRectMake(200, 10, 118, 36);
+    btnSendSongOfAdd.frame = CGRectMake(200, 10 + selectedSongCount * selectedSongHeight, 118, 36);
     [btnSendSongOfAdd setImage:addImage forState:UIControlStateNormal];
     [btnSendSongOfAdd addTarget:self action:@selector(doGetSongList:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -215,7 +214,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 57;
+    return 36;
 }
 
 #pragma mark - FriendOfSendSongList Delegate
