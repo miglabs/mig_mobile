@@ -1137,6 +1137,7 @@
 		CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfSendSongListViewController.h; sourceTree = "<group>"; };
 		CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfSendSongListViewController.m; sourceTree = "<group>"; };
 		CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfSendSongListViewController.xib; sourceTree = "<group>"; };
+		CBD3A39018350302008AA163 /* apidefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apidefine.h; sourceTree = "<group>"; };
 		CBE1E4DE17CE345600C0BB55 /* ConfigFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileInfo.h; sourceTree = "<group>"; };
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
@@ -1373,6 +1374,7 @@
 				163BCE0C177C9672008656D1 /* PCommonUtil.m */,
 				160E075217C08ECC003F0E45 /* XmlParserUtil.h */,
 				160E075317C08ECC003F0E45 /* XmlParserUtil.m */,
+				CBD3A39018350302008AA163 /* apidefine.h */,
 			);
 			path = MigLabAPI;
 			sourceTree = "<group>";

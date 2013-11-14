@@ -42,7 +42,7 @@
     
     //body
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10);
+    _dataTableView.frame = CGRectMake(ORIGIN_X, 44 + 10, ORIGIN_WIDTH, kMainScreenHeight - 44 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -119,7 +119,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end

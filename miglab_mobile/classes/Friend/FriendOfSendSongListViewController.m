@@ -45,14 +45,14 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
     
     _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight+self.topDistance-posy-30);
+    _songTableView.frame = CGRectMake(ORIGIN_X, posy+10, ORIGIN_WIDTH, kMainScreenHeight+self.topDistance-posy-30);
     _songTableView.dataSource = self;
     _songTableView.delegate = self;
     _songTableView.backgroundColor = [UIColor clearColor];
     _songTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
     UIImageView* bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy+10, 297, kMainScreenHeight+self.topDistance-147);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy+10, ORIGIN_WIDTH, kMainScreenHeight+self.topDistance-147);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _songTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_songTableView];
@@ -135,7 +135,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

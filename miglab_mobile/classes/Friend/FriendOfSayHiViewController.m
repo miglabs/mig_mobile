@@ -48,11 +48,11 @@
     [self.navView.rightButton setHidden:NO];
     [self.navView.rightButton addTarget:self action:@selector(doSayHello:) forControlEvents:UIControlEventTouchUpInside];
     
-    _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(11.5, 80, 297, 60)];
+    _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(ORIGIN_X, 80, ORIGIN_WIDTH, 60)];
     _lblinfo.text = @"想对Ta说些什么呢？";
     [self.view addSubview:_lblinfo];
     
-    _text = [[UITextField alloc] initWithFrame:CGRectMake(11.5, 140, 297, 50)];
+    _text = [[UITextField alloc] initWithFrame:CGRectMake(ORIGIN_X, 140, ORIGIN_WIDTH, 50)];
     _text.placeholder = @"...";
     _text.textAlignment = UITextAlignmentLeft;
     _text.borderStyle = 3;

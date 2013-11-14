@@ -60,14 +60,14 @@ NSString* szListenMyMusicRadius = @"10000";
     
     //附近歌友
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - BOTTOM_PLAYER_HEIGHT - 44 - 10 - 10 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _dataTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_dataTableView];
@@ -125,7 +125,7 @@ NSString* szListenMyMusicRadius = @"10000";
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     
     //junliu fixed, for debug
-    [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:@"10000" location:@"30.292207031178,120.0855621569"];
+    [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:@"30.292207031178,120.0855621569"];
 }
 
 #pragma notification
@@ -223,7 +223,7 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end

@@ -56,7 +56,7 @@
     
     //已选歌曲列表
     _sendsongTableView = [[UITableView alloc] init];
-    _sendsongTableView.frame = CGRectMake(11.5, posy, 297, kMainScreenHeight + self.topDistance - posy);
+    _sendsongTableView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy);
     _sendsongTableView.dataSource = self;
     _sendsongTableView.delegate = self;
     _sendsongTableView.backgroundColor = [UIColor clearColor];
@@ -197,7 +197,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 125;
+    return RECOMMAND_CELL_HEIGHT;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

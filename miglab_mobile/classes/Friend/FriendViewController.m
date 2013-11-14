@@ -14,6 +14,7 @@
 #import "NearFriendViewController.h"
 #import "MessageViewController.h"
 
+
 @interface FriendViewController ()
 
 @end
@@ -43,7 +44,7 @@
     
     //body
     _bodyTableView = [[UITableView alloc] init];
-    _bodyTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];
@@ -51,7 +52,7 @@
     _bodyTableView.scrollEnabled = NO;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
@@ -137,7 +138,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end

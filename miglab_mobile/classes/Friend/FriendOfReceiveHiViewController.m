@@ -58,11 +58,11 @@
             [_userHeadView updateFriendMessageUserHead:user];
         }//if
     }//for
-    _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
+    _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);
     [self.view addSubview:_userHeadView];
     
     //message
-    _messageContentView.frame = CGRectMake(11.5, posy + 10 + 129 + 10, 297, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + 73 + 10) );
+    _messageContentView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
     
     UILabel* contenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
     if (_msginfo.messagetype == 1) {

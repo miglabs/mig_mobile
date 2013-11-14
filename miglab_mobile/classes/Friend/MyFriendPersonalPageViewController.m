@@ -60,7 +60,7 @@
             [_userHeadView updateFriendMessageUserHead:_userinfo];
         }//if
     }//for
-    _userHeadView.frame = CGRectMake(11.5, posy + 10, 297, 129);
+    _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);
     [self.view addSubview:_userHeadView];
     
     [_userHeadView.btnSendSong addTarget:self action:@selector(doRecommendMusic:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,7 +76,7 @@
     
     //body menu
     _bodyTableView = [[UITableView alloc] init];
-    _bodyTableView.frame = CGRectMake(11.5, posy + 10 + 129 + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 129 - 10 - 10 - 73 - 10);
+    _bodyTableView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - BOTTOM_PLAYER_HEIGHT - 10 - 129 - 10 - 10 - 10);
     _bodyTableView.dataSource = self;
     _bodyTableView.delegate = self;
     _bodyTableView.backgroundColor = [UIColor clearColor];
@@ -84,7 +84,7 @@
     _bodyTableView.scrollEnabled = NO;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10 + 129 + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 129 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - BOTTOM_PLAYER_HEIGHT - 10 - 129 - 10 - 10 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
@@ -158,6 +158,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return 2;
 }
 
@@ -184,7 +185,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end

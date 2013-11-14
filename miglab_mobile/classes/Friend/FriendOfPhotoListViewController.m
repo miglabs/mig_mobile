@@ -43,7 +43,7 @@
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - BOTTOM_PLAYER_HEIGHT - 10 - 10 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
@@ -61,14 +61,14 @@
     separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
     
     UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(11.5, posy + 10, 297, 45);
+    headerView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 45);
     [headerView addSubview:lblDesc];
     [headerView addSubview:separatorImageView];
     [self.view addSubview:headerView];
     
     //photo table view
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45 + 5, 297, kMainScreenHeight + self.topDistance - posy - 10 - 45 - 5 - 5 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(ORIGIN_X, posy + 10 + 45 + 5, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - BOTTOM_PLAYER_HEIGHT - 10 - 45 - 5 - 5 - 10 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -132,7 +132,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 60;
+    return CELL_HEIGHT + 3;
 }
 
 @end

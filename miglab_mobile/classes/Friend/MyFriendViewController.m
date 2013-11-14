@@ -67,14 +67,14 @@
 //    
     //search result view
     _friendTableView = [[UITableView alloc] init];
-    _friendTableView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 73 - 10 - 10);
+    _friendTableView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     _friendTableView.dataSource = self;
     _friendTableView.delegate = self;
     _friendTableView.backgroundColor = [UIColor clearColor];
     _friendTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, posy + 10 + 44 + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10 + 44 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 44 - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _friendTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_friendTableView];
@@ -227,7 +227,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end
