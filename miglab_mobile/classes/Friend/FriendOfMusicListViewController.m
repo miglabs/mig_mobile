@@ -19,12 +19,15 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
+@synthesize userinfo = _userinfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadMusicListFromServerSuccess:) name:NotificationNameGetCollectedSongsSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadMusicListFromServerFailed:) name:NotificationNameGetCollectedSongsFailed object:nil];
     }
     return self;
 }
@@ -38,8 +41,10 @@
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
+    NSString* thetitle = [NSString stringWithFormat:@"%@的歌单", _userinfo.nickname];
+    
     //nav bar
-    self.navView.titleLabel.text = @"歌单";
+    self.navView.titleLabel.text = thetitle;
     
     //body
     //body bg
@@ -50,10 +55,10 @@
     
     //body head
     UILabel *lblDesc = [[UILabel alloc] init];
-    lblDesc.frame = CGRectMake(16, 12, 140, 21);
+    lblDesc.frame = CGRectMake(16, 12, ORIGIN_WIDTH, 21);
     lblDesc.backgroundColor = [UIColor clearColor];
     lblDesc.font = [UIFont systemFontOfSize:15.0f];
-    lblDesc.text = @"猫王爱淘汰的歌单";
+    lblDesc.text = thetitle;
     lblDesc.textAlignment = kTextAlignmentLeft;
     lblDesc.textColor = [UIColor whiteColor];
     
@@ -79,16 +84,47 @@
     //
     _datalist = [[NSMutableArray alloc] init];
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
-    [_datalist addObjectsFromArray:tempSongInfoList];
+//    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+//    NSMutableArray *tempSongInfoList = [databaseManager getSongInfoList:25];
+//    [_datalist addObjectsFromArray:tempSongInfoList];
     
+    [self loaddata];
+}
+
+-(void)loaddata {
+    
+    [self LoadMusicListFromServer];
+}
+
+-(void)LoadMusicListFromServer {
+    
+    NSString* userid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* touserid = _userinfo.userid;
+    
+    [self.miglabAPI doGetCollectedSongs:userid token:accesstoken taruid:touserid];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Notification
+-(void)LoadMusicListFromServerFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:@"获取歌曲失败了"];
+}
+
+-(void)LoadMusicListFromServerSuccess:(NSNotification *)tNotification {
+    
+    NSDictionary* dicresult = (NSDictionary*)tNotification.userInfo;
+    NSArray* songlist = [dicresult objectForKey:@"result"];
+    //int songcount = [songlist count];
+    
+    [_datalist addObjectsFromArray:songlist];
+    [_dataTableView reloadData];
 }
 
 // Called after the user changes the selection.
@@ -103,6 +139,7 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return [_datalist count];
 }
 
@@ -120,7 +157,7 @@
     
     Song *tempsong = [_datalist objectAtIndex:indexPath.row];
     cell.lblSongName.text = tempsong.songname;
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
+    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, tempsong.songtype==1?@"已缓存":@"未缓存"];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

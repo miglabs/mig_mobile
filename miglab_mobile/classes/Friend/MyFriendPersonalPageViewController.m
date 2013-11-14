@@ -142,6 +142,7 @@
     if (indexPath.row == 0) {
         
         FriendOfMusicListViewController *musicListViewController = [[FriendOfMusicListViewController alloc] initWithNibName:@"FriendOfMusicListViewController" bundle:nil];
+        musicListViewController.userinfo = _userinfo;
         [self.topViewcontroller.navigationController pushViewController:musicListViewController animated:YES];
         
     } else if (indexPath.row == 1) {
