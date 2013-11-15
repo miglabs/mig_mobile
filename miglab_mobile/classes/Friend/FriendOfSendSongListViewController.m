@@ -8,6 +8,7 @@
 
 #import "FriendOfSendSongListViewController.h"
 #import "MusicSongCell.h"
+#import "ChooseSongInfoCell.h"
 
 @interface FriendOfSendSongListViewController ()
 
@@ -114,11 +115,11 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"MusicSongCell";
-	MusicSongCell *cell = (MusicSongCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"ChooseSongInfoCell";
+	ChooseSongInfoCell *cell = (ChooseSongInfoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MusicSongCell" owner:self options:nil];
-        cell = (MusicSongCell *)[nibContents objectAtIndex:0];
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"ChooseSongInfoCell" owner:self options:nil];
+        cell = (ChooseSongInfoCell *)[nibContents objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -126,7 +127,9 @@
     
     Song *tempsong = [_songData objectAtIndex:indexPath.row];
     cell.lblSongName.text = tempsong.songname;
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, tempsong.songtype==1?@"已缓存":@"未缓存"];
+    cell.lblSongInfo.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"2.5mb"];
+    cell.lblListenNumber.text = [NSString stringWithFormat:@"%lld", tempsong.hot > 0 ? tempsong.hot : 0];
+    cell.lblCommentNumber.text = [NSString stringWithFormat:@"%d", tempsong.commentnum > 0 ? tempsong.commentnum : 0];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

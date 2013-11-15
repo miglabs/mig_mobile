@@ -483,6 +483,8 @@
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB68C6BB17FC03CB00264893 /* NearMessageState.m in Sources */ = {isa = PBXBuildFile; fileRef = CB68C6BA17FC03CB00264893 /* NearMessageState.m */; };
+		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
+		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DC17DB540000E3BA90 /* NearMusicState.m */; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
@@ -1130,6 +1132,9 @@
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB68C6B917FC03CB00264893 /* NearMessageState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMessageState.h; sourceTree = "<group>"; };
 		CB68C6BA17FC03CB00264893 /* NearMessageState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMessageState.m; sourceTree = "<group>"; };
+		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
+		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
+		CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseSongInfoCell.xib; sourceTree = "<group>"; };
 		CBB425DB17DB540000E3BA90 /* NearMusicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicState.h; sourceTree = "<group>"; };
 		CBB425DC17DB540000E3BA90 /* NearMusicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicState.m; sourceTree = "<group>"; };
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
@@ -1686,6 +1691,9 @@
 				16CDC6121832673B00035634 /* SongOfSendEmptyTipsView.h */,
 				16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */,
 				16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */,
+				CB99095A183652C40095C775 /* ChooseSongInfoCell.h */,
+				CB99095B183652C40095C775 /* ChooseSongInfoCell.m */,
+				CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2580,6 +2588,7 @@
 				1633F73017D2216800F47DFF /* music_song_listening.png in Resources */,
 				1633F73117D2216800F47DFF /* music_song_sel.png in Resources */,
 				1633F73217D2216800F47DFF /* music_song_unsel.png in Resources */,
+				CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */,
 				1633F73317D2216800F47DFF /* music_source_arrow.png in Resources */,
 				1633F73417D2216800F47DFF /* music_source_edit.png in Resources */,
 				1633F73517D2216800F47DFF /* music_source_menu_like.png in Resources */,
@@ -2709,6 +2718,7 @@
 				183E0237177C408E00EE8944 /* HomeViewController.m in Sources */,
 				163BCE0D177C9673008656D1 /* PCommonUtil.m in Sources */,
 				163BCE13177C96DC008656D1 /* GTMBase64.m in Sources */,
+				CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */,
 				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
 				161F850F178032100010090F /* PAAMusicPlayer.m in Sources */,
 				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
