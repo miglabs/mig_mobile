@@ -233,10 +233,52 @@
 
 #pragma mark - FriendOfSendSongList Delegate
 
--(void)didChooseTheSong:(Song *)cursong {
+-(BOOL)didChooseTheSong:(NSArray*)cursongs {
     
-    [_sendsongData addObject:cursong];
+    /* If we already have this song, skip it */
+    int curCount = [cursongs count];
+    int haveCount = [_sendsongData count];
     
+    if ((haveCount > MAX_PRESENT_SONG_COUNT)
+        || (haveCount + curCount > MAX_PRESENT_SONG_COUNT)) {
+        
+        NSString* strExceed = [NSString stringWithFormat:@"对不起，最多只能送%d首歌哦~~~", MAX_PRESENT_SONG_COUNT];
+        
+        [SVProgressHUD showErrorWithStatus:strExceed];
+        
+        return NO;
+    }
+    
+    if (haveCount <= 0) {
+        
+        [_sendsongData addObjectsFromArray:cursongs];
+    }
+    else {
+        
+        for (int i=0; i<curCount; i++) {
+            
+            Song* curSong = [cursongs objectAtIndex:i];
+            BOOL addSong = YES;
+            
+            for (int j=0; j<haveCount; j++) {
+                
+                Song* haveSong = [_sendsongData objectAtIndex:j];
+                
+                if (curSong.songid == haveSong.songid) {
+                    
+                    addSong = NO;
+                    break;
+                }
+            }
+            
+            if (addSong) {
+                
+                [_sendsongData addObject:curSong];
+            }
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark - UITextView Delegate

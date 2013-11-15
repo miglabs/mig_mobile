@@ -38,6 +38,9 @@
 
 @synthesize whereIsTheSong = _whereIsTheSong;
 
+@synthesize presentMsg = _presentMsg;
+@synthesize isChosed = _isChosed;
+
 +(id)initWithNSDictionary:(NSDictionary *)dict{
     
     Song *song = nil;
@@ -65,6 +68,8 @@
             song.type = [dict objectForKey:@"type"];
             song.tid = [[dict objectForKey:@"tid"] intValue];
             
+            song.presentMsg = nil;
+            song.isChosed = NO;
         }
         
     }

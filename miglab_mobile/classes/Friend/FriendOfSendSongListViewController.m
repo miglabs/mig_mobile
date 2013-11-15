@@ -18,7 +18,6 @@
 
 @synthesize songTableView = _songTableView;
 @synthesize songData = _songData;
-@synthesize chosedSong = _chosedSong;
 @synthesize delegate = _delegate;
 @synthesize miglabAPI = _miglabAPI;
 
@@ -40,22 +39,53 @@
     
     _miglabAPI = [[MigLabAPI alloc] init];
     
-    self.navView.titleLabel.text = @"选择您要赠送的歌曲";
+    self.navView.titleLabel.text = @"选择推荐歌曲";
     
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;
     
+    posy += 10;
+    
+    UIImageView* bodyBgImageView = [[UIImageView alloc] init];
+    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - 85);
+    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
+    [self.view addSubview:bodyBgImageView];
+    
+    /* Header view */
+    UILabel* lblDesc = [[UILabel alloc] init];
+    lblDesc.frame = CGRectMake(16, 12, ORIGIN_WIDTH - 80, 21);
+    lblDesc.backgroundColor = [UIColor clearColor];
+    lblDesc.font = [UIFont systemFontOfSize:15.0f];
+    lblDesc.text = @"选择以下歌曲";
+    lblDesc.textAlignment = kTextAlignmentLeft;
+    lblDesc.textColor= [UIColor whiteColor];
+    
+    UIImageView* separatorImageView = [[UIImageView alloc] init];
+    separatorImageView.frame = CGRectMake(0, 45, ORIGIN_WIDTH, 1);
+    separatorImageView.image = [UIImage imageWithName:@"music_source_separator" type:@"png"];
+    
+    UIButton* sureButton = [[UIButton alloc] init];
+    sureButton.frame = CGRectMake(ORIGIN_WIDTH - 70, 5, 60, 35);
+    [sureButton setBackgroundImage:[UIImage imageWithName:@"friend_sayhi_button_ok" type:@"png"] forState:UIControlStateNormal];
+    [sureButton setHidden:NO];
+    [sureButton addTarget:self action:@selector(finishChooseSongs:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView* headerView = [[UIView alloc] init];
+    headerView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, 45);
+    [headerView addSubview:lblDesc];
+    [headerView addSubview:separatorImageView];
+    [headerView addSubview:sureButton];
+    [self.view addSubview:headerView];
+    
+    posy += 45;
+    
     _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(ORIGIN_X, posy+10, ORIGIN_WIDTH, kMainScreenHeight+self.topDistance-posy-30);
+    _songTableView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - 85);
     _songTableView.dataSource = self;
     _songTableView.delegate = self;
     _songTableView.backgroundColor = [UIColor clearColor];
     _songTableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
-    UIImageView* bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy+10, ORIGIN_WIDTH, kMainScreenHeight+self.topDistance-147);
-    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-    _songTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_songTableView];
     
     _songData = [[NSMutableArray alloc] init];
@@ -77,6 +107,28 @@
     [self dismissModalViewControllerAnimated:YES];
     
 }
+
+-(IBAction)finishChooseSongs:(id)sender {
+    
+    int songcount = [_songData count];
+    NSMutableArray* chosedSongs = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<songcount; i++) {
+        
+        Song* song = [_songData objectAtIndex:i];
+        
+        if (song.isChosed) {
+            
+            [chosedSongs addObject:song];
+        }
+    }
+    
+    if([self.delegate didChooseTheSong:chosedSongs]) {
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
 
 -(void)loadData {
     
@@ -130,6 +182,7 @@
     cell.lblSongInfo.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"2.5mb"];
     cell.lblListenNumber.text = [NSString stringWithFormat:@"%lld", tempsong.hot > 0 ? tempsong.hot : 0];
     cell.lblCommentNumber.text = [NSString stringWithFormat:@"%d", tempsong.commentnum > 0 ? tempsong.commentnum : 0];
+    cell.isCheckButton = NO;
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
@@ -147,14 +200,28 @@
     
     if (song) {
         
-        [self.delegate didChooseTheSong:song];
-        [self doBack:nil];
+        /* Check the song flag and change the display icon */
+        ChooseSongInfoCell* cell = (ChooseSongInfoCell*)[tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.isCheckButton = !cell.isCheckButton;
+        
+        if (cell.isCheckButton) {
+            
+            cell.lbiCheck.image = [UIImage imageNamed:@"music_song_sel"];
+        }
+        else {
+            
+            cell.lbiCheck.image = [UIImage imageNamed:@"music_song_unsel"];
+        }
+        
+        song.isChosed = cell.isCheckButton;
     }
     else {
         
         [SVProgressHUD showErrorWithStatus:@"请选择一首歌"];
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

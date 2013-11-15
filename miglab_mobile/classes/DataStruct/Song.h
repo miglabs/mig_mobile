@@ -46,6 +46,7 @@ typedef enum{
 @property (nonatomic, retain) NSString *sceneid;                        //场景id
 
 @property (nonatomic, retain) NSString* presentMsg;                     //赠送歌曲时附带的消息，不能从服务端获取
+@property (nonatomic, assign) BOOL isChosed;                            //赠送歌曲时是否被选择的标记位，不能从服务端获取
 
 /*
  0-app中打包的歌曲

@@ -13,7 +13,7 @@
 
 @protocol FriendOfSendSongListViewControllerDelegate <NSObject>
 
--(void)didChooseTheSong:(Song*)cursong;
+-(BOOL)didChooseTheSong:(NSArray*)cursongs;
 
 @end
 
@@ -21,7 +21,6 @@
 
 @property (nonatomic, retain) UITableView* songTableView;
 @property (nonatomic, retain) NSMutableArray* songData;
-@property (nonatomic, retain) Song* chosedSong;
 
 @property (nonatomic, assign) id<FriendOfSendSongListViewControllerDelegate> delegate;
 
@@ -32,5 +31,7 @@
 -(void)LoadMyMusicFromServer;
 -(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification;
 -(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification;
+
+-(IBAction)finishChooseSongs:(id)sender;
 
 @end

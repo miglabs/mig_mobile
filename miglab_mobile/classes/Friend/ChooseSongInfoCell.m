@@ -14,7 +14,8 @@
 @synthesize lblSongInfo = _lblSongInfo;
 @synthesize lblListenNumber = _lblListenNumber;
 @synthesize lblCommentNumber = _lblCommentNumber;
-@synthesize lbtnIsChosed = _lbtnIsChosed;
+@synthesize lbiCheck = _lbiCheck;
+@synthesize isCheckButton = _isCheckButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -15,6 +15,8 @@
 @property (nonatomic, retain) IBOutlet UILabel* lblSongInfo;
 @property (nonatomic, retain) IBOutlet UILabel* lblListenNumber;
 @property (nonatomic, retain) IBOutlet UILabel* lblCommentNumber;
-@property (nonatomic, retain) IBOutlet UIButton* lbtnIsChosed;
+@property (nonatomic, retain) IBOutlet UIImageView* lbiCheck;
+
+@property (nonatomic, assign) BOOL isCheckButton;
 
 @end
