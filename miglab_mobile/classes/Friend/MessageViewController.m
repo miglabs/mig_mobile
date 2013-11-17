@@ -126,7 +126,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     MessageInfo *messageInfo = [_datalist objectAtIndex:indexPath.row];
-    NearbyUser* user = messageInfo.userInfo;
     
     if (messageInfo.messagetype == 1 || messageInfo.messagetype == 3) {
         // 打招呼, 评论歌曲
@@ -141,9 +140,15 @@
 //        [self.navigationController pushViewController:receiveMusicViewController animated:YES];
         
     } else if (messageInfo.messagetype == 2) {
-        // 送歌
         
-        //        FriendOfReceiveMusicViewController *receiveMusicViewController = [[FriendOfReceiveMusicViewController alloc] initWithNibName:@"FriendOfReceiveMusicViewController" bundle:nil];
+        // 送歌
+        FriendOfReceiveMusicViewController *receiveMusicViewController = [[FriendOfReceiveMusicViewController alloc] initWithNibName:@"FriendOfReceiveMusicViewController" bundle:nil];
+        receiveMusicViewController.msginfo = messageInfo;
+        [self.navigationController pushViewController:receiveMusicViewController animated:YES];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:@"信息格式不正确, 无法显示"];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -7,7 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "MusicCommentViewController.h"
+#import "FriendOfMessageContentView.h"
 
 @interface FriendOfReceiveMusicViewController : BaseViewController
+
+@property (nonatomic, retain) MessageInfo* msginfo;
+@property (nonatomic, retain) MusicCommentPlayerView* musicCommentHeader;
+@property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 
 @end

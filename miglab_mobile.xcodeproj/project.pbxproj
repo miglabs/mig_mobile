@@ -485,6 +485,8 @@
 		CB68C6BB17FC03CB00264893 /* NearMessageState.m in Sources */ = {isa = PBXBuildFile; fileRef = CB68C6BA17FC03CB00264893 /* NearMessageState.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
+		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
+		CB9909631838DE780095C775 /* FriendOfMessageContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */; };
 		CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DC17DB540000E3BA90 /* NearMusicState.m */; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
@@ -1135,6 +1137,9 @@
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
 		CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseSongInfoCell.xib; sourceTree = "<group>"; };
+		CB99095F1838DE5C0095C775 /* FriendOfMessageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfMessageContentView.h; sourceTree = "<group>"; };
+		CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfMessageContentView.m; sourceTree = "<group>"; };
+		CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfMessageContentView.xib; sourceTree = "<group>"; };
 		CBB425DB17DB540000E3BA90 /* NearMusicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicState.h; sourceTree = "<group>"; };
 		CBB425DC17DB540000E3BA90 /* NearMusicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicState.m; sourceTree = "<group>"; };
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
@@ -1694,6 +1699,9 @@
 				CB99095A183652C40095C775 /* ChooseSongInfoCell.h */,
 				CB99095B183652C40095C775 /* ChooseSongInfoCell.m */,
 				CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */,
+				CB99095F1838DE5C0095C775 /* FriendOfMessageContentView.h */,
+				CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */,
+				CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2509,6 +2517,7 @@
 				165D7CA817BE6253000D08E3 /* FriendViewController.xib in Resources */,
 				16F3521917BF241400CF9044 /* NearMusicViewController.xib in Resources */,
 				16F3521F17BF254D00CF9044 /* OnlineViewController.xib in Resources */,
+				CB9909631838DE780095C775 /* FriendOfMessageContentView.xib in Resources */,
 				16212F9017BF4E590091326E /* PTabBarViewController.xib in Resources */,
 				16212F9B17BF50580091326E /* RootViewController.xib in Resources */,
 				160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */,
@@ -2802,6 +2811,7 @@
 				1624BC1917C7869500BE08A5 /* FriendMessageUserHead.m in Sources */,
 				1624BC2C17C79E7A00BE08A5 /* FriendSearchView.m in Sources */,
 				1624BC4117C7A3BB00BE08A5 /* FriendInfoCell.m in Sources */,
+				CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */,
 				1624BC4D17C7AAB400BE08A5 /* MyFriendPersonalPageViewController.m in Sources */,
 				16D0DAF217C9E32700EB763F /* FriendOfPhotoListViewController.m in Sources */,
 				16D0DAF717C9E42700EB763F /* FriendOfRecommendMusicViewController.m in Sources */,

@@ -8,12 +8,13 @@
 
 #import "PlayerViewController.h"
 #import "FriendMessageUserHead.h"
+#import "FriendOfMessageContentView.h"
 
 @interface FriendOfReceiveHiViewController : PlayerViewController
 
 @property (nonatomic, retain) FriendMessageUserHead *userHeadView;
 @property (nonatomic, retain) MessageInfo* msginfo;
 
-@property (nonatomic, retain) IBOutlet UIView *messageContentView;
+@property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 
 @end
