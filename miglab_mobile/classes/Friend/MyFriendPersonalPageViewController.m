@@ -68,6 +68,7 @@
     if (_isFriend) {
         
         [_userHeadView.btnSay addTarget:self action:@selector(doSendMessage:) forControlEvents:UIControlEventTouchUpInside];
+        //_userHeadView.btnSay.imageView.image = [UIImage imageNamed:@""]
         
     } else {
         
@@ -93,7 +94,6 @@
     NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_user_photo_tip", @"MenuImageName", @"照片", @"MenuText", nil];
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, nil];
     
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,7 +115,7 @@
 -(IBAction)doSendMessage:(id)sender{
     
     PLog(@"doSendMessage...");
-    
+    [SVProgressHUD showErrorWithStatus:@"还不能发消息啊"];
 }
 
 //打招呼

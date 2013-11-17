@@ -53,14 +53,14 @@
         _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
     }
     
-    [_btnSendSong setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
+    [_btnSendSong setBackgroundImage:[UIImage imageNamed:@"friend_button_addblack.png"] forState:UIControlStateNormal];
     if (_isFriend) {
         
-        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
+        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_message_replay.pngfriend_button_sayhi.png"] forState:UIControlStateNormal];
     }
     else {
         
-        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_message_replay.png"] forState:UIControlStateNormal];
+        [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_button_sayhi.png"] forState:UIControlStateNormal];
     }
 }
 

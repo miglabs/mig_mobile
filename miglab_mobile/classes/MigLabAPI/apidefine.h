@@ -25,7 +25,7 @@
 #define BOTTOM_PLAYER_HEIGHT        73
 
 /* 搜索范围默认距离 */
-#define SEARCH_DISTANCE             10000
+#define SEARCH_DISTANCE             10000000
 
 /* 赠送歌曲的默认数量限制 */
 #define MAX_PRESENT_SONG_COUNT      3
