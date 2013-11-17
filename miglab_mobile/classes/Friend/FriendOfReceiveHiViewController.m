@@ -7,6 +7,7 @@
 //
 
 #import "FriendOfReceiveHiViewController.h"
+#import "FriendOfRecommendMusicViewController.h"
 
 @interface FriendOfReceiveHiViewController ()
 
@@ -40,14 +41,7 @@
     //nav bar
     NSString* name = _msginfo.userInfo.nickname;
     
-    if (_msginfo.messagetype == 1) {
-        // 打招呼
-        self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的消息", name];
-    }
-    else if (_msginfo.messagetype == 3) {
-        // 评论歌曲
-        self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的歌曲评论", name];
-    }
+    self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的消息", name];
     
     //user head view
     NSArray *userHeadNib = [[NSBundle mainBundle] loadNibNamed:@"FriendMessageUserHead" owner:self options:nil];
@@ -59,6 +53,8 @@
         }//if
     }//for
     _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);
+    [_userHeadView.btnSendSong setHidden:YES];
+    [_userHeadView.btnSay setHidden:YES];
     [self.view addSubview:_userHeadView];
     
     //message
@@ -69,6 +65,7 @@
         }//if
     }//for
     _messageContentView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
+    [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* contenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
     if (_msginfo.messagetype == 1) {
@@ -104,6 +101,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)doSendSong:(id)sender {
+    
+    // 跳转到送歌页面
+    FriendOfRecommendMusicViewController* recommandView = [[FriendOfRecommendMusicViewController alloc] initWithNibName:@"FriendOfRecommendMusicViewController" bundle:nil];
+    recommandView.toUserInfo = _msginfo.userInfo;
+    [self.navigationController pushViewController:recommandView animated:YES];
 }
 
 

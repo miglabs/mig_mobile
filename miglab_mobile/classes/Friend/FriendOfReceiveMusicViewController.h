@@ -15,5 +15,8 @@
 @property (nonatomic, retain) MessageInfo* msginfo;
 @property (nonatomic, retain) MusicCommentPlayerView* musicCommentHeader;
 @property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
+@property (nonatomic, assign) BOOL isFriend;
+
+-(IBAction)doSendSong:(id)sender;
 
 @end

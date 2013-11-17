@@ -127,17 +127,12 @@
     // ...
     MessageInfo *messageInfo = [_datalist objectAtIndex:indexPath.row];
     
-    if (messageInfo.messagetype == 1 || messageInfo.messagetype == 3) {
-        // 打招呼, 评论歌曲
+    if (messageInfo.messagetype == 1) {
+        
+        // 打招呼
         FriendOfReceiveHiViewController *receiveHiViewController = [[FriendOfReceiveHiViewController alloc] initWithNibName:@"FriendOfReceiveHiViewController" bundle:nil];
         receiveHiViewController.msginfo = messageInfo;
         [self.navigationController pushViewController:receiveHiViewController animated:YES];
-        
-//    } else if (messageInfo.messagetype == 3) {
-//        // 评论歌曲
-//        MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
-//        receiveMusicViewController.userinfo = user;
-//        [self.navigationController pushViewController:receiveMusicViewController animated:YES];
         
     } else if (messageInfo.messagetype == 2) {
         
@@ -145,8 +140,13 @@
         FriendOfReceiveMusicViewController *receiveMusicViewController = [[FriendOfReceiveMusicViewController alloc] initWithNibName:@"FriendOfReceiveMusicViewController" bundle:nil];
         receiveMusicViewController.msginfo = messageInfo;
         [self.navigationController pushViewController:receiveMusicViewController animated:YES];
-    }
-    else {
+    } else if (messageInfo.messagetype == 3) {
+        
+        // 评论歌曲
+        MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+        //receiveMusicViewController.userinfo = user;
+        //[self.navigationController pushViewController:receiveMusicViewController animated:YES];
+    } else {
         
         [SVProgressHUD showErrorWithStatus:@"信息格式不正确, 无法显示"];
     }

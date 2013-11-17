@@ -35,6 +35,10 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="lbtnChat" destination="Ejs-pB-MHn" id="eEj-k8-fdf"/>
+                <outlet property="lbtnSendSong" destination="q4I-zy-vGg" id="otW-ej-Kx1"/>
+            </connections>
         </view>
     </objects>
     <resources>

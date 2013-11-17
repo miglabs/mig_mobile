@@ -17,4 +17,6 @@
 
 @property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 
+-(IBAction)doSendSong:(id)sender;
+
 @end

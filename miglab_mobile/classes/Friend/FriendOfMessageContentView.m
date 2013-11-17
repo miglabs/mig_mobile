@@ -10,6 +10,9 @@
 
 @implementation FriendOfMessageContentView
 
+@synthesize lbtnSendSong = _lbtnSendSong;
+@synthesize lbtnChat = _lbtnChat;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

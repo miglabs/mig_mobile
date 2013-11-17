@@ -10,4 +10,7 @@
 
 @interface FriendOfMessageContentView : UIView
 
+@property (nonatomic, retain) IBOutlet UIButton* lbtnSendSong;
+@property (nonatomic, retain) IBOutlet UIButton* lbtnChat;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "FriendOfReceiveMusicViewController.h"
 #import "UserSessionManager.h"
+#import "FriendOfRecommendMusicViewController.h"
 
 @interface FriendOfReceiveMusicViewController ()
 
@@ -18,6 +19,7 @@
 @synthesize msginfo = _msginfo;
 @synthesize musicCommentHeader = _musicCommentHeader;
 @synthesize messageContentView = _messageContentView;
+@synthesize isFriend = _isFriend;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +68,7 @@
         }//if
     }//for
     _messageContentView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - BOTTOM_PLAYER_HEIGHT - 20);
+    [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* lblcontenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
     lblcontenttitle.text = @"评论";
@@ -81,6 +84,14 @@
     [_messageContentView addSubview:textcontent];
     
     [self.view addSubview:_messageContentView];
+}
+
+-(void)doSendSong:(id)sender {
+    
+    // 跳转到送歌页面
+    FriendOfRecommendMusicViewController* recommandView = [[FriendOfRecommendMusicViewController alloc] initWithNibName:@"FriendOfRecommendMusicViewController" bundle:nil];
+    recommandView.toUserInfo = _msginfo.userInfo;
+    [self.navigationController pushViewController:recommandView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
