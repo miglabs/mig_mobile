@@ -482,12 +482,10 @@
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
-		CB68C6BB17FC03CB00264893 /* NearMessageState.m in Sources */ = {isa = PBXBuildFile; fileRef = CB68C6BA17FC03CB00264893 /* NearMessageState.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
 		CB9909631838DE780095C775 /* FriendOfMessageContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */; };
-		CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DC17DB540000E3BA90 /* NearMusicState.m */; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
 		CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */; };
@@ -1132,16 +1130,12 @@
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
-		CB68C6B917FC03CB00264893 /* NearMessageState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMessageState.h; sourceTree = "<group>"; };
-		CB68C6BA17FC03CB00264893 /* NearMessageState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMessageState.m; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
 		CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseSongInfoCell.xib; sourceTree = "<group>"; };
 		CB99095F1838DE5C0095C775 /* FriendOfMessageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfMessageContentView.h; sourceTree = "<group>"; };
 		CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfMessageContentView.m; sourceTree = "<group>"; };
 		CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfMessageContentView.xib; sourceTree = "<group>"; };
-		CBB425DB17DB540000E3BA90 /* NearMusicState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicState.h; sourceTree = "<group>"; };
-		CBB425DC17DB540000E3BA90 /* NearMusicState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicState.m; sourceTree = "<group>"; };
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
 		CBB425DF17DE18C400E3BA90 /* SongComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongComment.m; sourceTree = "<group>"; };
 		CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfSendSongListViewController.h; sourceTree = "<group>"; };
@@ -1483,12 +1477,8 @@
 				CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */,
 				CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */,
 				CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */,
-				CBB425DB17DB540000E3BA90 /* NearMusicState.h */,
-				CBB425DC17DB540000E3BA90 /* NearMusicState.m */,
 				CBB425DE17DE18C400E3BA90 /* SongComment.h */,
 				CBB425DF17DE18C400E3BA90 /* SongComment.m */,
-				CB68C6B917FC03CB00264893 /* NearMessageState.h */,
-				CB68C6BA17FC03CB00264893 /* NearMessageState.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2838,7 +2828,6 @@
 				18A0EA0F17D6DBAC004B8BB6 /* SettingOfPrivacyViewController.m in Sources */,
 				18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */,
 				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
-				CBB425DD17DB540000E3BA90 /* NearMusicState.m in Sources */,
 				1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */,
 				1641CCDF17DB688F004179E4 /* SettingOfFriendManagerViewController.m in Sources */,
 				1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */,
@@ -2850,7 +2839,6 @@
 				16B2A3C717F311DD00E7F7E6 /* SettingOfAboutViewController.m in Sources */,
 				16B2A3CC17F31C9300E7F7E6 /* SettingOfFeedbackViewController.m in Sources */,
 				188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */,
-				CB68C6BB17FC03CB00264893 /* NearMessageState.m in Sources */,
 				16184E3E1802F07E00E6E627 /* ShareViewController.m in Sources */,
 				184C47FF1803F8C4004D7523 /* ShareContentView.m in Sources */,
 				184C48021803F8E5004D7523 /* ShareMenuView.m in Sources */,

@@ -279,9 +279,8 @@
         
         for (int i=0; i<nearbyusercount; i++) {
             
-            NearMusicState *nms = [nearbyUserInfoList objectAtIndex:i];
+            MessageInfo *nms = [nearbyUserInfoList objectAtIndex:i];
             [nms log];
-            
         }
         
         if (_pageIndex == 0) {
@@ -331,7 +330,7 @@
         [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
     }
     
-    NearMusicState *nms = [_dataList objectAtIndex:indexPath.row];
+    MessageInfo *nms = [_dataList objectAtIndex:indexPath.row];
     Song *tempsong = nms.song;
     
     cell.btnIcon.tag = tempsong.songid;

@@ -14,9 +14,8 @@
 #import "NearbyUser.h"
 #import "ConfigFileInfo.h"
 #import "CollectNum.h"
-#import "NearMusicState.h"
 #import "SongComment.h"
-#import "NearMessageState.h"
+#import "MessageInfo.h"
 #import "apidefine.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间

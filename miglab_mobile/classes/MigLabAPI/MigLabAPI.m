@@ -2652,7 +2652,7 @@
                 
                 for (int i=0; i<nmscount; i++) {
                     
-                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[nearmusicstate objectAtIndex:i]];
+                    MessageInfo* nms = [MessageInfo initWithNSDictionary:[nearmusicstate objectAtIndex:i]];
                     
                     [nmsInfos addObject:nms];
                 }
@@ -2947,7 +2947,7 @@
                 
                 for (int i=0; i<musicarraycount; i++) {
                     
-                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[musicarray objectAtIndex:i]];
+                    MessageInfo* nms = [MessageInfo initWithNSDictionary:[musicarray objectAtIndex:i]];
                     [musicList addObject:nms];
                 }
                 
@@ -2986,7 +2986,7 @@
 /*
  获取周围谁在听你红心的歌曲
  GET
- HTTP_GETSAMEMUSIC
+ HTTP_GETNEARUSER
  */
 -(void)doGetNearUser:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
     
@@ -3015,7 +3015,7 @@
                 
                 for (int i=0; i<musicarraycount; i++) {
                     
-                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[musicarray objectAtIndex:i]];
+                    MessageInfo* nms = [MessageInfo initWithNSDictionary:[musicarray objectAtIndex:i]];
                     [musicList addObject:nms];
                 }
                 
@@ -3216,7 +3216,7 @@
                 
                 for (int i=0; i<userArrayCount; i++) {
                     
-                    NearMusicState* nms = [NearMusicState initWithNSDictionary:[userArray objectAtIndex:i]];
+                    MessageInfo* nms = [MessageInfo initWithNSDictionary:[userArray objectAtIndex:i]];
                     
                     [userList addObject:nms];
                 }

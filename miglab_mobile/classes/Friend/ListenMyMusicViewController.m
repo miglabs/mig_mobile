@@ -8,7 +8,6 @@
 
 #import "ListenMyMusicViewController.h"
 #import "FriendInfoCell.h"
-#include "NearMusicState.h"
 #import "MyFriendPersonalPageViewController.h"
 
 NSString* szListenMyMusicRadius = @"10000";
@@ -97,13 +96,13 @@ NSString* szListenMyMusicRadius = @"10000";
 -(void)loadNearFriendFromDatabase{
     
     //test data
-    NearMusicState *testfriend = [[NearMusicState alloc] init];
-    testfriend.nearuser  = [[NearbyUser alloc] init];
-    testfriend.nearuser.nickname = @"lj_archer";
-    testfriend.nearuser.userid = @"123";
-    testfriend.nearuser.songname = @"非常好听的歌";
-    testfriend.nearuser.distance = 10;
-    testfriend.nearuser.sex = @"1";
+    MessageInfo *testfriend = [[MessageInfo alloc] init];
+    testfriend.userInfo  = [[NearbyUser alloc] init];
+    testfriend.userInfo.nickname = @"lj_archer";
+    testfriend.userInfo.userid = @"123";
+    testfriend.userInfo.songname = @"非常好听的歌";
+    testfriend.userInfo.distance = 10;
+    testfriend.userInfo.sex = @"1";
     [_dataList addObject:testfriend];
 //
 //    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
@@ -183,7 +182,7 @@ NSString* szListenMyMusicRadius = @"10000";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger row = indexPath.row;
-    NearbyUser* userinfo = (NearbyUser*)((NearMusicState*)[_dataList objectAtIndex:row]).nearuser;
+    NearbyUser* userinfo = (NearbyUser*)((MessageInfo*)[_dataList objectAtIndex:row]).userInfo;
     
     MyFriendPersonalPageViewController* friendPersonalView = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
     
@@ -212,8 +211,8 @@ NSString* szListenMyMusicRadius = @"10000";
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NearMusicState* nms = [_dataList objectAtIndex:indexPath.row];
-    NearbyUser *tempfriend = [nms nearuser];
+    MessageInfo* nms = [_dataList objectAtIndex:indexPath.row];
+    NearbyUser *tempfriend = nms.userInfo;
     [cell updateFriendInfoCellData:tempfriend];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);

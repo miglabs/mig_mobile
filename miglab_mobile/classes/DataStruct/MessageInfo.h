@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString* send_uid;
 @property (nonatomic, retain) NSString* to_uid;
 @property (nonatomic, retain) NSString* time;
+@property (nonatomic, retain) NSString* songstat;
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
 -(void)log;

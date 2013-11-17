@@ -142,8 +142,8 @@
     
     for (int i=0; i<userlistcount; i++) {
         
-        NearMusicState* nms = [userList objectAtIndex:i];
-        NearbyUser* user = nms.nearuser;
+        MessageInfo* nms = [userList objectAtIndex:i];
+        NearbyUser* user = nms.userInfo;
         user.songname = nms.song.songname;
         
         [_friendList addObject:user];

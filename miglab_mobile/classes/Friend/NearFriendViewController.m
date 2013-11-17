@@ -29,8 +29,8 @@
     if (self) {
         // Custom initialization
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbyFailed:) name:NotificationNameSearchNearbyFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbySuccess:) name:NotificationNameSearchNearbySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbyFailed:) name:NotificationNameGetNearUserFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchNearbySuccess:) name:NotificationNameGetNearUserSuccess object:nil];
         
     }
     return self;
@@ -135,7 +135,7 @@
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
-        [self.miglabAPI doSearchNearby:userid token:accesstoken location:tLocation radius:SEARCH_DISTANCE];//radius单位米
+        [self.miglabAPI doGetNearUser:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:tLocation];
         
     } else {
         
@@ -218,12 +218,12 @@
     MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
     
     NSInteger row = indexPath.row;
-    personalPageViewController.userinfo = (NearbyUser*)[_dataList objectAtIndex:row];
+    MessageInfo* msginfo = (MessageInfo*)[_dataList objectAtIndex:row];
+    personalPageViewController.userinfo = msginfo.userInfo;
     personalPageViewController.isFriend = NO;
     [self.navigationController pushViewController:personalPageViewController animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 #pragma mark - UITableView datasource
@@ -244,8 +244,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NearbyUser *tempfriend = [_dataList objectAtIndex:indexPath.row];
-    [cell updateFriendInfoCellData:tempfriend];
+    MessageInfo *msginfo = [_dataList objectAtIndex:indexPath.row];
+    NearbyUser* userinfo = msginfo.userInfo;
+    [cell updateFriendInfoCellData:userinfo];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
