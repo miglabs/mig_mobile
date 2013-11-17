@@ -186,7 +186,7 @@
     }
     
     cell.tvRecommendContent.delegate = self;
-    cell.tvRecommendContent.text = @"点击添加推荐语";
+    //cell.tvRecommendContent.text = @"点击添加推荐语";
     cell.tvRecommendContent.returnKeyType = UIReturnKeyDone;
     
     Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
@@ -205,6 +205,7 @@
     SongOfSendInfoCell* curCell = (SongOfSendInfoCell*)[self.sendsongTableView cellForRowAtIndexPath:indexPath];
     
     _curEditSong = indexPath.row;
+    [curCell.lblPlaceHolder setHidden:YES];
     [curCell.tvRecommendContent becomeFirstResponder];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -293,6 +294,16 @@
             
             Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
             curSong.presentMsg = presentmsg;
+            
+            /* 如果没有写任何消息，将显示Placeholder */
+            int msgsize = [presentmsg length];
+            if (msgsize <= 0) {
+                
+                SongOfSendInfoCell* cell = (SongOfSendInfoCell*)[_sendsongTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_curEditSong inSection:0]];
+                
+                [cell.lblPlaceHolder setHidden:NO];
+            }
+            
             _curEditSong = -1;
         }
         
