@@ -30,4 +30,7 @@
 /* 赠送歌曲的默认数量限制 */
 #define MAX_PRESENT_SONG_COUNT      3
 
+/* 打招呼的字数限制 */
+#define MAX_SAYHI_COUNT             30
+
 #endif

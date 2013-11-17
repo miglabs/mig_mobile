@@ -49,11 +49,11 @@
     [self.navView.rightButton addTarget:self action:@selector(doSayHello:) forControlEvents:UIControlEventTouchUpInside];
     
     _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(ORIGIN_X, 80, ORIGIN_WIDTH, 60)];
-    _lblinfo.text = @"想对Ta说些什么呢？";
+    _lblinfo.text = @"向ta说话打个招呼";
     [self.view addSubview:_lblinfo];
     
     _text = [[UITextField alloc] initWithFrame:CGRectMake(ORIGIN_X, 140, ORIGIN_WIDTH, 50)];
-    _text.placeholder = @"...";
+    _text.placeholder = @"30字以内";
     _text.textAlignment = UITextAlignmentLeft;
     _text.borderStyle = 3;
     _text.clearsOnBeginEditing = YES;
@@ -76,11 +76,20 @@
 
 -(IBAction)doSayHello:(id)sender {
     
+    NSString* content = [_text text];
+    int count = [content length];
+    
+    if (count <= 0) {
+        
+        [SVProgressHUD showErrorWithStatus:@"您还没有输入任何字哦"];
+        return;
+    }
+    
+    
     NSString* userid = [UserSessionManager GetInstance].userid;
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     
     NSString* touserid = _touserid;
-    NSString* content = [_text text];
     
     [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
 }
@@ -104,6 +113,18 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [_text resignFirstResponder];
+    
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSString* temp = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (temp.length > MAX_SAYHI_COUNT) {
+        
+        return NO;
+    }
     
     return YES;
 }
