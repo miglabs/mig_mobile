@@ -18,5 +18,6 @@
 @property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 
 -(IBAction)doSendSong:(id)sender;
+-(IBAction)doLoadChat:(id)sender;
 
 @end

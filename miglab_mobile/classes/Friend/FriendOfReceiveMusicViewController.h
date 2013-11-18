@@ -18,5 +18,6 @@
 @property (nonatomic, assign) BOOL isFriend;
 
 -(IBAction)doSendSong:(id)sender;
+-(IBAction)doLoadChat:(id)sender;
 
 @end

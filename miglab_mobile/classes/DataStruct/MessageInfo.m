@@ -30,15 +30,11 @@
         
         NSDictionary* dicDetail = [dict objectForKey:@"detail"];
         
-        msginfo.content = [dicDetail objectForKey:@"msg"];
-        msginfo.send_uid = [dicDetail objectForKey:@"send_uid"];
-        msginfo.to_uid = [dicDetail objectForKey:@"to_uid"];
-        msginfo.songid = [dicDetail objectForKey:@"song_id"];
-        msginfo.time = [dicDetail objectForKey:@"time"];
-        msginfo.song = [Song initWithNSDictionary:[dicDetail objectForKey:@"music"]];
+        msginfo.song = [Song initWithNSDictionary:[dict objectForKey:@"music"]];
         msginfo.userInfo = [NearbyUser initWithNSDictionary:[dict objectForKey:@"userinfo"]];
-        msginfo.songstat = [dicDetail objectForKey:@"songstat"];
+        msginfo.songstat = [dict objectForKey:@"songstat"];
         
+        /* 根据字符串获取类型 */
         NSString* type = [dict objectForKey:@"type"];
         
         if([type isEqualToString:@"presentsong"]) {
@@ -53,6 +49,13 @@
             
             msginfo.messagetype = -1;
         }
+        
+        /* 其他自定义格式信息，根据接口不同，需要的值不同 */
+        msginfo.content = [dicDetail objectForKey:@"msg"];
+        msginfo.send_uid = [dicDetail objectForKey:@"send_uid"];
+        msginfo.to_uid = [dicDetail objectForKey:@"to_uid"];
+        msginfo.songid = [dicDetail objectForKey:@"song_id"];
+        msginfo.time = [dicDetail objectForKey:@"time"];
         
         msginfo.userInfo.songname = msginfo.song.songname;
         msginfo.userInfo.singer = msginfo.song.artist;

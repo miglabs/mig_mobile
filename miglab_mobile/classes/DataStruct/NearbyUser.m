@@ -20,6 +20,11 @@
 @synthesize songstat = _songstat;
 @synthesize songname = _songname;
 @synthesize singer = _singer;
+@synthesize headurl = _headurl;
+@synthesize plat = _plat;
+@synthesize birthday = _birthday;
+@synthesize source = _source;
+@synthesize location = _location;
 
 //附近的人
 +(id)initWithNSDictionary:(NSDictionary*)dict{
@@ -40,6 +45,11 @@
             nearbyuser.sex = [dict objectForKey:@"sex"];
             nearbyuser.songstat = [dict objectForKey:@"songstat"];
             nearbyuser.singer = [dict objectForKey:@"name"];
+            nearbyuser.headurl = [dict objectForKey:@"head"];
+            nearbyuser.plat = [dict objectForKey:@"plat"];
+            nearbyuser.birthday = [dict objectForKey:@"birthday"];
+            nearbyuser.source = [dict objectForKey:@"source"];
+            nearbyuser.location = [dict objectForKey:@"location"];
         }
     }
     @catch (NSException *exception) {

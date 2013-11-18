@@ -20,6 +20,11 @@
 @property (nonatomic, retain) NSString* songstat;
 @property (nonatomic, retain) NSString* songname;
 @property (nonatomic, retain) NSString* singer;
+@property (nonatomic, retain) NSString* headurl;
+@property (nonatomic, retain) NSString* plat;
+@property (nonatomic, retain) NSString* birthday;
+@property (nonatomic, retain) NSString* source;
+@property (nonatomic, retain) NSString* location;
 
 //附近的人
 +(id)initWithNSDictionary:(NSDictionary*)dict;

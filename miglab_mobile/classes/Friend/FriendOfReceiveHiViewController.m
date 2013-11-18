@@ -66,6 +66,7 @@
     }//for
     _messageContentView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
     [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
+    [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChar:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* contenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
     if (_msginfo.messagetype == 1) {
@@ -109,6 +110,11 @@
     FriendOfRecommendMusicViewController* recommandView = [[FriendOfRecommendMusicViewController alloc] initWithNibName:@"FriendOfRecommendMusicViewController" bundle:nil];
     recommandView.toUserInfo = _msginfo.userInfo;
     [self.navigationController pushViewController:recommandView animated:YES];
+}
+
+-(void)doLoadChar:(id)sender {
+    
+    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
 }
 
 
