@@ -80,7 +80,7 @@
     posy += 45;
     
     _songTableView = [[UITableView alloc] init];
-    _songTableView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - 85);
+    _songTableView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 13);
     _songTableView.dataSource = self;
     _songTableView.delegate = self;
     _songTableView.backgroundColor = [UIColor clearColor];

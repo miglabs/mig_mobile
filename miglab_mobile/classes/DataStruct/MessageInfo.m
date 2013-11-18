@@ -64,4 +64,9 @@
     return msginfo;
 }
 
+-(void)log {
+    
+    
+}
+
 @end
