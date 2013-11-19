@@ -316,4 +316,8 @@
 #define NotificationNameGetMusicUserSuccess                 @"NotificationNameGetMusicUserSuccess"
 #define NotificationNameGetMusicUserFailed                  @"NotificationNameGetMusicUserFailed"
 
+#define HTTP_CONFIGPUSH                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/setuserconfigofpush.fcgi"]
+#define NotificationNameConfigPushSuccess                   @"NotificationNameConfigPushSuccess"
+#define NotificationNameConfigPushFailed                    @"NotificationNameConfigPushFailed"
+
 #endif

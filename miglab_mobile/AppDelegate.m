@@ -254,6 +254,9 @@
     //显示状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
+    //注册device token
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    
     //api test
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
@@ -486,6 +489,30 @@
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
         NSLog(@"resp.errCode: %d, resp.description: %@", resp.errCode, resp.description);
     }
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    NSString* device_token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    PLog(@"device token: %@", deviceToken);
+    
+    [UserSessionManager GetInstance].devicetoken = device_token;
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        MigLabAPI* miglab = [[MigLabAPI alloc] init];
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        [miglab doConfigPush:userid token:accesstoken devicetoken:device_token isreceive:@"1" begintime:@"08:00" endtime:@"23:55"];
+    }
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    PLog(@"get device token failed");
 }
 
 @end

@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSString *userid;
 @property (nonatomic, retain) NSString *accesstoken;
+@property (nonatomic, retain) NSString* devicetoken;
 @property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) PUser *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;

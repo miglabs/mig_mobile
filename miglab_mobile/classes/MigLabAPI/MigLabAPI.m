@@ -3255,4 +3255,65 @@
     [operation start];
 }
 
+/*
+ 设置推送配置
+ POST
+ HTTP_CONFIGPUSH
+ */
+-(void)doConfigPush:(NSString *)uid token:(NSString *)ttoken devicetoken:(NSString *)tdevicetoken isreceive:(NSString *)tisreceive begintime:(NSString *)tbegintime endtime:(NSString *)tendtime {
+    
+    PLog(@"config user push url: %@", HTTP_CONFIGPUSH);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_CONFIGPUSH]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&devicetoken=%@&isreceive=%@&begintime=%@&endtime=%@", uid, ttoken, tdevicetoken, tisreceive, tbegintime, tendtime];
+    PLog(@"config user push body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"config user push succeed");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameConfigPushSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"config user push failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameConfigPushFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameConfigPushFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"config user push failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameConfigPushFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+}
+
+
 @end

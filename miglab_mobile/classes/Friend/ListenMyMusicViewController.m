@@ -96,14 +96,14 @@ NSString* szListenMyMusicRadius = @"10000";
 -(void)loadNearFriendFromDatabase{
     
     //test data
-    MessageInfo *testfriend = [[MessageInfo alloc] init];
-    testfriend.userInfo  = [[NearbyUser alloc] init];
-    testfriend.userInfo.nickname = @"lj_archer";
-    testfriend.userInfo.userid = @"123";
-    testfriend.userInfo.songname = @"非常好听的歌";
-    testfriend.userInfo.distance = 10;
-    testfriend.userInfo.sex = @"1";
-    [_dataList addObject:testfriend];
+//    MessageInfo *testfriend = [[MessageInfo alloc] init];
+//    testfriend.userInfo  = [[NearbyUser alloc] init];
+//    testfriend.userInfo.nickname = @"lj_archer";
+//    testfriend.userInfo.userid = @"123";
+//    testfriend.userInfo.songname = @"非常好听的歌";
+//    testfriend.userInfo.distance = 10;
+//    testfriend.userInfo.sex = @"1";
+//    [_dataList addObject:testfriend];
 //
 //    NearbyUser *testfriend1 = [[NearbyUser alloc] init];
 //    testfriend.userid = @"456";

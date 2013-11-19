@@ -273,4 +273,9 @@ typedef enum {
  */
 -(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid;
 
+/*
+ 设置推送配置
+ */
+-(void)doConfigPush:(NSString*)uid token:(NSString*)ttoken devicetoken:(NSString*)tdevicetoken isreceive:(NSString*)tisreceive begintime:(NSString*)tbegintime endtime:(NSString*)tendtime;
+
 @end

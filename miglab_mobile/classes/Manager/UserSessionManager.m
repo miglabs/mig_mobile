@@ -12,6 +12,7 @@
 
 @synthesize userid = _userid;
 @synthesize accesstoken = _accesstoken;
+@synthesize devicetoken = _devicetoken;
 @synthesize accounttype = _accounttype;
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
