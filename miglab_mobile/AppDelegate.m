@@ -20,6 +20,7 @@
 #import "GeneViewController.h"
 #import "MusicViewController.h"
 #import "FriendViewController.h"
+#import "MessageViewController.h"
 
 #import "MainMenuViewController.h"
 
@@ -254,9 +255,6 @@
     //显示状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    //注册device token
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
-    
     //api test
     
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
@@ -285,46 +283,24 @@
         
     }
     
-    //[miglabAPI doPresentMusic:userid token:accesstoken touid:userid sid:22869];
-    //[miglabAPI doSayHello:userid token:accesstoken touid:userid msg:@"hehe"];
-    //[miglabAPI doGetPushMsg:userid token:accesstoken pageindex:@"1" pagesize:@"5"];
-    //[miglabAPI doGetSongHistory:@"10343" token:@"12222" fromid:@"" count:@""];
-    //[miglabAPI doGetMyNearMusicMsgNumber:@"10343" token:@"121" radius:@"10000" location:@"30.292207031178,120.0855621569"];
-    //[miglabAPI doCommentSong:@"1" token:@"2" songid:@"22869" comment:@"haha, nan ting si le"];
-    //[miglabAPI doGetSongComment:@"1" token:@"2" songid:@"12323" count:@"1" fromid:@"1"];
-    //[miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
-    
-//    [miglabAPI doRegister:@"archerhehe2" password:@"12345678" nickname:@"archerhehe2" source:SourceTypeSinaWeibo session:@"1" sex:@"1"];
-    //[miglabAPI doGetNearMusic:@"1" token:@"2" radius:@"10000" pageindex:@"1" pagesize:@"5" location:@"30.30022,120.127393"];
-    //[miglabAPI doDeleteCollectedSong:@"1" token:@"2" songid:@"22869"];
-    //[miglabAPI doGetSongInfo:@"1" token:@"2" songid:@"22869"];
-    //[miglabAPI doRecordCurrentSong:@"1" token:@"2" lastsong:@"22869" cursong:@"22869" mode:@"1" typeid:@"1" name:@"hehh" singer:@"archer" state:@"1"];
-    
-    
-    //[miglabAPI doGetTypeSongs:@"1" token:@"2" moodid:@"1" moodindex:@"2" sceneid:@"2" sceneindex:@"2" channelid:@"1" channelindex:@"2" num:@"5"];
-//    [miglabAPI doCollectSong:@"1" token:@"2" sid:@"22869" modetype:@"2" typeid:@"7"];
-    //[miglabAPI doHateSong:@"1" token:@"2" sid:@"22869"];
-    //[miglabAPI doCollectAndNearNum:@"1" token:@"2" taruid:@"5" radius:@"1000" pageindex:@"0" pagesize:@"10" location:@"30.30022,120.127393"];
-    
-    /*
-    NSString *testuserid = @"10026";
-    NSString *testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd80M2OEVDODFEOTIyRTk1MkJBMzNC";
-    [miglabAPI doGetModeMusic:testuserid token:testaccesstoken wordid:@"1" mood:@"mm"];
-    [miglabAPI doAddMoodRecord:testuserid token:testaccesstoken wordid:@"1" songid:99993];
-    [miglabAPI doSetUserPos:testuserid token:testaccesstoken location:@"30.30022,120.127393"];
-    [miglabAPI doSearchNearby:testuserid token:testaccesstoken location:@"30.30022,120.127393" radius:1000];
-    */
-    
-    /*
-    testuserid = @"10000";
-    testaccesstoken = @"AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2";
-    [miglabAPI doGetMoodMap:testuserid token:testaccesstoken];
-    [miglabAPI doGetMoodParent:testuserid token:testaccesstoken];
-    */
-    
     //
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    //注册device token
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
+    
+    if (launchOptions) {
+        
+        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        if (pushNotificationKey) {
+            
+            /* 如果程序是通过消息启动的，在这里做处理 */
+        }
+    }
+    
+    
     return YES;
 }
 
@@ -499,6 +475,7 @@
     
     [UserSessionManager GetInstance].devicetoken = device_token;
     
+    /* 如果用户已经登录，则发送一次数据 */
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         MigLabAPI* miglab = [[MigLabAPI alloc] init];
@@ -513,6 +490,19 @@
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     
     PLog(@"get device token failed");
+}
+
+-(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    /* 处理推送消息 */
+    PLog(@"receive message from push");
+    
+    application.applicationIconBadgeNumber = 0;
+    
+    /* 跳转到推送消息的页面 */
+    MessageViewController* msgViewControl = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+    
+    [self.navController pushViewController:msgViewControl animated:YES];
 }
 
 @end
