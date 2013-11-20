@@ -53,9 +53,10 @@
     _lblinfo = [[UILabel alloc] initWithFrame:CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, 45)];
     _lblinfo.text = @"向ta说话打个招呼";
     _lblinfo.textColor = [UIColor grayColor];
+    _lblinfo.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_lblinfo];
     
-    posy += 45;
+    posy += 55;
     
     _text = [[UITextField alloc] initWithFrame:CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, 45)];
     _text.placeholder = @"30字以内";

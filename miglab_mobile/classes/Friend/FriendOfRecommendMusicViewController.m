@@ -192,6 +192,12 @@
     Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
     cell.lblSongInfo.text = [NSString stringWithFormat:@"%@/%@", song.songname, song.artist];
     
+    if (song.presentMsg) {
+        
+        cell.tvRecommendContent.text = song.presentMsg;
+        [cell.lblPlaceHolder setHidden:YES];
+    }
+    
 	return cell;
 }
 
