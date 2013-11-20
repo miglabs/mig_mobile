@@ -498,6 +498,7 @@
     PLog(@"receive message from push");
     
     application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
     
     /* 跳转到推送消息的页面 */
     MessageViewController* msgViewControl = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
