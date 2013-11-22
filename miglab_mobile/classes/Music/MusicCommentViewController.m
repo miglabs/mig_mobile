@@ -41,7 +41,7 @@
         
         //getCommentList
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListFailed:) name:NotificationNameGetCommentFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListSuccess::) name:NotificationNameGetCommentSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListSuccess:) name:NotificationNameGetCommentSuccess object:nil];
         
         //监听键盘高度的变换
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -331,6 +331,7 @@
     if (cell == nil) {
         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MusicCommentCell" owner:self options:nil];
         cell = (MusicCommentCell *)[nibContents objectAtIndex:0];
+        cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
