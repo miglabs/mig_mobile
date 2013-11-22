@@ -16,8 +16,18 @@
 @property (nonatomic, retain) MusicCommentPlayerView* musicCommentHeader;
 @property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 @property (nonatomic, assign) BOOL isFriend;
+@property (nonatomic, retain) MigLabAPI* miglabAPI;
 
 -(IBAction)doSendSong:(id)sender;
 -(IBAction)doLoadChat:(id)sender;
+-(IBAction)doPlayOrPause:(id)sender;
+-(IBAction)doCollectedOrCancel:(id)sender;
+-(IBAction)doHate:(id)sender;
+
+-(void)doCollectedSuccess:(NSNotification*)tNotification;
+-(void)doCollectedFailed:(NSNotification*)tNotification;
+
+-(void)doCancelSuccess:(NSNotification*)tNotification;
+-(void)doCancelFailed:(NSNotification*)tNotification;
 
 @end

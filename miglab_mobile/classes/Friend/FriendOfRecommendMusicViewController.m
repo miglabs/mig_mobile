@@ -36,6 +36,12 @@
     return self;
 }
 
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePresentMusicSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePresentMusicFailed object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

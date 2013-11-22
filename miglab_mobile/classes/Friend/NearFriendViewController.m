@@ -135,7 +135,8 @@
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
-        [self.miglabAPI doGetNearUser:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:tLocation];
+        //junliu
+        [self.miglabAPI doGetNearUser:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:@"30.318076,120.133909"];
         
     } else {
         

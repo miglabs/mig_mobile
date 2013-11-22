@@ -30,6 +30,12 @@
     return self;
 }
 
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSayHelloSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSayHelloFailed object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

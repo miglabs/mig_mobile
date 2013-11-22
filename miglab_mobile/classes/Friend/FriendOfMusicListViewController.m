@@ -32,6 +32,12 @@
     return self;
 }
 
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCollectedSongsSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCollectedSongsFailed object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
