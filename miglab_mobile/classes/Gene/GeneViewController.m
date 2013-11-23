@@ -31,6 +31,7 @@ static int PAGE_WIDTH = 81;
 @synthesize oldGeneFrame = _oldGeneFrame;
 
 //音乐基因
+@synthesize isChannelLock = _isChannelLock;
 @synthesize modifyGeneView = _modifyGeneView;
 
 @synthesize xmlParserUtil = _xmlParserUtil;
@@ -137,6 +138,14 @@ static int PAGE_WIDTH = 81;
     [_btnScene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnScene];
     
+    //是否锁定频道
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"IsChannelLock"]) {
+        _isChannelLock = YES;
+    } else {
+        _isChannelLock = NO;
+    }
+    
     //音乐基因
     NSArray *modifyNib = [[NSBundle mainBundle] loadNibNamed:@"ModifyGeneView" owner:self options:nil];
     for (id oneObject in modifyNib){
@@ -149,6 +158,13 @@ static int PAGE_WIDTH = 81;
     //返回播放信息页面
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
+    float tempposx = 285;
+    CGRect switchChannelFrame = _modifyGeneView.switchChannelLock.frame;
+    _modifyGeneView.switchChannelLock.frame = CGRectMake(tempposx-switchChannelFrame.size.width, (44-switchChannelFrame.size.height)/2, switchChannelFrame.size.width, switchChannelFrame.size.height);
+    _modifyGeneView.switchChannelLock.on = _isChannelLock;//是否锁定频道
+    [_modifyGeneView.switchChannelLock addTarget:self action:@selector(doSwitchLockAction:) forControlEvents:UIControlEventValueChanged];
+    CGRect lockDesc = _modifyGeneView.lblChannelLock.frame;
+    _modifyGeneView.lblChannelLock.frame = CGRectMake(tempposx-switchChannelFrame.size.width-lockDesc.size.width, lockDesc.origin.y, lockDesc.size.width, lockDesc.size.height);
     _modifyGeneView.lblChannel.font = [UIFont fontOfApp:17.0f];
     _modifyGeneView.lblType.font = [UIFont fontOfApp:17.0f];
     _modifyGeneView.lblMood.font = [UIFont fontOfApp:17.0f];
@@ -250,7 +266,7 @@ static int PAGE_WIDTH = 81;
         lblScene.text = tempscene.name;
         lblScene.textAlignment = kTextAlignmentCenter;
         lblScene.textColor = [UIColor whiteColor];
-        lblScene.font = [UIFont systemFontOfSize:15.0f];
+        lblScene.font = [UIFont fontOfApp:15.0f];
         [_modifyGeneView.sceneScrollView addSubview:lblScene];
     }
     
@@ -265,6 +281,9 @@ static int PAGE_WIDTH = 81;
     
     //检查更新
     [self checkGeneConfigfile];
+    
+    //
+    [self doResetChannelLockView];
     
 }
 
@@ -645,6 +664,32 @@ static int PAGE_WIDTH = 81;
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
     */
+    
+}
+
+//频道锁定开关
+-(IBAction)doSwitchLockAction:(id)sender{
+    
+    UISwitch *switchLock = (UISwitch *)sender;
+    _isChannelLock = [switchLock isOn];
+    [[NSUserDefaults standardUserDefaults] setBool:_isChannelLock forKey:@"IsChannelLock"];
+    
+    [self doResetChannelLockView];
+    
+}
+
+-(void)doResetChannelLockView{
+    
+    //
+    if (_isChannelLock) {
+        _modifyGeneView.typeScrollView.scrollEnabled = NO;
+        _modifyGeneView.moodScrollView.scrollEnabled = NO;
+        _modifyGeneView.sceneScrollView.scrollEnabled = NO;
+    } else {
+        _modifyGeneView.typeScrollView.scrollEnabled = YES;
+        _modifyGeneView.moodScrollView.scrollEnabled = YES;
+        _modifyGeneView.sceneScrollView.scrollEnabled = YES;
+    }
     
 }
 

@@ -28,6 +28,7 @@
 @property (nonatomic, assign) CGRect oldGeneFrame;
 
 //音乐基因
+@property (nonatomic, assign) BOOL isChannelLock;
 @property (nonatomic, retain) ModifyGeneView *modifyGeneView;
 
 @property (nonatomic, retain) XmlParserUtil *xmlParserUtil;
@@ -40,6 +41,9 @@
 
 -(IBAction)doGotoGene:(id)sender;
 -(IBAction)doBackFromGene:(id)sender;
+//频道锁定开关
+-(IBAction)doSwitchLockAction:(id)sender;
+-(void)doResetChannelLockView;
 
 //更新日期显示
 -(void)updateDate;

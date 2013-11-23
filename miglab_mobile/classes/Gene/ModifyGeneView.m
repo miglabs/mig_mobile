@@ -12,6 +12,8 @@
 
 @synthesize bodyBgImageView = _bodyBgImageView;
 @synthesize btnBack = _btnBack;
+@synthesize lblChannelLock = _lblChannelLock;
+@synthesize switchChannelLock = _switchChannelLock;
 @synthesize lblChannel = _lblChannel;
 @synthesize lblType = _lblType;
 @synthesize lblMood = _lblMood;
