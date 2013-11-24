@@ -149,6 +149,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)updateDisplayInfo {
+    
+    
+}
+
 -(IBAction)doPlayOrPause:(id)sender {
     
     PLog(@"recommand song play or pause");

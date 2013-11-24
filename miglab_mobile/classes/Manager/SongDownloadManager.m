@@ -105,6 +105,12 @@
 -(long long)getSongLocalSize:(Song *)tsong{
     
     NSString *cachepath = [self getSongCachePath:tsong];
+    
+    if (cachepath && !tsong.songCachePath) {
+        
+        tsong.songCachePath = cachepath;
+    }
+    
     return [super getLocalFileSize:cachepath];
     
 }

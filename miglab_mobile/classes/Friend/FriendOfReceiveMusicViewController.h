@@ -24,6 +24,8 @@
 -(IBAction)doCollectedOrCancel:(id)sender;
 -(IBAction)doHate:(id)sender;
 
+-(void)updateDisplayInfo;
+
 -(void)doCollectedSuccess:(NSNotification*)tNotification;
 -(void)doCollectedFailed:(NSNotification*)tNotification;
 
