@@ -2876,12 +2876,18 @@
             
             if(1 == status) {
                 
-                int msg_num = [[dicJson objectForKey:@"msg_num"] intValue];
-                int music_num = [[dicJson objectForKey:@"music_num"] intValue];
+                NSDictionary* dicres = [dicJson objectForKey:@"result"];
+                
+                NSString* fri_num = [dicres objectForKey:@"fri_num"];
+                NSString* music_num = [dicres objectForKey:@"music_num"];
+                NSString* near_num = [dicres objectForKey:@"near_num"];
+                NSString* msg_num = [dicres objectForKey:@"msg_num"];
                 
                 NSMutableArray* numarray = [[NSMutableArray alloc] init];
-                [numarray addObject:[NSNumber numberWithInt:msg_num]];
-                [numarray addObject:[NSNumber numberWithInt:music_num]];
+                [numarray addObject:fri_num];
+                [numarray addObject:music_num];
+                [numarray addObject:near_num];
+                [numarray addObject:msg_num];
                 
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:numarray, @"result", nil];
                 
