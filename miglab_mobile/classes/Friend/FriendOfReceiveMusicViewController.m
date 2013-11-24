@@ -85,6 +85,7 @@
     [_musicCommentHeader.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
     [_musicCommentHeader.btnCollect addTarget:self action:@selector(doCollectedOrCancel:) forControlEvents:UIControlEventTouchUpInside];
     [_musicCommentHeader.btnDelete addTarget:self action:@selector(doHate:) forControlEvents:UIControlEventTouchUpInside];
+    [_musicCommentHeader.btnShare setHidden:YES];
     
     int islike = [_msginfo.song.like intValue];
     if (islike > 0) {
@@ -151,7 +152,18 @@
 
 -(void)updateDisplayInfo {
     
+    PAAMusicPlayer* aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     
+    if ([aaMusicPlayer isMusicPlaying]) {
+        
+        UIImage* stop = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+        [_musicCommentHeader.btnPlayOrPause setImage:stop forState:UIControlStateNormal];
+    }
+    else {
+        
+        UIImage* play = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+        [_musicCommentHeader.btnPlayOrPause setImage:play forState:UIControlStateNormal];
+    }
 }
 
 -(IBAction)doPlayOrPause:(id)sender {
@@ -159,6 +171,8 @@
     PLog(@"recommand song play or pause");
     
     [[PPlayerManagerCenter GetInstance] doInsertPlay:_msginfo.song];
+    
+    [self updateDisplayInfo];
 }
 
 -(IBAction)doCollectedOrCancel:(id)sender {
