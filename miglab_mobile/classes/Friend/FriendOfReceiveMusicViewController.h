@@ -12,11 +12,12 @@
 
 @interface FriendOfReceiveMusicViewController : BaseViewController
 
+@property (nonatomic, retain) MigLabAPI* miglabAPI;
 @property (nonatomic, retain) MessageInfo* msginfo;
 @property (nonatomic, retain) MusicCommentPlayerView* musicCommentHeader;
 @property (nonatomic, retain) FriendOfMessageContentView* messageContentView;
 @property (nonatomic, assign) BOOL isFriend;
-@property (nonatomic, retain) MigLabAPI* miglabAPI;
+@property (nonatomic, assign) BOOL isFirstPlay;
 
 -(IBAction)doSendSong:(id)sender;
 -(IBAction)doLoadChat:(id)sender;

@@ -21,6 +21,7 @@
 @synthesize messageContentView = _messageContentView;
 @synthesize isFriend = _isFriend;
 @synthesize miglabAPI = _miglabAPI;
+@synthesize isFirstPlay = _isFirstPlay;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +50,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isFirstPlay = YES;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -128,6 +131,8 @@
     
     [self.view addSubview:_messageContentView];
     
+    [self updateDisplayInfo];
+    
     _miglabAPI = [[MigLabAPI alloc] init];
 }
 
@@ -170,7 +175,15 @@
     
     PLog(@"recommand song play or pause");
     
-    [[PPlayerManagerCenter GetInstance] doInsertPlay:_msginfo.song];
+    if (_isFirstPlay) {
+        
+        [[PPlayerManagerCenter GetInstance] doInsertPlay:_msginfo.song];
+        _isFirstPlay = NO;
+    }
+    else {
+        
+        [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+    }
     
     [self updateDisplayInfo];
 }
