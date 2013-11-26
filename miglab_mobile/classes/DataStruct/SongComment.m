@@ -41,4 +41,9 @@
     return  sc;
 }
 
+-(void)log {
+    
+    
+}
+
 @end

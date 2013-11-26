@@ -2786,19 +2786,24 @@
                 bReturnSucceed = true;
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-                NSString* tsongid = [dicTemp objectForKey:@"songid"];
-                
-                NSArray* comments = [dicTemp objectForKey:@"comments"];
-                int commentcount = [comments count];
-                
+                int totlesize = [[dicJson objectForKey:@"size"] intValue];
+                int commentcount = 0;
                 NSMutableArray* commentInfo = [[NSMutableArray alloc] init];
                 
-                for (int i=0; i<commentcount; i++) {
+                if (totlesize > 0) {
                     
-                    SongComment* sc = [SongComment initWithNSDictionary:[comments objectAtIndex:i]];
-                    sc.songid = tsongid;
+                    NSString* tsongid = [dicTemp objectForKey:@"songid"];
                     
-                    [commentInfo addObject:sc];
+                    NSArray* comments = [dicTemp objectForKey:@"comments"];
+                    commentcount = [comments count];
+                    
+                    for (int i=0; i<commentcount; i++) {
+                        
+                        SongComment* sc = [SongComment initWithNSDictionary:[comments objectAtIndex:i]];
+                        sc.songid = tsongid;
+                        
+                        [commentInfo addObject:sc];
+                    }
                 }
                 
                 if (commentcount == 0) {

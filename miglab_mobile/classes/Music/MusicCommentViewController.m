@@ -78,9 +78,11 @@
     //nav title
     self.navView.titleLabel.text = @"评论当前歌曲";
     
+    posy += 10;
+    
     //body
     _bodyView = [[UIView alloc] init];
-    _bodyView.frame = CGRectMake(0, posy + 10, kMainScreenWidth, kMainScreenHeight - posy - 10 - 10 - 49);
+    _bodyView.frame = CGRectMake(0, posy, kMainScreenWidth, kMainScreenHeight - posy - 10 - 49);
     _bodyView.backgroundColor = [UIColor clearColor];
     
     //player
@@ -90,7 +92,7 @@
             _commentPlayerView = (MusicCommentPlayerView *)oneObject;
         }//if
     }//for
-    _commentPlayerView.frame = CGRectMake(11.5, 0, 297, 110);
+    _commentPlayerView.frame = CGRectMake(11.5, 0, ORIGIN_WIDTH, 110);
     [_bodyView addSubview:_commentPlayerView];
     
     _commentPlayerView.btnAvatar.layer.cornerRadius = 38;
@@ -107,10 +109,11 @@
     [_commentPlayerView.btnDelete addTarget:self action:@selector(doHate:) forControlEvents:UIControlEventTouchUpInside];
     [_commentPlayerView.btnShare addTarget:self action:@selector(doShare:) forControlEvents:UIControlEventTouchUpInside];
     
+    posy += 50;
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 110 + 10, 297, kMainScreenHeight - posy - 10 - 10 - 49 - 110 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy, ORIGIN_WIDTH, kMainScreenHeight - posy - 10 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -132,10 +135,13 @@
             _commentInputView = (MusicCommentInputView *)oneObject;
         }//if
     }//for
-    _commentInputView.frame = CGRectMake(0, kMainScreenHeight - 49, kMainScreenWidth, 49);
+    _commentInputView.frame = CGRectMake(0, kMainScreenHeight - 29, kMainScreenWidth, 49);
     _commentInputView.commentTextField.delegate = self;
     [_commentInputView.btnSendComent addTarget:self action:@selector(doCommentSong:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commentInputView];
+    
+    //data
+    _dataList = [[NSMutableArray alloc] init];
     
     //
     _miglabAPI = [[MigLabAPI alloc] init];
@@ -301,9 +307,9 @@
         if (_pageIndex == 0) {
             [_dataList removeAllObjects];
         }
+        
         [_dataList addObjectsFromArray:commentlist];
         [_dataTableView reloadData];
-        
     }
     
 }
@@ -458,7 +464,7 @@
         bodyFrame.origin.y = posy + 10 - h;
         _bodyView.frame = bodyFrame;
         
-        _commentInputView.frame = CGRectMake(0.0f, (float)(kMainScreenHeight-h-49), 320.0f, 49.0f);
+        _commentInputView.frame = CGRectMake(0.0f, (float)(kMainScreenHeight-h-29), 320.0f, 49.0f);
         
     } completion:^(BOOL finished) {
         
