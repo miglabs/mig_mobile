@@ -33,4 +33,11 @@
 /* 打招呼的字数限制 */
 #define MAX_SAYHI_COUNT             30
 
+/* 登陆账号ID类别 */
+#define LOGIN_MIGLAB                0
+#define LOGIN_SINA                  1
+#define LOGIN_WEIXIN                2
+#define LOGIN_QQZONE                3
+#define LOGIN_DOUBAN                4
+
 #endif

@@ -23,7 +23,8 @@ typedef enum {
     SourceTypeMiglab = 0,
     SourceTypeSinaWeibo = 1,
     SourceTypeTencentWeibo = 2,
-    SourceTypeDouBan = 3
+    SourceTypeTencentQQZone = 3,
+    SourceTypeDouBan = 4
 } SourceType;
 
 @interface MigLabAPI : NSObject

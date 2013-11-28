@@ -346,11 +346,20 @@
     cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
     cell.lblNickname.text = tempcomment.user.nickname ? tempcomment.user.nickname: @"未知用户";
     cell.lblNickname.font = [UIFont fontOfApp:17.0f];
+    
+    NSString* tempnickname = cell.lblNickname.text;
+    CGSize size = CGSizeMake(73, 21);
+    CGRect orgPos = cell.lblNickname.frame;
+    CGSize nicknamesize = [tempnickname sizeWithFont:cell.lblNickname.font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+    [cell.lblNickname setFrame:CGRectMake(orgPos.origin.x, orgPos.origin.y, nicknamesize.width, nicknamesize.height)];
+    
     if (tempcomment.user.gender > 0) {
         cell.genderImageView.image = [UIImage imageWithName:@"user_gender_male" type:@"png"];
     } else {
         cell.genderImageView.image = [UIImage imageWithName:@"user_gender_female" type:@"png"];
     }
+    cell.genderImageView.frame = CGRectMake(orgPos.origin.x + nicknamesize.width + 5, 12, 12, 12);
+    
     cell.lblTime.text = tempcomment.createdtime;
     cell.lblTime.font = [UIFont fontOfApp:10.0f];
     cell.lblContent.text = tempcomment.text;

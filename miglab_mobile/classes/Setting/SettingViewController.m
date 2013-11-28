@@ -53,7 +53,7 @@
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _dataTableView.scrollEnabled = NO;
+    _dataTableView.scrollEnabled = YES;
     [self.view addSubview:_dataTableView];
     
     NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
@@ -235,7 +235,7 @@
         
         cell.backgroundView = btnLogout;
         
-        arrowimage.hidden = YES;
+        arrowimage.hidden = NO;
         
     }
     

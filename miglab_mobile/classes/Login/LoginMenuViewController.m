@@ -566,9 +566,9 @@
     doubanAccount.expirationdate = [NSDate dateWithTimeIntervalSince1970:[expires_in longLongValue]];
     doubanAccount.accounttype = SourceTypeDouBan;
     
-    [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
+    [UserSessionManager GetInstance].accounttype = SourceTypeDouBan;
     [UserSessionManager GetInstance].currentUser.doubanAccount = doubanAccount;
-    [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
+    [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
     
     //
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
