@@ -173,18 +173,25 @@ static PPlayerManagerCenter *instance;
     
     if (_songList && [_songList count] > 0) {
         
-        _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
-        _currentSong = [_songList objectAtIndex:_currentSongIndex];
-        
-        [self stopDownload];
-        
-        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-        if ([aaMusicPlayer isMusicPlaying]) {
-            [aaMusicPlayer pause];
+        if (_currentSongIndex + 1 >= [_songList count]) {
+            
+            //do something and return;
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNeedUpdateList object:nil userInfo:nil];
         }
-        
-        [self initSongInfo];
-        
+        else {
+            
+            _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
+            _currentSong = [_songList objectAtIndex:_currentSongIndex];
+            
+            [self stopDownload];
+            
+            PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+            if ([aaMusicPlayer isMusicPlaying]) {
+                [aaMusicPlayer pause];
+            }
+            
+            [self initSongInfo];
+        }
     }
     
 }

@@ -320,4 +320,7 @@
 #define NotificationNameConfigPushSuccess                   @"NotificationNameConfigPushSuccess"
 #define NotificationNameConfigPushFailed                    @"NotificationNameConfigPushFailed"
 
+/* 需要更新歌曲列表 */
+#define NotificationNameNeedUpdateList                      @"NotificationNameNeedUpdateList"
+
 #endif

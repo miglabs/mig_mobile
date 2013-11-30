@@ -37,6 +37,8 @@
 @property (nonatomic, retain) Mood *currentMood;
 @property (nonatomic, retain) Scene *currentScene;
 
+@property (nonatomic, assign) BOOL isUpdateList;
+
 -(IBAction)doAvatar:(id)sender;
 
 -(IBAction)doGotoGene:(id)sender;
@@ -44,6 +46,9 @@
 //频道锁定开关
 -(IBAction)doSwitchLockAction:(id)sender;
 -(void)doResetChannelLockView;
+
+/* 获取新的歌曲 */
+-(void)doUpdateNewList:(id)sender;
 
 //更新日期显示
 -(void)updateDate;

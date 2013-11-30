@@ -40,6 +40,8 @@ static int PAGE_WIDTH = 81;
 @synthesize currentMood = _currentMood;
 @synthesize currentScene = _currentScene;
 
+@synthesize isUpdateList = _isUpdateList;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -53,6 +55,9 @@ static int PAGE_WIDTH = 81;
         //getTypeSongs
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
+        
+        /* update song list */
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdateNewList:) name:NotificationNameNeedUpdateList object:nil];
         
     }
     return self;
@@ -68,12 +73,15 @@ static int PAGE_WIDTH = 81;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedUpdateList object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isUpdateList = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -875,8 +883,28 @@ static int PAGE_WIDTH = 81;
     }
     */
     
+    if (_isUpdateList) {
+        
+        _isUpdateList = NO;
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if (![aaMusicPlayer isMusicPlaying]) {
+            
+            [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+        }
+    }
+    
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
+}
+
+#pragma UpdateList
+-(void)doUpdateNewList:(id)sender {
+    
+    /* 播放器发送消息，歌曲列表已经播放完成，需要更新 */
+    _isUpdateList = YES;
+    
+    [self loadSongsByGene];
 }
 
 @end
