@@ -40,4 +40,7 @@
 #define LOGIN_QQZONE                3
 #define LOGIN_DOUBAN                4
 
+/* 消息定义 */
+#define NotificationNameNeedUpdateList @"NotificationNameNeedUpdateList"
+
 #endif

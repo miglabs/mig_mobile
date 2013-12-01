@@ -40,6 +40,8 @@ static int PAGE_WIDTH = 81;
 @synthesize currentMood = _currentMood;
 @synthesize currentScene = _currentScene;
 
+@synthesize isUpdatedList = _isUpdatedList;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,6 +56,7 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedUpdateList object:nil];
     }
     return self;
 }
@@ -68,12 +71,15 @@ static int PAGE_WIDTH = 81;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedUpdateList object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isUpdatedList = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -875,8 +881,26 @@ static int PAGE_WIDTH = 81;
     }
     */
     
+    if (_isUpdatedList) {
+        
+        _isUpdatedList = NO;
+        
+        PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+        if ([aaMusicPlayer isMusicPlaying]) {
+            
+            [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+        }
+    }
+    
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
+}
+
+-(void)doUpdatePlayList:(id)sender {
+    
+    _isUpdatedList = YES;
+    
+    [self loadSongsByGene];
 }
 
 @end
