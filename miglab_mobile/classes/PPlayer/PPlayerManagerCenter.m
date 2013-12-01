@@ -259,6 +259,22 @@ static PPlayerManagerCenter *instance;
     }
 }
 
+-(void)doReplaceSongList:(NSMutableArray *)tSongList {
+    
+    PLog(@"doReplaceSongList...");
+    
+    PPlayerManagerCenter* playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    
+    if (playerManagerCenter.songList.count > 0) {
+        
+        _currentSongIndex = 0;
+        playerManagerCenter.currentSongIndex = _currentSongIndex;
+        
+        [playerManagerCenter.songList removeAllObjects];
+        [playerManagerCenter.songList addObjectsFromArray:tSongList];
+    }
+}
+
 -(void)stopDownload{
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];

@@ -894,7 +894,8 @@ static int PAGE_WIDTH = 81;
     }
     else {
         
-        [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+        // 如果是音乐基因获取到的歌曲，则删除之前的列表，添加新歌曲
+        [[PPlayerManagerCenter GetInstance] doReplaceSongList:tempsonglist];
     }
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
