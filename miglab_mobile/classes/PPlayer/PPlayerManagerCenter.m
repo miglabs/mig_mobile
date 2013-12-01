@@ -173,9 +173,9 @@ static PPlayerManagerCenter *instance;
     
     if (_songList && [_songList count] > 0) {
         
-        if (_currentSongIndex + 1 >= [_songList count]) {
+        if (([_songList count] > 0) && (_currentSongIndex + 1 >= [_songList count])) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNeedUpdateList object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNeedAddList object:nil userInfo:nil];
         }
         else {
         
@@ -232,13 +232,31 @@ static PPlayerManagerCenter *instance;
     
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {
-        playerManagerCenter.currentSongIndex = 0;
         NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tSongList.count)];
         [playerManagerCenter.songList insertObjects:tSongList atIndexes:indexs];
     } else {
         [playerManagerCenter.songList addObjectsFromArray:tSongList];
     }
     
+    _currentSongIndex = (_currentSongIndex + 1 > playerManagerCenter.songList.count) ? 0 : (_currentSongIndex + 1);
+    playerManagerCenter.currentSongIndex = _currentSongIndex;
+}
+
+-(void)doAddSongList:(NSMutableArray *)tSongList {
+    
+    PLog(@"doAddSonglist");
+    
+    PPlayerManagerCenter* playerManagerCenter = [PPlayerManagerCenter GetInstance];
+    
+    if (playerManagerCenter.songList.count > 0) {
+        
+        _currentSongIndex += 1;
+        playerManagerCenter.currentSongIndex = _currentSongIndex;
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tSongList.count)];
+        [playerManagerCenter.songList insertObjects:tSongList atIndexes:indexs];
+    } else {
+        [playerManagerCenter.songList addObjectsFromArray:tSongList];
+    }
 }
 
 -(void)stopDownload{

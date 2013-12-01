@@ -147,8 +147,9 @@
     }
     */
     
-    playerManagerCenter.currentSongIndex = (songListCount > 0) ? rnd : 0;
-    playerManagerCenter.currentSong = (songListCount > 0) ? [tempsonglist objectAtIndex:rnd] : nil;
+    //playerManagerCenter.currentSongIndex = (songListCount > 0) ? rnd : 0;
+    playerManagerCenter.currentSongIndex = 0;
+    playerManagerCenter.currentSong = (songListCount > 0) ? [tempsonglist objectAtIndex:playerManagerCenter.currentSongIndex] : nil;
     
 }
 
@@ -487,7 +488,8 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
-    
+ 
+    // 从网络获取歌曲失败，则从本地数据库获取音乐
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     

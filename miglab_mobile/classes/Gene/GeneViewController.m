@@ -56,7 +56,7 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedUpdateList object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
     }
     return self;
 }
@@ -71,7 +71,7 @@ static int PAGE_WIDTH = 81;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedUpdateList object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
 }
 
 - (void)viewDidLoad
@@ -849,7 +849,8 @@ static int PAGE_WIDTH = 81;
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
-    
+
+    // 从网络获取歌曲失败，则从本地数据库获取音乐
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
@@ -868,8 +869,6 @@ static int PAGE_WIDTH = 81;
     
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
-    
-    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
     /*
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {
@@ -883,6 +882,8 @@ static int PAGE_WIDTH = 81;
     
     if (_isUpdatedList) {
         
+        [[PPlayerManagerCenter GetInstance] doAddSongList:tempsonglist];
+        
         _isUpdatedList = NO;
         
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
@@ -890,6 +891,10 @@ static int PAGE_WIDTH = 81;
             
             [[PPlayerManagerCenter GetInstance] doPlayOrPause];
         }
+    }
+    else {
+        
+        [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
     }
     
     [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
