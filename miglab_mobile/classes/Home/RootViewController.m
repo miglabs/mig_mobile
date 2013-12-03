@@ -509,7 +509,15 @@
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
-    [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    if ([songInfoList count] > 0) {
+        
+        [[PPlayerManagerCenter GetInstance] doReplaceSongList:songInfoList];
+        [[PPlayerManagerCenter GetInstance] doNext];
+    }
+    else {
+    
+        [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+    }
     /*
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     if (playerManagerCenter.songList.count > 0) {

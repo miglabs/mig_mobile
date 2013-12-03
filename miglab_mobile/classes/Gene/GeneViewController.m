@@ -882,6 +882,7 @@ static int PAGE_WIDTH = 81;
     
     if (_isUpdatedList) {
         
+        // 如果是正在播放的列表歌曲播放完毕，则在原有列表上添加新的歌曲
         [[PPlayerManagerCenter GetInstance] doAddSongList:tempsonglist];
         
         _isUpdatedList = NO;
@@ -892,9 +893,17 @@ static int PAGE_WIDTH = 81;
             [[PPlayerManagerCenter GetInstance] doPlayOrPause];
         }
     }
-    else {
+    else if([songInfoList count] > 0){
         
         // 如果是音乐基因获取到的歌曲，则删除之前的列表，添加新歌曲
+        // 原有逻辑是添加从本地获取的列表，改为添加从服务端获取的列表，获取失败的逻辑不变
+        //[[PPlayerManagerCenter GetInstance] doReplaceSongList:tempsonglist];
+        [[PPlayerManagerCenter GetInstance] doReplaceSongList:songInfoList];
+        [[PPlayerManagerCenter GetInstance] doNext];
+    }
+    else {
+        
+        // 没有获取到一首歌，则用本地的数据
         [[PPlayerManagerCenter GetInstance] doReplaceSongList:tempsonglist];
     }
     

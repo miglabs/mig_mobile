@@ -265,9 +265,9 @@ static PPlayerManagerCenter *instance;
     
     PPlayerManagerCenter* playerManagerCenter = [PPlayerManagerCenter GetInstance];
     
-    if (playerManagerCenter.songList.count > 0) {
+    if ([tSongList count] > 0) {
         
-        _currentSongIndex = 0;
+        _currentSongIndex = -1;
         playerManagerCenter.currentSongIndex = _currentSongIndex;
         
         [playerManagerCenter.songList removeAllObjects];
