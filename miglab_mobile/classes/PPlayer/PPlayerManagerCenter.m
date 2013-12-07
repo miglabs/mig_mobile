@@ -208,8 +208,11 @@ static PPlayerManagerCenter *instance;
     
     } else {
         
-        [_songList insertObject:tInsertSong atIndex:0];
-        _currentSongIndex = 0;
+        //[_songList insertObject:tInsertSong atIndex:0];
+        //_currentSongIndex = 0;
+        
+        [_songList insertObject:tInsertSong atIndex:_currentSongIndex];
+        
         _currentSong = tInsertSong;
         
         [self stopDownload];
@@ -238,7 +241,7 @@ static PPlayerManagerCenter *instance;
         [playerManagerCenter.songList addObjectsFromArray:tSongList];
     }
     
-    _currentSongIndex = (_currentSongIndex + 1 > playerManagerCenter.songList.count) ? 0 : (_currentSongIndex + 1);
+    //_currentSongIndex = (_currentSongIndex + 1 > playerManagerCenter.songList.count) ? 0 : (_currentSongIndex + 1);
     playerManagerCenter.currentSongIndex = _currentSongIndex;
 }
 
