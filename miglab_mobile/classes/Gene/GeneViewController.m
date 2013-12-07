@@ -682,6 +682,20 @@ static int PAGE_WIDTH = 81;
     
     [self doResetChannelLockView];
     
+    if (_isChannelLock) {
+        
+        // 如果锁定了频道，根据当前频道，重置其他设置
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        
+        Channel* tempchannel = usergene.channel;
+        
+        usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
+        usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
+        usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
+        
+        [self initGeneByUserGene:usergene];
+        
+    }
 }
 
 -(void)doResetChannelLockView{
