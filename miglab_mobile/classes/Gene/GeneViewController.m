@@ -684,18 +684,27 @@ static int PAGE_WIDTH = 81;
     
     if (_isChannelLock) {
         
-        // 如果锁定了频道，根据当前频道，重置其他设置
+        // 如果锁定了频道，则组合上传
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         
-        Channel* tempchannel = [_xmlParserUtil.channelList objectAtIndex:[usergene.channel.channelId intValue]];
+//        Channel* tempchannel = [_xmlParserUtil.channelList objectAtIndex:[usergene.channel.channelId intValue]];
+//        Type* temptype = [_xmlParserUtil.typeList objectAtIndex:usergene.type.typeIndex];
+//        Mood* tempmood = [_xmlParserUtil.moodList objectAtIndex:usergene.mood.moodIndex];
+//        Scene* tempscene = [_xmlParserUtil.sceneList objectAtIndex:usergene.scene.sceneIndex];
+//        
+//        usergene.channel = tempchannel;
+//        usergene.type = temptype;
+//        usergene.mood = tempmood;
+//        usergene.scene = tempscene;
         
-        usergene.channel = tempchannel;
-        usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
-        usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
-        usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
+        if (usergene.channel.changenum == -1) {
+            
+            usergene.type.changenum = 0;
+            usergene.mood.changenum = 0;
+            usergene.scene.changenum = 0;
+        }
         
-        [self initGeneByUserGene:usergene];
-        
+        //[self initGeneByUserGene:usergene];
     }
 }
 
