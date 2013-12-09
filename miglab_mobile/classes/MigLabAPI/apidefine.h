@@ -40,6 +40,9 @@
 #define LOGIN_QQZONE                3
 #define LOGIN_DOUBAN                4
 
+/* 默认推荐语 */
+#define DEFAULT_RECOMMEND_MESSAGE   @"来听听嘛~"
+
 /* 消息定义 */
 #define NotificationNameNeedAddList @"NotificationNameNeedAddList"
 

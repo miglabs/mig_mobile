@@ -147,6 +147,18 @@
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
+        /* 对所有歌曲遍历检查一遍，如果赠送歌曲的推荐语为空，则发送默认的推荐语 */
+        int sendcount = [_sendsongData count];
+        for (int i=0; i<sendcount; i++) {
+            
+            Song* tempSong = (Song*)[_sendsongData objectAtIndex:i];
+            
+            if (!tempSong.presentMsg) {
+                
+                tempSong.presentMsg = DEFAULT_RECOMMEND_MESSAGE;
+            }
+        }
+        
         _isSendingSong = YES;
         
         [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
