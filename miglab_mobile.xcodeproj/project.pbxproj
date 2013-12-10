@@ -487,6 +487,7 @@
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
 		CB9909631838DE780095C775 /* FriendOfMessageContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
+		CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
 		CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
@@ -1138,6 +1139,7 @@
 		CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfMessageContentView.xib; sourceTree = "<group>"; };
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
 		CBB425DF17DE18C400E3BA90 /* SongComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongComment.m; sourceTree = "<group>"; };
+		CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_button_recommend.png; sourceTree = "<group>"; };
 		CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfSendSongListViewController.h; sourceTree = "<group>"; };
 		CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfSendSongListViewController.m; sourceTree = "<group>"; };
 		CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfSendSongListViewController.xib; sourceTree = "<group>"; };
@@ -1425,6 +1427,7 @@
 				1624BC2317C795C100BE08A5 /* friend_message_tip.png */,
 				1624BC2417C795C100BE08A5 /* friend_myfriend_tip.png */,
 				1624BC2517C795C100BE08A5 /* friend_nearby_tip.png */,
+				CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */,
 				1624BC1E17C78D1400BE08A5 /* friend_button_addblack.png */,
 				1624BC1F17C78D1400BE08A5 /* friend_button_sayhi.png */,
 				1624BC1C17C7883000BE08A5 /* friend_message_user_head_src.png */,
@@ -2520,6 +2523,7 @@
 				162AAB5017C258F0000E904F /* gene_src_1.png in Resources */,
 				162AAB5117C258F0000E904F /* gene_src_2.png in Resources */,
 				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
+				CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */,
 				16896059181171C00031902F /* LoginMenuCell.xib in Resources */,
 				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
 				1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */,

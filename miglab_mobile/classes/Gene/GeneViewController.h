@@ -15,7 +15,7 @@
 #import "Mood.h"
 #import "Scene.h"
 
-@interface GeneViewController : PlayerViewController<UIScrollViewDelegate>
+@interface GeneViewController : PlayerViewController<UIScrollViewDelegate, PPlayerManagerCenterDelegate>
 
 //当前基因信息
 @property (nonatomic, retain) CurrentGeneView *currentGeneView;
@@ -59,6 +59,7 @@
 -(void)initGene:(Channel *)tchannel typeIndex:(int)ttypeindex moodIndex:(int)tmoodindex sceneIndex:(int)tsceneindex;
 -(void)loadSongsByGene;   //根据音乐基因获取歌曲
 -(void)checkGeneConfigfile;
+-(void)updateGeneDisplay:(Song*)song;
 
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification;
 -(void)getUpdateConfigSuccess:(NSNotification *)tNotification;

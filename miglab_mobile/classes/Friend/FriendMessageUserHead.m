@@ -53,7 +53,7 @@
         _lblListening.text = [NSString stringWithFormat:@"正在听-%@", _userinfo.songname];
     }
     
-    [_btnSendSong setBackgroundImage:[UIImage imageNamed:@"friend_button_addblack.png"] forState:UIControlStateNormal];
+    [_btnSendSong setBackgroundImage:[UIImage imageNamed:@"friend_button_recommend.png"] forState:UIControlStateNormal];
     if (_isFriend) {
         
         [_btnSay setBackgroundImage:[UIImage imageNamed:@"friend_message_replay.png"] forState:UIControlStateNormal];

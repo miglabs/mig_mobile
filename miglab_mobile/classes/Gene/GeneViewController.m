@@ -291,6 +291,8 @@ static int PAGE_WIDTH = 81;
     //
     [self doResetChannelLockView];
     
+    [PPlayerManagerCenter GetInstance].delegate = self;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -687,16 +689,6 @@ static int PAGE_WIDTH = 81;
         // 如果锁定了频道，则组合上传
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
         
-//        Channel* tempchannel = [_xmlParserUtil.channelList objectAtIndex:[usergene.channel.channelId intValue]];
-//        Type* temptype = [_xmlParserUtil.typeList objectAtIndex:usergene.type.typeIndex];
-//        Mood* tempmood = [_xmlParserUtil.moodList objectAtIndex:usergene.mood.moodIndex];
-//        Scene* tempscene = [_xmlParserUtil.sceneList objectAtIndex:usergene.scene.sceneIndex];
-//        
-//        usergene.channel = tempchannel;
-//        usergene.type = temptype;
-//        usergene.mood = tempmood;
-//        usergene.scene = tempscene;
-        
         if (usergene.channel.changenum == -1) {
             
             usergene.type.changenum = 0;
@@ -940,6 +932,53 @@ static int PAGE_WIDTH = 81;
     _isUpdatedList = YES;
     
     [self loadSongsByGene];
+}
+
+-(void)updateGeneDisplay:(Song *)song {
+    
+    NSString* strid = song.type;
+    
+    
+    if ([strid isEqualToString:@"chl"]) {
+        
+        Type* type = [_xmlParserUtil.typeList objectAtIndex:[song.typeid intValue]];
+        
+        UIImage *typeimage = [UIImage imageNamed:type.picname];
+        [_btnType setImage:typeimage forState:UIControlStateNormal];
+        _currentGeneView.typeImageView.image = typeimage;
+        _currentGeneView.lblTypeDesc.text = type.desc;
+    }
+    else if ([strid isEqualToString:@"mm"]) {
+        
+        Mood* mood = [_xmlParserUtil.moodList objectAtIndex:[song.typeid intValue]];
+        
+        UIImage *moodimage = [UIImage imageNamed:mood.picname];
+        [_btnMood setImage:moodimage forState:UIControlStateNormal];
+        _currentGeneView.moodImageView.image = moodimage;
+        _currentGeneView.lblMoodDesc.text = mood.desc;
+    }
+    else if ([strid isEqualToString:@"ms"]) {
+        
+        Scene* scene = [_xmlParserUtil.sceneList objectAtIndex:[song.typeid intValue]];
+        
+        UIImage *sceneimage = [UIImage imageNamed:scene.picname];
+        [_btnScene setImage:sceneimage forState:UIControlStateNormal];
+        _currentGeneView.sceneImageView.image = sceneimage;
+        _currentGeneView.lblSceneDesc.text = scene.desc;
+    }
+}
+
+#pragma mark - Player Delegate
+
+-(void)DidPlayNext:(Song *)song {
+    
+    PLog(@"change gene display...");
+    [self updateGeneDisplay:song];
+}
+
+-(void)DidPlayorPause:(Song *)song {
+    
+    
 }
 
 @end

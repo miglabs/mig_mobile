@@ -20,6 +20,13 @@ typedef enum{
     
 } WhichPlayer;
 
+@protocol PPlayerManagerCenterDelegate <NSObject>
+
+-(void)DidPlayNext:(Song*)song;
+-(void)DidPlayorPause:(Song*)song;
+
+@end
+
 @interface PPlayerManagerCenter : NSObject<PHttpDownloaderDelegate, PMusicPlayerDelegate>
 
 @property (nonatomic, retain) NSMutableArray *playerList;
@@ -33,6 +40,8 @@ typedef enum{
 
 @property BOOL hasAddMoodRecord;
 @property (nonatomic, retain) NSString *lastSongId;
+
+@property (nonatomic, retain) id<PPlayerManagerCenterDelegate> delegate;
 
 +(PPlayerManagerCenter *)GetInstance;
 

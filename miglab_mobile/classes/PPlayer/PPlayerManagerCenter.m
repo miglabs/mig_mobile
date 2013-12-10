@@ -30,6 +30,7 @@
 
 @synthesize hasAddMoodRecord = _hasAddMoodRecord;
 @synthesize lastSongId = _lastSongId;
+@synthesize delegate = _delegate;
 
 static PPlayerManagerCenter *instance;
 
@@ -190,6 +191,12 @@ static PPlayerManagerCenter *instance;
             }
             
             [self initSongInfo];
+            
+            // 更新音乐基因显示内容
+            if (self.delegate != nil) {
+                
+                [self.delegate DidPlayNext:_currentSong];
+            }
         }
     }
     
