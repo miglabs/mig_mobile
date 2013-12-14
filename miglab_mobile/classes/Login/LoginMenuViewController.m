@@ -145,6 +145,7 @@
 
 -(void)didFinishLogin {
     
+    [PDatabaseManager GetInstance].isLastLogOut = NO;
     [self SendDeviceToken];
 }
 

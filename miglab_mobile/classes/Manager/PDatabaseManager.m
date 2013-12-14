@@ -12,6 +12,7 @@
 @implementation PDatabaseManager
 
 @synthesize db = _db;
+@synthesize isLastLogOut = _isLastLogOut;
 
 +(PDatabaseManager *)GetInstance{
     
@@ -334,6 +335,11 @@
     [_db executeUpdate:sql];
     [_db close];
     
+}
+
+-(void)setLogStateInfo:(BOOL)logstate {
+    
+    //NSString* sql = @""
 }
 
 //记录用户音乐基因

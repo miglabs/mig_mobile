@@ -133,8 +133,8 @@
         
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
         AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
-        BOOL isLogedIn = [UserSessionManager GetInstance].isLoggedIn;
-        if ( isLogedIn && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+        BOOL isNeedLogedIn = !databaseManager.isLastLogOut;
+        if ( isNeedLogedIn && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
             
             PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
             if (tempuser) {
@@ -146,6 +146,7 @@
                 [UserSessionManager GetInstance].accesstoken = tempuser.token;
                 [UserSessionManager GetInstance].accounttype = tempuser.source;
                 [UserSessionManager GetInstance].isLoggedIn = YES;
+                databaseManager.isLastLogOut = NO;
             }
             
         } else {

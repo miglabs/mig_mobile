@@ -13,6 +13,7 @@
 #import "UMFeedback.h"
 #import "SettingOfAboutViewController.h"
 #import "UserSessionManager.h"
+#import "PDatabaseManager.h"
 
 @interface SettingViewController ()
 
@@ -87,6 +88,7 @@
     if (buttonIndex == 1) {
         
         [[UserSessionManager GetInstance] doLogout];
+        [PDatabaseManager GetInstance].isLastLogOut = YES;
         
         [self doBack:nil];
         
