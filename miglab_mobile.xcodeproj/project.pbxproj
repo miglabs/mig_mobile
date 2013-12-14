@@ -481,6 +481,9 @@
 		18A6022117F2A29400344C5B /* ShareChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6022017F2A29300344C5B /* ShareChooseView.m */; };
 		18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */; };
 		18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */; };
+		CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */; };
+		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
+		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1129,6 +1132,9 @@
 		18E3472C17A27A57001C46C7 /* PPlayerManagerCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPlayerManagerCenter.m; sourceTree = "<group>"; };
 		18E434E217BE182000DECFC7 /* RootNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationMenuView.h; sourceTree = "<group>"; };
 		18E434E317BE182000DECFC7 /* RootNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationMenuView.m; sourceTree = "<group>"; };
+		CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
+		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
+		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
@@ -1545,6 +1551,9 @@
 			children = (
 				16C10E1517A9638F00DA628D /* get_password_back.png */,
 				16C10E1617A9638F00DA628D /* get_password_by_email.png */,
+				CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */,
+				CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */,
+				CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */,
 				16C10E1717A9638F00DA628D /* login_edit1_bg.png */,
 				16C10E0A17A94F4200DA628D /* login_edit2_bg.png */,
 				16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */,
@@ -2442,6 +2451,7 @@
 				16AB8BA4179EB8A40009411F /* left_menu_arrow.png in Resources */,
 				16AB8BA6179EB8A40009411F /* left_menu_gedan.png in Resources */,
 				16AB8BA7179EB8A40009411F /* left_menu_haoyou.png in Resources */,
+				CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */,
 				16AB8BA8179EB8A40009411F /* left_menu_migfm.png in Resources */,
 				16AB8BA9179EB8A40009411F /* left_menu_separator.png in Resources */,
 				16AB8BAA179EB8A40009411F /* left_menu_shezhi.png in Resources */,
@@ -2494,7 +2504,9 @@
 				1684764617BA791600F42172 /* music_menu_dark_heart_nor.png in Resources */,
 				1684764717BA791600F42172 /* music_menu_dark_heart_sel.png in Resources */,
 				1684764817BA791600F42172 /* music_menu_delete_nor.png in Resources */,
+				CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */,
 				1684764917BA791600F42172 /* music_menu_delete_sel.png in Resources */,
+				CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */,
 				1684764A17BA791600F42172 /* music_menu_next_nor.png in Resources */,
 				1684764B17BA791600F42172 /* music_menu_next_sel.png in Resources */,
 				1684764C17BA791600F42172 /* music_menu_play_nor.png in Resources */,

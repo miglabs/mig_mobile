@@ -93,12 +93,12 @@
     [self.view addSubview:_dataTableView];
     
     //
-    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_sinaweibo", @"EditName", @"新浪微博登陆", @"MenuText", nil];
-    NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_qq", @"EditName", @"QQ账号登陆", @"MenuText", nil];
-    NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_douban", @"EditName", @"豆瓣账号登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_sinaweibo", @"MenuImageName", @"新浪微博登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_qq", @"MenuImageName", @"QQ账号登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_douban", @"MenuImageName", @"豆瓣账号登陆", @"MenuText", nil];
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, nil];
     
-    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"EditName", @"用Mig账号登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用Mig账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _dataList = [NSMutableArray arrayWithObjects:menulist0, menulist1, nil];
     
@@ -141,6 +141,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)SendDeviceToken {
+        
+    MigLabAPI* miglab = [[MigLabAPI alloc] init];
+    
+    NSString* userid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* device_token = [UserSessionManager GetInstance].devicetoken;
+    
+    [miglab doConfigPush:userid token:accesstoken devicetoken:device_token isreceive:@"1" begintime:@"08:00" endtime:@"23:55"];
 }
 
 -(IBAction)doGotoRegister:(id)sender{
@@ -358,6 +369,7 @@
     [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
     
+    [self SendDeviceToken];
     [self storeAuthData];
     [self getUserInfoFromSinaWeibo];
 }
@@ -458,6 +470,8 @@
         [UserSessionManager GetInstance].accounttype = SourceTypeTencentWeibo;
         [UserSessionManager GetInstance].currentUser.tencentAccount = tencentAccount;
         [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
+        
+        [self SendDeviceToken];
         
         if(![_tencentOAuth getUserInfo]){
             [self showInvalidTokenOrOpenIDMessage];
@@ -570,6 +584,8 @@
     [UserSessionManager GetInstance].currentUser.doubanAccount = doubanAccount;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
     
+    [self SendDeviceToken];
+    
     //
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
@@ -612,7 +628,6 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 #pragma mark - UITableView datasource
@@ -644,7 +659,11 @@
     
     NSArray *sectionMenu = [_dataList objectAtIndex:indexPath.section];
     NSMutableDictionary *dicMenu = [sectionMenu objectAtIndex:indexPath.row];
-    cell.iconImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
+    
+    NSString* imgName = [dicMenu objectForKey:@"MenuImageName"];
+    cell.iconImageView.image = [UIImage imageWithName:imgName];
+    cell.iconImageView.frame = CGRectMake(60, 12, 31, 25);
+    
     cell.lblDesc.font = [UIFont fontOfApp:17.0f];
     cell.lblDesc.textColor = [UIColor whiteColor];
     cell.lblDesc.text = [dicMenu objectForKey:@"MenuText"];
