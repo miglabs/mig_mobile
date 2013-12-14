@@ -91,8 +91,9 @@
     [self.view addSubview:_bodyTableView];
     
     NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_user_songlist_tip", @"MenuImageName", @"歌单", @"MenuText", nil];
-    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_user_photo_tip", @"MenuImageName", @"照片", @"MenuText", nil];
-    _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, nil];
+    
+//    NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_user_photo_tip", @"MenuImageName", @"照片", @"MenuText", nil];
+    _tableTitles = [NSArray arrayWithObjects:dicMenu0, nil];
     
 }
 
@@ -144,13 +145,14 @@
         FriendOfMusicListViewController *musicListViewController = [[FriendOfMusicListViewController alloc] initWithNibName:@"FriendOfMusicListViewController" bundle:nil];
         musicListViewController.userinfo = _userinfo;
         [self.topViewcontroller.navigationController pushViewController:musicListViewController animated:YES];
-        
-    } else if (indexPath.row == 1) {
-        
-        FriendOfPhotoListViewController *photoListViewController = [[FriendOfPhotoListViewController alloc] initWithNibName:@"FriendOfPhotoListViewController" bundle:nil];
-        [self.topViewcontroller.navigationController pushViewController:photoListViewController animated:YES];
-        
     }
+    
+//    } else if (indexPath.row == 1) {
+//        
+//        FriendOfPhotoListViewController *photoListViewController = [[FriendOfPhotoListViewController alloc] initWithNibName:@"FriendOfPhotoListViewController" bundle:nil];
+//        [self.topViewcontroller.navigationController pushViewController:photoListViewController animated:YES];
+//        
+//    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -160,7 +162,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,6 +180,7 @@
     NSDictionary *dicMenu = [_tableTitles objectAtIndex:indexPath.row];
     cell.menuImageView.image = [UIImage imageWithName:[dicMenu objectForKey:@"MenuImageName"]];
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
+    [cell.lblTipNum setHidden:YES];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
