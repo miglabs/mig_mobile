@@ -88,7 +88,7 @@
     if (buttonIndex == 1) {
         
         [[UserSessionManager GetInstance] doLogout];
-        [PDatabaseManager GetInstance].isLastLogOut = YES;
+        [[PDatabaseManager GetInstance] setLoginStatusInfo:0];
         
         [self doBack:nil];
         

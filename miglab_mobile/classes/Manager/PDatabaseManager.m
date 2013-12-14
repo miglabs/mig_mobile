@@ -12,7 +12,6 @@
 @implementation PDatabaseManager
 
 @synthesize db = _db;
-@synthesize isLastLogOut = _isLastLogOut;
 
 +(PDatabaseManager *)GetInstance{
     
@@ -56,6 +55,9 @@
         [_db executeUpdate:@"create table if not exists WORD_INFO (index integer not null, typeid integer not null, name text, mode text)"];
         
         [_db executeUpdate:@"create table if not exists SONG_JSON_INFO (jsonid integer, songjsoninfo text, createtime integer)"];
+        
+        // login status
+        [_db executeUpdate:@"create table if not exists LOGIN_STATUS (loginstatus integer)"];
         
         [_db close];
     }
@@ -337,10 +339,59 @@
     
 }
 
--(void)setLogStateInfo:(BOOL)logstate {
+
+-(int)getLoginStatusInfo {
     
-    //NSString* sql = @""
+    NSString* sql = @"select * from LOGIN_STATUS";
+    int loginstatus = -1;
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    
+    while ([rs next]) {
+        
+        loginstatus = [rs intForColumn:@"loginstatus"];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return loginstatus;
 }
+
+-(void)setLoginStatusInfo:(int)logstate {
+    
+    NSString* sql = @"insert into LOGIN_STATUS (loginstatus) values (?)";
+    NSString* checksql = @"select * from LOGIN_STATUS";
+    NSNumber* status = [NSNumber numberWithInt:logstate];
+    
+    [_db open];
+    
+    FMResultSet* rs = [_db executeQuery:checksql];
+    
+    while ([rs next]) {
+        
+        sql = @"update LOGIN_STATUS set loginstatus = ?";
+        
+        break;
+    }
+    
+    BOOL isOk = [_db executeUpdate:sql, status];
+    
+    if(isOk) {
+        
+        PLog(@"update login status success");
+    }
+    else {
+        
+        PLog(@"update login status failed");
+    }
+    
+    [_db close];
+}
+
 
 //记录用户音乐基因
 -(void)insertUserGene:(UserGene *)tusergene userId:(NSString *)tuserid{

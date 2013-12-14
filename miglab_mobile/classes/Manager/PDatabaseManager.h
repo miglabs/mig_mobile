@@ -19,7 +19,6 @@
 @interface PDatabaseManager : PFileManager
 
 @property (nonatomic, retain) FMDatabase *db;
-@property (nonatomic, assign) BOOL isLastLogOut;
 
 +(PDatabaseManager *)GetInstance;
 
@@ -56,8 +55,8 @@
 -(void)deleteUserGene;
 
 // 记录用户是否已经退出登录
--(void)setLogStateInfo:(BOOL)logstate; // 0:logout, 1:login
--(BOOL)getLogStateInfo;
+-(void)setLoginStatusInfo:(int)logstate; // 0:logout, 1:login
+-(int)getLoginStatusInfo;
 
 /*
  记录请求歌曲返回数据结果
