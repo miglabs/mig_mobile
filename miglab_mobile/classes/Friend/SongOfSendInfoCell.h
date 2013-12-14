@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGOImageView.h"
+#import "EGOImageButton.h"
 
 @interface SongOfSendInfoCell : UITableViewCell
 
-@property (nonatomic, retain) IBOutlet EGOImageView *headEGOImageView;
+@property (nonatomic, retain) IBOutlet EGOImageButton *btnAvatar;
 @property (nonatomic, retain) IBOutlet UILabel *lblPlaceHolder;
 @property (nonatomic, retain) IBOutlet UITextView *tvRecommendContent;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongInfo;

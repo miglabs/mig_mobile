@@ -10,7 +10,7 @@
 
 @implementation SongOfSendInfoCell
 
-@synthesize headEGOImageView = _headEGOImageView;
+@synthesize btnAvatar = _btnAvatar;
 @synthesize lblPlaceHolder = _lblPlaceHolder;
 @synthesize tvRecommendContent = _tvRecommendContent;
 @synthesize lblSongInfo = _lblSongInfo;
