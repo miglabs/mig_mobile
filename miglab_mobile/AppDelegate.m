@@ -133,7 +133,8 @@
         
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
         AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
-        if (lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+        BOOL isLogedIn = [UserSessionManager GetInstance].isLoggedIn;
+        if ( isLogedIn && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
             
             PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
             if (tempuser) {
@@ -147,18 +148,16 @@
                 [UserSessionManager GetInstance].isLoggedIn = YES;
             }
             
-            
-            
         } else {
             
-            [databaseManager insertUserAccout:@"liujun2458@163.com" password:@"123456"];
-            
-            PUser *user = [[PUser alloc] init];
-            user.username = @"liujun2458@163.com";
-            user.password = @"123456";
-            [UserSessionManager GetInstance].currentUser = user;
-            
-            PLog(@"username: %@, password: %@", user.username, user.password);
+//            [databaseManager insertUserAccout:@"liujun2458@163.com" password:@"123456"];
+//            
+//            PUser *user = [[PUser alloc] init];
+//            user.username = @"liujun2458@163.com";
+//            user.password = @"123456";
+//            [UserSessionManager GetInstance].currentUser = user;
+//            
+//            PLog(@"username: %@, password: %@", user.username, user.password);
             
         }
         

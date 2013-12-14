@@ -30,6 +30,8 @@
 -(IBAction)doDouBanLogin:(id)sender;
 -(IBAction)doMiglabLogin:(id)sender;
 
+-(void)didFinishLogin;
+-(void)didFinishLogout;
 -(void)SendDeviceToken;
 
 -(void)registerFailed:(NSNotification *)tNotification;

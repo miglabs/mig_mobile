@@ -143,6 +143,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)didFinishLogin {
+    
+    [self SendDeviceToken];
+}
+
+-(void)didFinishLogout {
+    
+}
+
 -(void)SendDeviceToken {
         
     MigLabAPI* miglab = [[MigLabAPI alloc] init];
@@ -369,9 +378,10 @@
     [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
     
-    [self SendDeviceToken];
     [self storeAuthData];
     [self getUserInfoFromSinaWeibo];
+    
+    [self didFinishLogin];
 }
 
 - (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
@@ -471,12 +481,11 @@
         [UserSessionManager GetInstance].currentUser.tencentAccount = tencentAccount;
         [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
         
-        [self SendDeviceToken];
-        
         if(![_tencentOAuth getUserInfo]){
             [self showInvalidTokenOrOpenIDMessage];
         }
         
+        [self didFinishLogin];
     }
     else
     {
@@ -584,13 +593,13 @@
     [UserSessionManager GetInstance].currentUser.doubanAccount = doubanAccount;
     [UserSessionManager GetInstance].currentUser.source = SourceTypeDouBan;
     
-    [self SendDeviceToken];
-    
     //
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
     //注册和登录合并，第三方平台直接使用注册接口登录
     [_miglabAPI doRegister:douban_user_name password:douban_user_name nickname:douban_user_name source:accounttype session:douban_user_id sex:gender];
+    
+    [self didFinishLogin];
     
 }
 
