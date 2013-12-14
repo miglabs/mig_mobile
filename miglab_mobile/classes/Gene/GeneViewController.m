@@ -935,37 +935,39 @@ static int PAGE_WIDTH = 81;
 }
 
 -(void)updateGeneDisplay:(Song *)song {
+   
+    // TODO: 根据歌曲的类型显示白框
     
-    NSString* strid = song.type;
-    
-    
-    if ([strid isEqualToString:@"chl"]) {
-        
-        Type* type = [_xmlParserUtil.typeList objectAtIndex:[song.typeid intValue]];
-        
-        UIImage *typeimage = [UIImage imageNamed:type.picname];
-        [_btnType setImage:typeimage forState:UIControlStateNormal];
-        _currentGeneView.typeImageView.image = typeimage;
-        _currentGeneView.lblTypeDesc.text = type.desc;
-    }
-    else if ([strid isEqualToString:@"mm"]) {
-        
-        Mood* mood = [_xmlParserUtil.moodList objectAtIndex:[song.typeid intValue]];
-        
-        UIImage *moodimage = [UIImage imageNamed:mood.picname];
-        [_btnMood setImage:moodimage forState:UIControlStateNormal];
-        _currentGeneView.moodImageView.image = moodimage;
-        _currentGeneView.lblMoodDesc.text = mood.desc;
-    }
-    else if ([strid isEqualToString:@"ms"]) {
-        
-        Scene* scene = [_xmlParserUtil.sceneList objectAtIndex:[song.typeid intValue]];
-        
-        UIImage *sceneimage = [UIImage imageNamed:scene.picname];
-        [_btnScene setImage:sceneimage forState:UIControlStateNormal];
-        _currentGeneView.sceneImageView.image = sceneimage;
-        _currentGeneView.lblSceneDesc.text = scene.desc;
-    }
+//    NSString* strid = song.type;
+//    
+//    
+//    if ([strid isEqualToString:@"chl"]) {
+//        
+//        Type* type = [_xmlParserUtil.typeList objectAtIndex:[song.typeid intValue]];
+//        
+//        UIImage *typeimage = [UIImage imageNamed:type.picname];
+//        [_btnType setImage:typeimage forState:UIControlStateNormal];
+//        _currentGeneView.typeImageView.image = typeimage;
+//        _currentGeneView.lblTypeDesc.text = type.desc;
+//    }
+//    else if ([strid isEqualToString:@"mm"]) {
+//        
+//        Mood* mood = [_xmlParserUtil.moodList objectAtIndex:[song.typeid intValue]];
+//        
+//        UIImage *moodimage = [UIImage imageNamed:mood.picname];
+//        [_btnMood setImage:moodimage forState:UIControlStateNormal];
+//        _currentGeneView.moodImageView.image = moodimage;
+//        _currentGeneView.lblMoodDesc.text = mood.desc;
+//    }
+//    else if ([strid isEqualToString:@"ms"]) {
+//        
+//        Scene* scene = [_xmlParserUtil.sceneList objectAtIndex:[song.typeid intValue]];
+//        
+//        UIImage *sceneimage = [UIImage imageNamed:scene.picname];
+//        [_btnScene setImage:sceneimage forState:UIControlStateNormal];
+//        _currentGeneView.sceneImageView.image = sceneimage;
+//        _currentGeneView.lblSceneDesc.text = scene.desc;
+//    }
 }
 
 #pragma mark - Player Delegate
