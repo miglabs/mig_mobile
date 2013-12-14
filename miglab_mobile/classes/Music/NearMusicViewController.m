@@ -10,6 +10,7 @@
 #import "MusicSongCell.h"
 #import "Song.h"
 #import "PDatabaseManager.h"
+#import "MusicCommentViewController.h"
 
 @interface NearMusicViewController ()
 
@@ -28,6 +29,7 @@
 @synthesize location = _location;
 
 @synthesize dataStatus = _dataStatus;
+@synthesize isUpdateLocation = _isUpdateLocation;
 
 @synthesize dicSelectedSongId = _dicSelectedSongId;
 
@@ -39,8 +41,6 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearMusicFailed:) name:NotificationNameGetNearMusicFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNearMusicSuccess:) name:NotificationNameGetNearMusicSuccess object:nil];
-        
-        
     }
     return self;
 }
@@ -49,13 +49,14 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetNearMusicFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetNearMusicSuccess object:nil];
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isUpdateLocation = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -155,9 +156,7 @@
     } else {
         
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
-        
     }
-    
 }
 
 #pragma notification
@@ -166,7 +165,6 @@
 -(IBAction)doSearch:(id)sender{
     
     PLog(@"doSearch...");
-    
 }
 
 -(IBAction)doEdit:(id)sender{
@@ -183,7 +181,6 @@
             
             NSString *tempsongid = [selectedSongList objectAtIndex:i];
             [[PDatabaseManager GetInstance] deleteSongInfo:[tempsongid longLongValue]];
-            
         }
         
         _dataStatus = 1;
@@ -193,7 +190,6 @@
         
         _dataStatus = 2;
         [_dataTableView reloadData];
-        
     }
     
     [_dicSelectedSongId removeAllObjects];
@@ -223,14 +219,16 @@
         UIImage *iconimage = [UIImage imageWithName:@"music_song_sel" type:@"png"];
         [tempBtnIcon setImage:iconimage forState:UIControlStateNormal];
         [_dicSelectedSongId setObject:key forKey:key];
-        
     }
-    
 }
 
 #pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
+    if (_isUpdateLocation) {
+        return;
+    }
     
     PLog(@"[newLocation description]: %@", [newLocation description]);
     
@@ -246,9 +244,8 @@
     
     //
     _location = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
+    _isUpdateLocation = YES;
     [self loadNearMusicFromServer:_location];
-    
-    
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -262,7 +259,6 @@
     PLog(@"getNearMusicFailed...");
     
     [SVProgressHUD showErrorWithStatus:@"附近的好音乐获取失败:("];
-    
 }
 
 -(void)getNearMusicSuccess:(NSNotification *)tNotification{
@@ -299,8 +295,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_dataStatus == 1) {
+        
+        //只有在正常模式下才能进去歌曲评论界面
+        MessageInfo* curMsgInfo = [_dataList objectAtIndex:indexPath.row];
+        Song *tempsong = curMsgInfo.song;
+        
+        MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
+        musicCommentViewController.song = tempsong;
+        [self.navigationController pushViewController:musicCommentViewController animated:YES];
+    }
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 #pragma mark - UITableView datasource

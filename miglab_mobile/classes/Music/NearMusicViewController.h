@@ -27,6 +27,7 @@
 @property (nonatomic, retain) NSString *location;   //gps坐标
 
 @property (nonatomic, assign) int dataStatus;       //1-normal，2-编辑
+@property (nonatomic, assign) int isUpdateLocation;
 
 @property (nonatomic, retain) NSMutableDictionary *dicSelectedSongId;
 

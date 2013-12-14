@@ -382,11 +382,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
     
-    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
-    
-    MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
-    musicCommentViewController.song = tempsong;
-    [self.navigationController pushViewController:musicCommentViewController animated:YES];
+    if (_dataStatus == 1) {
+        
+        // 只有在正常模式下才能进入歌曲评论
+        Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+        
+        MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
+        musicCommentViewController.song = tempsong;
+        [self.navigationController pushViewController:musicCommentViewController animated:YES];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

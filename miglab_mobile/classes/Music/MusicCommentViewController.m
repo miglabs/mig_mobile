@@ -250,9 +250,16 @@
 -(IBAction)doNext:(id)sender {
     
     [[PPlayerManagerCenter GetInstance] doNext];
+    
+    // 将下首歌存入成员
     _song = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    // 更新成员变量和显示内容
     _isCurrentLike = [_song.like intValue];
     [self updateSongInfo];
+    
+    // 载入新的歌曲的评论
+    [self loadData];
 }
 
 -(IBAction)doCollect:(id)sender{
