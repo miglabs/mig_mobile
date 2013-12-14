@@ -32,6 +32,7 @@
 @synthesize pageIndex = _pageIndex;
 @synthesize pageSize = _pageSize;
 @synthesize isLoadMore = _isLoadMore;
+@synthesize isCurrentLike = _isCurrentLike;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +43,18 @@
         //getCommentList
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListFailed:) name:NotificationNameGetCommentFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommentListSuccess:) name:NotificationNameGetCommentSuccess object:nil];
+        
+        //Comment Song
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCommentSongSuccess:) name:NotificationNameCommentSongSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCommentSongFailed:) name:NotificationNameCommentSongFailed object:nil];
+        
+        //collect song
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCollectSuccess:) name:NotificationNameCollectSongSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCollectFailed:) name:NotificationNameCollectSongFailed object:nil];
+        
+        //Delete collect Song
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDeleteCollectSuccess:) name:NotificationNameDeleteCollectSongSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDeleteCollectFailed:) name:NotificationNameDeleteCollectSongFailed object:nil];
         
         //监听键盘高度的变换
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -64,6 +77,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCommentFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetCommentSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCommentSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCommentSongSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameDeleteCollectSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameDeleteCollectSongSuccess object:nil];
 }
 
 - (void)viewDidLoad
@@ -105,9 +126,9 @@
     _commentPlayerView.lblSongArtist.text = _song.artist;
     _commentPlayerView.lblSongArtist.font = [UIFont fontOfApp:17.0f];
     [_commentPlayerView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
-    [_commentPlayerView.btnCollect addTarget:self action:@selector(doCollectedOrCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentPlayerView.btnCollect addTarget:self action:@selector(doCollect:) forControlEvents:UIControlEventTouchUpInside];
     [_commentPlayerView.btnDelete addTarget:self action:@selector(doHate:) forControlEvents:UIControlEventTouchUpInside];
-    [_commentPlayerView.btnShare addTarget:self action:@selector(doShare:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentPlayerView.btnShare addTarget:self action:@selector(doNext:) forControlEvents:UIControlEventTouchUpInside];
     
     posy += 50;
     
@@ -142,16 +163,17 @@
     
     //data
     _dataList = [[NSMutableArray alloc] init];
+    _isCurrentLike = [_song.like intValue];
     
     //
     _miglabAPI = [[MigLabAPI alloc] init];
     _pageIndex = 0;
     _pageSize = PAGE_SIZE;
     
+    [self updateSongInfo];
+    
     //data
     [self loadData];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -163,7 +185,41 @@
 -(void)loadData{
     
     [self loadCommentListFromServer];
+}
+
+-(void)updateSongInfo{
     
+    PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if ([aaMusicPlayer isMusicPlaying]) {
+        UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+        [_commentPlayerView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    } else {
+        UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+        [_commentPlayerView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+    }
+    
+    _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+    
+    if (_song.songname) {
+        
+        _commentPlayerView.lblSongName.text = _song.songname;
+    }
+    
+    if (_song.artist) {
+        
+        _commentPlayerView.lblSongArtist.text = _song.artist;
+    }
+    
+    if (_isCurrentLike > 0) {
+        
+        UIImage *darkHeartImage = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
+        [_commentPlayerView.btnCollect setImage:darkHeartImage forState:UIControlStateNormal];
+        
+    } else {
+        
+        UIImage *lightHeartImage = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
+        [_commentPlayerView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
+    }
 }
 
 -(void)loadCommentListFromServer{
@@ -187,15 +243,22 @@
     
     PLog(@"doPlayOrPause...");
     
-    
     [[PPlayerManagerCenter GetInstance] doInsertPlay:_song];
-    
+    [self updateSongInfo];
 }
 
--(IBAction)doCollectedOrCancel:(id)sender{
+-(IBAction)doNext:(id)sender {
+    
+    [[PPlayerManagerCenter GetInstance] doNext];
+    _song = [PPlayerManagerCenter GetInstance].currentSong;
+    _isCurrentLike = [_song.like intValue];
+    [self updateSongInfo];
+}
+
+-(IBAction)doCollect:(id)sender{
     
     PLog(@"doCollect...");
-    /*
+    
     UserSessionManager *userSessionManager = [UserSessionManager GetInstance];
     if (userSessionManager.isLoggedIn) {
         
@@ -206,18 +269,17 @@
         NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
         NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
-        int isLike = [currentSong.like intValue];
-        if (isLike > 0) {
+        if (_isCurrentLike > 0) {
+            
             [_miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:songid];
         } else {
+            
             [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
         }
-        
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
-    */
 }
 
 -(IBAction)doHate:(id)sender{
@@ -234,13 +296,11 @@
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
     }
-    
 }
 
 -(IBAction)doShare:(id)sender{
     
     PLog(@"doShare...");
-    
 }
 
 -(IBAction)doCommentSong:(id)sender{
@@ -261,18 +321,15 @@
         
         
         [_miglabAPI doCommentSong:userid token:accesstoken songid:songid comment:commentcontent];
-        
     }
     
     _commentInputView.commentTextField.text = @"";
     [_commentInputView.commentTextField resignFirstResponder];
-    
 }
 
 -(IBAction)doHideKeyboard:(id)sender{
     
     [self autoMovekeyBoard:0];
-    
 }
 
 #pragma notification
@@ -282,7 +339,6 @@
     PLog(@"getCommentListFailed...");
     
     [SVProgressHUD showErrorWithStatus:@"歌曲评论信息获取失败:("];
-    
 }
 
 -(void)getCommentListSuccess:(NSNotification *)tNotification{
@@ -311,7 +367,36 @@
         [_dataList addObjectsFromArray:commentlist];
         [_dataTableView reloadData];
     }
+}
+
+-(void)doCollectSuccess:(NSNotification *)tNotification {
     
+    _isCurrentLike = 1;
+    [self updateSongInfo];
+}
+
+-(void)doCollectFailed:(NSNotification *)tNotification {
+    
+}
+
+-(void)doDeleteCollectSuccess:(NSNotification *)tNotification {
+    
+    _isCurrentLike = 0;
+    [self updateSongInfo];
+}
+
+-(void)doDeleteCollectFailed:(NSNotification *)tNotification {
+    
+}
+
+-(void)doCommentSongSuccess:(NSNotification *)tNotification {
+    
+    [self loadData];
+}
+
+-(void)doCommentSongFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:@"评论歌曲怎么就失败了呢..."];
 }
 
 #pragma mark - UITableView delegate
@@ -321,7 +406,6 @@
     // ...
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
 #pragma mark - UITableView datasource
@@ -343,7 +427,11 @@
 	}
     
     SongComment *tempcomment = [_dataList objectAtIndex:indexPath.row];
-    cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
+    
+    if (tempcomment.user.head) {
+        
+        cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
+    }
     cell.lblNickname.text = tempcomment.user.nickname ? tempcomment.user.nickname: @"未知用户";
     cell.lblNickname.font = [UIFont fontOfApp:17.0f];
     
@@ -478,8 +566,6 @@
     } completion:^(BOOL finished) {
         
     }];
-    
-    
     
 }
 
