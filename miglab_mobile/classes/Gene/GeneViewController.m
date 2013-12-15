@@ -360,8 +360,6 @@ static int PAGE_WIDTH = 81;
             tempusergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempusergene.mood.moodIndex];
             tempusergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempusergene.scene.sceneIndex];
             
-            [UserSessionManager GetInstance].currentUserGene = tempusergene;
-            
         } else {
             
             tempusergene = [UserSessionManager GetInstance].currentUserGene;
@@ -371,6 +369,9 @@ static int PAGE_WIDTH = 81;
             tempusergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempusergene.channel.sceneindex];
             
         }
+        
+        // 无论是否获取到一个用户的音乐基因，都需要给当前分配一个基因
+        [UserSessionManager GetInstance].currentUserGene = tempusergene;
         
         [self initGeneByUserGene:tempusergene];
         
@@ -426,10 +427,9 @@ static int PAGE_WIDTH = 81;
 //根据音乐基因获取歌曲
 -(void)loadSongsByGene{
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
-        
-        NSString *userid = [UserSessionManager GetInstance].userid;
-        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+    
+    if (usergene) {
         
         //type
         UIImage *typeimage = [UIImage imageNamed:usergene.type.picname];
@@ -448,8 +448,13 @@ static int PAGE_WIDTH = 81;
         [_btnScene setImage:sceneimage forState:UIControlStateNormal];
         _currentGeneView.sceneImageView.image = sceneimage;
         _currentGeneView.lblSceneDesc.text = usergene.scene.desc;
+    }
+    
+    // 如果用户已经登陆，则载入歌曲，保存基因到数据库
+    if ([UserSessionManager GetInstance].isLoggedIn) {
         
         //记录音乐基因
+        NSString *userid = [UserSessionManager GetInstance].userid;
         [[PDatabaseManager GetInstance] insertUserGene:usergene userId:userid];
         
         [super loadTypeSongs];
