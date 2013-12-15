@@ -484,6 +484,7 @@
 		CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */; };
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
+		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1135,6 +1136,7 @@
 		CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
 		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
+		CB0380D9185DA0B500137D8E /* gene_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_focus.png; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
@@ -1500,6 +1502,7 @@
 				1697324317E5BC8700F4AA6E /* scene */,
 				1697324A17E5BC8700F4AA6E /* type */,
 				161D5D9617D0DBE800F1056B /* gene_type.png */,
+				CB0380D9185DA0B500137D8E /* gene_focus.png */,
 				162AAB4C17C258F0000E904F /* gene_separator.png */,
 				162AAB4D17C258F0000E904F /* gene_src_1.png */,
 				162AAB4E17C258F0000E904F /* gene_src_2.png */,
@@ -2528,6 +2531,7 @@
 				160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */,
 				160E075F17C0A64F003F0E45 /* DetailPlayerViewController.xib in Resources */,
 				16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */,
+				CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */,
 				16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */,
 				162AAB4617C25440000E904F /* gene_choose_bg.png in Resources */,
 				162AAB4B17C25451000E904F /* home_navigation_bg.png in Resources */,

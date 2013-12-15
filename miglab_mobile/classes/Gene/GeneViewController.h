@@ -37,6 +37,8 @@
 @property (nonatomic, retain) Mood *currentMood;
 @property (nonatomic, retain) Scene *currentScene;
 
+@property (nonatomic, retain) UIImageView* focusImageView;
+
 @property (nonatomic, assign) BOOL isUpdatedList;
 
 -(IBAction)doAvatar:(id)sender;

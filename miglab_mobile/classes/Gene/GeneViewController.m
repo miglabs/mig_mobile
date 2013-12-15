@@ -40,6 +40,8 @@ static int PAGE_WIDTH = 81;
 @synthesize currentMood = _currentMood;
 @synthesize currentScene = _currentScene;
 
+@synthesize focusImageView = _focusImageView;
+
 @synthesize isUpdatedList = _isUpdatedList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -278,6 +280,12 @@ static int PAGE_WIDTH = 81;
     
     [self.view addSubview:_modifyGeneView];
     _modifyGeneView.hidden = YES;
+    
+    // 初始化类型的白框焦点
+    
+    _focusImageView = [[UIImageView alloc] init];
+    [self.view addSubview:_focusImageView];
+    _focusImageView.hidden = YES;
     
     //init gene 4 show
     [self initGeneDataByCache];
@@ -526,7 +534,7 @@ static int PAGE_WIDTH = 81;
         
         _btnCurrentGene.hidden = YES;
         _modifyGeneView.hidden = NO;
-        
+        _focusImageView.hidden = YES;
     }];
     
     /*
@@ -590,6 +598,7 @@ static int PAGE_WIDTH = 81;
     _btnScene.hidden = NO;
     _currentGeneView.hidden = NO;
     _btnCurrentGene.hidden = NO;
+    _focusImageView.hidden = NO;
     _btnCurrentGene.alpha = 0.0f;
     
     [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
@@ -941,37 +950,40 @@ static int PAGE_WIDTH = 81;
 
 -(void)updateGeneDisplay:(Song *)song {
    
-    // TODO: 根据歌曲的类型显示白框
+    NSString* strid = song.type;
+    CGRect rect;
     
-//    NSString* strid = song.type;
-//    
-//    if ([strid isEqualToString:@"chl"]) {
-//        
-//        Type* type = [_xmlParserUtil.typeList objectAtIndex:[song.typeid intValue]];
-//        
-//        UIImage *typeimage = [UIImage imageNamed:type.picname];
-//        [_btnType setImage:typeimage forState:UIControlStateNormal];
-//        _currentGeneView.typeImageView.image = typeimage;
-//        _currentGeneView.lblTypeDesc.text = type.desc;
-//    }
-//    else if ([strid isEqualToString:@"mm"]) {
-//        
-//        Mood* mood = [_xmlParserUtil.moodList objectAtIndex:[song.typeid intValue]];
-//        
-//        UIImage *moodimage = [UIImage imageNamed:mood.picname];
-//        [_btnMood setImage:moodimage forState:UIControlStateNormal];
-//        _currentGeneView.moodImageView.image = moodimage;
-//        _currentGeneView.lblMoodDesc.text = mood.desc;
-//    }
-//    else if ([strid isEqualToString:@"ms"]) {
-//        
-//        Scene* scene = [_xmlParserUtil.sceneList objectAtIndex:[song.typeid intValue]];
-//        
-//        UIImage *sceneimage = [UIImage imageNamed:scene.picname];
-//        [_btnScene setImage:sceneimage forState:UIControlStateNormal];
-//        _currentGeneView.sceneImageView.image = sceneimage;
-//        _currentGeneView.lblSceneDesc.text = scene.desc;
-//    }
+    if ([strid isEqualToString:@"chl"]) {
+        
+        rect = _btnType.frame;
+    }
+    else if ([strid isEqualToString:@"mm"]) {
+        
+        rect = _btnMood.frame;
+    }
+    else if ([strid isEqualToString:@"ms"]) {
+        
+        rect = _btnScene.frame;
+    }
+    else {
+     
+        _focusImageView.hidden = YES;
+        return;
+    }
+    
+    // 初始位置往回退像素
+    rect.origin.x -= 5;
+    rect.origin.y -= 5;
+    
+    // 大小增加
+    rect.size.width += 10;
+    rect.size.height += 10;
+    
+    // 初始化白框图片
+    UIImage* focusImg = [UIImage imageWithName:@"gene_focus"];
+    _focusImageView.image = focusImg;
+    _focusImageView.frame = rect;
+    _focusImageView.hidden = NO;
 }
 
 #pragma mark - Player Delegate
