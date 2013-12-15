@@ -10,6 +10,7 @@
 #import "MusicSongCell.h"
 #import "Song.h"
 #import "PDatabaseManager.h"
+#import "MusicCommentViewController.h"
 
 @interface FriendOfMusicListViewController ()
 
@@ -135,8 +136,13 @@
 
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // ...
     
+    // 进入歌曲评论界面
+    Song* tempsong = [_datalist objectAtIndex:indexPath.row];
+    
+    MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
+    musicCommentViewController.song = tempsong;
+    [self.navigationController pushViewController:musicCommentViewController animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
