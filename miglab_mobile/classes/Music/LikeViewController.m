@@ -25,6 +25,8 @@
 @synthesize dataList = _dataList;
 
 @synthesize dataStatus = _dataStatus;
+@synthesize isReturnFromChild = _isReturnFromChild;
+@synthesize isGettingCollectSong = _isGettingCollectSong;
 
 @synthesize dicSelectedSongId = _dicSelectedSongId;
 
@@ -53,6 +55,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isReturnFromChild = NO;
+    _isGettingCollectSong = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -113,11 +118,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    if (_isReturnFromChild) {
+        
+        _isReturnFromChild = NO;
+        [self loadData];
+    }
+}
+
 -(void)loadData{
     
-    [self loadMusicFromDatabase];
+    //[self loadMusicFromDatabase];
     [self loadMusicFromServer];
-    
 }
 
 -(void)loadMusicFromDatabase{
@@ -133,7 +146,9 @@
 
 -(void)loadMusicFromServer{
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+    if ([UserSessionManager GetInstance].isLoggedIn && !_isGettingCollectSong) {
+        
+        _isGettingCollectSong = YES;
         
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
@@ -143,7 +158,6 @@
     } else {
         
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
-        
     }
     
 }
@@ -155,7 +169,7 @@
     PLog(@"getCollectedSongsFailed...");
     
     [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取失败:("];
-    
+    _isGettingCollectSong = NO;
 }
 
 -(void)getCollectedSongsSuccess:(NSNotification *)tNotification{
@@ -163,6 +177,8 @@
     PLog(@"getCollectedSongsSuccess...");
     
     [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取成功:)"];
+    
+    _isGettingCollectSong = NO;
     
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
@@ -386,6 +402,8 @@
         
         // 只有在正常模式下才能进入歌曲评论
         Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+        
+        _isReturnFromChild = YES;
         
         MusicCommentViewController *musicCommentViewController = [[MusicCommentViewController alloc] initWithNibName:@"MusicCommentViewController" bundle:nil];
         musicCommentViewController.song = tempsong;

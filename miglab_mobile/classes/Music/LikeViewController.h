@@ -19,9 +19,10 @@
 @property (nonatomic, retain) NSMutableArray *dataList;
 
 @property (nonatomic, assign) int dataStatus;       //1-normal，2-编辑
+@property (nonatomic, assign) BOOL isReturnFromChild;
+@property (nonatomic, assign) BOOL isGettingCollectSong;
 
 @property (nonatomic, retain) NSMutableDictionary *dicSelectedSongId;
-
 -(void)loadData;
 -(void)loadCollectedMusicFromDatabase;
 -(void)loadCollectedMusicFromServer;
