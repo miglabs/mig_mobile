@@ -945,7 +945,6 @@ static int PAGE_WIDTH = 81;
     
 //    NSString* strid = song.type;
 //    
-//    
 //    if ([strid isEqualToString:@"chl"]) {
 //        
 //        Type* type = [_xmlParserUtil.typeList objectAtIndex:[song.typeid intValue]];

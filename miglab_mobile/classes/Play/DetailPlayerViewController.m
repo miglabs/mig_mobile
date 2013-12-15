@@ -423,9 +423,24 @@
 -(void)initSongInfo{
     
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-    _topPlayerInfoView.lblPlayingSongInfo.text = usergene.type.desc;
-    
     Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    // 根据歌曲的类型显示字
+    NSString* songtype = currentSong.type;
+    NSString* tempText = usergene.type.desc;
+    
+    if ([songtype isEqualToString:@"mm"]) {
+        
+        tempText = usergene.mood.name;
+    }
+    else if([songtype isEqualToString:@"ms"]) {
+        
+        tempText = usergene.scene.name;
+    }
+    
+    _topPlayerInfoView.lblPlayingSongInfo.text = tempText;
+    
+    // 显示歌曲名称和演唱者
     _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
     _cdOfSongView.coverOfSongEGOImageView.imageURL = [NSURL URLWithString:currentSong.coverurl];
     
