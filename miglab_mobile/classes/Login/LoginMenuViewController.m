@@ -145,7 +145,13 @@
 
 -(void)didFinishLogin {
     
+    // 保存登录状态到本地
     [[PDatabaseManager GetInstance] setLoginStatusInfo:1];
+    
+    // 发送登陆成功消息
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccessByUser object:nil userInfo:nil];
+    
+    // 发送设备号到服务端
     [self SendDeviceToken];
 }
 

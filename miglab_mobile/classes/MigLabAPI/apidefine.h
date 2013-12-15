@@ -43,7 +43,12 @@
 /* 默认推荐语 */
 #define DEFAULT_RECOMMEND_MESSAGE   @"来听听嘛~"
 
-/* 消息定义 */
-#define NotificationNameNeedAddList @"NotificationNameNeedAddList"
+/* --------------------- 消息定义 --------------------- */
+
+/* 歌曲播放完毕，需要添加新的歌曲进来 */
+#define NotificationNameNeedAddList             @"NotificationNameNeedAddList"
+
+/* 用户从登录窗口登录成功 */
+#define NotificationNameLoginSuccessByUser      @"NotificationNameLoginSuccessByUser"
 
 #endif
