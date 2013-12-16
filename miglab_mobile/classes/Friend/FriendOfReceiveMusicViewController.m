@@ -123,15 +123,17 @@
     lblcontenttitle.textAlignment = UITextAlignmentLeft;
     [_messageContentView addSubview:lblcontenttitle];
     
-    CGSize maxsize = CGSizeMake(300, 9000);
     UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, 257, 80)];
     textcontent.text = _msginfo.content;
     textcontent.textColor = [UIColor whiteColor];
-    textcontent.font = [UIFont fontWithName:@"system" size:14];
-    CGSize stringSize = [textcontent.text sizeWithFont:textcontent.font constrainedToSize:maxsize];
-    textcontent.frame = CGRectMake(20, 35, 257, stringSize.height);
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
+    textcontent.font = [UIFont fontWithName:@"system" size:14];
+    
+    // 更新label显示的高度
+    CGSize maxsize = CGSizeMake(300, 9000);
+    CGSize stringSize = [textcontent.text sizeWithFont:textcontent.font constrainedToSize:maxsize];
+    textcontent.frame = CGRectMake(20, 35, 257, stringSize.height);
     [_messageContentView addSubview:textcontent];
     
     [self.view addSubview:_messageContentView];
