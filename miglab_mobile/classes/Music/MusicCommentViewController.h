@@ -25,7 +25,11 @@
 
 @property (nonatomic, retain) MusicCommentInputView *commentInputView;
 
+// 当前页面显示的歌曲
 @property (nonatomic, retain) Song *song;
+
+// 当前正在播放的歌曲
+@property (nonatomic, retain) Song* curPlayingSong;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 

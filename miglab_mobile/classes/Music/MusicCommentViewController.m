@@ -26,6 +26,7 @@
 @synthesize commentInputView = _commentInputView;
 
 @synthesize song = _song;
+@synthesize curPlayingSong = _curPlayingSong;
 
 @synthesize miglabAPI = _miglabAPI;
 
@@ -170,6 +171,8 @@
     _pageIndex = 0;
     _pageSize = PAGE_SIZE;
     
+    _curPlayingSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
     [self updateSongInfo];
     
     //data
@@ -190,7 +193,7 @@
 -(void)updateSongInfo{
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
-    if ([aaMusicPlayer isMusicPlaying]) {
+    if ([aaMusicPlayer isMusicPlaying] && _curPlayingSong.songid == _song.songid) {
         UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
         [_commentPlayerView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
     } else {
@@ -244,6 +247,10 @@
     PLog(@"doPlayOrPause...");
     
     [[PPlayerManagerCenter GetInstance] doInsertPlay:_song];
+    
+    // 播放或暂停的时候，更新一下歌曲的信息
+    _curPlayingSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
     [self updateSongInfo];
 }
 
@@ -253,6 +260,9 @@
     
     // 将下首歌存入成员
     _song = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    // 更新当前播放的歌曲
+    _curPlayingSong = _song;
     
     // 更新成员变量和显示内容
     _isCurrentLike = [_song.like intValue];
