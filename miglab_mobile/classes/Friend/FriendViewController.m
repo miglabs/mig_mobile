@@ -26,6 +26,7 @@
 @synthesize tipNumber = _tipNumber;
 @synthesize locationMng = _locationMng;
 @synthesize isUpdateLocation = _isUpdateLocation;
+@synthesize isFirstLoadView = _isFirstLoadView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +59,7 @@
     _tipNumber = [[NSMutableArray alloc] initWithObjects:friends, listen, nearfriends, messages, nil];
     
     _isUpdateLocation = NO;
+    _isFirstLoadView = YES;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -92,6 +94,19 @@
         [_locationMng setDistanceFilter:kCLDistanceFilterNone];
         [_locationMng setDesiredAccuracy:kCLLocationAccuracyBest];
         [_locationMng startUpdatingLocation];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    if (!_isFirstLoadView) {
+        
+        _isUpdateLocation = NO;
+        [_locationMng startUpdatingLocation];
+    }
+    else {
+        
+        _isFirstLoadView = NO;
     }
 }
 
