@@ -23,6 +23,8 @@
 @property (nonatomic, retain) NSString* to_uid;
 @property (nonatomic, retain) NSString* time;
 @property (nonatomic, retain) NSString* songstat;
+@property (nonatomic, assign) long distance;
+
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
 -(void)log;

@@ -19,6 +19,7 @@
 @synthesize to_uid = _to_uid;
 @synthesize time = _time;
 @synthesize songstat = _songstat;
+@synthesize distance = _distance;
 
 +(id)initWithNSDictionary:(NSDictionary *)dict {
     
@@ -56,9 +57,11 @@
         msginfo.to_uid = [dicDetail objectForKey:@"to_uid"];
         msginfo.songid = [dicDetail objectForKey:@"song_id"];
         msginfo.time = [dicDetail objectForKey:@"time"];
+        msginfo.distance = [[dicDetail objectForKey:@"distance"] longValue];
         
         msginfo.userInfo.songname = msginfo.song.songname;
         msginfo.userInfo.singer = msginfo.song.artist;
+        msginfo.userInfo.distance = msginfo.distance;
     }
     
     return msginfo;
