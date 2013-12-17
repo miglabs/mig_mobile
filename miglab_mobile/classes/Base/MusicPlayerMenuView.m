@@ -42,7 +42,7 @@
         [self addSubview:_menuBgImageView];
         
         //avatar
-        UIImage *avatarNorImage = [UIImage imageWithName:@"music_default_avatar" type:@"png"];
+        UIImage *avatarNorImage = [UIImage imageWithName:@"song_cover" type:@"png"];
         _btnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:avatarNorImage];
         _btnAvatar.frame = CGRectMake(13, 9, 41, 41);
         _btnAvatar.layer.cornerRadius = 20;
