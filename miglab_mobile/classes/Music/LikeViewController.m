@@ -184,17 +184,18 @@
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
     int songInfoCount = [songInfoList count];
     
-    for (int i=0; i<songInfoCount; i++) {
-        Song *collectedSong = [songInfoList objectAtIndex:i];
-        collectedSong.like = @"1";
-    }
+    // 不强制设为喜欢
+//    for (int i=0; i<songInfoCount; i++) {
+//        Song *collectedSong = [songInfoList objectAtIndex:i];
+//        collectedSong.like = @"1";
+//    }
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertSongInfoList:songInfoList];
     NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
     
     [_dataList removeAllObjects];
-    [_dataList addObjectsFromArray:tempSongInfoList];
+    [_dataList addObjectsFromArray:songInfoList];
     [_dataTableView reloadData];
     
 }

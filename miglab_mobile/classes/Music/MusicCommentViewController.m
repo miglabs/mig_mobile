@@ -281,7 +281,7 @@
         
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        Song *currentSong = _song;
         NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
         NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
         NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
