@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,7 +22,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q4I-zy-vGg">
                     <rect key="frame" x="83" y="133" width="98" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button" image="friend_button_addblack.png">
+                    <state key="normal" title="Button" image="friend_button_recommend.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -43,7 +43,7 @@
     </objects>
     <resources>
         <image name="body_bg.png" width="594" height="619"/>
-        <image name="friend_button_addblack.png" width="196" height="59"/>
+        <image name="friend_button_recommend.png" width="178" height="60"/>
         <image name="friend_message_content_bg.png" width="553" height="189"/>
         <image name="friend_message_replay.png" width="196" height="59"/>
     </resources>
