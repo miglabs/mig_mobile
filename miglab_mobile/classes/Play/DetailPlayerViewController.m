@@ -32,6 +32,8 @@
 
 @synthesize playerTimer = _playerTimer;
 @synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
+@synthesize miglabAPI = _miglabAPI;
+@synthesize isCurSongLike = _isCurSongLike;
 
 //分享选择
 @synthesize shareAchtionSheet = _shareAchtionSheet;
@@ -104,7 +106,7 @@
     [_bottomPlayerMenuView.btnNext addTarget:self action:@selector(doNextAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_bottomPlayerMenuView];
     
-    
+    _miglabAPI = [[MigLabAPI alloc] init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -120,6 +122,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
     //data
+    _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
+    
     [self initSongInfo];
     
 }
@@ -370,13 +374,15 @@
         NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
         NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
-        int isLike = [currentSong.like intValue];
-        if (isLike > 0) {
+        if (_isCurSongLike > 0) {
+            
             [_miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:songid];
+            _isCurSongLike = 0;
         } else {
+            
             [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+            _isCurSongLike = 1;
         }
-        
         
     } else {
         [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
@@ -400,6 +406,8 @@
     
     [[PPlayerManagerCenter GetInstance] doNext];
     
+    _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
+    
     [self initSongInfo];
     
 }
@@ -417,7 +425,9 @@
 }
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
+    
     [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
+    [self initSongInfo];
 }
 
 -(void)initSongInfo{
@@ -443,6 +453,17 @@
     // 显示歌曲名称和演唱者
     _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
     _cdOfSongView.coverOfSongEGOImageView.imageURL = [NSURL URLWithString:currentSong.coverurl];
+    
+    // 显示红心
+    if (_isCurSongLike > 0) {
+        
+        _bottomPlayerMenuView.btnLike.imageView.image = [UIImage imageWithName:@"btn_like_sel" type:@"png"];
+    }
+    else {
+        
+        _bottomPlayerMenuView.btnLike.imageView.image = [UIImage imageWithName:@"btn_like_nor" type:@"png"];
+    }
+    
     
 //    _cdOfSongView.lrcOfSongTextView.text = usergene.scene.desc;
     
