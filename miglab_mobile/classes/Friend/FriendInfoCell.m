@@ -42,11 +42,11 @@
     
     if (!_userinfo.songname) {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000];
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000.0f];
     }
     else {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000, _userinfo.songname];
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000.0f, _userinfo.songname];
     }
     
     if ([_userinfo.sex isEqualToString:@"0"]) {
