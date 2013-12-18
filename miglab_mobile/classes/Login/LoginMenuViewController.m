@@ -280,6 +280,8 @@
     [UserSessionManager GetInstance].accesstoken = tempUser.token;
     [UserSessionManager GetInstance].isLoggedIn = YES;
     
+    [self didFinishLogin];
+    
     //go back
     [self doBack:nil];
     
@@ -387,8 +389,6 @@
     
     [self storeAuthData];
     [self getUserInfoFromSinaWeibo];
-    
-    [self didFinishLogin];
 }
 
 - (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo

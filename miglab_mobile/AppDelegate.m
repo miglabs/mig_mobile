@@ -496,6 +496,7 @@
     /* 处理推送消息 */
     PLog(@"receive message from push");
     
+    /* 清理右上角的未读消息标记 */
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
     
