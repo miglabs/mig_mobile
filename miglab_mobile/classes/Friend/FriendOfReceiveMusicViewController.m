@@ -221,7 +221,7 @@
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:@"您还没有登录哦~"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
     }
 }
 
@@ -239,7 +239,7 @@
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:@"您还没有登录哦~"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
     }
 }
 

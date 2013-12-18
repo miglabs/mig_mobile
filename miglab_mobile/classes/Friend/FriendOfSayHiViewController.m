@@ -97,13 +97,19 @@
         return;
     }
     
-    
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    
-    NSString* touserid = _touserid;
-    
-    [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        NSString* touserid = _touserid;
+        
+        [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+    }
 }
 
 -(void)doSayHelloSuccess:(NSNotification *)tNotification {

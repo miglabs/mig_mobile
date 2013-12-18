@@ -105,11 +105,19 @@
 
 -(void)LoadMusicListFromServer {
     
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString* touserid = _userinfo.userid;
-    
-    [self.miglabAPI doGetCollectedSongs:userid token:accesstoken taruid:touserid];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString* touserid = _userinfo.userid;
+        
+        [self.miglabAPI doGetCollectedSongs:userid token:accesstoken taruid:touserid];
+
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -227,19 +227,26 @@
 
 -(void)loadCommentListFromServer{
     
-    NSString *userid = [UserSessionManager GetInstance].userid;
-    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
-    NSString *strPageSize = [NSString stringWithFormat:@"%d", _pageSize];
-    
-    int commentcount = [_dataList count];
-    SongComment *tempcomment = (commentcount > 0) ? [_dataList objectAtIndex:commentcount - 1] : nil;
-    NSString *strFromId = (tempcomment) ? tempcomment.cid : @"0";
-    
-    _pageIndex = [strFromId intValue];
-    
-    [_miglabAPI doGetSongComment:userid token:accesstoken songid:songid count:strPageSize fromid:strFromId];
-    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
+        NSString *strPageSize = [NSString stringWithFormat:@"%d", _pageSize];
+        
+        int commentcount = [_dataList count];
+        SongComment *tempcomment = (commentcount > 0) ? [_dataList objectAtIndex:commentcount - 1] : nil;
+        NSString *strFromId = (tempcomment) ? tempcomment.cid : @"0";
+        
+        _pageIndex = [strFromId intValue];
+        
+        [_miglabAPI doGetSongComment:userid token:accesstoken songid:songid count:strPageSize fromid:strFromId];
+        
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+    }
 }
 
 -(IBAction)doPlayOrPause:(id)sender{
@@ -295,7 +302,7 @@
         }
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
     }
 }
 
@@ -311,7 +318,7 @@
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
     }
 }
 

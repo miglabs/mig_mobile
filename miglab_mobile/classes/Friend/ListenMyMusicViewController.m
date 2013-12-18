@@ -120,11 +120,18 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(void)LoadListeningMyFavorateMusic:(NSString *)location {
     
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    
-    //junliu fixed, for debug
-    [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:@"30.318076,120.133909"];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        
+        //junliu fixed, for debug
+        [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:@"30.318076,120.133909"];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+    }
 }
 
 #pragma notification

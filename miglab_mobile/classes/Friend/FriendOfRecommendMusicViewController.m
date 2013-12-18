@@ -144,24 +144,31 @@
     
     if (_isSendingSong == NO) {
         
-        NSString* userid = [UserSessionManager GetInstance].userid;
-        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        
-        /* 对所有歌曲遍历检查一遍，如果赠送歌曲的推荐语为空，则发送默认的推荐语 */
-        int sendcount = [_sendsongData count];
-        for (int i=0; i<sendcount; i++) {
+        if ([UserSessionManager GetInstance].isLoggedIn) {
             
-            Song* tempSong = (Song*)[_sendsongData objectAtIndex:i];
+            NSString* userid = [UserSessionManager GetInstance].userid;
+            NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
             
-            if (!tempSong.presentMsg) {
+            /* 对所有歌曲遍历检查一遍，如果赠送歌曲的推荐语为空，则发送默认的推荐语 */
+            int sendcount = [_sendsongData count];
+            for (int i=0; i<sendcount; i++) {
                 
-                tempSong.presentMsg = DEFAULT_RECOMMEND_MESSAGE;
+                Song* tempSong = (Song*)[_sendsongData objectAtIndex:i];
+                
+                if (!tempSong.presentMsg) {
+                    
+                    tempSong.presentMsg = DEFAULT_RECOMMEND_MESSAGE;
+                }
             }
+            
+            _isSendingSong = YES;
+            
+            [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
         }
-        
-        _isSendingSong = YES;
-        
-        [self.miglabAPI doPresentMusic:userid token:accesstoken touid:_toUserInfo.userid sid:_sendsongData];
+        else {
+            
+            [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        }
     }
 }
 

@@ -43,6 +43,9 @@
 /* 默认推荐语 */
 #define DEFAULT_RECOMMEND_MESSAGE   @"来听听嘛~"
 
+/* 未登录提示语 */
+#define DEFAULT_UNLOGIN_REMINDING   @"您还没有登录哦~~~"
+
 /* --------------------- 消息定义 --------------------- */
 
 /* 歌曲播放完毕，需要添加新的歌曲进来 */

@@ -89,9 +89,7 @@
         NSString *username = [UserSessionManager GetInstance].currentUser.username;
         
         [self.miglabAPI doRecordLocalSongsArray:userid token:accesstoken source:@"2" urlcode:@"0" name:username songs:datalist];
-        
     }
-    
 }
 
 -(void)getSongListFromIPod{

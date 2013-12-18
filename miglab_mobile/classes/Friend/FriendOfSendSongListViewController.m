@@ -143,10 +143,17 @@
 
 -(void)LoadMyMusicFromServer {
     
-    NSString* userid = [UserSessionManager GetInstance].userid;
-    NSString* token = [UserSessionManager GetInstance].accesstoken;
-    
-    [_miglabAPI doGetSongHistory:userid token:token fromid:@"0" count:@"10"];
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        
+        [_miglabAPI doGetSongHistory:userid token:token fromid:@"0" count:@"10"];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+    }
 }
 
 #pragma mark - Notification

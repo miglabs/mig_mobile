@@ -468,7 +468,7 @@ static int PAGE_WIDTH = 81;
         [super loadTypeSongs];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
     }
     
 }
@@ -482,7 +482,6 @@ static int PAGE_WIDTH = 81;
         
         [self.miglabAPI doUpdateConfigfile:userid token:accesstoken version:[NSString stringWithFormat:@"%lld", _xmlParserUtil.version]];
     }
-
     
 }
 

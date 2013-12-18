@@ -451,8 +451,8 @@
     
     PLog(@"doLikeAction...");
     
-    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString *userid = [UserSessionManager GetInstance].userid;
+//    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+//   NSString *userid = [UserSessionManager GetInstance].userid;
 //    [_miglabAPI doCollectSong:accesstoken uid:userid songid:_currentSong.songid];
     
 }
