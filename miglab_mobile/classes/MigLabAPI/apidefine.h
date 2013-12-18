@@ -51,4 +51,10 @@
 /* 用户从登录窗口登录成功 */
 #define NotificationNameLoginSuccessByUser      @"NotificationNameLoginSuccessByUser"
 
+
+/* 播放器实例事件 */
+#define NotificationNamePlayerStart             @"NotificationNamePlayerStart"
+#define NotificationNamePlayerStop              @"NotificationNamePlayerStop"
+#define NotificationNamePlayerNext              @"NotificationNamePlayerNext"
+
 #endif

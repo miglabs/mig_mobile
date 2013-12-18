@@ -121,6 +121,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
+    
     //data
     _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
     
@@ -140,6 +142,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerNext object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -549,6 +552,12 @@
         [self timerStop];
     }
     
+}
+
+-(void)autoPlayerNext:(NSNotification *)tNotification {
+    
+    _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
+    [self initSongInfo];
 }
 
 #pragma EGOImageViewDelegate

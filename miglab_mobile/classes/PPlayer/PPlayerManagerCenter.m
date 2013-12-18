@@ -13,6 +13,7 @@
 #import "PAAMusicPlayer.h"
 #import "SVProgressHUD.h"
 #import "UserSessionManager.h"
+#import "apidefine.h"
 
 #define SONG_INIT_SIZE 30000
 
@@ -199,6 +200,8 @@ static PPlayerManagerCenter *instance;
             }
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNext object:nil userInfo:nil];
     
 }
 

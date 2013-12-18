@@ -58,6 +58,7 @@
 -(void)hateSongSuccess:(NSNotification *)tNotification;
 -(void)collectSongFailed:(NSNotification *)tNotification;
 -(void)collectSongSuccess:(NSNotification *)tNotification;
+-(void)autoPlayerNext:(NSNotification *)tNotification;
 
 -(void)initSongInfo;
 -(void)configNowPlayingInfoCenter;               //锁屏封面
