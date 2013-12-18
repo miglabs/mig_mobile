@@ -23,6 +23,7 @@
 @property (nonatomic, assign) BOOL isGettingCollectSong;
 
 @property (nonatomic, retain) NSMutableDictionary *dicSelectedSongId;
+
 -(void)loadData;
 -(void)loadCollectedMusicFromDatabase;
 -(void)loadCollectedMusicFromServer;
