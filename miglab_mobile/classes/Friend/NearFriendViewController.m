@@ -136,11 +136,11 @@
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
         //junliu
-        [self.miglabAPI doGetNearUser:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:@"30.318076,120.133909"];
+        [self.miglabAPI doGetNearUser:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:tLocation];
         
     } else {
         
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
         
     }
     

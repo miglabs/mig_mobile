@@ -251,7 +251,7 @@
         
         //[self loadNumbersFromServer:location];
         //junliu test
-        [self loadNumbersFromServer:@"30.292207031178,120.0855621569"];
+        [self loadNumbersFromServer:location];
         
         _isUpdateLocation = YES;
     }
