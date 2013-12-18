@@ -19,10 +19,10 @@
 #define APPLE_ID 577680501
 
 //友盟
-#define UMENG_APPKEY                        @"51f338a356240baf3a0723a0"
+#define UMENG_APPKEY                        @"52ad939456240b089e156ae2"
 
 //友盟统计渠道定义
-#define APP_CHANNEL_ID                      @"TEST"
+#define APP_CHANNEL_ID                      @"咪哟"
 
 //新浪账号-音乐随我意移动版
 #define SINA_WEIBO_APP_KEY                  @"4082577001"

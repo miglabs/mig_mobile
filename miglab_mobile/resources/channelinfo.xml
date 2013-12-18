@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <description>
     <updateurl>
         <attr id = "1" tipurl = "http://42.121.112.248/pic/system/mode/" />
@@ -14,19 +14,19 @@
         <attr index = "8"  id = "16"   picname="type_16.png"   name="轻音乐" dec="轻音乐元素" />
     </type>
     <mood>
-        <attr index = "1" id = "1"  picname="mood_1.png" name="失恋疗伤"   dec="错过了日出可以等待,错过了爱情却不会回来"/>
-        <attr index = "2" id = "2"  picname="mood_2.png" name="受到挫折"   dec="对勇气最大考验,就是做到败而不馁"/>
-        <attr index = "3" id = "3"  picname="mood_3.png" name="暗恋时分"   dec="一人是甜甜暗恋,爱或不爱是不是都要说出来"/>
-        <attr index = "4" id = "4"  picname="mood_4.png" name="寂寞孤独"   dec="不愿醒来,台灯投射在墙上只有我孤独的身影"/>
-        <attr index = "5" id = "5"  picname="mood_5.png" name="思念的距离" dec="思念不听话,自己跑出来,任性地追随你的影踪"/>
-        <attr index = "6" id = "6"  picname="mood_6.png" name="幸福甜蜜"   dec="爱情像海一样深沉,因为两者都是没有穷尽的"/>
+        <attr index = "1" id = "1"  picname="mood_1.png" name="失恋疗伤"   dec="错过的爱情不会回来"/>
+        <attr index = "2" id = "2"  picname="mood_2.png" name="受到挫折"   dec="最大的勇气，败而不馁"/>
+        <attr index = "3" id = "3"  picname="mood_3.png" name="暗恋时分"   dec="爱或不爱都要说出来"/>
+        <attr index = "4" id = "4"  picname="mood_4.png" name="寂寞孤独"   dec="墙上倒影着我孤独的身影"/>
+        <attr index = "5" id = "5"  picname="mood_5.png" name="思念的距离" dec="思念不听话,自己跑出来"/>
+        <attr index = "6" id = "6"  picname="mood_6.png" name="幸福甜蜜"   dec="如同冬天里的棉袄"/>
     </mood>
     <scenes>
-        <attr index = "1" id = "1"  picname="scene_1.png" name="午后"       dec="桃李依依春暗度,一片芳心千万绪"/>
-        <attr index = "2" id = "2"  picname="scene_2.png" name="睡觉"       dec="调皮的阳光跃上窗台,探窥那熟睡的香甜"/>
-        <attr index = "3" id = "3"  picname="scene_3.png" name="驾驶"       dec="一路上有这样旋律陪伴，沿途的风景更美了"/>
-        <attr index = "4" id = "4"  picname="scene_4.png" name="工作"       dec="放松心态，完全进入工作状态"/>
-        <attr index = "5" id = "5"  picname="scene_5.png" name="旅行"       dec="有音乐就有路，有音乐就有美丽的风景"/>
+        <attr index = "1" id = "1"  picname="scene_1.png" name="午后"       dec="阳光慵懒而舒服"/>
+        <attr index = "2" id = "2"  picname="scene_2.png" name="睡觉"       dec="伴随你你甜蜜熟睡"/>
+        <attr index = "3" id = "3"  picname="scene_3.png" name="驾驶"       dec="一路上有优美旋律陪伴"/>
+        <attr index = "4" id = "4"  picname="scene_4.png" name="工作"       dec="放松心态"/>
+        <attr index = "5" id = "5"  picname="scene_5.png" name="旅行"       dec="有音乐的旅途风景会更美"/>
         <attr index = "6" id = "6"  picname="scene_6.png" name="运动"       dec="运动不止，生命不息"/>
     </scenes>
     <mig_channel>
