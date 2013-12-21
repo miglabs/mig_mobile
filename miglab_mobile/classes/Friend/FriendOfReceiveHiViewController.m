@@ -41,7 +41,7 @@
     //nav bar
     NSString* name = _msginfo.userInfo.nickname;
     
-    self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@的消息", name];
+    self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@", name];
     
     //user head view
     NSArray *userHeadNib = [[NSBundle mainBundle] loadNibNamed:@"FriendMessageUserHead" owner:self options:nil];

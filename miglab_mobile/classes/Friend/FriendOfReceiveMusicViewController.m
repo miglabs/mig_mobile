@@ -57,10 +57,10 @@
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
-    NSString* myname = [UserSessionManager GetInstance].currentUser.nickname;
+    NSString* name = _msginfo.userInfo.nickname;
     
     //nav bar
-    self.navView.titleLabel.text = myname;
+    self.navView.titleLabel.text = [NSString stringWithFormat:@"来自%@", name];
     
     /* music header */
     posy += 10;
@@ -117,7 +117,7 @@
     [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChat:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel* lblcontenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
-    lblcontenttitle.text = @"评论";
+    lblcontenttitle.text = @"推荐语";
     lblcontenttitle.backgroundColor = [UIColor clearColor];
     lblcontenttitle.textColor = [UIColor whiteColor];
     lblcontenttitle.textAlignment = UITextAlignmentLeft;
