@@ -14,6 +14,8 @@
 @property (nonatomic, retain) UILabel* lblinfo;
 @property (nonatomic, retain) NSString* touserid;
 
+@property (nonatomic, assign) BOOL isSendingMsg;
+
 -(IBAction)doSayHello:(id)sender;
 
 -(void)doSayHelloSuccess:(NSNotification*)tNotification;

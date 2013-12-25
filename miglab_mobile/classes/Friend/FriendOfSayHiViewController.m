@@ -17,6 +17,7 @@
 @synthesize text = _text;
 @synthesize lblinfo = _lblinfo;
 @synthesize touserid = _touserid;
+@synthesize isSendingMsg = _isSendingMsg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +41,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isSendingMsg = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -97,18 +100,26 @@
         return;
     }
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+    if (_isSendingMsg == NO) {
         
-        NSString* userid = [UserSessionManager GetInstance].userid;
-        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        
-        NSString* touserid = _touserid;
-        
-        [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
+        if ([UserSessionManager GetInstance].isLoggedIn) {
+            
+            _isSendingMsg = YES;
+            
+            NSString* userid = [UserSessionManager GetInstance].userid;
+            NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+            NSString* touserid = _touserid;
+            
+            [self.miglabAPI doSayHello:userid token:accesstoken touid:touserid msg:content];
+        }
+        else {
+            
+            [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        }
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        [SVProgressHUD showErrorWithStatus:DEFAULT_IS_SENDING_MESSAGE];
     }
 }
 
@@ -116,12 +127,16 @@
     
     [SVProgressHUD showErrorWithStatus:@"打招呼成功啦！！！"];
     
+    _isSendingMsg = NO;
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)doSayHelloFailed:(NSNotification *)tNotification {
     
     [SVProgressHUD showErrorWithStatus:@"打招呼失败了:("];
+    
+    _isSendingMsg = NO;
     
     [self.navigationController popViewControllerAnimated:YES];
 }

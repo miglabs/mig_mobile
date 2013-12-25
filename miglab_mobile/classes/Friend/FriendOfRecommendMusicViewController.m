@@ -170,6 +170,10 @@
             [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
         }
     }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:DEFAULT_IS_SENDING_MESSAGE];
+    }
 }
 
 #pragma mark - Notification center
