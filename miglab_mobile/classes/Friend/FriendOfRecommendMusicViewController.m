@@ -322,14 +322,14 @@
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
+    NSString* presentmsg = textView.text;
+    
+    Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
+    curSong.presentMsg = presentmsg;
+    
     if ([text isEqualToString:@"\n"]) {
         
-        NSString* presentmsg = textView.text;
-        
         if (_curEditSong > -1) {
-            
-            Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
-            curSong.presentMsg = presentmsg;
             
             /* 如果没有写任何消息，将显示Placeholder */
             int msgsize = [presentmsg length];
