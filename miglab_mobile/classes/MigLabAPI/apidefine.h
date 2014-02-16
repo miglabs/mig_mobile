@@ -41,13 +41,22 @@
 #define LOGIN_DOUBAN                4
 
 /* 默认推荐语 */
-#define DEFAULT_RECOMMEND_MESSAGE   @"来听听嘛~"
+#define MIGTIP_DEFAULT_RECOMMAND    @"来听听嘛~"
 
 /* 未登录提示语 */
-#define DEFAULT_UNLOGIN_REMINDING   @"您还没有登录哦~~~"
+#define MIGTIP_UNLOGIN              @"您还没有登录哦~~~"
 
 /* 正在发送提示语 */
-#define DEFAULT_IS_SENDING_MESSAGE  @"正在发送消息哦~~~"
+#define MIGTIP_SENDING_MESSAGE      @"正在发送消息哦~~~"
+
+/* 空邮箱提示语 */
+#define MIGTIP_EMPTY_EMAIL         @"邮箱不能为空哦~~~"
+
+/* 错误邮箱格式 */
+#define MIGTIP_WRONG_EMAIL_FMT     @"邮箱格式错误"
+
+/* 空密码提示语 */
+#define MIGTIP_EMPTY_PASSWORD      @"密码不能为空哦~~~"
 
 /* --------------------- 消息定义 --------------------- */
 

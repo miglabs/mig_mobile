@@ -140,7 +140,7 @@
         
     } else {
         
-        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
         
     }
     

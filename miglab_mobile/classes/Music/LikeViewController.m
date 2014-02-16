@@ -157,7 +157,7 @@
         
     } else {
         
-        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
     
 }
@@ -270,7 +270,7 @@
         [self.miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:tSelectedSongs];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
     
 }

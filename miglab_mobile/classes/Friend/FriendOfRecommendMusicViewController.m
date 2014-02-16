@@ -157,7 +157,7 @@
                 
                 if (!tempSong.presentMsg) {
                     
-                    tempSong.presentMsg = DEFAULT_RECOMMEND_MESSAGE;
+                    tempSong.presentMsg = MIGTIP_DEFAULT_RECOMMAND;
                 }
             }
             
@@ -167,12 +167,12 @@
         }
         else {
             
-            [SVProgressHUD showErrorWithStatus:DEFAULT_UNLOGIN_REMINDING];
+            [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
         }
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:DEFAULT_IS_SENDING_MESSAGE];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_SENDING_MESSAGE];
     }
 }
 
