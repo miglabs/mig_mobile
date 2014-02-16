@@ -83,7 +83,7 @@
 
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
-#define LOGIN_SSO_SP_URL                                    [NSString stringWithFormat:@"%@%@",HTTP_SSO_DOMAIN,@"cgi-bin/sp.fcgi?sp"]
+#define LOGIN_SSO_SP_URL                                    [NSString stringWithFormat:@"%@%@",HTTP_SSO_DOMAIN,@"cgi-bin/login.fcgi"]
 //用户名为空
 #define NotificationNameUsernameIsNull                      @"NotificationNameUsernameIsNull"
 //密码为空

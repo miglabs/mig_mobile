@@ -31,7 +31,7 @@
         
         //register
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
         
     }
     return self;
@@ -126,7 +126,6 @@
     
     RegisterOfNickNameViewController *gotoNickNameView = [[RegisterOfNickNameViewController alloc] initWithNibName:@"RegisterOfNickNameViewController" bundle:nil];
     [self.navigationController pushViewController:gotoNickNameView animated:YES];
-    
 }
 
 @end

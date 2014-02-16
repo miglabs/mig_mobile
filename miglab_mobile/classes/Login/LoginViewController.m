@@ -108,12 +108,12 @@
     NSString *strPassword = _passwordTextField.text;
     
     if (!strEMail || strEMail.length < 1) {
-        [SVProgressHUD showErrorWithStatus:@"邮箱不能为空噢～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_EMPTY_EMAIL];
         return;
     }
     
     if (!strPassword || strPassword.length < 1) {
-        [SVProgressHUD showErrorWithStatus:@"密码不能为空噢～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_EMPTY_PASSWORD];
         return;
     }
     
