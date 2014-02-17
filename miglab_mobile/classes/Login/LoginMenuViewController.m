@@ -14,6 +14,7 @@
 #import "SVProgressHUD.h"
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
+#import "PPlayerManagerCenter.h"
 
 @interface LoginMenuViewController ()
 
@@ -153,6 +154,9 @@
     
     // 发送设备号到服务端
     [self SendDeviceToken];
+    
+    // 获取一次歌曲
+    [[PPlayerManagerCenter GetInstance] doNext];
 }
 
 -(void)didFinishLogout {
