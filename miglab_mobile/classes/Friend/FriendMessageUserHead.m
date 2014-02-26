@@ -41,6 +41,15 @@
     CGRect sexImgRect = CGRectMake(nameRect.origin.x + nameSize.width + 8, 37, 12, 12);
     [_imgSex setFrame:sexImgRect];
     
+    if ([_userinfo.sex isEqualToString:STR_MALE]) {
+        
+        _imgSex.image = [UIImage imageNamed:@"user_gender_male"];
+    }
+    else {
+        
+        _imgSex.image = [UIImage imageNamed:@"user_gender_female"];
+    }
+    
     //初始化个人信息
     if (_userinfo.distance < 1000.0) {
         

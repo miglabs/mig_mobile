@@ -40,6 +40,10 @@
 #define LOGIN_QQZONE                3
 #define LOGIN_DOUBAN                4
 
+/* 性别 */
+#define STR_MALE                    @"1"
+#define STR_FEMALE                  @"0"
+
 /* 默认推荐语 */
 #define MIGTIP_DEFAULT_RECOMMAND    @"来听听嘛~"
 

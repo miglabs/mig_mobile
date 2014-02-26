@@ -49,7 +49,7 @@
         _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000.0f, _userinfo.songname];
     }
     
-    if ([_userinfo.sex isEqualToString:@"0"]) {
+    if ([_userinfo.sex isEqualToString:STR_FEMALE]) {
         
         _genderImageView.image = [UIImage imageNamed:@"user_gender_female"];
     }
