@@ -18,6 +18,7 @@
 @synthesize btnSay = _btnSay;
 @synthesize btnSendSong = _btnSendSong;
 @synthesize isFriend = _isFriend;
+@synthesize imgSex = _imgSex;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,6 +34,12 @@
     
     _lblNickName.text = _userinfo.nickname;
     _lblListening.text = _userinfo.songname;
+    
+    CGSize nameSize = [_lblNickName.text sizeWithFont:_lblNickName.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+    CGRect nameRect = [_lblNickName frame];
+    
+    CGRect sexImgRect = CGRectMake(nameRect.origin.x + nameSize.width + 8, 37, 12, 12);
+    [_imgSex setFrame:sexImgRect];
     
     //初始化个人信息
     if (_userinfo.distance < 1000.0) {
