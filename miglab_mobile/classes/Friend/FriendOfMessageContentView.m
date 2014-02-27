@@ -12,6 +12,7 @@
 
 @synthesize lbtnSendSong = _lbtnSendSong;
 @synthesize lbtnChat = _lbtnChat;
+@synthesize imgBorder = _imgBorder;
 
 - (id)initWithFrame:(CGRect)frame
 {

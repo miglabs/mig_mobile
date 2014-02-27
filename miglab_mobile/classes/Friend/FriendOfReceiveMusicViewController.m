@@ -116,25 +116,74 @@
     [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
     [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChat:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel* lblcontenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
-    lblcontenttitle.text = @"推荐语";
-    lblcontenttitle.backgroundColor = [UIColor clearColor];
-    lblcontenttitle.textColor = [UIColor whiteColor];
-    lblcontenttitle.textAlignment = UITextAlignmentLeft;
-    [_messageContentView addSubview:lblcontenttitle];
+    // 添加发送人信息
+    int starty = 10;
+    int startx = 10;
+    int maxWidth = 277;
     
-    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, 257, 80)];
+    //添加发送人头像
+    int avatarWidth = 30;
+    int avatarHeight = 30;
+    EGOImageButton* btnAvatar = [[EGOImageButton alloc] initWithFrame:CGRectMake(startx, starty, avatarWidth, avatarHeight)];
+    btnAvatar.imageURL = [NSURL URLWithString:_msginfo.userInfo.headurl];
+    [_messageContentView addSubview:btnAvatar];
+    
+    // 添加发送人名字
+    UILabel* lblSenderName = [[UILabel alloc] initWithFrame:CGRectMake(startx + avatarWidth + 5, starty - 5, 160, avatarHeight / 3 * 2)];
+    lblSenderName.text = _msginfo.userInfo.nickname;
+    lblSenderName.textColor = [UIColor whiteColor];
+    lblSenderName.backgroundColor = [UIColor clearColor];
+    lblSenderName.textAlignment = UITextAlignmentLeft;
+    lblSenderName.font = [UIFont fontWithName:@"system" size:10];
+    [_messageContentView addSubview:lblSenderName];
+    
+    
+    // 添加发送人位置和收听歌曲显示
+    long distance = _msginfo.userInfo.distance;
+    NSString* songName = _msginfo.userInfo.songname;
+    UILabel* lblSenderInfo = [[UILabel alloc] initWithFrame:CGRectMake(startx + avatarWidth + 5, starty + avatarHeight / 3 * 2, maxWidth - avatarWidth - starty, avatarHeight / 3)];
+    lblSenderInfo.text = [NSString stringWithFormat:@"%ldkm | 正在听 %@", distance, songName];
+    lblSenderInfo.textColor = [UIColor whiteColor];
+    lblSenderInfo.backgroundColor = [UIColor clearColor];
+    lblSenderInfo.textAlignment = UITextAlignmentLeft;
+    lblSenderInfo.font = [UIFont fontWithName:@"system" size:7];
+    [_messageContentView addSubview:lblSenderInfo];
+    
+    starty += avatarHeight + 10;
+    
+//    UILabel* lblcontenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
+//    lblcontenttitle.text = @"推荐语";
+//    lblcontenttitle.backgroundColor = [UIColor clearColor];
+//    lblcontenttitle.textColor = [UIColor whiteColor];
+//    lblcontenttitle.textAlignment = UITextAlignmentLeft;
+//    [_messageContentView addSubview:lblcontenttitle];
+    
+    // 修改发送信息显示框
+    int msgCntWidth = maxWidth;
+    int msgCntHeight = 100;
+    int msgCntBorderWidth = 10;
+    _messageContentView.imgBorder.frame = CGRectMake(startx, starty, msgCntWidth, msgCntHeight);
+    
+    // 添加发送信息内容
+    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(startx + msgCntBorderWidth, starty + msgCntBorderWidth, msgCntWidth - msgCntBorderWidth, msgCntHeight - msgCntBorderWidth)];
     textcontent.text = _msginfo.content;
     textcontent.textColor = [UIColor whiteColor];
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
     textcontent.font = [UIFont fontWithName:@"system" size:14];
     
-    // 更新label显示的高度
+    // 更新发送信息内容显示的高度
     CGSize maxsize = CGSizeMake(300, 9000);
     CGSize stringSize = [textcontent.text sizeWithFont:textcontent.font constrainedToSize:maxsize];
-    textcontent.frame = CGRectMake(20, 35, 257, stringSize.height);
+    textcontent.frame = CGRectMake(startx + msgCntBorderWidth, starty + msgCntBorderWidth, msgCntWidth - msgCntBorderWidth, stringSize.height);
     [_messageContentView addSubview:textcontent];
+    
+    starty += msgCntHeight + 5;
+    
+    //更新按钮显示位置
+    _messageContentView.lbtnSendSong.frame = CGRectMake(83, starty, 98, 30);
+    _messageContentView.lbtnChat.frame = CGRectMake(189, starty, 98, 30);
+    
     
     [self.view addSubview:_messageContentView];
     

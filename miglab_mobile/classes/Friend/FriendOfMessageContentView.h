@@ -12,5 +12,6 @@
 
 @property (nonatomic, retain) IBOutlet UIButton* lbtnSendSong;
 @property (nonatomic, retain) IBOutlet UIButton* lbtnChat;
+@property (nonatomic, retain) IBOutlet UIImageView* imgBorder;
 
 @end
