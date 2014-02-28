@@ -102,10 +102,12 @@
         [_musicCommentHeader.btnCollect setImage:img forState:UIControlStateNormal];
     }
     
+    posy += 110;
+    
     // "评论"标识
-    UILabel* lblComment = [[UILabel alloc] initWithFrame:CGRectMake(10, posy + 5, 180, 15)];
+    UILabel* lblComment = [[UILabel alloc] initWithFrame:CGRectMake(10 + 10, posy + 2, 180, 15)];
     lblComment.text = @"评论";
-    lblComment.textColor = [UIColor blackColor];
+    lblComment.textColor = [UIColor grayColor];
     lblComment.backgroundColor = [UIColor clearColor];
     lblComment.textAlignment = UITextAlignmentLeft;
     lblComment.font = [UIFont fontOfApp:12];
@@ -113,7 +115,7 @@
     
     
     /* title */
-    posy += 110 + 20;
+    posy += 20;
     NSArray* msgContentNib = [[NSBundle mainBundle] loadNibNamed:@"FriendOfMessageContentView" owner:self options:nil];
     for (id oneObject in msgContentNib) {
         
@@ -136,6 +138,8 @@
     int avatarHeight = 30;
     EGOImageButton* btnAvatar = [[EGOImageButton alloc] initWithFrame:CGRectMake(startx, starty, avatarWidth, avatarHeight)];
     btnAvatar.imageURL = [NSURL URLWithString:_msginfo.userInfo.headurl];
+    btnAvatar.layer.cornerRadius = avatarWidth / 2;
+    btnAvatar.layer.masksToBounds = YES;
     [_messageContentView addSubview:btnAvatar];
     
     // 添加发送人名字
@@ -144,14 +148,14 @@
     lblSenderName.textColor = [UIColor whiteColor];
     lblSenderName.backgroundColor = [UIColor clearColor];
     lblSenderName.textAlignment = UITextAlignmentLeft;
-    lblSenderName.font = [UIFont fontOfApp:10];
+    lblSenderName.font = [UIFont fontOfApp:14];
     [_messageContentView addSubview:lblSenderName];
     
     // 添加发送人性别图片
     NSString* senderSex = _msginfo.userInfo.sex;
     CGSize senderNameLength = [lblSenderName.text sizeWithFont:lblSenderName.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
     CGRect senderNameRect = lblSenderName.frame;
-    CGRect imgRect = CGRectMake(senderNameRect.origin.x + senderNameLength.width + 5, senderNameRect.origin.y, 12, 12);
+    CGRect imgRect = CGRectMake(senderNameRect.origin.x + senderNameLength.width + 5, senderNameRect.origin.y + 5, 12, 12);
     UIImageView* imgSex = [[UIImageView alloc] initWithFrame:imgRect];
     if ([senderSex isEqualToString:STR_MALE]) {
         
@@ -172,24 +176,24 @@
     lblSenderInfo.textColor = [UIColor whiteColor];
     lblSenderInfo.backgroundColor = [UIColor clearColor];
     lblSenderInfo.textAlignment = UITextAlignmentLeft;
-    lblSenderInfo.font = [UIFont fontOfApp:8];
+    lblSenderInfo.font = [UIFont fontOfApp:10];
     [_messageContentView addSubview:lblSenderInfo];
     
-    starty += avatarHeight + 10;
+    starty += avatarHeight + 5;
     
     // 修改发送信息显示框
     int msgCntWidth = maxWidth;
-    int msgCntHeight = 100;
+    int msgCntHeight = 95;
     int msgCntBorderWidth = 10;
     _messageContentView.imgBorder.frame = CGRectMake(startx, starty, msgCntWidth, msgCntHeight);
     
     // 添加发送信息内容
-    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(startx + msgCntBorderWidth, starty + msgCntBorderWidth, msgCntWidth - msgCntBorderWidth, msgCntHeight - msgCntBorderWidth)];
+    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(startx + msgCntBorderWidth, starty, msgCntWidth - msgCntBorderWidth, msgCntHeight - msgCntBorderWidth)];
     textcontent.text = _msginfo.content;
     textcontent.textColor = [UIColor whiteColor];
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
-    textcontent.font = [UIFont fontOfApp:14];
+    textcontent.font = [UIFont fontOfApp:16];
     
     // 更新发送信息内容显示的高度
     CGSize maxsize = CGSizeMake(300, 9000);

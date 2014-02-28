@@ -57,6 +57,30 @@
     [_userHeadView.btnSay setHidden:YES];
     [self.view addSubview:_userHeadView];
     
+    posy += 139;
+    
+    // "对方送你一首歌"标识
+    UILabel* lblComment = [[UILabel alloc] initWithFrame:CGRectMake(10 + 10, posy + 2, 180, 15)];
+    lblComment.textColor = [UIColor grayColor];
+    lblComment.backgroundColor = [UIColor clearColor];
+    lblComment.textAlignment = UITextAlignmentLeft;
+    lblComment.font = [UIFont fontOfApp:12];
+    if (_msginfo.messagetype == 1) {
+        
+        lblComment.text = @"对方给你打了一个招呼";
+    }
+    else if (_msginfo.messagetype == 3) {
+        
+        lblComment.text = @"对方给你的歌曲评论";
+    }
+    else {
+        
+        lblComment.text = @"";
+    }
+    [self.view addSubview:lblComment];
+    
+    posy += 20;
+    
     //message
     NSArray* msgContentNib = [[NSBundle mainBundle] loadNibNamed:@"FriendOfMessageContentView" owner:self options:nil];
     for (id oneObject in msgContentNib) {
@@ -64,41 +88,38 @@
             _messageContentView = (FriendOfMessageContentView*)oneObject;
         }//if
     }//for
-    _messageContentView.frame = CGRectMake(ORIGIN_X, posy + 10 + 129 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - (posy + 10 + 129 + 10) - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
+    _messageContentView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
     [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
     [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChar:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel* contenttitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 227, 21)];
-    if (_msginfo.messagetype == 1) {
-        
-        contenttitle.text = @"对方给你打了一个招呼";
-    }
-    else if (_msginfo.messagetype == 3) {
-        
-        contenttitle.text = @"对方给你的歌曲评论";
-    }
-    else {
-        
-        contenttitle.text = @"";
-    }
-    contenttitle.backgroundColor = [UIColor clearColor];
-    contenttitle.textColor = [UIColor whiteColor];
-    //[contenttitle setFont:[UIFont fontWithName:@"Arial" size:18.0]];
-    contenttitle.textAlignment = UITextAlignmentLeft;
-    [_messageContentView addSubview:contenttitle];
+    // 打招呼显示框
+    int startx = 10;
+    int starty = 10;
+    int msgCntWidth = 277;
+    int msgCntHeight = 113;
+    int msgCntBorderWidth = 10;
+    _messageContentView.imgBorder.frame = CGRectMake(startx, starty, msgCntWidth, msgCntHeight);
     
-    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, 257, 80)];
+    // 打招呼显示内容
+    UILabel* textcontent = [[UILabel alloc] initWithFrame:CGRectMake(startx + msgCntBorderWidth, starty + msgCntBorderWidth, msgCntWidth - msgCntBorderWidth, msgCntHeight - msgCntBorderWidth)];
     textcontent.text = _msginfo.content;
     textcontent.textColor = [UIColor whiteColor];
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
-    textcontent.font = [UIFont fontOfApp:14];
+    textcontent.font = [UIFont fontOfApp:16];
     
     // 更新label显示的高度
     CGSize maxsize = CGSizeMake(300, 9000);
     CGSize stringSize = [textcontent.text sizeWithFont:textcontent.font constrainedToSize:maxsize];
-    textcontent.frame = CGRectMake(20, 35, 257, stringSize.height);
+    textcontent.frame = CGRectMake(startx + msgCntBorderWidth, starty + msgCntBorderWidth, msgCntWidth - msgCntBorderWidth, stringSize.height);
     [_messageContentView addSubview:textcontent];
+    
+    starty += msgCntHeight + 5;
+    
+    //更新按钮显示位置
+    _messageContentView.lbtnSendSong.frame = CGRectMake(83, starty, 98, 30);
+    _messageContentView.lbtnChat.frame = CGRectMake(189, starty, 98, 30);
+
     
     [self.view addSubview:_messageContentView];
     
