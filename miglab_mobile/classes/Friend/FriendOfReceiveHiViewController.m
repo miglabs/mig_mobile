@@ -92,7 +92,7 @@
     textcontent.textColor = [UIColor whiteColor];
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
-    textcontent.font = [UIFont fontWithName:@"system" size:14];
+    textcontent.font = [UIFont fontOfApp:14];
     
     // 更新label显示的高度
     CGSize maxsize = CGSizeMake(300, 9000);
