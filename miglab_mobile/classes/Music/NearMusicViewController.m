@@ -7,7 +7,7 @@
 //
 
 #import "NearMusicViewController.h"
-#import "MusicSongCell.h"
+#import "NearMusicSongCell.h"
 #import "Song.h"
 #import "PDatabaseManager.h"
 #import "MusicCommentViewController.h"
@@ -318,11 +318,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"MusicSongCell";
-	MusicSongCell *cell = (MusicSongCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"NearMusicSongCell";
+	NearMusicSongCell *cell = (NearMusicSongCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MusicSongCell" owner:self options:nil];
-        cell = (MusicSongCell *)[nibContents objectAtIndex:0];
+        NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"NearMusicSongCell" owner:self options:nil];
+        cell = (NearMusicSongCell *)[nibContents objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -344,6 +344,29 @@
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
     cell.lblSongName.font = [UIFont fontOfApp:15.0f];
+    
+    long distance = nms.userInfo.distance;
+    int favornum = tempsong.collectnum;
+    NSString* imageurl = nms.userInfo.headurl;
+    
+    if (distance < 1000) {
+        
+        cell.lblDistance.text = [NSString stringWithFormat:@"%d | %ldm内", favornum, distance];
+    }
+    else if(distance < 1000000) {
+        
+        cell.lblDistance.text = [NSString stringWithFormat:@"%d | %ldkm内", favornum, distance];
+    }
+    else {
+        
+        cell.lblDistance.text = [NSString stringWithFormat:@"%d | 大于1km", favornum];
+    }
+    cell.lblDistance.textAlignment = UITextAlignmentRight;
+    
+    if (imageurl) {
+        
+        cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
+    }
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
     NSString *songDesc = @"未缓存";

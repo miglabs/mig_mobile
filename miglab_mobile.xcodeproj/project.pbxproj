@@ -485,6 +485,8 @@
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
 		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
+		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
+		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1137,6 +1139,9 @@
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
 		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		CB0380D9185DA0B500137D8E /* gene_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_focus.png; sourceTree = "<group>"; };
+		CB30AD8418C0E45F0072B198 /* NearMusicSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicSongCell.h; sourceTree = "<group>"; };
+		CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicSongCell.m; sourceTree = "<group>"; };
+		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
@@ -1750,6 +1755,9 @@
 				16F3521517BF241400CF9044 /* NearMusicViewController.h */,
 				16F3521617BF241400CF9044 /* NearMusicViewController.m */,
 				16F3521717BF241400CF9044 /* NearMusicViewController.xib */,
+				CB30AD8418C0E45F0072B198 /* NearMusicSongCell.h */,
+				CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */,
+				CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */,
 				16F3521B17BF254C00CF9044 /* OnlineViewController.h */,
 				16F3521C17BF254C00CF9044 /* OnlineViewController.m */,
 				16F3521D17BF254C00CF9044 /* OnlineViewController.xib */,
@@ -2661,6 +2669,7 @@
 				1697326517E5BC8700F4AA6E /* type_6.png in Resources */,
 				1697326617E5BC8700F4AA6E /* type_9.png in Resources */,
 				16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */,
+				CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */,
 				1635D96717F06C6C00B392BB /* home_navigation_menu_sel.png in Resources */,
 				1635D96A17F06C7800B392BB /* gene_avatar_unlogin.png in Resources */,
 				1635D96C17F06C8100B392BB /* about_icon.png in Resources */,
@@ -2717,6 +2726,7 @@
 				162316621777397600CF8FB5 /* AFPropertyListRequestOperation.m in Sources */,
 				162316631777397600CF8FB5 /* AFURLConnectionOperation.m in Sources */,
 				162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */,
+				CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */,
 				162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */,
 				162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */,
 				1623166A1777397600CF8FB5 /* EGOCache.m in Sources */,
