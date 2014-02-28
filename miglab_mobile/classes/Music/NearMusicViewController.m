@@ -348,20 +348,31 @@
     long distance = nms.userInfo.distance;
     int favornum = tempsong.collectnum;
     NSString* imageurl = nms.userInfo.headurl;
+    NSString* szFavor = [NSString stringWithFormat:@"%d", favornum];
+    if (favornum > 999) {
+        
+        szFavor = @"999+";
+    }
     
     if (distance < 1000) {
         
-        cell.lblDistance.text = [NSString stringWithFormat:@"%d | %ldm内", favornum, distance];
+        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldm内", szFavor, distance];
     }
     else if(distance < 1000000) {
         
-        cell.lblDistance.text = [NSString stringWithFormat:@"%d | %ldkm内", favornum, distance];
+        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldkm内", szFavor, distance];
     }
     else {
         
-        cell.lblDistance.text = [NSString stringWithFormat:@"%d | 大于1km", favornum];
+        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | 大于1km", szFavor];
     }
     cell.lblDistance.textAlignment = UITextAlignmentRight;
+    
+    CGSize distancesize = [cell.lblDistance.text sizeWithFont:cell.lblDistance.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+    CGRect distanceRect = cell.lblDistance.frame;
+    CGRect tipRect = cell.imgMsgTips.frame;
+    tipRect.origin.x = distanceRect.origin.x + distanceRect.size.width - distancesize.width - 5 - tipRect.size.width;
+    cell.imgMsgTips.frame = tipRect;
     
     if (imageurl) {
         
