@@ -155,8 +155,12 @@
     // 发送设备号到服务端
     [self SendDeviceToken];
     
-    // 获取一次歌曲
-    [[PPlayerManagerCenter GetInstance] doNext];
+    // 如果当前没有播放，获取一次歌曲
+    PAAMusicPlayer* aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+    if (![aaMusicPlayer isMusicPlaying]) {
+        
+        [[PPlayerManagerCenter GetInstance] doNext];
+    }
 }
 
 -(void)didFinishLogout {
