@@ -278,8 +278,6 @@
         tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
         tempUser.source = SourceTypeDouBan;
         
-        //[databaseManager deleteAllUserAccount];
-        
         [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
         [databaseManager insertUserAccout:tempUser.doubanAccount.username password:tempUser.doubanAccount.username userid:tempUser.doubanAccount.accountid accessToken:tempUser.doubanAccount.accesstoken accountType:tempUser.doubanAccount.accounttype];
         
@@ -599,12 +597,15 @@
     NSString *douban_user_name = [result objectForKey:@"douban_user_name"];
     NSString *expires_in = [result objectForKey:@"expires_in"];
     NSString *gender = @"0";
+    NSString *password = @"";
     
     AccountOf3rdParty *doubanAccount = [[AccountOf3rdParty alloc] init];
     doubanAccount.accountid = douban_user_id;
     doubanAccount.accesstoken = access_token;
     doubanAccount.expirationdate = [NSDate dateWithTimeIntervalSince1970:[expires_in longLongValue]];
     doubanAccount.accounttype = SourceTypeDouBan;
+    doubanAccount.username = douban_user_name;
+    doubanAccount.password = password;
     
     [UserSessionManager GetInstance].accounttype = SourceTypeDouBan;
     [UserSessionManager GetInstance].currentUser.doubanAccount = doubanAccount;
