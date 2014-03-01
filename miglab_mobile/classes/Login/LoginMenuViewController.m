@@ -278,6 +278,8 @@
         tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
         tempUser.source = SourceTypeDouBan;
         
+        //[databaseManager deleteAllUserAccount];
+        
         [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
         [databaseManager insertUserAccout:tempUser.doubanAccount.username password:tempUser.doubanAccount.username userid:tempUser.doubanAccount.accountid accessToken:tempUser.doubanAccount.accesstoken accountType:tempUser.doubanAccount.accounttype];
         

@@ -13,4 +13,6 @@
 -(NSString *)getImageName;
 -(NSString *)getImageType;
 
++(NSString *)getConstellation:(int)month day:(int)tday;
+
 @end

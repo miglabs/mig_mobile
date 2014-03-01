@@ -17,6 +17,7 @@
 @property (nonatomic, retain) IBOutlet EGOImageButton *btnAvatar;
 @property (nonatomic, retain) IBOutlet UILabel *lblNickName;
 @property (nonatomic, retain) IBOutlet UILabel *lblUserInfo;
+@property (nonatomic, retain) IBOutlet UILabel* lblDistance;
 @property (nonatomic, retain) IBOutlet UIButton *btnSay;
 @property (nonatomic, retain) IBOutlet UIButton *btnSendSong;
 @property (nonatomic, retain) IBOutlet UIImageView *imgSex;

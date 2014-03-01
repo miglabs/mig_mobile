@@ -7,6 +7,7 @@
 //
 
 #import "FriendMessageUserHead.h"
+#import "NSString+PStringCategory.h"
 
 @implementation FriendMessageUserHead
 
@@ -19,6 +20,7 @@
 @synthesize btnSendSong = _btnSendSong;
 @synthesize isFriend = _isFriend;
 @synthesize imgSex = _imgSex;
+@synthesize lblDistance = _lblDistance;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -51,13 +53,32 @@
     }
     
     //初始化个人信息
-    if (_userinfo.distance < 1000.0) {
+    NSArray* birthday = [_userinfo.birthday componentsSeparatedByString:@"-"];
+
+    if ([birthday count] == 3) {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"距离您有%.0fm", (float)_userinfo.distance];
+        NSString* szYear = [birthday objectAtIndex:0];
+        NSString* szMonth = [birthday objectAtIndex:1];
+        NSString* szDay = [birthday objectAtIndex:2];
+        
+        int year = [szYear intValue];
+        int month = [szMonth intValue];
+        int day = [szDay intValue];
+        
+        NSDate* now = [NSDate date];
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        unsigned int unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit;
+        NSDateComponents *dd = [cal components:unitFlags fromDate:now];
+        int nowyear = [dd year];
+        
+        int age = nowyear - year;
+        NSString* Constellation = [NSString getConstellation:month day:day];
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"%d岁  %@座", age, Constellation];
     }
     else {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"距离您有%.0fkm", _userinfo.distance/1000.0];
+        _lblUserInfo.text = @"未找到生日信息";
     }
     
     if (!_userinfo.songname) {

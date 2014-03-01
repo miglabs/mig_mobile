@@ -45,8 +45,15 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="22岁   天蝎座          23km | 杭州" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9">
-                    <rect key="frame" x="90" y="55" width="207" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="22岁   天蝎座 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9">
+                    <rect key="frame" x="90" y="55" width="80" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="07X-w9-n9j">
+                    <rect key="frame" x="169" y="55" width="108" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,6 +94,7 @@
                 <outlet property="btnSay" destination="11" id="DRd-1j-mmU"/>
                 <outlet property="btnSendSong" destination="10" id="joF-aE-XfN"/>
                 <outlet property="imgSex" destination="Hov-aI-qeU" id="bXj-dP-CzW"/>
+                <outlet property="lblDistance" destination="07X-w9-n9j" id="Xho-3e-3Hz"/>
                 <outlet property="lblListening" destination="6" id="12"/>
                 <outlet property="lblNickName" destination="8" id="14"/>
                 <outlet property="lblUserInfo" destination="9" id="15"/>

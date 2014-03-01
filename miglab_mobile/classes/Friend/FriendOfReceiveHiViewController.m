@@ -50,6 +50,11 @@
         if ([oneObject isKindOfClass:[FriendMessageUserHead class]]){
             _userHeadView = (FriendMessageUserHead *)oneObject;
             [_userHeadView updateFriendMessageUserHead:user];
+            
+            // 单独更新距离信息
+            float fDistance = user.distance / 1000.0f;
+            NSString* Location = user.location;
+            _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%.2fkm | %@", fDistance, Location];
         }//if
     }//for
     _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);

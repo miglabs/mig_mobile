@@ -58,6 +58,18 @@
             _userHeadView = (FriendMessageUserHead *)oneObject;
             _userHeadView.isFriend = _isFriend;
             [_userHeadView updateFriendMessageUserHead:_userinfo];
+            
+            // 单独更新距离信息
+            float fDistance = _userinfo.distance / 1000.0f;
+            NSString* source = _userinfo.source;
+            if (source) {
+                
+                _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%.2fkm | %@", fDistance, source];
+            }
+            else {
+                
+                _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%.2fkm", fDistance];
+            }
         }//if
     }//for
     _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);
