@@ -15,6 +15,7 @@
 #import "MainMenuViewController.h"
 #import "AppDelegate.h"
 #import "DDMenuController.h"
+#import "PPlayerManagerCenter.h"
 
 @interface LoginViewController ()
 
@@ -135,7 +136,6 @@
     [databaseManager deleteUserAccountByUserName:[UserSessionManager GetInstance].currentUser.username];
     
     [SVProgressHUD showErrorWithStatus:@"登录失败，请稍后重试~"];
-    
 }
 
 -(void)loginSuccess:(NSNotification *)tNotification{
@@ -143,13 +143,25 @@
     NSDictionary *result = [tNotification userInfo];
     PLog(@"loginSuccess...%@", result);
     
-    NSString *accesstoken = [result objectForKey:@"AccessToken"];
+    NSString *accesstoken = [result objectForKey:@"token"];
     NSString *username = [UserSessionManager GetInstance].currentUser.username;
-    
     [UserSessionManager GetInstance].accesstoken = accesstoken;
     
-    [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+    PUser* user = [PUser initWithNSDictionary:result];
+    user.password = [UserSessionManager GetInstance].currentUser.password;
+    [user log];
     
+    [UserSessionManager GetInstance].currentUser = user;
+    
+    accesstoken = [UserSessionManager GetInstance].accesstoken;
+    username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:nil];
 }
 
 //getUserInfo notification

@@ -430,7 +430,13 @@
     
     [UserSessionManager GetInstance].accesstoken = accesstoken;
     
-    [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+    // 改为第一次登陆的时候获取一次，目前不知道为什么每次都要获取
+    static BOOL firstLogin = YES;
+    if (firstLogin) {
+        
+        [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
+        firstLogin = NO;
+    }
 }
 
 //getUserInfo notification

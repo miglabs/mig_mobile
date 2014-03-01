@@ -44,8 +44,6 @@ typedef enum {
  */
 -(void)doAuthLogin:(NSString *)tusername password:(NSString *)tpassword;
 -(void)doSsoLoginFirst:(NSString *)tusername password:(NSString *)tpassword;
--(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam;
--(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam;
 
 /*
  获取用户信息

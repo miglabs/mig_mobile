@@ -39,144 +39,55 @@
 }
 
 /*
- <!--请求Get-->
+ <!--请求Post-->
  http://sso.miglab.com/cgi-bin/sp.fcgi?sp
  */
 -(void)doSsoLoginFirst:(NSString *)tusername password:(NSString *)tpassword{
     
     PLog(@"LOGIN_SSO_SP_URL: %@", LOGIN_SSO_SP_URL);
     
-    NSURL *url = [NSURL URLWithString:LOGIN_SSO_SP_URL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:LOGIN_SSO_SP_URL]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"username=%@&password=%@&clientid=0&token=miglab", tusername, tpassword];
+    PLog(@"login first body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         @try {
             
-            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            PLog(@"result: %@", result);
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
             
-            NSArray *resultList = [result componentsSeparatedByString:@"?"];
-            if ([resultList count] == 2) {
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
                 
-                NSString *postUrl = [resultList objectAtIndex:0];
-                NSString *postContent = [resultList objectAtIndex:1];
-                NSString *secondPostContent = [NSString stringWithFormat:@"username=%@&password=%@&%@", tusername, tpassword, postContent];
+                //成功之后保存用户名和密码
+                [UserSessionManager GetInstance].currentUser.username = tusername;
+                [UserSessionManager GetInstance].currentUser.password = tpassword;
                 
-                [self doSsoLoginSecond:postUrl param:secondPostContent];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
                 
-            } else {
-                
-                PLog(@"doSsoLoginFirst failure...");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicTemp];
                 
             }
-            
-        }
-        @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        PLog(@"failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-        
-    }];
-    
-    [operation start];
-    
-}
-
-/*
- 将第一步返回值URL和RequestID解析出来
- <!--请求POST-->
- http://sso.miglab.com/cgi-bin/idp.fcgi
- */
--(void)doSsoLoginSecond:(NSString *)ssoSecondUrl param:(NSString *)strParam{
-    
-    NSString *loginSsoSecondUrl = ssoSecondUrl;
-    PLog(@"loginSsoSecondUrl: %@", loginSsoSecondUrl);
-    
-    NSURL *url = [NSURL URLWithString:loginSsoSecondUrl];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
-    [request setHTTPBody:[strParam dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        @try {
-            
-            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            PLog(@"result: %@", result);
-            NSArray *resultList = [result componentsSeparatedByString:@"?"];
-            if ([resultList count] == 2) {
+            else {
                 
-                NSString *postUrl = [resultList objectAtIndex:0];
-                NSString *postContent = [resultList objectAtIndex:1];
+                PLog(@"login failed");
                 
-                [self doSsoLoginThird:postUrl param:postContent];
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-            } else {
-                
-                PLog(@"doSsoLoginSecond failure...");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:dicResult];
             }
-            
         }
         @catch (NSException *exception) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
         }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        PLog(@"failure: %@", error);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-        
-    }];
-    
-    [operation start];
-    
-}
-
-/*
- 将第二步内容得URL和内容解析出来
- <!--请求POST-->
- http://fm.miglab.com/cgi-bin/sp.fcgi
- */
--(void)doSsoLoginThird:(NSString *)ssoThirdUrl param:(NSString *)strParam{
-    
-    NSString *loginSsoThirdUrl = ssoThirdUrl;
-    PLog(@"loginSsoThirdUrl: %@", loginSsoThirdUrl);
-    
-    NSURL *url = [NSURL URLWithString:loginSsoThirdUrl];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
-    [request setHTTPBody:[strParam dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        @try {
-            
-            NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            NSString *strAccessToken = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            PLog(@"result AccessToken: %@, strAccessToken: %@", result, strAccessToken);
-            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:strAccessToken, @"AccessToken", nil];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccess object:nil userInfo:dicResult];
-            
-        }
-        @catch (NSException *exception) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginFailed object:nil userInfo:nil];
-        }
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

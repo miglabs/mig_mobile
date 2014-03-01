@@ -146,11 +146,11 @@
 
 -(void)didFinishLogin {
     
-    // 保存登录状态到本地
+    // 保存登录状态到本地, 1表示已登陆，0表示未登陆或退出登陆，如果退出登陆，下次启动时会检查该值，以免再重新登陆一次
     [[PDatabaseManager GetInstance] setLoginStatusInfo:1];
     
     // 发送登陆成功消息
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccessByUser object:nil userInfo:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccessByUser object:nil userInfo:nil];
     
     // 发送设备号到服务端
     [self SendDeviceToken];
@@ -243,55 +243,65 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"registerSuccess...");
-    PUser *tempUser = [result objectForKey:@"result"];
-    [tempUser log];
-    
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    
-    if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
+
+    if (result) {
         
-        [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
+        PUser *tempUser = [result objectForKey:@"result"];
+        [tempUser log];
         
-        tempUser.sinaAccount = [UserSessionManager GetInstance].currentUser.sinaAccount;
-        tempUser.source = SourceTypeSinaWeibo;
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
         
-        [databaseManager insertUserInfo:tempUser accountId:tempUser.sinaAccount.accountid];
-        [databaseManager insertUserAccout:tempUser.sinaAccount.username password:tempUser.sinaAccount.username userid:tempUser.sinaAccount.accountid accessToken:tempUser.sinaAccount.accesstoken accountType:tempUser.sinaAccount.accounttype];
+        if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
+            
+            tempUser.sinaAccount = [UserSessionManager GetInstance].currentUser.sinaAccount;
+            tempUser.source = SourceTypeSinaWeibo;
+            
+            [databaseManager insertUserInfo:tempUser accountId:tempUser.sinaAccount.accountid];
+            [databaseManager insertUserAccout:tempUser.sinaAccount.username password:tempUser.sinaAccount.username userid:tempUser.sinaAccount.accountid accessToken:tempUser.sinaAccount.accesstoken accountType:tempUser.sinaAccount.accounttype];
+            
+            PUser *checkuser = [databaseManager getUserInfoByAccountId:tempUser.sinaAccount.accountid];
+            [checkuser log];
+            
+        } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
+            
+            tempUser.tencentAccount = [UserSessionManager GetInstance].currentUser.tencentAccount;
+            tempUser.source = SourceTypeTencentWeibo;
+            
+            [databaseManager insertUserInfo:tempUser accountId:tempUser.tencentAccount.accountid];
+            [databaseManager insertUserAccout:tempUser.tencentAccount.username password:tempUser.tencentAccount.username userid:tempUser.tencentAccount.accountid accessToken:tempUser.tencentAccount.accesstoken accountType:tempUser.tencentAccount.accounttype];
+            
+        } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
+            
+            tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
+            tempUser.source = SourceTypeDouBan;
+            
+            [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
+            [databaseManager insertUserAccout:tempUser.doubanAccount.username password:tempUser.doubanAccount.username userid:tempUser.doubanAccount.accountid accessToken:tempUser.doubanAccount.accesstoken accountType:tempUser.doubanAccount.accounttype];
+            
+        }
         
-        PUser *checkuser = [databaseManager getUserInfoByAccountId:tempUser.sinaAccount.accountid];
-        [checkuser log];
+        [UserSessionManager GetInstance].currentUser = tempUser;
+        [UserSessionManager GetInstance].userid = tempUser.userid;
+        [UserSessionManager GetInstance].accesstoken = tempUser.token;
+        [UserSessionManager GetInstance].isLoggedIn = YES;
         
-    } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
+        [self didFinishLogin];
         
-        [SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
-        
-        tempUser.tencentAccount = [UserSessionManager GetInstance].currentUser.tencentAccount;
-        tempUser.source = SourceTypeTencentWeibo;
-        
-        [databaseManager insertUserInfo:tempUser accountId:tempUser.tencentAccount.accountid];
-        [databaseManager insertUserAccout:tempUser.tencentAccount.username password:tempUser.tencentAccount.username userid:tempUser.tencentAccount.accountid accessToken:tempUser.tencentAccount.accesstoken accountType:tempUser.tencentAccount.accounttype];
-        
-    } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
-        
-        [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
-        
-        tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
-        tempUser.source = SourceTypeDouBan;
-        
-        [databaseManager insertUserInfo:tempUser accountId:tempUser.doubanAccount.accountid];
-        [databaseManager insertUserAccout:tempUser.doubanAccount.username password:tempUser.doubanAccount.username userid:tempUser.doubanAccount.accountid accessToken:tempUser.doubanAccount.accesstoken accountType:tempUser.doubanAccount.accounttype];
-        
+        //go back
+        [self doBack:nil];
     }
-    
-    [UserSessionManager GetInstance].currentUser = tempUser;
-    [UserSessionManager GetInstance].userid = tempUser.userid;
-    [UserSessionManager GetInstance].accesstoken = tempUser.token;
-    [UserSessionManager GetInstance].isLoggedIn = YES;
-    
-    [self didFinishLogin];
-    
-    //go back
-    [self doBack:nil];
+    else {
+        
+        [self didFinishLogin];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 
