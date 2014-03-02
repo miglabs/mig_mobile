@@ -52,6 +52,10 @@
         _imgSex.image = [UIImage imageNamed:@"user_gender_female"];
     }
     
+    _btnAvatar.imageURL = [NSURL URLWithString:_userinfo.headurl];
+    _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
+    _btnAvatar.layer.masksToBounds = YES;
+    
     //初始化个人信息
     NSArray* birthday = [_userinfo.birthday componentsSeparatedByString:@"-"];
 
