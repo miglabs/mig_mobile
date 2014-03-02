@@ -36,6 +36,10 @@
     _msginfo = msg;
     NSString* username = _msginfo.userInfo.nickname;
     
+    _btnAvatar.imageURL = [NSURL URLWithString:msg.userInfo.headurl];
+    _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
+    _btnAvatar.layer.masksToBounds = YES;
+    
     if(_msginfo.messagetype == 2) {
         //送歌曲
         

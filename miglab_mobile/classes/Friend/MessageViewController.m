@@ -22,6 +22,8 @@
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
 @synthesize userinfo = _userinfo;
+@synthesize msgCurStartIndex = _msgCurStartIndex;
+@synthesize isLoadingMsg = _isLoadingMsg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,6 +46,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // 初始化成员变量值
+    _msgCurStartIndex = 0;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -76,7 +81,11 @@
 -(void)loadData {
     
     [self loadMessageFromDatabase];
-    [self loadMessageFromServer];
+    
+    NSString* start = [NSString stringWithFormat:@"%d", _msgCurStartIndex];
+    NSString* tsize = [NSString stringWithFormat:@"%d", MSG_DISPLAY_COUNT];
+    
+    [self loadMessageFromServer:start size:tsize];
 }
 
 -(void)loadMessageFromDatabase {
@@ -101,14 +110,16 @@
 //    [_datalist addObject:mi1];
 }
 
--(void)loadMessageFromServer {
+-(void)loadMessageFromServer:(NSString*)startindex size:(NSString*)tsize {
     
-    if([UserSessionManager GetInstance].isLoggedIn) {
+    if([UserSessionManager GetInstance].isLoggedIn && !_isLoadingMsg) {
+        
+        _isLoadingMsg = YES;
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
-        [self.miglabAPI doGetPushMsg:userid token:accesstoken pageindex:@"0" pagesize:@"10"];
+        [self.miglabAPI doGetPushMsg:userid token:accesstoken pageindex:startindex pagesize:tsize];
     }
     else {
         
@@ -164,11 +175,15 @@
     
     [_datalist addObjectsFromArray:messages];
     [_dataTableView reloadData];
+    
+    _isLoadingMsg = NO;
 }
 
 -(void)loadMessageFailed:(NSNotification *)tNotification {
     
     [SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
+    
+    _isLoadingMsg = NO;
 }
 
 #pragma mark - UITableView datasource
@@ -200,6 +215,22 @@
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return CELL_HEIGHT;
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
+        
+        if (!_isLoadingMsg) {
+            
+            _msgCurStartIndex += MSG_DISPLAY_COUNT;
+            
+            NSString* start = [NSString stringWithFormat:@"%d", _msgCurStartIndex];
+            NSString* tsize = [NSString stringWithFormat:@"%d", MSG_DISPLAY_COUNT];
+            
+            [self loadMessageFromServer:start size:tsize];
+        }
+    }
 }
 
 @end

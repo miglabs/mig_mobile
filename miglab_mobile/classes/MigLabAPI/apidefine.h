@@ -33,6 +33,9 @@
 /* 打招呼的字数限制 */
 #define MAX_SAYHI_COUNT             30
 
+/* 推送消息一次显示的数量 */
+#define MSG_DISPLAY_COUNT           10
+
 /* 登陆账号ID类别 */
 #define LOGIN_MIGLAB                0
 #define LOGIN_SINA                  1

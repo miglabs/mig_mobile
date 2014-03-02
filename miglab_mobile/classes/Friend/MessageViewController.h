@@ -8,15 +8,18 @@
 
 #import "PlayerViewController.h"
 
-@interface MessageViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
+@interface MessageViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 @property (nonatomic, retain) NearbyUser* userinfo;
 
+@property (nonatomic, assign) int msgCurStartIndex;
+@property (nonatomic, assign) BOOL isLoadingMsg;
+
 -(void)loadData;
 -(void)loadMessageFromDatabase;
--(void)loadMessageFromServer;
+-(void)loadMessageFromServer:(NSString*)startindex size:(NSString*)tsize;
 
 -(void)loadMessageFailed:(NSNotification *)tNotification;
 -(void)loadMessageSuccess:(NSNotification *)tNotification;
