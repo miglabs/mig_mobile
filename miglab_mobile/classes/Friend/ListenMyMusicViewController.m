@@ -125,7 +125,6 @@ NSString* szListenMyMusicRadius = @"10000";
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
-        //junliu fixed, for debug
         [self.miglabAPI doGetSameMusic:userid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:location];
     }
     else {

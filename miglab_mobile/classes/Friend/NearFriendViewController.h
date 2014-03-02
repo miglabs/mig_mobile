@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSMutableArray *dataList;
 @property (nonatomic, assign) BOOL isUpdatedLocation;
 
+@property (nonatomic, assign) BOOL isLoadingNearFriend;
+
 -(void)loadData;
 -(void)loadNearFriendFromDatabase;
 -(void)loadNearFriendFromServer:(NSString *)tLocation;

@@ -22,6 +22,7 @@
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
 @synthesize isUpdatedLocation = _isUpdatedLocation;
+@synthesize isLoadingNearFriend = _isLoadingNearFriend;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +50,7 @@
     // Do any additional setup after loading the view from its nib.
     
     _isUpdatedLocation = NO;
+    _isLoadingNearFriend = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -104,7 +106,6 @@
 -(void)loadData{
     
     [self loadNearFriendFromDatabase];
-    //[self loadNearFriendFromServer];
     
 }
 -(void)loadNearFriendFromDatabase{
@@ -154,6 +155,7 @@
     
     [SVProgressHUD showErrorWithStatus:@"附近的歌友获取失败:("];
     
+    _isLoadingNearFriend = NO;
 }
 
 -(void)searchNearbySuccess:(NSNotification *)tNotification{
@@ -166,6 +168,7 @@
     [_dataList addObjectsFromArray:nearbyUserInfoList];
     [_dataTableView reloadData];
     
+    _isLoadingNearFriend = NO;
 }
 
 -(IBAction)doSearch:(id)sender{
