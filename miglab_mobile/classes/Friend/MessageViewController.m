@@ -24,6 +24,7 @@
 @synthesize userinfo = _userinfo;
 @synthesize msgCurStartIndex = _msgCurStartIndex;
 @synthesize isLoadingMsg = _isLoadingMsg;
+@synthesize totalMsgCount = _totalMsgCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -173,6 +174,12 @@
     NSDictionary* result = [tNotification userInfo];
     NSMutableArray* messages = [result objectForKey:@"result"];
     
+    // 如果curStartIndex是0，则表示第一次更新，或者选择了重新刷新，则删除所有数据，重新加载
+    if (_msgCurStartIndex == 0) {
+        
+        [_datalist removeAllObjects];
+    }
+    
     [_datalist addObjectsFromArray:messages];
     [_dataTableView reloadData];
     
@@ -221,7 +228,8 @@
     
     if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
         
-        if (!_isLoadingMsg) {
+        // 没有加载消息，并且数量未加载完，则更新
+        if (!_isLoadingMsg && (_msgCurStartIndex < _totalMsgCount)) {
             
             _msgCurStartIndex += MSG_DISPLAY_COUNT;
             [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];

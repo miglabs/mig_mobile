@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NearbyUser* userinfo;
 
 @property (nonatomic, assign) int msgCurStartIndex;
+@property (nonatomic, assign) int totalMsgCount;
 @property (nonatomic, assign) BOOL isLoadingMsg;
 
 -(void)loadData;

@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSMutableArray *friendList;
 
 @property (nonatomic, assign) int friendCurStartIndex;
+@property (nonatomic, assign) int totalFriendCount;
 @property (nonatomic, assign) BOOL isLoadingFriend;
 
 -(void)loadData;

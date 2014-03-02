@@ -27,6 +27,10 @@
 @synthesize locationMng = _locationMng;
 @synthesize isUpdateLocation = _isUpdateLocation;
 @synthesize isFirstLoadView = _isFirstLoadView;
+@synthesize totalFriendCount = _totalFriendCount;
+@synthesize totalNearFriendCount = _totalNearFriendCount;
+@synthesize totalNearMusicCount = _totalNearMusicCount;
+@synthesize totalMsgCount = _totalMsgCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -150,21 +154,25 @@
     if (indexPath.row == 0) {
         
         MyFriendViewController *myFriendViewController = [[MyFriendViewController alloc] initWithNibName:@"MyFriendViewController" bundle:nil];
+        myFriendViewController.totalFriendCount = _totalFriendCount;
         [self.topViewcontroller.navigationController pushViewController:myFriendViewController animated:YES];
         
     } else if (indexPath.row == 1) {
         
         ListenMyMusicViewController *listenMyMusicViewController = [[ListenMyMusicViewController alloc] initWithNibName:@"ListenMyMusicViewController" bundle:nil];
+        //listenMyMusicViewController
         [self.topViewcontroller.navigationController pushViewController:listenMyMusicViewController animated:YES];
         
     } else if (indexPath.row == 2) {
         
         NearFriendViewController *nearFriendViewController = [[NearFriendViewController alloc] initWithNibName:@"NearFriendViewController" bundle:nil];
+        //nearFriendViewController
         [self.topViewcontroller.navigationController pushViewController:nearFriendViewController animated:YES];
         
     } else if (indexPath.row == 3) {
         
         MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+        messageViewController.totalMsgCount = _totalMsgCount;
         [self.topViewcontroller.navigationController pushViewController:messageViewController animated:YES];
         
     }
@@ -215,6 +223,11 @@
     NSDictionary* dicResult = (NSDictionary*)tNotification.userInfo;
     NSMutableArray* numbers = [dicResult objectForKey:@"result"];
     int count = [numbers count];
+    
+    _totalFriendCount = [[numbers objectAtIndex:0] intValue];
+    _totalNearMusicCount = [[numbers objectAtIndex:1] intValue];
+    _totalNearFriendCount = [[numbers objectAtIndex:2] intValue];
+    _totalMsgCount = [[numbers objectAtIndex:3] intValue];
     
     for (int i=0; i<count; i++) {
         

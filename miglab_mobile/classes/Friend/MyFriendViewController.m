@@ -23,6 +23,7 @@
 @synthesize friendList = _friendList;
 @synthesize friendCurStartIndex = _friendCurStartIndex;
 @synthesize isLoadingFriend = _isLoadingFriend;
+@synthesize totalFriendCount = _totalFriendCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -155,6 +156,11 @@
     
     int userlistcount = [userList count];
     
+    if (_friendCurStartIndex == 0) {
+        
+        [_friendList removeAllObjects];
+    }
+    
     for (int i=0; i<userlistcount; i++) {
         
         MessageInfo* nms = [userList objectAtIndex:i];
@@ -251,7 +257,7 @@
     
     if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
         
-        if (!_isLoadingFriend) {
+        if (!_isLoadingFriend && (_friendCurStartIndex < _totalFriendCount)) {
             
             _friendCurStartIndex += FRIEND_DISPLAY_COUNT;
             [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
