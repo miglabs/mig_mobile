@@ -19,9 +19,10 @@
 @implementation MyFriendViewController
 
 @synthesize searchView = _searchView;
-
 @synthesize friendTableView = _friendTableView;
 @synthesize friendList = _friendList;
+@synthesize friendCurStartIndex = _friendCurStartIndex;
+@synthesize isLoadingFriend = _isLoadingFriend;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +46,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _friendCurStartIndex = 0;
+    _isLoadingFriend = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -95,7 +99,7 @@
 -(void)loadData {
     
     [self loadMusicUserFromDatabase];
-    [self loadMusicUserFromServer];
+    [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
 }
 
 -(void)loadMusicUserFromDatabase {
@@ -116,14 +120,18 @@
 //    [_friendList addObject:testfriend1];
 }
 
--(void)loadMusicUserFromServer {
+-(void)loadMusicUserFromServer:(int)start size:(int)tsize {
     
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+    if ([UserSessionManager GetInstance].isLoggedIn && !_isLoadingFriend) {
+        
+        _isLoadingFriend = YES;
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString* szstart = [NSString stringWithFormat:@"%d", start];
+        NSString* szsize = [NSString stringWithFormat:@"%d", tsize];
         
-        [self.miglabAPI doGetMusicUser:userid token:accesstoken fromid:@"0" count:@"10"];
+        [self.miglabAPI doGetMusicUser:userid token:accesstoken fromid:szstart count:szsize];
     }
     else {
         
@@ -137,6 +145,7 @@
     
     PLog(@"get music user failed");
     [SVProgressHUD showErrorWithStatus:@"获取歌友失败:("];
+    _isLoadingFriend = NO;
 }
 
 -(void)getMusicUserSuccess:(NSNotification *)tNotification {
@@ -156,6 +165,8 @@
     }
     
     [_friendTableView reloadData];
+    
+    _isLoadingFriend = NO;
 }
 
 
@@ -234,6 +245,26 @@
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return CELL_HEIGHT;
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
+        
+        if (!_isLoadingFriend) {
+            
+            _friendCurStartIndex += FRIEND_DISPLAY_COUNT;
+            [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
+        }
+    }
+    else if(scrollView.contentOffset.y < 0) {
+        
+        if (!_isLoadingFriend) {
+            
+            _friendCurStartIndex = 0;
+            [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
+        }
+    }
 }
 
 @end

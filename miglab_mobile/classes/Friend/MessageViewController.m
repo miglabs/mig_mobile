@@ -49,6 +49,7 @@
     
     // 初始化成员变量值
     _msgCurStartIndex = 0;
+    _isLoadingMsg = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -82,10 +83,7 @@
     
     [self loadMessageFromDatabase];
     
-    NSString* start = [NSString stringWithFormat:@"%d", _msgCurStartIndex];
-    NSString* tsize = [NSString stringWithFormat:@"%d", MSG_DISPLAY_COUNT];
-    
-    [self loadMessageFromServer:start size:tsize];
+    [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
 }
 
 -(void)loadMessageFromDatabase {
@@ -110,7 +108,7 @@
 //    [_datalist addObject:mi1];
 }
 
--(void)loadMessageFromServer:(NSString*)startindex size:(NSString*)tsize {
+-(void)loadMessageFromServer:(int)startindex size:(int)tsize {
     
     if([UserSessionManager GetInstance].isLoggedIn && !_isLoadingMsg) {
         
@@ -118,8 +116,10 @@
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString* szstart = [NSString stringWithFormat:@"%d", startindex];
+        NSString* szsize = [NSString stringWithFormat:@"%d", tsize];
         
-        [self.miglabAPI doGetPushMsg:userid token:accesstoken pageindex:startindex pagesize:tsize];
+        [self.miglabAPI doGetPushMsg:userid token:accesstoken pageindex:szstart pagesize:szsize];
     }
     else {
         
@@ -224,11 +224,15 @@
         if (!_isLoadingMsg) {
             
             _msgCurStartIndex += MSG_DISPLAY_COUNT;
+            [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
+        }
+    }
+    else if(scrollView.contentOffset.y < 0) {
+        
+        if (!_isLoadingMsg) {
             
-            NSString* start = [NSString stringWithFormat:@"%d", _msgCurStartIndex];
-            NSString* tsize = [NSString stringWithFormat:@"%d", MSG_DISPLAY_COUNT];
-            
-            [self loadMessageFromServer:start size:tsize];
+            _msgCurStartIndex = 0;
+            [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
         }
     }
 }

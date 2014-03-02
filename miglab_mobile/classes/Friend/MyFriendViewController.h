@@ -12,12 +12,14 @@
 @interface MyFriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, retain) FriendSearchView *searchView;
-
 @property (nonatomic, retain) UITableView *friendTableView;
 @property (nonatomic, retain) NSMutableArray *friendList;
 
+@property (nonatomic, assign) int friendCurStartIndex;
+@property (nonatomic, assign) BOOL isLoadingFriend;
+
 -(void)loadData;
--(void)loadMusicUserFromServer;
+-(void)loadMusicUserFromServer:(int)start size:(int)tsize;
 -(void)loadMusicUserFromDatabase;
 
 -(void)getMusicUserSuccess:(NSNotification*)tNotification;

@@ -19,7 +19,7 @@
 
 -(void)loadData;
 -(void)loadMessageFromDatabase;
--(void)loadMessageFromServer:(NSString*)startindex size:(NSString*)tsize;
+-(void)loadMessageFromServer:(int)startindex size:(int)tsize;
 
 -(void)loadMessageFailed:(NSNotification *)tNotification;
 -(void)loadMessageSuccess:(NSNotification *)tNotification;

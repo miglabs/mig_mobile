@@ -33,8 +33,17 @@
 /* 打招呼的字数限制 */
 #define MAX_SAYHI_COUNT             30
 
-/* 推送消息一次显示的数量 */
+/* 一页中推送消息显示的数量 */
 #define MSG_DISPLAY_COUNT           10
+
+/* 一页中歌友显示的数量 */
+#define FRIEND_DISPLAY_COUNT        10
+
+/* 一页中附近歌友显示的数量 */
+#define NEARFRIEND_DISPLAY_COUNT    10
+
+/* 一页中附近歌曲显示的数量 */
+#define NEARMUSIC_DISPLAY_COUNT     10
 
 /* 登陆账号ID类别 */
 #define LOGIN_MIGLAB                0
