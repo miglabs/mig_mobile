@@ -378,6 +378,8 @@
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
     }
+    cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
+    cell.btnAvatar.layer.masksToBounds = YES;
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
     NSString *songDesc = @"未缓存";

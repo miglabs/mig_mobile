@@ -40,6 +40,10 @@
     
     _lblNickName.text = _userinfo.nickname;
     
+    _btnAvatar.imageURL = [NSURL URLWithString:_userinfo.headurl];
+    _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
+    _btnAvatar.layer.masksToBounds = YES;
+    
     if (!_userinfo.songname) {
         
         _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000.0f];
