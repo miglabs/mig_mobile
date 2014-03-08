@@ -125,6 +125,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn && !_isLoadingFriend) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         _isLoadingFriend = YES;
         
         NSString* userid = [UserSessionManager GetInstance].userid;
@@ -145,6 +147,7 @@
 -(void)getMusicUserFailed:(NSNotification *)tNotification {
     
     PLog(@"get music user failed");
+    [SVProgressHUD dismiss];
     [SVProgressHUD showErrorWithStatus:@"获取歌友失败:("];
     _isLoadingFriend = NO;
 }
@@ -173,6 +176,8 @@
     [_friendTableView reloadData];
     
     _isLoadingFriend = NO;
+    
+    [SVProgressHUD dismiss];
 }
 
 

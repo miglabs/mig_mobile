@@ -133,6 +133,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn && tLocation) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
@@ -153,6 +155,8 @@
     
     PLog(@"searchNearbyFailed...");
     
+    [SVProgressHUD dismiss];
+    
     [SVProgressHUD showErrorWithStatus:@"附近的歌友获取失败:("];
     
     _isLoadingNearFriend = NO;
@@ -169,6 +173,8 @@
     [_dataTableView reloadData];
     
     _isLoadingNearFriend = NO;
+    
+    [SVProgressHUD dismiss];
 }
 
 -(IBAction)doSearch:(id)sender{

@@ -122,6 +122,8 @@ NSString* szListenMyMusicRadius = @"10000";
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
@@ -142,9 +144,13 @@ NSString* szListenMyMusicRadius = @"10000";
     
     [_dataList addObjectsFromArray:nms];
     [_dataTableView reloadData];
+    
+    [SVProgressHUD dismiss];
 }
 
 -(void)LoadListeningMyFavorateMusicFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
     
     [SVProgressHUD showErrorWithStatus:@"获取听你爱的歌失败了:("];
 }

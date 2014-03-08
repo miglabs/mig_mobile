@@ -113,6 +113,8 @@
     
     if([UserSessionManager GetInstance].isLoggedIn && !_isLoadingMsg) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         _isLoadingMsg = YES;
         
         NSString* userid = [UserSessionManager GetInstance].userid;
@@ -184,9 +186,13 @@
     [_dataTableView reloadData];
     
     _isLoadingMsg = NO;
+    
+    [SVProgressHUD dismiss];
 }
 
 -(void)loadMessageFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
     
     [SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
     

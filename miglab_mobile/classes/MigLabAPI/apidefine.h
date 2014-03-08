@@ -66,13 +66,16 @@
 #define MIGTIP_SENDING_MESSAGE      @"正在发送消息哦~~~"
 
 /* 空邮箱提示语 */
-#define MIGTIP_EMPTY_EMAIL         @"邮箱不能为空哦~~~"
+#define MIGTIP_EMPTY_EMAIL          @"邮箱不能为空哦~~~"
 
 /* 错误邮箱格式 */
-#define MIGTIP_WRONG_EMAIL_FMT     @"邮箱格式错误"
+#define MIGTIP_WRONG_EMAIL_FMT      @"邮箱格式错误"
 
 /* 空密码提示语 */
-#define MIGTIP_EMPTY_PASSWORD      @"密码不能为空哦~~~"
+#define MIGTIP_EMPTY_PASSWORD       @"密码不能为空哦~~~"
+
+/* 加载提示语 */
+#define MIGTIP_LOADING              @"加载中..."
 
 /* --------------------- 消息定义 --------------------- */
 
