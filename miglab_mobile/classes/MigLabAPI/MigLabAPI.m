@@ -2047,7 +2047,7 @@
  */
 -(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize {
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&Page_index=%@&Rec_per_page=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, tpagesize];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&page_index=%@&page_size=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, tpagesize];
     PLog(@"get push message url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
