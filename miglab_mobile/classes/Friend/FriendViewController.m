@@ -118,6 +118,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeNone];
+        
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
@@ -235,11 +237,14 @@
     }
     
     [self updateDisplayNumber];
+    
+    [SVProgressHUD dismiss];
 }
 
 -(void)getNumbersFailed:(NSNotification *)tNotification {
     
     PLog(@"get numbers failed");
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - Location delegate
