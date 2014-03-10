@@ -339,6 +339,15 @@
     
 }
 
+-(NSMutableArray*)getFriendNumbers {
+    
+    return nil;
+}
+
+-(void)setFriendNumbers:(NSMutableArray *)numbers {
+    
+    
+}
 
 -(int)getLoginStatusInfo {
     

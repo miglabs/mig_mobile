@@ -58,6 +58,10 @@
 -(void)setLoginStatusInfo:(int)logstate; // 0:logout, 1:login
 -(int)getLoginStatusInfo;
 
+//记录社交的好友数,歌曲数,附近歌友数,消息数,
+-(void)setFriendNumbers:(NSMutableArray*)numbers;
+-(NSMutableArray*)getFriendNumbers;
+
 /*
  记录请求歌曲返回数据结果
  1.用于有效期内缓存数据，2.确认返回歌曲url和歌名是否一致
