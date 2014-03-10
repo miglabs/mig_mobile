@@ -108,7 +108,11 @@ static int PAGE_WIDTH = 81;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
     _currentGeneView.egoBtnAvatar.layer.borderWidth = 2;
     _currentGeneView.egoBtnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
-    //_currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
+    NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
+    if (userHeadUrl) {
+        
+        _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
+    }
     [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_currentGeneView];
     
