@@ -30,6 +30,7 @@
 #import "SinaWeibo.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <libDoubanAPIEngine/DOUService.h>
+#import <Crashlytics/Crashlytics.h>
 
 //test
 #import "Song.h"
@@ -91,6 +92,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    [self installUncaughtExceptionHandler];//
+    
+    //Crashlytics
+    [Crashlytics startWithAPIKey:@"CRASHLYTICS_KEY"];
+    
+    //登录后，可记录用户信息. 替换里面的字符串， USER_ID，USER_EMAIL，USER_NAME
+    [Crashlytics setUserIdentifier:@"USER_ID_VALUE"];
+    [Crashlytics setUserEmail:@"USER_EMAIL_VALUE"];
+    [Crashlytics setUserName:@"USER_NAME_VALUE"];
     
     //友盟的方法本身是异步执行，所以不需要再异步调用
     [self umengTrack];

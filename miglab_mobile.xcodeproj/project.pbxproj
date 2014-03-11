@@ -24,6 +24,9 @@
 		1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1604F0EB17C4F2E60072A0D8 /* MusicCommentInputView.m */; };
 		1604F0EE17C4F2F80072A0D8 /* MusicCommentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */; };
 		1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1609584617CB9E950027CBB6 /* CustomWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		160C96DF18CF23C400B98EEC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96DE18CF23C400B98EEC /* Crashlytics.framework */; };
+		160C96E318CF24A800B98EEC /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */; };
+		160C96E518CF24C100B98EEC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */; };
 		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
 		160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 160E073C17C08A45003F0E45 /* channelinfo.xml */; };
 		160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075317C08ECC003F0E45 /* XmlParserUtil.m */; };
@@ -523,6 +526,9 @@
 		1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCommentInputView.xib; sourceTree = "<group>"; };
 		1609584517CB9E950027CBB6 /* CustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWindow.h; sourceTree = "<group>"; };
 		1609584617CB9E950027CBB6 /* CustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWindow.m; sourceTree = "<group>"; };
+		160C96DE18CF23C400B98EEC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
+		160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
+		160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
 		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
 		160E073C17C08A45003F0E45 /* channelinfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = channelinfo.xml; sourceTree = "<group>"; };
@@ -1170,6 +1176,7 @@
 			files = (
 				188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */,
 				1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */,
+				160C96E518CF24C100B98EEC /* TencentOpenAPI.framework in Frameworks */,
 				1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */,
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
 				1637CA7117B7A58800E6F132 /* MobileCoreServices.framework in Frameworks */,
@@ -1180,6 +1187,7 @@
 				1623168617773BE700CF8FB5 /* QuartzCore.framework in Frameworks */,
 				163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */,
 				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
+				160C96E318CF24A800B98EEC /* libDoubanApiEngine.framework in Frameworks */,
 				163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */,
 				163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */,
 				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
@@ -1187,6 +1195,7 @@
 				1623168217773BD600CF8FB5 /* SystemConfiguration.framework in Frameworks */,
 				1623167C17773B6700CF8FB5 /* libsqlite3.0.dylib in Frameworks */,
 				16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */,
+				160C96DF18CF23C400B98EEC /* Crashlytics.framework in Frameworks */,
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
@@ -2054,6 +2063,9 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */,
+				160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */,
+				160C96DE18CF23C400B98EEC /* Crashlytics.framework */,
 				188A20B917F5638000D4E753 /* CoreText.framework */,
 				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
 				1637CA9B17B7A63500E6F132 /* libiconv.dylib */,
@@ -2952,8 +2964,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\"",
-					"\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\"",
+					"\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\"",
+					"\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\"",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -2985,8 +3000,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\"",
-					"\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\"",
+					"\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\"",
+					"\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\"",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
