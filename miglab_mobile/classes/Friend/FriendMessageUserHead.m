@@ -8,6 +8,7 @@
 
 #import "FriendMessageUserHead.h"
 #import "NSString+PStringCategory.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation FriendMessageUserHead
 

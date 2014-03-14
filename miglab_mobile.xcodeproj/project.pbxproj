@@ -25,8 +25,6 @@
 		1604F0EE17C4F2F80072A0D8 /* MusicCommentInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0ED17C4F2F80072A0D8 /* MusicCommentInputView.xib */; };
 		1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1609584617CB9E950027CBB6 /* CustomWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		160C96DF18CF23C400B98EEC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96DE18CF23C400B98EEC /* Crashlytics.framework */; };
-		160C96E318CF24A800B98EEC /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */; };
-		160C96E518CF24C100B98EEC /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */; };
 		160E073617C076F5003F0E45 /* SYAppStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E073517C076F5003F0E45 /* SYAppStart.m */; };
 		160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */ = {isa = PBXBuildFile; fileRef = 160E073C17C08A45003F0E45 /* channelinfo.xml */; };
 		160E075417C08ECC003F0E45 /* XmlParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075317C08ECC003F0E45 /* XmlParserUtil.m */; };
@@ -527,8 +525,6 @@
 		1609584517CB9E950027CBB6 /* CustomWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWindow.h; sourceTree = "<group>"; };
 		1609584617CB9E950027CBB6 /* CustomWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWindow.m; sourceTree = "<group>"; };
 		160C96DE18CF23C400B98EEC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
-		160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
-		160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		160E073417C076F5003F0E45 /* SYAppStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYAppStart.h; sourceTree = "<group>"; };
 		160E073517C076F5003F0E45 /* SYAppStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAppStart.m; sourceTree = "<group>"; };
 		160E073C17C08A45003F0E45 /* channelinfo.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = channelinfo.xml; sourceTree = "<group>"; };
@@ -1176,7 +1172,6 @@
 			files = (
 				188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */,
 				1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */,
-				160C96E518CF24C100B98EEC /* TencentOpenAPI.framework in Frameworks */,
 				1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */,
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
 				1637CA7117B7A58800E6F132 /* MobileCoreServices.framework in Frameworks */,
@@ -1187,7 +1182,6 @@
 				1623168617773BE700CF8FB5 /* QuartzCore.framework in Frameworks */,
 				163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */,
 				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
-				160C96E318CF24A800B98EEC /* libDoubanApiEngine.framework in Frameworks */,
 				163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */,
 				163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */,
 				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
@@ -2063,8 +2057,6 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				160C96E418CF24C100B98EEC /* TencentOpenAPI.framework */,
-				160C96E218CF24A800B98EEC /* libDoubanApiEngine.framework */,
 				160C96DE18CF23C400B98EEC /* Crashlytics.framework */,
 				188A20B917F5638000D4E753 /* CoreText.framework */,
 				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
@@ -2926,8 +2918,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2950,8 +2942,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2986,9 +2978,9 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				VALID_ARCHS = armv7;
+				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3022,9 +3014,9 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				VALID_ARCHS = armv7;
+				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -7,6 +7,7 @@
 //
 
 #import "MessageInfoCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MessageInfoCell
 

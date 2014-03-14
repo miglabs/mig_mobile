@@ -7,6 +7,7 @@
 //
 
 #import "FriendInfoCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation FriendInfoCell
 
