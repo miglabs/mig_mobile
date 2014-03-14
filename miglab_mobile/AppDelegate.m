@@ -94,7 +94,7 @@
 //    [self installUncaughtExceptionHandler];//
     
     //Crashlytics
-    [Crashlytics startWithAPIKey:@"CRASHLYTICS_KEY"];
+    [Crashlytics startWithAPIKey:@"13b0dd85b007ad78249b02fc26fa3972dff8da79"];
     
     //登录后，可记录用户信息. 替换里面的字符串， USER_ID，USER_EMAIL，USER_NAME
     [Crashlytics setUserIdentifier:@"USER_ID_VALUE"];

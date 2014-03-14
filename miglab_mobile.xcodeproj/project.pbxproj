@@ -795,6 +795,7 @@
 		165D7CA417BE6253000D08E3 /* FriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController.h; sourceTree = "<group>"; };
 		165D7CA517BE6253000D08E3 /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
 		165D7CA617BE6253000D08E3 /* FriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
+		165F694918D3438B009D4F88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		166B5800180C29CE00436AB0 /* base_navigation_bg_ios7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_navigation_bg_ios7.png; sourceTree = "<group>"; };
 		166B5803180C2BC400436AB0 /* home_navigation_bg_ios7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_navigation_bg_ios7.png; sourceTree = "<group>"; };
 		167459E117BBB63F00E636F8 /* music_default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_default_avatar.png; sourceTree = "<group>"; };
@@ -2057,6 +2058,7 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				165F694918D3438B009D4F88 /* Crashlytics.framework */,
 				160C96DE18CF23C400B98EEC /* Crashlytics.framework */,
 				188A20B917F5638000D4E753 /* CoreText.framework */,
 				1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */,
@@ -2360,6 +2362,7 @@
 				16EDEF331759AD5E001BE4E9 /* Sources */,
 				16EDEF341759AD5E001BE4E9 /* Frameworks */,
 				16EDEF351759AD5E001BE4E9 /* Resources */,
+				165F694818D34343009D4F88 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2714,6 +2717,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		165F694818D34343009D4F88 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 13b0dd85b007ad78249b02fc26fa3972dff8da79 09fbffcee88c3bfa1086819566cdaf4b4c0f451fe57b9699cd9525804778308d";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		16EDEF331759AD5E001BE4E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2956,11 +2975,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\"",
-					"\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\"",
+					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\"",
+					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\"",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -2992,11 +3012,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\"",
-					"\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\"",
+					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\"",
+					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\"",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
+					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
