@@ -106,8 +106,8 @@ static int PAGE_WIDTH = 81;
     //avatar
     _currentGeneView.egoBtnAvatar.layer.cornerRadius = 22;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
-    _currentGeneView.egoBtnAvatar.layer.borderWidth = 2;
-    _currentGeneView.egoBtnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    _currentGeneView.egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+    _currentGeneView.egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
     if (userHeadUrl) {
         

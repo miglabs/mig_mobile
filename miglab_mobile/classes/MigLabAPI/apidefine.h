@@ -45,6 +45,12 @@
 /* 一页中附近歌曲显示的数量 */
 #define NEARMUSIC_DISPLAY_COUNT     10
 
+/* 头像的边框宽度 */
+#define AVATAR_BORDER_WIDTH         2
+
+/* 头像的边框颜色 */
+#define AVATAR_BORDER_COLOR         [UIColor whiteColor].CGColor
+
 /* 登陆账号ID类别 */
 #define LOGIN_MIGLAB                0
 #define LOGIN_SINA                  1

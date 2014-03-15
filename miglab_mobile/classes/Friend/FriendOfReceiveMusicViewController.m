@@ -140,6 +140,8 @@
     btnAvatar.imageURL = [NSURL URLWithString:_msginfo.userInfo.headurl];
     btnAvatar.layer.cornerRadius = avatarWidth / 2;
     btnAvatar.layer.masksToBounds = YES;
+    btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+    btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     [_messageContentView addSubview:btnAvatar];
     
     // 添加发送人名字

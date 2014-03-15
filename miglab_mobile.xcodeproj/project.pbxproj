@@ -486,6 +486,9 @@
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
 		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
+		CB1EAE1C18D4ADF10099D2A2 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */; };
+		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
+		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
@@ -1142,6 +1145,9 @@
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
 		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		CB0380D9185DA0B500137D8E /* gene_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_focus.png; sourceTree = "<group>"; };
+		CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
+		CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
+		CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
 		CB30AD8418C0E45F0072B198 /* NearMusicSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicSongCell.h; sourceTree = "<group>"; };
 		CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearMusicSongCell.m; sourceTree = "<group>"; };
 		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
@@ -1175,7 +1181,9 @@
 				1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */,
 				1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */,
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
+				CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */,
 				1637CA7117B7A58800E6F132 /* MobileCoreServices.framework in Frameworks */,
+				CB1EAE1C18D4ADF10099D2A2 /* TencentOpenAPI.framework in Frameworks */,
 				1637CA6F17B7A57500E6F132 /* Security.framework in Frameworks */,
 				1637CA6D17B7A56900E6F132 /* CFNetwork.framework in Frameworks */,
 				1637CA6B17B7A55300E6F132 /* libxml2.dylib in Frameworks */,
@@ -1185,6 +1193,7 @@
 				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
 				163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */,
 				163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */,
+				CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */,
 				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
 				1623168417773BE000CF8FB5 /* OpenGLES.framework in Frameworks */,
 				1623168217773BD600CF8FB5 /* SystemConfiguration.framework in Frameworks */,
@@ -2058,6 +2067,9 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */,
+				CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */,
+				CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */,
 				165F694918D3438B009D4F88 /* Crashlytics.framework */,
 				160C96DE18CF23C400B98EEC /* Crashlytics.framework */,
 				188A20B917F5638000D4E753 /* CoreText.framework */,
@@ -2975,12 +2987,15 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\"",
-					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\\\\\\\\\"",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/TencentAPI,
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/DoubanAPI,
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -2998,9 +3013,9 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3012,12 +3027,15 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\"",
-					"\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\\\\\\\\\"",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
 					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/TencentAPI,
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/DoubanAPI,
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3035,9 +3053,9 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C9BB2DF-3D22-411B-910B-DC6D7B0B66C2";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

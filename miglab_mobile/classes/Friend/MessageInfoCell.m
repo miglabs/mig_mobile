@@ -40,6 +40,8 @@
     _btnAvatar.imageURL = [NSURL URLWithString:msg.userInfo.headurl];
     _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
     _btnAvatar.layer.masksToBounds = YES;
+    _btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+    _btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     
     if(_msginfo.messagetype == 2) {
         //送歌曲
