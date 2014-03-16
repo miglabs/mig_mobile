@@ -25,14 +25,14 @@
 @property (nonatomic, retain) NSMutableDictionary *dicSelectedSongId;
 
 -(void)loadData;
--(void)loadCollectedMusicFromDatabase;
--(void)loadCollectedMusicFromServer;
+//-(void)loadCollectedMusicFromDatabase;
+//-(void)loadCollectedMusicFromServer;
 
 -(void)loadMusicFromDatabase;
 -(void)loadMusicFromServer;
 
--(void)getCollectedSongsFailed:(NSNotification *)tNotification;
--(void)getCollectedSongsSuccess:(NSNotification *)tNotification;
+//-(void)getCollectedSongsFailed:(NSNotification *)tNotification;
+//-(void)getCollectedSongsSuccess:(NSNotification *)tNotification;
 
 -(IBAction)doSort:(id)sender;
 -(IBAction)doEdit:(id)sender;

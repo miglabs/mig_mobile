@@ -157,7 +157,7 @@
     } else if (messageInfo.messagetype == 3) {
         
         // 评论歌曲
-        MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+        //MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
         //receiveMusicViewController.userinfo = user;
         //[self.navigationController pushViewController:receiveMusicViewController animated:YES];
     } else {

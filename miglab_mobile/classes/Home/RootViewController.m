@@ -131,7 +131,7 @@
     
     PLog(@"rand(): %d, random(): %ld", rand(), random());
     int songListCount = [tempsonglist count];
-    int rnd = rand() % (songListCount == 0 ? 1 : songListCount);
+    //int rnd = rand() % (songListCount == 0 ? 1 : songListCount);
     
     PPlayerManagerCenter *playerManagerCenter = [PPlayerManagerCenter GetInstance];
     [playerManagerCenter doUpdateSongList:tempsonglist];

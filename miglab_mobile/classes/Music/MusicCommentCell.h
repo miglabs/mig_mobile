@@ -17,6 +17,4 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblTime;
 @property (nonatomic, retain) IBOutlet UILabel *lblContent;
 
--(void)updateCellView;
-
 @end

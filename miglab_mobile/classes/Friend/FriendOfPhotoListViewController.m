@@ -123,7 +123,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    PhotoInfo *photoinfo = [_datalist objectAtIndex:indexPath.row];
+    /* TODO: photo */
+    //PhotoInfo *photoinfo = [_datalist objectAtIndex:indexPath.row];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
