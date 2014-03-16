@@ -146,6 +146,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
@@ -258,6 +260,8 @@
     
     PLog(@"getNearMusicFailed...");
     
+    [SVProgressHUD dismiss];
+    
     [SVProgressHUD showErrorWithStatus:@"附近的好音乐获取失败:("];
 }
 
@@ -287,6 +291,7 @@
         
     }
     
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - UITableView delegate

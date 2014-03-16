@@ -148,6 +148,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn && !_isGettingCollectSong) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         _isGettingCollectSong = YES;
         
         NSString *userid = [UserSessionManager GetInstance].userid;
@@ -168,6 +170,8 @@
     
     PLog(@"getCollectedSongsFailed...");
     
+    [SVProgressHUD dismiss];
+    
     [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取失败:("];
     _isGettingCollectSong = NO;
 }
@@ -176,7 +180,7 @@
     
     PLog(@"getCollectedSongsSuccess...");
     
-    [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取成功:)"];
+    //[SVProgressHUD showErrorWithStatus:@"收藏歌曲获取成功:)"];
     
     _isGettingCollectSong = NO;
     
@@ -198,6 +202,7 @@
     [_dataList addObjectsFromArray:songInfoList];
     [_dataTableView reloadData];
     
+    [SVProgressHUD dismiss];
 }
 
 -(IBAction)doSort:(id)sender{

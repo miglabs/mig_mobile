@@ -19,6 +19,8 @@
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 
+@property (nonatomic, assign) BOOL isFirstLoadNumber;
+
 //gps定位
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CollectNum *collectNum;

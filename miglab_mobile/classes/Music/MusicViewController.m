@@ -30,6 +30,8 @@
 @synthesize locationManager = _locationManager;
 @synthesize collectNum = _collectNum;
 
+@synthesize isFirstLoadNumber = _isFirstLoadNumber;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,6 +56,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _isFirstLoadNumber = YES;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -145,6 +149,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn && tLocation) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeNone];
+        
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         
@@ -161,6 +167,8 @@
 #pragma notification
 
 -(void)getCollectAndNearNumFailed:(NSNotification *)tNotification{
+    
+    [SVProgressHUD dismiss];
     
     PLog(@"getCollectAndNearNumFailed...");
     
@@ -207,6 +215,7 @@
     
     [_bodyTableView reloadData];
     
+    [SVProgressHUD dismiss];
 }
 
 -(IBAction)doShowSourceEdit:(id)sender{
@@ -293,7 +302,11 @@
     NSString *strLocation = [NSString stringWithFormat:@"%@,%@", strLatitude, strLongitude];
     
     //
-    [self loadCollectedAndNearNumFromServer:strLocation];
+    if (_isFirstLoadNumber) {
+        
+        [self loadCollectedAndNearNumFromServer:strLocation];
+        _isFirstLoadNumber = NO;
+    }
     
     
 }
