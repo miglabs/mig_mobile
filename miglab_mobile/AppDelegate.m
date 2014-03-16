@@ -263,11 +263,9 @@
     //显示状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    //api test
-    
+    //NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    //NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString *username = [UserSessionManager GetInstance].currentUser.username;
-    NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];

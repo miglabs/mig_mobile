@@ -169,7 +169,7 @@
     //
     _miglabAPI = [[MigLabAPI alloc] init];
     _pageIndex = 0;
-    _pageSize = PAGE_SIZE;
+    _pageSize = MIG_PAGE_SIZE;
     
     _curPlayingSong = [PPlayerManagerCenter GetInstance].currentSong;
     

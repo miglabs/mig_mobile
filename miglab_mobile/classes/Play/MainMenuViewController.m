@@ -190,10 +190,7 @@
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString *username = [UserSessionManager GetInstance].currentUser.username;
         NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-        
-//        [_miglabAPI doGetUserInfo:username accessToken:accesstoken];
         
         //根据描述词获取歌曲 test
         //随机心情词id
@@ -629,7 +626,7 @@
     
     //end 构造播放页面
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
 //    [_playView addGestureRecognizer:panGestureRecognizer];
     
     
@@ -1072,7 +1069,7 @@
 
 -(void)getMusicFromChannelSuccess:(NSNotification *)tNotification{
     
-    NSDictionary *result = [tNotification userInfo];
+    //NSDictionary *result = [tNotification userInfo];
     PLog(@"getMusicFromChannelSuccess...");
     
 }

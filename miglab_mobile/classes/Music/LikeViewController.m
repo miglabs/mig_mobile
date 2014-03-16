@@ -186,7 +186,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
-    int songInfoCount = [songInfoList count];
+//    int songInfoCount = [songInfoList count];
     
     // 不强制设为喜欢
 //    for (int i=0; i<songInfoCount; i++) {
@@ -196,7 +196,7 @@
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertSongInfoList:songInfoList];
-    NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
+//    NSMutableArray *tempSongInfoList = [databaseManager getLikeSongInfoList:200];
     
     [_dataList removeAllObjects];
     [_dataList addObjectsFromArray:songInfoList];

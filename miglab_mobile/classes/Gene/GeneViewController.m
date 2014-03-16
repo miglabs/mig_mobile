@@ -870,9 +870,9 @@ static int PAGE_WIDTH = 81;
     /*
      * 判断是否需要更新
      * 然后下载新的数据更新
+     NSDictionary *result = [tNotification userInfo];
+     ConfigFileInfo *configInfo = [result objectForKey:@"result"];
      */
-    NSDictionary *result = [tNotification userInfo];
-    ConfigFileInfo *configInfo = [result objectForKey:@"result"];
     
 }
 

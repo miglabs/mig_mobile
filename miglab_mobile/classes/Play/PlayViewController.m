@@ -213,9 +213,6 @@
     song3.songCachePath = [songManager getSongCachePath:song3];
     [_songList addObject:song3];
     
-    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
-//    [miglabAPI doGetDefaultMusic:<#(NSString *)#> token:<#(NSString *)#> uid:<#(int)#>]
-    
 }
 
 - (void)didReceiveMemoryWarning

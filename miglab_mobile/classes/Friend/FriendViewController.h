@@ -28,7 +28,7 @@
 
 -(void)updateDisplayNumber;
 
--(void)updateLocation;
+//-(void)updateLocation;
 
 -(void)loadNumbersFromServer:(NSString*)tlocation;
 -(void)getNumbersSuccess:(NSNotification*)tNotification;

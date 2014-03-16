@@ -51,8 +51,6 @@
 
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
-//列表分页数量
-#define PAGE_SIZE                           20
 //根据音乐基因获取歌曲数量
 #define GET_TYPE_SONGS_NUM                  5
 

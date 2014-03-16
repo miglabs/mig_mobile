@@ -28,6 +28,9 @@
 -(void)loadCollectedMusicFromDatabase;
 -(void)loadCollectedMusicFromServer;
 
+-(void)loadMusicFromDatabase;
+-(void)loadMusicFromServer;
+
 -(void)getCollectedSongsFailed:(NSNotification *)tNotification;
 -(void)getCollectedSongsSuccess:(NSNotification *)tNotification;
 

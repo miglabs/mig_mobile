@@ -9,6 +9,9 @@
 #ifndef miglab_mobile_apidefine_h
 #define miglab_mobile_apidefine_h
 
+/* 列表分页数量 */
+ #define MIG_PAGE_SIZE                           20
+
 /* 屏幕的左上角x坐标 */
 #define ORIGIN_X                    11.5
 

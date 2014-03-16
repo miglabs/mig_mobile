@@ -98,8 +98,8 @@
     
     [super viewWillAppear:animated];
     
-    NSURL *avatarUrl = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
-    NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
+//    NSURL *avatarUrl = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
+//    NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
 //    _btnUserAvatar.imageURL = avatarUrl;
 //    _lblUserNickName.text = nickname;
     
