@@ -95,6 +95,9 @@
     
     NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
     NSRange range = [songext rangeOfString:@"."];
+    if (range.location == NSNotFound || range.length <= 0) {
+        return 0;
+    }
     songext = [songext substringFromIndex:range.location + 1];
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
