@@ -385,6 +385,8 @@
     }
     cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
     cell.btnAvatar.layer.masksToBounds = YES;
+    cell.btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+    cell.btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
     NSString *songDesc = @"未缓存";
