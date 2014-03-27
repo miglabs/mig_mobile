@@ -351,7 +351,7 @@
     cell.lblSongName.font = [UIFont fontOfApp:15.0f];
     
     long distance = nms.userInfo.distance;
-    int favornum = tempsong.collectnum;
+    int favornum = tempsong.commentnum;
     NSString* imageurl = nms.userInfo.headurl;
     NSString* szFavor = [NSString stringWithFormat:@"%d", favornum];
     if (favornum > 999) {
@@ -365,7 +365,7 @@
     }
     else if(distance < 1000000) {
         
-        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldkm内", szFavor, distance];
+        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldkm", szFavor, distance];
     }
     else {
         
