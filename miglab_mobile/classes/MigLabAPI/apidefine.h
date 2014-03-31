@@ -66,9 +66,10 @@
 #define STR_FEMALE                  @"0"
 
 /* 用户来源 */
+#define STR_USER_SOURCE_MIG         @"0"
 #define STR_USER_SOURCE_SINA        @"1"
 #define STR_USER_SOURCE_QQ          @"2"
-#define STR_USER_SOURCE_MIG         @"3"
+#define STR_USER_SOURCE_WEIXIN      @"3"
 #define STR_USER_SOURCE_DOUBAN      @"4"
 
 /* 默认推荐语 */

@@ -45,6 +45,7 @@
     _btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     _btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     
+    /* 显示状态 */
     if (!_userinfo.songname) {
         
         _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000.0f];
@@ -54,6 +55,7 @@
         _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000.0f, _userinfo.songname];
     }
     
+    /* 显示性别的图片 */
     if ([_userinfo.sex isEqualToString:STR_FEMALE]) {
         
         _genderImageView.image = [UIImage imageNamed:@"user_gender_female"];
@@ -63,6 +65,13 @@
         _genderImageView.image = [UIImage imageNamed:@"user_gender_male"];
     }
     
+    CGSize nameSize = [_lblNickName.text sizeWithFont:_lblNickName.font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+    CGRect nameRect = _lblNickName.frame;
+    CGRect genderRect = _genderImageView.frame;
+    genderRect.origin.x = nameRect.origin.x + nameSize.width + 5;
+    _genderImageView.frame = genderRect;
+    
+    /* 显示用户来源 */
     NSString* plat = _userinfo.plat;
     
     if ([plat isEqualToString:STR_USER_SOURCE_SINA]) {
