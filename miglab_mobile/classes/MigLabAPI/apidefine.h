@@ -65,6 +65,12 @@
 #define STR_MALE                    @"1"
 #define STR_FEMALE                  @"0"
 
+/* 用户来源 */
+#define STR_USER_SOURCE_SINA        @"1"
+#define STR_USER_SOURCE_QQ          @"2"
+#define STR_USER_SOURCE_MIG         @"3"
+#define STR_USER_SOURCE_DOUBAN      @"4"
+
 /* 默认推荐语 */
 #define MIGTIP_DEFAULT_RECOMMAND    @"来听听嘛~"
 

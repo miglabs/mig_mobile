@@ -15,9 +15,7 @@
 @synthesize lblNickName = _lblNickName;
 @synthesize lblUserInfo = _lblUserInfo;
 @synthesize genderImageView = _genderImageView;
-@synthesize sinaTipImageView = _sinaTipImageView;
-@synthesize tencentTipImageView = _tencentTipImageView;
-@synthesize doubanTipImageView = _doubanTipImageView;
+@synthesize userSourceImageView = _userSourceImageView;
 @synthesize userinfo = _userinfo;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -63,6 +61,25 @@
     else {
         
         _genderImageView.image = [UIImage imageNamed:@"user_gender_male"];
+    }
+    
+    NSString* plat = _userinfo.plat;
+    
+    if ([plat isEqualToString:STR_USER_SOURCE_SINA]) {
+        
+        _userSourceImageView.image = [UIImage imageNamed:@"sina_tip"];
+    }
+    else if([plat isEqualToString:STR_USER_SOURCE_QQ]) {
+        
+        _userSourceImageView.image = [UIImage imageNamed:@"tencent_tip"];
+    }
+    else if([plat isEqualToString:STR_USER_SOURCE_DOUBAN]) {
+        
+        _userSourceImageView.image = [UIImage imageNamed:@"douban_tip"];
+    }
+    else {
+        
+        _userSourceImageView.hidden = YES;
     }
 }
 

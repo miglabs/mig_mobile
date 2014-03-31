@@ -15,9 +15,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblNickName;
 @property (nonatomic, retain) IBOutlet UILabel *lblUserInfo;
 @property (nonatomic, retain) IBOutlet UIImageView *genderImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *sinaTipImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *tencentTipImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *doubanTipImageView;
+@property (nonatomic, retain) IBOutlet UIImageView *userSourceImageView;
 @property (nonatomic, retain) NearbyUser* userinfo;
 
 -(void)updateFriendInfoCellData:(NearbyUser*)user;

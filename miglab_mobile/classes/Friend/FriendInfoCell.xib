@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -41,16 +41,8 @@
                     <rect key="frame" x="185" y="16" width="12" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sina_tip.png" id="9">
-                    <rect key="frame" x="235" y="23" width="11" height="11"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tencent_tip.png" id="8">
                     <rect key="frame" x="255" y="23" width="11" height="11"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="douban_tip.png" id="7">
-                    <rect key="frame" x="275" y="23" width="11" height="11"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="music_source_separator.png" id="10">
@@ -64,14 +56,13 @@
                 <outlet property="genderImageView" destination="6" id="eYA-zs-tWV"/>
                 <outlet property="lblNickName" destination="4" id="0k2-4q-K9R"/>
                 <outlet property="lblUserInfo" destination="5" id="Feb-J3-xAN"/>
+                <outlet property="userSourceImageView" destination="8" id="Rdp-OH-lWO"/>
             </connections>
         </view>
     </objects>
     <resources>
-        <image name="douban_tip.png" width="24" height="24"/>
         <image name="music_song_avatar.png" width="110" height="114"/>
         <image name="music_source_separator.png" width="563" height="1"/>
-        <image name="sina_tip.png" width="22" height="21"/>
         <image name="tencent_tip.png" width="22" height="22"/>
         <image name="user_gender_female.png" width="24" height="24"/>
     </resources>
