@@ -108,11 +108,6 @@ static int PAGE_WIDTH = 81;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
     _currentGeneView.egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     _currentGeneView.egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
-    NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
-    if (userHeadUrl) {
-        
-        _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
-    }
     [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_currentGeneView];
     
@@ -315,6 +310,16 @@ static int PAGE_WIDTH = 81;
     //刷新日期
     [self updateDate];
     
+    // 刷新头像
+    NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
+    if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
+        
+        _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
+    }
+    else {
+        
+        _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
+    }
 }
 
 - (void)didReceiveMemoryWarning
