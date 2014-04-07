@@ -1,0 +1,872 @@
+
+ 
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+ 
+ <!DOCTYPE html>
+<html>
+<head>
+ <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <link rel="canonical" href="http://code.google.com/p/cocoaasyncsocket/wiki/Reference_AsyncSocket" />
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl":null,"token":null,"assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/16877346213899399380","projectHomeUrl":"/p/cocoaasyncsocket","relativeBaseUrl":"","projectName":"cocoaasyncsocket","loggedInUserEmail":null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ _gaq.push(
+ ['projectTracker._setAccount', 'UA-4982170-1'],
+ ['projectTracker._trackPageview']);
+ 
+ 
+ </script>
+ 
+ 
+ <title>Reference_AsyncSocket - 
+ cocoaasyncsocket -
+ 
+ AsyncSocket API Reference - 
+ AsyncSocket is an asynchronous socket networking library for Cocoa. - Google Project Hosting
+ </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/ph_detail.css" >
+ 
+ 
+ 
+ <link type="application/atom+xml" rel="alternate" href="/feeds/p/cocoaasyncsocket/gitchanges/basic?repo=wiki&amp;path=/Reference_AsyncSocket.wiki">
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ #maincol {
+ padding-top: 0;
+ padding-bottom: 0;
+ }
+
+ 
+ </style>
+</head>
+<body class="t6">
+<script type="text/javascript">
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fwiki%2FReference_AsyncSocket&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fwiki%2FReference_AsyncSocket" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/cocoaasyncsocket">
+ <a href="/p/cocoaasyncsocket/">
+ 
+ <img src="http://www.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/cocoaasyncsocket/"><span itemprop="name">cocoaasyncsocket</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/cocoaasyncsocket/"><span itemprop="description">AsyncSocket is an asynchronous socket networking library for Cocoa.</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/cocoaasyncsocket/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/downloads/list" class="tab ">Downloads</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/w/list" class="tab active">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/issues/list"
+ class="tab ">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/source/checkout"
+ class="tab ">Source</a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ <span class="inIssueList"> 
+ <span>Search</span>
+ <form action="/p/cocoaasyncsocket/w/list" method="GET" style="display:inline">
+ <select id="can" name="can" >
+ <option disabled="disabled">Search within:</option>
+ 
+ <option value="1" >&nbsp;All wiki pages</option>
+ <option value="3" >&nbsp;Featured pages</option>
+ <option value="2" selected="selected">&nbsp;Current pages</option>
+ 
+ 
+ <option value="4" >&nbsp;Deprecated pages</option>
+ 
+ </select>
+ <span>for</span>
+ <span id="qq"><input type="text" size="38" id="searchq" name="q" value=""
+ autocomplete="off" ></span>
+ 
+ 
+ 
+ <input type="submit" value="Search" >
+ </form>
+ </span>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+</div>
+</div>
+
+ </td>
+ 
+ 
+ 
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+<!-- IE -->
+
+
+
+
+
+
+
+ <style type="text/css">
+ .delcom { background: #e8e8e8 }
+ .commentcontent {
+ margin: 2em;
+ padding: 0px 10px;
+ width: 66em;
+ }
+ .artifactcomment {
+ border-top: 3px solid #c3d9ff;
+ }
+ #commentform {
+ border-top: 3px solid #c3d9ff;
+ }
+ </style>
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">Reference_AsyncSocket</span>
+ &nbsp;
+ <div> 
+ 
+ <i>AsyncSocket API Reference</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Tue Jul 26 01:52:28 2011">
+ Jul 26, 2011</span>
+ 
+ by <a style="white-space: nowrap" href="/u/106698553724316516551/">robbieha...@deusty.com</a>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <h1><a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a></h1><p>AsyncSocket is a RunLoop based TCP socket library.  The project also contains a GCD based version, as well as UDP socket libraries. </p><p>The CocoaAsyncSocket project is a mature open source framework that has been around since 2003. As such it has benefitted from a wide variety of networking developers who have submitted code or suggested features. The goal of the project is to create powerful yet easy to use socket libraries. </p><p>Features include: <ul><li>Delegate support. Errors, connections, accepts, read completions, write completions, progress, and disconnections all result in a call to your delegate method. The delegate methods include a socket parameter, allowing you to distinguish between many instances. </li><li>Queued non-blocking reads and writes, with optional timeouts. You tell it what to read or write, and it will call you when it&#x27;s done. </li><li>Automatic socket acceptance. If you tell it to accept connections, it will call you with new instances of itself for each connection. You can, of course, disconnect them immediately. </li><li>Automatic support for IPv4 and IPv6. </li><li>SSL/TLS support. </li><li>RunLoop based using core networking technologies such as CFSocket. </li><li>Self-contained in one class. You don&#x27;t need to muck around with streams or sockets. The class handles all of that. </li></ul></p><p>One of the most powerful features of AsyncSocket is its queued architecture. This allows you to control the socket when it is convenient for YOU, and not when the socket tells you it&#x27;s ready. A few examples: </p><pre class="prettyprint">// Start asynchronous connection.
+// The method below will return immediately,
+// and the delegate method onSocket:didConnectToHost:port: will
+// be invoked when the connection has completed.
+[asyncSocket connectToHost:host onPort:port error:nil];
+
+// At this moment in time, the socket is not yet connected.
+// It has just started the asynchronous connection attempt.
+// But AsyncSocket was designed to make socket programming easier for you.
+// You are free to start reading/writing if it is convenient for you.
+// So we are going to start the read request for our message header now.
+// The read request will automatically be queued.
+// And after the socket connects, this read request will automatically be dequeued and executed.
+[asyncSocket readDataToLength:LENGTH_HEADER withTimeout:TIMEOUT_NONE tag:TAG_HEADER];</pre><p>In addition to this, you can invoke multiple read/write requests as is convenient. </p><pre class="prettyprint">// Start asynchronous write operation
+[asyncSocket writeData:msgHeader withTimeout:TIMEOUT_NONE tag:TAG_HEADER];
+
+// We don&#x27;t have to wait for that write to complete before starting the next one
+[asyncSocket writeData:msgBody withTimeout:TIMEOUT_NONE tag:TAG_BODY];</pre><pre class="prettyprint">// Start asynchronous read operation.
+// Read and ignore the welcome message.
+[asyncSocket readDataToData:msgSeparator withTimeout:TIMEOUT_NONE tag:TAG_WELCOME];
+
+// We don&#x27;t have to wait for that read to complete before starting the next one.
+// Read server capabilities.
+[asyncSocket readDataToData:msgSeparator withTimeout:TIMEOUT_NONE tag:TAG_CAPABILITIES];</pre><p>The queued architecture even extends into the SSL/TLS support! </p><pre class="prettyprint">// Send startTLS confirmation ACK.
+// Remember this is an asynchronous operation.
+[asyncSocket writeData:ack withTimeout:TIMEOUT_NONE tag:TAG_ACK];
+
+// We don&#x27;t have to wait for the write to complete before invoking startTLS.
+// The socket will automatically queue the operation, and wait for previous reads/writes to complete.
+// Once that has happened, the upgrade to SSL/TLS will automatically start.
+[asyncSocket startTLS:tlsSettings];
+
+// Again, we don&#x27;t have to wait for the security handshakes to complete.
+// We can immediately queue our next operation if it&#x27;s convenient for us.
+// So we can start reading the next request from the client.
+[asyncSocket readDataToData:msgSeparator withTimeout:TIMEOUT_NONE tag:TAG_MSG];</pre><p>Timeouts are optional parameters to most operations. </p><p>In addition to this you&#x27;ve probably noticed the tag parameter. The tag you pass during the read/write operation is passed back to you via the delegate method once the read/write operation completes. It does not get sent over the socket or read from the socket.  It is designed to help simplify the code in your delegate method.  For example, your delegate method might look like this: </p><pre class="prettyprint">#define TAG_WELCOME 10
+#define TAG_CAPABILITIES 11
+#define TAG_MSG 12
+
+... 
+
+- (void)onSocket:(AsyncSocket *)sender didReadData:(NSData *)data withTag:(long)tag
+{
+    if (tag == TAG_WELCOME)
+    {
+        // Ignore welcome message
+    }
+    else if (tag == TAG_CAPABILITIES)
+    {
+        [self processCapabilities:data];
+    }
+    else if (tag == TAG_MSG)
+    {
+        [self processMessage:data];
+    }
+}</pre><p>AsyncSocket can be configured to run on any given thread/runloop.  You can configure the runloop mode as desired.  You can also change the thread/runloop and/or runloop mode while the socket is running. </p><p>However, AsyncSocket is not thread-safe. You must only invoke methods on AsyncSocket from the thread/runloop on which the socket is configured. If you find yourself on a thread which is different from the thread on which AsyncSocket is running, and you need to invoke a method on AsyncSocket, then you must use a method like performSelector:onThread: to ensure the method is invoked on AsyncSocket&#x27;s thread (and thereby maintaining thread-safety). </p><p>If you are doing a lot of multithreading, and the thread-safety issue is a concern, you may be interested in GCDAsyncSocket which is thread-safe. </p><h1><a name="License"></a>License<a href="#License" class="section_anchor"></a></h1><p>This class is in the public domain. </p><p>Originally created by Dustin Voss on Jan 29 2003. </p><p>Updated and maintained by Deusty Designs and the Mac development community. </p><h1><a name="Reference"></a>Reference<a href="#Reference" class="section_anchor"></a></h1><ul><li><a href="#Delegate_Methods">Delegate Methods</a> </li><ul><li><a href="#onSocketWillConnect:">onSocketWillConnect:</a> </li><li><a href="#onSocket:_didConnectToHost:_port:">onSocket: didConnectToHost: port:</a> </li><li><a href="#onSocket:_didReadData:_withTag:">onSocket: didReadData: withTag:</a> </li><li><a href="#onSocket:_didReadPartialDataOfLength:_tag:">onSocket: didReadPartialDataOfLength: tag:</a> </li><li><a href="#onSocket:_shouldTimeoutReadWithTag:_elapsed:_bytesDone:">onSocket: shouldTimeoutReadWithTag: elapsed: bytesDone:</a> </li><li><a href="#onSocket:_didWriteDataWithTag:">onSocket: didWriteDataWithTag:</a> </li><li><a href="#onSocket:_didWritePartialDataOfLength:_tag:">onSocket: didWritePartialDataOfLength: tag:</a> </li><li><a href="#onSocket:_shouldTimeoutWriteWithTag:_elapsed:_bytesDone:">onSocket: shouldTimeoutWriteWithTag: elapsed: bytesDone:</a> </li><li><a href="#onSocketDidSecure:">onSocketDidSecure:</a> </li><li><a href="#onSocket:_didAcceptNewSocket:">onSocket: didAcceptNewSocket:</a> </li><li><a href="#onSocket:_wantsRunLoopForNewSocket:">onSocket: wantsRunLoopForNewSocket:</a> </li><li><a href="#onSocket:_willDisconnectWithError:">onSocket: willDisconnectWithError:</a> </li><li><a href="#onSocketDidDisconnect:">onSocketDidDisconnect:</a> </li></ul></ul><ul><li><a href="#Initialization">Initialization</a> </li><ul><li><a href="#init">init</a> </li><li><a href="#initWithDelegate:">initWithDelegate:</a> </li><li><a href="#initWithDelegate:_userData:">initWithDelegate: userData:</a> </li></ul></ul><ul><li><a href="#Configuration">Configuration</a> </li><ul><li><a href="#delegate">delegate</a> </li><li><a href="#setDelegate:">setDelegate:</a> </li><li><a href="#canSafelySetDelegate">canSafelySetDelegate</a> </li><li><a href="#userData">userData</a> </li><li><a href="#setUserData:">setUserData:</a> </li><li><a href="#getCFSocket">getCFSocket</a> </li><li><a href="#getCFReadStream">getCFReadStream</a> </li><li><a href="#getCFWriteStream">getCFWriteStream</a> </li></ul></ul><ul><li><a href="#Accepting">Accepting</a> </li><ul><li><a href="#acceptOnPort:_error:">acceptOnPort: error:</a> </li><li><a href="#acceptOnInterface:_port:_error:">acceptOnInterface: port: error:</a> </li></ul></ul><ul><li><a href="#Connecting">Connecting</a> </li><ul><li><a href="#connectToHost:_onPort:_error:">connectToHost: onPort: error:</a> </li><li><a href="#connectToHost:_onPort:_withTimeout:_error:">connectToHost: onPort: withTimeout: error:</a> </li><li><a href="#connectToAddress:_error:">connectToAddress: error:</a> </li><li><a href="#connectToAddress:_withTimeout:_error:">connectToAddress: withTimeout: error:</a> </li><li><a href="#connectToAddress:_viaInterfaceAddress:_withTimeout:_error:">connectToAddress: viaInterfaceAddress: withTimeout: error:</a> </li></ul></ul><ul><li><a href="#Reading">Reading</a> </li><ul><li><a href="#readDataWithTimeout:_tag:">readDataWithTimeout: tag:</a> </li><li><a href="#readDataWithTimeout:_buffer:_bufferOffset:_tag:">readDataWithTimeout: buffer: bufferOffset: tag:</a> </li><li><a href="#readDataWithTimeout:_buffer:_bufferOffset:_maxLength:_tag:">readDataWithTimeout: buffer: bufferOffset: maxLength: tag:</a> </li><li><a href="#readDataToLength:_withTimeout:_tag:">readDataToLength: withTimeout: tag:</a> </li><li><a href="#readDataToLength:_withTimeout:_buffer:_bufferOffset:_tag:">readDataToLength: withTimeout: buffer: bufferOffset: tag:</a> </li><li><a href="#readDataToData:_withTimeout:_tag:">readDataToData: withTimeout: tag:</a> </li><li><a href="#readDataToData:_withTimeout:_buffer:_bufferOffset:_tag:">readDataToData: withTimeout: buffer: bufferOffset: tag:</a> </li><li><a href="#readDataToData:_withTimeout:_maxLength:_tag:">readDataToData: withTimeout: maxLength: tag:</a> </li><li><a href="#readDataToData:_withTimeout:_buffer:_bufferOffset:_maxLength:_tag:">readDataToData: withTimeout: buffer: bufferOffset: maxLength: tag:</a> </li></ul></ul><ul><li><a href="#Writing">Writing</a> </li><ul><li><a href="#writeData:_withTimeout:_tag:">writeData: withTimeout: tag:</a> </li></ul></ul><ul><li><a href="#Diagnostics">Diagnostics</a> </li><ul><li><a href="#isConnected">isConnected</a> </li><li><a href="#connectedHost">connectedHost</a> </li><li><a href="#connectedPort">connectedPort</a> </li><li><a href="#localHost">localHost</a> </li><li><a href="#localPort">localPort</a> </li><li><a href="#connectedAddress">connectedAddress</a> </li><li><a href="#localAddress">localAddress</a> </li><li><a href="#isIPv4">isIPv4</a> </li><li><a href="#isIPv6">isIPv6</a> </li><li><a href="#progressOfReadReturningTag:_bytesDone:_total:">progressOfReadReturningTag: bytesDone: total:</a> </li><li><a href="#progressOfWriteReturningTag:_bytesDone:_total:">progressOfWriteReturningTag: bytesDone: total:</a> </li></ul></ul><ul><li><a href="#Disconnecting">Disconnecting</a> </li><ul><li><a href="#disconnect">disconnect</a> </li><li><a href="#disconnectAfterReading">disconnectAfterReading</a> </li><li><a href="#disconnectAfterWriting">disconnectAfterWriting</a> </li><li><a href="#disconnectAfterReadingAndWriting">disconnectAfterReadingAndWriting</a> </li></ul></ul><ul><li><a href="#Security">Security</a> </li><ul><li><a href="#startTLS:">startTLS:</a> </li></ul></ul><ul><li><a href="#RunLoop_Configuration">RunLoop Configuration</a> </li><ul><li><a href="#runLoopModes">runLoopModes</a> </li><li><a href="#setRunLoopModes:">setRunLoopModes:</a> </li><li><a href="#addRunLoopMode:">addRunLoopMode:</a> </li><li><a href="#removeRunLoopMode:">removeRunLoopMode:</a> </li><li><a href="#moveToRunLoop:">moveToRunLoop:</a> </li></ul></ul><ul><li><a href="#Advanced">Advanced</a> </li><ul><li><a href="#unreadData">unreadData</a> </li><li><a href="#enablePreBuffering">enablePreBuffering</a> </li></ul></ul><hr/><hr/><h2><a name="Delegate_Methods"></a>Delegate Methods<a href="#Delegate_Methods" class="section_anchor"></a></h2><p>AsyncSocket is asynchronous. So for most methods, when you initiate an action on a socket (connecting, accepting, reading, writing) the method will return immediately, and the result of the action will be returned to you via the corresponding delegate method. </p><h4><a name="onSocketWillConnect:"></a>onSocketWillConnect:<a href="#onSocketWillConnect:" class="section_anchor"></a></h4><p><tt> - (BOOL)onSocketWillConnect:(AsyncSocket *)sock </tt> </p><blockquote>Called when a socket is about to connect. This method should return YES to continue, or NO to abort. 
+If aborted, will result in AsyncSocketCanceledError. 
+</blockquote><p>   <blockquote>If the connectToHost:onPort:error: method was called, the delegate will be able to access and configure the 
+CFReadStream and CFWriteStream as desired prior to connection. 
+</blockquote>  <blockquote>If the connectToAddress:error: method was called, the delegate will be able to access and configure the 
+CFSocket and CFSocketNativeHandle (BSD socket) as desired prior to connection. You will be able to access and 
+configure the CFReadStream and CFWriteStream in the onSocket:didConnectToHost:port: method. 
+</blockquote></p><h4><a name="onSocket:_didConnectToHost:_port:"></a>onSocket: didConnectToHost: port:<a href="#onSocket:_didConnectToHost:_port:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port </tt> </p><blockquote>Called when a socket connects and is ready to start reading and writing. 
+The host parameter will be an IP address, not a DNS name. 
+</blockquote><h4><a name="onSocket:_didReadData:_withTag:"></a>onSocket: didReadData: withTag:<a href="#onSocket:_didReadData:_withTag:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag </tt> </p><blockquote>Called when a socket has completed reading the requested data into memory. 
+Not called if there is an error. 
+</blockquote><blockquote>The tag parameter is the tag you passed when you requested the read operation. 
+For example, in the readDataWithTimeout:tag: method. 
+</blockquote><h4><a name="onSocket:_didReadPartialDataOfLength:_tag:"></a>onSocket: didReadPartialDataOfLength: tag:<a href="#onSocket:_didReadPartialDataOfLength:_tag:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag </tt> </p><blockquote>Called when a socket has read in data, but has not yet completed the read. 
+This would occur if using readDataToData: or readDataToLength: methods. 
+It may be used to for things such as updating progress bars. 
+</blockquote><blockquote>The tag parameter is the tag you passed when you requested the read operation. 
+For example, in the readDataWithTimeout:tag: method. 
+</blockquote><h4><a name="onSocket:_shouldTimeoutReadWithTag:_elapsed:_bytesDone:"></a>onSocket: shouldTimeoutReadWithTag: elapsed: bytesDone:<a href="#onSocket:_shouldTimeoutReadWithTag:_elapsed:_bytesDone:" class="section_anchor"></a></h4><pre class="prettyprint">- (NSTimeInterval)onSocket:(AsyncSocket *)sock
+  shouldTimeoutReadWithTag:(long)tag
+                   elapsed:NSTimeInterval)elapsed
+                 bytesDone:(NSUInteger)length</pre><blockquote>Called if a read operation has reached its timeout without completing. 
+This method allows you to optionally extend the timeout. 
+If you return a positive time interval (&gt; 0) the read&#x27;s timeout will be extended by the given amount. 
+If you don&#x27;t implement this method, or return a non-positive time interval (&lt;= 0) the read will timeout as usual. 
+</blockquote><p>  <blockquote>The elapsed parameter is the sum of the original timeout, plus any additions previously added via this method. 
+The length parameter is the number of bytes that have been read so far for the read operation. 
+</blockquote>   <blockquote>Note that this method may be called multiple times for a single read if you return positive numbers. 
+</blockquote></p><h4><a name="onSocket:_didWriteDataWithTag:"></a>onSocket: didWriteDataWithTag:<a href="#onSocket:_didWriteDataWithTag:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag </tt> </p><blockquote>Called when a socket has completed writing the requested data. 
+Not called if there is an error. 
+</blockquote><blockquote>The tag parameter is the tag you passed when you requested the write operation 
+For example, in the writeData:withTimeout:tag: method. 
+</blockquote><h4><a name="onSocket:_didWritePartialDataOfLength:_tag:"></a>onSocket: didWritePartialDataOfLength: tag:<a href="#onSocket:_didWritePartialDataOfLength:_tag:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag </tt> </p><blockquote>Called when a socket has written some data, but has not yet completed the entire write. 
+It may be used to for things such as updating progress bars. 
+</blockquote><blockquote>The tag parameter is the tag you passed when you requested the write operation 
+For example, in the writeData:withTimeout:tag: method. 
+</blockquote><h4><a name="onSocket:_shouldTimeoutWriteWithTag:_elapsed:_bytesDone:"></a>onSocket: shouldTimeoutWriteWithTag: elapsed: bytesDone:<a href="#onSocket:_shouldTimeoutWriteWithTag:_elapsed:_bytesDone:" class="section_anchor"></a></h4><pre class="prettyprint">- (NSTimeInterval)onSocket:(AsyncSocket *)sock
+ shouldTimeoutWriteWithTag:(long)tag
+                   elapsed:(NSTimeInterval)elapsed
+                 bytesDone:(NSUInteger)length;</pre><blockquote>Called if a write operation has reached its timeout without completing. 
+This method allows you to optionally extend the timeout. 
+If you return a positive time interval (&gt; 0) the write&#x27;s timeout will be extended by the given amount. 
+If you don&#x27;t implement this method, or return a non-positive time interval (&lt;= 0) the write will timeout as usual. 
+</blockquote><p>   <blockquote>The elapsed parameter is the sum of the original timeout, plus any additions previously added via this method. 
+The length parameter is the number of bytes that have been written so far for the write operation. 
+</blockquote>   <blockquote>Note that this method may be called multiple times for a single write if you return positive numbers. 
+</blockquote></p><h4><a name="onSocketDidSecure:"></a>onSocketDidSecure:<a href="#onSocketDidSecure:" class="section_anchor"></a></h4><p><tt> - (void)onSocketDidSecure:(AsyncSocket *)sock </tt> </p><blockquote>Called after the socket has successfully completed SSL/TLS negotiation. 
+This method is not called unless you use the provided startTLS method. 
+</blockquote><p>   <blockquote>If a SSL/TLS negotiation fails (invalid certificate, etc) then the socket will immediately close, 
+and the onSocket:willDisconnectWithError: delegate method will be called with the specific SSL error code. 
+</blockquote>   <blockquote>See Apple&#x27;s SecureTransport.h file in Security.framework for the list of SSL error codes and their meaning. 
+</blockquote></p><h4><a name="onSocket:_didAcceptNewSocket:"></a>onSocket: didAcceptNewSocket:<a href="#onSocket:_didAcceptNewSocket:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket </tt> </p><blockquote>Called when a &quot;server&quot; socket accepts an incoming &quot;client&quot; connection. 
+Another socket is spawned to handle it. 
+The new socket will have the same delegate by default. 
+</blockquote><blockquote>After this method is called, the onSocket:wantsRunLoopForNewSocket: delegate is invoked. 
+This allows you to place client connections on a separate runloop if necessary. 
+</blockquote><blockquote>After that, the onSocket:didConnectToHost:port: delegate is invoked for the new socket. 
+</blockquote><h4><a name="onSocket:_wantsRunLoopForNewSocket:"></a>onSocket: wantsRunLoopForNewSocket:<a href="#onSocket:_wantsRunLoopForNewSocket:" class="section_anchor"></a></h4><p><tt> - (NSRunLoop *)onSocket:(AsyncSocket *)sock wantsRunLoopForNewSocket:(AsyncSocket *)newSocket </tt> </p><blockquote>Called when a new socket is spawned to handle a connection. 
+This method should return the runloop of the thread on which the new socket and its delegate should operate. 
+If omitted, the new socket inherits the runloop of its parent. 
+</blockquote><h4><a name="onSocket:_willDisconnectWithError:"></a>onSocket: willDisconnectWithError:<a href="#onSocket:_willDisconnectWithError:" class="section_anchor"></a></h4><p><tt> - (void)onSocket:(AsyncSocket *)sender willDisconnectWithError:(NSError *)error </tt> </p><blockquote>In the event of an error, the socket is closed. 
+</blockquote><p>   <blockquote>If the error is an SSL/TLS error, 
+see Apple&#x27;s SecureTransport.h file in Security.framework for the list of SSL error codes and their meaning. 
+</blockquote></p><blockquote>You may call &quot;unreadData&quot; during this call-back to get the last bit of data off the socket. 
+When connecting, this delegate method may be called 
+before&quot;onSocket:didAcceptNewSocket:&quot; or &quot;onSocket:didConnectToHost:&quot; 
+</blockquote><h4><a name="onSocketDidDisconnect:"></a>onSocketDidDisconnect:<a href="#onSocketDidDisconnect:" class="section_anchor"></a></h4><p><tt> - (void)onSocketDidDisconnect:(AsyncSocket *)sock </tt> </p><blockquote>Called when a socket disconnects with or without error.  If you want to release a socket after it disconnects, 
+do so here. It is not safe to do that during &quot;onSocket:willDisconnectWithError:&quot;. 
+</blockquote><p>   <blockquote>If you call the disconnect method, and the socket wasn&#x27;t already disconnected, 
+this delegate method will be called before the disconnect method returns. 
+(Since the disconnect method is synchronous.) 
+</blockquote></p><hr/><hr/><h3><a name="Initialization"></a>Initialization<a href="#Initialization" class="section_anchor"></a></h3><p>AsyncSocket requires a delegate to function properly. You can pass the delegate via the init method, or you can assign it later.  If you attempt to perform a connect or accept operation without a set delegate, you will receive an error. </p><h4><a name="init"></a>init<a href="#init" class="section_anchor"></a></h4><p>  <tt> - (id)init </tt> </p><blockquote>Invokes the designated initializer with nil values. You will need to set a delegate before using the socket. 
+</blockquote><h4><a name="initWithDelegate:"></a>initWithDelegate:<a href="#initWithDelegate:" class="section_anchor"></a></h4><p><tt> - (id)initWithDelegate:(id)delegate </tt> </p><blockquote>Invokes the designated initializer with the given delegate, and no user data. 
+</blockquote><h4><a name="initWithDelegate:_userData:"></a>initWithDelegate: userData:<a href="#initWithDelegate:_userData:" class="section_anchor"></a></h4><p><tt> - (id)initWithDelegate:(id)delegate userData:(long)userData </tt> </p><blockquote>Designated initializer. 
+</blockquote><blockquote>Initializes the socket with the given delegate and user data. 
+The user data is optional, and is for your own internal use. 
+User data is not accessed by the socket. 
+User data can be a long, or an id or void <tt>*</tt> cast to a long. 
+</blockquote><hr/><hr/><h3><a name="Configuration"></a>Configuration<a href="#Configuration" class="section_anchor"></a></h3><h4><a name="delegate"></a>delegate<a href="#delegate" class="section_anchor"></a></h4><p><tt> - (id)delegate </tt> </p><blockquote>Returns the delegate that is currently set for the socket. 
+</blockquote><h4><a name="setDelegate:"></a>setDelegate:<a href="#setDelegate:" class="section_anchor"></a></h4><p><tt> - (void)setDelegate:(id)delegate </tt> </p><blockquote>Sets the delegate of the socket. 
+</blockquote><p>   <blockquote>If you regularly change the delegate of a socket, for whatever reason, you may also be interested in the canSafelySetDelegate method below. 
+</blockquote></p><blockquote>It is recommended that you nilify a socket&#x27;s delegate before releasing the socket. 
+See the disconnect method for more information. 
+</blockquote><h4><a name="canSafelySetDelegate"></a>canSafelySetDelegate<a href="#canSafelySetDelegate" class="section_anchor"></a></h4><p><tt> - (BOOL)canSafelySetDelegate </tt> </p><blockquote>Use this method to see if there is any pending business (reads, writes, etc) with the current delegate before changing it. It is, of course, safe to change the delegate before connecting or accepting connections. 
+</blockquote><h4><a name="userData"></a>userData<a href="#userData" class="section_anchor"></a></h4><p><tt> - (long)userData </tt> </p><blockquote>Returns the user data. 
+User data is entirely for your own use, and is not accessed by the socket. 
+User data can be a long, or an id, or simply a void <tt>*</tt> cast to a long.  
+</blockquote><h4><a name="setUserData:"></a>setUserData:<a href="#setUserData:" class="section_anchor"></a></h4><p><tt> - (void)setUserData:(long)userData </tt> </p><blockquote>Sets the given user data. 
+User data is entirely for your own use, and is not accessed by the socket. 
+User data can be a long, or an id, or simply a void <tt>*</tt> cast to a long. 
+</blockquote><h4><a name="getCFSocket"></a>getCFSocket<a href="#getCFSocket" class="section_anchor"></a></h4><p><tt> - (CFSocketRef)getCFSocket </tt> </p><blockquote>Returns the underlying CFSocket. 
+</blockquote><p>   <blockquote>Important: <strong>This method is for configuration only! Do NOT use it to read or write!</strong> 
+</blockquote></p><h4><a name="getCFReadStream"></a>getCFReadStream<a href="#getCFReadStream" class="section_anchor"></a></h4><p><tt> - (CFReadStreamRef)getCFReadStream </tt> </p><blockquote>Returns the underlying CFReadStream. 
+</blockquote><blockquote>Important: <strong>This method is for configuration only! Do NOT use it to read or write!</strong> 
+</blockquote><p>   <blockquote>Further, you should NOT use this method to start SSL/TLS.  Instead use the designated startTLS: method. The startTLS: method properly ties into AsyncSocket&#x27;s queued architecture, and also provides its own onSocketDidSecure: delegate method. 
+</blockquote></p><h4><a name="getCFWriteStream"></a>getCFWriteStream<a href="#getCFWriteStream" class="section_anchor"></a></h4><p><tt> - (CFWriteStreamRef)getCFWriteStream </tt> </p><blockquote>Returns the underlying CFWriteStream. 
+</blockquote><blockquote>Important: <strong>This method is for configuration only! Do NOT use it to read or write!</strong> 
+</blockquote><blockquote>Further, you should NOT use this method to start SSL/TLS.  Instead use the designated startTLS: method. The startTLS: method properly ties into AsyncSocket&#x27;s queued architecture, and also provides its own onSocketDidSecure: delegate method. 
+</blockquote><blockquote>It is sometimes necessary to synchronously perform a write.  For example, during a power notification or backgrounding notification.  You might be tempted to use this method to accomplish a quick &amp; dirty synchronous write.  Resist the temptation! It is unsafe, and you may end up performing writes out-of-order.  Instead, take advantage of the fact that runloops can be nested.  You can add a custom runloop mode to the socket, and then synchronously run the custom runloop mode until your write has completed. For example: 
+</blockquote><pre class="prettyprint">- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+	// Oh no! I need to notify my server immediately.
+	// And I need my write to be performed synchronously.
+		
+	NSString *customRunLoopMode = @&quot;MySyncWrite&quot;;
+	
+	[asyncSocket addRunLoopMode:customRunLoopMode];
+	[asyncSocket writeData:didBackgroundData withTimeout:TIMEOUT_NONE tag:TAG_BG];
+	
+	syncWriteComplete = NO;
+	BOOL runLoopReady = YES;
+	
+	while (runLoopReady &amp;&amp; !syncWriteComplete)
+	{
+		runLoopReady = [[NSRunLoop currentRunLoop] runMode:customRunLoopMode
+		                                        beforeDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+	}
+	
+	[asyncSocket removeRunLoopMode:customRunLoopMode];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag
+{
+	if (tag == TAG_BG)
+	{
+		syncWriteComplete = YES;
+	}
+}</pre><hr/><hr/><h3><a name="Accepting"></a>Accepting<a href="#Accepting" class="section_anchor"></a></h3><blockquote>Once one of the accept or connect methods are called, the AsyncSocket instance is locked in 
+and the other accept/connect methods can&#x27;t be called without disconnecting the socket first. 
+</blockquote><blockquote>When an incoming connection is accepted, AsyncSocket invokes several delegate methods. 
+These methods are (in chronological order): 
+<ol><li>onSocket:didAcceptNewSocket: </li><li>onSocket:wantsRunLoopForNewSocket: </li><li>onSocketWillConnect: </li></ol></blockquote><p>  <blockquote>Your server code will need to retain the accepted socket (if you want to accept it). 
+The best place to do this is probably in the onSocket:didAcceptNewSocket: method. 
+</blockquote>  <blockquote>After the read and write streams have been setup for the newly accepted socket, 
+the onSocket:didConnectToHost:port: method will be called on the proper (configured) run loop. 
+</blockquote>  <blockquote>Multithreading Note: If you&#x27;re going to be moving the newly accepted socket to another run 
+loop by implementing onSocket:wantsRunLoopForNewSocket:, then you should wait until the 
+onSocket:didConnectToHost:port: method before calling read, write, or startTLS methods. 
+Otherwise read/write events are scheduled on the incorrect runloop, and chaos will ensue (it might crash). 
+</blockquote></p><h4><a name="acceptOnPort:_error:"></a>acceptOnPort: error:<a href="#acceptOnPort:_error:" class="section_anchor"></a></h4><p><tt> - (BOOL)acceptOnPort:(UInt16)port error:(NSError **)errPtr </tt> </p><blockquote>Tells the socket to begin listening and accepting connections on the given port. 
+When a connection comes in, the AsyncSocket instance will call the various delegate methods (see above). 
+The socket will listen on all available interfaces (e.g. wifi, ethernet, etc) 
+</blockquote><blockquote>This method returns YES if the socket was able to start listening. 
+If an error occurs, this method returns NO and sets the optional errPtr variable. 
+An example of an error might be that no delegate has been set, or the socket is already accepting connections. 
+</blockquote><h4><a name="acceptOnInterface:_port:_error:"></a>acceptOnInterface: port: error:<a href="#acceptOnInterface:_port:_error:" class="section_anchor"></a></h4><p><tt> - (BOOL)acceptOnInterface:(NSString *)interface port:(UInt16)port error:(NSError **)errPtr </tt> </p><blockquote>Tells the socket to begin listening and accepting connections on the given port. 
+When a connection comes in, the AsyncSocket instance will call the various delegate methods (see above). 
+</blockquote><p>   <blockquote>Additionally the interface on which to listen may be specified. 
+For example, if you are writing code for a server that has multiple IP addresses, 
+you could specify which address you wanted to listen on. 
+Or you could use it to specify that the socket should only accept connections over ethernet, 
+and not other interfaces such as wifi. 
+</blockquote></p><blockquote>You may use the special strings &quot;localhost&quot; or &quot;loopback&quot; to specify that 
+the socket only accept connections from the local machine. 
+</blockquote><p>   <blockquote>To accept connections on any interface pass nil, or simply use the acceptOnPort:error: method. 
+</blockquote></p><blockquote>This method returns YES if the socket was able to start listening. 
+If an error occurs, this method returns NO and sets the optional errPtr variable. 
+An example of an error might be that no delegate has been set, or the socket is already accepting connections. 
+</blockquote><hr/><hr/><h3><a name="Connecting"></a>Connecting<a href="#Connecting" class="section_anchor"></a></h3><h4><a name="connectToHost:_onPort:_error:"></a>connectToHost: onPort: error:<a href="#connectToHost:_onPort:_error:" class="section_anchor"></a></h4><p><tt> - (BOOL)connectToHost:(NSString *)hostname onPort:(UInt16)port error:(NSError **)errPtr </tt> </p><blockquote>Connects to the given host and port. 
+The host may be a domain name (e.g. &quot;deusty.com&quot;) or an IP address string (e.g. &quot;192.168.0.2&quot;) 
+</blockquote><p>   <blockquote>Returns YES if the asynchronous connection attempt was started. 
+Returns NO If an error was detected with the request and sets the optional errPtr variable. 
+</blockquote></p><h4><a name="connectToHost:_onPort:_withTimeout:_error:"></a>connectToHost: onPort: withTimeout: error:<a href="#connectToHost:_onPort:_withTimeout:_error:" class="section_anchor"></a></h4><pre class="prettyprint">- (BOOL)connectToHost:(NSString *)hostname
+               onPort:(UInt16)port
+          withTimeout:(NSTimeInterval)timeout
+                error:(NSError **)errPtr;</pre><blockquote>Connects to the given host and port. 
+The host may be a domain name (e.g. &quot;deusty.com&quot;) or an IP address string (e.g. &quot;192.168.0.2&quot;) 
+</blockquote><blockquote>An optional timeout may be supplied. 
+To not time out use a negative time interval, or simply use the connectToHost:onPort:error: method. 
+</blockquote><h4><a name="connectToAddress:_error"></a>connectToAddress: error<a href="#connectToAddress:_error" class="section_anchor"></a></h4><p><tt> - (BOOL)connectToAddress:(NSData *)remoteAddr error:(NSError **)errPtr </tt> </p><blockquote>Connects to the given address, specified as a sockaddr structure wrapped in a NSData object. 
+For example, a NSData object returned from NSNetservice&#x27;s addresses method. 
+</blockquote><blockquote>If you have an existing struct sockaddr you can convert it to a NSData object like so: 
+<pre class="prettyprint">struct sockaddr_in sa4;
+struct sockaddr_in6 *sa6Ptr;
+
+NSData *d4 = [NSData dataWithBytes:&amp;sa4 length:sizeof(sa4)];
+NSData *d6 = [NSData dataWithBytes:sa6Ptr length:sizeof(struct sockaddr_in6)];</pre></blockquote><h4><a name="connectToAddress:_withTimeout:_error:"></a>connectToAddress: withTimeout: error:<a href="#connectToAddress:_withTimeout:_error:" class="section_anchor"></a></h4><p><tt> - (BOOL)connectToAddress:(NSData *)remoteAddr withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr; </tt> </p><blockquote>Connects to the given address, specified as a sockaddr structure wrapped in a NSData object. 
+For example, a NSData object returned from NSNetservice&#x27;s addresses method. 
+</blockquote><blockquote>If you have an existing struct sockaddr you can convert it to a NSData object like so: 
+<pre class="prettyprint">struct sockaddr_in sa4;
+struct sockaddr_in6 *sa6Ptr;
+
+NSData *d4 = [NSData dataWithBytes:&amp;sa4 length:sizeof(sa4)];
+NSData *d6 = [NSData dataWithBytes:sa6Ptr length:sizeof(struct sockaddr_in6)];</pre></blockquote><blockquote>An optional timeout may be supplied. 
+To not time out use a negative time interval, or simply use the connectToAddress:error: method. 
+</blockquote><h4><a name="connectToAddress:_viaInterfaceAddress:_withTimeout:_error:"></a>connectToAddress: viaInterfaceAddress: withTimeout: error:<a href="#connectToAddress:_viaInterfaceAddress:_withTimeout:_error:" class="section_anchor"></a></h4><pre class="prettyprint">- (BOOL)connectToAddress:(NSData *)remoteAddr
+     viaInterfaceAddress:(NSData *)interfaceAddr
+             withTimeout:(NSTimeInterval)timeout
+                   error:(NSError **)errPtr;</pre><blockquote>Connects to the given address, specified as a sockaddr structure wrapped in a NSData object. 
+For example, a NSData object returned from NSNetservice&#x27;s addresses method. 
+</blockquote><blockquote>If you have an existing struct sockaddr you can convert it to a NSData object like so: 
+<pre class="prettyprint">struct sockaddr_in sa4;
+struct sockaddr_in6 *sa6Ptr;
+
+NSData *d4 = [NSData dataWithBytes:&amp;sa4 length:sizeof(sa4)];
+NSData *d6 = [NSData dataWithBytes:sa6Ptr length:sizeof(struct sockaddr_in6)];</pre></blockquote><blockquote>An optional interface to bind to may be supplied. 
+</blockquote><blockquote>An optional timeout may be supplied. 
+To not time out use a negative time interval. 
+</blockquote><hr/><hr/><h3><a name="Reading"></a>Reading<a href="#Reading" class="section_anchor"></a></h3><p>The read methods won&#x27;t block (they are asynchronous). When a read is complete the onSocket:didReadData:withTag: delegate method is called. </p><p>You may optionally set a timeout for any read operation. (To not timeout, use a negative time interval.) If a read operation times out, the corresponding &quot;onSocket:shouldTimeoutReadWithTag...&quot; delegate method is called to optionally allow you to extend the timeout. Upon a timeout, the &quot;onSocket:willDisconnectWithError:&quot; method is called, followed by &quot;onSocketDidDisconnect&quot;. </p><p>The tag is for your convenience. The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. You can use it as a state id, an array index, widget number, pointer, etc. </p><p>You can invoke multiple read methods back-to-back. The reads will queued in request order, and will be dequeued and executed serially. </p><h4><a name="readDataWithTimeout:_tag:"></a>readDataWithTimeout: tag:<a href="#readDataWithTimeout:_tag:" class="section_anchor"></a></h4><p><tt> - (void)readDataWithTimeout:(NSTimeInterval)timeout tag:(long)tag </tt> </p><blockquote>Reads the first available bytes that become available on the socket. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><h4><a name="readDataWithTimeout:_buffer:_bufferOffset:_tag:"></a>readDataWithTimeout: buffer: bufferOffset: tag:<a href="#readDataWithTimeout:_buffer:_bufferOffset:_tag:" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataWithTimeout:(NSTimeInterval)timeout
+                     buffer:(NSMutableData *)buffer
+               bufferOffset:(NSUInteger)offset
+                        tag:(long)tag;</pre><blockquote>Reads the first available bytes that become available on the socket. 
+The bytes will be appended to the given byte buffer starting at the given offset. 
+The given buffer will automatically be increased in size if needed. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If the buffer if nil, the socket will automatically manage the buffer. 
+</blockquote><blockquote>If the bufferOffset is greater than the length of the given buffer, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>If you pass a buffer, you must not alter it in any way while AsyncSocket is using it. 
+After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer. 
+That is, it will reference the bytes that were appended to the given buffer. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><h4><a name="readDataWithTimeout:_buffer:_bufferOffset:_maxLength:_tag:"></a>readDataWithTimeout: buffer: bufferOffset: maxLength: tag:<a href="#readDataWithTimeout:_buffer:_bufferOffset:_maxLength:_tag:" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataWithTimeout:(NSTimeInterval)timeout
+                     buffer:(NSMutableData *)buffer
+               bufferOffset:(NSUInteger)offset
+                  maxLength:(NSUInteger)length
+                        tag:(long)tag;</pre><blockquote>Reads the first available bytes that become available on the socket. 
+The bytes will be appended to the given byte buffer starting at the given offset. 
+The given buffer will automatically be increased in size if needed. 
+A maximum of length bytes will be read. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If the buffer if nil, the socket will automatically manage the buffer. 
+If maxLength is zero, no length restriction is enforced. 
+</blockquote><blockquote>If the bufferOffset is greater than the length of the given buffer, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>If you pass a buffer, you must not alter it in any way while AsyncSocket is using it. 
+After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer. 
+That is, it will reference the bytes that were appended to the given buffer. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><h4><a name="readDataToLength:_withTimeout:_tag:"></a>readDataToLength: withTimeout: tag:<a href="#readDataToLength:_withTimeout:_tag:" class="section_anchor"></a></h4><p><tt> - (void)readDataToLength:(NSUInteger)length withTimeout:(NSTimeInterval)timeout tag:(long)tag </tt> </p><blockquote>Reads the given number of bytes. 
+</blockquote><p>   <blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote></p><blockquote>If the length is 0, this method does nothing and the delegate is not called. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><h4><a name="readDataToLength:_withTimeout:_buffer:_bufferOffset:_tag:"></a>readDataToLength: withTimeout: buffer: bufferOffset: tag:<a href="#readDataToLength:_withTimeout:_buffer:_bufferOffset:_tag:" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataToLength:(NSUInteger)length
+             withTimeout:(NSTimeInterval)timeout
+                  buffer:(NSMutableData *)buffer
+            bufferOffset:(NSUInteger)offset
+                     tag:(long)tag;</pre><blockquote>Reads the given number of bytes. 
+The bytes will be appended to the given byte buffer starting at the given offset. 
+The given buffer will automatically be increased in size if needed. 
+</blockquote><p>   <blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote></p><blockquote>If the buffer if nil, the socket will automatically manage the buffer. 
+</blockquote><blockquote>If the length is 0, this method does nothing and the delegate is not called. 
+If the bufferOffset is greater than the length of the given buffer, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>If you pass a buffer, you must not alter it in any way while AsyncSocket is using it. 
+After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer. 
+That is, it will reference the bytes that were appended to the given buffer. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback 
+</blockquote><h4><a name="readDataToData"></a>readDataToData<a href="#readDataToData" class="section_anchor"></a></h4><p><tt> - (void)readDataToData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag </tt> </p><blockquote>Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If you pass nil or zero-length data as the &quot;data&quot; parameter, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><blockquote>To read a line from the socket, use the line separator (e.g. CRLF for HTTP) as the &quot;data&quot; parameter. 
+Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for 
+a character, the read will prematurely end. 
+</blockquote><h4><a name="readDataToData:_withTimeout:_buffer:_bufferOffset:_tag:"></a>readDataToData: withTimeout: buffer: bufferOffset: tag:<a href="#readDataToData:_withTimeout:_buffer:_bufferOffset:_tag:" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataToData:(NSData *)data
+           withTimeout:(NSTimeInterval)timeout
+                buffer:(NSMutableData *)buffer
+          bufferOffset:(NSUInteger)offset
+                   tag:(long)tag;</pre><blockquote>Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator. 
+The bytes will be appended to the given byte buffer starting at the given offset. 
+The given buffer will automatically be increased in size if needed. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If the buffer if nil, a buffer will automatically be created for you. 
+</blockquote><p>  <blockquote>If the bufferOffset is greater than the length of the given buffer, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote>   <blockquote>If you pass a buffer, you must not alter it in any way while AsyncSocket is using it. 
+After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer. 
+That is, it will reference the bytes that were appended to the given buffer. 
+</blockquote></p><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><blockquote>To read a line from the socket, use the line separator (e.g. CRLF for HTTP) as the &quot;data&quot; parameter. 
+Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for 
+a character, the read will prematurely end. 
+</blockquote><h4><a name="readDataToData:_withTimeout:_maxLength:_tag:"></a>readDataToData: withTimeout: maxLength: tag:<a href="#readDataToData:_withTimeout:_maxLength:_tag:" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataToData:(NSData *)data
+           withTimeout:(NSTimeInterval)timeout
+             maxLength:(NSUInteger)length
+                   tag:(long)tag;</pre><blockquote>Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If maxLength is zero, no length restriction is enforced. 
+Otherwise if maxLength bytes are read without completing the read, 
+it is treated similarly to a timeout - the socket is closed with a AsyncSocketReadMaxedOutError. 
+The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end. 
+</blockquote><blockquote>If you pass nil or zero-length data as the &quot;data&quot; parameter, 
+the method will do nothing, and the delegate will not be called. 
+If you pass a maxLength parameter that is less than the length of the data parameter, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><blockquote>To read a line from the socket, use the line separator (e.g. CRLF for HTTP) as the &quot;data&quot; parameter. 
+Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for 
+a character, the read will prematurely end. 
+</blockquote><h4><a name="readDataToData:_withTimeout:_buffer:_bufferOffset:_maxLength:_ta"></a>readDataToData: withTimeout: buffer: bufferOffset: maxLength: tag:<a href="#readDataToData:_withTimeout:_buffer:_bufferOffset:_maxLength:_ta" class="section_anchor"></a></h4><pre class="prettyprint">- (void)readDataToData:(NSData *)data
+           withTimeout:(NSTimeInterval)timeout
+                buffer:(NSMutableData *)buffer
+          bufferOffset:(NSUInteger)offset
+             maxLength:(NSUInteger)length
+                   tag:(long)tag;</pre><blockquote>Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator. 
+The bytes will be appended to the given byte buffer starting at the given offset. 
+The given buffer will automatically be increased in size if needed. 
+A maximum of length bytes will be read. 
+</blockquote><blockquote>If the timeout value is negative, the read operation will not use a timeout. 
+If the timeout is zero, the read operation will timeout if enough data is not immediately available on the socket at the time the read operation is dequeued. 
+</blockquote><blockquote>If the buffer if nil, a buffer will automatically be created for you. 
+</blockquote><blockquote>If maxLength is zero, no length restriction is enforced. 
+Otherwise if maxLength bytes are read without completing the read, 
+it is treated similarly to a timeout - the socket is closed with a AsyncSocketReadMaxedOutError. 
+The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end. 
+</blockquote><blockquote>If you pass a maxLength parameter that is less than the length of the data parameter, 
+the method will do nothing, and the delegate will not be called. 
+If the bufferOffset is greater than the length of the given buffer, 
+the method will do nothing, and the delegate will not be called. 
+</blockquote><blockquote>If you pass a buffer, you must not alter it in any way while AsyncSocket is using it. 
+After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer. 
+That is, it will reference the bytes that were appended to the given buffer. 
+</blockquote><blockquote>The tag is for your convenience. 
+The tag you pass to the read operation is the tag that is passed back to you in the onSocket:didReadData:withTag: delegate callback. 
+</blockquote><blockquote>To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the &quot;data&quot; parameter. 
+Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for 
+a character, the read will prematurely end. 
+</blockquote><hr/><hr/><h3><a name="Writing"></a>Writing<a href="#Writing" class="section_anchor"></a></h3><p>The write method won&#x27;t block (it is asynchronous). When a write is complete the onSocket:didWriteDataWithTag: delegate method is called. </p><p>You may optionally set a timeout for a write operation. (To not timeout, use a negative time interval.) If a write operation times out, the corresponding &quot;onSocket:shouldTimeoutWriteWithTag...&quot; delegate method is called to optionally allow you to extend the timeout. Upon a timeout, the &quot;onSocket:willDisconnectWithError:&quot; method is called, followed by &quot;onSocketDidDisconnect&quot;. </p><p>The tag is for your convenience. The tag you pass to the write operation is the tag that is passed back to you in the onSocket:didWriteDataWithTag: delegate callback. You can use it as a state id, an array index, widget number, pointer, etc. </p><p>You can invoke multiple write methods back-to-back. The writes will queued in request order, and will be dequeued and executed serially. </p><h4><a name="writeData:_withTimeout:_tag:"></a>writeData: withTimeout: tag:<a href="#writeData:_withTimeout:_tag:" class="section_anchor"></a></h4><p><tt> - (void)writeData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag </tt> </p><blockquote>Writes data to the socket, and calls the delegate when finished. 
+</blockquote><blockquote>If you pass in nil or zero-length data, this method does nothing and the delegate will not be called. 
+</blockquote><blockquote>If the timeout value is negative, the write operation will not use a timeout. 
+If the timeout is zero, the write operation will timeout if all the data cannot immediately be written to the socket at the time the write operation is dequeued. 
+</blockquote><hr/><hr/><h3><a name="Diagnostics"></a>Diagnostics<a href="#Diagnostics" class="section_anchor"></a></h3><h4><a name="isConnected"></a>isConnected<a href="#isConnected" class="section_anchor"></a></h4><p><tt> - (BOOL)isConnected </tt> </p><blockquote>Returns YES if the socket and streams are open, connected, and ready for reading and writing. 
+</blockquote><h4><a name="connectedHost"></a>connectedHost<a href="#connectedHost" class="section_anchor"></a></h4><p><tt> - (NSString *)connectedHost </tt> </p><blockquote>Returns the IP address of the connected (remote) host in string format. 
+</blockquote><blockquote>If the socket is not connected, returns nil. 
+</blockquote><h4><a name="connectedPort"></a>connectedPort<a href="#connectedPort" class="section_anchor"></a></h4><p><tt> - (UInt16)connectedPort </tt> </p><blockquote>Returns the port number of the connected (remote) host. 
+</blockquote><blockquote>If the socket is not connected, returns 0. 
+</blockquote><h4><a name="localHost"></a>localHost<a href="#localHost" class="section_anchor"></a></h4><p><tt> - (NSString *)localHost </tt> </p><blockquote>Returns the IP address of the local interface that was used to connect. 
+For example, this might be something like &quot;192.168.0.4&quot;. 
+</blockquote><blockquote>If the socket is not connected, returns nil. 
+</blockquote><h4><a name="localPort"></a>localPort<a href="#localPort" class="section_anchor"></a></h4><p><tt> - (UInt16)localPort </tt> </p><blockquote>Returns the port number that was used to connect. 
+</blockquote><blockquote>If the socket is not connected, returns 0. 
+</blockquote><h4><a name="connectedAddress"></a>connectedAddress<a href="#connectedAddress" class="section_anchor"></a></h4><p><tt> - (NSData *)connectedAddress </tt> </p><blockquote>Returns the address of the connected (remote) host. 
+This is a &#x27;struct sockaddr&#x27; value wrapped in a NSData object. 
+If the socket is IPv4, the data will be of type &#x27;struct sockaddr_in&#x27;. 
+If the socket is IPv6, the data will be of type &#x27;struct sockaddr_in6&#x27;. 
+</blockquote><blockquote>If the socket is not connected, returns nil. 
+</blockquote><h4><a name="localAddress"></a>localAddress<a href="#localAddress" class="section_anchor"></a></h4><p><tt> - (NSData *)localAddress </tt> </p><blockquote>Returns the address of the local interface that was used to connect. 
+This is a &#x27;struct sockaddr&#x27; value wrapped in a NSData object. 
+If the socket is IPv4, the data will be of type &#x27;struct sockaddr_in&#x27;. 
+If the socket is IPv6, the data will be of type &#x27;struct sockaddr_in6&#x27;. 
+</blockquote><blockquote>If the socket is not connected, returns nil. 
+</blockquote><h4><a name="isIPv4"></a>isIPv4<a href="#isIPv4" class="section_anchor"></a></h4><p><tt> - (BOOL)isIPv4 </tt> </p><blockquote>Returns YES if the socket is IPv4. 
+</blockquote><p>   <blockquote>For client sockets (those that connect to another host via connectTo...) the socket will either be IPv4 or IPv6. 
+</blockquote></p><blockquote>For server sockets (those that accept incoming connections via accept...) the socket may be both IPv4 and IPv6. This allows a server to automatically support both protocols. 
+</blockquote><h4><a name="isIPv6"></a>isIPv6<a href="#isIPv6" class="section_anchor"></a></h4><p><tt> - (BOOL)isIPv6 </tt> </p><blockquote>Returns YES if the socket is IPv6. 
+</blockquote><blockquote>For client sockets (those that connect to another host via connectTo...) the socket will either be IPv4 or IPv6. 
+</blockquote><blockquote>For server sockets (those that accept incoming connections via accept...) the socket may be both IPv4 and IPv6. This allows a server to automatically support both protocols. 
+</blockquote><h4><a name="progressOfReadReturningTag:_bytesDone:_total:"></a>progressOfReadReturningTag: bytesDone: total:<a href="#progressOfReadReturningTag:_bytesDone:_total:" class="section_anchor"></a></h4><p><tt> - (float)progressOfReadReturningTag:(long *)tag bytesDone:(NSUInteger *)done total:(NSUInteger *)total </tt> </p><blockquote>Returns progress of current read, from 0.0 to 1.0, or NaN (use isnan() to check) if no read operation is in progress. 
+</blockquote><blockquote>The &quot;tag&quot;, &quot;done&quot; and &quot;total&quot; parameters are optional, and will be filled in if they aren&#x27;t NULL. 
+</blockquote><h4><a name="progressOfWriteReturningTag:_bytesDone:_total:"></a>progressOfWriteReturningTag: bytesDone: total:<a href="#progressOfWriteReturningTag:_bytesDone:_total:" class="section_anchor"></a></h4><p><tt> - (float)progressOfWriteReturningTag:(long *)tag bytesDone:(NSUInteger *)done total:(NSUInteger *)total </tt> </p><blockquote>Returns progress of current write, from 0.0 to 1.0, or NaN (use isnan() to check) if no write operation is in progress. 
+</blockquote><blockquote>The &quot;tag&quot;, &quot;done&quot; and &quot;total&quot; parameters are optional, and will be filled in if they aren&#x27;t NULL. 
+</blockquote><hr/><hr/><h3><a name="Disconnecting"></a>Disconnecting<a href="#Disconnecting" class="section_anchor"></a></h3><h4><a name="disconnect"></a>disconnect<a href="#disconnect" class="section_anchor"></a></h4><p><tt> - (void)disconnect </tt> </p><blockquote>Disconnects immediately. 
+Any pending reads or writes are dropped. 
+</blockquote><blockquote>This method is synchronous. If the socket is not already disconnected, the onSocketDidDisconnect: delegate method will be called immediately, before this method returns. 
+</blockquote><blockquote>Please note the recommended way of releasing an AsyncSocket instance (e.g. in a dealloc method) 
+<pre class="prettyprint">[asyncSocket setDelegate:nil];
+[asyncSocket disconnect];
+[asyncSocket release];</pre></blockquote><h4><a name="disconnectAfterReading"></a>disconnectAfterReading<a href="#disconnectAfterReading" class="section_anchor"></a></h4><p><tt> - (void)disconnectAfterReading </tt> </p><blockquote>Disconnects after all pending reads have completed. 
+This method is asynchronous and returns immediately (even if there are no pending reads). 
+</blockquote><blockquote>After calling this method, the read and write methods will do nothing. 
+The socket will disconnect even if there are still pending writes. 
+</blockquote><h4><a name="disconnectAfterWriting"></a>disconnectAfterWriting<a href="#disconnectAfterWriting" class="section_anchor"></a></h4><p><tt> - (void)disconnectAfterWriting </tt> </p><blockquote>Disconnects after all pending writes have completed. 
+This method is asynchronous and returns immediately (even if there are no pending writes). 
+</blockquote><blockquote>After calling this method, the read and write methods will do nothing. 
+The socket will disconnect even if there are still pending reads. 
+</blockquote><h4><a name="disconnectAfterReadingAndWriting"></a>disconnectAfterReadingAndWriting<a href="#disconnectAfterReadingAndWriting" class="section_anchor"></a></h4><p><tt> - (void)disconnectAfterReadingAndWriting </tt> </p><blockquote>Disconnects after all pending reads and writes have completed. 
+This method is asynchronous and returns immediately (even if there are no pending reads or writes). 
+</blockquote><blockquote>After calling this, the read and write methods will do nothing. 
+</blockquote><hr/><hr/><h3><a name="Security"></a>Security<a href="#Security" class="section_anchor"></a></h3><h4><a name="startTLS:"></a>startTLS:<a href="#startTLS:" class="section_anchor"></a></h4><p><tt> - (void)startTLS:(NSDictionary *)tlsSettings </tt> </p><blockquote>Secures the connection using SSL/TLS. 
+</blockquote><blockquote>This method may be called at any time, and the SSL/TLS handshake will occur after all pending reads and writes are finished. This allows one the option of sending a protocol dependent StartTLS message, and queuing  the upgrade to TLS at the same time, without having to wait for the write to finish. Any reads or writes scheduled after this method is called will occur over the secured connection. 
+</blockquote><blockquote>The possible keys and values for the TLS settings are well documented. 
+Some possible keys are: 
+</blockquote><ul><li>kCFStreamSSLLevel </li><li>kCFStreamSSLAllowsExpiredCertificates </li><li>kCFStreamSSLAllowsExpiredRoots </li><li>kCFStreamSSLAllowsAnyRoot </li><li>kCFStreamSSLValidatesCertificateChain </li><li>kCFStreamSSLPeerName </li><li>kCFStreamSSLCertificates </li><li>kCFStreamSSLIsServer </li></ul><blockquote>Please refer to Apple&#x27;s documentation for associated values, as well as other possible keys. 
+</blockquote><blockquote>If you pass in nil or an empty dictionary, the default settings will be used. 
+</blockquote><blockquote>The default settings will check to make sure the remote party&#x27;s certificate is signed by a trusted 3rd party certificate agency (e.g. verisign) and that the certificate is not expired. However it will not verify the name on the certificate unless you give it a name to verify against via the kCFStreamSSLPeerName key. 
+</blockquote><blockquote>Note: <strong>The security implications of this are important to understand.</strong> 
+</blockquote><blockquote>Imagine you are attempting to create a secure connection to MySecureServer.com, but your socket gets directed to MaliciousServer.com because of a hacked DNS server. If you simply use the default settings, and MaliciousServer.com has a valid certificate, the default settings will not detect any problems since the certificate is valid. To properly secure your connection in this particular scenario you should set the kCFStreamSSLPeerName property to &quot;MySecureServer.com&quot;. 
+</blockquote><blockquote>If you do not know the peer name of the remote host in advance (for example, you&#x27;re not sure if it will be &quot;domain.com&quot; or &quot;www.domain.com&quot;), then you can use the default settings to validate the certificate, and then use the X509Certificate class to verify the issuer after the socket has been secured. The X509Certificate class is part of the CocoaAsyncSocket open source project. 
+</blockquote><hr/><hr/><h3><a name="RunLoop_Configuration"></a>RunLoop Configuration<a href="#RunLoop_Configuration" class="section_anchor"></a></h3><blockquote>AsyncSocket provides an array of options to configure which run loop modes the socket uses. 
+The default set of run loop modes is NSDefaultRunLoopMode. 
+</blockquote><blockquote>If you&#x27;d like your socket to continue operation during other modes, you may want to add modes such as NSModalPanelRunLoopMode or NSEventTrackingRunLoopMode. Or you may simply want to use NSRunLoopCommonModes. 
+</blockquote><blockquote>Accepted sockets will automatically inherit the same run loop modes as the listening socket. 
+</blockquote><p>   <blockquote>Accepted sockets will automatically inherit the same run loop modes as the listening socket. 
+Note: NSRunLoopCommonModes is defined in 10.5. For previous versions one can use kCFRunLoopCommonModes. 
+</blockquote></p><h4><a name="runLoopModes"></a>runLoopModes<a href="#runLoopModes" class="section_anchor"></a></h4><p><tt> - (NSArray *)runLoopModes </tt> </p><blockquote>Returns the current run loop modes the AsyncSocket instance is operating in. 
+</blockquote><blockquote>The default set of run loop modes is NSDefaultRunLoopMode. 
+</blockquote><h4><a name="setRunLoopModes:"></a>setRunLoopModes:<a href="#setRunLoopModes:" class="section_anchor"></a></h4><p><tt> - (BOOL)setRunLoopModes:(NSArray *)runLoopModes </tt> </p><blockquote>Sets the list of runloop modes the socket operates in. 
+This method may be called while the socket is running. 
+</blockquote><p>   <blockquote>You cannot remove a socket from all runloop modes. 
+If you attempt to do so by passing an empty array, the operation will fail and this method will return NO. 
+</blockquote></p><h4><a name="addRunLoopMode:"></a>addRunLoopMode:<a href="#addRunLoopMode:" class="section_anchor"></a></h4><p><tt> - (BOOL)addRunLoopMode:(NSString *)runLoopMode </tt> </p><blockquote>Adds the given runloop mode to the existing set of runloop modes. 
+This method may be called while the socket is running. 
+</blockquote><h4><a name="removeRunLoopMode:"></a>removeRunLoopMode:<a href="#removeRunLoopMode:" class="section_anchor"></a></h4><p><tt> - (BOOL)removeRunLoopMode:(NSString *)runLoopMode </tt> </p><blockquote>Removes the given runloop mode from the existing set of runloop modes. 
+This method may be called while the socket is running. 
+</blockquote><blockquote>You cannot remove a socket from all runloop modes. 
+If you attempt to do so, the operation will fail and this method will return NO. 
+</blockquote><h4><a name="moveToRunLoop:"></a>moveToRunLoop:<a href="#moveToRunLoop:" class="section_anchor"></a></h4><p><tt> - (BOOL)moveToRunLoop:(NSRunLoop *)runLoop </tt> </p><blockquote>When you create an AsyncSocket, it is added to the runloop of the current thread. 
+So for manually created sockets, it is easiest to simply create the socket on the thread you intend to use it. 
+</blockquote><blockquote>If a new socket is accepted, the delegate method onSocket:wantsRunLoopForNewSocket: is called to allow you to place the socket on a separate thread. This works best in conjunction with a thread pool design. 
+</blockquote><blockquote>If, however, you need to move the socket to a separate thread at a later time, this method may be used to accomplish the task. 
+</blockquote><blockquote>Note: <strong>This method must be called from the thread/runloop the socket is currently running on.</strong> 
+</blockquote><blockquote>After calling this method, all further method calls to this object must be done from the given runloop. 
+Also, all delegate calls will be sent on the given runloop. 
+</blockquote><hr/><hr/><h3><a name="Advanced"></a>Advanced<a href="#Advanced" class="section_anchor"></a></h3><h4><a name="unreadData"></a>unreadData<a href="#unreadData" class="section_anchor"></a></h4><p><tt> - (NSData *)unreadData </tt> </p><blockquote>In the event of an error, this method may be called during onSocket:willDisconnectWithError: to read any data that&#x27;s left on the socket. 
+</blockquote><h4><a name="enablePreBuffering"></a>enablePreBuffering<a href="#enablePreBuffering" class="section_anchor"></a></h4><p><tt> - (void)enablePreBuffering </tt> </p><blockquote>There are two ways to handle a readDataToData requests: 
+</blockquote><ol><li>Read data from the socket in small increments until the specified terminator is found </li><li>Read larger chunks at a time and store any overflow in a small internal buffer. </li></ol><blockquote>Option 1 is inefficient.  Option 2 is drastically faster (especially on slower hardware), and is termed pre-buffering  as some data may be read for you before you ask for it. 
+</blockquote><blockquote>Pre-buffering is enabled by default. 
+</blockquote><blockquote>This method exists in case pre-buffering needs to be disabled by default for some unforeseen reason. 
+The only time I&#x27;ve ever seen a need for this is was a custom protocol that architected a startTLS option in a very haphazard manner. 
+</blockquote><blockquote>In such a case, this method exists to allow one to easily reenable pre-buffering when ready. 
+</blockquote><p>   <blockquote>The default pre-buffering state is controlled by the DEFAULT_PREBUFFERING definition. 
+It is highly recommended one leave this set to YES. 
+</blockquote></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+ 
+ 
+ 
+ 
+ <br>
+ <div class="artifactcomment">
+ <span class="indicator">&#9658;</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fwiki%2FReference_AsyncSocket&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fwiki%2FReference_AsyncSocket"
+ >Sign in</a> to add a comment
+ </div>
+ 
+ 
+ 
+ 
+ <form name="delcom" action="../w/delComment.do" method="POST">
+ <input type="hidden" name="sequence_num" value="" >
+ <input type="hidden" name="create_time" value="" >
+ <input type="hidden" name="mode" value="" >
+ <input type="hidden" name="pagename" value="Reference_AsyncSocket" >
+ <input type="hidden" name="token" value="" >
+ </form>
+
+
+
+ <script src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/prettify/prettify.js"></script>
+ <script type="text/javascript">
+ prettyPrint();
+ </script>
+
+<script type="text/javascript" src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/dit_scripts.js"></script>
+
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+</script>
+
+  
+ 
+ 
+ <script type="text/javascript" src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript" src="/js/codesite_product_dictionary_ph.pack.04102009.js"></script>
+</div> 
+<div id="footer" dir="ltr">
+ <div class="text">
+ &copy;2011 Google -
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+ 
+ 
+
+
+ 
+ </body>
+</html>
+
+

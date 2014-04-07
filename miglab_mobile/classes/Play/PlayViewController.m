@@ -99,7 +99,7 @@
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
     _lblSongInfo.textColor = [UIColor whiteColor];
     _lblSongInfo.shadowOffset = CGSizeMake(0, 1);
-    _lblSongInfo.text = @"乐瑟 - 无敌仙曲";
+    _lblSongInfo.text = @"咪呦努力加载";
     [self.view addSubview:_lblSongInfo];
     
     //song of page

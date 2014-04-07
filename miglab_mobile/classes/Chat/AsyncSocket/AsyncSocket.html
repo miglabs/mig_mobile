@@ -1,0 +1,5511 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl":null,"token":null,"assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/16877346213899399380","projectHomeUrl":"/p/cocoaasyncsocket","relativeBaseUrl":"","projectName":"cocoaasyncsocket","loggedInUserEmail":null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ _gaq.push(
+ ['projectTracker._setAccount', 'UA-4982170-1'],
+ ['projectTracker._trackPageview']);
+ 
+ 
+ </script>
+ 
+ 
+ <title>AsyncSocket.h - 
+ cocoaasyncsocket -
+ 
+ 
+ AsyncSocket is an asynchronous socket networking library for Cocoa. - Google Project Hosting
+ </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/ph_detail.css" >
+ 
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/d_sb.css" >
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/16877346213899399380/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ 
+  tr.inline_comment {
+ background: #fff;
+ vertical-align: top;
+ }
+ div.draft, div.published {
+ padding: .3em;
+ border: 1px solid #999; 
+ margin-bottom: .1em;
+ font-family: arial, sans-serif;
+ max-width: 60em;
+ }
+ div.draft {
+ background: #ffa;
+ } 
+ div.published {
+ background: #e5ecf9;
+ }
+ div.published .body, div.draft .body {
+ padding: .5em .1em .1em .1em;
+ max-width: 60em;
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -pre-wrap;
+ white-space: -o-pre-wrap;
+ word-wrap: break-word;
+ font-size: 1em;
+ }
+ div.draft .actions {
+ margin-left: 1em;
+ font-size: 90%;
+ }
+ div.draft form {
+ padding: .5em .5em .5em 0;
+ }
+ div.draft textarea, div.published textarea {
+ width: 95%;
+ height: 10em;
+ font-family: arial, sans-serif;
+ margin-bottom: .5em;
+ }
+
+ 
+ .nocursor, .nocursor td, .cursor_hidden, .cursor_hidden td {
+ background-color: white;
+ height: 2px;
+ }
+ .cursor, .cursor td {
+ background-color: darkblue;
+ height: 2px;
+ display: '';
+ }
+ 
+ 
+.list {
+ border: 1px solid white;
+ border-bottom: 0;
+}
+
+ 
+ </style>
+</head>
+<body class="t4">
+<script type="text/javascript">
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fsource%2Fbrowse%2FRunLoop%2FAsyncSocket.h&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fsource%2Fbrowse%2FRunLoop%2FAsyncSocket.h" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/cocoaasyncsocket">
+ <a href="/p/cocoaasyncsocket/">
+ 
+ <img src="http://www.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/cocoaasyncsocket/"><span itemprop="name">cocoaasyncsocket</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/cocoaasyncsocket/"><span itemprop="description">AsyncSocket is an asynchronous socket networking library for Cocoa.</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/cocoaasyncsocket/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/downloads/list" class="tab ">Downloads</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/w/list" class="tab ">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/issues/list"
+ class="tab ">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/cocoaasyncsocket/source/checkout"
+ class="tab active">Source</a>
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="st2">
+ <div class="isf">
+ 
+ <form action="/p/cocoaasyncsocket/source/browse" style="display: inline">
+ 
+ Repository:
+ <select name="repo" id="repo" style="font-size: 92%" onchange="submit()">
+ <option value="default">default</option><option value="wiki">wiki</option>
+ </select>
+ </form>
+ 
+ 
+
+
+ <span class="inst1"><a href="/p/cocoaasyncsocket/source/checkout">Checkout</a></span> &nbsp;
+ <span class="inst2"><a href="/p/cocoaasyncsocket/source/browse/">Browse</a></span> &nbsp;
+ <span class="inst3"><a href="/p/cocoaasyncsocket/source/list">Changes</a></span> &nbsp;
+ <span class="inst4"><a href="/p/cocoaasyncsocket/source/clones">Clones</a></span> &nbsp; 
+ 
+ &nbsp;
+ <form action="http://www.google.com/codesearch" method="get" style="display:inline"
+ onsubmit="document.getElementById('codesearchq').value = document.getElementById('origq').value + ' package:http://cocoaasyncsocket\\.googlecode\\.com'">
+ <input type="hidden" name="q" id="codesearchq" value="">
+ <input type="text" maxlength="2048" size="38" id="origq" name="origq" value="" title="Google Code Search" style="font-size:92%">&nbsp;<input type="submit" value="Search Trunk" name="btnG" style="font-size:92%">
+ 
+ 
+ 
+ 
+ 
+ 
+ </form>
+ </div>
+</div>
+
+ </td>
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+<!-- IE -->
+
+
+
+
+<div class="expand">
+<div id="colcontrol">
+<style type="text/css">
+ #file_flipper { white-space: nowrap; padding-right: 2em; }
+ #file_flipper.hidden { display: none; }
+ #file_flipper .pagelink { color: #0000CC; text-decoration: underline; }
+ #file_flipper #visiblefiles { padding-left: 0.5em; padding-right: 0.5em; }
+</style>
+<table id="nav_and_rev" class="list"
+ cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+ 
+ <td nowrap="nowrap" class="src_crumbs src_nav" width="33%">
+ <strong class="src_nav">Source path:&nbsp;</strong>
+ <span id="crumb_root">
+ 
+ <a href="/p/cocoaasyncsocket/source/browse/">git</a>/&nbsp;</span>
+ <span id="crumb_links" class="ifClosed"><a href="/p/cocoaasyncsocket/source/browse/RunLoop/">RunLoop</a><span class="sp">/&nbsp;</span>AsyncSocket.h</span>
+ 
+ 
+ 
+ 
+ 
+ <form class="src_nav">
+ 
+ <span class="sourcelabel"><strong>Branch:</strong>
+ <select id="branch_select" name="name" onchange="submit()">
+ 
+ <option value="arc"
+ >
+ arc
+ </option>
+ 
+ <option value="master"
+ selected>
+ master
+ </option>
+ 
+ <option value="multiconnect"
+ >
+ multiconnect
+ </option>
+ 
+ 
+ </select>
+ </span>
+ </form>
+ 
+ 
+ 
+ 
+
+
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="right">
+ <table cellpadding="0" cellspacing="0" style="font-size: 100%"><tr>
+ 
+ 
+ <td class="flipper">
+ <ul class="leftside">
+ 
+ <li><a href="/p/cocoaasyncsocket/source/browse/RunLoop/AsyncSocket.h?r=660ad20ec25c3464e3e728b7f575f2bb92f31cf1" title="Previous">&lsaquo;660ad20ec25c</a></li>
+ 
+ </ul>
+ </td>
+ 
+ <td class="flipper"><b>642950d66544</b></td>
+ 
+ </tr></table>
+ </td> 
+ </tr>
+</table>
+
+<div class="fc">
+ 
+ 
+ 
+<style type="text/css">
+.undermouse span {
+ background-image: url(http://www.gstatic.com/codesite/ph/images/comments.gif); }
+</style>
+<table class="opened" id="review_comment_area"
+><tr>
+<td id="nums">
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+<pre><table width="100%" id="nums_table_0"><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_1"
+
+><td id="1"><a href="#1">1</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_2"
+
+><td id="2"><a href="#2">2</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_3"
+
+><td id="3"><a href="#3">3</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_4"
+
+><td id="4"><a href="#4">4</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_5"
+
+><td id="5"><a href="#5">5</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_6"
+
+><td id="6"><a href="#6">6</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_7"
+
+><td id="7"><a href="#7">7</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_8"
+
+><td id="8"><a href="#8">8</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_9"
+
+><td id="9"><a href="#9">9</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_10"
+
+><td id="10"><a href="#10">10</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_11"
+
+><td id="11"><a href="#11">11</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_12"
+
+><td id="12"><a href="#12">12</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_13"
+
+><td id="13"><a href="#13">13</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_14"
+
+><td id="14"><a href="#14">14</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_15"
+
+><td id="15"><a href="#15">15</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_16"
+
+><td id="16"><a href="#16">16</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_17"
+
+><td id="17"><a href="#17">17</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_18"
+
+><td id="18"><a href="#18">18</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_19"
+
+><td id="19"><a href="#19">19</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_20"
+
+><td id="20"><a href="#20">20</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_21"
+
+><td id="21"><a href="#21">21</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_22"
+
+><td id="22"><a href="#22">22</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_23"
+
+><td id="23"><a href="#23">23</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_24"
+
+><td id="24"><a href="#24">24</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_25"
+
+><td id="25"><a href="#25">25</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_26"
+
+><td id="26"><a href="#26">26</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_27"
+
+><td id="27"><a href="#27">27</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_28"
+
+><td id="28"><a href="#28">28</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_29"
+
+><td id="29"><a href="#29">29</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_30"
+
+><td id="30"><a href="#30">30</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_31"
+
+><td id="31"><a href="#31">31</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_32"
+
+><td id="32"><a href="#32">32</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_33"
+
+><td id="33"><a href="#33">33</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_34"
+
+><td id="34"><a href="#34">34</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_35"
+
+><td id="35"><a href="#35">35</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_36"
+
+><td id="36"><a href="#36">36</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_37"
+
+><td id="37"><a href="#37">37</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_38"
+
+><td id="38"><a href="#38">38</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_39"
+
+><td id="39"><a href="#39">39</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_40"
+
+><td id="40"><a href="#40">40</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_41"
+
+><td id="41"><a href="#41">41</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_42"
+
+><td id="42"><a href="#42">42</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_43"
+
+><td id="43"><a href="#43">43</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_44"
+
+><td id="44"><a href="#44">44</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_45"
+
+><td id="45"><a href="#45">45</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_46"
+
+><td id="46"><a href="#46">46</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_47"
+
+><td id="47"><a href="#47">47</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_48"
+
+><td id="48"><a href="#48">48</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_49"
+
+><td id="49"><a href="#49">49</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_50"
+
+><td id="50"><a href="#50">50</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_51"
+
+><td id="51"><a href="#51">51</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_52"
+
+><td id="52"><a href="#52">52</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_53"
+
+><td id="53"><a href="#53">53</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_54"
+
+><td id="54"><a href="#54">54</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_55"
+
+><td id="55"><a href="#55">55</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_56"
+
+><td id="56"><a href="#56">56</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_57"
+
+><td id="57"><a href="#57">57</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_58"
+
+><td id="58"><a href="#58">58</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_59"
+
+><td id="59"><a href="#59">59</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_60"
+
+><td id="60"><a href="#60">60</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_61"
+
+><td id="61"><a href="#61">61</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_62"
+
+><td id="62"><a href="#62">62</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_63"
+
+><td id="63"><a href="#63">63</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_64"
+
+><td id="64"><a href="#64">64</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_65"
+
+><td id="65"><a href="#65">65</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_66"
+
+><td id="66"><a href="#66">66</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_67"
+
+><td id="67"><a href="#67">67</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_68"
+
+><td id="68"><a href="#68">68</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_69"
+
+><td id="69"><a href="#69">69</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_70"
+
+><td id="70"><a href="#70">70</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_71"
+
+><td id="71"><a href="#71">71</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_72"
+
+><td id="72"><a href="#72">72</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_73"
+
+><td id="73"><a href="#73">73</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_74"
+
+><td id="74"><a href="#74">74</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_75"
+
+><td id="75"><a href="#75">75</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_76"
+
+><td id="76"><a href="#76">76</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_77"
+
+><td id="77"><a href="#77">77</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_78"
+
+><td id="78"><a href="#78">78</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_79"
+
+><td id="79"><a href="#79">79</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_80"
+
+><td id="80"><a href="#80">80</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_81"
+
+><td id="81"><a href="#81">81</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_82"
+
+><td id="82"><a href="#82">82</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_83"
+
+><td id="83"><a href="#83">83</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_84"
+
+><td id="84"><a href="#84">84</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_85"
+
+><td id="85"><a href="#85">85</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_86"
+
+><td id="86"><a href="#86">86</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_87"
+
+><td id="87"><a href="#87">87</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_88"
+
+><td id="88"><a href="#88">88</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_89"
+
+><td id="89"><a href="#89">89</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_90"
+
+><td id="90"><a href="#90">90</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_91"
+
+><td id="91"><a href="#91">91</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_92"
+
+><td id="92"><a href="#92">92</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_93"
+
+><td id="93"><a href="#93">93</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_94"
+
+><td id="94"><a href="#94">94</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_95"
+
+><td id="95"><a href="#95">95</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_96"
+
+><td id="96"><a href="#96">96</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_97"
+
+><td id="97"><a href="#97">97</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_98"
+
+><td id="98"><a href="#98">98</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_99"
+
+><td id="99"><a href="#99">99</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_100"
+
+><td id="100"><a href="#100">100</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_101"
+
+><td id="101"><a href="#101">101</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_102"
+
+><td id="102"><a href="#102">102</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_103"
+
+><td id="103"><a href="#103">103</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_104"
+
+><td id="104"><a href="#104">104</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_105"
+
+><td id="105"><a href="#105">105</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_106"
+
+><td id="106"><a href="#106">106</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_107"
+
+><td id="107"><a href="#107">107</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_108"
+
+><td id="108"><a href="#108">108</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_109"
+
+><td id="109"><a href="#109">109</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_110"
+
+><td id="110"><a href="#110">110</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_111"
+
+><td id="111"><a href="#111">111</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_112"
+
+><td id="112"><a href="#112">112</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_113"
+
+><td id="113"><a href="#113">113</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_114"
+
+><td id="114"><a href="#114">114</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_115"
+
+><td id="115"><a href="#115">115</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_116"
+
+><td id="116"><a href="#116">116</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_117"
+
+><td id="117"><a href="#117">117</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_118"
+
+><td id="118"><a href="#118">118</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_119"
+
+><td id="119"><a href="#119">119</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_120"
+
+><td id="120"><a href="#120">120</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_121"
+
+><td id="121"><a href="#121">121</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_122"
+
+><td id="122"><a href="#122">122</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_123"
+
+><td id="123"><a href="#123">123</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_124"
+
+><td id="124"><a href="#124">124</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_125"
+
+><td id="125"><a href="#125">125</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_126"
+
+><td id="126"><a href="#126">126</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_127"
+
+><td id="127"><a href="#127">127</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_128"
+
+><td id="128"><a href="#128">128</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_129"
+
+><td id="129"><a href="#129">129</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_130"
+
+><td id="130"><a href="#130">130</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_131"
+
+><td id="131"><a href="#131">131</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_132"
+
+><td id="132"><a href="#132">132</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_133"
+
+><td id="133"><a href="#133">133</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_134"
+
+><td id="134"><a href="#134">134</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_135"
+
+><td id="135"><a href="#135">135</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_136"
+
+><td id="136"><a href="#136">136</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_137"
+
+><td id="137"><a href="#137">137</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_138"
+
+><td id="138"><a href="#138">138</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_139"
+
+><td id="139"><a href="#139">139</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_140"
+
+><td id="140"><a href="#140">140</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_141"
+
+><td id="141"><a href="#141">141</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_142"
+
+><td id="142"><a href="#142">142</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_143"
+
+><td id="143"><a href="#143">143</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_144"
+
+><td id="144"><a href="#144">144</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_145"
+
+><td id="145"><a href="#145">145</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_146"
+
+><td id="146"><a href="#146">146</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_147"
+
+><td id="147"><a href="#147">147</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_148"
+
+><td id="148"><a href="#148">148</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_149"
+
+><td id="149"><a href="#149">149</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_150"
+
+><td id="150"><a href="#150">150</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_151"
+
+><td id="151"><a href="#151">151</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_152"
+
+><td id="152"><a href="#152">152</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_153"
+
+><td id="153"><a href="#153">153</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_154"
+
+><td id="154"><a href="#154">154</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_155"
+
+><td id="155"><a href="#155">155</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_156"
+
+><td id="156"><a href="#156">156</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_157"
+
+><td id="157"><a href="#157">157</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_158"
+
+><td id="158"><a href="#158">158</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_159"
+
+><td id="159"><a href="#159">159</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_160"
+
+><td id="160"><a href="#160">160</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_161"
+
+><td id="161"><a href="#161">161</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_162"
+
+><td id="162"><a href="#162">162</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_163"
+
+><td id="163"><a href="#163">163</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_164"
+
+><td id="164"><a href="#164">164</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_165"
+
+><td id="165"><a href="#165">165</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_166"
+
+><td id="166"><a href="#166">166</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_167"
+
+><td id="167"><a href="#167">167</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_168"
+
+><td id="168"><a href="#168">168</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_169"
+
+><td id="169"><a href="#169">169</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_170"
+
+><td id="170"><a href="#170">170</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_171"
+
+><td id="171"><a href="#171">171</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_172"
+
+><td id="172"><a href="#172">172</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_173"
+
+><td id="173"><a href="#173">173</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_174"
+
+><td id="174"><a href="#174">174</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_175"
+
+><td id="175"><a href="#175">175</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_176"
+
+><td id="176"><a href="#176">176</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_177"
+
+><td id="177"><a href="#177">177</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_178"
+
+><td id="178"><a href="#178">178</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_179"
+
+><td id="179"><a href="#179">179</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_180"
+
+><td id="180"><a href="#180">180</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_181"
+
+><td id="181"><a href="#181">181</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_182"
+
+><td id="182"><a href="#182">182</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_183"
+
+><td id="183"><a href="#183">183</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_184"
+
+><td id="184"><a href="#184">184</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_185"
+
+><td id="185"><a href="#185">185</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_186"
+
+><td id="186"><a href="#186">186</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_187"
+
+><td id="187"><a href="#187">187</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_188"
+
+><td id="188"><a href="#188">188</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_189"
+
+><td id="189"><a href="#189">189</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_190"
+
+><td id="190"><a href="#190">190</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_191"
+
+><td id="191"><a href="#191">191</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_192"
+
+><td id="192"><a href="#192">192</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_193"
+
+><td id="193"><a href="#193">193</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_194"
+
+><td id="194"><a href="#194">194</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_195"
+
+><td id="195"><a href="#195">195</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_196"
+
+><td id="196"><a href="#196">196</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_197"
+
+><td id="197"><a href="#197">197</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_198"
+
+><td id="198"><a href="#198">198</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_199"
+
+><td id="199"><a href="#199">199</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_200"
+
+><td id="200"><a href="#200">200</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_201"
+
+><td id="201"><a href="#201">201</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_202"
+
+><td id="202"><a href="#202">202</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_203"
+
+><td id="203"><a href="#203">203</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_204"
+
+><td id="204"><a href="#204">204</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_205"
+
+><td id="205"><a href="#205">205</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_206"
+
+><td id="206"><a href="#206">206</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_207"
+
+><td id="207"><a href="#207">207</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_208"
+
+><td id="208"><a href="#208">208</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_209"
+
+><td id="209"><a href="#209">209</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_210"
+
+><td id="210"><a href="#210">210</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_211"
+
+><td id="211"><a href="#211">211</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_212"
+
+><td id="212"><a href="#212">212</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_213"
+
+><td id="213"><a href="#213">213</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_214"
+
+><td id="214"><a href="#214">214</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_215"
+
+><td id="215"><a href="#215">215</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_216"
+
+><td id="216"><a href="#216">216</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_217"
+
+><td id="217"><a href="#217">217</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_218"
+
+><td id="218"><a href="#218">218</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_219"
+
+><td id="219"><a href="#219">219</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_220"
+
+><td id="220"><a href="#220">220</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_221"
+
+><td id="221"><a href="#221">221</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_222"
+
+><td id="222"><a href="#222">222</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_223"
+
+><td id="223"><a href="#223">223</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_224"
+
+><td id="224"><a href="#224">224</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_225"
+
+><td id="225"><a href="#225">225</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_226"
+
+><td id="226"><a href="#226">226</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_227"
+
+><td id="227"><a href="#227">227</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_228"
+
+><td id="228"><a href="#228">228</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_229"
+
+><td id="229"><a href="#229">229</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_230"
+
+><td id="230"><a href="#230">230</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_231"
+
+><td id="231"><a href="#231">231</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_232"
+
+><td id="232"><a href="#232">232</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_233"
+
+><td id="233"><a href="#233">233</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_234"
+
+><td id="234"><a href="#234">234</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_235"
+
+><td id="235"><a href="#235">235</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_236"
+
+><td id="236"><a href="#236">236</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_237"
+
+><td id="237"><a href="#237">237</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_238"
+
+><td id="238"><a href="#238">238</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_239"
+
+><td id="239"><a href="#239">239</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_240"
+
+><td id="240"><a href="#240">240</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_241"
+
+><td id="241"><a href="#241">241</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_242"
+
+><td id="242"><a href="#242">242</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_243"
+
+><td id="243"><a href="#243">243</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_244"
+
+><td id="244"><a href="#244">244</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_245"
+
+><td id="245"><a href="#245">245</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_246"
+
+><td id="246"><a href="#246">246</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_247"
+
+><td id="247"><a href="#247">247</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_248"
+
+><td id="248"><a href="#248">248</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_249"
+
+><td id="249"><a href="#249">249</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_250"
+
+><td id="250"><a href="#250">250</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_251"
+
+><td id="251"><a href="#251">251</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_252"
+
+><td id="252"><a href="#252">252</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_253"
+
+><td id="253"><a href="#253">253</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_254"
+
+><td id="254"><a href="#254">254</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_255"
+
+><td id="255"><a href="#255">255</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_256"
+
+><td id="256"><a href="#256">256</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_257"
+
+><td id="257"><a href="#257">257</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_258"
+
+><td id="258"><a href="#258">258</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_259"
+
+><td id="259"><a href="#259">259</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_260"
+
+><td id="260"><a href="#260">260</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_261"
+
+><td id="261"><a href="#261">261</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_262"
+
+><td id="262"><a href="#262">262</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_263"
+
+><td id="263"><a href="#263">263</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_264"
+
+><td id="264"><a href="#264">264</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_265"
+
+><td id="265"><a href="#265">265</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_266"
+
+><td id="266"><a href="#266">266</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_267"
+
+><td id="267"><a href="#267">267</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_268"
+
+><td id="268"><a href="#268">268</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_269"
+
+><td id="269"><a href="#269">269</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_270"
+
+><td id="270"><a href="#270">270</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_271"
+
+><td id="271"><a href="#271">271</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_272"
+
+><td id="272"><a href="#272">272</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_273"
+
+><td id="273"><a href="#273">273</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_274"
+
+><td id="274"><a href="#274">274</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_275"
+
+><td id="275"><a href="#275">275</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_276"
+
+><td id="276"><a href="#276">276</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_277"
+
+><td id="277"><a href="#277">277</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_278"
+
+><td id="278"><a href="#278">278</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_279"
+
+><td id="279"><a href="#279">279</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_280"
+
+><td id="280"><a href="#280">280</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_281"
+
+><td id="281"><a href="#281">281</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_282"
+
+><td id="282"><a href="#282">282</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_283"
+
+><td id="283"><a href="#283">283</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_284"
+
+><td id="284"><a href="#284">284</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_285"
+
+><td id="285"><a href="#285">285</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_286"
+
+><td id="286"><a href="#286">286</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_287"
+
+><td id="287"><a href="#287">287</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_288"
+
+><td id="288"><a href="#288">288</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_289"
+
+><td id="289"><a href="#289">289</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_290"
+
+><td id="290"><a href="#290">290</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_291"
+
+><td id="291"><a href="#291">291</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_292"
+
+><td id="292"><a href="#292">292</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_293"
+
+><td id="293"><a href="#293">293</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_294"
+
+><td id="294"><a href="#294">294</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_295"
+
+><td id="295"><a href="#295">295</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_296"
+
+><td id="296"><a href="#296">296</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_297"
+
+><td id="297"><a href="#297">297</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_298"
+
+><td id="298"><a href="#298">298</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_299"
+
+><td id="299"><a href="#299">299</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_300"
+
+><td id="300"><a href="#300">300</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_301"
+
+><td id="301"><a href="#301">301</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_302"
+
+><td id="302"><a href="#302">302</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_303"
+
+><td id="303"><a href="#303">303</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_304"
+
+><td id="304"><a href="#304">304</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_305"
+
+><td id="305"><a href="#305">305</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_306"
+
+><td id="306"><a href="#306">306</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_307"
+
+><td id="307"><a href="#307">307</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_308"
+
+><td id="308"><a href="#308">308</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_309"
+
+><td id="309"><a href="#309">309</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_310"
+
+><td id="310"><a href="#310">310</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_311"
+
+><td id="311"><a href="#311">311</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_312"
+
+><td id="312"><a href="#312">312</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_313"
+
+><td id="313"><a href="#313">313</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_314"
+
+><td id="314"><a href="#314">314</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_315"
+
+><td id="315"><a href="#315">315</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_316"
+
+><td id="316"><a href="#316">316</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_317"
+
+><td id="317"><a href="#317">317</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_318"
+
+><td id="318"><a href="#318">318</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_319"
+
+><td id="319"><a href="#319">319</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_320"
+
+><td id="320"><a href="#320">320</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_321"
+
+><td id="321"><a href="#321">321</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_322"
+
+><td id="322"><a href="#322">322</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_323"
+
+><td id="323"><a href="#323">323</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_324"
+
+><td id="324"><a href="#324">324</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_325"
+
+><td id="325"><a href="#325">325</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_326"
+
+><td id="326"><a href="#326">326</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_327"
+
+><td id="327"><a href="#327">327</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_328"
+
+><td id="328"><a href="#328">328</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_329"
+
+><td id="329"><a href="#329">329</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_330"
+
+><td id="330"><a href="#330">330</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_331"
+
+><td id="331"><a href="#331">331</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_332"
+
+><td id="332"><a href="#332">332</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_333"
+
+><td id="333"><a href="#333">333</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_334"
+
+><td id="334"><a href="#334">334</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_335"
+
+><td id="335"><a href="#335">335</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_336"
+
+><td id="336"><a href="#336">336</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_337"
+
+><td id="337"><a href="#337">337</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_338"
+
+><td id="338"><a href="#338">338</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_339"
+
+><td id="339"><a href="#339">339</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_340"
+
+><td id="340"><a href="#340">340</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_341"
+
+><td id="341"><a href="#341">341</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_342"
+
+><td id="342"><a href="#342">342</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_343"
+
+><td id="343"><a href="#343">343</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_344"
+
+><td id="344"><a href="#344">344</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_345"
+
+><td id="345"><a href="#345">345</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_346"
+
+><td id="346"><a href="#346">346</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_347"
+
+><td id="347"><a href="#347">347</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_348"
+
+><td id="348"><a href="#348">348</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_349"
+
+><td id="349"><a href="#349">349</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_350"
+
+><td id="350"><a href="#350">350</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_351"
+
+><td id="351"><a href="#351">351</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_352"
+
+><td id="352"><a href="#352">352</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_353"
+
+><td id="353"><a href="#353">353</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_354"
+
+><td id="354"><a href="#354">354</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_355"
+
+><td id="355"><a href="#355">355</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_356"
+
+><td id="356"><a href="#356">356</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_357"
+
+><td id="357"><a href="#357">357</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_358"
+
+><td id="358"><a href="#358">358</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_359"
+
+><td id="359"><a href="#359">359</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_360"
+
+><td id="360"><a href="#360">360</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_361"
+
+><td id="361"><a href="#361">361</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_362"
+
+><td id="362"><a href="#362">362</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_363"
+
+><td id="363"><a href="#363">363</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_364"
+
+><td id="364"><a href="#364">364</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_365"
+
+><td id="365"><a href="#365">365</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_366"
+
+><td id="366"><a href="#366">366</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_367"
+
+><td id="367"><a href="#367">367</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_368"
+
+><td id="368"><a href="#368">368</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_369"
+
+><td id="369"><a href="#369">369</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_370"
+
+><td id="370"><a href="#370">370</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_371"
+
+><td id="371"><a href="#371">371</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_372"
+
+><td id="372"><a href="#372">372</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_373"
+
+><td id="373"><a href="#373">373</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_374"
+
+><td id="374"><a href="#374">374</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_375"
+
+><td id="375"><a href="#375">375</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_376"
+
+><td id="376"><a href="#376">376</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_377"
+
+><td id="377"><a href="#377">377</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_378"
+
+><td id="378"><a href="#378">378</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_379"
+
+><td id="379"><a href="#379">379</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_380"
+
+><td id="380"><a href="#380">380</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_381"
+
+><td id="381"><a href="#381">381</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_382"
+
+><td id="382"><a href="#382">382</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_383"
+
+><td id="383"><a href="#383">383</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_384"
+
+><td id="384"><a href="#384">384</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_385"
+
+><td id="385"><a href="#385">385</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_386"
+
+><td id="386"><a href="#386">386</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_387"
+
+><td id="387"><a href="#387">387</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_388"
+
+><td id="388"><a href="#388">388</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_389"
+
+><td id="389"><a href="#389">389</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_390"
+
+><td id="390"><a href="#390">390</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_391"
+
+><td id="391"><a href="#391">391</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_392"
+
+><td id="392"><a href="#392">392</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_393"
+
+><td id="393"><a href="#393">393</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_394"
+
+><td id="394"><a href="#394">394</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_395"
+
+><td id="395"><a href="#395">395</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_396"
+
+><td id="396"><a href="#396">396</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_397"
+
+><td id="397"><a href="#397">397</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_398"
+
+><td id="398"><a href="#398">398</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_399"
+
+><td id="399"><a href="#399">399</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_400"
+
+><td id="400"><a href="#400">400</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_401"
+
+><td id="401"><a href="#401">401</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_402"
+
+><td id="402"><a href="#402">402</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_403"
+
+><td id="403"><a href="#403">403</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_404"
+
+><td id="404"><a href="#404">404</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_405"
+
+><td id="405"><a href="#405">405</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_406"
+
+><td id="406"><a href="#406">406</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_407"
+
+><td id="407"><a href="#407">407</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_408"
+
+><td id="408"><a href="#408">408</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_409"
+
+><td id="409"><a href="#409">409</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_410"
+
+><td id="410"><a href="#410">410</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_411"
+
+><td id="411"><a href="#411">411</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_412"
+
+><td id="412"><a href="#412">412</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_413"
+
+><td id="413"><a href="#413">413</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_414"
+
+><td id="414"><a href="#414">414</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_415"
+
+><td id="415"><a href="#415">415</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_416"
+
+><td id="416"><a href="#416">416</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_417"
+
+><td id="417"><a href="#417">417</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_418"
+
+><td id="418"><a href="#418">418</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_419"
+
+><td id="419"><a href="#419">419</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_420"
+
+><td id="420"><a href="#420">420</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_421"
+
+><td id="421"><a href="#421">421</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_422"
+
+><td id="422"><a href="#422">422</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_423"
+
+><td id="423"><a href="#423">423</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_424"
+
+><td id="424"><a href="#424">424</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_425"
+
+><td id="425"><a href="#425">425</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_426"
+
+><td id="426"><a href="#426">426</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_427"
+
+><td id="427"><a href="#427">427</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_428"
+
+><td id="428"><a href="#428">428</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_429"
+
+><td id="429"><a href="#429">429</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_430"
+
+><td id="430"><a href="#430">430</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_431"
+
+><td id="431"><a href="#431">431</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_432"
+
+><td id="432"><a href="#432">432</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_433"
+
+><td id="433"><a href="#433">433</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_434"
+
+><td id="434"><a href="#434">434</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_435"
+
+><td id="435"><a href="#435">435</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_436"
+
+><td id="436"><a href="#436">436</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_437"
+
+><td id="437"><a href="#437">437</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_438"
+
+><td id="438"><a href="#438">438</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_439"
+
+><td id="439"><a href="#439">439</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_440"
+
+><td id="440"><a href="#440">440</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_441"
+
+><td id="441"><a href="#441">441</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_442"
+
+><td id="442"><a href="#442">442</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_443"
+
+><td id="443"><a href="#443">443</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_444"
+
+><td id="444"><a href="#444">444</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_445"
+
+><td id="445"><a href="#445">445</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_446"
+
+><td id="446"><a href="#446">446</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_447"
+
+><td id="447"><a href="#447">447</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_448"
+
+><td id="448"><a href="#448">448</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_449"
+
+><td id="449"><a href="#449">449</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_450"
+
+><td id="450"><a href="#450">450</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_451"
+
+><td id="451"><a href="#451">451</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_452"
+
+><td id="452"><a href="#452">452</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_453"
+
+><td id="453"><a href="#453">453</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_454"
+
+><td id="454"><a href="#454">454</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_455"
+
+><td id="455"><a href="#455">455</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_456"
+
+><td id="456"><a href="#456">456</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_457"
+
+><td id="457"><a href="#457">457</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_458"
+
+><td id="458"><a href="#458">458</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_459"
+
+><td id="459"><a href="#459">459</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_460"
+
+><td id="460"><a href="#460">460</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_461"
+
+><td id="461"><a href="#461">461</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_462"
+
+><td id="462"><a href="#462">462</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_463"
+
+><td id="463"><a href="#463">463</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_464"
+
+><td id="464"><a href="#464">464</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_465"
+
+><td id="465"><a href="#465">465</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_466"
+
+><td id="466"><a href="#466">466</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_467"
+
+><td id="467"><a href="#467">467</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_468"
+
+><td id="468"><a href="#468">468</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_469"
+
+><td id="469"><a href="#469">469</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_470"
+
+><td id="470"><a href="#470">470</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_471"
+
+><td id="471"><a href="#471">471</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_472"
+
+><td id="472"><a href="#472">472</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_473"
+
+><td id="473"><a href="#473">473</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_474"
+
+><td id="474"><a href="#474">474</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_475"
+
+><td id="475"><a href="#475">475</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_476"
+
+><td id="476"><a href="#476">476</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_477"
+
+><td id="477"><a href="#477">477</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_478"
+
+><td id="478"><a href="#478">478</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_479"
+
+><td id="479"><a href="#479">479</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_480"
+
+><td id="480"><a href="#480">480</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_481"
+
+><td id="481"><a href="#481">481</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_482"
+
+><td id="482"><a href="#482">482</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_483"
+
+><td id="483"><a href="#483">483</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_484"
+
+><td id="484"><a href="#484">484</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_485"
+
+><td id="485"><a href="#485">485</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_486"
+
+><td id="486"><a href="#486">486</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_487"
+
+><td id="487"><a href="#487">487</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_488"
+
+><td id="488"><a href="#488">488</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_489"
+
+><td id="489"><a href="#489">489</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_490"
+
+><td id="490"><a href="#490">490</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_491"
+
+><td id="491"><a href="#491">491</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_492"
+
+><td id="492"><a href="#492">492</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_493"
+
+><td id="493"><a href="#493">493</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_494"
+
+><td id="494"><a href="#494">494</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_495"
+
+><td id="495"><a href="#495">495</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_496"
+
+><td id="496"><a href="#496">496</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_497"
+
+><td id="497"><a href="#497">497</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_498"
+
+><td id="498"><a href="#498">498</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_499"
+
+><td id="499"><a href="#499">499</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_500"
+
+><td id="500"><a href="#500">500</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_501"
+
+><td id="501"><a href="#501">501</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_502"
+
+><td id="502"><a href="#502">502</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_503"
+
+><td id="503"><a href="#503">503</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_504"
+
+><td id="504"><a href="#504">504</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_505"
+
+><td id="505"><a href="#505">505</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_506"
+
+><td id="506"><a href="#506">506</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_507"
+
+><td id="507"><a href="#507">507</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_508"
+
+><td id="508"><a href="#508">508</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_509"
+
+><td id="509"><a href="#509">509</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_510"
+
+><td id="510"><a href="#510">510</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_511"
+
+><td id="511"><a href="#511">511</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_512"
+
+><td id="512"><a href="#512">512</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_513"
+
+><td id="513"><a href="#513">513</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_514"
+
+><td id="514"><a href="#514">514</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_515"
+
+><td id="515"><a href="#515">515</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_516"
+
+><td id="516"><a href="#516">516</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_517"
+
+><td id="517"><a href="#517">517</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_518"
+
+><td id="518"><a href="#518">518</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_519"
+
+><td id="519"><a href="#519">519</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_520"
+
+><td id="520"><a href="#520">520</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_521"
+
+><td id="521"><a href="#521">521</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_522"
+
+><td id="522"><a href="#522">522</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_523"
+
+><td id="523"><a href="#523">523</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_524"
+
+><td id="524"><a href="#524">524</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_525"
+
+><td id="525"><a href="#525">525</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_526"
+
+><td id="526"><a href="#526">526</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_527"
+
+><td id="527"><a href="#527">527</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_528"
+
+><td id="528"><a href="#528">528</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_529"
+
+><td id="529"><a href="#529">529</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_530"
+
+><td id="530"><a href="#530">530</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_531"
+
+><td id="531"><a href="#531">531</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_532"
+
+><td id="532"><a href="#532">532</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_533"
+
+><td id="533"><a href="#533">533</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_534"
+
+><td id="534"><a href="#534">534</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_535"
+
+><td id="535"><a href="#535">535</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_536"
+
+><td id="536"><a href="#536">536</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_537"
+
+><td id="537"><a href="#537">537</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_538"
+
+><td id="538"><a href="#538">538</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_539"
+
+><td id="539"><a href="#539">539</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_540"
+
+><td id="540"><a href="#540">540</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_541"
+
+><td id="541"><a href="#541">541</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_542"
+
+><td id="542"><a href="#542">542</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_543"
+
+><td id="543"><a href="#543">543</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_544"
+
+><td id="544"><a href="#544">544</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_545"
+
+><td id="545"><a href="#545">545</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_546"
+
+><td id="546"><a href="#546">546</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_547"
+
+><td id="547"><a href="#547">547</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_548"
+
+><td id="548"><a href="#548">548</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_549"
+
+><td id="549"><a href="#549">549</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_550"
+
+><td id="550"><a href="#550">550</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_551"
+
+><td id="551"><a href="#551">551</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_552"
+
+><td id="552"><a href="#552">552</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_553"
+
+><td id="553"><a href="#553">553</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_554"
+
+><td id="554"><a href="#554">554</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_555"
+
+><td id="555"><a href="#555">555</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_556"
+
+><td id="556"><a href="#556">556</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_557"
+
+><td id="557"><a href="#557">557</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_558"
+
+><td id="558"><a href="#558">558</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_559"
+
+><td id="559"><a href="#559">559</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_560"
+
+><td id="560"><a href="#560">560</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_561"
+
+><td id="561"><a href="#561">561</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_562"
+
+><td id="562"><a href="#562">562</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_563"
+
+><td id="563"><a href="#563">563</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_564"
+
+><td id="564"><a href="#564">564</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_565"
+
+><td id="565"><a href="#565">565</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_566"
+
+><td id="566"><a href="#566">566</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_567"
+
+><td id="567"><a href="#567">567</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_568"
+
+><td id="568"><a href="#568">568</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_569"
+
+><td id="569"><a href="#569">569</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_570"
+
+><td id="570"><a href="#570">570</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_571"
+
+><td id="571"><a href="#571">571</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_572"
+
+><td id="572"><a href="#572">572</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_573"
+
+><td id="573"><a href="#573">573</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_574"
+
+><td id="574"><a href="#574">574</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_575"
+
+><td id="575"><a href="#575">575</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_576"
+
+><td id="576"><a href="#576">576</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_577"
+
+><td id="577"><a href="#577">577</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_578"
+
+><td id="578"><a href="#578">578</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_579"
+
+><td id="579"><a href="#579">579</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_580"
+
+><td id="580"><a href="#580">580</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_581"
+
+><td id="581"><a href="#581">581</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_582"
+
+><td id="582"><a href="#582">582</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_583"
+
+><td id="583"><a href="#583">583</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_584"
+
+><td id="584"><a href="#584">584</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_585"
+
+><td id="585"><a href="#585">585</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_586"
+
+><td id="586"><a href="#586">586</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_587"
+
+><td id="587"><a href="#587">587</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_588"
+
+><td id="588"><a href="#588">588</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_589"
+
+><td id="589"><a href="#589">589</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_590"
+
+><td id="590"><a href="#590">590</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_591"
+
+><td id="591"><a href="#591">591</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_592"
+
+><td id="592"><a href="#592">592</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_593"
+
+><td id="593"><a href="#593">593</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_594"
+
+><td id="594"><a href="#594">594</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_595"
+
+><td id="595"><a href="#595">595</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_596"
+
+><td id="596"><a href="#596">596</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_597"
+
+><td id="597"><a href="#597">597</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_598"
+
+><td id="598"><a href="#598">598</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_599"
+
+><td id="599"><a href="#599">599</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_600"
+
+><td id="600"><a href="#600">600</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_601"
+
+><td id="601"><a href="#601">601</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_602"
+
+><td id="602"><a href="#602">602</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_603"
+
+><td id="603"><a href="#603">603</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_604"
+
+><td id="604"><a href="#604">604</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_605"
+
+><td id="605"><a href="#605">605</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_606"
+
+><td id="606"><a href="#606">606</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_607"
+
+><td id="607"><a href="#607">607</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_608"
+
+><td id="608"><a href="#608">608</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_609"
+
+><td id="609"><a href="#609">609</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_610"
+
+><td id="610"><a href="#610">610</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_611"
+
+><td id="611"><a href="#611">611</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_612"
+
+><td id="612"><a href="#612">612</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_613"
+
+><td id="613"><a href="#613">613</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_614"
+
+><td id="614"><a href="#614">614</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_615"
+
+><td id="615"><a href="#615">615</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_616"
+
+><td id="616"><a href="#616">616</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_617"
+
+><td id="617"><a href="#617">617</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_618"
+
+><td id="618"><a href="#618">618</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_619"
+
+><td id="619"><a href="#619">619</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_620"
+
+><td id="620"><a href="#620">620</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_621"
+
+><td id="621"><a href="#621">621</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_622"
+
+><td id="622"><a href="#622">622</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_623"
+
+><td id="623"><a href="#623">623</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_624"
+
+><td id="624"><a href="#624">624</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_625"
+
+><td id="625"><a href="#625">625</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_626"
+
+><td id="626"><a href="#626">626</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_627"
+
+><td id="627"><a href="#627">627</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_628"
+
+><td id="628"><a href="#628">628</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_629"
+
+><td id="629"><a href="#629">629</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_630"
+
+><td id="630"><a href="#630">630</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_631"
+
+><td id="631"><a href="#631">631</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_632"
+
+><td id="632"><a href="#632">632</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_633"
+
+><td id="633"><a href="#633">633</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_634"
+
+><td id="634"><a href="#634">634</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_635"
+
+><td id="635"><a href="#635">635</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_636"
+
+><td id="636"><a href="#636">636</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_637"
+
+><td id="637"><a href="#637">637</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_638"
+
+><td id="638"><a href="#638">638</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_639"
+
+><td id="639"><a href="#639">639</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_640"
+
+><td id="640"><a href="#640">640</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_641"
+
+><td id="641"><a href="#641">641</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_642"
+
+><td id="642"><a href="#642">642</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_643"
+
+><td id="643"><a href="#643">643</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_644"
+
+><td id="644"><a href="#644">644</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_645"
+
+><td id="645"><a href="#645">645</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_646"
+
+><td id="646"><a href="#646">646</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_647"
+
+><td id="647"><a href="#647">647</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_648"
+
+><td id="648"><a href="#648">648</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_649"
+
+><td id="649"><a href="#649">649</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_650"
+
+><td id="650"><a href="#650">650</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_651"
+
+><td id="651"><a href="#651">651</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_652"
+
+><td id="652"><a href="#652">652</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_653"
+
+><td id="653"><a href="#653">653</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_654"
+
+><td id="654"><a href="#654">654</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_655"
+
+><td id="655"><a href="#655">655</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_656"
+
+><td id="656"><a href="#656">656</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_657"
+
+><td id="657"><a href="#657">657</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_658"
+
+><td id="658"><a href="#658">658</a></td></tr
+><tr id="gr_svn642950d66544921e60d74c278ae0a096ea498bc7_659"
+
+><td id="659"><a href="#659">659</a></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+</td>
+<td id="lines">
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+<pre class="prettyprint "><table id="src_table_0"><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_1
+
+><td class="source">//<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_2
+
+><td class="source">//  AsyncSocket.h<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_3
+
+><td class="source">//  <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_4
+
+><td class="source">//  This class is in the public domain.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_5
+
+><td class="source">//  Originally created by Dustin Voss on Wed Jan 29 2003.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_6
+
+><td class="source">//  Updated and maintained by Deusty Designs and the Mac development community.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_7
+
+><td class="source">//<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_8
+
+><td class="source">//  http://code.google.com/p/cocoaasyncsocket/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_9
+
+><td class="source">//<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_10
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_11
+
+><td class="source">#import &lt;Foundation/Foundation.h&gt;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_12
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_13
+
+><td class="source">@class AsyncSocket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_14
+
+><td class="source">@class AsyncReadPacket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_15
+
+><td class="source">@class AsyncWritePacket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_16
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_17
+
+><td class="source">extern NSString *const AsyncSocketException;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_18
+
+><td class="source">extern NSString *const AsyncSocketErrorDomain;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_19
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_20
+
+><td class="source">enum AsyncSocketError<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_21
+
+><td class="source">{<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_22
+
+><td class="source">	AsyncSocketCFSocketError = kCFSocketError,	// From CFSocketError enum.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_23
+
+><td class="source">	AsyncSocketNoError = 0,						// Never used.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_24
+
+><td class="source">	AsyncSocketCanceledError,					// onSocketWillConnect: returned NO.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_25
+
+><td class="source">	AsyncSocketConnectTimeoutError,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_26
+
+><td class="source">	AsyncSocketReadMaxedOutError,               // Reached set maxLength without completing<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_27
+
+><td class="source">	AsyncSocketReadTimeoutError,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_28
+
+><td class="source">	AsyncSocketWriteTimeoutError<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_29
+
+><td class="source">};<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_30
+
+><td class="source">typedef enum AsyncSocketError AsyncSocketError;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_31
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_32
+
+><td class="source">@protocol AsyncSocketDelegate<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_33
+
+><td class="source">@optional<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_34
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_35
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_36
+
+><td class="source"> * In the event of an error, the socket is closed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_37
+
+><td class="source"> * You may call &quot;unreadData&quot; during this call-back to get the last bit of data off the socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_38
+
+><td class="source"> * When connecting, this delegate method may be called<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_39
+
+><td class="source"> * before&quot;onSocket:didAcceptNewSocket:&quot; or &quot;onSocket:didConnectToHost:&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_40
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_41
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_42
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_43
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_44
+
+><td class="source"> * Called when a socket disconnects with or without error.  If you want to release a socket after it disconnects,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_45
+
+><td class="source"> * do so here. It is not safe to do that during &quot;onSocket:willDisconnectWithError:&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_46
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_47
+
+><td class="source"> * If you call the disconnect method, and the socket wasn&#39;t already disconnected,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_48
+
+><td class="source"> * this delegate method will be called before the disconnect method returns.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_49
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_50
+
+><td class="source">- (void)onSocketDidDisconnect:(AsyncSocket *)sock;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_51
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_52
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_53
+
+><td class="source"> * Called when a socket accepts a connection.  Another socket is spawned to handle it. The new socket will have<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_54
+
+><td class="source"> * the same delegate and will call &quot;onSocket:didConnectToHost:port:&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_55
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_56
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_57
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_58
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_59
+
+><td class="source"> * Called when a new socket is spawned to handle a connection.  This method should return the run-loop of the<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_60
+
+><td class="source"> * thread on which the new socket and its delegate should operate. If omitted, [NSRunLoop currentRunLoop] is used.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_61
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_62
+
+><td class="source">- (NSRunLoop *)onSocket:(AsyncSocket *)sock wantsRunLoopForNewSocket:(AsyncSocket *)newSocket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_63
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_64
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_65
+
+><td class="source"> * Called when a socket is about to connect. This method should return YES to continue, or NO to abort.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_66
+
+><td class="source"> * If aborted, will result in AsyncSocketCanceledError.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_67
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_68
+
+><td class="source"> * If the connectToHost:onPort:error: method was called, the delegate will be able to access and configure the<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_69
+
+><td class="source"> * CFReadStream and CFWriteStream as desired prior to connection.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_70
+
+><td class="source"> *<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_71
+
+><td class="source"> * If the connectToAddress:error: method was called, the delegate will be able to access and configure the<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_72
+
+><td class="source"> * CFSocket and CFSocketNativeHandle (BSD socket) as desired prior to connection. You will be able to access and<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_73
+
+><td class="source"> * configure the CFReadStream and CFWriteStream in the onSocket:didConnectToHost:port: method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_74
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_75
+
+><td class="source">- (BOOL)onSocketWillConnect:(AsyncSocket *)sock;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_76
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_77
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_78
+
+><td class="source"> * Called when a socket connects and is ready for reading and writing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_79
+
+><td class="source"> * The host parameter will be an IP address, not a DNS name.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_80
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_81
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_82
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_83
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_84
+
+><td class="source"> * Called when a socket has completed reading the requested data into memory.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_85
+
+><td class="source"> * Not called if there is an error.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_86
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_87
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_88
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_89
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_90
+
+><td class="source"> * Called when a socket has read in data, but has not yet completed the read.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_91
+
+><td class="source"> * This would occur if using readToData: or readToLength: methods.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_92
+
+><td class="source"> * It may be used to for things such as updating progress bars.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_93
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_94
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_95
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_96
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_97
+
+><td class="source"> * Called when a socket has completed writing the requested data. Not called if there is an error.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_98
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_99
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_100
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_101
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_102
+
+><td class="source"> * Called when a socket has written some data, but has not yet completed the entire write.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_103
+
+><td class="source"> * It may be used to for things such as updating progress bars.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_104
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_105
+
+><td class="source">- (void)onSocket:(AsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_106
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_107
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_108
+
+><td class="source"> * Called if a read operation has reached its timeout without completing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_109
+
+><td class="source"> * This method allows you to optionally extend the timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_110
+
+><td class="source"> * If you return a positive time interval (&gt; 0) the read&#39;s timeout will be extended by the given amount.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_111
+
+><td class="source"> * If you don&#39;t implement this method, or return a non-positive time interval (&lt;= 0) the read will timeout as usual.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_112
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_113
+
+><td class="source"> * The elapsed parameter is the sum of the original timeout, plus any additions previously added via this method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_114
+
+><td class="source"> * The length parameter is the number of bytes that have been read so far for the read operation.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_115
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_116
+
+><td class="source"> * Note that this method may be called multiple times for a single read if you return positive numbers.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_117
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_118
+
+><td class="source">- (NSTimeInterval)onSocket:(AsyncSocket *)sock<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_119
+
+><td class="source">  shouldTimeoutReadWithTag:(long)tag<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_120
+
+><td class="source">                   elapsed:(NSTimeInterval)elapsed<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_121
+
+><td class="source">                 bytesDone:(NSUInteger)length;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_122
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_123
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_124
+
+><td class="source"> * Called if a write operation has reached its timeout without completing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_125
+
+><td class="source"> * This method allows you to optionally extend the timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_126
+
+><td class="source"> * If you return a positive time interval (&gt; 0) the write&#39;s timeout will be extended by the given amount.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_127
+
+><td class="source"> * If you don&#39;t implement this method, or return a non-positive time interval (&lt;= 0) the write will timeout as usual.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_128
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_129
+
+><td class="source"> * The elapsed parameter is the sum of the original timeout, plus any additions previously added via this method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_130
+
+><td class="source"> * The length parameter is the number of bytes that have been written so far for the write operation.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_131
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_132
+
+><td class="source"> * Note that this method may be called multiple times for a single write if you return positive numbers.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_133
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_134
+
+><td class="source">- (NSTimeInterval)onSocket:(AsyncSocket *)sock<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_135
+
+><td class="source"> shouldTimeoutWriteWithTag:(long)tag<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_136
+
+><td class="source">                   elapsed:(NSTimeInterval)elapsed<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_137
+
+><td class="source">                 bytesDone:(NSUInteger)length;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_138
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_139
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_140
+
+><td class="source"> * Called after the socket has successfully completed SSL/TLS negotiation.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_141
+
+><td class="source"> * This method is not called unless you use the provided startTLS method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_142
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_143
+
+><td class="source"> * If a SSL/TLS negotiation fails (invalid certificate, etc) then the socket will immediately close,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_144
+
+><td class="source"> * and the onSocket:willDisconnectWithError: delegate method will be called with the specific SSL error code.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_145
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_146
+
+><td class="source">- (void)onSocketDidSecure:(AsyncSocket *)sock;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_147
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_148
+
+><td class="source">@end<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_149
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_150
+
+><td class="source">////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_151
+
+><td class="source">#pragma mark -<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_152
+
+><td class="source">////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_153
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_154
+
+><td class="source">@interface AsyncSocket : NSObject<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_155
+
+><td class="source">{<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_156
+
+><td class="source">	CFSocketNativeHandle theNativeSocket4;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_157
+
+><td class="source">	CFSocketNativeHandle theNativeSocket6;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_158
+
+><td class="source">	<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_159
+
+><td class="source">	CFSocketRef theSocket4;            // IPv4 accept or connect socket<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_160
+
+><td class="source">	CFSocketRef theSocket6;            // IPv6 accept or connect socket<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_161
+
+><td class="source">	<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_162
+
+><td class="source">	CFReadStreamRef theReadStream;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_163
+
+><td class="source">	CFWriteStreamRef theWriteStream;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_164
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_165
+
+><td class="source">	CFRunLoopSourceRef theSource4;     // For theSocket4<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_166
+
+><td class="source">	CFRunLoopSourceRef theSource6;     // For theSocket6<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_167
+
+><td class="source">	CFRunLoopRef theRunLoop;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_168
+
+><td class="source">	CFSocketContext theContext;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_169
+
+><td class="source">	NSArray *theRunLoopModes;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_170
+
+><td class="source">	<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_171
+
+><td class="source">	NSTimer *theConnectTimer;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_172
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_173
+
+><td class="source">	NSMutableArray *theReadQueue;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_174
+
+><td class="source">	AsyncReadPacket *theCurrentRead;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_175
+
+><td class="source">	NSTimer *theReadTimer;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_176
+
+><td class="source">	NSMutableData *partialReadBuffer;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_177
+
+><td class="source">	<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_178
+
+><td class="source">	NSMutableArray *theWriteQueue;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_179
+
+><td class="source">	AsyncWritePacket *theCurrentWrite;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_180
+
+><td class="source">	NSTimer *theWriteTimer;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_181
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_182
+
+><td class="source">	id theDelegate;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_183
+
+><td class="source">	UInt16 theFlags;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_184
+
+><td class="source">	<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_185
+
+><td class="source">	long theUserData;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_186
+
+><td class="source">}<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_187
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_188
+
+><td class="source">- (id)init;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_189
+
+><td class="source">- (id)initWithDelegate:(id)delegate;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_190
+
+><td class="source">- (id)initWithDelegate:(id)delegate userData:(long)userData;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_191
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_192
+
+><td class="source">/* String representation is long but has no &quot;\n&quot;. */<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_193
+
+><td class="source">- (NSString *)description;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_194
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_195
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_196
+
+><td class="source"> * Use &quot;canSafelySetDelegate&quot; to see if there is any pending business (reads and writes) with the current delegate<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_197
+
+><td class="source"> * before changing it.  It is, of course, safe to change the delegate before connecting or accepting connections.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_198
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_199
+
+><td class="source">- (id)delegate;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_200
+
+><td class="source">- (BOOL)canSafelySetDelegate;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_201
+
+><td class="source">- (void)setDelegate:(id)delegate;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_202
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_203
+
+><td class="source">/* User data can be a long, or an id or void * cast to a long. */<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_204
+
+><td class="source">- (long)userData;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_205
+
+><td class="source">- (void)setUserData:(long)userData;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_206
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_207
+
+><td class="source">/* Don&#39;t use these to read or write. And don&#39;t close them either! */<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_208
+
+><td class="source">- (CFSocketRef)getCFSocket;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_209
+
+><td class="source">- (CFReadStreamRef)getCFReadStream;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_210
+
+><td class="source">- (CFWriteStreamRef)getCFWriteStream;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_211
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_212
+
+><td class="source">// Once one of the accept or connect methods are called, the AsyncSocket instance is locked in<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_213
+
+><td class="source">// and the other accept/connect methods can&#39;t be called without disconnecting the socket first.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_214
+
+><td class="source">// If the attempt fails or times out, these methods either return NO or<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_215
+
+><td class="source">// call &quot;onSocket:willDisconnectWithError:&quot; and &quot;onSockedDidDisconnect:&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_216
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_217
+
+><td class="source">// When an incoming connection is accepted, AsyncSocket invokes several delegate methods.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_218
+
+><td class="source">// These methods are (in chronological order):<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_219
+
+><td class="source">// 1. onSocket:didAcceptNewSocket:<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_220
+
+><td class="source">// 2. onSocket:wantsRunLoopForNewSocket:<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_221
+
+><td class="source">// 3. onSocketWillConnect:<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_222
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_223
+
+><td class="source">// Your server code will need to retain the accepted socket (if you want to accept it).<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_224
+
+><td class="source">// The best place to do this is probably in the onSocket:didAcceptNewSocket: method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_225
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_226
+
+><td class="source">// After the read and write streams have been setup for the newly accepted socket,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_227
+
+><td class="source">// the onSocket:didConnectToHost:port: method will be called on the proper run loop.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_228
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_229
+
+><td class="source">// Multithreading Note: If you&#39;re going to be moving the newly accepted socket to another run<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_230
+
+><td class="source">// loop by implementing onSocket:wantsRunLoopForNewSocket:, then you should wait until the<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_231
+
+><td class="source">// onSocket:didConnectToHost:port: method before calling read, write, or startTLS methods.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_232
+
+><td class="source">// Otherwise read/write events are scheduled on the incorrect runloop, and chaos may ensue.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_233
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_234
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_235
+
+><td class="source"> * Tells the socket to begin listening and accepting connections on the given port.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_236
+
+><td class="source"> * When a connection comes in, the AsyncSocket instance will call the various delegate methods (see above).<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_237
+
+><td class="source"> * The socket will listen on all available interfaces (e.g. wifi, ethernet, etc)<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_238
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_239
+
+><td class="source">- (BOOL)acceptOnPort:(UInt16)port error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_240
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_241
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_242
+
+><td class="source"> * This method is the same as acceptOnPort:error: with the additional option<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_243
+
+><td class="source"> * of specifying which interface to listen on. So, for example, if you were writing code for a server that<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_244
+
+><td class="source"> * has multiple IP addresses, you could specify which address you wanted to listen on.  Or you could use it<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_245
+
+><td class="source"> * to specify that the socket should only accept connections over ethernet, and not other interfaces such as wifi.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_246
+
+><td class="source"> * You may also use the special strings &quot;localhost&quot; or &quot;loopback&quot; to specify that<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_247
+
+><td class="source"> * the socket only accept connections from the local machine.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_248
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_249
+
+><td class="source"> * To accept connections on any interface pass nil, or simply use the acceptOnPort:error: method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_250
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_251
+
+><td class="source">- (BOOL)acceptOnInterface:(NSString *)interface port:(UInt16)port error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_252
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_253
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_254
+
+><td class="source"> * Connects to the given host and port.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_255
+
+><td class="source"> * The host may be a domain name (e.g. &quot;deusty.com&quot;) or an IP address string (e.g. &quot;192.168.0.2&quot;)<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_256
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_257
+
+><td class="source">- (BOOL)connectToHost:(NSString *)hostname onPort:(UInt16)port error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_258
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_259
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_260
+
+><td class="source"> * This method is the same as connectToHost:onPort:error: with an additional timeout option.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_261
+
+><td class="source"> * To not time out use a negative time interval, or simply use the connectToHost:onPort:error: method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_262
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_263
+
+><td class="source">- (BOOL)connectToHost:(NSString *)hostname<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_264
+
+><td class="source">			   onPort:(UInt16)port<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_265
+
+><td class="source">		  withTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_266
+
+><td class="source">				error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_267
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_268
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_269
+
+><td class="source"> * Connects to the given address, specified as a sockaddr structure wrapped in a NSData object.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_270
+
+><td class="source"> * For example, a NSData object returned from NSNetservice&#39;s addresses method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_271
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_272
+
+><td class="source"> * If you have an existing struct sockaddr you can convert it to a NSData object like so:<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_273
+
+><td class="source"> * struct sockaddr sa  -&gt; NSData *dsa = [NSData dataWithBytes:&amp;remoteAddr length:remoteAddr.sa_len];<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_274
+
+><td class="source"> * struct sockaddr *sa -&gt; NSData *dsa = [NSData dataWithBytes:remoteAddr length:remoteAddr-&gt;sa_len];<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_275
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_276
+
+><td class="source">- (BOOL)connectToAddress:(NSData *)remoteAddr error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_277
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_278
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_279
+
+><td class="source"> * This method is the same as connectToAddress:error: with an additional timeout option.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_280
+
+><td class="source"> * To not time out use a negative time interval, or simply use the connectToAddress:error: method.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_281
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_282
+
+><td class="source">- (BOOL)connectToAddress:(NSData *)remoteAddr withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_283
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_284
+
+><td class="source">- (BOOL)connectToAddress:(NSData *)remoteAddr<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_285
+
+><td class="source">     viaInterfaceAddress:(NSData *)interfaceAddr<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_286
+
+><td class="source">             withTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_287
+
+><td class="source">                   error:(NSError **)errPtr;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_288
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_289
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_290
+
+><td class="source"> * Disconnects immediately. Any pending reads or writes are dropped.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_291
+
+><td class="source"> * If the socket is not already disconnected, the onSocketDidDisconnect delegate method<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_292
+
+><td class="source"> * will be called immediately, before this method returns.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_293
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_294
+
+><td class="source"> * Please note the recommended way of releasing an AsyncSocket instance (e.g. in a dealloc method)<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_295
+
+><td class="source"> * [asyncSocket setDelegate:nil];<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_296
+
+><td class="source"> * [asyncSocket disconnect];<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_297
+
+><td class="source"> * [asyncSocket release];<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_298
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_299
+
+><td class="source">- (void)disconnect;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_300
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_301
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_302
+
+><td class="source"> * Disconnects after all pending reads have completed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_303
+
+><td class="source"> * After calling this, the read and write methods will do nothing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_304
+
+><td class="source"> * The socket will disconnect even if there are still pending writes.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_305
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_306
+
+><td class="source">- (void)disconnectAfterReading;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_307
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_308
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_309
+
+><td class="source"> * Disconnects after all pending writes have completed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_310
+
+><td class="source"> * After calling this, the read and write methods will do nothing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_311
+
+><td class="source"> * The socket will disconnect even if there are still pending reads.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_312
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_313
+
+><td class="source">- (void)disconnectAfterWriting;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_314
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_315
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_316
+
+><td class="source"> * Disconnects after all pending reads and writes have completed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_317
+
+><td class="source"> * After calling this, the read and write methods will do nothing.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_318
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_319
+
+><td class="source">- (void)disconnectAfterReadingAndWriting;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_320
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_321
+
+><td class="source">/* Returns YES if the socket and streams are open, connected, and ready for reading and writing. */<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_322
+
+><td class="source">- (BOOL)isConnected;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_323
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_324
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_325
+
+><td class="source"> * Returns the local or remote host and port to which this socket is connected, or nil and 0 if not connected.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_326
+
+><td class="source"> * The host will be an IP address.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_327
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_328
+
+><td class="source">- (NSString *)connectedHost;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_329
+
+><td class="source">- (UInt16)connectedPort;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_330
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_331
+
+><td class="source">- (NSString *)localHost;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_332
+
+><td class="source">- (UInt16)localPort;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_333
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_334
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_335
+
+><td class="source"> * Returns the local or remote address to which this socket is connected,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_336
+
+><td class="source"> * specified as a sockaddr structure wrapped in a NSData object.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_337
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_338
+
+><td class="source"> * See also the connectedHost, connectedPort, localHost and localPort methods.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_339
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_340
+
+><td class="source">- (NSData *)connectedAddress;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_341
+
+><td class="source">- (NSData *)localAddress;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_342
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_343
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_344
+
+><td class="source"> * Returns whether the socket is IPv4 or IPv6.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_345
+
+><td class="source"> * An accepting socket may be both.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_346
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_347
+
+><td class="source">- (BOOL)isIPv4;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_348
+
+><td class="source">- (BOOL)isIPv6;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_349
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_350
+
+><td class="source">// The readData and writeData methods won&#39;t block (they are asynchronous).<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_351
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_352
+
+><td class="source">// When a read is complete the onSocket:didReadData:withTag: delegate method is called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_353
+
+><td class="source">// When a write is complete the onSocket:didWriteDataWithTag: delegate method is called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_354
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_355
+
+><td class="source">// You may optionally set a timeout for any read/write operation. (To not timeout, use a negative time interval.)<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_356
+
+><td class="source">// If a read/write opertion times out, the corresponding &quot;onSocket:shouldTimeout...&quot; delegate method<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_357
+
+><td class="source">// is called to optionally allow you to extend the timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_358
+
+><td class="source">// Upon a timeout, the &quot;onSocket:willDisconnectWithError:&quot; method is called, followed by &quot;onSocketDidDisconnect&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_359
+
+><td class="source">// <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_360
+
+><td class="source">// The tag is for your convenience.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_361
+
+><td class="source">// You can use it as an array index, step number, state id, pointer, etc.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_362
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_363
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_364
+
+><td class="source"> * Reads the first available bytes that become available on the socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_365
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_366
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_367
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_368
+
+><td class="source">- (void)readDataWithTimeout:(NSTimeInterval)timeout tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_369
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_370
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_371
+
+><td class="source"> * Reads the first available bytes that become available on the socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_372
+
+><td class="source"> * The bytes will be appended to the given byte buffer starting at the given offset.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_373
+
+><td class="source"> * The given buffer will automatically be increased in size if needed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_374
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_375
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_376
+
+><td class="source"> * If the buffer if nil, the socket will create a buffer for you.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_377
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_378
+
+><td class="source"> * If the bufferOffset is greater than the length of the given buffer,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_379
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_380
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_381
+
+><td class="source"> * If you pass a buffer, you must not alter it in any way while AsyncSocket is using it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_382
+
+><td class="source"> * After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_383
+
+><td class="source"> * That is, it will reference the bytes that were appended to the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_384
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_385
+
+><td class="source">- (void)readDataWithTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_386
+
+><td class="source">					 buffer:(NSMutableData *)buffer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_387
+
+><td class="source">			   bufferOffset:(NSUInteger)offset<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_388
+
+><td class="source">						tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_389
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_390
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_391
+
+><td class="source"> * Reads the first available bytes that become available on the socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_392
+
+><td class="source"> * The bytes will be appended to the given byte buffer starting at the given offset.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_393
+
+><td class="source"> * The given buffer will automatically be increased in size if needed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_394
+
+><td class="source"> * A maximum of length bytes will be read.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_395
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_396
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_397
+
+><td class="source"> * If the buffer if nil, a buffer will automatically be created for you.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_398
+
+><td class="source"> * If maxLength is zero, no length restriction is enforced.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_399
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_400
+
+><td class="source"> * If the bufferOffset is greater than the length of the given buffer,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_401
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_402
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_403
+
+><td class="source"> * If you pass a buffer, you must not alter it in any way while AsyncSocket is using it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_404
+
+><td class="source"> * After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_405
+
+><td class="source"> * That is, it will reference the bytes that were appended to the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_406
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_407
+
+><td class="source">- (void)readDataWithTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_408
+
+><td class="source">                     buffer:(NSMutableData *)buffer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_409
+
+><td class="source">               bufferOffset:(NSUInteger)offset<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_410
+
+><td class="source">                  maxLength:(NSUInteger)length<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_411
+
+><td class="source">                        tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_412
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_413
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_414
+
+><td class="source"> * Reads the given number of bytes.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_415
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_416
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_417
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_418
+
+><td class="source"> * If the length is 0, this method does nothing and the delegate is not called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_419
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_420
+
+><td class="source">- (void)readDataToLength:(NSUInteger)length withTimeout:(NSTimeInterval)timeout tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_421
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_422
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_423
+
+><td class="source"> * Reads the given number of bytes.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_424
+
+><td class="source"> * The bytes will be appended to the given byte buffer starting at the given offset.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_425
+
+><td class="source"> * The given buffer will automatically be increased in size if needed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_426
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_427
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_428
+
+><td class="source"> * If the buffer if nil, a buffer will automatically be created for you.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_429
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_430
+
+><td class="source"> * If the length is 0, this method does nothing and the delegate is not called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_431
+
+><td class="source"> * If the bufferOffset is greater than the length of the given buffer,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_432
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_433
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_434
+
+><td class="source"> * If you pass a buffer, you must not alter it in any way while AsyncSocket is using it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_435
+
+><td class="source"> * After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_436
+
+><td class="source"> * That is, it will reference the bytes that were appended to the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_437
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_438
+
+><td class="source">- (void)readDataToLength:(NSUInteger)length<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_439
+
+><td class="source">             withTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_440
+
+><td class="source">                  buffer:(NSMutableData *)buffer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_441
+
+><td class="source">            bufferOffset:(NSUInteger)offset<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_442
+
+><td class="source">                     tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_443
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_444
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_445
+
+><td class="source"> * Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_446
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_447
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_448
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_449
+
+><td class="source"> * If you pass nil or zero-length data as the &quot;data&quot; parameter,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_450
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_451
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_452
+
+><td class="source"> * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the &quot;data&quot; parameter.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_453
+
+><td class="source"> * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_454
+
+><td class="source"> * a character, the read will prematurely end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_455
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_456
+
+><td class="source">- (void)readDataToData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_457
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_458
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_459
+
+><td class="source"> * Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_460
+
+><td class="source"> * The bytes will be appended to the given byte buffer starting at the given offset.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_461
+
+><td class="source"> * The given buffer will automatically be increased in size if needed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_462
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_463
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_464
+
+><td class="source"> * If the buffer if nil, a buffer will automatically be created for you.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_465
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_466
+
+><td class="source"> * If the bufferOffset is greater than the length of the given buffer,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_467
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_468
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_469
+
+><td class="source"> * If you pass a buffer, you must not alter it in any way while AsyncSocket is using it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_470
+
+><td class="source"> * After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_471
+
+><td class="source"> * That is, it will reference the bytes that were appended to the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_472
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_473
+
+><td class="source"> * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the &quot;data&quot; parameter.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_474
+
+><td class="source"> * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_475
+
+><td class="source"> * a character, the read will prematurely end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_476
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_477
+
+><td class="source">- (void)readDataToData:(NSData *)data<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_478
+
+><td class="source">           withTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_479
+
+><td class="source">                buffer:(NSMutableData *)buffer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_480
+
+><td class="source">          bufferOffset:(NSUInteger)offset<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_481
+
+><td class="source">                   tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_482
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_483
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_484
+
+><td class="source"> * Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_485
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_486
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_487
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_488
+
+><td class="source"> * If maxLength is zero, no length restriction is enforced.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_489
+
+><td class="source"> * Otherwise if maxLength bytes are read without completing the read,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_490
+
+><td class="source"> * it is treated similarly to a timeout - the socket is closed with a AsyncSocketReadMaxedOutError.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_491
+
+><td class="source"> * The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_492
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_493
+
+><td class="source"> * If you pass nil or zero-length data as the &quot;data&quot; parameter,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_494
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_495
+
+><td class="source"> * If you pass a maxLength parameter that is less than the length of the data parameter,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_496
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_497
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_498
+
+><td class="source"> * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the &quot;data&quot; parameter.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_499
+
+><td class="source"> * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_500
+
+><td class="source"> * a character, the read will prematurely end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_501
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_502
+
+><td class="source">- (void)readDataToData:(NSData *)data withTimeout:(NSTimeInterval)timeout maxLength:(NSUInteger)length tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_503
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_504
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_505
+
+><td class="source"> * Reads bytes until (and including) the passed &quot;data&quot; parameter, which acts as a separator.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_506
+
+><td class="source"> * The bytes will be appended to the given byte buffer starting at the given offset.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_507
+
+><td class="source"> * The given buffer will automatically be increased in size if needed.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_508
+
+><td class="source"> * A maximum of length bytes will be read.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_509
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_510
+
+><td class="source"> * If the timeout value is negative, the read operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_511
+
+><td class="source"> * If the buffer if nil, a buffer will automatically be created for you.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_512
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_513
+
+><td class="source"> * If maxLength is zero, no length restriction is enforced.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_514
+
+><td class="source"> * Otherwise if maxLength bytes are read without completing the read,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_515
+
+><td class="source"> * it is treated similarly to a timeout - the socket is closed with a AsyncSocketReadMaxedOutError.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_516
+
+><td class="source"> * The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_517
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_518
+
+><td class="source"> * If you pass a maxLength parameter that is less than the length of the data parameter,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_519
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_520
+
+><td class="source"> * If the bufferOffset is greater than the length of the given buffer,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_521
+
+><td class="source"> * the method will do nothing, and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_522
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_523
+
+><td class="source"> * If you pass a buffer, you must not alter it in any way while AsyncSocket is using it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_524
+
+><td class="source"> * After completion, the data returned in onSocket:didReadData:withTag: will be a subset of the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_525
+
+><td class="source"> * That is, it will reference the bytes that were appended to the given buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_526
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_527
+
+><td class="source"> * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the &quot;data&quot; parameter.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_528
+
+><td class="source"> * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_529
+
+><td class="source"> * a character, the read will prematurely end.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_530
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_531
+
+><td class="source">- (void)readDataToData:(NSData *)data<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_532
+
+><td class="source">           withTimeout:(NSTimeInterval)timeout<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_533
+
+><td class="source">                buffer:(NSMutableData *)buffer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_534
+
+><td class="source">          bufferOffset:(NSUInteger)offset<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_535
+
+><td class="source">             maxLength:(NSUInteger)length<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_536
+
+><td class="source">                   tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_537
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_538
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_539
+
+><td class="source"> * Writes data to the socket, and calls the delegate when finished.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_540
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_541
+
+><td class="source"> * If you pass in nil or zero-length data, this method does nothing and the delegate will not be called.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_542
+
+><td class="source"> * If the timeout value is negative, the write operation will not use a timeout.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_543
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_544
+
+><td class="source">- (void)writeData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_545
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_546
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_547
+
+><td class="source"> * Returns progress of current read or write, from 0.0 to 1.0, or NaN if no read/write (use isnan() to check).<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_548
+
+><td class="source"> * &quot;tag&quot;, &quot;done&quot; and &quot;total&quot; will be filled in if they aren&#39;t NULL.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_549
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_550
+
+><td class="source">- (float)progressOfReadReturningTag:(long *)tag bytesDone:(NSUInteger *)done total:(NSUInteger *)total;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_551
+
+><td class="source">- (float)progressOfWriteReturningTag:(long *)tag bytesDone:(NSUInteger *)done total:(NSUInteger *)total;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_552
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_553
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_554
+
+><td class="source"> * Secures the connection using SSL/TLS.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_555
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_556
+
+><td class="source"> * This method may be called at any time, and the TLS handshake will occur after all pending reads and writes<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_557
+
+><td class="source"> * are finished. This allows one the option of sending a protocol dependent StartTLS message, and queuing<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_558
+
+><td class="source"> * the upgrade to TLS at the same time, without having to wait for the write to finish.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_559
+
+><td class="source"> * Any reads or writes scheduled after this method is called will occur over the secured connection.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_560
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_561
+
+><td class="source"> * The possible keys and values for the TLS settings are well documented.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_562
+
+><td class="source"> * Some possible keys are:<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_563
+
+><td class="source"> * - kCFStreamSSLLevel<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_564
+
+><td class="source"> * - kCFStreamSSLAllowsExpiredCertificates<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_565
+
+><td class="source"> * - kCFStreamSSLAllowsExpiredRoots<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_566
+
+><td class="source"> * - kCFStreamSSLAllowsAnyRoot<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_567
+
+><td class="source"> * - kCFStreamSSLValidatesCertificateChain<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_568
+
+><td class="source"> * - kCFStreamSSLPeerName<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_569
+
+><td class="source"> * - kCFStreamSSLCertificates<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_570
+
+><td class="source"> * - kCFStreamSSLIsServer<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_571
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_572
+
+><td class="source"> * Please refer to Apple&#39;s documentation for associated values, as well as other possible keys.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_573
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_574
+
+><td class="source"> * If you pass in nil or an empty dictionary, the default settings will be used.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_575
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_576
+
+><td class="source"> * The default settings will check to make sure the remote party&#39;s certificate is signed by a<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_577
+
+><td class="source"> * trusted 3rd party certificate agency (e.g. verisign) and that the certificate is not expired.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_578
+
+><td class="source"> * However it will not verify the name on the certificate unless you<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_579
+
+><td class="source"> * give it a name to verify against via the kCFStreamSSLPeerName key.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_580
+
+><td class="source"> * The security implications of this are important to understand.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_581
+
+><td class="source"> * Imagine you are attempting to create a secure connection to MySecureServer.com,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_582
+
+><td class="source"> * but your socket gets directed to MaliciousServer.com because of a hacked DNS server.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_583
+
+><td class="source"> * If you simply use the default settings, and MaliciousServer.com has a valid certificate,<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_584
+
+><td class="source"> * the default settings will not detect any problems since the certificate is valid.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_585
+
+><td class="source"> * To properly secure your connection in this particular scenario you<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_586
+
+><td class="source"> * should set the kCFStreamSSLPeerName property to &quot;MySecureServer.com&quot;.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_587
+
+><td class="source"> * If you do not know the peer name of the remote host in advance (for example, you&#39;re not sure<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_588
+
+><td class="source"> * if it will be &quot;domain.com&quot; or &quot;www.domain.com&quot;), then you can use the default settings to validate the<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_589
+
+><td class="source"> * certificate, and then use the X509Certificate class to verify the issuer after the socket has been secured.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_590
+
+><td class="source"> * The X509Certificate class is part of the CocoaAsyncSocket open source project.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_591
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_592
+
+><td class="source">- (void)startTLS:(NSDictionary *)tlsSettings;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_593
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_594
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_595
+
+><td class="source"> * For handling readDataToData requests, data is necessarily read from the socket in small increments.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_596
+
+><td class="source"> * The performance can be much improved by allowing AsyncSocket to read larger chunks at a time and<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_597
+
+><td class="source"> * store any overflow in a small internal buffer.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_598
+
+><td class="source"> * This is termed pre-buffering, as some data may be read for you before you ask for it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_599
+
+><td class="source"> * If you use readDataToData a lot, enabling pre-buffering will result in better performance, especially on the iPhone.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_600
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_601
+
+><td class="source"> * The default pre-buffering state is controlled by the DEFAULT_PREBUFFERING definition.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_602
+
+><td class="source"> * It is highly recommended one leave this set to YES.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_603
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_604
+
+><td class="source"> * This method exists in case pre-buffering needs to be disabled by default for some unforeseen reason.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_605
+
+><td class="source"> * In that case, this method exists to allow one to easily enable pre-buffering when ready.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_606
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_607
+
+><td class="source">- (void)enablePreBuffering;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_608
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_609
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_610
+
+><td class="source"> * When you create an AsyncSocket, it is added to the runloop of the current thread.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_611
+
+><td class="source"> * So for manually created sockets, it is easiest to simply create the socket on the thread you intend to use it.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_612
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_613
+
+><td class="source"> * If a new socket is accepted, the delegate method onSocket:wantsRunLoopForNewSocket: is called to<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_614
+
+><td class="source"> * allow you to place the socket on a separate thread. This works best in conjunction with a thread pool design.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_615
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_616
+
+><td class="source"> * If, however, you need to move the socket to a separate thread at a later time, this<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_617
+
+><td class="source"> * method may be used to accomplish the task.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_618
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_619
+
+><td class="source"> * This method must be called from the thread/runloop the socket is currently running on.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_620
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_621
+
+><td class="source"> * Note: After calling this method, all further method calls to this object should be done from the given runloop.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_622
+
+><td class="source"> * Also, all delegate calls will be sent on the given runloop.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_623
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_624
+
+><td class="source">- (BOOL)moveToRunLoop:(NSRunLoop *)runLoop;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_625
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_626
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_627
+
+><td class="source"> * Allows you to configure which run loop modes the socket uses.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_628
+
+><td class="source"> * The default set of run loop modes is NSDefaultRunLoopMode.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_629
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_630
+
+><td class="source"> * If you&#39;d like your socket to continue operation during other modes, you may want to add modes such as<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_631
+
+><td class="source"> * NSModalPanelRunLoopMode or NSEventTrackingRunLoopMode. Or you may simply want to use NSRunLoopCommonModes.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_632
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_633
+
+><td class="source"> * Accepted sockets will automatically inherit the same run loop modes as the listening socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_634
+
+><td class="source"> * <br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_635
+
+><td class="source"> * Note: NSRunLoopCommonModes is defined in 10.5. For previous versions one can use kCFRunLoopCommonModes.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_636
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_637
+
+><td class="source">- (BOOL)setRunLoopModes:(NSArray *)runLoopModes;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_638
+
+><td class="source">- (BOOL)addRunLoopMode:(NSString *)runLoopMode;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_639
+
+><td class="source">- (BOOL)removeRunLoopMode:(NSString *)runLoopMode;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_640
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_641
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_642
+
+><td class="source"> * Returns the current run loop modes the AsyncSocket instance is operating in.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_643
+
+><td class="source"> * The default set of run loop modes is NSDefaultRunLoopMode.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_644
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_645
+
+><td class="source">- (NSArray *)runLoopModes;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_646
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_647
+
+><td class="source">/**<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_648
+
+><td class="source"> * In the event of an error, this method may be called during onSocket:willDisconnectWithError: to read<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_649
+
+><td class="source"> * any data that&#39;s left on the socket.<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_650
+
+><td class="source">**/<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_651
+
+><td class="source">- (NSData *)unreadData;<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_652
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_653
+
+><td class="source">/* A few common line separators, for use with the readDataToData:... methods. */<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_654
+
+><td class="source">+ (NSData *)CRLFData;   // 0x0D0A<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_655
+
+><td class="source">+ (NSData *)CRData;     // 0x0D<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_656
+
+><td class="source">+ (NSData *)LFData;     // 0x0A<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_657
+
+><td class="source">+ (NSData *)ZeroData;   // 0x00<br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_658
+
+><td class="source"><br></td></tr
+><tr
+id=sl_svn642950d66544921e60d74c278ae0a096ea498bc7_659
+
+><td class="source">@end<br></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+</td>
+</tr></table>
+
+ 
+<script type="text/javascript">
+ var lineNumUnderMouse = -1;
+ 
+ function gutterOver(num) {
+ gutterOut();
+ var newTR = document.getElementById('gr_svn642950d66544921e60d74c278ae0a096ea498bc7_' + num);
+ if (newTR) {
+ newTR.className = 'undermouse';
+ }
+ lineNumUnderMouse = num;
+ }
+ function gutterOut() {
+ if (lineNumUnderMouse != -1) {
+ var oldTR = document.getElementById(
+ 'gr_svn642950d66544921e60d74c278ae0a096ea498bc7_' + lineNumUnderMouse);
+ if (oldTR) {
+ oldTR.className = '';
+ }
+ lineNumUnderMouse = -1;
+ }
+ }
+ var numsGenState = {table_base_id: 'nums_table_'};
+ var srcGenState = {table_base_id: 'src_table_'};
+ var alignerRunning = false;
+ var startOver = false;
+ function setLineNumberHeights() {
+ if (alignerRunning) {
+ startOver = true;
+ return;
+ }
+ numsGenState.chunk_id = 0;
+ numsGenState.table = document.getElementById('nums_table_0');
+ numsGenState.row_num = 0;
+ if (!numsGenState.table) {
+ return; // Silently exit if no file is present.
+ }
+ srcGenState.chunk_id = 0;
+ srcGenState.table = document.getElementById('src_table_0');
+ srcGenState.row_num = 0;
+ alignerRunning = true;
+ continueToSetLineNumberHeights();
+ }
+ function rowGenerator(genState) {
+ if (genState.row_num < genState.table.rows.length) {
+ var currentRow = genState.table.rows[genState.row_num];
+ genState.row_num++;
+ return currentRow;
+ }
+ var newTable = document.getElementById(
+ genState.table_base_id + (genState.chunk_id + 1));
+ if (newTable) {
+ genState.chunk_id++;
+ genState.row_num = 0;
+ genState.table = newTable;
+ return genState.table.rows[0];
+ }
+ return null;
+ }
+ var MAX_ROWS_PER_PASS = 1000;
+ function continueToSetLineNumberHeights() {
+ var rowsInThisPass = 0;
+ var numRow = 1;
+ var srcRow = 1;
+ while (numRow && srcRow && rowsInThisPass < MAX_ROWS_PER_PASS) {
+ numRow = rowGenerator(numsGenState);
+ srcRow = rowGenerator(srcGenState);
+ rowsInThisPass++;
+ if (numRow && srcRow) {
+ if (numRow.offsetHeight != srcRow.offsetHeight) {
+ numRow.firstChild.style.height = srcRow.offsetHeight + 'px';
+ }
+ }
+ }
+ if (rowsInThisPass >= MAX_ROWS_PER_PASS) {
+ setTimeout(continueToSetLineNumberHeights, 10);
+ } else {
+ alignerRunning = false;
+ if (startOver) {
+ startOver = false;
+ setTimeout(setLineNumberHeights, 500);
+ }
+ }
+ }
+ function initLineNumberHeights() {
+ // Do 2 complete passes, because there can be races
+ // between this code and prettify.
+ startOver = true;
+ setTimeout(setLineNumberHeights, 250);
+ window.onresize = setLineNumberHeights;
+ }
+ initLineNumberHeights();
+</script>
+
+ 
+ 
+ <div id="log">
+ <div style="text-align:right">
+ <a class="ifCollapse" href="#" onclick="_toggleMeta(this); return false">Show details</a>
+ <a class="ifExpand" href="#" onclick="_toggleMeta(this); return false">Hide details</a>
+ </div>
+ <div class="ifExpand">
+ 
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="changelog">
+ <p>Change log</p>
+ <div>
+ <a href="/p/cocoaasyncsocket/source/detail?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&amp;r=6674474a3b35f812fa3a8edca791ac6bc5903b2d">6674474a3b35</a>
+ by Robbie Hanson &lt;robbieha...@deusty.com&gt;
+ on Nov 15, 2010
+ &nbsp; <a href="/p/cocoaasyncsocket/source/diff?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=6674474a3b35f812fa3a8edca791ac6bc5903b2d&amp;format=side&amp;path=/RunLoop/AsyncSocket.h&amp;old_path=/RunLoop/AsyncSocket.h&amp;old=660ad20ec25c3464e3e728b7f575f2bb92f31cf1">Diff</a>
+ </div>
+ <pre>Switching to newer optional/protocol for
+the delegate declarations.
+</pre>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ var detail_url = '/p/cocoaasyncsocket/source/detail?r=6674474a3b35f812fa3a8edca791ac6bc5903b2d&spec=svn642950d66544921e60d74c278ae0a096ea498bc7';
+ var publish_url = '/p/cocoaasyncsocket/source/detail?r=6674474a3b35f812fa3a8edca791ac6bc5903b2d&spec=svn642950d66544921e60d74c278ae0a096ea498bc7#publish';
+ // describe the paths of this revision in javascript.
+ var changed_paths = [];
+ var changed_urls = [];
+ 
+ changed_paths.push('/RunLoop/AsyncSocket.h');
+ changed_urls.push('/p/cocoaasyncsocket/source/browse/RunLoop/AsyncSocket.h?r\x3d6674474a3b35f812fa3a8edca791ac6bc5903b2d\x26spec\x3dsvn642950d66544921e60d74c278ae0a096ea498bc7');
+ 
+ var selected_path = '/RunLoop/AsyncSocket.h';
+ 
+ 
+ changed_paths.push('/RunLoop/AsyncUdpSocket.h');
+ changed_urls.push('/p/cocoaasyncsocket/source/browse/RunLoop/AsyncUdpSocket.h?r\x3d6674474a3b35f812fa3a8edca791ac6bc5903b2d\x26spec\x3dsvn642950d66544921e60d74c278ae0a096ea498bc7');
+ 
+ 
+ function getCurrentPageIndex() {
+ for (var i = 0; i < changed_paths.length; i++) {
+ if (selected_path == changed_paths[i]) {
+ return i;
+ }
+ }
+ }
+ function getNextPage() {
+ var i = getCurrentPageIndex();
+ if (i < changed_paths.length - 1) {
+ return changed_urls[i + 1];
+ }
+ return null;
+ }
+ function getPreviousPage() {
+ var i = getCurrentPageIndex();
+ if (i > 0) {
+ return changed_urls[i - 1];
+ }
+ return null;
+ }
+ function gotoNextPage() {
+ var page = getNextPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoPreviousPage() {
+ var page = getPreviousPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoDetailPage() {
+ window.location = detail_url;
+ }
+ function gotoPublishPage() {
+ window.location = publish_url;
+ }
+</script>
+
+ 
+ <style type="text/css">
+ #review_nav {
+ border-top: 3px solid white;
+ padding-top: 6px;
+ margin-top: 1em;
+ }
+ #review_nav td {
+ vertical-align: middle;
+ }
+ #review_nav select {
+ margin: .5em 0;
+ }
+ </style>
+ <div id="review_nav">
+ <table><tr><td>Go to:&nbsp;</td><td>
+ <select name="files_in_rev" onchange="window.location=this.value">
+ 
+ <option value="/p/cocoaasyncsocket/source/browse/RunLoop/AsyncSocket.h?r=6674474a3b35f812fa3a8edca791ac6bc5903b2d&amp;spec=svn642950d66544921e60d74c278ae0a096ea498bc7"
+ selected="selected"
+ >/RunLoop/AsyncSocket.h</option>
+ 
+ <option value="/p/cocoaasyncsocket/source/browse/RunLoop/AsyncUdpSocket.h?r=6674474a3b35f812fa3a8edca791ac6bc5903b2d&amp;spec=svn642950d66544921e60d74c278ae0a096ea498bc7"
+ 
+ >/RunLoop/AsyncUdpSocket.h</option>
+ 
+ </select>
+ </td></tr></table>
+ 
+ 
+ 
+
+
+
+ <div style="white-space:nowrap">
+ Project members,
+ <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fsource%2Fbrowse%2FRunLoop%2FAsyncSocket.h&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fcocoaasyncsocket%2Fsource%2Fbrowse%2FRunLoop%2FAsyncSocket.h"
+ >sign in</a> to write a code review</div>
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="older_bubble">
+ <p>Older revisions</p>
+ 
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/cocoaasyncsocket/source/detail?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=660ad20ec25c3464e3e728b7f575f2bb92f31cf1">660ad20ec25c</a>
+ by Robbie Hanson &lt;robbieha...@deusty.com&gt;
+ on Nov 15, 2010
+ &nbsp; <a href="/p/cocoaasyncsocket/source/diff?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=660ad20ec25c3464e3e728b7f575f2bb92f31cf1&amp;format=side&amp;path=/RunLoop/AsyncSocket.h&amp;old_path=/AsyncSocket.h&amp;old=a89fd05276702cb6a6ae76a0cf168201567c8697">Diff</a>
+ <br>
+ <pre class="ifOpened">Moving all existing code into RunLoop
+subdirectory. Prepping for GCD
+subdirectory.
+</pre>
+ </div>
+ 
+ 
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/cocoaasyncsocket/source/detail?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=a89fd05276702cb6a6ae76a0cf168201567c8697">a89fd0527670</a>
+ by Robbie Hanson &lt;robbieha...@deusty.com&gt;
+ on Oct 25, 2010
+ &nbsp; <a href="/p/cocoaasyncsocket/source/diff?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=a89fd05276702cb6a6ae76a0cf168201567c8697&amp;format=side&amp;path=/AsyncSocket.h&amp;old_path=/AsyncSocket.h&amp;old=a5e175d1c490f73330478b88e9654b19cc6a8ae0">Diff</a>
+ <br>
+ <pre class="ifOpened">API Change: Switching from CFIndex to
+NSUInteger for those values that
+should be unsigned. For example, the
+maxLength parameter.
+</pre>
+ </div>
+ 
+ <div class="closed" style="margin-bottom:3px;" >
+ <img class="ifClosed" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/plus.gif" >
+ <img class="ifOpened" onclick="_toggleHidden(this)" src="http://www.gstatic.com/codesite/ph/images/minus.gif" >
+ <a href="/p/cocoaasyncsocket/source/detail?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=a5e175d1c490f73330478b88e9654b19cc6a8ae0">a5e175d1c490</a>
+ by Robbie Hanson &lt;robbieha...@deusty.com&gt;
+ on Oct 18, 2010
+ &nbsp; <a href="/p/cocoaasyncsocket/source/diff?spec=svn642950d66544921e60d74c278ae0a096ea498bc7&r=a5e175d1c490f73330478b88e9654b19cc6a8ae0&amp;format=side&amp;path=/AsyncSocket.h&amp;old_path=/AsyncSocket.h&amp;old=95d7aded8113664beee38b37d05d243f3d7d06bc">Diff</a>
+ <br>
+ <pre class="ifOpened">Added a method to specify the
+interface to use for outgoing
+connections. Also added a sample
+project demonstrating its usage.
+</pre>
+ </div>
+ 
+ 
+ <a href="/p/cocoaasyncsocket/source/list?path=/RunLoop/AsyncSocket.h&r=6674474a3b35f812fa3a8edca791ac6bc5903b2d">All revisions of this file</a>
+ </div>
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="fileinfo_bubble">
+ <p>File info</p>
+ 
+ <div>Size: 30005 bytes,
+ 659 lines</div>
+ 
+ <div><a href="//cocoaasyncsocket.googlecode.com/git/RunLoop/AsyncSocket.h">View raw file</a></div>
+ </div>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ </div>
+ </div>
+
+
+</div>
+
+</div>
+</div>
+
+<script src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/prettify/prettify.js"></script>
+<script type="text/javascript">prettyPrint();</script>
+
+
+<script src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/source_file_scripts.js"></script>
+
+ <script type="text/javascript" src="https://kibbles.googlecode.com/files/kibbles-1.3.3.comp.js"></script>
+ <script type="text/javascript">
+ var lastStop = null;
+ var initialized = false;
+ 
+ function updateCursor(next, prev) {
+ if (prev && prev.element) {
+ prev.element.className = 'cursor_stop cursor_hidden';
+ }
+ if (next && next.element) {
+ next.element.className = 'cursor_stop cursor';
+ lastStop = next.index;
+ }
+ }
+ 
+ function pubRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftDestroyed(data) {
+ updateCursorForCell(data.cellId, 'nocursor');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ function reloadCursors() {
+ kibbles.skipper.reset();
+ loadCursors();
+ if (lastStop != null) {
+ kibbles.skipper.setCurrentStop(lastStop);
+ }
+ }
+ // possibly the simplest way to insert any newly added comments
+ // is to update the class of the corresponding cursor row,
+ // then refresh the entire list of rows.
+ function updateCursorForCell(cellId, className) {
+ var cell = document.getElementById(cellId);
+ // we have to go two rows back to find the cursor location
+ var row = getPreviousElement(cell.parentNode);
+ row.className = className;
+ }
+ // returns the previous element, ignores text nodes.
+ function getPreviousElement(e) {
+ var element = e.previousSibling;
+ if (element.nodeType == 3) {
+ element = element.previousSibling;
+ }
+ if (element && element.tagName) {
+ return element;
+ }
+ }
+ function loadCursors() {
+ // register our elements with skipper
+ var elements = CR_getElements('*', 'cursor_stop');
+ var len = elements.length;
+ for (var i = 0; i < len; i++) {
+ var element = elements[i]; 
+ element.className = 'cursor_stop cursor_hidden';
+ kibbles.skipper.append(element);
+ }
+ }
+ function toggleComments() {
+ CR_toggleCommentDisplay();
+ reloadCursors();
+ }
+ function keysOnLoadHandler() {
+ // setup skipper
+ kibbles.skipper.addStopListener(
+ kibbles.skipper.LISTENER_TYPE.PRE, updateCursor);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_top', 50);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_bottom', 100);
+ // Register our keys
+ kibbles.skipper.addFwdKey("n");
+ kibbles.skipper.addRevKey("p");
+ kibbles.keys.addKeyPressListener(
+ 'u', function() { window.location = detail_url; });
+ kibbles.keys.addKeyPressListener(
+ 'r', function() { window.location = detail_url + '#publish'; });
+ 
+ kibbles.keys.addKeyPressListener('j', gotoNextPage);
+ kibbles.keys.addKeyPressListener('k', gotoPreviousPage);
+ 
+ 
+ }
+ </script>
+<script src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/code_review_scripts.js"></script>
+<script type="text/javascript">
+ function showPublishInstructions() {
+ var element = document.getElementById('review_instr');
+ if (element) {
+ element.className = 'opened';
+ }
+ }
+ var codereviews;
+ function revsOnLoadHandler() {
+ // register our source container with the commenting code
+ var paths = {'svn642950d66544921e60d74c278ae0a096ea498bc7': '/RunLoop/AsyncSocket.h'}
+ codereviews = CR_controller.setup(
+ {"profileUrl":null,"token":null,"assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/16877346213899399380","projectHomeUrl":"/p/cocoaasyncsocket","relativeBaseUrl":"","projectName":"cocoaasyncsocket","loggedInUserEmail":null}, '', 'svn642950d66544921e60d74c278ae0a096ea498bc7', paths,
+ CR_BrowseIntegrationFactory);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, showPublishInstructions);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_PUB_PLATE, pubRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, draftRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.DISCARD_DRAFT_COMMENT, draftDestroyed);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ var initialized = true;
+ reloadCursors();
+ }
+ window.onload = function() {keysOnLoadHandler(); revsOnLoadHandler();};
+
+</script>
+<script type="text/javascript" src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/dit_scripts.js"></script>
+
+ 
+ 
+ 
+ <script type="text/javascript" src="http://www.gstatic.com/codesite/ph/16877346213899399380/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript" src="/js/codesite_product_dictionary_ph.pack.04102009.js"></script>
+</div> 
+<div id="footer" dir="ltr">
+ <div class="text">
+ &copy;2011 Google -
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+ 
+ 
+
+
+ 
+ </body>
+</html>
+
