@@ -383,6 +383,10 @@
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
     }
+    else {
+        
+        cell.btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
+    }
     cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
     cell.btnAvatar.layer.masksToBounds = YES;
     cell.btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;

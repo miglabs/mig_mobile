@@ -39,7 +39,14 @@
     
     _lblNickName.text = _userinfo.nickname;
     
-    _btnAvatar.imageURL = [NSURL URLWithString:_userinfo.headurl];
+    if (_userinfo.headurl) {
+        
+        _btnAvatar.imageURL = [NSURL URLWithString:_userinfo.headurl];
+    }
+    else {
+        
+        _btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
+    }
     _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
     _btnAvatar.layer.masksToBounds = YES;
     _btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;

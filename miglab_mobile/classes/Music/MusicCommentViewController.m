@@ -456,6 +456,10 @@
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
     }
+    else {
+        
+        cell.btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
+    }
     cell.lblNickname.text = tempcomment.user.nickname ? tempcomment.user.nickname: @"未知用户";
     cell.lblNickname.font = [UIFont fontOfApp:17.0f];
     
