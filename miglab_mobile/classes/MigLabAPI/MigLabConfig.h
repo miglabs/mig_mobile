@@ -51,9 +51,6 @@
 
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
-//根据音乐基因获取歌曲数量
-#define GET_TYPE_SONGS_NUM                  5
-
 /*
  * 用于切换不同域名地址
  */
@@ -77,6 +74,14 @@
 #define HTTP_DOMAIN                                         @"http://112.124.49.59/"
 #define HTTP_API_DOMAIN                                     @"http://112.124.49.59/"
 
+#endif
+
+/*
+ * 宏控制开关
+ */
+// 使用QQ登陆
+#ifndef USE_QQ_LOGIN
+    #define USE_QQ_LOGIN 0
 #endif
 
 //登陆

@@ -95,9 +95,18 @@
     
     //
     NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_sinaweibo", @"MenuImageName", @"新浪微博登陆", @"MenuText", nil];
+
+#if USE_QQ_LOGIN
     NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_qq", @"MenuImageName", @"QQ账号登陆", @"MenuText", nil];
+#endif
+    
     NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_douban", @"MenuImageName", @"豆瓣账号登陆", @"MenuText", nil];
+    
+#if USE_QQ_LOGIN
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, nil];
+#else
+    NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu2, nil];
+#endif
     
     NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用Mig账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];

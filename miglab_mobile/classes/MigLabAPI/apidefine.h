@@ -51,6 +51,9 @@
 /* 头像的边框宽度 */
 #define AVATAR_BORDER_WIDTH                     2
 
+//根据音乐基因获取歌曲数量
+#define GET_TYPE_SONGS_NUM                      5
+
 /* 头像的边框颜色 */
 #define AVATAR_BORDER_COLOR                     [UIColor whiteColor].CGColor
 
