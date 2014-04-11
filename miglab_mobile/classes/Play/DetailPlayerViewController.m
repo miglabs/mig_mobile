@@ -59,6 +59,11 @@
     _topPlayerInfoView = [[PCustomPlayerNavigationView alloc] initPlayerNavigationView:CGRectMake(0, -20 + self.topDistance, kMainScreenWidth, 44)];
     [_topPlayerInfoView.btnMenu addTarget:self action:@selector(doShowMenuViewAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topPlayerInfoView.btnShare addTarget:self action:@selector(doShareAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+#if !USE_SHARE
+    _topPlayerInfoView.btnShare.hidden = YES;
+#endif
+    
     [self.view addSubview:_topPlayerInfoView];
     
     //song info label

@@ -99,6 +99,11 @@
     #define USE_NICKNAME_SETTING 0
 #endif
 
+// 开启分享按钮
+#ifndef USE_SHARE
+    #define USE_SHARE 0
+#endif
+
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
 #define LOGIN_SSO_SP_URL                                    [NSString stringWithFormat:@"%@%@",HTTP_SSO_DOMAIN,@"cgi-bin/login.fcgi"]

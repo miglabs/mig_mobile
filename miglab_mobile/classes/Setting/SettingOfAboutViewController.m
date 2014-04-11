@@ -67,7 +67,7 @@
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _dataTableView.scrollEnabled = NO;
+    _dataTableView.scrollEnabled = YES;
     [self.view addSubview:_dataTableView];
     
     _datalist = [NSMutableArray arrayWithObjects:@"评个分吧", @"检查新版本", @"使用条款与隐私政策", nil];
