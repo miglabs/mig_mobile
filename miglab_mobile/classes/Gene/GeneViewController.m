@@ -282,7 +282,6 @@ static int PAGE_WIDTH = 81;
     _modifyGeneView.hidden = YES;
     
     // 初始化类型的白框焦点
-    
     _focusImageView = [[UIImageView alloc] init];
     [self.view addSubview:_focusImageView];
     _focusImageView.hidden = YES;
