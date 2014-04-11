@@ -483,10 +483,6 @@
     NSNumber *numGeneIndex = [NSNumber numberWithInt:100];
     GeneViewController *tempGene = [_dicViewControllerCache objectForKey:numGeneIndex];
     [tempGene loadSongsByGene];
-    
-    
-    
-    
 }
 
 //getTypeSongsFailed notification

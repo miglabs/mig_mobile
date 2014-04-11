@@ -57,13 +57,25 @@
     _dataTableView.scrollEnabled = YES;
     [self.view addSubview:_dataTableView];
     
+#if USE_NICKNAME_SETTING
     NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
+#else
+    NSArray *section0 = [NSArray arrayWithObjects:@"生日", nil];
+#endif
+    
+#if USE_PRIVATE && USE_FUNCTION_SETTING
     NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"功能", @"意见反馈", nil];
+#elif USE_PRIVATE
+    NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"意见反馈", nil];
+#elif USE_FUNCTION_SETTING
+    NSArray *section1 = [NSArray arrayWithObjects:@"功能", @"意见反馈", nil];
+#else
+    NSArray *section1 = [NSArray arrayWithObjects:@"意见反馈", nil];
+#endif
+    
     NSArray *section2 = [NSArray arrayWithObjects:@"关于Music Soulmate", nil];
     NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
     _datalist = [NSMutableArray arrayWithObjects:section0, section1, section2, section3, nil];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

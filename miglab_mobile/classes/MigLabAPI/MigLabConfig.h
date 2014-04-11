@@ -84,6 +84,21 @@
     #define USE_QQ_LOGIN 0
 #endif
 
+// 开启隐私
+#ifndef USE_PRIVATE
+    #define USE_PRIVATE 0
+#endif
+
+// 开启功能
+#ifndef USE_FUNCTION_SETTING
+    #define USE_FUNCTION_SETTING 0
+#endif
+
+// 开启昵称修改
+#ifndef USE_NICKNAME_SETTING
+    #define USE_NICKNAME_SETTING 0
+#endif
+
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
 #define LOGIN_SSO_SP_URL                                    [NSString stringWithFormat:@"%@%@",HTTP_SSO_DOMAIN,@"cgi-bin/login.fcgi"]
