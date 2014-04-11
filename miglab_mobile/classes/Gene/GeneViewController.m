@@ -104,7 +104,7 @@ static int PAGE_WIDTH = 81;
     _currentGeneView.lblMonthAndDay.font = [UIFont fontOfApp:18.0f];
     
     //avatar
-    _currentGeneView.egoBtnAvatar.layer.cornerRadius = 22;
+    _currentGeneView.egoBtnAvatar.layer.cornerRadius = AVATAR_RADIUS;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
     _currentGeneView.egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     _currentGeneView.egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;

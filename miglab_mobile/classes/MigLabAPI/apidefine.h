@@ -48,6 +48,9 @@
 /* 一页中附近歌曲显示的数量 */
 #define NEARMUSIC_DISPLAY_COUNT                 10
 
+/* 头像的宽度 */
+#define AVATAR_RADIUS                           22
+
 /* 头像的边框宽度 */
 #define AVATAR_BORDER_WIDTH                     2
 
