@@ -78,6 +78,11 @@
     
     [self loadData];
     
+    // 清除消息数量显示
+    UIApplication* application = [UIApplication sharedApplication];
+    
+    application.applicationIconBadgeNumber = 0;
+    [application cancelAllLocalNotifications];
 }
 
 -(void)loadData {
