@@ -86,8 +86,14 @@
     NSMutableDictionary *dicEdit0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"EditName", @"在线推荐", @"MenuText", @"1", @"IsSelected", nil];
     NSMutableDictionary *dicEdit1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"EditName", @"我喜欢的", @"MenuText", @"0", @"IsSelected", nil];
     NSMutableDictionary *dicEdit2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"EditName", @"附近的好音乐", @"MenuText", @"0", @"IsSelected", nil];
+    
+#if USE_LOCAL_PLAY
     NSMutableDictionary *dicEdit3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"EditName", @"本地音乐", @"MenuText", @"0", @"IsSelected", nil];
+    
     _sourceEditData = [NSArray arrayWithObjects:dicEdit0, dicEdit1, dicEdit2, dicEdit3, nil];
+#else
+    _sourceEditData = [NSArray arrayWithObjects:dicEdit0, dicEdit1, dicEdit2, nil];
+#endif
     
     //body
     _bodyTableView = [[UITableView alloc] init];
@@ -107,8 +113,14 @@
     NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"已经消耗0MB流量", @"MenuTip", nil];
     NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"0", @"MenuTip", nil];
     NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"0", @"MenuTip", nil];
+    
+#if USE_LOCAL_PLAY
     NSMutableDictionary *dicMenu3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"本地音乐", @"MenuText", @"0", @"MenuTip", nil];
+    
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
+#else
+    _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, nil];
+#endif
     
     //gps
     _locationManager = [[CLLocationManager alloc] init];
@@ -376,7 +388,14 @@
 #pragma mark - UITableView datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    
+    NSInteger nSection = 4;
+    
+#if !USE_LOCAL_PLAY
+    nSection -= 1;
+#endif
+    
+    return nSection;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -425,7 +444,7 @@
 
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 57;
+    return CELL_HEIGHT;
 }
 
 @end
