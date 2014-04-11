@@ -363,13 +363,9 @@
         
         cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldm内", szFavor, distance];
     }
-    else if(distance < 1000000) {
-        
-        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldkm", szFavor, distance];
-    }
     else {
         
-        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | 大于1km", szFavor];
+        cell.lblDistance.text = [NSString stringWithFormat:@"%@ | %ldkm", szFavor, distance / 1000];
     }
     cell.lblDistance.textAlignment = UITextAlignmentRight;
     
