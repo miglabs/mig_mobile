@@ -664,7 +664,11 @@
         if (indexPath.row == 0) {
             [self doSinaWeiboLogin:nil];
         } else if (indexPath.row == 1) {
+#if USE_QQ_LOGIN
             [self doQQLogin:nil];
+#else
+            [self doDouBanLogin:nil];
+#endif
         } else if (indexPath.row == 2) {
             [self doDouBanLogin:nil];
         }
