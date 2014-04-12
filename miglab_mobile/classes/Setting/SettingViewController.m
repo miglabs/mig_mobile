@@ -125,17 +125,38 @@
         
     } else if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
+        int curRow = indexPath.row;
+        
+#if USE_PRIVATE && USE_FUNCTION_SETTING
+        
+        // do nothing
+        
+#elif USE_PRIVATE
+        
+        if (curRow == 1) {
+            
+            curRow = 2;
+        }
+        
+#elif USE_FUNCTION_SETTING
+        
+        curRow += 1;
+        
+#else 
+        curRow = 2;
+        
+#endif
+        if (curRow == 0) {
             
             SettingOfPrivacyViewController *privacy = [[SettingOfPrivacyViewController alloc] initWithNibName:@"SettingOfPrivacyViewController" bundle:nil];
             [self.navigationController pushViewController:privacy animated:YES];
             
-        } else if (indexPath.row == 1) {
+        } else if (curRow == 1) {
             
             SettingOfFunctionViewController *function = [[SettingOfFunctionViewController alloc] initWithNibName:@"SettingOfFunctionViewController" bundle:nil];
             [self.navigationController pushViewController:function animated:YES];
             
-        } else if (indexPath.row == 2) {
+        } else if (curRow == 2) {
             
             //反馈加入用户昵称
             NSString *userid = [UserSessionManager GetInstance].userid;
