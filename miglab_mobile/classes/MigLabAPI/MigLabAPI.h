@@ -65,7 +65,10 @@ typedef enum {
 /*
  更新用户信息
  */
--(void)doUpdateUserInfo:(NSString*)tuid token:(NSString*)ttoken username:(NSString*)tusername nickname:(NSString*)tnickname gender:(NSString*)tgender birthday:(NSString*)tbirthday location:(NSString*)tlocation source:(NSString*)tsource head:(NSString*)thead;
+-(void)doUpdateUserInfo:(NSString*)tuid token:(NSString*)ttoken nickname:(NSString*)tnickname gender:(NSString*)tgender birthday:(NSString*)tbirthday;
+-(void)doUpdateUserInfoNickName:(NSString*)tuid token:(NSString*)ttoken nickname:(NSString*)tnickname;
+-(void)doUpdateUserInfoGender:(NSString*)tuid token:(NSString*)ttoken gender:(NSString*)tgender;
+-(void)doUpdateUserInfoBirthday:(NSString*)tuid token:(NSString*)ttoken birthday:(NSString*)tbirthday;
 
 
 /************************* 歌曲 ****************************/

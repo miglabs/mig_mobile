@@ -96,7 +96,7 @@
 
 // 开启昵称修改
 #ifndef USE_NICKNAME_SETTING
-    #define USE_NICKNAME_SETTING 0
+    #define USE_NICKNAME_SETTING 1
 #endif
 
 // 开启分享按钮
@@ -138,7 +138,7 @@
 #define NotificationNameGetGuestFailed                      @"NotificationNameGetGuestFailed"
 
 //更新用户信息
-#define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/usrupdate.fcgi"]
+#define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/updateusr.fcgi"]
 #define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"
 #define NotificationUpdateUserFailed                        @"NotificationUpdateUserFailed"
 

@@ -13,8 +13,13 @@
 @property (nonatomic, retain) IBOutlet UIImageView *textBgImageView;
 @property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
 @property (nonatomic, retain) IBOutlet UILabel *lblErrorMessage;
+@property (nonatomic, retain) MigLabAPI* miglabApi;
+@property (nonatomic, assign) NSString* curNickname;
 
 -(IBAction)doSaveNickname:(id)sender;
 -(IBAction)doHideKeyBoard:(id)sender;
+
+-(void)ChangeNicknameSuccess:(NSNotification*)tNotification;
+-(void)ChangeNickNameFailed:(NSNotification*)tNotification;
 
 @end

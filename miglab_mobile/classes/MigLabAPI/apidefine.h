@@ -103,6 +103,12 @@
 /* 加载提示语 */
 #define MIGTIP_LOADING                          @"加载中..."
 
+/* 修改昵称失败提示语 */
+#define MIGTIP_ERROR_CHANGE_NICKNAME            @"修改昵称失败，该昵称可能已被占用..."
+
+/* 修改昵称成功提示语 */
+#define MIGTIP_CHANGE_NICKNAME_SUCCESS          @"修改昵称成功啦~~~"
+
 
 /* --------------------- 地址定义 --------------------- */
 #define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miglab.com/default.jpg"
