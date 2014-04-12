@@ -39,6 +39,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight + self.topDistance);
+    
     //menu
     _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight + self.topDistance - 73 - 10, 297, 73)];
     _playerMenuView.btnAvatar.delegate = self;

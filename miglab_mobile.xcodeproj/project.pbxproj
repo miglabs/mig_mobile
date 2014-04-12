@@ -2987,15 +2987,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\\\\\\\\\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\\\\\\\\\"",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/TencentAPI,
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/DoubanAPI,
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes,
+					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
+					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
+					"$(SRCROOT)/miglab_mobile/classes",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3027,15 +3021,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/DoubanAPI\\\\\\\\\\\\\\\"",
-					"\\\\\\\\\\\\\\\"$(SRCROOT)/miglab_mobile/classes/TencentAPI\\\\\\\\\\\\\\\"",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/TencentAPI",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile/miglab_mobile/classes/DoubanAPI",
-					"/Users/pig/Desktop/zhuruhong/1027-20140226mig_mobile",
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/TencentAPI,
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/DoubanAPI,
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes,
+					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
+					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
+					"$(SRCROOT)/miglab_mobile/classes",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
