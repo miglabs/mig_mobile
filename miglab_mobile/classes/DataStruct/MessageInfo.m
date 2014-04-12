@@ -45,6 +45,9 @@
             
             msginfo.messagetype = 1;
         }
+        else if ([type isEqualToString:@"leavemsg"]) {
+            msginfo.messagetype = 3;
+        }
         else {
             
             msginfo.messagetype = -1;

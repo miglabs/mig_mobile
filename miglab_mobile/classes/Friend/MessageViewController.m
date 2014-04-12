@@ -12,6 +12,7 @@
 #import "FriendOfReceiveHiViewController.h"
 #import "FriendOfReceiveMusicViewController.h"
 #import "MyFriendPersonalPageViewController.h"
+#import "ChatViewController.h"
 
 @interface MessageViewController ()
 
@@ -165,6 +166,12 @@
         //MyFriendPersonalPageViewController* receiveMusicViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
         //receiveMusicViewController.userinfo = user;
         //[self.navigationController pushViewController:receiveMusicViewController animated:YES];
+        
+        // 聊天留言
+        int currentUserId = [[UserSessionManager GetInstance].userid intValue];
+        ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[messageInfo.send_uid intValue]];
+        [self.navigationController pushViewController:chatController animated:YES];
+        
     } else {
         
         [SVProgressHUD showErrorWithStatus:@"信息格式不正确, 无法显示"];

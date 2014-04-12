@@ -224,10 +224,35 @@
 		165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7CA117BE61E3000D08E3 /* MusicPlayerMenuView.m */; };
 		165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 165D7CA517BE6253000D08E3 /* FriendViewController.m */; };
 		165D7CA817BE6253000D08E3 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D7CA617BE6253000D08E3 /* FriendViewController.xib */; };
+		166171EA18F9343B00E86B11 /* FaceBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 166171E918F9343B00E86B11 /* FaceBoardView.m */; };
+		166171F918F9354600E86B11 /* chat_add_but.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171EC18F9354600E86B11 /* chat_add_but.png */; };
+		166171FA18F9354600E86B11 /* chat_face.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 166171ED18F9354600E86B11 /* chat_face.bundle */; };
+		166171FB18F9354600E86B11 /* chat_msg_bt_f.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171EE18F9354600E86B11 /* chat_msg_bt_f.png */; };
+		166171FC18F9354600E86B11 /* chat_msg_bt_t.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171EF18F9354600E86B11 /* chat_msg_bt_t.png */; };
+		166171FD18F9354600E86B11 /* chat_textfield_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F018F9354600E86B11 /* chat_textfield_bg.png */; };
+		166171FE18F9354600E86B11 /* chat_toolbar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F118F9354600E86B11 /* chat_toolbar_bg.png */; };
+		166171FF18F9354600E86B11 /* del_emoji_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F218F9354600E86B11 /* del_emoji_normal.png */; };
+		1661720018F9354600E86B11 /* del_emoji_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F318F9354600E86B11 /* del_emoji_normal@2x.png */; };
+		1661720118F9354600E86B11 /* face_but_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F418F9354600E86B11 /* face_but_img.png */; };
+		1661720218F9354600E86B11 /* facesbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F518F9354600E86B11 /* facesbg.png */; };
+		1661720318F9354600E86B11 /* head_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F618F9354600E86B11 /* head_border.png */; };
+		1661720418F9354600E86B11 /* key_but_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F718F9354600E86B11 /* key_but_img.png */; };
+		1661720518F9354600E86B11 /* senditem.png in Resources */ = {isa = PBXBuildFile; fileRef = 166171F818F9354600E86B11 /* senditem.png */; };
 		166B5801180C29CE00436AB0 /* base_navigation_bg_ios7.png in Resources */ = {isa = PBXBuildFile; fileRef = 166B5800180C29CE00436AB0 /* base_navigation_bg_ios7.png */; };
 		166B5804180C2BC400436AB0 /* home_navigation_bg_ios7.png in Resources */ = {isa = PBXBuildFile; fileRef = 166B5803180C2BC400436AB0 /* home_navigation_bg_ios7.png */; };
 		167459E217BBB63F00E636F8 /* music_default_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 167459E117BBB63F00E636F8 /* music_default_avatar.png */; };
 		167459E917BBC0EA00E636F8 /* MusicPlayerNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167459E817BBC0EA00E636F8 /* MusicPlayerNavigationView.m */; };
+		167F047118F9306F000A1C21 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047018F9306F000A1C21 /* ChatViewController.m */; };
+		167F047A18F93228000A1C21 /* ChatEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047318F93228000A1C21 /* ChatEntity.m */; };
+		167F047B18F93228000A1C21 /* ChatInputToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047518F93228000A1C21 /* ChatInputToolBar.m */; };
+		167F047C18F93228000A1C21 /* ChatMsgContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047718F93228000A1C21 /* ChatMsgContentView.m */; };
+		167F047D18F93228000A1C21 /* ChatNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047918F93228000A1C21 /* ChatNotification.m */; };
+		167F048418F93274000A1C21 /* ChatMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F047F18F93274000A1C21 /* ChatMsgTableViewCell.m */; };
+		167F048518F93274000A1C21 /* ChatMsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 167F048018F93274000A1C21 /* ChatMsgTableViewCell.xib */; };
+		167F048618F93274000A1C21 /* ChatNetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F048218F93274000A1C21 /* ChatNetService.m */; };
+		167F048918F932B9000A1C21 /* ChatMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F048818F932B9000A1C21 /* ChatMessageView.m */; };
+		167F048D18F932C4000A1C21 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F048C18F932C4000A1C21 /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		167F049218F9337D000A1C21 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F049118F9337D000A1C21 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1683FB81179119640081612B /* bg_mask_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7A179119640081612B /* bg_mask_0.png */; };
 		1683FB82179119640081612B /* bg_mask_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7B179119640081612B /* bg_mask_1.png */; };
 		1683FB83179119640081612B /* bg_mask_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7C179119640081612B /* bg_mask_2.png */; };
@@ -799,11 +824,49 @@
 		165D7CA517BE6253000D08E3 /* FriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController.m; sourceTree = "<group>"; };
 		165D7CA617BE6253000D08E3 /* FriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		165F694918D3438B009D4F88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		166171E818F9343B00E86B11 /* FaceBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceBoardView.h; sourceTree = "<group>"; };
+		166171E918F9343B00E86B11 /* FaceBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceBoardView.m; sourceTree = "<group>"; };
+		166171EC18F9354600E86B11 /* chat_add_but.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_add_but.png; sourceTree = "<group>"; };
+		166171ED18F9354600E86B11 /* chat_face.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = chat_face.bundle; sourceTree = "<group>"; };
+		166171EE18F9354600E86B11 /* chat_msg_bt_f.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_msg_bt_f.png; sourceTree = "<group>"; };
+		166171EF18F9354600E86B11 /* chat_msg_bt_t.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_msg_bt_t.png; sourceTree = "<group>"; };
+		166171F018F9354600E86B11 /* chat_textfield_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_textfield_bg.png; sourceTree = "<group>"; };
+		166171F118F9354600E86B11 /* chat_toolbar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_toolbar_bg.png; sourceTree = "<group>"; };
+		166171F218F9354600E86B11 /* del_emoji_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del_emoji_normal.png; sourceTree = "<group>"; };
+		166171F318F9354600E86B11 /* del_emoji_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "del_emoji_normal@2x.png"; sourceTree = "<group>"; };
+		166171F418F9354600E86B11 /* face_but_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_but_img.png; sourceTree = "<group>"; };
+		166171F518F9354600E86B11 /* facesbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facesbg.png; sourceTree = "<group>"; };
+		166171F618F9354600E86B11 /* head_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_border.png; sourceTree = "<group>"; };
+		166171F718F9354600E86B11 /* key_but_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key_but_img.png; sourceTree = "<group>"; };
+		166171F818F9354600E86B11 /* senditem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = senditem.png; sourceTree = "<group>"; };
 		166B5800180C29CE00436AB0 /* base_navigation_bg_ios7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_navigation_bg_ios7.png; sourceTree = "<group>"; };
 		166B5803180C2BC400436AB0 /* home_navigation_bg_ios7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_navigation_bg_ios7.png; sourceTree = "<group>"; };
 		167459E117BBB63F00E636F8 /* music_default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_default_avatar.png; sourceTree = "<group>"; };
 		167459E717BBC0EA00E636F8 /* MusicPlayerNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerNavigationView.h; sourceTree = "<group>"; };
 		167459E817BBC0EA00E636F8 /* MusicPlayerNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerNavigationView.m; sourceTree = "<group>"; };
+		167F046F18F9306F000A1C21 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		167F047018F9306F000A1C21 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		167F047218F93228000A1C21 /* ChatEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEntity.h; sourceTree = "<group>"; };
+		167F047318F93228000A1C21 /* ChatEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEntity.m; sourceTree = "<group>"; };
+		167F047418F93228000A1C21 /* ChatInputToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatInputToolBar.h; sourceTree = "<group>"; };
+		167F047518F93228000A1C21 /* ChatInputToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatInputToolBar.m; sourceTree = "<group>"; };
+		167F047618F93228000A1C21 /* ChatMsgContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMsgContentView.h; sourceTree = "<group>"; };
+		167F047718F93228000A1C21 /* ChatMsgContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMsgContentView.m; sourceTree = "<group>"; };
+		167F047818F93228000A1C21 /* ChatNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatNotification.h; sourceTree = "<group>"; };
+		167F047918F93228000A1C21 /* ChatNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatNotification.m; sourceTree = "<group>"; };
+		167F047E18F93274000A1C21 /* ChatMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMsgTableViewCell.h; sourceTree = "<group>"; };
+		167F047F18F93274000A1C21 /* ChatMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMsgTableViewCell.m; sourceTree = "<group>"; };
+		167F048018F93274000A1C21 /* ChatMsgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMsgTableViewCell.xib; sourceTree = "<group>"; };
+		167F048118F93274000A1C21 /* ChatNetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatNetService.h; sourceTree = "<group>"; };
+		167F048218F93274000A1C21 /* ChatNetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatNetService.m; sourceTree = "<group>"; };
+		167F048318F93274000A1C21 /* ChatNetServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatNetServiceDelegate.h; sourceTree = "<group>"; };
+		167F048718F932B9000A1C21 /* ChatMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageView.h; sourceTree = "<group>"; };
+		167F048818F932B9000A1C21 /* ChatMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageView.m; sourceTree = "<group>"; };
+		167F048B18F932C4000A1C21 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		167F048C18F932C4000A1C21 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		167F048E18F932FA000A1C21 /* ChatDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDef.h; sourceTree = "<group>"; };
+		167F049018F9337D000A1C21 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		167F049118F9337D000A1C21 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		1683FB7A179119640081612B /* bg_mask_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_0.png; sourceTree = "<group>"; };
 		1683FB7B179119640081612B /* bg_mask_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_1.png; sourceTree = "<group>"; };
 		1683FB7C179119640081612B /* bg_mask_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_2.png; sourceTree = "<group>"; };
@@ -1225,6 +1288,9 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
+				167F048A18F932C4000A1C21 /* AsyncSocket */,
+				167F046E18F9306F000A1C21 /* SocketChat */,
 				188A20B517F55C0B00D4E753 /* TTTAttributedLabel */,
 				1641CCBD17DB0BE5004179E4 /* PinYin */,
 				18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */,
@@ -1729,6 +1795,72 @@
 			path = Friend;
 			sourceTree = "<group>";
 		};
+		166171EB18F9354600E86B11 /* socket_chat */ = {
+			isa = PBXGroup;
+			children = (
+				166171EC18F9354600E86B11 /* chat_add_but.png */,
+				166171ED18F9354600E86B11 /* chat_face.bundle */,
+				166171EE18F9354600E86B11 /* chat_msg_bt_f.png */,
+				166171EF18F9354600E86B11 /* chat_msg_bt_t.png */,
+				166171F018F9354600E86B11 /* chat_textfield_bg.png */,
+				166171F118F9354600E86B11 /* chat_toolbar_bg.png */,
+				166171F218F9354600E86B11 /* del_emoji_normal.png */,
+				166171F318F9354600E86B11 /* del_emoji_normal@2x.png */,
+				166171F418F9354600E86B11 /* face_but_img.png */,
+				166171F518F9354600E86B11 /* facesbg.png */,
+				166171F618F9354600E86B11 /* head_border.png */,
+				166171F718F9354600E86B11 /* key_but_img.png */,
+				166171F818F9354600E86B11 /* senditem.png */,
+			);
+			path = socket_chat;
+			sourceTree = "<group>";
+		};
+		167F046E18F9306F000A1C21 /* SocketChat */ = {
+			isa = PBXGroup;
+			children = (
+				166171E818F9343B00E86B11 /* FaceBoardView.h */,
+				166171E918F9343B00E86B11 /* FaceBoardView.m */,
+				167F048E18F932FA000A1C21 /* ChatDef.h */,
+				167F048718F932B9000A1C21 /* ChatMessageView.h */,
+				167F048818F932B9000A1C21 /* ChatMessageView.m */,
+				167F047E18F93274000A1C21 /* ChatMsgTableViewCell.h */,
+				167F047F18F93274000A1C21 /* ChatMsgTableViewCell.m */,
+				167F048018F93274000A1C21 /* ChatMsgTableViewCell.xib */,
+				167F048118F93274000A1C21 /* ChatNetService.h */,
+				167F048218F93274000A1C21 /* ChatNetService.m */,
+				167F048318F93274000A1C21 /* ChatNetServiceDelegate.h */,
+				167F047218F93228000A1C21 /* ChatEntity.h */,
+				167F047318F93228000A1C21 /* ChatEntity.m */,
+				167F047418F93228000A1C21 /* ChatInputToolBar.h */,
+				167F047518F93228000A1C21 /* ChatInputToolBar.m */,
+				167F047618F93228000A1C21 /* ChatMsgContentView.h */,
+				167F047718F93228000A1C21 /* ChatMsgContentView.m */,
+				167F047818F93228000A1C21 /* ChatNotification.h */,
+				167F047918F93228000A1C21 /* ChatNotification.m */,
+				167F046F18F9306F000A1C21 /* ChatViewController.h */,
+				167F047018F9306F000A1C21 /* ChatViewController.m */,
+			);
+			path = SocketChat;
+			sourceTree = "<group>";
+		};
+		167F048A18F932C4000A1C21 /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				167F048B18F932C4000A1C21 /* AsyncSocket.h */,
+				167F048C18F932C4000A1C21 /* AsyncSocket.m */,
+			);
+			path = AsyncSocket;
+			sourceTree = "<group>";
+		};
+		167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				167F049018F9337D000A1C21 /* EGORefreshTableHeaderView.h */,
+				167F049118F9337D000A1C21 /* EGORefreshTableHeaderView.m */,
+			);
+			path = EGORefreshTableHeaderView;
+			sourceTree = "<group>";
+		};
 		1683FB93179127920081612B /* playing_tips */ = {
 			isa = PBXGroup;
 			children = (
@@ -1961,6 +2093,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				166171EB18F9354600E86B11 /* socket_chat */,
 				1633F6E417D1D24F00F47DFF /* base */,
 				1624BC0617C784DC00BE08A5 /* friend */,
 				162AAB4217C25440000E904F /* gene */,
@@ -2430,6 +2563,7 @@
 				16E77E8D178DB18C006A24A6 /* bottom_control_bg.png in Resources */,
 				16E77E8E178DB18C006A24A6 /* btn_delete_nor.png in Resources */,
 				16E77E8F178DB18C006A24A6 /* btn_delete_sel.png in Resources */,
+				166171FA18F9354600E86B11 /* chat_face.bundle in Resources */,
 				16E77E94178DB18C006A24A6 /* btn_menu_nor.png in Resources */,
 				16E77E95178DB18C006A24A6 /* btn_next_nor.png in Resources */,
 				16E77E96178DB18C006A24A6 /* btn_next_sel.png in Resources */,
@@ -2447,6 +2581,7 @@
 				1683FB81179119640081612B /* bg_mask_0.png in Resources */,
 				1683FB82179119640081612B /* bg_mask_1.png in Resources */,
 				1683FB83179119640081612B /* bg_mask_2.png in Resources */,
+				1661720518F9354600E86B11 /* senditem.png in Resources */,
 				1683FB84179119640081612B /* bg_mask_3.png in Resources */,
 				1683FB85179119640081612B /* bg_mask_4.png in Resources */,
 				1683FB86179119640081612B /* btn_like_nor.png in Resources */,
@@ -2465,6 +2600,7 @@
 				184648471793A60800E83EBB /* RegisterViewController.xib in Resources */,
 				1846484C1793A61700E83EBB /* LoginViewController.xib in Resources */,
 				1846485B1793AA5F00E83EBB /* SinaWeibo.bundle in Resources */,
+				1661720118F9354600E86B11 /* face_but_img.png in Resources */,
 				16F575BF179587D900277308 /* bg_borad_3.png in Resources */,
 				16F575C0179587D900277308 /* borad_bottom_menu.png in Resources */,
 				16F575C1179587D900277308 /* borad_default_avatar.png in Resources */,
@@ -2486,6 +2622,7 @@
 				16AB8BA9179EB8A40009411F /* left_menu_separator.png in Resources */,
 				16AB8BAA179EB8A40009411F /* left_menu_shezhi.png in Resources */,
 				16AB8BAB179EB8A40009411F /* left_menu_user_avatar.png in Resources */,
+				166171FE18F9354600E86B11 /* chat_toolbar_bg.png in Resources */,
 				16AB8BAC179EB8A40009411F /* left_menu_user_gender.png in Resources */,
 				16AB8BAD179EB8A40009411F /* left_menu_yinyuejiyin.png in Resources */,
 				16AB8BAF179EBA420009411F /* left_view_0.png in Resources */,
@@ -2500,6 +2637,7 @@
 				16C10E0517A94D3800DA628D /* login_back_arrow_nor.png in Resources */,
 				16C10E0617A94D3800DA628D /* login_back_arrow_sel.png in Resources */,
 				16C10E0717A94D3800DA628D /* login_button.png in Resources */,
+				1661720018F9354600E86B11 /* del_emoji_normal@2x.png in Resources */,
 				16C10E0917A94D3800DA628D /* register_finish_button.png in Resources */,
 				16C10E0B17A94F4200DA628D /* login_edit2_bg.png in Resources */,
 				16C10E1017A9565E00DA628D /* RegisterOfNickNameViewController.xib in Resources */,
@@ -2529,8 +2667,10 @@
 				1684763917BA613700F42172 /* body_bg.png in Resources */,
 				1684763A17BA613700F42172 /* music_src.png in Resources */,
 				1684763B17BA613700F42172 /* player_bg.png in Resources */,
+				166171F918F9354600E86B11 /* chat_add_but.png in Resources */,
 				1684763C17BA613700F42172 /* top_bg_0.png in Resources */,
 				1684763D17BA613700F42172 /* view_bg.png in Resources */,
+				1661720418F9354600E86B11 /* key_but_img.png in Resources */,
 				1684764617BA791600F42172 /* music_menu_dark_heart_nor.png in Resources */,
 				1684764717BA791600F42172 /* music_menu_dark_heart_sel.png in Resources */,
 				1684764817BA791600F42172 /* music_menu_delete_nor.png in Resources */,
@@ -2546,6 +2686,7 @@
 				1653DC1317BD158F00767E0E /* LocalViewController.xib in Resources */,
 				1653DC2D17BD221300767E0E /* LikeViewController.xib in Resources */,
 				165D7C8317BE5908000D08E3 /* top_navigation_bg.png in Resources */,
+				1661720218F9354600E86B11 /* facesbg.png in Resources */,
 				165D7C9417BE60D2000D08E3 /* GeneViewController.xib in Resources */,
 				165D7C9D17BE618C000D08E3 /* BaseViewController.xib in Resources */,
 				165D7C9F17BE618C000D08E3 /* PlayerViewController.xib in Resources */,
@@ -2568,6 +2709,8 @@
 				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
 				CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */,
 				16896059181171C00031902F /* LoginMenuCell.xib in Resources */,
+				166171FF18F9354600E86B11 /* del_emoji_normal.png in Resources */,
+				166171FD18F9354600E86B11 /* chat_textfield_bg.png in Resources */,
 				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
 				1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */,
 				1649E20C17C3A95D009A9E3F /* NearFriendViewController.xib in Resources */,
@@ -2619,6 +2762,7 @@
 				16D0DAF817C9E42700EB763F /* FriendOfRecommendMusicViewController.xib in Resources */,
 				16D0DAFD17C9E47D00EB763F /* FriendOfChatViewController.xib in Resources */,
 				16D0DB0217C9E4E300EB763F /* FriendOfMusicListViewController.xib in Resources */,
+				166171FC18F9354600E86B11 /* chat_msg_bt_t.png in Resources */,
 				16D0DB0717C9E9A200EB763F /* FriendOfReceiveHiViewController.xib in Resources */,
 				16D0DB0C17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib in Resources */,
 				16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */,
@@ -2699,17 +2843,20 @@
 				18A6020A17F2956400344C5B /* qq_weibo_icon_disabled@2x.png in Resources */,
 				18A6020B17F2956400344C5B /* qq_weibo_normal@2x.png in Resources */,
 				18A6020C17F2956400344C5B /* qzone_icon@2x.png in Resources */,
+				167F048518F93274000A1C21 /* ChatMsgTableViewCell.xib in Resources */,
 				18A6020D17F2956400344C5B /* qzone_icon_disabled@2x.png in Resources */,
 				18A6020E17F2956400344C5B /* qzone_normal@2x.png in Resources */,
 				18A6020F17F2956400344C5B /* renren_icon.png in Resources */,
 				18A6021017F2956400344C5B /* renren_icon@2x.png in Resources */,
 				18A6021117F2956400344C5B /* renren_icon_disabled@2x.png in Resources */,
 				18A6021217F2956400344C5B /* renren_normal@2x.png in Resources */,
+				166171FB18F9354600E86B11 /* chat_msg_bt_f.png in Resources */,
 				18A6021317F2956400344C5B /* sina_weibo_icon.png in Resources */,
 				18A6021417F2956400344C5B /* sina_weibo_icon@2x.png in Resources */,
 				18A6021517F2956400344C5B /* sina_weibo_icon_disabled@2x.png in Resources */,
 				18A6021617F2956400344C5B /* sina_weibo_normal@2x.png in Resources */,
 				18A6021717F2956400344C5B /* sms_normal@2x.png in Resources */,
+				1661720318F9354600E86B11 /* head_border.png in Resources */,
 				18A6021817F2956400344C5B /* weixin_normal@2x.png in Resources */,
 				16B2A3C817F311DD00E7F7E6 /* SettingOfAboutViewController.xib in Resources */,
 				16B2A3CD17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib in Resources */,
@@ -2774,6 +2921,7 @@
 				162316711777397600CF8FB5 /* FMDatabaseAdditions.m in Sources */,
 				162316721777397600CF8FB5 /* FMDatabasePool.m in Sources */,
 				162316731777397600CF8FB5 /* FMDatabaseQueue.m in Sources */,
+				167F047C18F93228000A1C21 /* ChatMsgContentView.m in Sources */,
 				162316751777397600CF8FB5 /* FMResultSet.m in Sources */,
 				162316761777397600CF8FB5 /* GuideViewController.m in Sources */,
 				1623168C17773E2600CF8FB5 /* PMusicPlayerControllerView.m in Sources */,
@@ -2788,6 +2936,7 @@
 				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
 				18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */,
 				18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */,
+				167F049218F9337D000A1C21 /* EGORefreshTableHeaderView.m in Sources */,
 				18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */,
 				18A450FD1783FC2700CFFAD4 /* UserSessionManager.m in Sources */,
 				18A451011783FC9800CFFAD4 /* LeftViewController.m in Sources */,
@@ -2839,6 +2988,7 @@
 				165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */,
 				16CDC6071832585E00035634 /* SongOfSendInfoCell.m in Sources */,
 				165D7C9E17BE618C000D08E3 /* PlayerViewController.m in Sources */,
+				167F047D18F93228000A1C21 /* ChatNotification.m in Sources */,
 				165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */,
 				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,
 				16F3521817BF241400CF9044 /* NearMusicViewController.m in Sources */,
@@ -2855,6 +3005,7 @@
 				185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */,
 				1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */,
 				1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */,
+				167F048618F93274000A1C21 /* ChatNetService.m in Sources */,
 				1649E21017C3A997009A9E3F /* MessageViewController.m in Sources */,
 				1649E21517C3AAB5009A9E3F /* ListenMyMusicViewController.m in Sources */,
 				1649E22017C3B720009A9E3F /* MusicSongCell.m in Sources */,
@@ -2862,8 +3013,11 @@
 				1604F0E217C4EA1C0072A0D8 /* MusicCommentPlayerView.m in Sources */,
 				1604F0E717C4F0790072A0D8 /* MusicCommentCell.m in Sources */,
 				1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */,
+				167F047B18F93228000A1C21 /* ChatInputToolBar.m in Sources */,
 				1624BC1517C7861600BE08A5 /* FriendOfSayHiViewController.m in Sources */,
+				167F048418F93274000A1C21 /* ChatMsgTableViewCell.m in Sources */,
 				1624BC1917C7869500BE08A5 /* FriendMessageUserHead.m in Sources */,
+				167F047118F9306F000A1C21 /* ChatViewController.m in Sources */,
 				1624BC2C17C79E7A00BE08A5 /* FriendSearchView.m in Sources */,
 				1624BC4117C7A3BB00BE08A5 /* FriendInfoCell.m in Sources */,
 				CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */,
@@ -2877,6 +3031,7 @@
 				16D0DB0F17C9F11800EB763F /* MessageInfoCell.m in Sources */,
 				16D0DB1417C9F3E900EB763F /* MessageInfo.m in Sources */,
 				16D0DB1F17CA291E00EB763F /* PhotoInfoCell.m in Sources */,
+				167F047A18F93228000A1C21 /* ChatEntity.m in Sources */,
 				16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */,
 				16D0DB2917CA31E700EB763F /* FriendOfAddViewController.m in Sources */,
 				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
@@ -2890,9 +3045,12 @@
 				16BE5D1B17D61E7300802DE1 /* FriendOfAddDetailViewController.m in Sources */,
 				16BE5D2417D6249C00802DE1 /* SettingViewController.m in Sources */,
 				18A0EA0A17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m in Sources */,
+				166171EA18F9343B00E86B11 /* FaceBoardView.m in Sources */,
+				167F048918F932B9000A1C21 /* ChatMessageView.m in Sources */,
 				18A0EA0F17D6DBAC004B8BB6 /* SettingOfPrivacyViewController.m in Sources */,
 				18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */,
 				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
+				167F048D18F932C4000A1C21 /* AsyncSocket.m in Sources */,
 				1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */,
 				1641CCDF17DB688F004179E4 /* SettingOfFriendManagerViewController.m in Sources */,
 				1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */,
