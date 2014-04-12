@@ -13,6 +13,7 @@
 #import "FriendOfSayHiViewController.h"
 #import "FriendOfMusicListViewController.h"
 #import "FriendOfPhotoListViewController.h"
+#import "ChatViewController.h"
 
 @interface MyFriendPersonalPageViewController ()
 
@@ -128,7 +129,11 @@
 -(IBAction)doSendMessage:(id)sender{
     
     PLog(@"doSendMessage...");
-    [SVProgressHUD showErrorWithStatus:@"还不能发消息啊"];
+    
+    int currentUserId = [[UserSessionManager GetInstance].userid intValue];
+    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_userinfo.userid intValue]];
+    [self.navigationController pushViewController:chatController animated:YES];
+    
 }
 
 //打招呼

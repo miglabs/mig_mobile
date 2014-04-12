@@ -9,6 +9,7 @@
 #import "FriendOfReceiveMusicViewController.h"
 #import "UserSessionManager.h"
 #import "FriendOfRecommendMusicViewController.h"
+#import "ChatViewController.h"
 
 @interface FriendOfReceiveMusicViewController ()
 
@@ -235,7 +236,11 @@
 
 -(void)doLoadChat:(id)sender {
     
-    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
+//    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
+    
+    int currentUserId = [[UserSessionManager GetInstance].userid intValue];
+    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_msginfo.userInfo.userid intValue]];
+    [self.navigationController pushViewController:chatController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

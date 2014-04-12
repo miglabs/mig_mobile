@@ -8,6 +8,7 @@
 
 #import "FriendOfReceiveHiViewController.h"
 #import "FriendOfRecommendMusicViewController.h"
+#import "ChatViewController.h"
 
 @interface FriendOfReceiveHiViewController ()
 
@@ -95,7 +96,7 @@
     }//for
     _messageContentView.frame = CGRectMake(ORIGIN_X, posy, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - (10 + BOTTOM_PLAYER_HEIGHT + 10) );
     [_messageContentView.lbtnSendSong addTarget:self action:@selector(doSendSong:) forControlEvents:UIControlEventTouchUpInside];
-    [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChar:) forControlEvents:UIControlEventTouchUpInside];
+    [_messageContentView.lbtnChat addTarget:self action:@selector(doLoadChat:) forControlEvents:UIControlEventTouchUpInside];
     
     // 打招呼显示框
     int startx = 10;
@@ -144,9 +145,14 @@
     [self.navigationController pushViewController:recommandView animated:YES];
 }
 
--(void)doLoadChar:(id)sender {
+-(void)doLoadChat:(id)sender {
     
-    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
+//    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
+    
+    int currentUserId = [[UserSessionManager GetInstance].userid intValue];
+    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_msginfo.userInfo.userid intValue]];
+    [self.navigationController pushViewController:chatController animated:YES];
+    
 }
 
 
