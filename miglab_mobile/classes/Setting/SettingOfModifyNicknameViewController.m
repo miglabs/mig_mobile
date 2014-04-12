@@ -118,8 +118,6 @@
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_NICKNAME_SUCCESS];
     
-    [UserSessionManager GetInstance].currentUser.nickname = _curNickname;
-    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
