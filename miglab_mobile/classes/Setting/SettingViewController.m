@@ -26,20 +26,32 @@
 @synthesize datalist = _datalist;
 @synthesize dateSheet = _dateSheet;
 @synthesize miglabApi = _miglabApi;
+@synthesize nChangeID = _nChangeID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdaySuccess:) name:NotificationUpdateUserSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdayFailed:) name:NotificationUpdateUserFailed object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserFailed object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _nChangeID = -1;
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
@@ -111,6 +123,8 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* token = [UserSessionManager GetInstance].accesstoken;
         
@@ -135,6 +149,20 @@
     UIAlertView *tempAlertView = [[UIAlertView alloc] initWithTitle:nil message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [tempAlertView show];
     
+}
+
+-(void)doChangeBirthdaySuccess:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_SUCCESS];
+}
+
+-(void)doChangeBirthdayFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_FAILED];
 }
 
 #pragma UIAlertViewDelegate

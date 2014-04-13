@@ -69,7 +69,7 @@
     CGRect errormessageframe = _lblErrorMessage.frame;
     errormessageframe.origin.y += self.topDistance;
     _lblErrorMessage.frame = errormessageframe;
-    _lblErrorMessage.text = MIGTIP_ERROR_CHANGE_NICKNAME;
+    _lblErrorMessage.text = MIGTIP_CHANGE_NICKNAME_FAILED;
     _lblErrorMessage.hidden = YES;
     
     _miglabApi = [[MigLabAPI alloc] init];
