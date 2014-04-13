@@ -138,9 +138,7 @@
 
 -(void)popGenderPicker:(id)sender {
     
-    NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
-    
-    _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:@"女", @"男", nil];
+    _dateSheet = [[UIActionSheet alloc] initWithTitle:@"请选择性别" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:@"女", @"男", nil];
     
     _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
     
