@@ -56,9 +56,9 @@
         _lblMessageType.text = [NSString stringWithFormat:@"%@送了一首歌曲给你", username];
     }
     else if(_msginfo.messagetype == 3) {
-        //评论歌曲
+        //留言
         
-        _lblMessageType.text = [NSString stringWithFormat:@"%@评论了你个歌曲", username];
+        _lblMessageType.text = [NSString stringWithFormat:@"%@给你留言", username];
     }
     else {
         // 打招呼
