@@ -70,7 +70,7 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
     //nav bar
-    self.navView.titleLabel.text = @"请登录";
+    self.navView.titleLabel.text = @"请登陆";
     
     //search
     UIImage *searchImage = [UIImage imageWithName:@"login_choose_register" type:@"png"];
@@ -108,7 +108,7 @@
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu2, nil];
 #endif
     
-    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用Mig账号登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪呦账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _dataList = [NSMutableArray arrayWithObjects:menulist0, menulist1, nil];
     
