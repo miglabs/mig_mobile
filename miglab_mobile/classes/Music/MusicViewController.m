@@ -281,6 +281,9 @@
     
     PLog(@"doSelected: %d", btnEdit.tag);
     
+    if (btnEdit.tag + 1 > [_sourceEditData count]) {
+        return;
+    }
     NSMutableDictionary *dicEdit = [_sourceEditData objectAtIndex:btnEdit.tag];
     NSString *strIsSelected = [dicEdit objectForKey:@"IsSelected"];
     if ([strIsSelected intValue] > 0) {
