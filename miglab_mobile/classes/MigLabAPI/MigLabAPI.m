@@ -390,6 +390,30 @@
     [operation start];
 }
 
+-(void)doUpdateUserInfoNickName:(NSString *)tuid token:(NSString *)ttoken nickname:(NSString *)tnickname {
+    
+    NSString* szGender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
+    NSString* szBirthday = [UserSessionManager GetInstance].currentUser.birthday;
+    
+    [self doUpdateUserInfo:tuid token:ttoken nickname:tnickname gender:szGender birthday:szBirthday];
+}
+
+-(void)doUpdateUserInfoGender:(NSString *)tuid token:(NSString *)ttoken gender:(NSString *)tgender {
+    
+    NSString* szNickname = [UserSessionManager GetInstance].currentUser.nickname;
+    NSString* szBirthday = [UserSessionManager GetInstance].currentUser.birthday;
+    
+    [self doUpdateUserInfo:tuid token:ttoken nickname:szNickname gender:tgender birthday:szBirthday];
+}
+
+-(void)doUpdateUserInfoBirthday:(NSString *)tuid token:(NSString *)ttoken birthday:(NSString *)tbirthday {
+    
+    NSString* szGender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
+    NSString* szNickname = [UserSessionManager GetInstance].currentUser.nickname;
+    
+    [self doUpdateUserInfo:tuid token:ttoken nickname:szNickname gender:szGender birthday:tbirthday];
+}
+
 /*
  获取默认推荐歌曲接口
  <!--请求Get-->

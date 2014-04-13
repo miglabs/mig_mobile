@@ -23,6 +23,7 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
+@synthesize datePicker = _datePicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +77,24 @@
     NSArray *section2 = [NSArray arrayWithObjects:@"关于Music Soulmate", nil];
     NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
     _datalist = [NSMutableArray arrayWithObjects:section0, section1, section2, section3, nil];
+    
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, 480.0, 320.0, 260.0)];
+    _datePicker.datePickerMode = UIDatePickerModeDate;
+    _datePicker.hidden = YES;
+    [self.view addSubview:_datePicker];
+}
+
+-(IBAction)popDatePicker:(id)sender {
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.6];
+    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+    self.datePicker.frame = CGRectMake(0, 245, 320, 260);
+    
+    [UIView setAnimationDelegate:self];
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +140,10 @@
             SettingOfModifyNicknameViewController *modifyNickname = [[SettingOfModifyNicknameViewController alloc] initWithNibName:@"SettingOfModifyNicknameViewController" bundle:nil];
             [self.navigationController pushViewController:modifyNickname animated:YES];
             
+        }
+        else if(indexPath.row == 1) {
+            
+            [self popDatePicker:nil];
         }
         
     } else if (indexPath.section == 1) {

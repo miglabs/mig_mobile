@@ -91,12 +91,10 @@
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString* gender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
-        NSString* birthday = [UserSessionManager GetInstance].currentUser.birthday;
         NSString* nickname = _nicknameTextField.text;
         _curNickname = nickname;
         
-        [_miglabApi doUpdateUserInfo:userid token:accesstoken nickname:nickname gender:gender birthday:birthday];
+        [_miglabApi doUpdateUserInfoNickName:userid token:accesstoken nickname:nickname];
     }
     else {
         

@@ -12,7 +12,11 @@
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
+@property (nonatomic, retain) UIDatePicker* datePicker;
 
 -(IBAction)doLogout:(id)sender;
+
+-(IBAction)popDatePicker:(id)sender;
+-(IBAction)resetDatePicker:(id)sender;
 
 @end
