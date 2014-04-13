@@ -115,6 +115,12 @@
 /* 修改生日失败 */
 #define MIGTIP_CHANGE_BIRTHDAY_FAILED           @"修改生日失败，请稍后重试..."
 
+/* 修改性别成功 */
+#define MIGTIP_CHANGE_GENDER_SUCCESS            @"修改性别成功啦~~~"
+
+/* 修改性别失败 */
+#define MIGTIP_CHANGE_GENDER_FAILED             @"修改性别失败，请稍后重试..."
+
 /* 确定 */
 #define MIGTIP_OK                               @"确定"
 

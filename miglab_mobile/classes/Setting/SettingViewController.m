@@ -51,7 +51,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _nChangeID = -1;
+    _nChangeID = CHANGE_ID_NONE;
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
@@ -73,9 +73,9 @@
     [self.view addSubview:_dataTableView];
     
 #if USE_NICKNAME_SETTING
-    NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", @"性别", nil];
 #else
-    NSArray *section0 = [NSArray arrayWithObjects:@"生日", nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"生日", @"性别", nil];
 #endif
     
 #if USE_PRIVATE && USE_FUNCTION_SETTING
@@ -136,6 +136,31 @@
     }
 }
 
+-(void)popGenderPicker:(id)sender {
+    
+    NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
+    
+    _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:@"女", @"男", nil];
+    
+    _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+    
+    [_dateSheet showInView:self.view];
+}
+
+-(void)resetGenderPicker:(int)tgender {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        NSString* gender = [NSString stringWithFormat:@"%d", tgender];
+        
+        [_miglabApi doUpdateUserInfoGender:userid token:token gender:gender];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -155,14 +180,32 @@
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_SUCCESS];
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_SUCCESS];
+    }
+    else if(_nChangeID == CHANGE_ID_GENDER) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_GENDER_SUCCESS];
+    }
+    
+    _nChangeID = CHANGE_ID_NONE;
 }
 
 -(void)doChangeBirthdayFailed:(NSNotification *)tNotification {
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_FAILED];
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_FAILED];
+    }
+    else if(_nChangeID == CHANGE_ID_GENDER) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_GENDER_FAILED];
+    }
+    
+    _nChangeID = CHANGE_ID_NONE;
 }
 
 #pragma UIAlertViewDelegate
@@ -196,7 +239,15 @@
         }
         else if(indexPath.row == 1) {
             
+            _nChangeID = CHANGE_ID_BIRTHDAY;
+            
             [self popDatePicker:nil];
+        }
+        else if(indexPath.row == 2) {
+            
+            _nChangeID = CHANGE_ID_GENDER;
+            
+            [self popGenderPicker:nil];
         }
         
     } else if (indexPath.section == 1) {
@@ -320,6 +371,8 @@
             lblContent.text = [UserSessionManager GetInstance].currentUser.nickname;
         } else if (indexPath.row == 1) {
             lblContent.text = [UserSessionManager GetInstance].currentUser.birthday;
+        } else if (indexPath.row == 2) {
+            lblContent.text = [UserSessionManager GetInstance].currentUser.gender ? @"男" : @"女";
         }
         
     } else if (indexPath.section == 1) {
@@ -357,13 +410,23 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 0) {
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
         
-        [self resetDatePicker];
+        if (buttonIndex == 0) {
+            
+            [self resetDatePicker];
+        }
     }
-    else if(buttonIndex == 1) {
+    else if (_nChangeID == CHANGE_ID_GENDER) {
         
-        // do nothing
+        if (buttonIndex == 0) {
+            
+            [self resetGenderPicker:0];
+        }
+        else if(buttonIndex == 1) {
+            
+            [self resetGenderPicker:1];
+        }
     }
 }
 
