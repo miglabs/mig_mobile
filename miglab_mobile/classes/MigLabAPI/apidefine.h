@@ -109,6 +109,12 @@
 /* 修改昵称成功提示语 */
 #define MIGTIP_CHANGE_NICKNAME_SUCCESS          @"修改昵称成功啦~~~"
 
+/* 确定 */
+#define MIGTIP_OK                               @"确定"
+
+/* 取消 */
+#define MIGTIP_CANCEL                           @"取消"
+
 
 /* --------------------- 地址定义 --------------------- */
 #define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miglab.com/default.jpg"

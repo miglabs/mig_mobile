@@ -14,6 +14,7 @@
 #import "SettingOfAboutViewController.h"
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
+#import "SVProgressHUD.h"
 
 @interface SettingViewController ()
 
@@ -23,7 +24,8 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
-@synthesize datePicker = _datePicker;
+@synthesize dateSheet = _dateSheet;
+@synthesize miglabApi = _miglabApi;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,23 +80,46 @@
     NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
     _datalist = [NSMutableArray arrayWithObjects:section0, section1, section2, section3, nil];
     
-    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, 480.0, 320.0, 260.0)];
-    _datePicker.datePickerMode = UIDatePickerModeDate;
-    _datePicker.hidden = YES;
-    [self.view addSubview:_datePicker];
+    _miglabApi = [[MigLabAPI alloc] init];
 }
 
 -(IBAction)popDatePicker:(id)sender {
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.6];
-    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
-    self.datePicker.frame = CGRectMake(0, 245, 320, 260);
+    NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
     
-    [UIView setAnimationDelegate:self];
-    [UIView commitAnimations];
+    _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:MIGTIP_OK, nil];
+    
+    _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+    
+    [_dateSheet showInView:self.view];
+    
+    UIDatePicker* datepicker = [[UIDatePicker alloc] init];
+    datepicker.datePickerMode = UIDatePickerModeDate;
+    datepicker.tag = 101;
+    
+    [_dateSheet addSubview:datepicker];
+}
+
+-(void)resetDatePicker {
+    
+    UIDatePicker* datepicker = (UIDatePicker*)[_dateSheet viewWithTag:101];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd";
+    
+    NSString* birthday = [formatter stringFromDate:datepicker.date];
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        
+        [_miglabApi doUpdateUserInfoBirthday:userid token:token birthday:birthday];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -300,6 +325,18 @@
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0) {
+        
+        [self resetDatePicker];
+    }
+    else if(buttonIndex == 1) {
+        
+        // do nothing
+    }
 }
 
 @end

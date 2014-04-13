@@ -8,15 +8,16 @@
 
 #import "BaseViewController.h"
 
-@interface SettingViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface SettingViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
-@property (nonatomic, retain) UIDatePicker* datePicker;
+@property (nonatomic, retain) UIActionSheet* dateSheet;
+@property (nonatomic, retain) MigLabAPI* miglabApi;
 
 -(IBAction)doLogout:(id)sender;
 
 -(IBAction)popDatePicker:(id)sender;
--(IBAction)resetDatePicker:(id)sender;
+-(void)resetDatePicker;
 
 @end
