@@ -288,6 +288,7 @@
     UIViewController *controller = [self getControllerBySegIndex:_currentShowViewTag];
     UIView *newShowView = controller.view;
     newShowView.tag = 999;
+    newShowView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight + self.topDistance);
     [self.view insertSubview:newShowView belowSubview:_rootNavMenuView];
     
 }
@@ -304,15 +305,12 @@
                 //update
                 GeneViewController *oldGene = (GeneViewController *)controller;
                 [oldGene viewWillAppear:YES];
-                
             } else {
-                
-                GeneViewController *gene = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
+                GeneViewController *gene = [[GeneViewController alloc] init];
                 [gene setTopViewcontroller:self];
                 [gene viewWillAppear:YES];
                 [_dicViewControllerCache setObject:gene forKey:numIndex];
                 controller = gene;
-                
             }
             
         }
@@ -323,15 +321,12 @@
                 //update
                 MusicViewController *oldMusic = (MusicViewController *)controller;
                 [oldMusic viewWillAppear:YES];
-                
             } else {
-                
                 MusicViewController *music = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
                 [music setTopViewcontroller:self];
                 [music viewWillAppear:YES];
                 [_dicViewControllerCache setObject:music forKey:numIndex];
                 controller = music;
-                
             }
         }
             break;
@@ -341,15 +336,12 @@
                 //update
                 FriendViewController *oldFriend = (FriendViewController *)controller;
                 [oldFriend viewWillAppear:YES];
-                
             } else {
-                
-                FriendViewController *friend = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
+                FriendViewController *friend = [[FriendViewController alloc] init];
                 [friend setTopViewcontroller:self];
                 [friend viewWillAppear:YES];
                 [_dicViewControllerCache setObject:friend forKey:numIndex];
                 controller = friend;
-                
             }
         }
             break;
