@@ -14,6 +14,7 @@
 #import "SettingOfAboutViewController.h"
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
+#import "SVProgressHUD.h"
 
 @interface SettingViewController ()
 
@@ -23,20 +24,34 @@
 
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
+@synthesize dateSheet = _dateSheet;
+@synthesize miglabApi = _miglabApi;
+@synthesize nChangeID = _nChangeID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdaySuccess:) name:NotificationUpdateUserSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdayFailed:) name:NotificationUpdateUserFailed object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserFailed object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _nChangeID = CHANGE_ID_NONE;
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
@@ -58,9 +73,9 @@
     [self.view addSubview:_dataTableView];
     
 #if USE_NICKNAME_SETTING
-    NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"昵称", @"生日", @"性别", nil];
 #else
-    NSArray *section0 = [NSArray arrayWithObjects:@"生日", nil];
+    NSArray *section0 = [NSArray arrayWithObjects:@"生日", @"性别", nil];
 #endif
     
 #if USE_PRIVATE && USE_FUNCTION_SETTING
@@ -76,6 +91,72 @@
     NSArray *section2 = [NSArray arrayWithObjects:@"关于Music Soulmate", nil];
     NSArray *section3 = [NSArray arrayWithObjects:@"退出登录", nil];
     _datalist = [NSMutableArray arrayWithObjects:section0, section1, section2, section3, nil];
+    
+    _miglabApi = [[MigLabAPI alloc] init];
+}
+
+-(IBAction)popDatePicker:(id)sender {
+    
+    NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
+    
+    _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:MIGTIP_OK, nil];
+    
+    _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+    
+    [_dateSheet showInView:self.view];
+    
+    UIDatePicker* datepicker = [[UIDatePicker alloc] init];
+    datepicker.datePickerMode = UIDatePickerModeDate;
+    datepicker.tag = 101;
+    
+    [_dateSheet addSubview:datepicker];
+}
+
+-(void)resetDatePicker {
+    
+    UIDatePicker* datepicker = (UIDatePicker*)[_dateSheet viewWithTag:101];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd";
+    
+    NSString* birthday = [formatter stringFromDate:datepicker.date];
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        
+        [_miglabApi doUpdateUserInfoBirthday:userid token:token birthday:birthday];
+    }
+    else {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
+    }
+}
+
+-(void)popGenderPicker:(id)sender {
+    
+    _dateSheet = [[UIActionSheet alloc] initWithTitle:@"请选择性别" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:@"女", @"男", nil];
+    
+    _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+    
+    [_dateSheet showInView:self.view];
+}
+
+-(void)resetGenderPicker:(int)tgender {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        
+        NSString* userid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        NSString* gender = [NSString stringWithFormat:@"%d", tgender];
+        
+        [_miglabApi doUpdateUserInfoGender:userid token:token gender:gender];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,6 +172,38 @@
     UIAlertView *tempAlertView = [[UIAlertView alloc] initWithTitle:nil message:@"退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [tempAlertView show];
     
+}
+
+-(void)doChangeBirthdaySuccess:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
+    
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_SUCCESS];
+    }
+    else if(_nChangeID == CHANGE_ID_GENDER) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_GENDER_SUCCESS];
+    }
+    
+    _nChangeID = CHANGE_ID_NONE;
+}
+
+-(void)doChangeBirthdayFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD dismiss];
+    
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_FAILED];
+    }
+    else if(_nChangeID == CHANGE_ID_GENDER) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_GENDER_FAILED];
+    }
+    
+    _nChangeID = CHANGE_ID_NONE;
 }
 
 #pragma UIAlertViewDelegate
@@ -122,20 +235,53 @@
             [self.navigationController pushViewController:modifyNickname animated:YES];
             
         }
+        else if(indexPath.row == 1) {
+            
+            _nChangeID = CHANGE_ID_BIRTHDAY;
+            
+            [self popDatePicker:nil];
+        }
+        else if(indexPath.row == 2) {
+            
+            _nChangeID = CHANGE_ID_GENDER;
+            
+            [self popGenderPicker:nil];
+        }
         
     } else if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
+        int curRow = indexPath.row;
+        
+#if USE_PRIVATE && USE_FUNCTION_SETTING
+        
+        // do nothing
+        
+#elif USE_PRIVATE
+        
+        if (curRow == 1) {
+            
+            curRow = 2;
+        }
+        
+#elif USE_FUNCTION_SETTING
+        
+        curRow += 1;
+        
+#else 
+        curRow = 2;
+        
+#endif
+        if (curRow == 0) {
             
             SettingOfPrivacyViewController *privacy = [[SettingOfPrivacyViewController alloc] initWithNibName:@"SettingOfPrivacyViewController" bundle:nil];
             [self.navigationController pushViewController:privacy animated:YES];
             
-        } else if (indexPath.row == 1) {
+        } else if (curRow == 1) {
             
             SettingOfFunctionViewController *function = [[SettingOfFunctionViewController alloc] initWithNibName:@"SettingOfFunctionViewController" bundle:nil];
             [self.navigationController pushViewController:function animated:YES];
             
-        } else if (indexPath.row == 2) {
+        } else if (curRow == 2) {
             
             //反馈加入用户昵称
             NSString *userid = [UserSessionManager GetInstance].userid;
@@ -223,6 +369,8 @@
             lblContent.text = [UserSessionManager GetInstance].currentUser.nickname;
         } else if (indexPath.row == 1) {
             lblContent.text = [UserSessionManager GetInstance].currentUser.birthday;
+        } else if (indexPath.row == 2) {
+            lblContent.text = [UserSessionManager GetInstance].currentUser.gender ? @"男" : @"女";
         }
         
     } else if (indexPath.section == 1) {
@@ -256,6 +404,28 @@
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (_nChangeID == CHANGE_ID_BIRTHDAY) {
+        
+        if (buttonIndex == 0) {
+            
+            [self resetDatePicker];
+        }
+    }
+    else if (_nChangeID == CHANGE_ID_GENDER) {
+        
+        if (buttonIndex == 0) {
+            
+            [self resetGenderPicker:0];
+        }
+        else if(buttonIndex == 1) {
+            
+            [self resetGenderPicker:1];
+        }
+    }
 }
 
 @end

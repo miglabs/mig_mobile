@@ -291,7 +291,7 @@
         range = [self getCorrectRange:inputString range:range isInput:FALSE];
        
     }
-    if ( range.length == 0 ) {
+    if ( range.length == 0 && range.location > 0) {
         range.location -= 1;
         range.length = 1;
     }

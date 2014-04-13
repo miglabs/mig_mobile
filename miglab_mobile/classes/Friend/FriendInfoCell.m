@@ -95,7 +95,8 @@
     }
     else {
         
-        _userSourceImageView.hidden = YES;
+        //_userSourceImageView.hidden = YES;
+        _userSourceImageView.image = [UIImage imageNamed:@"default_tip"];
     }
 }
 

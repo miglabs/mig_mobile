@@ -103,11 +103,29 @@
 /* 加载提示语 */
 #define MIGTIP_LOADING                          @"加载中..."
 
-/* 修改昵称失败提示语 */
-#define MIGTIP_ERROR_CHANGE_NICKNAME            @"修改昵称失败，该昵称可能已被占用..."
-
 /* 修改昵称成功提示语 */
 #define MIGTIP_CHANGE_NICKNAME_SUCCESS          @"修改昵称成功啦~~~"
+
+/* 修改昵称失败提示语 */
+#define MIGTIP_CHANGE_NICKNAME_FAILED           @"修改昵称失败，该昵称可能已被占用..."
+
+/* 修改生日成功 */
+#define MIGTIP_CHANGE_BIRTHDAY_SUCCESS          @"修改生日成功啦~~~"
+
+/* 修改生日失败 */
+#define MIGTIP_CHANGE_BIRTHDAY_FAILED           @"修改生日失败，请稍后重试..."
+
+/* 修改性别成功 */
+#define MIGTIP_CHANGE_GENDER_SUCCESS            @"修改性别成功啦~~~"
+
+/* 修改性别失败 */
+#define MIGTIP_CHANGE_GENDER_FAILED             @"修改性别失败，请稍后重试..."
+
+/* 确定 */
+#define MIGTIP_OK                               @"确定"
+
+/* 取消 */
+#define MIGTIP_CANCEL                           @"取消"
 
 
 /* --------------------- 地址定义 --------------------- */

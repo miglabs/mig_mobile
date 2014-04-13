@@ -69,7 +69,7 @@
     CGRect errormessageframe = _lblErrorMessage.frame;
     errormessageframe.origin.y += self.topDistance;
     _lblErrorMessage.frame = errormessageframe;
-    _lblErrorMessage.text = MIGTIP_ERROR_CHANGE_NICKNAME;
+    _lblErrorMessage.text = MIGTIP_CHANGE_NICKNAME_FAILED;
     _lblErrorMessage.hidden = YES;
     
     _miglabApi = [[MigLabAPI alloc] init];
@@ -91,12 +91,10 @@
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString* gender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
-        NSString* birthday = [UserSessionManager GetInstance].currentUser.birthday;
         NSString* nickname = _nicknameTextField.text;
         _curNickname = nickname;
         
-        [_miglabApi doUpdateUserInfo:userid token:accesstoken nickname:nickname gender:gender birthday:birthday];
+        [_miglabApi doUpdateUserInfoNickName:userid token:accesstoken nickname:nickname];
     }
     else {
         
@@ -117,8 +115,6 @@
     [SVProgressHUD dismiss];
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_NICKNAME_SUCCESS];
-    
-    [UserSessionManager GetInstance].currentUser.nickname = _curNickname;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
