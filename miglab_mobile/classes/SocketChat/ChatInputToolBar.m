@@ -286,22 +286,29 @@
 {
     NSRange range = m_textView.selectedRange;
     NSString* inputString = m_textView.text;
-    if ( range.location > 0 && inputString.length > MIN_FACE_LENGHT)
+    if( inputString.length > 0 )
     {
-        range = [self getCorrectRange:inputString range:range isInput:FALSE];
+        if ( range.location > 0 && inputString.length > MIN_FACE_LENGHT)
+        {
+            range = [self getCorrectRange:inputString range:range isInput:FALSE];
        
+        }
+        if ( range.length == 0 ) {
+            range.location -= 1;
+            range.length = 1;
+        }
+        inputString = [inputString stringByReplacingCharactersInRange:range withString:@""];
+        [m_textView setText:inputString];
     }
-    if ( range.length == 0 && range.location > 0) {
-        range.location -= 1;
-        range.length = 1;
-    }
-    inputString = [inputString stringByReplacingCharactersInRange:range withString:@""];
-    [m_textView setText:inputString];
 }
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if( [text length] == 0 ) {
+        NSRange range1 = m_textView.selectedRange;
+        if ( range1.length == 0 && range.length != 0 ) {
+            return YES;
+        }
         [self onDelInputString];
         return NO;
     }
