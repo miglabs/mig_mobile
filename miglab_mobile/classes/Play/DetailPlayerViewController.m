@@ -363,7 +363,7 @@
         [self doNextAction:nil];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
     
 }
@@ -425,7 +425,7 @@
 }
 
 -(void)hateSongSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
 }
 
 -(void)collectSongFailed:(NSNotification *)tNotification{
@@ -434,7 +434,7 @@
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
     
-    [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
     [self initSongInfo];
 }
 

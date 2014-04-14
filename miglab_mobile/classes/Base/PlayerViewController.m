@@ -215,7 +215,7 @@
         [self doNext:nil];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
     
 }
@@ -377,7 +377,7 @@
 }
 
 -(void)hateSongSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"拉黑歌曲成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"拉黑歌曲成功:)"];
 }
 
 -(void)collectSongFailed:(NSNotification *)tNotification{
@@ -394,7 +394,7 @@
     UIImage *darkHeartImage = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
     [_playerMenuView.btnCollect setImage:darkHeartImage forState:UIControlStateNormal];
     
-    [SVProgressHUD showSuccessWithStatus:@"收藏歌曲成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"收藏歌曲成功:)"];
 }
 
 -(void)cancelCollectedSongFailed:(NSNotification *)tNotification{
@@ -411,7 +411,7 @@
     UIImage *lightHeartImage = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
     [_playerMenuView.btnCollect setImage:lightHeartImage forState:UIControlStateNormal];
     
-    [SVProgressHUD showSuccessWithStatus:@"取消收藏歌曲成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"取消收藏歌曲成功:)"];
 }
 
 -(void)playerStart:(NSNotification *)tNotification{

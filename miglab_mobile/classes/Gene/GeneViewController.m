@@ -395,7 +395,7 @@ static int PAGE_WIDTH = 81;
     }
     @catch (NSException *exception) {
         PLog(@"initGeneDataByCache failed...please check");
-        [SVProgressHUD showErrorWithStatus:@"初始化音乐基因出错:("];
+        //[SVProgressHUD showErrorWithStatus:@"初始化音乐基因出错:("];
     }
     
 }
@@ -892,7 +892,7 @@ static int PAGE_WIDTH = 81;
     
     [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
     
-    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
 
@@ -943,7 +943,7 @@ static int PAGE_WIDTH = 81;
         [[PPlayerManagerCenter GetInstance] doReplaceSongList:tempsonglist];
     }
     
-    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
+    //[SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
 }
 

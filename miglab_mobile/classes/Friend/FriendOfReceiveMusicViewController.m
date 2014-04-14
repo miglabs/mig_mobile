@@ -342,7 +342,7 @@
     UIImage* img = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
     [_musicCommentHeader.btnCollect setImage:img forState:UIControlStateNormal];
     
-    [SVProgressHUD showErrorWithStatus:@"收藏歌曲成功"];
+   // [SVProgressHUD showErrorWithStatus:@"收藏歌曲成功"];
 }
 
 -(void)doCollectedFailed:(NSNotification *)tNotification {
@@ -360,7 +360,7 @@
     UIImage* img = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
     [_musicCommentHeader.btnCollect setImage:img forState:UIControlStateNormal];
     
-    [SVProgressHUD showErrorWithStatus:@"取消成功"];
+    //[SVProgressHUD showErrorWithStatus:@"取消成功"];
 }
 
 -(void)doCancelFailed:(NSNotification *)tNotification {

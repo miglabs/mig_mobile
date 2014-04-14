@@ -138,7 +138,7 @@
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦~~"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
 }
 
@@ -148,7 +148,7 @@
     
     PLog(@"get music user failed");
     [SVProgressHUD dismiss];
-    [SVProgressHUD showErrorWithStatus:@"获取歌友失败:("];
+    [SVProgressHUD showErrorWithStatus:@"你还没有歌友哦"];
     _isLoadingFriend = NO;
 }
 

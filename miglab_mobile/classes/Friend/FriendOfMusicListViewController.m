@@ -129,7 +129,7 @@
 #pragma mark - Notification
 -(void)LoadMusicListFromServerFailed:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"获取歌曲失败了"];
+    //[SVProgressHUD showErrorWithStatus:@"获取歌曲失败了"];
 }
 
 -(void)LoadMusicListFromServerSuccess:(NSNotification *)tNotification {

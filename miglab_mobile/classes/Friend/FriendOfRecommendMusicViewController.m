@@ -181,14 +181,14 @@
 -(void)SendMusicToUserFailed:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
-    [SVProgressHUD showErrorWithStatus:@"赠送歌曲失败:("];
+    [SVProgressHUD showErrorWithStatus:@"对方拒绝你的歌曲了"];
 }
 
 -(void)SendMusicToUserSuccess:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
     
-    [SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
+    //[SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

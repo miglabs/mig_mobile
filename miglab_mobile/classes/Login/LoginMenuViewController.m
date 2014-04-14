@@ -282,7 +282,7 @@
         
         if ([UserSessionManager GetInstance].accounttype == SourceTypeSinaWeibo) {
             
-            [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
+           // [SVProgressHUD showSuccessWithStatus:@"新浪微博绑定成功:)"];
             
             tempUser.sinaAccount = [UserSessionManager GetInstance].currentUser.sinaAccount;
             tempUser.source = SourceTypeSinaWeibo;
@@ -295,7 +295,7 @@
             
         } else if ([UserSessionManager GetInstance].accounttype == SourceTypeTencentWeibo) {
             
-            [SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
+            //[SVProgressHUD showSuccessWithStatus:@"腾讯微博绑定成功:)"];
             
             tempUser.tencentAccount = [UserSessionManager GetInstance].currentUser.tencentAccount;
             tempUser.source = SourceTypeTencentWeibo;
@@ -305,7 +305,7 @@
             
         } else if ([UserSessionManager GetInstance].accounttype == SourceTypeDouBan) {
             
-            [SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
+            //[SVProgressHUD showSuccessWithStatus:@"豆瓣帐号绑定成功:)"];
             
             tempUser.doubanAccount = [UserSessionManager GetInstance].currentUser.doubanAccount;
             tempUser.source = SourceTypeDouBan;
@@ -351,7 +351,7 @@
     PUser* user = [result objectForKey:@"result"];
     [user log];
     
-    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
     user.password = [UserSessionManager GetInstance].currentUser.password;
     [UserSessionManager GetInstance].currentUser = user;

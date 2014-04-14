@@ -346,7 +346,7 @@ static PPlayerManagerCenter *instance;
         
         NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:dicPlayerInfo];
-        [SVProgressHUD showSuccessWithStatus:@"开始播放"];
+        //[SVProgressHUD showSuccessWithStatus:@"开始播放"];
         
     } else {
         
@@ -355,18 +355,18 @@ static PPlayerManagerCenter *instance;
         
         NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStop object:nil userInfo:dicPlayerInfo];
-        [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
+        //[SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
         
     }
     
 }
 
 -(void)addMoodRecordFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
 }
 
 -(void)addMoodRecordSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
 }
 
 #pragma PHttpDownloaderDelegate
@@ -380,7 +380,7 @@ static PPlayerManagerCenter *instance;
     int nDownloadCount = [downloadcount intValue];
     if (nDownloadCount > 0) {
         
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"nDownloadCount: %d", nDownloadCount]];
+        //[SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"nDownloadCount: %d", nDownloadCount]];
         
         [self stopDownload];
         SongDownloadManager *songManager = [SongDownloadManager GetInstance];
@@ -394,7 +394,7 @@ static PPlayerManagerCenter *instance;
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteSongInfo:[localkey longLongValue]];
     
-    [SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
 }
 
 -(void)doDownloadProcess:(NSDictionary *)dicProcess{
@@ -440,7 +440,7 @@ static PPlayerManagerCenter *instance;
 -(void)doDownloadSuccess:(NSDictionary *)dicResult{
     
     PLog(@"doDownloadSuccess...%@", dicResult);
-    [SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {

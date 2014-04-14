@@ -996,7 +996,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getUserInfoFailed: %@", result);
-    [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
+    [SVProgressHUD showErrorWithStatus:@"重新登陆试试哦~"];
     
 }
 
@@ -1020,7 +1020,7 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
-    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
     //根据描述词获取歌曲 test
     //随机心情词id
@@ -1034,7 +1034,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getChannelFailed...%@", result);
-    [SVProgressHUD showErrorWithStatus:@"获取频道信息失败"];
+   // [SVProgressHUD showErrorWithStatus:@"获取频道信息失败"];
     
 }
 
@@ -1063,7 +1063,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getMusicFromChannelFailed...%@", result);
-    [SVProgressHUD showErrorWithStatus:@"根据频道获取歌曲信息失败"];
+   // [SVProgressHUD showErrorWithStatus:@"根据频道获取歌曲信息失败"];
     
 }
 
@@ -1078,7 +1078,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getModeMusicFailed...%@", result);
-    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲失败:("];
     
 }
 
@@ -1092,32 +1092,32 @@
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoList:20];
     [_songList addObjectsFromArray:tempsonglist];
     
-    [SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
+    //[SVProgressHUD showErrorWithStatus:@"根据描述词获取歌曲成功:)"];
     
 }
 
 -(void)addBlacklistFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲拉黑失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲拉黑失败:("];
 }
 
 -(void)addBlacklistSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
 }
 
 -(void)collectSongFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
 }
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
 }
 
 -(void)addMoodRecordFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"记录用户心情失败:("];
 }
 
 -(void)addMoodRecordSuccess:(NSNotification *)tNotification{
-    [SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"记录用户心情成功:)"];
 }
 
 // end 登录，获取用户资料
@@ -1125,7 +1125,7 @@
 -(void)downloadFailed:(NSNotification *)tNotification{
     PLog(@"downloadFailed...");
     
-    [SVProgressHUD showErrorWithStatus:@"下载歌曲失败"];
+    //[SVProgressHUD showErrorWithStatus:@"下载歌曲失败"];
     
     //播放下一首
 //    [self doNextAction:nil];
@@ -1187,7 +1187,7 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteSongInfo:[localkey longLongValue]];
     
-    [SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
 }
 
 -(void)doDownloadProcess:(NSDictionary *)dicProcess{
@@ -1233,7 +1233,7 @@
 -(void)doDownloadSuccess:(NSDictionary *)dicResult{
     
     PLog(@"doDownloadSuccess...%@", dicResult);
-    [SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
@@ -1308,13 +1308,13 @@
         [self timerStart];
         _hasAddMoodRecord = NO;
         
-        [SVProgressHUD showSuccessWithStatus:@"开始播放"];
+        //[SVProgressHUD showSuccessWithStatus:@"开始播放"];
         
     } else {
         
         [aaMusicPlayer playerDestory];
         _shouldStartPlayAfterDownloaded = YES;
-        [SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
+        //[SVProgressHUD showSuccessWithStatus:@"播放器初始化失败:("];
         
     }
     

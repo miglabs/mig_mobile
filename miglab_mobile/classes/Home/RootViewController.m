@@ -393,7 +393,7 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getGuestInfoFailed: %@", result);
     
-    [SVProgressHUD showErrorWithStatus:@"游客信息获取失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"游客信息获取失败:("];
     
 }
 
@@ -448,7 +448,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getUserInfoFailed: %@", result);
-    [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
+    [SVProgressHUD showErrorWithStatus:@"重新登录试试哦~"];
     
 }
 
@@ -473,7 +473,7 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
-    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
     /*
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
@@ -501,7 +501,7 @@
     
     [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
     
-    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
 }
 
@@ -535,7 +535,7 @@
     }
     */
     
-    [SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
+    //[SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲成功:)"];
     
 }
 

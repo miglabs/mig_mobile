@@ -130,7 +130,7 @@
     
     PLog(@"getTypeSongsFailed...");
     
-    [SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取失败:("];
     
 }
 
@@ -138,7 +138,7 @@
     
     PLog(@"getTypeSongsSuccess...");
     
-    [SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取成功:)"];
+    //[SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取成功:)"];
     
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray *songInfoList = [result objectForKey:@"result"];

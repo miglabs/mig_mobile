@@ -86,10 +86,10 @@
 #define MIGTIP_DEFAULT_RECOMMAND                @"来听听嘛~"
 
 /* 未登录提示语 */
-#define MIGTIP_UNLOGIN                          @"您还没有登录哦~~~"
+#define MIGTIP_UNLOGIN                          @"点蓝色头像赶紧登陆吧~~"
 
 /* 正在发送提示语 */
-#define MIGTIP_SENDING_MESSAGE                  @"正在发送消息哦~~~"
+#define MIGTIP_SENDING_MESSAGE                  @"我们正在为你勾搭~~"
 
 /* 空邮箱提示语 */
 #define MIGTIP_EMPTY_EMAIL                      @"邮箱不能为空哦~~~"
@@ -101,7 +101,7 @@
 #define MIGTIP_EMPTY_PASSWORD                   @"密码不能为空哦~~~"
 
 /* 加载提示语 */
-#define MIGTIP_LOADING                          @"加载中..."
+#define MIGTIP_LOADING                          @"咪呦在拼命加载..."
 
 /* 修改昵称成功提示语 */
 #define MIGTIP_CHANGE_NICKNAME_SUCCESS          @"修改昵称成功啦~~~"

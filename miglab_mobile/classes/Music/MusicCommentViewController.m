@@ -362,7 +362,7 @@
     
     PLog(@"getCommentListFailed...");
     
-    [SVProgressHUD showErrorWithStatus:@"歌曲评论信息获取失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"歌曲评论信息获取失败:("];
 }
 
 -(void)getCommentListSuccess:(NSNotification *)tNotification{
@@ -420,7 +420,7 @@
 
 -(void)doCommentSongFailed:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"评论歌曲怎么就失败了呢..."];
+    //[SVProgressHUD showErrorWithStatus:@"评论歌曲怎么就失败了呢..."];
 }
 
 #pragma mark - UITableView delegate

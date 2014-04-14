@@ -5,7 +5,7 @@
 //  Created by 180 on 14-3-30.
 //
 //
-#define  HTTP_API_URL  @"http://112.124.49.59/cgi-bin/"
+#define  HTTP_API_URL  @"http://112.124.49.59/"
 #import "ChatNetService.h"
 #import "AFNetworking.h"
 #import "ChatDef.h"
@@ -65,7 +65,7 @@
 
 -(void) getRequestJsonData:(NSString*) path success:(void (^)(id jsonResult)) success failure:(void (^)(NSError* err)) failure
 {
-    NSString* strurl = [[NSString alloc]initWithFormat:@"%@%@",HTTP_API_URL,path];
+    NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_URL,path];
     NSURL* url = [NSURL URLWithString:strurl];
     NSLog(@"getRequestJsonData  %@",strurl);
     AFHTTPClient* http = [AFHTTPClient clientWithBaseURL:url];

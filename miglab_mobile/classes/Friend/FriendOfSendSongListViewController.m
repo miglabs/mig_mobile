@@ -159,7 +159,7 @@
 #pragma mark - Notification
 -(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"获取歌曲列表失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"获取歌曲列表失败:("];
 }
 
 -(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification {

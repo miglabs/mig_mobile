@@ -138,7 +138,7 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteUserAccountByUserName:[UserSessionManager GetInstance].currentUser.username];
     
-    [SVProgressHUD showErrorWithStatus:@"登录失败，请稍后重试~"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
 }
 
 -(void)loginSuccess:(NSNotification *)tNotification{
@@ -174,7 +174,7 @@
     
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"getUserInfoFailed: %@", result);
-    [SVProgressHUD showErrorWithStatus:@"用户信息获取失败:("];
+    [SVProgressHUD showErrorWithStatus:@"重新登陆试试哦~"];
     
 }
 
@@ -186,7 +186,7 @@
     PUser* user = [result objectForKey:@"result"];
     [user log];
     
-    [SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
+    //[SVProgressHUD showSuccessWithStatus:@"用户信息获取成功:)"];
     
     user.password = [UserSessionManager GetInstance].currentUser.password;
     [UserSessionManager GetInstance].currentUser = user;

@@ -157,7 +157,7 @@
         
     } else {
         
-        [SVProgressHUD showErrorWithStatus:@"您还未登陆哦～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
 }
 

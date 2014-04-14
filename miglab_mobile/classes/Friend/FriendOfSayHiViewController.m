@@ -125,7 +125,7 @@
 
 -(void)doSayHelloSuccess:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"打招呼成功啦！！！"];
+    //[SVProgressHUD showErrorWithStatus:@"打招呼成功啦！！！"];
     
     _isSendingMsg = NO;
     
@@ -134,7 +134,7 @@
 
 -(void)doSayHelloFailed:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"打招呼失败了:("];
+    [SVProgressHUD showErrorWithStatus:@"对方拒绝你的搭讪"];
     
     _isSendingMsg = NO;
     

@@ -206,7 +206,7 @@
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
+    //[SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
     
     _isLoadingMsg = NO;
 }
