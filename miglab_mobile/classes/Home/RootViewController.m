@@ -36,6 +36,18 @@
 
 @synthesize miglabAPI = _miglabAPI;
 
++ (id)sharedInstance
+{
+    static id sharedInstance = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+    });
+    
+    return sharedInstance;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

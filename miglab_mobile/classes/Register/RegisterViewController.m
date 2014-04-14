@@ -11,6 +11,11 @@
 #import "MigLabAPI.h"
 #import "SVProgressHUD.h"
 #import "RegisterOfNickNameViewController.h"
+#import "UserSessionManager.h"
+#import "PDatabaseManager.h"
+#import "RootViewController.h"
+#import "GeneViewController.h"
+#import "AppDelegate.h"
 
 @interface RegisterViewController ()
 
@@ -104,6 +109,9 @@
     
     if (strEMail && strPassword) {
         
+        [UserSessionManager GetInstance].currentUser.username = strEMail;
+        [UserSessionManager GetInstance].currentUser.password = strPassword;
+        
         MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
         [miglabAPI doRegister:strEMail password:strPassword nickname:strEMail source:SourceTypeMiglab];
         
@@ -127,8 +135,40 @@
     NSDictionary *result = [tNotification userInfo];
     NSLog(@"registerSuccess: %@", result);
     
-    RegisterOfNickNameViewController *gotoNickNameView = [[RegisterOfNickNameViewController alloc] initWithNibName:@"RegisterOfNickNameViewController" bundle:nil];
-    [self.navigationController pushViewController:gotoNickNameView animated:YES];
+    if (result == nil) {
+        return;
+    }
+    
+    PUser* user = [result objectForKey:@"result"];
+    user.password = [UserSessionManager GetInstance].currentUser.password;
+    user.source = SourceTypeMiglab;
+    [user log];
+    
+    [UserSessionManager GetInstance].accesstoken = user.token;
+    [UserSessionManager GetInstance].currentUser = user;
+    [UserSessionManager GetInstance].userid = user.userid;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
+    
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *password = [UserSessionManager GetInstance].currentUser.password;
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
+    NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    
+    //gene
+    NSNumber *numGeneIndex = [NSNumber numberWithInt:100];
+    RootViewController *rootViewController = ((AppDelegate *)[UIApplication sharedApplication].delegate).rootController;
+    GeneViewController *tempGene = [rootViewController.dicViewControllerCache objectForKey:numGeneIndex];
+    [tempGene loadSongsByGene];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+//    RegisterOfNickNameViewController *gotoNickNameView = [[RegisterOfNickNameViewController alloc] initWithNibName:@"RegisterOfNickNameViewController" bundle:nil];
+//    [self.navigationController pushViewController:gotoNickNameView animated:YES];
 }
 
 @end

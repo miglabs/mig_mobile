@@ -15,12 +15,15 @@
 
 #import "PTabBarViewController.h"
 
+#import "RootViewController.h"
+
 @class SinaWeibo;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, strong) RootViewController *rootController;
 
 @property (nonatomic, retain) DDMenuController *menuController;
 @property (nonatomic, retain) HomeViewController *homeViewController;

@@ -147,17 +147,18 @@
     PLog(@"loginSuccess...%@", result);
     
     NSString *accesstoken = [result objectForKey:@"token"];
-    NSString *username = [UserSessionManager GetInstance].currentUser.username;
     [UserSessionManager GetInstance].accesstoken = accesstoken;
     
     PUser* user = [PUser initWithNSDictionary:result];
     user.password = [UserSessionManager GetInstance].currentUser.password;
+    user.source = SourceTypeMiglab;
     [user log];
     
     [UserSessionManager GetInstance].currentUser = user;
+    [UserSessionManager GetInstance].userid = user.userid;
+    [UserSessionManager GetInstance].isLoggedIn = YES;
     
-    accesstoken = [UserSessionManager GetInstance].accesstoken;
-    username = [UserSessionManager GetInstance].currentUser.username;
+    NSString *username = [UserSessionManager GetInstance].currentUser.username;
     NSString *password = [UserSessionManager GetInstance].currentUser.password;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     

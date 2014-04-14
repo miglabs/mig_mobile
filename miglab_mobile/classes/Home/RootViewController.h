@@ -26,6 +26,8 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
++ (id)sharedInstance;
+
 -(IBAction)segmentAction:(id)sender;
 -(void)doUpdateView:(int)viewtag;
 -(UIViewController *)getControllerBySegIndex:(int)segindex;

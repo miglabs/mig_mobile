@@ -249,8 +249,8 @@
             
         } else if (initHomeViewType == 6) {
             
-            RootViewController *rootViewController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+            _rootController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+            _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
             _navController.navigationBar.hidden = YES;
             
             self.window.rootViewController = _navController;
