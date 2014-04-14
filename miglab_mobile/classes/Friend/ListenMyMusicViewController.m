@@ -152,7 +152,7 @@ NSString* szListenMyMusicRadius = @"10000";
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:@"获取听你爱的歌失败了:("];
+    //[SVProgressHUD showErrorWithStatus:@"获取听你爱的歌失败了:("];
 }
 
 #pragma CLLocationManagerDelegate
