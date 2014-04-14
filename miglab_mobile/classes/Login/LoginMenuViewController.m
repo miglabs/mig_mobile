@@ -37,8 +37,8 @@
         // Custom initialization
         
         //register
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
         
         //user
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserInfoFailed:) name:NotificationNameGetUserInfoFailed object:nil];
@@ -51,8 +51,8 @@
 -(void)dealloc{
     
     //register
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterFailed object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterSuccess object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterFailed object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterSuccess object:nil];
     
     //user
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetUserInfoFailed object:nil];
@@ -144,6 +144,26 @@
     //api
     _miglabAPI = [[MigLabAPI alloc] init];
     
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //register
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    //register
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRegisterSuccess object:nil];
     
 }
 

@@ -20,7 +20,7 @@
 
 //tencent
 @property (nonatomic, retain) TencentOAuth *tencentOAuth;
-@property (nonatomic, retain) NSMutableArray *permissions;
+@property (nonatomic, retain) NSArray *permissions;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
