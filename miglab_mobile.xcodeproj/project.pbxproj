@@ -320,6 +320,8 @@
 		16B2A3C817F311DD00E7F7E6 /* SettingOfAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16B2A3C617F311DD00E7F7E6 /* SettingOfAboutViewController.xib */; };
 		16B2A3CC17F31C9300E7F7E6 /* SettingOfFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B2A3CA17F31C9200E7F7E6 /* SettingOfFeedbackViewController.m */; };
 		16B2A3CD17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16B2A3CB17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib */; };
+		16B61FD618FCFC4800849EB6 /* Icon_120_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B61FD518FCFC4800849EB6 /* Icon_120_120.png */; };
+		16B61FD818FCFC7600849EB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16B61FD718FCFC7600849EB6 /* Images.xcassets */; };
 		16BE5D0E17D61D8600802DE1 /* friend_add_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D0917D61D8600802DE1 /* friend_add_button.png */; };
 		16BE5D0F17D61D8600802DE1 /* friend_add_friend_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D0A17D61D8600802DE1 /* friend_add_friend_arrow.png */; };
 		16BE5D1017D61D8600802DE1 /* friend_add_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D0B17D61D8600802DE1 /* friend_add_separator.png */; };
@@ -940,6 +942,8 @@
 		16B2A3C917F31C9200E7F7E6 /* SettingOfFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfFeedbackViewController.h; sourceTree = "<group>"; };
 		16B2A3CA17F31C9200E7F7E6 /* SettingOfFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfFeedbackViewController.m; sourceTree = "<group>"; };
 		16B2A3CB17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfFeedbackViewController.xib; sourceTree = "<group>"; };
+		16B61FD518FCFC4800849EB6 /* Icon_120_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_120_120.png; sourceTree = "<group>"; };
+		16B61FD718FCFC7600849EB6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		16BE5D0917D61D8600802DE1 /* friend_add_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_add_button.png; sourceTree = "<group>"; };
 		16BE5D0A17D61D8600802DE1 /* friend_add_friend_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_add_friend_arrow.png; sourceTree = "<group>"; };
 		16BE5D0B17D61D8600802DE1 /* friend_add_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_add_separator.png; sourceTree = "<group>"; };
@@ -2232,6 +2236,7 @@
 				162315FF1777397600CF8FB5 /* classes */,
 				16EDEF4A1759AD5E001BE4E9 /* AppDelegate.h */,
 				16EDEF4B1759AD5E001BE4E9 /* AppDelegate.m */,
+				16B61FD718FCFC7600849EB6 /* Images.xcassets */,
 				16EDEF421759AD5E001BE4E9 /* Supporting Files */,
 			);
 			path = miglab_mobile;
@@ -2240,6 +2245,7 @@
 		16EDEF421759AD5E001BE4E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				16B61FD518FCFC4800849EB6 /* Icon_120_120.png */,
 				C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */,
 				C7C9F5C218FC2CA0001E3A47 /* Icon.png */,
 				16EDEF431759AD5E001BE4E9 /* miglab_mobile-Info.plist */,
@@ -2636,6 +2642,7 @@
 				16C10E0917A94D3800DA628D /* register_finish_button.png in Resources */,
 				16C10E0B17A94F4200DA628D /* login_edit2_bg.png in Resources */,
 				16C10E1017A9565E00DA628D /* RegisterOfNickNameViewController.xib in Resources */,
+				16B61FD818FCFC7600849EB6 /* Images.xcassets in Resources */,
 				16C10E1817A9638F00DA628D /* get_password_back.png in Resources */,
 				16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */,
 				16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */,
@@ -2793,6 +2800,7 @@
 				16BE5D2517D6249C00802DE1 /* SettingViewController.xib in Resources */,
 				18A0EA0B17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.xib in Resources */,
 				18A0EA1017D6DBAC004B8BB6 /* SettingOfPrivacyViewController.xib in Resources */,
+				16B61FD618FCFC4800849EB6 /* Icon_120_120.png in Resources */,
 				18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */,
 				18A0EA1B17D6E0C2004B8BB6 /* umFeedback.bundle in Resources */,
 				1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */,
@@ -3083,8 +3091,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3099,8 +3107,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "978D503F-EF73-416E-ABDA-1F341EB772AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "978D503F-EF73-416E-ABDA-1F341EB772AF";
+				PROVISIONING_PROFILE = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3114,8 +3122,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3123,8 +3131,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "978D503F-EF73-416E-ABDA-1F341EB772AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "978D503F-EF73-416E-ABDA-1F341EB772AF";
+				PROVISIONING_PROFILE = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3133,8 +3141,10 @@
 		16EDEF561759AD5E001BE4E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3157,8 +3167,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "978D503F-EF73-416E-ABDA-1F341EB772AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "978D503F-EF73-416E-ABDA-1F341EB772AF";
+				PROVISIONING_PROFILE = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3167,8 +3177,10 @@
 		16EDEF571759AD5E001BE4E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiang Dong (6JWDKE7GS8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3191,8 +3203,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "978D503F-EF73-416E-ABDA-1F341EB772AF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "978D503F-EF73-416E-ABDA-1F341EB772AF";
+				PROVISIONING_PROFILE = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CE9E959-37E3-4279-A62E-43EB53B4BA38";
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
