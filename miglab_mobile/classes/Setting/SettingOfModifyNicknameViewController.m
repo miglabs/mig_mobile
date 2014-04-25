@@ -9,6 +9,7 @@
 #import "SettingOfModifyNicknameViewController.h"
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
+#import "PDatabaseManager.h"
 
 @interface SettingOfModifyNicknameViewController ()
 
@@ -20,7 +21,7 @@
 @synthesize nicknameTextField = _nicknameTextField;
 @synthesize lblErrorMessage = _lblErrorMessage;
 @synthesize miglabApi = _miglabApi;
-@synthesize curNickname = _curNickname;
+@synthesize updatedNickName = _updatedNickName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,6 +82,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshUserInforDisplay:(NSString*)nickname birthday:(NSString*)tbirthday gender:(NSString*)tgender {
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
+    
+    int loginstatus = [databaseManager getLoginStatusInfo];
+    
+    if ( loginstatus && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+        
+        if (nickname) {
+            
+            [databaseManager updateNickname:nickname accountId:lastAccount.accountid];
+        }
+        
+        if (tbirthday) {
+            
+            [databaseManager updateBirthday:tbirthday accountId:lastAccount.accountid];
+        }
+        
+        if (tgender) {
+            
+            [databaseManager updateGender:tgender accountId:lastAccount.accountid];
+        }
+        
+        PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
+        if (tempuser) {
+            
+            tempuser.password = lastAccount.password;
+            
+            [UserSessionManager GetInstance].currentUser = tempuser;
+            [UserSessionManager GetInstance].userid = tempuser.userid;
+            [UserSessionManager GetInstance].accesstoken = tempuser.token;
+            [UserSessionManager GetInstance].accounttype = tempuser.source;
+            [UserSessionManager GetInstance].isLoggedIn = YES;
+        }
+    }
+}
+
+
 -(IBAction)doSaveNickname:(id)sender{
     
     PLog(@"doSaveNickname...");
@@ -91,10 +131,9 @@
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString* nickname = _nicknameTextField.text;
-        _curNickname = nickname;
+        _updatedNickName = _nicknameTextField.text;
         
-        [_miglabApi doUpdateUserInfoNickName:userid token:accesstoken nickname:nickname];
+        [_miglabApi doUpdateUserInfoNickName:userid token:accesstoken nickname:_updatedNickName];
     }
     else {
         
@@ -115,6 +154,8 @@
     [SVProgressHUD dismiss];
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_NICKNAME_SUCCESS];
+    
+    [self refreshUserInforDisplay:_updatedNickName birthday:nil gender:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

@@ -14,12 +14,14 @@
 @property (nonatomic, retain) IBOutlet UITextField *nicknameTextField;
 @property (nonatomic, retain) IBOutlet UILabel *lblErrorMessage;
 @property (nonatomic, retain) MigLabAPI* miglabApi;
-@property (nonatomic, assign) NSString* curNickname;
+@property (nonatomic, retain) NSString* updatedNickName;
 
 -(IBAction)doSaveNickname:(id)sender;
 -(IBAction)doHideKeyBoard:(id)sender;
 
 -(void)ChangeNicknameSuccess:(NSNotification*)tNotification;
 -(void)ChangeNickNameFailed:(NSNotification*)tNotification;
+
+-(void)refreshUserInforDisplay:(NSString*)nickname birthday:(NSString*)tbirthday gender:(NSString*)tgender;
 
 @end

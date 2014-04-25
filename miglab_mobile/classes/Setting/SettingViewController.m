@@ -27,6 +27,8 @@
 @synthesize dateSheet = _dateSheet;
 @synthesize miglabApi = _miglabApi;
 @synthesize nChangeID = _nChangeID;
+@synthesize updatedBirthday = _updatedBirthday;
+@synthesize updatedGender = _updatedGender;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -95,6 +97,44 @@
     _miglabApi = [[MigLabAPI alloc] init];
 }
 
+-(void)refreshUserInforDisplay:(NSString*)nickname birthday:(NSString*)tbirthday gender:(NSString*)tgender {
+    
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
+    
+    int loginstatus = [databaseManager getLoginStatusInfo];
+    
+    if ( loginstatus && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+        
+        if (nickname) {
+            
+            [databaseManager updateNickname:nickname accountId:lastAccount.accountid];
+        }
+        
+        if (tbirthday) {
+            
+            [databaseManager updateBirthday:tbirthday accountId:lastAccount.accountid];
+        }
+        
+        if (tgender) {
+            
+            [databaseManager updateGender:tgender accountId:lastAccount.accountid];
+        }
+        
+        PUser *tempuser = [databaseManager getUserInfoByAccountId:lastAccount.accountid];
+        if (tempuser) {
+            
+            tempuser.password = lastAccount.password;
+            
+            [UserSessionManager GetInstance].currentUser = tempuser;
+            [UserSessionManager GetInstance].userid = tempuser.userid;
+            [UserSessionManager GetInstance].accesstoken = tempuser.token;
+            [UserSessionManager GetInstance].accounttype = tempuser.source;
+            [UserSessionManager GetInstance].isLoggedIn = YES;
+        }
+    }
+}
+
 -(IBAction)popDatePicker:(id)sender {
     
     NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
@@ -119,7 +159,7 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"YYYY-MM-dd";
     
-    NSString* birthday = [formatter stringFromDate:datepicker.date];
+    _updatedBirthday = [formatter stringFromDate:datepicker.date];
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
@@ -128,7 +168,7 @@
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* token = [UserSessionManager GetInstance].accesstoken;
         
-        [_miglabApi doUpdateUserInfoBirthday:userid token:token birthday:birthday];
+        [_miglabApi doUpdateUserInfoBirthday:userid token:token birthday:_updatedBirthday];
     }
     else {
         
@@ -153,9 +193,9 @@
         
         NSString* userid = [UserSessionManager GetInstance].userid;
         NSString* token = [UserSessionManager GetInstance].accesstoken;
-        NSString* gender = [NSString stringWithFormat:@"%d", tgender];
+        _updatedGender = [NSString stringWithFormat:@"%d", tgender];
         
-        [_miglabApi doUpdateUserInfoGender:userid token:token gender:gender];
+        [_miglabApi doUpdateUserInfoGender:userid token:token gender:_updatedGender];
     }
 }
 
@@ -181,13 +221,19 @@
     if (_nChangeID == CHANGE_ID_BIRTHDAY) {
         
         [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_BIRTHDAY_SUCCESS];
+        
+        [self refreshUserInforDisplay:nil birthday:_updatedBirthday gender:nil];
     }
     else if(_nChangeID == CHANGE_ID_GENDER) {
         
         [SVProgressHUD showErrorWithStatus:MIGTIP_CHANGE_GENDER_SUCCESS];
+        
+        [self refreshUserInforDisplay:nil birthday:nil gender:_updatedGender];
     }
     
     _nChangeID = CHANGE_ID_NONE;
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)doChangeBirthdayFailed:(NSNotification *)tNotification {

@@ -38,6 +38,13 @@
 //清空账号
 -(void)deleteAllUserAccount;
 
+//更新当前账号生日信息
+-(void)updateBirthday:(NSString*)birthday accountId:(NSString *)taccountid;
+//更新当前账号性别
+-(void)updateGender:(NSString*)gender accountId:(NSString *)taccountid;
+//更新当前账号昵称
+-(void)updateNickname:(NSString*)nickname accountId:(NSString *)taccountid;
+
 //记录用户信息
 -(void)insertUserInfo:(PUser *)tuser accountId:(NSString *)taccountid;
 //根据第三方唯一taccountid获取用户信息

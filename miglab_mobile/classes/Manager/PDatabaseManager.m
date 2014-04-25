@@ -315,6 +315,36 @@
     
 }
 
+-(void)updateBirthday:(NSString *)birthday accountId:(NSString *)taccountid {
+    
+    NSString* sql = @"update USER_INFO set birthday = ? where accountid = ?";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, birthday, taccountid];
+    [_db close];
+}
+
+-(void)updateNickname:(NSString *)nickname accountId:(NSString *)taccountid {
+    
+    NSString* sql = @"update USER_INFO set nickname = ? where accountid = ?";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, nickname, taccountid];
+    [_db close];
+}
+
+-(void)updateGender:(NSString *)gender accountId:(NSString *)taccountid {
+    
+    NSString* sql = @"update USER_INFO set gender = ? where accountid = ?";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    [_db executeUpdate:sql, gender, taccountid];
+    [_db close];
+}
+
 //根据第三方唯一taccountid删除用户信息
 -(void)deleteUserInfoByAccountId:(NSString *)taccountid{
     
