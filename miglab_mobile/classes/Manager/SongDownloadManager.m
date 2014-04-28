@@ -69,10 +69,23 @@
 
 -(NSString *)getSongCachePath:(Song *)tsong{
     
-    NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
-    NSRange range = [songext rangeOfString:@"."];
-    songext = [songext substringFromIndex:range.location];
-    return [self getSongCachePath:tsong.songid songExt:songext];
+    // 如果没有url，则跳过
+    if (tsong.songurl && ![tsong.songurl isEqualToString:@""]) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        
+        // 如果location太大，认为非法，跳过
+        if (range.location > 256)
+        {
+            return nil;
+        }
+        
+        songext = [songext substringFromIndex:range.location];
+        return [self getSongCachePath:tsong.songid songExt:songext];
+    }
+    
+    return nil;
 }
 
 -(NSString *)getLrcCachePath:(long long)tsongid lrcExt:(NSString *)tlrcext{

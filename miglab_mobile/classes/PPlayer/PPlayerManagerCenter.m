@@ -401,7 +401,7 @@ static PPlayerManagerCenter *instance;
     
 //    PLog(@"downloadProcess: %@", dicProcess);
     
-    if (_currentSong.songurl) {
+    if (_currentSong.songurl && ![_currentSong.songurl isEqualToString:@""]) {
         
         NSString *songext = [NSString stringWithFormat:@"%@", [_currentSong.songurl lastPathComponent]];
         NSRange range = [songext rangeOfString:@"."];

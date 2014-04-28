@@ -126,6 +126,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+#ifdef DEBUG
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+#endif
+    
     //增加标识，用于判断是否是第一次启动应用...
     if (NO && ![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
         
@@ -512,5 +516,15 @@
     
     [self.navController pushViewController:msgViewControl animated:YES];
 }
+
+#ifdef DEBUG
+
+void uncaughtExceptionHandler(NSException* exception) {
+    
+    PLog(@"CRASH: %@", exception);
+    PLog(@"Stack Trace: %@", [exception callStackSymbols]);
+}
+
+#endif
 
 @end
