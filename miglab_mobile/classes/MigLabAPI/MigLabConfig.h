@@ -81,7 +81,7 @@
  */
 // 使用QQ登陆
 #ifndef USE_QQ_LOGIN
-    #define USE_QQ_LOGIN 0
+    #define USE_QQ_LOGIN 1
 #endif
 
 // 开启隐私
