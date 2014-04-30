@@ -106,16 +106,20 @@
 
 -(long long)getSongMaxSize:(Song *)tsong{
     
-    NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
-    NSRange range = [songext rangeOfString:@"."];
-    if (range.location == NSNotFound || range.length <= 0) {
-        return 0;
+    if (tsong.songurl && ![tsong.songurl isEqualToString:@""]) {
+        
+        NSString *songext = [NSString stringWithFormat:@"%@", [tsong.songurl lastPathComponent]];
+        NSRange range = [songext rangeOfString:@"."];
+        if (range.location == NSNotFound || range.length <= 0) {
+            return 0;
+        }
+        songext = [songext substringFromIndex:range.location + 1];
+        
+        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+        return [databaseManager getSongMaxSize:tsong.songid type:songext];
     }
-    songext = [songext substringFromIndex:range.location + 1];
     
-    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-    return [databaseManager getSongMaxSize:tsong.songid type:songext];
-    
+    return 0;
 }
 
 -(long long)getSongLocalSize:(Song *)tsong{

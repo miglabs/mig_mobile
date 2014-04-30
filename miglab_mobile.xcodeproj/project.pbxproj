@@ -517,6 +517,8 @@
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCD1911576100BD4A03 /* guide_1.png */; };
+		CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCE1911576100BD4A03 /* guide_2.png */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
@@ -1216,6 +1218,8 @@
 		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CB4C3BCD1911576100BD4A03 /* guide_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_1.png; sourceTree = "<group>"; };
+		CB4C3BCE1911576100BD4A03 /* guide_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_2.png; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
 		CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseSongInfoCell.xib; sourceTree = "<group>"; };
@@ -2091,6 +2095,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CB4C3BCC19114E6500BD4A03 /* guide */,
 				166171EB18F9354600E86B11 /* socket_chat */,
 				1633F6E417D1D24F00F47DFF /* base */,
 				1624BC0617C784DC00BE08A5 /* friend */,
@@ -2497,6 +2502,15 @@
 			path = share;
 			sourceTree = "<group>";
 		};
+		CB4C3BCC19114E6500BD4A03 /* guide */ = {
+			isa = PBXGroup;
+			children = (
+				CB4C3BCD1911576100BD4A03 /* guide_1.png */,
+				CB4C3BCE1911576100BD4A03 /* guide_2.png */,
+			);
+			name = guide;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2630,6 +2644,7 @@
 				16AB8BB4179EBF590009411F /* LeftViewCell.xib in Resources */,
 				163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */,
 				163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */,
+				CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */,
 				163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */,
 				163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */,
 				163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */,
@@ -2842,6 +2857,7 @@
 				18A6020A17F2956400344C5B /* qq_weibo_icon_disabled@2x.png in Resources */,
 				18A6020B17F2956400344C5B /* qq_weibo_normal@2x.png in Resources */,
 				18A6020C17F2956400344C5B /* qzone_icon@2x.png in Resources */,
+				CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */,
 				167F048518F93274000A1C21 /* ChatMsgTableViewCell.xib in Resources */,
 				C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */,
 				18A6020D17F2956400344C5B /* qzone_icon_disabled@2x.png in Resources */,

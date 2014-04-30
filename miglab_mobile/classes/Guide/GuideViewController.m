@@ -45,7 +45,7 @@
     _guideScrollView.contentSize = CGSizeMake(320 * photoCount, height);
     for (int i=0; i<photoCount; i++) {
         
-        NSString *fsImageName = [NSString stringWithFormat:@"fs0%d", i];
+        NSString *fsImageName = [NSString stringWithFormat:@"guide_%d", i + 1];
         UIImageView *fsImageView = [[UIImageView alloc] init];
         fsImageView.frame = CGRectMake(320 * i, 0, 320, height);
         fsImageView.image = [UIImage imageWithName:fsImageName type:@"png"];

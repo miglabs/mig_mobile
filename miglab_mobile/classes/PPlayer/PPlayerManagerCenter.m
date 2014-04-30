@@ -209,6 +209,11 @@ static PPlayerManagerCenter *instance;
     
     PLog(@"doInsertPlay...");
     [tInsertSong log];
+
+    if (_currentSongIndex >= [_songList count]) {
+        
+        return;
+    }
     
     _currentSong = [_songList objectAtIndex:_currentSongIndex];
     
