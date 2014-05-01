@@ -324,28 +324,31 @@
     
     NSString* presentmsg = textView.text;
     
-    Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
-    curSong.presentMsg = presentmsg;
-    
-    if ([text isEqualToString:@"\n"]) {
+    if (_curEditSong < [_sendsongData count]) {
         
-        if (_curEditSong > -1) {
+        Song* curSong = [_sendsongData objectAtIndex:_curEditSong];
+        curSong.presentMsg = presentmsg;
+        
+        if ([text isEqualToString:@"\n"]) {
             
-            /* 如果没有写任何消息，将显示Placeholder */
-            int msgsize = [presentmsg length];
-            if (msgsize <= 0) {
+            if (_curEditSong > -1) {
                 
-                SongOfSendInfoCell* cell = (SongOfSendInfoCell*)[_sendsongTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_curEditSong inSection:0]];
+                /* 如果没有写任何消息，将显示Placeholder */
+                int msgsize = [presentmsg length];
+                if (msgsize <= 0) {
+                    
+                    SongOfSendInfoCell* cell = (SongOfSendInfoCell*)[_sendsongTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_curEditSong inSection:0]];
+                    
+                    [cell.lblPlaceHolder setHidden:NO];
+                }
                 
-                [cell.lblPlaceHolder setHidden:NO];
+                _curEditSong = -1;
             }
             
-            _curEditSong = -1;
+            [textView resignFirstResponder];
+            
+            return NO;
         }
-        
-        [textView resignFirstResponder];
-        
-        return NO;
     }
     
     return YES;
