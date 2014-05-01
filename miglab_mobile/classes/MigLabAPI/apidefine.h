@@ -67,6 +67,9 @@
 #define LOGIN_QQZONE                            3
 #define LOGIN_DOUBAN                            4
 
+/* 主界面和交友界面的引导图片数量 */
+#define GUIDE_MAIN_NUMBER                       2
+#define GUIDE_FIREND_NUMBER                     2
 
 
 /* 性别 */

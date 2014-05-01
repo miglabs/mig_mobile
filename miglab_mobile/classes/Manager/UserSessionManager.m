@@ -16,6 +16,8 @@
 @synthesize accounttype = _accounttype;
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
+@synthesize isMainMenuFirstLaunch = _isMainMenuFirstLaunch;
+@synthesize isFirendMenuFirstLaunch = _isFirendMenuFirstLaunch;
 
 @synthesize currentUserGene = _currentUserGene;
 @synthesize networkStatus = _networkStatus;

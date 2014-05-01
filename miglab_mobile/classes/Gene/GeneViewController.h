@@ -41,6 +41,10 @@
 
 @property (nonatomic, assign) BOOL isUpdatedList;
 
+//基因界面帮助显示
+@property (nonatomic, retain) UIScrollView* mainGuideScrollView;
+@property (nonatomic, retain) UIPageControl* mainGuidePageControl;
+
 -(IBAction)doAvatar:(id)sender;
 
 -(IBAction)doGotoGene:(id)sender;
@@ -68,5 +72,9 @@
 
 -(void)getTypeSongsFailed:(NSNotification *)tNotification;
 -(void)getTypeSongsSuccess:(NSNotification *)tNotification;
+
+//引导界面
+-(void)finishCurrentGuide;
+-(void)pageTurn:(UIPageControl*)sender;
 
 @end

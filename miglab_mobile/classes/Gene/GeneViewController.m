@@ -44,6 +44,9 @@ static int PAGE_WIDTH = 81;
 
 @synthesize isUpdatedList = _isUpdatedList;
 
+@synthesize mainGuidePageControl = _mainGuidePageControl;
+@synthesize mainGuideScrollView = _mainGuideScrollView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -300,6 +303,47 @@ static int PAGE_WIDTH = 81;
     
     [PPlayerManagerCenter GetInstance].delegate = self;
     
+    if ([UserSessionManager GetInstance].isMainMenuFirstLaunch) {
+        
+        float height = [UIScreen mainScreen].bounds.size.height;
+        
+        _mainGuideScrollView = [[UIScrollView alloc] init];
+        _mainGuideScrollView.frame = CGRectMake(0, 0, 320, height);
+        _mainGuideScrollView.scrollEnabled = YES;
+        _mainGuideScrollView.showsHorizontalScrollIndicator = NO;
+        _mainGuideScrollView.pagingEnabled = YES;
+        _mainGuideScrollView.delegate = self;
+        _mainGuideScrollView.bounces = NO;
+        [_mainGuideScrollView setTag:2];
+        
+        _mainGuideScrollView.contentSize = CGSizeMake(320 * GUIDE_MAIN_NUMBER, height);
+        for (int i=0; i<GUIDE_MAIN_NUMBER; i++) {
+            
+            NSString* imgName = [NSString stringWithFormat:@"guide_%d", i+1];
+            UIImageView* imgView = [[UIImageView alloc] init];
+            imgView.frame = CGRectMake(320 * i, 0, 320, height);
+            imgView.image = [UIImage imageWithName:imgName type:@"png"];
+            //imgView.alpha = 0.9f;
+            [_mainGuideScrollView addSubview:imgView];
+        }
+        
+        UIButton *btnStart = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnStart.frame = CGRectMake(320 * 3 + 60, height - 150, 200, 100);
+        btnStart.backgroundColor = [UIColor clearColor];
+        btnStart.alpha = 0.4f;
+        [btnStart addTarget:self action:@selector(finishCurrentGuide) forControlEvents:UIControlEventTouchUpInside];
+        [_mainGuideScrollView addSubview:btnStart];
+        
+        [self.view addSubview:_mainGuideScrollView];
+        
+        _mainGuidePageControl = [[UIPageControl alloc] init];
+        _mainGuidePageControl.frame = CGRectMake(0, height - 40, 320, 16);
+        _mainGuidePageControl.numberOfPages = GUIDE_MAIN_NUMBER;
+        _mainGuidePageControl.currentPage = 0;
+        _mainGuidePageControl.backgroundColor = [UIColor clearColor];
+        [_mainGuidePageControl addTarget:self action:@selector(pageTurn) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:_mainGuidePageControl];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -735,11 +779,115 @@ static int PAGE_WIDTH = 81;
     
 }
 
+-(void)finishCurrentGuide {
+    
+    _mainGuideScrollView.hidden = YES;
+    _mainGuidePageControl.hidden = YES;
+    
+    [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
+}
+
+-(void)pageTurn :(UIPageControl*)sender {
+    
+    CGSize viewSize = _mainGuideScrollView.frame.size;
+    CGRect rect = CGRectMake(sender.currentPage * viewSize.width, 0, viewSize.width, viewSize.height);
+    
+    [_mainGuideScrollView scrollRectToVisible:rect animated:YES];
+}
+
 #pragma UIScrollViewDelegate
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    if (!decelerate) {
+    if (scrollView.tag == 2) {
+    
+        int x = scrollView.contentOffset.x;
+        if (x >= 320 * (GUIDE_MAIN_NUMBER - 1)) {
+            
+            [self finishCurrentGuide];
+        }
+    }
+    else {
+        
+        if (!decelerate) {
+            int x = scrollView.contentOffset.x;
+            int pageIndex = x / PAGE_WIDTH;
+            
+            if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
+                pageIndex++;
+            }
+            [scrollView setContentOffset:CGPointMake(pageIndex*PAGE_WIDTH, 0) animated:YES];
+            
+            int channelCount = [_xmlParserUtil.channelList count];
+            if (scrollView.tag == 200 && pageIndex < channelCount) {
+                
+                Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:pageIndex];
+                [tempchannel log];
+                
+                UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+                usergene.channel = tempchannel;
+                usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
+                usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
+                usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
+                [self initGeneByUserGene:usergene];
+                
+            } else if (scrollView.tag == 201) {
+                
+                Type *temptype = [_xmlParserUtil.typeList objectAtIndex:pageIndex];
+                [temptype log];
+                
+                UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+                usergene.type = temptype;
+                usergene.mood.changenum = -1;
+                usergene.scene.changenum = -1;
+                usergene.channel.changenum = -1;
+                
+            } else if (scrollView.tag == 202) {
+                
+                Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:pageIndex];
+                [tempmood log];
+                
+                UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+                usergene.mood = tempmood;
+                usergene.type.changenum = -1;
+                usergene.scene.changenum = -1;
+                usergene.channel.changenum = -1;
+                
+            } else if (scrollView.tag == 203) {
+                
+                Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:pageIndex];
+                [tempscene log];
+                
+                UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+                usergene.scene = tempscene;
+                usergene.type.changenum = -1;
+                usergene.mood.changenum = -1;
+                usergene.channel.changenum = -1;
+                
+            }
+            
+        }
+    }
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    
+    if (scrollView.tag == 2) {
+        
+        [self finishCurrentGuide];
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    if (scrollView.tag == 2) {
+        
+        CGPoint offset = _mainGuideScrollView.contentOffset;
+        CGRect bounds = _mainGuideScrollView.frame;
+        [_mainGuidePageControl setCurrentPage:offset.x / bounds.size.width];
+    }
+    else {
+        
         int x = scrollView.contentOffset.x;
         int pageIndex = x / PAGE_WIDTH;
         
@@ -795,69 +943,7 @@ static int PAGE_WIDTH = 81;
             usergene.channel.changenum = -1;
             
         }
-        
     }
-    
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
-    int x = scrollView.contentOffset.x;
-    int pageIndex = x / PAGE_WIDTH;
-    
-    if ((x % PAGE_WIDTH) > PAGE_WIDTH / 2) {
-        pageIndex++;
-    }
-    [scrollView setContentOffset:CGPointMake(pageIndex*PAGE_WIDTH, 0) animated:YES];
-    
-    int channelCount = [_xmlParserUtil.channelList count];
-    if (scrollView.tag == 200 && pageIndex < channelCount) {
-        
-        Channel *tempchannel = [_xmlParserUtil.channelList objectAtIndex:pageIndex];
-        [tempchannel log];
-        
-        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        usergene.channel = tempchannel;
-        usergene.type = [_xmlParserUtil.typeList objectAtIndex:tempchannel.typeindex];
-        usergene.mood = [_xmlParserUtil.moodList objectAtIndex:tempchannel.moodindex];
-        usergene.scene = [_xmlParserUtil.sceneList objectAtIndex:tempchannel.sceneindex];
-        [self initGeneByUserGene:usergene];
-        
-    } else if (scrollView.tag == 201) {
-        
-        Type *temptype = [_xmlParserUtil.typeList objectAtIndex:pageIndex];
-        [temptype log];
-        
-        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        usergene.type = temptype;
-        usergene.mood.changenum = -1;
-        usergene.scene.changenum = -1;
-        usergene.channel.changenum = -1;
-        
-    } else if (scrollView.tag == 202) {
-        
-        Mood *tempmood = [_xmlParserUtil.moodList objectAtIndex:pageIndex];
-        [tempmood log];
-        
-        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        usergene.mood = tempmood;
-        usergene.type.changenum = -1;
-        usergene.scene.changenum = -1;
-        usergene.channel.changenum = -1;
-        
-    } else if (scrollView.tag == 203) {
-        
-        Scene *tempscene = [_xmlParserUtil.sceneList objectAtIndex:pageIndex];
-        [tempscene log];
-        
-        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        usergene.scene = tempscene;
-        usergene.type.changenum = -1;
-        usergene.mood.changenum = -1;
-        usergene.channel.changenum = -1;
-        
-    }
-    
 }
 
 #pragma notification

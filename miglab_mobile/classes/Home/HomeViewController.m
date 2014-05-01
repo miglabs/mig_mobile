@@ -19,6 +19,7 @@
 #import "DDMenuController.h"
 #import "MainMenuViewController.h"
 #import "UINavigationController+PAnimationCategory.h"
+#import "GuideViewController.h"
 
 @interface HomeViewController ()
 
@@ -81,7 +82,6 @@
     [_btnMove addTarget:self action:@selector(dragBegin:withEvent:) forControlEvents:UIControlEventTouchDown];
     [_btnMove addTarget:self action:@selector(dragMoving:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [_btnMove addTarget:self action:@selector(dragEnd:withEvent:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
-    
 }
 
 -(void)dragBegin:(UIControl *)c withEvent:ev{

@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     
     float height = [UIScreen mainScreen].bounds.size.height - 20;
-    int photoCount = 4;
+    int photoCount = 2;
     
     _guideScrollView = [[UIScrollView alloc] init];
     _guideScrollView.frame = CGRectMake(0, 0, 320, height);
@@ -41,6 +41,7 @@
     _guideScrollView.showsHorizontalScrollIndicator = NO;
     _guideScrollView.pagingEnabled = YES;
     _guideScrollView.delegate = self;
+    _guideScrollView.bounces = NO;
     
     _guideScrollView.contentSize = CGSizeMake(320 * photoCount, height);
     for (int i=0; i<photoCount; i++) {
@@ -49,6 +50,7 @@
         UIImageView *fsImageView = [[UIImageView alloc] init];
         fsImageView.frame = CGRectMake(320 * i, 0, 320, height);
         fsImageView.image = [UIImage imageWithName:fsImageName type:@"png"];
+        fsImageView.alpha = 0.5f;
         [_guideScrollView addSubview:fsImageView];
     }
     

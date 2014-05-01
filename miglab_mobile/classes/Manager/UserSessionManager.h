@@ -18,6 +18,8 @@
 @property (nonatomic, assign) int accounttype;
 @property (nonatomic, retain) PUser *currentUser;
 @property (nonatomic, assign) BOOL isLoggedIn;
+@property (nonatomic, assign) BOOL isMainMenuFirstLaunch;
+@property (nonatomic, assign) BOOL isFirendMenuFirstLaunch;
 
 @property (nonatomic, retain) UserGene *currentUserGene;
 @property (nonatomic, assign) int networkStatus;   //0－未知，1-wlan，2-cache，3-2g，3g网络

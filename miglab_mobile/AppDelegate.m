@@ -131,9 +131,9 @@
 #endif
     
     //增加标识，用于判断是否是第一次启动应用...
-    if (NO && ![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunch"];
+        /*
         
         GuideViewController *guideViewController = [[GuideViewController alloc] initWithNibName:@"GuideViewController" bundle:nil];
         _navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
@@ -141,9 +141,20 @@
         
         self.window.rootViewController = _navController;
         [self.window addSubview:self.navController.view];
+         */
+        
+        [UserSessionManager GetInstance].isMainMenuFirstLaunch = YES;
+        [UserSessionManager GetInstance].isFirendMenuFirstLaunch = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunch"];
         
     } else {
         
+        [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
+        [UserSessionManager GetInstance].isFirendMenuFirstLaunch = NO;
+    }
+    
+    /* Begin show main menu */
+    {
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
         AccountOf3rdParty *lastAccount = [databaseManager getLastLoginUserAccount];
         int loginstatus = [databaseManager getLoginStatusInfo];
