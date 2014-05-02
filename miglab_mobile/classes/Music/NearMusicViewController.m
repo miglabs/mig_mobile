@@ -11,6 +11,7 @@
 #import "Song.h"
 #import "PDatabaseManager.h"
 #import "MusicCommentViewController.h"
+#import "MyFriendPersonalPageViewController.h"
 
 @interface NearMusicViewController ()
 
@@ -294,6 +295,27 @@
     [SVProgressHUD dismiss];
 }
 
+-(IBAction)checkNearMusicUserInfo:(id)sender; {
+    
+    int row = ((UIButton*)sender).tag - 77;
+    PLog(@"row %d", row);
+    
+    if (row < [_dataList count]) {
+        
+        MessageInfo* curMsgInfo = [_dataList objectAtIndex:row];
+        NearbyUser* user = curMsgInfo.userInfo;
+        
+        if (user) {
+            
+            MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+            personalPageViewController.userinfo = user;
+            personalPageViewController.isFriend = NO;
+            
+            [self.navigationController pushViewController:personalPageViewController animated:YES];
+        }
+    }
+}
+
 #pragma mark - UITableView delegate
 
 // Called after the user changes the selection.
@@ -387,6 +409,10 @@
     cell.btnAvatar.layer.masksToBounds = YES;
     cell.btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     cell.btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
+    cell.btnAvatar.tag = indexPath.row + 77;
+    [cell.btnAvatar addTarget:self action:@selector(checkNearMusicUserInfo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.contentView addSubview:cell.btnAvatar];
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
     NSString *songDesc = @"未缓存";

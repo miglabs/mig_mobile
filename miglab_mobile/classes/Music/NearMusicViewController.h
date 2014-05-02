@@ -43,4 +43,7 @@
 -(IBAction)doEdit:(id)sender;
 -(IBAction)doSelectedIcon:(id)sender;
 
+// 查看用户信息
+-(IBAction)checkNearMusicUserInfo:(id)sender;
+
 @end
