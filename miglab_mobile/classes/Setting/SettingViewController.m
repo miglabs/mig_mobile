@@ -83,11 +83,11 @@
 #if USE_PRIVATE && USE_FUNCTION_SETTING
     NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"功能", @"意见反馈", nil];
 #elif USE_PRIVATE
-    NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"向我吐槽", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"隐私", @"吐槽咪呦", nil];
 #elif USE_FUNCTION_SETTING
-    NSArray *section1 = [NSArray arrayWithObjects:@"功能", @"向我吐槽", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"功能", @"吐槽咪呦", nil];
 #else
-    NSArray *section1 = [NSArray arrayWithObjects:@"向我吐槽", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"吐槽咪呦", nil];
 #endif
     
     NSArray *section2 = [NSArray arrayWithObjects:@"关于咪呦", nil];

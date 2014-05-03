@@ -99,8 +99,14 @@
 
 - (void)getSC
 {
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+#ifdef DEBUG
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc1.fcgi?platformid=%lld&uid=%lld&tid=%lld",
                                                     m_platformid,m_uid,m_tid];
+#else
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+                      m_platformid,m_uid,m_tid];
+#endif
+    
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {
             NSString* serverIP = [jsonResult objectForKey:@"host"];
@@ -115,8 +121,12 @@
 }
 -(NSArray*)getHiscChat
 {
+#ifdef DEBUG
     
+    NSString* path = [[NSString alloc]initWithFormat:@"hischat1.fcgi?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",m_platformid,m_uid,m_tid,m_token,m_minmsgid];
+#else
     NSString* path = [[NSString alloc]initWithFormat:@"hischat.fcgi?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",m_platformid,m_uid,m_tid,m_token,m_minmsgid];
+#endif
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {
             id jsonObject = [jsonResult objectForKey:@"chat"];

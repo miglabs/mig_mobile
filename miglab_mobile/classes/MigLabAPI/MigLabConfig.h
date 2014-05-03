@@ -54,7 +54,7 @@
 /*
  * 用于切换不同域名地址
  */
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 
 #if (0 == IS_DEBUG_SERVER)
 
@@ -101,13 +101,16 @@
 
 // 开启分享按钮
 #ifndef USE_SHARE
-    #define USE_SHARE 0
+    #define USE_SHARE 1
 #endif
 
 // 开启本地播放功能
 #ifndef USE_LOCAL_PLAY
     #define USE_LOCAL_PLAY 0
 #endif
+
+
+
 
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
