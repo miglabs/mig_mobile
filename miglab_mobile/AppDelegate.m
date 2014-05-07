@@ -185,93 +185,12 @@
             
         }
         
-        //0-测试，1-左右侧滑菜单，2-播放菜单主页，3-确认左侧菜单后页面
-        int initHomeViewType = 6;
+        _rootController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+        _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
+        _navController.navigationBar.hidden = YES;
         
-        if (initHomeViewType == 0) {
-            //
-            
-        } else if (initHomeViewType == 1) {
-            
-            _homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:_homeViewController];
-            [_navController.navigationBar setHidden:YES];
-            
-            //menu
-            DDMenuController *rootController = [[DDMenuController alloc] initWithRootViewController:_navController];
-            _leftViewController = [[LeftViewController alloc] initWithNibName:@"LeftViewController" bundle:nil];
-            _rightViewController = [[RightViewController alloc] initWithNibName:@"RightViewController" bundle:nil];
-            rootController.leftViewController = _leftViewController;
-            rootController.rightViewController = _rightViewController;
-            
-            _menuController = rootController;
-            self.window.rootViewController =  rootController;
-            
-        } else if (initHomeViewType == 2) {
-            
-            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-            _navController.navigationBar.hidden = YES;
-            
-            self.window.rootViewController = _navController;
-            [self.window addSubview:self.navController.view];
-            
-        } else if (initHomeViewType == 3) {
-            
-            MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-            [_navController.navigationBar setHidden:YES];
-            
-            //menu
-            DDMenuController *rootController = [[DDMenuController alloc] initWithRootViewController:_navController];
-            _leftViewController = [[LeftViewController alloc] initWithNibName:@"LeftViewController" bundle:nil];
-            _rightViewController = [[RightViewController alloc] initWithNibName:@"RightViewController" bundle:nil];
-            rootController.leftViewController = _leftViewController;
-            rootController.rightViewController = _rightViewController;
-            
-            _menuController = rootController;
-            self.window.rootViewController =  rootController;
-            
-        } else if (initHomeViewType == 4) {
-            
-            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:musicViewController];
-            _navController.navigationBar.hidden = YES;
-            
-            self.window.rootViewController = _navController;
-            [self.window addSubview:self.navController.view];
-            
-        } else if (initHomeViewType == 5) {
-            
-            GeneViewController *geneViewController = [[GeneViewController alloc] initWithNibName:@"GeneViewController" bundle:nil];
-            MusicViewController *musicViewController = [[MusicViewController alloc] initWithNibName:@"MusicViewController" bundle:nil];
-            FriendViewController *friendViewController = [[FriendViewController alloc] initWithNibName:@"FriendViewController" bundle:nil];
-            
-            geneViewController.hidesBottomBarWhenPushed = YES;
-            musicViewController.hidesBottomBarWhenPushed = YES;
-            friendViewController.hidesBottomBarWhenPushed = YES;
-            
-            //初始化TabBarViewController
-            _tabBarController = [[PTabBarViewController alloc] initWithNibName:@"PTabBarViewController" bundle:nil];
-            _tabBarController.viewControllers = [NSArray arrayWithObjects:geneViewController, musicViewController, friendViewController, nil];
-            [_tabBarController doSelectedFirstMenu:nil];
-            
-            _navController = [[UINavigationController alloc] initWithRootViewController:_tabBarController];
-            _navController.navigationBar.hidden = YES;
-            
-            self.window.rootViewController = _navController;
-            [self.window addSubview:self.navController.view];
-            
-        } else if (initHomeViewType == 6) {
-            
-            _rootController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-            _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
-            _navController.navigationBar.hidden = YES;
-            
-            self.window.rootViewController = _navController;
-            [self.window addSubview:self.navController.view];
-            
-        }
+        self.window.rootViewController = _navController;
+        [self.window addSubview:self.navController.view];
         
     }//
     

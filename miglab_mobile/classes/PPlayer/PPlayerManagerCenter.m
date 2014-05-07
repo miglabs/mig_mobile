@@ -155,6 +155,9 @@ static PPlayerManagerCenter *instance;
         return;
     }
     
+    if (_currentSongIndex >= [_songList count] || _currentSongIndex < 0) {
+        return;
+    }
     _currentSong = [_songList objectAtIndex:_currentSongIndex];
     [self stopDownload];
     
