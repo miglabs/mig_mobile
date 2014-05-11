@@ -63,7 +63,7 @@
     }
     
     /* 显示性别的图片 */
-    if ([_userinfo.sex isEqualToString:STR_FEMALE]) {
+    if ([_userinfo.sex isEqual:STR_FEMALE]) {
         
         _genderImageView.image = [UIImage imageNamed:@"user_gender_female"];
     }
@@ -80,16 +80,15 @@
     
     /* 显示用户来源 */
     NSString* plat = _userinfo.plat;
-    
-    if ([plat isEqualToString:STR_USER_SOURCE_SINA]) {
+    if ([plat isEqual:STR_USER_SOURCE_SINA]) {
         
         _userSourceImageView.image = [UIImage imageNamed:@"sina_tip"];
     }
-    else if([plat isEqualToString:STR_USER_SOURCE_QQ]) {
+    else if([plat isEqual:STR_USER_SOURCE_QQ]) {
         
         _userSourceImageView.image = [UIImage imageNamed:@"tencent_tip"];
     }
-    else if([plat isEqualToString:STR_USER_SOURCE_DOUBAN]) {
+    else if([plat isEqual:STR_USER_SOURCE_DOUBAN]) {
         
         _userSourceImageView.image = [UIImage imageNamed:@"douban_tip"];
     }

@@ -122,7 +122,12 @@
     [self doRecordLocalSongInfo:localDataList];
     
     //export
-    [self exportSongFromIPod:mediaItems currentIndex:0];
+    @try {
+        [self exportSongFromIPod:mediaItems currentIndex:0];
+    }
+    @catch (NSException *exception) {
+        PLog(@"exportSongFromIPod exception: %@", exception);
+    }
     
 }
 
