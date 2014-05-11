@@ -106,6 +106,12 @@
 /* 加载提示语 */
 #define MIGTIP_LOADING                          @"咪呦在拼命加载..."
 
+/*加载聊天*/
+#define MIGTIP_HIS_CHAT                         @"加载聊天"
+
+/*重新登录*/
+#define MIGTIP_RELOGIN                          @"重新登录"
+
 /* 修改昵称成功提示语 */
 #define MIGTIP_CHANGE_NICKNAME_SUCCESS          @"修改昵称成功啦~~~"
 

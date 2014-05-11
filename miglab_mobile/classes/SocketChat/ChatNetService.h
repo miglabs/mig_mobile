@@ -10,6 +10,7 @@
 #import "AsyncSocket.h"
 #import "ChatNetServiceDelegate.h"
 #import "ChatEntity.h"
+#import "SVProgressHUD.h"
 @interface ChatNetService : NSObject <AsyncSocketDelegate>
 
 @property (nonatomic, assign) id<ChatNetServiceDelegate> delegate;

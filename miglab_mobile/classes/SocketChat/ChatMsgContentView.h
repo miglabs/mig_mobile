@@ -11,6 +11,7 @@
 #import "ChatMsgTableViewCell.h"
 #import "ChatNotification.h"
 #import "EGORefreshTableHeaderView.h"
+#import "SVProgressHUD.h"
 @interface ChatMsgContentView : UIView<UITableViewDataSource,
                                     UITableViewDelegate,
                                     ChatNetServiceDelegate,

@@ -40,6 +40,9 @@
     m_uid = uid;
     m_tid = tid;
     m_token = token;
+    
+    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
+    
     return self;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,6 +62,7 @@
 #if DEBUG
     NSLog(@"%@ dealloc", self);
 #endif
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated

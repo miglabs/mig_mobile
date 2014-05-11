@@ -99,6 +99,7 @@
 #if DEBUG
     NSLog(@"%@ dealloc", self);
 #endif
+    [SVProgressHUD dismiss];
 }
 
  - (void)handleSingleFingerEvent:(UISwipeGestureRecognizer *)sender
@@ -297,7 +298,6 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
 	[m_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-	
 }
 
 

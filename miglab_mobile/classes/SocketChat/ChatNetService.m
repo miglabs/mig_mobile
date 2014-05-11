@@ -21,9 +21,17 @@
     NSString*               m_token;
     NSMutableData*          m_recvdata;
     NSMutableDictionary*    m_dicuserinfos;
+    
+    NSString*  m_serverIP;
+    NSInteger  m_serverPort;
+    NSInteger  m_is_relogin;
+    
 }
 @end
 @implementation ChatNetService 
+
+
+
 
 
 - (id) init:(NSString*) token uid:(int64_t)uid
@@ -40,6 +48,7 @@
         m_token = @"11231231232132132131232132323";
     m_dicuserinfos = [[NSMutableDictionary alloc] init];
     m_minmsgid = 0;
+    m_is_relogin = 0;
     [self getSC];
     return self;
 }
@@ -65,6 +74,9 @@
 
 -(void) getRequestJsonData:(NSString*) path success:(void (^)(id jsonResult)) success failure:(void (^)(NSError* err)) failure
 {
+    
+    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
+    
     NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_URL,path];
     NSURL* url = [NSURL URLWithString:strurl];
     NSLog(@"getRequestJsonData  %@",strurl);
@@ -107,11 +119,12 @@
                       m_platformid,m_uid,m_tid];
 #endif
     
+    
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {
-            NSString* serverIP = [jsonResult objectForKey:@"host"];
-            NSInteger  serverPort = [[jsonResult objectForKey:@"port"] integerValue];
-            [self connectServer:serverIP port:serverPort];
+            m_serverIP = [jsonResult objectForKey:@"host"];
+            m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
+            [self connectServer:m_serverIP port:m_serverPort];
         }
     } failure:^(NSError *error) {
         if( self.delegate != nil )
@@ -136,9 +149,11 @@
             }
             
         }
+        [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
         if( self.delegate != nil )
             [self.delegate onError:error.description];
+        [SVProgressHUD dismiss];
     }];
     return nil;
 }
@@ -319,7 +334,11 @@
 
 -(void) onOppositionInfo:(const void*) pData
 {
-    [self getHiscChat];
+    
+    if (m_is_relogin==0)
+        [self getHiscChat];
+    else
+        m_is_relogin = 2;
     
     struct OppositionInfo* pInfo = (struct OppositionInfo*)pData;
     m_session =  pInfo->session;
@@ -343,12 +362,23 @@
         last -= OPPINFO_SIZE;
         pBuffer += OPPINFO_SIZE;
     }
+    if (m_is_relogin == 2){
+        [SVProgressHUD dismiss];
+        m_is_relogin = 0;
+    }
 }
 
 -(void) onHeart:(const void*) pData
 {
-    struct PacketHead* pHead = (struct PacketHead*)pData;
-    [self sendData:pHead len:pHead->packet_length ];
+    @try {
+        struct PacketHead* pHead = (struct PacketHead*)pData;
+        [self sendData:pHead len:pHead->packet_length ];
+    }
+    @catch (NSException *exception) {
+        [SVProgressHUD showErrorWithStatus:@"网路异常"];
+    }
+    
+
 }
 
 -(void)  onChatMsg:(NSString*) msg fid:(int64_t) fid tid:(int64_t) tid msgid:(int16_t) msgid
@@ -408,6 +438,7 @@
     }
 
     [self requestTUserInfo];
+    
 }
 
 
@@ -453,12 +484,16 @@
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err
 {
-    if( self.delegate != nil && err != nil)
-        [self.delegate onError:err.description];
+   //if( self.delegate != nil && err != nil)
+       // [self.delegate onError:err.description];
 }
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
     //NSLog(@"onSocketDidDisconnect ");
+    //断开重连接
+    [m_socket disconnect];
+    m_socket = nil;
+    
 }
 - (void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
 {
