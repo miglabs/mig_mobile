@@ -167,6 +167,8 @@ static int PAGE_WIDTH = 81;
     _modifyGeneView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 -10);
     _modifyGeneView.bodyBgImageView.frame = CGRectMake(0, 0, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 -10);
     //返回播放信息页面
+    [_modifyGeneView.btnBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_modifyGeneView.btnBack setTitle:@"确定" forState:UIControlStateNormal];
     [_modifyGeneView.btnBack addTarget:self action:@selector(doBackFromGene:) forControlEvents:UIControlEventTouchUpInside];
     
     float tempposx = 285;
@@ -658,6 +660,7 @@ static int PAGE_WIDTH = 81;
         
     } completion:^(BOOL finished) {
         
+        [_currentGeneView setNeedsDisplay];
         
     }];
     
