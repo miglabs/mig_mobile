@@ -92,9 +92,7 @@
                      kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
                      nil];
 	
-    NSString *appid = @"222222";
-    
-	_tencentOAuth = [[TencentOAuth alloc] initWithAppId:appid
+	_tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY
 											andDelegate:self];
     
 }
@@ -115,6 +113,20 @@
     
     PLog(@"doShare...");
     
+    if (_isShare2QQZone) {
+        if (![_tencentOAuth isSessionValid]) {
+            [_tencentOAuth authorize:_permissions];
+            return;
+        }
+        [self doShare2QQZone];
+    }
+    if (_isShare2SinaWeibo) {
+        [self doShare2SinaWeibo];
+    }
+    if (_isShare2TencentWeibo) {
+        [self doShare2TencentWeibo];
+    }
+    
 }
 
 -(void)doShare2SinaWeibo{
@@ -134,15 +146,58 @@
     params.paramImages = @"http://img1.gtimg.com/tech/pics/hv1/95/153/847/55115285.jpg";
     params.paramUrl = @"http://www.qq.com";
 	
-	if(![_tencentOAuth addShareWithParams:params]){
-        [self showInvalidTokenOrOpenIDMessage];
-    }
+//	if(![_tencentOAuth addShareWithParams:params]){
+//        [self showInvalidTokenOrOpenIDMessage];
+//    }
     
 }
 
 -(void)doShare2QQZone{
     
     PLog(@"doShare2QQZone...");
+    
+//    NSString *imageurl = self.imageurl.text;
+    NSString *shareText = _shareContentView.tvShareContent.text;
+//    NSString *feeds = self.feeds.text;
+    NSString *shareTitle = @"咪哟";
+    NSString *source = @"4";
+    NSString *act = @"进入应用";
+    NSString *url = @"www.qq.com";
+//    NSString *shareurl = self.shareurl.text;
+    
+    if (nil == shareTitle
+        || 0 == [shareTitle length])
+    {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败" message:[NSString stringWithFormat:@"标题不能为空"]
+													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        /*
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                              shareText, @"description",
+                              feeds, @"summary",
+                              imageurl, @"pics",
+                              shareTitle, @"title",
+                              source, @"source",
+                              act, @"act",
+                              url, @"url",
+                              shareurl, @"shareurl",
+                              nil];
+        */
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                              shareText, @"description",
+                              shareTitle, @"title",
+                              source, @"source",
+                              act, @"act",
+                              url, @"url",
+                              nil];
+        
+        if (![_tencentOAuth sendStory:data friendList:nil]) {
+            [self showInvalidTokenOrOpenIDMessage];
+        }
+    }
     
 }
 
@@ -197,6 +252,36 @@
 	
 }
 //end qq zone
+
+#pragma mark tecent api delegate
+
+- (void)responseDidReceived:(APIResponse*)response forMessage:(NSString *)message
+{
+    if (nil == response || nil == message) {
+        return;
+    }
+    
+    if (URLREQUEST_SUCCEED == response.retCode && kOpenSDKErrorSuccess == response.detailRetCode && [message isEqualToString:@"SendStory"])
+    {
+        NSMutableString *str=[NSMutableString stringWithFormat:@""];
+        for (id key in response.jsonResponse)
+        {
+            [str appendString: [NSString stringWithFormat:@"%@:%@\n",key,[response.jsonResponse objectForKey:key]]];
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:[NSString stringWithFormat:@"%@",str]
+                              
+                                                       delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        NSString *errMsg = [NSString stringWithFormat:@"errorMsg:%@\n%@", response.errorMsg, [response.jsonResponse objectForKey:@"msg"]];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:errMsg delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+}
 
 #pragma mark - UITextViewDelegate
 

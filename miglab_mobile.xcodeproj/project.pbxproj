@@ -167,8 +167,6 @@
 		1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9917B7A61F00E6F132 /* libstdc++.dylib */; };
 		1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9B17B7A63500E6F132 /* libiconv.dylib */; };
 		1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */; };
-		1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */; };
-		1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		1637CAA717B7B9EC00E6F132 /* PUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1637CAA617B7B9EC00E6F132 /* PUser.m */; };
 		163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF2177C67DF008656D1 /* AudioToolbox.framework */; };
 		163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163BCDF4177C67F3008656D1 /* MediaPlayer.framework */; };
@@ -182,6 +180,8 @@
 		163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */; };
 		163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99017A7F9B700EBD24C /* login_choose_register.png */; };
 		163EA99A17A7FABE00EBD24C /* login_choose_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 163EA99917A7FABE00EBD24C /* login_choose_board.png */; };
+		1640AED4191FA81E0093CC6A /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1640AED2191FA81E0093CC6A /* TencentOpenAPI.framework */; };
+		1640AED5191FA81E0093CC6A /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1640AED3191FA81E0093CC6A /* TencentOpenApi_IOS_Bundle.bundle */; };
 		1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCBE17DB0BE5004179E4 /* pinyin.c */; };
 		1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */; };
 		1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1641CCD717DB685E004179E4 /* SettingOfAddFriendViewController.m */; };
@@ -510,7 +510,6 @@
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
 		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
-		CB1EAE1C18D4ADF10099D2A2 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */; };
 		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
 		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
@@ -744,8 +743,6 @@
 		1637CA9917B7A61F00E6F132 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		1637CA9B17B7A63500E6F132 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		1637CA9D17B7A65200E6F132 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
-		1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		1637CAA517B7B9EC00E6F132 /* PUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUser.h; sourceTree = "<group>"; };
 		1637CAA617B7B9EC00E6F132 /* PUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUser.m; sourceTree = "<group>"; };
 		163BCDF2177C67DF008656D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -763,6 +760,8 @@
 		163EA98F17A7F9B700EBD24C /* login_choose_menu_sel_88_88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_menu_sel_88_88.png; sourceTree = "<group>"; };
 		163EA99017A7F9B700EBD24C /* login_choose_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_register.png; sourceTree = "<group>"; };
 		163EA99917A7FABE00EBD24C /* login_choose_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_choose_board.png; sourceTree = "<group>"; };
+		1640AED2191FA81E0093CC6A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		1640AED3191FA81E0093CC6A /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		1641CCBE17DB0BE5004179E4 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		1641CCBF17DB0BE5004179E4 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		1641CCD017DB4FA5004179E4 /* setting_nickname_modify_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_nickname_modify_bg.png; sourceTree = "<group>"; };
@@ -1248,7 +1247,6 @@
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
 				CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */,
 				1637CA7117B7A58800E6F132 /* MobileCoreServices.framework in Frameworks */,
-				CB1EAE1C18D4ADF10099D2A2 /* TencentOpenAPI.framework in Frameworks */,
 				1637CA6F17B7A57500E6F132 /* Security.framework in Frameworks */,
 				1637CA6D17B7A56900E6F132 /* CFNetwork.framework in Frameworks */,
 				1637CA6B17B7A55300E6F132 /* libxml2.dylib in Frameworks */,
@@ -1267,9 +1265,9 @@
 				160C96DF18CF23C400B98EEC /* Crashlytics.framework in Frameworks */,
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
+				1640AED4191FA81E0093CC6A /* TencentOpenAPI.framework in Frameworks */,
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
 				1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */,
-				1637CAA317B7B4B400E6F132 /* TencentOpenAPI.framework in Frameworks */,
 				1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */,
 				18A0EA1A17D6E0C2004B8BB6 /* libUMFeedback.a in Frameworks */,
 			);
@@ -1290,6 +1288,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
 				167F048A18F932C4000A1C21 /* AsyncSocket */,
 				167F046E18F9306F000A1C21 /* SocketChat */,
@@ -1303,7 +1302,6 @@
 				165D7C9517BE618C000D08E3 /* Base */,
 				165D7C8F17BE60AA000D08E3 /* Gene */,
 				1684762C17BA600500F42172 /* Music */,
-				1637CAA017B7B4B400E6F132 /* TencentAPI */,
 				1637CA6117B7A4DF00E6F132 /* DoubanAPI */,
 				169C2E1017A381C2009774E7 /* UMAnalytics_Sdk_2.2.0.OpenUDID */,
 				1830B52B179D129200314A28 /* AES256 */,
@@ -1617,15 +1615,6 @@
 			path = DoubanAPI;
 			sourceTree = "<group>";
 		};
-		1637CAA017B7B4B400E6F132 /* TencentAPI */ = {
-			isa = PBXGroup;
-			children = (
-				1637CAA117B7B4B400E6F132 /* TencentOpenAPI.framework */,
-				1637CAA217B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle */,
-			);
-			path = TencentAPI;
-			sourceTree = "<group>";
-		};
 		163BCE0F177C96DC008656D1 /* CTMBase64 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1659,6 +1648,15 @@
 				163EA99017A7F9B700EBD24C /* login_choose_register.png */,
 			);
 			path = login;
+			sourceTree = "<group>";
+		};
+		1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */ = {
+			isa = PBXGroup;
+			children = (
+				1640AED2191FA81E0093CC6A /* TencentOpenAPI.framework */,
+				1640AED3191FA81E0093CC6A /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = Connect_IOS_SDK_V2.2;
 			sourceTree = "<group>";
 		};
 		1641CCBD17DB0BE5004179E4 /* PinYin */ = {
@@ -2676,7 +2674,6 @@
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
 				162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */,
-				1637CAA417B7B4B400E6F132 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1684763217BA601D00F42172 /* MusicViewController.xib in Resources */,
 				1684763917BA613700F42172 /* body_bg.png in Resources */,
 				1684763A17BA613700F42172 /* music_src.png in Resources */,
@@ -2799,6 +2796,7 @@
 				1633F73817D2216800F47DFF /* music_source_menu_online.png in Resources */,
 				1633F73917D2216800F47DFF /* music_source_separator.png in Resources */,
 				1633F73A17D2216800F47DFF /* music_source_sort.png in Resources */,
+				1640AED5191FA81E0093CC6A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1632E51117D349510089291C /* MusicSourceEditMenuView.xib in Resources */,
 				16BE5D0E17D61D8600802DE1 /* friend_add_button.png in Resources */,
 				16BE5D0F17D61D8600802DE1 /* friend_add_friend_arrow.png in Resources */,
@@ -3162,6 +3160,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
+					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3198,6 +3197,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
+					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";

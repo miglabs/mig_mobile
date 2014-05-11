@@ -15,6 +15,8 @@
 #import "ShareChooseView.h"
 #import "ShareViewController.h"
 #import "WXApi.h"
+#import <objc/runtime.h>
+#import "TencentOpenAPI/QQApiInterface.h"
 
 @interface DetailPlayerViewController ()
 
@@ -260,9 +262,16 @@
     
     PLog(@"doShare2QQZone...");
     
-    ShareViewController *shareViewController = [[ShareViewController alloc] init];
-    shareViewController.isShare2QQZone = YES;
-    [self presentModalViewController:shareViewController animated:YES];
+    QQApiTextObject *txtObj = [QQApiTextObject objectWithText:@"test txt here" ? : @""];
+    [txtObj setCflag:[self shareControlFlags]];
+    
+    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+    [self handleSendResult:sent];
+    
+//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+//    shareViewController.isShare2QQZone = YES;
+//    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
@@ -353,6 +362,95 @@
     PLog(@"doSHare2Sms...");
     
 }
+
+//
+
+- (void)handleSendResult:(QQApiSendResultCode)sendResult
+{
+    switch (sendResult)
+    {
+        case EQQAPIAPPNOTREGISTED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"App未注册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPIMESSAGECONTENTINVALID:
+        case EQQAPIMESSAGECONTENTNULL:
+        case EQQAPIMESSAGETYPEINVALID:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送参数错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPIQQNOTINSTALLED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"未安装手Q" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPIQQNOTSUPPORTAPI:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"API接口不支持" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPISENDFAILD:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPIQZONENOTSUPPORTTEXT:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"空间分享不支持纯文本分享，请使用图文分享" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        case EQQAPIQZONENOTSUPPORTIMAGE:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"空间分享不支持纯图片分享，请使用图文分享" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+
+- (uint64_t)shareControlFlags
+{
+    NSDictionary *context = nil;//[self currentNavContext];
+    __block uint64_t cflag = 0;
+    [context enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([obj isKindOfClass:[NSNumber class]] &&
+            [key isKindOfClass:[NSString class]] &&
+            [key hasPrefix:@"kQQAPICtrlFlag"])
+        {
+            cflag |= [obj unsignedIntValue];
+        }
+    }];
+    
+    return cflag;
+}
+
+- (NSMutableDictionary *)currentNavContext
+{
+    UINavigationController *navCtrl = [self navigationController];
+    NSMutableDictionary *context = objc_getAssociatedObject(navCtrl, objc_unretainedPointer(@"currentNavContext"));
+    if (nil == context)
+    {
+        context = [NSMutableDictionary dictionaryWithCapacity:3];
+        objc_setAssociatedObject(navCtrl, objc_unretainedPointer(@"currentNavContext"), context, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    
+    return context;
+}
+
+#pragma UIAlertViewDelegate
+
 
 #pragma UIActionSheetDelegate
 

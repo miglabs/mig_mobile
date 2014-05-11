@@ -11,7 +11,7 @@
 #import "ShareMenuView.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 
-@interface ShareViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, TencentSessionDelegate>
+@interface ShareViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, TencentSessionDelegate, TencentApiInterfaceDelegate, TCAPIRequestDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
