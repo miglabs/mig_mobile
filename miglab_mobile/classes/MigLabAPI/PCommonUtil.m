@@ -243,6 +243,11 @@
     CGImageRef processImageRef = CGBitmapContextCreateImage(bitmapContext);
     UIImage *processImage = [UIImage imageWithCGImage:processImageRef];
     
+    CGImageRelease(processImageRef);
+    CGContextRelease(bitmapContext);
+    CGColorSpaceRelease(colorSpace);
+    free(spriteData);
+    
     return processImage;
 }
 

@@ -78,8 +78,8 @@
     _playingTipIndex++;
     _playingTipIndex = _playingTipIndex % 7;
     
-    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d", _playingTipIndex];
-    _showPlayingImageView.image = [UIImage imageWithName:playingTipImageName type:@"png"];
+    NSString *playingTipImageName = [NSString stringWithFormat:@"playing_tip_%d.png", _playingTipIndex];
+    _showPlayingImageView.image = [UIImage imageNamed:playingTipImageName];
     
 }
 

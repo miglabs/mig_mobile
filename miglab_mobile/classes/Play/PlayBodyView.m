@@ -40,7 +40,7 @@
     CGSize imageSize = CGSizeMake(width, height);
     
     //圆盘
-    UIImage *circleProcess = [UIImage imageWithName:@"progress_line" type:@"png"];
+    UIImage *circleProcess = [UIImage imageNamed:@"progress_line.png"];
     UIImage *processMask = [PCommonUtil getCircleProcessImageWithNoneAlpha:imageSize progress:processRate];
     UIImage *currentProcessImage = [PCommonUtil maskImage:circleProcess withImage:processMask];
     _ivCircleProcess.image = currentProcessImage;
