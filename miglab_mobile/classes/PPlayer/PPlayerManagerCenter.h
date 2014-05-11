@@ -26,19 +26,19 @@ typedef enum{
 
 @interface PPlayerManagerCenter : NSObject<PHttpDownloaderDelegate, PMusicPlayerDelegate>
 
-@property (nonatomic, retain) NSMutableArray *playerList;
-@property (nonatomic, retain) NSMutableDictionary *dicPlayer;
+@property (retain) NSMutableArray *playerList;
+@property (retain) NSMutableDictionary *dicPlayer;
 
 //正在播放的歌曲信息
-@property (nonatomic, retain) NSMutableArray *songList;
-@property (nonatomic, assign) int currentSongIndex;
-@property (nonatomic, retain) Song *currentSong;
+@property (retain) NSMutableArray *songList;
+@property (assign) int currentSongIndex;
+@property (retain) Song *currentSong;
 @property BOOL shouldStartPlayAfterDownloaded;
 
 @property BOOL hasAddMoodRecord;
-@property (nonatomic, retain) NSString *lastSongId;
+@property (retain) NSString *lastSongId;
 
-@property (nonatomic, retain) id<PPlayerManagerCenterDelegate> delegate;
+@property (retain) id<PPlayerManagerCenterDelegate> delegate;
 
 +(PPlayerManagerCenter *)GetInstance;
 

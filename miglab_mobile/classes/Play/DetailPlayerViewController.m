@@ -358,8 +358,11 @@
         [_miglabAPI doHateSong:userid token:accesstoken sid:currentSong.songid];
         
         int currentSongIndex = [PPlayerManagerCenter GetInstance].currentSongIndex;
-        [[PPlayerManagerCenter GetInstance].songList removeObjectAtIndex:currentSongIndex];
-        [[PDatabaseManager GetInstance] deleteSongInfo:currentSong.songid];
+        if (currentSongIndex >=0 && currentSongIndex < [[PPlayerManagerCenter GetInstance].songList count]) {
+            [[PPlayerManagerCenter GetInstance].songList removeObjectAtIndex:currentSongIndex];
+            [[PDatabaseManager GetInstance] deleteSongInfo:currentSong.songid];
+        }
+        
         [self doNextAction:nil];
         
     } else {
