@@ -92,6 +92,7 @@
     CGRect forgetframe = _btnForget.frame;
     forgetframe.origin.y += self.topDistance;
     _btnForget.frame = forgetframe;
+    _btnForget.hidden = YES;
     
     //
     _miglabAPI = [[MigLabAPI alloc] init];

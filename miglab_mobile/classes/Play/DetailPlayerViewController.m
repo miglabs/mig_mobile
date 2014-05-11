@@ -187,7 +187,11 @@
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    shareSelectedView.btnFive.hidden = YES;
+    shareSelectedView.lblFive.hidden = YES;
     [shareSelectedView.btnSix addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    shareSelectedView.btnSix.hidden = YES;
+    shareSelectedView.lblSix.hidden = YES;
     
     [_shareAchtionSheet addSubview:shareSelectedView];
     
@@ -217,7 +221,6 @@
         {
             //weixin
             [self doShare2WeiXin];
-            return;
         }
             break;
         case 204:
@@ -247,9 +250,9 @@
     [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
     
     //
-    ShareViewController *shareViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
     //    [self.navigationController pushViewController:shareViewController animated:YES];
-    [self presentModalViewController:shareViewController animated:YES];
+//    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
@@ -257,11 +260,19 @@
     
     PLog(@"doShare2QQZone...");
     
+    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+    shareViewController.isShare2QQZone = YES;
+    [self presentModalViewController:shareViewController animated:YES];
+    
 }
 
 -(void)doShare2SinaWeibo{
     
     PLog(@"doShare2SinaWeibo...");
+    
+    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+    shareViewController.isShare2SinaWeibo = YES;
+    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
@@ -324,6 +335,10 @@
 -(void)doShare2TencentWeibo{
     
     PLog(@"doShare2TencentWeibo...");
+    
+    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+    shareViewController.isShare2TencentWeibo = YES;
+    [self presentModalViewController:shareViewController animated:YES];
     
 }
 

@@ -64,7 +64,6 @@
     
     NSArray *tempTitleList = [NSArray arrayWithObjects:@"Live", @"", @"Profile", nil];
     [self setTitleList:tempTitleList];
-    [tempTitleList release];
     
     NSArray *tempNormalIconList = [NSArray arrayWithObjects:@"tab_live.png", @"tab_camera.png", @"tab_profile.png", nil];
     [self setNormalIconList:tempNormalIconList];

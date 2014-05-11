@@ -33,7 +33,6 @@
 		160E075E17C0A64F003F0E45 /* DetailPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160E075C17C0A64F003F0E45 /* DetailPlayerViewController.m */; };
 		160E075F17C0A64F003F0E45 /* DetailPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 160E075D17C0A64F003F0E45 /* DetailPlayerViewController.xib */; };
 		16184E3E1802F07E00E6E627 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16184E3A1802F07E00E6E627 /* ShareViewController.m */; };
-		16184E3F1802F07E00E6E627 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16184E3B1802F07E00E6E627 /* ShareViewController.xib */; };
 		16184E471802F09F00E6E627 /* share_button_share_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16184E411802F09F00E6E627 /* share_button_share_bg.png */; };
 		16184E481802F09F00E6E627 /* share_cd_share_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 16184E421802F09F00E6E627 /* share_cd_share_layer.png */; };
 		16184E491802F09F00E6E627 /* share_qqzone_share_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16184E431802F09F00E6E627 /* share_qqzone_share_icon.png */; };
@@ -569,7 +568,6 @@
 		160E075D17C0A64F003F0E45 /* DetailPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPlayerViewController.xib; sourceTree = "<group>"; };
 		16184E391802F07E00E6E627 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		16184E3A1802F07E00E6E627 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		16184E3B1802F07E00E6E627 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		16184E411802F09F00E6E627 /* share_button_share_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button_share_bg.png; sourceTree = "<group>"; };
 		16184E421802F09F00E6E627 /* share_cd_share_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_cd_share_layer.png; sourceTree = "<group>"; };
 		16184E431802F09F00E6E627 /* share_qqzone_share_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_qqzone_share_icon.png; sourceTree = "<group>"; };
@@ -2116,7 +2114,6 @@
 			children = (
 				16184E391802F07E00E6E627 /* ShareViewController.h */,
 				16184E3A1802F07E00E6E627 /* ShareViewController.m */,
-				16184E3B1802F07E00E6E627 /* ShareViewController.xib */,
 				16E77E16178DA518006A24A6 /* PCustomPlayerMenuView.h */,
 				16E77E17178DA518006A24A6 /* PCustomPlayerMenuView.m */,
 				16E77E18178DA518006A24A6 /* PCustomPlayerNavigationView.h */,
@@ -2877,7 +2874,6 @@
 				16B2A3C817F311DD00E7F7E6 /* SettingOfAboutViewController.xib in Resources */,
 				16B2A3CD17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib in Resources */,
 				188A20BC17F57F7600D4E753 /* MSYH.ttf in Resources */,
-				16184E3F1802F07E00E6E627 /* ShareViewController.xib in Resources */,
 				16184E471802F09F00E6E627 /* share_button_share_bg.png in Resources */,
 				16184E481802F09F00E6E627 /* share_cd_share_layer.png in Resources */,
 				16184E491802F09F00E6E627 /* share_qqzone_share_icon.png in Resources */,

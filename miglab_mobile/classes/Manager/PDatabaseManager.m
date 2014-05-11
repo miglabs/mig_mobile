@@ -597,7 +597,7 @@
     NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, tid, createtime, collectnum, commentnum, hot, channelid, typeid, moodid, sceneid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
-    NSString *pinYinResult = [[NSString alloc] init];
+    NSMutableString *pinYinResult = [[NSMutableString alloc] init];
     
     [_db open];
     
@@ -623,11 +623,11 @@
         for (int i=0; i<tsong.songname.length; i++) {
             NSString *singlePinYinLetter = [[NSString stringWithFormat:@"%c", pinyinFirstLetter([tsong.songname characterAtIndex:i])] uppercaseString];
             
-            pinYinResult = [pinYinResult stringByAppendingString:singlePinYinLetter];
+            [pinYinResult appendFormat:@"%@", singlePinYinLetter];
         }
         
         tsong.pinyin = pinYinResult;
-        pinYinResult = @"";
+        [pinYinResult deleteCharactersInRange:NSMakeRange(0, pinYinResult.length)];
     }
     
     NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];
@@ -647,7 +647,7 @@
     NSString *sql = @"insert into SONG_LOCAL_INFO (songid, songname, pinyin, artist, pubtime, album, duration, songurl, hqurl, lrcurl, coverurl, like, type, tid, createtime, collectnum, commentnum, hot, channelid, typeid, moodid, sceneid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PLog(@"sql: %@", sql);
     
-    NSString *pinYinResult = [[NSString alloc] init];
+    NSMutableString *pinYinResult = [[NSMutableString alloc] init];
     
     [_db open];
     
@@ -691,11 +691,11 @@
             for (int i=0; i<tsong.songname.length; i++) {
                 NSString *singlePinYinLetter = [[NSString stringWithFormat:@"%c", pinyinFirstLetter([tsong.songname characterAtIndex:i])] uppercaseString];
                 
-                pinYinResult = [pinYinResult stringByAppendingString:singlePinYinLetter];
+                [pinYinResult appendFormat:@"%@", singlePinYinLetter];
             }
             
             tsong.pinyin = pinYinResult;
-            pinYinResult = @"";
+            [pinYinResult deleteCharactersInRange:NSMakeRange(0, pinYinResult.length)];
         }
         
         NSNumber *numSongId = [NSNumber numberWithLongLong:tsong.songid];

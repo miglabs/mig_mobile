@@ -21,6 +21,10 @@
 @property (nonatomic, strong) TencentOAuth *tencentOAuth;
 @property (nonatomic, strong) NSArray *permissions;
 
+@property (nonatomic, assign) BOOL isShare2SinaWeibo;
+@property (nonatomic, assign) BOOL isShare2TencentWeibo;
+@property (nonatomic, assign) BOOL isShare2QQZone;
+
 -(IBAction)doShare:(id)sender;
 -(void)doShare2SinaWeibo;
 -(void)doShare2TencentWeibo;

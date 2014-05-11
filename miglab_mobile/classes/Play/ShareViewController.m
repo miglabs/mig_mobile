@@ -58,7 +58,7 @@
     
     NSDictionary *dicMenu10 = [NSDictionary dictionaryWithObjectsAndKeys:@"share_button_share_bg.png", @"MenuImageName", @"分享", @"MenuText", nil];
     NSArray *section1 = [NSArray arrayWithObjects:dicMenu10, nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, nil];
+    _datalist = [NSMutableArray arrayWithObjects:section0, section1, nil];
     
     //
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doHideKeyborad:)];
