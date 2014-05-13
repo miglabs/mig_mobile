@@ -5,7 +5,7 @@
 //  Created by 180 on 14-3-30.
 //
 //
-#define  HTTP_API_URL  @"http://112.124.49.59/"
+#define  HTTP_API_URL  @"http://42.121.14.108/"
 #import "ChatNetService.h"
 #import "AFNetworking.h"
 #import "ChatDef.h"
@@ -78,41 +78,80 @@
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     
     NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_URL,path];
+    PLog(@"getUserInfoUrl:%@",strurl);
     NSURL* url = [NSURL URLWithString:strurl];
-    NSLog(@"getRequestJsonData  %@",strurl);
-    AFHTTPClient* http = [AFHTTPClient clientWithBaseURL:url];
-    [http getPath:nil parameters:nil success:^(AFHTTPRequestOperation *operation,id responseObject){
-        NSData *jsonData=[[NSData alloc] initWithData:[[operation responseString] dataUsingEncoding:NSUTF8StringEncoding]];
-        NSError* error = nil;
-        id jsonObject=[NSJSONSerialization JSONObjectWithData:jsonData
-                                                      options:NSJSONReadingMutableLeaves error:&error];
-        if (jsonObject != nil) {
-            NSInteger status = [[ (NSDictionary*)jsonObject objectForKey:@"status"] integerValue];
-            if (status != 0 ) {
-                 if( failure != nil)
-                     failure([ (NSDictionary*)jsonObject objectForKey:@"msg"]);
-            }
-            else
-            {
-                 success([(NSDictionary*)jsonObject objectForKey:@"result"]);
-            }
-        }
-        else
-            if( failure != nil)
-                failure(error);
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
             
-       
-    }
-   failure:^(AFHTTPRequestOperation *operation,NSError *error){
-       if( failure != nil)
-           failure(error);
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
+            
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"get chat information operation succeeded");
+                success([ dicJson objectForKey:@"result"]);
+                
+            } else {
+                if( failure != nil)
+                    failure([ dicJson objectForKey:@"msg"]);
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败:(";
+            PLog(@"failure: %@", msg);
+            
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"failure: %@", error);
+        
     }];
+    
+    [operation start];
+    
+    /*AFHTTPClient* http = [AFHTTPClient clientWithBaseURL:url];
+     [http getPath:nil parameters:nil success:^(AFHTTPRequestOperation *operation,id responseObject){
+     NSData *jsonData=[[NSData alloc] initWithData:[[operation responseString] dataUsingEncoding:NSUTF8StringEncoding]];
+     NSError* error = nil;
+     id jsonObject=[NSJSONSerialization JSONObjectWithData:jsonData
+     options:NSJSONReadingMutableLeaves error:&error];
+     if (jsonObject != nil) {
+     NSInteger status = [[ (NSDictionary*)jsonObject objectForKey:@"status"] integerValue];
+     if (status != 0 ) {
+     if( failure != nil)
+     failure([ (NSDictionary*)jsonObject objectForKey:@"msg"]);
+     }
+     else
+     {
+     success([(NSDictionary*)jsonObject objectForKey:@"result"]);
+     }
+     }
+     else
+     if( failure != nil)
+     failure(error);
+     
+     
+     }
+     failure:^(AFHTTPRequestOperation *operation,NSError *error){
+     if( failure != nil)
+     failure(error);
+     }];*/
 }
 
 - (void)getSC
 {
 #ifdef DEBUG
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc1.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
                                                     m_platformid,m_uid,m_tid];
 #else
     NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
@@ -136,7 +175,7 @@
 {
 #ifdef DEBUG
     
-    NSString* path = [[NSString alloc]initWithFormat:@"hischat1.fcgi?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",m_platformid,m_uid,m_tid,m_token,m_minmsgid];
+    NSString* path = [[NSString alloc]initWithFormat:@"hischat.fcgi?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",m_platformid,m_uid,m_tid,m_token,m_minmsgid];
 #else
     NSString* path = [[NSString alloc]initWithFormat:@"hischat.fcgi?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",m_platformid,m_uid,m_tid,m_token,m_minmsgid];
 #endif
