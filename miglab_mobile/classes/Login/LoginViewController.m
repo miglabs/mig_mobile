@@ -14,7 +14,6 @@
 #import "PDatabaseManager.h"
 #import "MainMenuViewController.h"
 #import "AppDelegate.h"
-#import "DDMenuController.h"
 #import "PPlayerManagerCenter.h"
 
 @interface LoginViewController ()
@@ -204,9 +203,6 @@
     MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
     [nav setNavigationBarHidden:YES];
-    
-    DDMenuController *menuController = (DDMenuController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).menuController;
-    [menuController setRootController:nav animated:YES];
     
 }
 

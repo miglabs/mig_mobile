@@ -24,7 +24,6 @@
 
 #import "MainMenuViewController.h"
 
-#import "HomeViewController.h"
 #import "PUser.h"
 #import "UserSessionManager.h"
 #import "SinaWeibo.h"
@@ -41,20 +40,7 @@
 @synthesize window = _window;
 @synthesize navController = _navController;
 
-@synthesize menuController = _menuController;
-@synthesize homeViewController = _homeViewController;
-@synthesize leftViewController = _leftViewController;
-@synthesize rightViewController = _rightViewController;
-
 @synthesize sinaweibo = _sinaweibo;
-
-@synthesize tabBarController = _tabBarController;
-
-//for crash
-//-(void)installUncaughtExceptionHandler
-//{
-//    InstallUncaughtExceptionHandler();
-//}
 
 - (void)umengTrack {
     
@@ -91,7 +77,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [self installUncaughtExceptionHandler];//
     
     //Crashlytics
     [Crashlytics startWithAPIKey:@"13b0dd85b007ad78249b02fc26fa3972dff8da79"];
@@ -132,16 +117,6 @@
     
     //增加标识，用于判断是否是第一次启动应用...
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
-        
-        /*
-        
-        GuideViewController *guideViewController = [[GuideViewController alloc] initWithNibName:@"GuideViewController" bundle:nil];
-        _navController = [[UINavigationController alloc] initWithRootViewController:guideViewController];
-        _navController.navigationBar.hidden = YES;
-        
-        self.window.rootViewController = _navController;
-        [self.window addSubview:self.navController.view];
-         */
         
         [UserSessionManager GetInstance].isMainMenuFirstLaunch = YES;
         [UserSessionManager GetInstance].isFirendMenuFirstLaunch = YES;
@@ -185,7 +160,7 @@
             
         }
         
-        _rootController = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+        _rootController = [RootViewController sharedInstance];
         _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
         _navController.navigationBar.hidden = YES;
         

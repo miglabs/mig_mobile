@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDMenuController.h"
-#import "HomeViewController.h"
-#import "LeftViewController.h"
-#import "RightViewController.h"
 #import "WXApi.h"
-
-#import "PTabBarViewController.h"
 
 #import "RootViewController.h"
 
@@ -25,13 +19,6 @@
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, strong) RootViewController *rootController;
 
-@property (nonatomic, retain) DDMenuController *menuController;
-@property (nonatomic, retain) HomeViewController *homeViewController;
-@property (nonatomic, retain) LeftViewController *leftViewController;
-@property (nonatomic, retain) RightViewController *rightViewController;
-
 @property (nonatomic, retain) SinaWeibo *sinaweibo;
-
-@property (nonatomic, retain) PTabBarViewController *tabBarController;
 
 @end

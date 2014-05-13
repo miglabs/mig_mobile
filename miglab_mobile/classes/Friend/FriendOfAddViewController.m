@@ -49,7 +49,7 @@
     
     NSArray *section0 = [NSArray arrayWithObjects:@"从手机通讯录里添加", nil];
     NSArray *section1 = [NSArray arrayWithObjects:@"从新浪微博添加好友", @"从腾讯微博添加好友", nil];
-    _datalist = [NSArray arrayWithObjects:section0, section1, nil];
+    _datalist = [NSMutableArray arrayWithObjects:section0, section1, nil];
     
 }
 

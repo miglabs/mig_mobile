@@ -163,9 +163,7 @@
     GeneViewController *tempGene = [rootViewController.dicViewControllerCache objectForKey:numGeneIndex];
     [tempGene loadSongsByGene];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToViewController:rootViewController animated:YES];
     
 //    RegisterOfNickNameViewController *gotoNickNameView = [[RegisterOfNickNameViewController alloc] initWithNibName:@"RegisterOfNickNameViewController" bundle:nil];
 //    [self.navigationController pushViewController:gotoNickNameView animated:YES];
