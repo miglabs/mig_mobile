@@ -15,6 +15,7 @@
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
 #import "SVProgressHUD.h"
+#import "RootViewController.h"
 
 @interface SettingViewController ()
 
@@ -29,24 +30,6 @@
 @synthesize nChangeID = _nChangeID;
 @synthesize updatedBirthday = _updatedBirthday;
 @synthesize updatedGender = _updatedGender;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdaySuccess:) name:NotificationUpdateUserSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdayFailed:) name:NotificationUpdateUserFailed object:nil];
-    }
-    return self;
-}
-
--(void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserFailed object:nil];
-}
 
 - (void)viewDidLoad
 {
@@ -95,6 +78,30 @@
     _datalist = [NSMutableArray arrayWithObjects:section0, section1, section2, section3, nil];
     
     _miglabApi = [[MigLabAPI alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdaySuccess:) name:NotificationUpdateUserSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doChangeBirthdayFailed:) name:NotificationUpdateUserFailed object:nil];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationUpdateUserFailed object:nil];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)refreshUserInforDisplay:(NSString*)nickname birthday:(NSString*)tbirthday gender:(NSString*)tgender {
@@ -199,12 +206,6 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(IBAction)doLogout:(id)sender{
     
     PLog(@"doLogout...");
@@ -233,7 +234,10 @@
     
     _nChangeID = CHANGE_ID_NONE;
     
-    [self.navigationController popViewControllerAnimated:YES];
+    //
+    RootViewController *rootViewController = [RootViewController sharedInstance];
+    [self.navigationController popToViewController:rootViewController animated:YES];
+    
 }
 
 -(void)doChangeBirthdayFailed:(NSNotification *)tNotification {

@@ -548,7 +548,7 @@ static int PAGE_WIDTH = 81;
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
-        SettingViewController *settingViewController = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
+        SettingViewController *settingViewController = [[SettingViewController alloc] init];
         [self.topViewcontroller.navigationController pushViewController:settingViewController animated:YES];
         
     } else {

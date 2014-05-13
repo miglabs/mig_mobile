@@ -159,14 +159,12 @@
     
     //gene
     NSNumber *numGeneIndex = [NSNumber numberWithInt:100];
-    RootViewController *rootViewController = ((AppDelegate *)[UIApplication sharedApplication].delegate).rootController;
+    RootViewController *rootViewController = [RootViewController sharedInstance];
     GeneViewController *tempGene = [rootViewController.dicViewControllerCache objectForKey:numGeneIndex];
     [tempGene loadSongsByGene];
     
     [self.navigationController popToViewController:rootViewController animated:YES];
     
-//    RegisterOfNickNameViewController *gotoNickNameView = [[RegisterOfNickNameViewController alloc] initWithNibName:@"RegisterOfNickNameViewController" bundle:nil];
-//    [self.navigationController pushViewController:gotoNickNameView animated:YES];
 }
 
 @end

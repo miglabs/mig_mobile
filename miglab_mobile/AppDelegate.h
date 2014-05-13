@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
-@property (nonatomic, strong) RootViewController *rootController;
+@property (nonatomic, strong) RootViewController *rootViewController;
 
 @property (nonatomic, retain) SinaWeibo *sinaweibo;
 

@@ -160,8 +160,8 @@
             
         }
         
-        _rootController = [RootViewController sharedInstance];
-        _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
+        _rootViewController = [RootViewController sharedInstance];
+        _navController = [[UINavigationController alloc] initWithRootViewController:_rootViewController];
         _navController.navigationBar.hidden = YES;
         
         self.window.rootViewController = _navController;

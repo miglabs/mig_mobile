@@ -10,6 +10,7 @@
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
+#import "RootViewController.h"
 
 @interface SettingOfModifyNicknameViewController ()
 
@@ -89,7 +90,7 @@
     
     int loginstatus = [databaseManager getLoginStatusInfo];
     
-    if ( loginstatus && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
+    if ( loginstatus >= 0 && lastAccount && lastAccount.accesstoken && lastAccount.accountid) {
         
         if (nickname) {
             
@@ -157,7 +158,9 @@
     
     [self refreshUserInforDisplay:_updatedNickName birthday:nil gender:nil];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    RootViewController *rootViewController = [RootViewController sharedInstance];
+    [self.navigationController popToViewController:rootViewController animated:YES];
+    
 }
 
 -(void)ChangeNickNameFailed:(NSNotification *)tNotification {

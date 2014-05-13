@@ -329,7 +329,9 @@
         
         [self didFinishLogin];
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        RootViewController *rootViewController = [RootViewController sharedInstance];
+        [self.navigationController popToViewController:rootViewController animated:YES];
+        
     }
     
 }

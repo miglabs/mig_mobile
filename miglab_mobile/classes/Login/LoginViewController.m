@@ -165,8 +165,10 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterSuccess object:nil userInfo:nil];
+    //
+    RootViewController *rootViewController = [RootViewController sharedInstance];
+    [self.navigationController popToViewController:rootViewController animated:YES];
+    
 }
 
 //getUserInfo notification
