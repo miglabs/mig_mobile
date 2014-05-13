@@ -123,12 +123,21 @@
 #endif
     
     //gps
-    _locationManager = [[CLLocationManager alloc] init];
-    if ([CLLocationManager locationServicesEnabled]) {
-        [_locationManager setDelegate:self];
-        [_locationManager setDistanceFilter:kCLDistanceFilterNone];
-        [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-//        [_locationManager startUpdatingLocation];
+    
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+        
+        _locationManager = [[CLLocationManager alloc] init];
+        if ([CLLocationManager locationServicesEnabled]) {
+            [_locationManager setDelegate:self];
+            [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+            [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+            //        [_locationManager startUpdatingLocation];
+        }
+    }
+    else {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
+        [alert show];
     }
     
 }

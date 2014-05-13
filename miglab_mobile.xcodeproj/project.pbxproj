@@ -517,6 +517,7 @@
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCD1911576100BD4A03 /* guide_1.png */; };
 		CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCE1911576100BD4A03 /* guide_2.png */; };
+		CB70C4421922639F007D583A /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB70C4411922639F007D583A /* TencentOpenAPI.framework */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
@@ -1217,6 +1218,7 @@
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB4C3BCD1911576100BD4A03 /* guide_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_1.png; sourceTree = "<group>"; };
 		CB4C3BCE1911576100BD4A03 /* guide_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_2.png; sourceTree = "<group>"; };
+		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
 		CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseSongInfoCell.xib; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
 				16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */,
 				1640AED4191FA81E0093CC6A /* TencentOpenAPI.framework in Frameworks */,
+				CB70C4421922639F007D583A /* TencentOpenAPI.framework in Frameworks */,
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
 				1637CA6617B7A4DF00E6F132 /* libDoubanApiEngine.framework in Frameworks */,
 				1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */,
@@ -2201,6 +2204,7 @@
 				CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */,
 				CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */,
 				CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */,
+				CB70C4411922639F007D583A /* TencentOpenAPI.framework */,
 				165F694918D3438B009D4F88 /* Crashlytics.framework */,
 				160C96DE18CF23C400B98EEC /* Crashlytics.framework */,
 				188A20B917F5638000D4E753 /* CoreText.framework */,
@@ -3161,6 +3165,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
 					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3198,6 +3203,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
 					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";

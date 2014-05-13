@@ -136,6 +136,11 @@
 /* 取消 */
 #define MIGTIP_CANCEL                           @"取消"
 
+/* 警告 */
+#define MIGTIP_WARNING                          @"Warning"
+
+/* 没有打开定位服务 */
+#define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
 
 /* --------------------- 地址定义 --------------------- */
 #define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miglab.com/default.jpg"

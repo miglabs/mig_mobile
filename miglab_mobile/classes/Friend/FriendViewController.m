@@ -91,13 +91,21 @@
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     /* 载入gps */
-    _locationMng = [[CLLocationManager alloc] init];
-    if ([CLLocationManager locationServicesEnabled]) {
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
         
-        [_locationMng setDelegate:self];
-        [_locationMng setDistanceFilter:kCLDistanceFilterNone];
-        [_locationMng setDesiredAccuracy:kCLLocationAccuracyBest];
-        [_locationMng startUpdatingLocation];
+        _locationMng = [[CLLocationManager alloc] init];
+        if ([CLLocationManager locationServicesEnabled]) {
+            
+            [_locationMng setDelegate:self];
+            [_locationMng setDistanceFilter:kCLDistanceFilterNone];
+            [_locationMng setDesiredAccuracy:kCLLocationAccuracyBest];
+            [_locationMng startUpdatingLocation];
+        }
+    }
+    else {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 
