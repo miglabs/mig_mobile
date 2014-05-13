@@ -308,9 +308,11 @@ static int PAGE_WIDTH = 81;
     if ([UserSessionManager GetInstance].isMainMenuFirstLaunch) {
         
         float height = [UIScreen mainScreen].bounds.size.height;
+        double version = [[UIDevice currentDevice].systemVersion doubleValue];
+        float heightoffset = version >= 7 ? 0 : 6;
         
         _mainGuideScrollView = [[UIScrollView alloc] init];
-        _mainGuideScrollView.frame = CGRectMake(0, 0, 320, height);
+        _mainGuideScrollView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
         _mainGuideScrollView.scrollEnabled = YES;
         _mainGuideScrollView.showsHorizontalScrollIndicator = NO;
         _mainGuideScrollView.pagingEnabled = YES;
