@@ -165,6 +165,8 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
     
+    [databaseManager setLoginStatusInfo:1];
+    
     //
     RootViewController *rootViewController = [RootViewController sharedInstance];
     [self.navigationController popToViewController:rootViewController animated:YES];
