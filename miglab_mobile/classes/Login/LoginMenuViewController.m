@@ -190,6 +190,12 @@
         
         [[PPlayerManagerCenter GetInstance] doNext];
     }
+    
+    // 开启登陆后引导
+    if ([UserSessionManager GetInstance].isProgramFirstLaunch) {
+        
+        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = YES;
+    }
 }
 
 -(void)didFinishLogout {

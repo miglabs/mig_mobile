@@ -46,6 +46,8 @@ static int PAGE_WIDTH = 81;
 
 @synthesize mainGuidePageControl = _mainGuidePageControl;
 @synthesize mainGuideScrollView = _mainGuideScrollView;
+@synthesize imgGeneView = _imgGeneView;
+@synthesize imgMainView = _imgMainView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -306,11 +308,13 @@ static int PAGE_WIDTH = 81;
     [PPlayerManagerCenter GetInstance].delegate = self;
     
     if ([UserSessionManager GetInstance].isMainMenuFirstLaunch) {
-        
+     
+        // 暂时不用strollview，只有一张图片显示
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
         float heightoffset = version >= 7 ? 0 : 6;
         
+#if 0
         _mainGuideScrollView = [[UIScrollView alloc] init];
         _mainGuideScrollView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
         _mainGuideScrollView.scrollEnabled = YES;
@@ -347,6 +351,17 @@ static int PAGE_WIDTH = 81;
         _mainGuidePageControl.backgroundColor = [UIColor clearColor];
         [_mainGuidePageControl addTarget:self action:@selector(pageTurn) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:_mainGuidePageControl];
+#endif
+        
+        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 1];
+        _imgMainView = [[UIImageView alloc] init];
+        _imgMainView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
+        _imgMainView.image = [UIImage imageWithName:imgName type:@"png"];
+        _imgMainView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
+        [_imgMainView addGestureRecognizer:singleTap];
+        [self.view addSubview:_imgMainView];
     }
 }
 
@@ -366,6 +381,27 @@ static int PAGE_WIDTH = 81;
     else {
         
         _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
+    }
+    
+    if (![UserSessionManager GetInstance].isMainMenuFirstLaunch &&
+        [UserSessionManager GetInstance].isGeneMenuFirstLaunch) {
+        
+        // 主页引导已经完成
+        float height = [UIScreen mainScreen].bounds.size.height;
+        double version = [[UIDevice currentDevice].systemVersion doubleValue];
+        float heightoffset = version >= 7 ? 0 : 6;
+        
+        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 2];
+        _imgGeneView = [[UIImageView alloc] init];
+        _imgGeneView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
+        _imgGeneView.image = [UIImage imageWithName:imgName type:@"png"];
+        
+        _imgGeneView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
+        [_imgGeneView addGestureRecognizer:singleTap];
+        
+        [self.view addSubview:_imgGeneView];
     }
 }
 
@@ -790,6 +826,10 @@ static int PAGE_WIDTH = 81;
     _mainGuidePageControl.hidden = YES;
     
     [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
+    [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
+    
+    [_imgGeneView setHidden:YES];
+    [_imgMainView setHidden:YES];
 }
 
 -(void)pageTurn :(UIPageControl*)sender {

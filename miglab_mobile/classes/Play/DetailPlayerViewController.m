@@ -32,6 +32,8 @@
 
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
+@synthesize imgDetailView = _imgDetailView;
+
 @synthesize playerTimer = _playerTimer;
 @synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
 @synthesize miglabAPI = _miglabAPI;
@@ -114,6 +116,30 @@
     [self.view addSubview:_bottomPlayerMenuView];
     
     _miglabAPI = [[MigLabAPI alloc] init];
+    
+    if ([UserSessionManager GetInstance].isDetailPlayFirstLaunch) {
+        
+        float height = [UIScreen mainScreen].bounds.size.height;
+        double version = [[UIDevice currentDevice].systemVersion doubleValue];
+        float heightoffset = version >= 7 ? 0 : 6;
+        
+        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 3];
+        _imgDetailView = [[UIImageView alloc] init];
+        _imgDetailView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
+        _imgDetailView.image = [UIImage imageWithName:imgName type:@"png"];
+        _imgDetailView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
+        [_imgDetailView addGestureRecognizer:singleTap];
+        
+        [self.view addSubview:_imgDetailView];
+    }
+}
+
+-(void)finishCurrentGuide {
+    
+    [UserSessionManager GetInstance].isDetailPlayFirstLaunch = NO;
+    [_imgDetailView setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

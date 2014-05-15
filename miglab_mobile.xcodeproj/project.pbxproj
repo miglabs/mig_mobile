@@ -503,6 +503,7 @@
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CB3EAEE519250E1A00F1CAB7 /* guide_3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3EAEE419250E1A00F1CAB7 /* guide_3.png */; };
 		CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCD1911576100BD4A03 /* guide_1.png */; };
 		CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCE1911576100BD4A03 /* guide_2.png */; };
 		CB70C4421922639F007D583A /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB70C4411922639F007D583A /* TencentOpenAPI.framework */; };
@@ -1186,6 +1187,7 @@
 		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CB3EAEE419250E1A00F1CAB7 /* guide_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_3.png; sourceTree = "<group>"; };
 		CB4C3BCD1911576100BD4A03 /* guide_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_1.png; sourceTree = "<group>"; };
 		CB4C3BCE1911576100BD4A03 /* guide_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_2.png; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
@@ -2450,6 +2452,7 @@
 			children = (
 				CB4C3BCD1911576100BD4A03 /* guide_1.png */,
 				CB4C3BCE1911576100BD4A03 /* guide_2.png */,
+				CB3EAEE419250E1A00F1CAB7 /* guide_3.png */,
 			);
 			name = guide;
 			sourceTree = "<group>";
@@ -2536,6 +2539,7 @@
 				1683FB81179119640081612B /* bg_mask_0.png in Resources */,
 				1683FB82179119640081612B /* bg_mask_1.png in Resources */,
 				1683FB83179119640081612B /* bg_mask_2.png in Resources */,
+				CB3EAEE519250E1A00F1CAB7 /* guide_3.png in Resources */,
 				1661720518F9354600E86B11 /* senditem.png in Resources */,
 				1683FB84179119640081612B /* bg_mask_3.png in Resources */,
 				1683FB85179119640081612B /* bg_mask_4.png in Resources */,

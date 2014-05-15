@@ -119,13 +119,19 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
         
         [UserSessionManager GetInstance].isMainMenuFirstLaunch = YES;
+        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
         [UserSessionManager GetInstance].isFirendMenuFirstLaunch = YES;
+        [UserSessionManager GetInstance].isProgramFirstLaunch = YES;
+        [UserSessionManager GetInstance].isDetailPlayFirstLaunch = YES;
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunch"];
         
     } else {
         
         [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
+        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
         [UserSessionManager GetInstance].isFirendMenuFirstLaunch = NO;
+        [UserSessionManager GetInstance].isProgramFirstLaunch = NO;
+        [UserSessionManager GetInstance].isDetailPlayFirstLaunch = NO;
     }
     
     /* Begin show main menu */

@@ -27,6 +27,8 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+@property (nonatomic, retain) UIImageView* imgDetailView;
+
 /*
  使用播放计时器控制统一控制刷新，预留后续的歌词刷新
  */
@@ -39,6 +41,7 @@
 @property (nonatomic, retain) UIImage *screenCaptureImage;
 @property (nonatomic, assign) BOOL isCurSongLike;
 
+-(void)finishCurrentGuide;
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 -(IBAction)doGotoShareView:(id)sender;
