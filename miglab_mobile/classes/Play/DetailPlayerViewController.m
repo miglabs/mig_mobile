@@ -288,16 +288,70 @@
     
     PLog(@"doShare2QQZone...");
     
-    QQApiTextObject *txtObj = [QQApiTextObject objectWithText:@"test txt here" ? : @""];
-    [txtObj setCflag:[self shareControlFlags]];
+    _permissions = [NSArray arrayWithObjects:
+                    kOPEN_PERMISSION_GET_USER_INFO,
+                    kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                    kOPEN_PERMISSION_ADD_ALBUM,
+                    kOPEN_PERMISSION_ADD_IDOL,
+                    kOPEN_PERMISSION_ADD_ONE_BLOG,
+                    kOPEN_PERMISSION_ADD_PIC_T,
+                    kOPEN_PERMISSION_ADD_SHARE,
+                    kOPEN_PERMISSION_ADD_TOPIC,
+                    kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                    kOPEN_PERMISSION_DEL_IDOL,
+                    kOPEN_PERMISSION_DEL_T,
+                    kOPEN_PERMISSION_GET_FANSLIST,
+                    kOPEN_PERMISSION_GET_IDOLLIST,
+                    kOPEN_PERMISSION_GET_INFO,
+                    kOPEN_PERMISSION_GET_OTHER_INFO,
+                    kOPEN_PERMISSION_GET_REPOST_LIST,
+                    kOPEN_PERMISSION_LIST_ALBUM,
+                    kOPEN_PERMISSION_UPLOAD_PIC,
+                    kOPEN_PERMISSION_GET_VIP_INFO,
+                    kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                    kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
+                    kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
+                    nil];
+	
+	if (!_tencentOAuth) {
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY
+                                                andDelegate:self];
+        [_tencentOAuth setSessionDelegate:self];
+        [_tencentOAuth authorize:_permissions inSafari:NO];
+    }
     
-    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
-    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
-    [self handleSendResult:sent];
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
     
-//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
-//    shareViewController.isShare2QQZone = YES;
-//    [self presentModalViewController:shareViewController animated:YES];
+//    NSString *imageurl = currentSong.;
+    NSString *shareText = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou，【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦： http://itunes.apple.com/cn/app/wei/id862410865", currentSong.songname];
+    NSString *feeds = @"feeds";
+    NSString *shareTitle = @"咪呦";
+    NSString *source = @"4";
+    NSString *act = @"进入应用";
+    NSString *url = @"http://itunes.apple.com/cn/app/wei/id862410865";
+    NSString *shareurl = @"http://itunes.apple.com/cn/app/wei/id862410865";
+    
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 shareText, @"description",
+                                 feeds, @"summary",
+                                 shareTitle, @"title",
+                                 source, @"source",
+                                 act, @"act",
+                                 url, @"url",
+                                 shareurl, @"shareurl",
+                                 nil];
+    if ([_tencentOAuth sendStory:data friendList:nil]) {
+        PLog(@"qq zone ok...");
+    }
+    
+    
+//    QQApiTextObject *txtObj = [QQApiTextObject objectWithText:@"test txt here" ? : @""];
+//    [txtObj setCflag:[self shareControlFlags]];
+//    
+//    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:txtObj];
+//    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+//    [self handleSendResult:sent];
+    
     
 }
 
@@ -305,9 +359,11 @@
     
     PLog(@"doShare2SinaWeibo...");
     
-    ShareViewController *shareViewController = [[ShareViewController alloc] init];
-    shareViewController.isShare2SinaWeibo = YES;
-    [self presentModalViewController:shareViewController animated:YES];
+    _sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
+    
+//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+//    shareViewController.isShare2SinaWeibo = YES;
+//    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
@@ -371,9 +427,53 @@
     
     PLog(@"doShare2TencentWeibo...");
     
-    ShareViewController *shareViewController = [[ShareViewController alloc] init];
-    shareViewController.isShare2TencentWeibo = YES;
-    [self presentModalViewController:shareViewController animated:YES];
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    NSString *shareText = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou，【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦： http://itunes.apple.com/cn/app/wei/id862410865", currentSong.songname];
+    
+    WeiBo_add_t_POST *request = [[WeiBo_add_t_POST alloc] init];
+    request.param_content = shareText;
+    request.param_compatibleflag = @"0x2|0x4|0x8|0x20";
+    
+    _permissions = [NSArray arrayWithObjects:
+                    kOPEN_PERMISSION_GET_USER_INFO,
+                    kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                    kOPEN_PERMISSION_ADD_ALBUM,
+                    kOPEN_PERMISSION_ADD_IDOL,
+                    kOPEN_PERMISSION_ADD_ONE_BLOG,
+                    kOPEN_PERMISSION_ADD_PIC_T,
+                    kOPEN_PERMISSION_ADD_SHARE,
+                    kOPEN_PERMISSION_ADD_TOPIC,
+                    kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                    kOPEN_PERMISSION_DEL_IDOL,
+                    kOPEN_PERMISSION_DEL_T,
+                    kOPEN_PERMISSION_GET_FANSLIST,
+                    kOPEN_PERMISSION_GET_IDOLLIST,
+                    kOPEN_PERMISSION_GET_INFO,
+                    kOPEN_PERMISSION_GET_OTHER_INFO,
+                    kOPEN_PERMISSION_GET_REPOST_LIST,
+                    kOPEN_PERMISSION_LIST_ALBUM,
+                    kOPEN_PERMISSION_UPLOAD_PIC,
+                    kOPEN_PERMISSION_GET_VIP_INFO,
+                    kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                    kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
+                    kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
+                    nil];
+	
+    if (!_tencentOAuth) {
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY
+                                                andDelegate:self];
+        [_tencentOAuth setSessionDelegate:self];
+        [_tencentOAuth authorize:_permissions inSafari:NO];
+    }
+    
+    if ([_tencentOAuth sendAPIRequest:request callback:self]) {
+        PLog(@"tencent weibo...");
+    }
+    
+//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
+//    shareViewController.isShare2TencentWeibo = YES;
+//    [self presentModalViewController:shareViewController animated:YES];
     
 }
 
@@ -473,6 +573,47 @@
     }
     
     return context;
+}
+
+#pragma -mark TCAPIRequestDelegate
+
+- (void)cgiRequest:(TCAPIRequest *)request didResponse:(APIResponse *)response {
+    if (URLREQUEST_SUCCEED == response.retCode && kOpenSDKErrorSuccess == response.detailRetCode)
+    {
+        PLog(@"分享QQ微博成功:%@", response.jsonResponse);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:nil delegate:nil cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+    }
+    else
+    {
+        NSString *errMsg = [NSString stringWithFormat:@"errorMsg:%@\n%@", response.errorMsg, [response.jsonResponse objectForKey:@"msg"]];
+        PLog(@"分享QQ微博失败:%@", errMsg);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:errMsg delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+        
+    }
+}
+
+#pragma tencent share
+
+- (void)addShareResponse:(APIResponse*)response
+{
+    NSString *error = [response.jsonResponse objectForKey:@"errcode"];
+    if (error == nil) error = [response.jsonResponse objectForKey:@"ret"];
+    if (error != nil && ([error intValue] == 100013 || [error intValue] == 100014 || [error intValue] == 100015 || [error intValue] == 100030 || [error intValue] == 100031))
+    {
+        PLog(@"监测到您的QQtoken已经过期，请重新授权...");
+    }
+}
+
+- (void)responseDidReceived:(APIResponse *)response forMessage:(NSString *)message
+{
+    NSString *error = [response.jsonResponse objectForKey:@"errcode"];
+    if (error == nil) error = [response.jsonResponse objectForKey:@"ret"];
+    if (error != nil && ([error intValue] == 100013 || [error intValue] == 100014 || [error intValue] == 100015 || [error intValue] == 100030 || [error intValue] == 100031))
+    {
+        PLog(@"监测到您的QQtoken已经过期，请重新授权...");
+    }
 }
 
 #pragma UIAlertViewDelegate
