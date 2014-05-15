@@ -84,6 +84,8 @@
 #define STR_USER_SOURCE_DOUBAN                  @"4"
 
 
+/* 米格用户id */
+#define MIG_USER_ACCOUNT_ID                     @"666"
 
 /* 默认推荐语 */
 #define MIGTIP_DEFAULT_RECOMMAND                @"来听听嘛~"

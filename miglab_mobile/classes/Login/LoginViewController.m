@@ -163,7 +163,12 @@
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    
+    [databaseManager insertUserInfo:user accountId:userid];
     [databaseManager insertUserAccout:username password:password userid:userid accessToken:accesstoken accountType:0];
+    
+    PUser* checkuser = [databaseManager getUserInfoByAccountId:userid];
+    [checkuser log];
     
     [databaseManager setLoginStatusInfo:1];
     
