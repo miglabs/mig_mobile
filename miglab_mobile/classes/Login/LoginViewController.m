@@ -172,6 +172,11 @@
     
     [databaseManager setLoginStatusInfo:1];
     
+    if ([UserSessionManager GetInstance].isProgramFirstLaunch) {
+        
+        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = YES;
+    }
+    
     //
     RootViewController *rootViewController = [RootViewController sharedInstance];
     [self.navigationController popToViewController:rootViewController animated:YES];
