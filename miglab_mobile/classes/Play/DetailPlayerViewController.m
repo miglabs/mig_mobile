@@ -121,7 +121,7 @@
         
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
-        float heightoffset = version >= 7 ? 0 : 6;
+        float heightoffset = version >= 7 ? 0 : (-9);
         
         NSString* imgName = [NSString stringWithFormat:@"guide_%d", 3];
         _imgDetailView = [[UIImageView alloc] init];

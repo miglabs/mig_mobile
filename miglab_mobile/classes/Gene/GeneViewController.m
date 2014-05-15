@@ -312,7 +312,7 @@ static int PAGE_WIDTH = 81;
         // 暂时不用strollview，只有一张图片显示
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
-        float heightoffset = version >= 7 ? 0 : 6;
+        float heightoffset = version >= 7 ? 0 : (-16);
         
 #if 0
         _mainGuideScrollView = [[UIScrollView alloc] init];
@@ -389,7 +389,7 @@ static int PAGE_WIDTH = 81;
         // 主页引导已经完成
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
-        float heightoffset = version >= 7 ? 0 : 6;
+        float heightoffset = version >= 7 ? 0 : (-32);
         
         NSString* imgName = [NSString stringWithFormat:@"guide_%d", 2];
         _imgGeneView = [[UIImageView alloc] init];
