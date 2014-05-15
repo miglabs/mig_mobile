@@ -12,10 +12,12 @@
 #import "PCustomPlayerNavigationView.h"
 #import "PlayBodyView.h"
 #import "PCustomPlayerMenuView.h"
-
+#import <TencentOpenAPI/TencentOAuth.h>
 #import "MigLabAPI.h"
+#import "SinaWeibo.h"
+#import "SinaWeiboRequest.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboDelegate, TencentSessionDelegate, TCAPIRequestDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
@@ -40,6 +42,13 @@
 //截图
 @property (nonatomic, retain) UIImage *screenCaptureImage;
 @property (nonatomic, assign) BOOL isCurSongLike;
+
+//qq zone
+@property (nonatomic, strong) TencentOAuth *tencentOAuth;
+@property (nonatomic, strong) NSArray *permissions;
+
+//sina weibo
+@property (nonatomic, strong) SinaWeibo *sinaWeibo;
 
 -(void)finishCurrentGuide;
 -(IBAction)doShowMenuViewAction:(id)sender;
