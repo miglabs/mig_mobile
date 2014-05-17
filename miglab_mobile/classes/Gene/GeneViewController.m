@@ -8,6 +8,7 @@
 
 #import "GeneViewController.h"
 #import "PDatabaseManager.h"
+#import "GlobalDataManager.h"
 #import "ConfigFileInfo.h"
 #import "SettingViewController.h"
 #import "LoginMenuViewController.h"
@@ -307,7 +308,7 @@ static int PAGE_WIDTH = 81;
     
     [PPlayerManagerCenter GetInstance].delegate = self;
     
-    if ([UserSessionManager GetInstance].isMainMenuFirstLaunch) {
+    if ([GlobalDataManager GetInstance].isMainMenuFirstLaunch) {
      
         // 暂时不用strollview，只有一张图片显示
         float height = [UIScreen mainScreen].bounds.size.height;
@@ -383,8 +384,8 @@ static int PAGE_WIDTH = 81;
         _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     
-    if (![UserSessionManager GetInstance].isMainMenuFirstLaunch &&
-        [UserSessionManager GetInstance].isGeneMenuFirstLaunch) {
+    if (![GlobalDataManager GetInstance].isMainMenuFirstLaunch &&
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch) {
         
         // 主页引导已经完成
         float height = [UIScreen mainScreen].bounds.size.height;
@@ -825,8 +826,8 @@ static int PAGE_WIDTH = 81;
     _mainGuideScrollView.hidden = YES;
     _mainGuidePageControl.hidden = YES;
     
-    [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
-    [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
+    [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
+    [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
     
     [_imgGeneView setHidden:YES];
     [_imgMainView setHidden:YES];

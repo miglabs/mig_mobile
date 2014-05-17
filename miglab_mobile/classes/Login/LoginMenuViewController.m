@@ -15,6 +15,7 @@
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
 #import "PPlayerManagerCenter.h"
+#import "GlobalDataManager.h"
 
 @interface LoginMenuViewController ()
 
@@ -192,9 +193,9 @@
     }
     
     // 开启登陆后引导
-    if ([UserSessionManager GetInstance].isProgramFirstLaunch) {
+    if ([GlobalDataManager GetInstance].isProgramFirstLaunch) {
         
-        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = YES;
     }
 }
 

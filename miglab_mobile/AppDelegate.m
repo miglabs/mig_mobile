@@ -26,6 +26,7 @@
 
 #import "PUser.h"
 #import "UserSessionManager.h"
+#import "GlobalDataManager.h"
 #import "SinaWeibo.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <libDoubanAPIEngine/DOUService.h>
@@ -118,20 +119,20 @@
     //增加标识，用于判断是否是第一次启动应用...
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunch"]) {
         
-        [UserSessionManager GetInstance].isMainMenuFirstLaunch = YES;
-        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
-        [UserSessionManager GetInstance].isFirendMenuFirstLaunch = YES;
-        [UserSessionManager GetInstance].isProgramFirstLaunch = YES;
-        [UserSessionManager GetInstance].isDetailPlayFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isFirendMenuFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isProgramFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = YES;
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunch"];
         
     } else {
         
-        [UserSessionManager GetInstance].isMainMenuFirstLaunch = NO;
-        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = NO;
-        [UserSessionManager GetInstance].isFirendMenuFirstLaunch = NO;
-        [UserSessionManager GetInstance].isProgramFirstLaunch = NO;
-        [UserSessionManager GetInstance].isDetailPlayFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isFirendMenuFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isProgramFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = NO;
     }
     
     /* Begin show main menu */

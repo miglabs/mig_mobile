@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "GetPasswordViewController.h"
 #import "UserSessionManager.h"
+#import "GlobalDataManager.h"
 #import "PDatabaseManager.h"
 #import "MainMenuViewController.h"
 #import "AppDelegate.h"
@@ -172,9 +173,9 @@
     
     [databaseManager setLoginStatusInfo:1];
     
-    if ([UserSessionManager GetInstance].isProgramFirstLaunch) {
+    if ([GlobalDataManager GetInstance].isProgramFirstLaunch) {
         
-        [UserSessionManager GetInstance].isGeneMenuFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = YES;
     }
     
     //

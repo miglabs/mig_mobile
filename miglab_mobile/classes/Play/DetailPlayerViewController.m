@@ -10,6 +10,7 @@
 #import "PPlayerManagerCenter.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "UserSessionManager.h"
+#import "GlobalDataManager.h"
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
 #import "ShareChooseView.h"
@@ -117,7 +118,7 @@
     
     _miglabAPI = [[MigLabAPI alloc] init];
     
-    if ([UserSessionManager GetInstance].isDetailPlayFirstLaunch) {
+    if ([GlobalDataManager GetInstance].isDetailPlayFirstLaunch) {
         
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
@@ -138,7 +139,7 @@
 
 -(void)finishCurrentGuide {
     
-    [UserSessionManager GetInstance].isDetailPlayFirstLaunch = NO;
+    [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = NO;
     [_imgDetailView setHidden:YES];
 }
 
