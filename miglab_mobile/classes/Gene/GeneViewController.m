@@ -992,6 +992,36 @@ static int PAGE_WIDTH = 81;
     }
 }
 
+// 获取新增消息
+-(void)getNewMsgCount:(NSString*)userid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        [[super miglabAPI] doGetMyNearMusicMsgNumber:userid token:ttoken radius:tradius location:tlocation];
+    }
+}
+
+-(void)getNewMsgCountSucceed:(NSNotification *)tNotification {
+    
+    NSDictionary* dicResult = (NSDictionary*)tNotification.userInfo;
+    NSMutableArray* numbers = [dicResult objectForKey:@"result"];
+    int newMsgCount = [[numbers objectAtIndex:4] intValue];
+    
+    [GlobalDataManager GetInstance].nNewArrivalMsg = newMsgCount;
+    
+    if (newMsgCount > 0) {
+        
+        PLog(@"get new msg count succeed");
+    }
+}
+
+-(void)getNewMsgCountFailed:(NSNotification *)tNotification {
+    
+    [GlobalDataManager GetInstance].nNewArrivalMsg = 0;
+    
+    PLog(@"Gene view get new message count failed");
+}
+
 #pragma notification
 
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification{

@@ -13,6 +13,7 @@
 #import "ListenMyMusicViewController.h"
 #import "NearFriendViewController.h"
 #import "MessageViewController.h"
+#import "GlobalDataManager.h"
 
 
 @interface FriendViewController ()
@@ -31,6 +32,7 @@
 @synthesize totalNearFriendCount = _totalNearFriendCount;
 @synthesize totalNearMusicCount = _totalNearMusicCount;
 @synthesize totalMsgCount = _totalMsgCount;
+@synthesize btnNewMsg = _btnNewMsg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -142,6 +144,16 @@
 -(void)updateDisplayNumber {
     
     [_bodyTableView reloadData];
+    
+#if 0
+    if ([GlobalDataManager GetInstance].nNewArrivalMsg > 0) {
+        
+        CGRect cellFrame = [_bodyTableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:3]].frame;
+        CGRect cellWindowFrame = cellFrame;
+        _btnNewMsg = [[UIButton alloc] initWithFrame:cellWindowFrame];
+        _btnNewMsg.imageView.image = [UIImage imageWithName:@"message_tip_bg" type:@"png"];
+    }
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -238,8 +250,9 @@
     _totalNearMusicCount = [[numbers objectAtIndex:1] intValue];
     _totalNearFriendCount = [[numbers objectAtIndex:2] intValue];
     _totalMsgCount = [[numbers objectAtIndex:3] intValue];
+    [GlobalDataManager GetInstance].nNewArrivalMsg = [[numbers objectAtIndex:4] intValue];
     
-    for (int i=0; i<count; i++) {
+    for (int i=0; i<count - 1; i++) {
         
         [_tipNumber replaceObjectAtIndex:i withObject:[numbers objectAtIndex:i]];
     }

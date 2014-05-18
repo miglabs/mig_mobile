@@ -15,6 +15,7 @@
 @synthesize isFirendMenuFirstLaunch = _isFirendMenuFirstLaunch;
 @synthesize isProgramFirstLaunch = _isProgramFirstLaunch;
 @synthesize isDetailPlayFirstLaunch = _isDetailPlayFirstLaunch;
+@synthesize nNewArrivalMsg = _nNewArrivalMsg;
 
 +(GlobalDataManager *)GetInstance{
     

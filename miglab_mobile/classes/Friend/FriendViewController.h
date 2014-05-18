@@ -19,6 +19,7 @@
 @property (nonatomic, assign) int totalNearFriendCount;
 @property (nonatomic, assign) int totalNearMusicCount;
 @property (nonatomic, assign) int totalMsgCount;
+@property (nonatomic, retain) UIButton* btnNewMsg;
 
 // 是否更新了一次位置，防止位置一次更新多次调用回调函数（因为多次回调函数的精度不同）
 @property (nonatomic, assign) BOOL isUpdateLocation;

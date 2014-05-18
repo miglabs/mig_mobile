@@ -2821,12 +2821,14 @@
                 NSString* music_num = [dicres objectForKey:@"music_num"];
                 NSString* near_num = [dicres objectForKey:@"near_num"];
                 NSString* msg_num = [dicres objectForKey:@"msg_num"];
+                NSString* new_msg_num = [dicres objectForKey:@"new_msg_num"];
                 
                 NSMutableArray* numarray = [[NSMutableArray alloc] init];
                 [numarray addObject:fri_num];
                 [numarray addObject:music_num];
                 [numarray addObject:near_num];
                 [numarray addObject:msg_num];
+                [numarray addObject:new_msg_num];
                 
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:numarray, @"result", nil];
                 

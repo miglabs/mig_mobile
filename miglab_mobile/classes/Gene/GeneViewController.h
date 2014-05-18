@@ -79,4 +79,9 @@
 -(void)finishCurrentGuide;
 -(void)pageTurn:(UIPageControl*)sender;
 
+// 新增消息
+-(void)getNewMsgCount:(NSString*)userid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+-(void)getNewMsgCountSucceed:(NSNotification *)tNotification;
+-(void)getNewMsgCountFailed:(NSNotification *)tNotification;
+
 @end

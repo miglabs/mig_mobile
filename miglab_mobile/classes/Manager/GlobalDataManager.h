@@ -16,6 +16,8 @@
 @property (nonatomic, assign) BOOL isProgramFirstLaunch;
 @property (nonatomic, assign) BOOL isDetailPlayFirstLaunch;
 
+@property (nonatomic, assign) int nNewArrivalMsg;
+
 +(GlobalDataManager *)GetInstance;
 
 @end
