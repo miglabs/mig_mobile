@@ -48,7 +48,6 @@ static int PAGE_WIDTH = 81;
 @synthesize mainGuidePageControl = _mainGuidePageControl;
 @synthesize mainGuideScrollView = _mainGuideScrollView;
 @synthesize imgGeneView = _imgGeneView;
-@synthesize imgMainView = _imgMainView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -354,16 +353,14 @@ static int PAGE_WIDTH = 81;
         [self.view addSubview:_mainGuidePageControl];
 #endif
         
-        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 1];
-        _imgMainView = [[UIImageView alloc] init];
-        _imgMainView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
-        _imgMainView.image = [UIImage imageWithName:imgName type:@"png"];
-        _imgMainView.userInteractionEnabled = YES;
+        //引导
+        _geneGuideView = [[GeneGuideView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, CGRectGetHeight(kMainScreenFrame))];
+        [self.view addSubview:_geneGuideView];
+        UITapGestureRecognizer *guideSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGeneGuideView)];
+        [_geneGuideView addGestureRecognizer:guideSingleTap];
         
-        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
-        [_imgMainView addGestureRecognizer:singleTap];
-        [self.view addSubview:_imgMainView];
     }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -410,6 +407,22 @@ static int PAGE_WIDTH = 81;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)finishCurrentGuide {
+    
+    _mainGuideScrollView.hidden = YES;
+    _mainGuidePageControl.hidden = YES;
+    
+    [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
+    [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
+    
+    [_imgGeneView setHidden:YES];
+}
+
+- (void)hideGeneGuideView
+{
+    _geneGuideView.hidden = YES;
 }
 
 //更新日期显示
@@ -819,18 +832,6 @@ static int PAGE_WIDTH = 81;
         _modifyGeneView.sceneScrollView.scrollEnabled = YES;
     }
     
-}
-
--(void)finishCurrentGuide {
-    
-    _mainGuideScrollView.hidden = YES;
-    _mainGuidePageControl.hidden = YES;
-    
-    [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
-    [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
-    
-    [_imgGeneView setHidden:YES];
-    [_imgMainView setHidden:YES];
 }
 
 -(void)pageTurn :(UIPageControl*)sender {

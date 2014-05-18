@@ -14,6 +14,7 @@
 #import "Type.h"
 #import "Mood.h"
 #import "Scene.h"
+#import "GeneGuideView.h"
 
 @interface GeneViewController : PlayerViewController<UIScrollViewDelegate, PPlayerManagerCenterDelegate>
 
@@ -44,8 +45,10 @@
 //基因界面帮助显示
 @property (nonatomic, retain) UIScrollView* mainGuideScrollView;
 @property (nonatomic, retain) UIPageControl* mainGuidePageControl;
-@property (nonatomic, retain) UIImageView* imgMainView;
 @property (nonatomic, retain) UIImageView* imgGeneView;
+
+//引导
+@property (nonatomic, strong) GeneGuideView *geneGuideView;
 
 -(IBAction)doAvatar:(id)sender;
 

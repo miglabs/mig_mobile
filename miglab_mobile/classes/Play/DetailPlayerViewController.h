@@ -12,12 +12,12 @@
 #import "PCustomPlayerNavigationView.h"
 #import "PlayBodyView.h"
 #import "PCustomPlayerMenuView.h"
-#import <TencentOpenAPI/TencentOAuth.h>
 #import "MigLabAPI.h"
-#import "SinaWeibo.h"
-#import "SinaWeiboRequest.h"
+#import "ShareGuideView.h"
+#import "SinaWeiboHelper.h"
+#import "TencentHelper.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboDelegate, TencentSessionDelegate, TCAPIRequestDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
@@ -28,8 +28,6 @@
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
-
-@property (nonatomic, retain) UIImageView* imgDetailView;
 
 /*
  使用播放计时器控制统一控制刷新，预留后续的歌词刷新
@@ -47,10 +45,9 @@
 @property (nonatomic, strong) TencentOAuth *tencentOAuth;
 @property (nonatomic, strong) NSArray *permissions;
 
-//sina weibo
-@property (nonatomic, strong) SinaWeibo *sinaWeibo;
+//分享引导
+@property (nonatomic, strong) ShareGuideView *shareGuideView;
 
--(void)finishCurrentGuide;
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 -(IBAction)doGotoShareView:(id)sender;

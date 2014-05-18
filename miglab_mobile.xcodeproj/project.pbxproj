@@ -392,6 +392,21 @@
 		16E77E9F178DB18C006A24A6 /* top_menu_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E77E8A178DB18C006A24A6 /* top_menu_0.png */; };
 		16E77EA1178DB18C006A24A6 /* top_menu_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E77E8C178DB18C006A24A6 /* top_menu_title.png */; };
 		16E77EA3178DB1EF006A24A6 /* playing_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E77EA2178DB1EF006A24A6 /* playing_tip.png */; };
+		16EA2D2119286855008E9DD3 /* GeneGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D2019286855008E9DD3 /* GeneGuideView.m */; };
+		16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2319286B09008E9DD3 /* gene1.png */; };
+		16EA2D2F19286B09008E9DD3 /* gene2.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2419286B09008E9DD3 /* gene2.png */; };
+		16EA2D3019286B09008E9DD3 /* gene3.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2519286B09008E9DD3 /* gene3.png */; };
+		16EA2D3119286B09008E9DD3 /* gene_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2619286B09008E9DD3 /* gene_text.png */; };
+		16EA2D3219286B09008E9DD3 /* guide_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2719286B09008E9DD3 /* guide_1.png */; };
+		16EA2D3319286B09008E9DD3 /* guide_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2819286B09008E9DD3 /* guide_2.png */; };
+		16EA2D3419286B09008E9DD3 /* guide_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2919286B09008E9DD3 /* guide_3.png */; };
+		16EA2D3519286B09008E9DD3 /* login_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2A19286B09008E9DD3 /* login_icon.png */; };
+		16EA2D3619286B09008E9DD3 /* login_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2B19286B09008E9DD3 /* login_text.png */; };
+		16EA2D3719286B09008E9DD3 /* share1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2C19286B09008E9DD3 /* share1.png */; };
+		16EA2D3819286B09008E9DD3 /* share_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2D19286B09008E9DD3 /* share_text.png */; };
+		16EA2D3B192875F0008E9DD3 /* ShareGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */; };
+		16EA2D4419288793008E9DD3 /* SinaWeiboHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */; };
+		16EA2D4719289B22008E9DD3 /* TencentHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D4619289B22008E9DD3 /* TencentHelper.m */; };
 		16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */; };
 		16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */; };
 		16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3F1759AD5E001BE4E9 /* CoreGraphics.framework */; };
@@ -504,9 +519,6 @@
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
-		CB3EAEE519250E1A00F1CAB7 /* guide_3.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3EAEE419250E1A00F1CAB7 /* guide_3.png */; };
-		CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCD1911576100BD4A03 /* guide_1.png */; };
-		CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CB4C3BCE1911576100BD4A03 /* guide_2.png */; };
 		CB70C4421922639F007D583A /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB70C4411922639F007D583A /* TencentOpenAPI.framework */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1023,6 +1035,25 @@
 		16E77E8A178DB18C006A24A6 /* top_menu_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_0.png; sourceTree = "<group>"; };
 		16E77E8C178DB18C006A24A6 /* top_menu_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_title.png; sourceTree = "<group>"; };
 		16E77EA2178DB1EF006A24A6 /* playing_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing_tip.png; sourceTree = "<group>"; };
+		16EA2D1F19286855008E9DD3 /* GeneGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneGuideView.h; sourceTree = "<group>"; };
+		16EA2D2019286855008E9DD3 /* GeneGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneGuideView.m; sourceTree = "<group>"; };
+		16EA2D2319286B09008E9DD3 /* gene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene1.png; sourceTree = "<group>"; };
+		16EA2D2419286B09008E9DD3 /* gene2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene2.png; sourceTree = "<group>"; };
+		16EA2D2519286B09008E9DD3 /* gene3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene3.png; sourceTree = "<group>"; };
+		16EA2D2619286B09008E9DD3 /* gene_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_text.png; sourceTree = "<group>"; };
+		16EA2D2719286B09008E9DD3 /* guide_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_1.png; sourceTree = "<group>"; };
+		16EA2D2819286B09008E9DD3 /* guide_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_2.png; sourceTree = "<group>"; };
+		16EA2D2919286B09008E9DD3 /* guide_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_3.png; sourceTree = "<group>"; };
+		16EA2D2A19286B09008E9DD3 /* login_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_icon.png; sourceTree = "<group>"; };
+		16EA2D2B19286B09008E9DD3 /* login_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_text.png; sourceTree = "<group>"; };
+		16EA2D2C19286B09008E9DD3 /* share1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share1.png; sourceTree = "<group>"; };
+		16EA2D2D19286B09008E9DD3 /* share_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_text.png; sourceTree = "<group>"; };
+		16EA2D39192875F0008E9DD3 /* ShareGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareGuideView.h; sourceTree = "<group>"; };
+		16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareGuideView.m; sourceTree = "<group>"; };
+		16EA2D4219288793008E9DD3 /* SinaWeiboHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboHelper.h; sourceTree = "<group>"; };
+		16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboHelper.m; sourceTree = "<group>"; };
+		16EA2D4519289B22008E9DD3 /* TencentHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentHelper.h; sourceTree = "<group>"; };
+		16EA2D4619289B22008E9DD3 /* TencentHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentHelper.m; sourceTree = "<group>"; };
 		16EDEF371759AD5E001BE4E9 /* miglab_mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miglab_mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1190,9 +1221,6 @@
 		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
-		CB3EAEE419250E1A00F1CAB7 /* guide_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_3.png; sourceTree = "<group>"; };
-		CB4C3BCD1911576100BD4A03 /* guide_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_1.png; sourceTree = "<group>"; };
-		CB4C3BCE1911576100BD4A03 /* guide_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_2.png; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
@@ -1435,6 +1463,10 @@
 				162316591777397600CF8FB5 /* GuideViewController.h */,
 				1623165A1777397600CF8FB5 /* GuideViewController.m */,
 				1623165B1777397600CF8FB5 /* GuideViewController.xib */,
+				16EA2D1F19286855008E9DD3 /* GeneGuideView.h */,
+				16EA2D2019286855008E9DD3 /* GeneGuideView.m */,
+				16EA2D39192875F0008E9DD3 /* ShareGuideView.h */,
+				16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */,
 			);
 			path = Guide;
 			sourceTree = "<group>";
@@ -2067,7 +2099,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				CB4C3BCC19114E6500BD4A03 /* guide */,
+				16EA2D2219286B09008E9DD3 /* guide */,
 				166171EB18F9354600E86B11 /* socket_chat */,
 				1633F6E417D1D24F00F47DFF /* base */,
 				1624BC0617C784DC00BE08A5 /* friend */,
@@ -2152,6 +2184,24 @@
 				16E77E8C178DB18C006A24A6 /* top_menu_title.png */,
 			);
 			path = play;
+			sourceTree = "<group>";
+		};
+		16EA2D2219286B09008E9DD3 /* guide */ = {
+			isa = PBXGroup;
+			children = (
+				16EA2D2319286B09008E9DD3 /* gene1.png */,
+				16EA2D2419286B09008E9DD3 /* gene2.png */,
+				16EA2D2519286B09008E9DD3 /* gene3.png */,
+				16EA2D2619286B09008E9DD3 /* gene_text.png */,
+				16EA2D2719286B09008E9DD3 /* guide_1.png */,
+				16EA2D2819286B09008E9DD3 /* guide_2.png */,
+				16EA2D2919286B09008E9DD3 /* guide_3.png */,
+				16EA2D2A19286B09008E9DD3 /* login_icon.png */,
+				16EA2D2B19286B09008E9DD3 /* login_text.png */,
+				16EA2D2C19286B09008E9DD3 /* share1.png */,
+				16EA2D2D19286B09008E9DD3 /* share_text.png */,
+			);
+			path = guide;
 			sourceTree = "<group>";
 		};
 		16EDEF2C1759AD5E001BE4E9 = {
@@ -2314,6 +2364,10 @@
 				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
 				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
 				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
+				16EA2D4219288793008E9DD3 /* SinaWeiboHelper.h */,
+				16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */,
+				16EA2D4519289B22008E9DD3 /* TencentHelper.h */,
+				16EA2D4619289B22008E9DD3 /* TencentHelper.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2452,16 +2506,6 @@
 			path = share;
 			sourceTree = "<group>";
 		};
-		CB4C3BCC19114E6500BD4A03 /* guide */ = {
-			isa = PBXGroup;
-			children = (
-				CB4C3BCD1911576100BD4A03 /* guide_1.png */,
-				CB4C3BCE1911576100BD4A03 /* guide_2.png */,
-				CB3EAEE419250E1A00F1CAB7 /* guide_3.png */,
-			);
-			name = guide;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2544,7 +2588,6 @@
 				1683FB81179119640081612B /* bg_mask_0.png in Resources */,
 				1683FB82179119640081612B /* bg_mask_1.png in Resources */,
 				1683FB83179119640081612B /* bg_mask_2.png in Resources */,
-				CB3EAEE519250E1A00F1CAB7 /* guide_3.png in Resources */,
 				1661720518F9354600E86B11 /* senditem.png in Resources */,
 				1683FB84179119640081612B /* bg_mask_3.png in Resources */,
 				1683FB85179119640081612B /* bg_mask_4.png in Resources */,
@@ -2557,6 +2600,7 @@
 				1683FB9B179127920081612B /* playing_tip_4.png in Resources */,
 				1683FB9F1791295B0081612B /* playing_tip_5.png in Resources */,
 				1683FBA01791295B0081612B /* playing_tip_6.png in Resources */,
+				16EA2D3419286B09008E9DD3 /* guide_3.png in Resources */,
 				1683FBA11791295B0081612B /* playing_tip_7.png in Resources */,
 				1683FBA3179129990081612B /* playing_tip_0.png in Resources */,
 				1683FBA9179137DF0081612B /* song_cover.png in Resources */,
@@ -2592,7 +2636,6 @@
 				16AB8BAF179EBA420009411F /* left_view_0.png in Resources */,
 				163EA99217A7F9B700EBD24C /* login_button_mig.png in Resources */,
 				163EA99317A7F9B700EBD24C /* login_button_mig_0.png in Resources */,
-				CB4C3BD01911576100BD4A03 /* guide_2.png in Resources */,
 				163EA99517A7F9B700EBD24C /* login_choose_menu_nor_88_88.png in Resources */,
 				163EA99617A7F9B700EBD24C /* login_choose_menu_sel_88_88.png in Resources */,
 				163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */,
@@ -2608,6 +2651,7 @@
 				16B61FD818FCFC7600849EB6 /* Images.xcassets in Resources */,
 				16C10E1817A9638F00DA628D /* get_password_back.png in Resources */,
 				16C10E1917A9638F00DA628D /* get_password_by_email.png in Resources */,
+				16EA2D3219286B09008E9DD3 /* guide_1.png in Resources */,
 				16C10E1A17A9638F00DA628D /* login_edit1_bg.png in Resources */,
 				16C10E2017A9673400DA628D /* GetPasswordViewController.xib in Resources */,
 				16CDC60E18325AC200035634 /* send_song_of_cell_bg.png in Resources */,
@@ -2624,6 +2668,7 @@
 				1627279C17ACB39A000C79D3 /* borad_menu_stop_nor.png in Resources */,
 				1627279D17ACB39A000C79D3 /* borad_menu_stop_sel.png in Resources */,
 				162727A317ACB947000C79D3 /* play_btn_menu_nor.png in Resources */,
+				16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */,
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
 				162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */,
@@ -2635,6 +2680,7 @@
 				1684763C17BA613700F42172 /* top_bg_0.png in Resources */,
 				1684763D17BA613700F42172 /* view_bg.png in Resources */,
 				1661720418F9354600E86B11 /* key_but_img.png in Resources */,
+				16EA2D3619286B09008E9DD3 /* login_text.png in Resources */,
 				1684764617BA791600F42172 /* music_menu_dark_heart_nor.png in Resources */,
 				1684764717BA791600F42172 /* music_menu_dark_heart_sel.png in Resources */,
 				C72F16BE18FA270900ECD8B8 /* douban_tip.png in Resources */,
@@ -2716,7 +2762,9 @@
 				1624BC3E17C79F0700BE08A5 /* friend_search_src0.png in Resources */,
 				1624BC4317C7A41000BE08A5 /* FriendInfoCell.xib in Resources */,
 				1624BC4717C7A67800BE08A5 /* message_tip_bg.png in Resources */,
+				16EA2D3819286B09008E9DD3 /* share_text.png in Resources */,
 				1624BC4817C7A67800BE08A5 /* user_gender_female.png in Resources */,
+				16EA2D3519286B09008E9DD3 /* login_icon.png in Resources */,
 				1624BC4917C7A67800BE08A5 /* user_gender_male.png in Resources */,
 				1624BC4E17C7AAB400BE08A5 /* MyFriendPersonalPageViewController.xib in Resources */,
 				16D0DAF317C9E32700EB763F /* FriendOfPhotoListViewController.xib in Resources */,
@@ -2771,6 +2819,7 @@
 				1641CCEA17DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.xib in Resources */,
 				1641CCEF17DB6A3B004179E4 /* SettingOfLimitViewController.xib in Resources */,
 				1697325317E5BC8700F4AA6E /* mood_1.png in Resources */,
+				16EA2D3019286B09008E9DD3 /* gene3.png in Resources */,
 				1697325417E5BC8700F4AA6E /* mood_2.png in Resources */,
 				1697325517E5BC8700F4AA6E /* mood_3.png in Resources */,
 				1697325617E5BC8700F4AA6E /* mood_4.png in Resources */,
@@ -2780,6 +2829,7 @@
 				1697325A17E5BC8700F4AA6E /* scene_2.png in Resources */,
 				1697325B17E5BC8700F4AA6E /* scene_3.png in Resources */,
 				1697325C17E5BC8700F4AA6E /* scene_4.png in Resources */,
+				16EA2D3319286B09008E9DD3 /* guide_2.png in Resources */,
 				1697325D17E5BC8700F4AA6E /* scene_5.png in Resources */,
 				1697325E17E5BC8700F4AA6E /* scene_6.png in Resources */,
 				1697325F17E5BC8700F4AA6E /* type_1.png in Resources */,
@@ -2789,6 +2839,7 @@
 				1697326317E5BC8700F4AA6E /* type_4.png in Resources */,
 				1697326417E5BC8700F4AA6E /* type_5.png in Resources */,
 				1689605B181171C00031902F /* LoginMenuViewController.xib in Resources */,
+				16EA2D3719286B09008E9DD3 /* share1.png in Resources */,
 				1697326517E5BC8700F4AA6E /* type_6.png in Resources */,
 				1697326617E5BC8700F4AA6E /* type_9.png in Resources */,
 				16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */,
@@ -2803,7 +2854,6 @@
 				18A6020A17F2956400344C5B /* qq_weibo_icon_disabled@2x.png in Resources */,
 				18A6020B17F2956400344C5B /* qq_weibo_normal@2x.png in Resources */,
 				18A6020C17F2956400344C5B /* qzone_icon@2x.png in Resources */,
-				CB4C3BCF1911576100BD4A03 /* guide_1.png in Resources */,
 				167F048518F93274000A1C21 /* ChatMsgTableViewCell.xib in Resources */,
 				C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */,
 				18A6020D17F2956400344C5B /* qzone_icon_disabled@2x.png in Resources */,
@@ -2816,6 +2866,7 @@
 				18A6021317F2956400344C5B /* sina_weibo_icon.png in Resources */,
 				18A6021417F2956400344C5B /* sina_weibo_icon@2x.png in Resources */,
 				18A6021517F2956400344C5B /* sina_weibo_icon_disabled@2x.png in Resources */,
+				16EA2D2F19286B09008E9DD3 /* gene2.png in Resources */,
 				18A6021617F2956400344C5B /* sina_weibo_normal@2x.png in Resources */,
 				18A6021717F2956400344C5B /* sms_normal@2x.png in Resources */,
 				1661720318F9354600E86B11 /* head_border.png in Resources */,
@@ -2828,6 +2879,7 @@
 				16184E491802F09F00E6E627 /* share_qqzone_share_icon.png in Resources */,
 				16184E4A1802F09F00E6E627 /* share_sinaweibo_share_icon.png in Resources */,
 				16184E4B1802F09F00E6E627 /* share_songcover_share_layer.png in Resources */,
+				16EA2D3119286B09008E9DD3 /* gene_text.png in Resources */,
 				16184E4C1802F09F00E6E627 /* share_tencentweibo_share_icon.png in Resources */,
 				184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */,
 				166B5801180C29CE00436AB0 /* base_navigation_bg_ios7.png in Resources */,
@@ -2871,6 +2923,7 @@
 				162316631777397600CF8FB5 /* AFURLConnectionOperation.m in Sources */,
 				162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */,
 				CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */,
+				16EA2D4419288793008E9DD3 /* SinaWeiboHelper.m in Sources */,
 				162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */,
 				162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */,
 				1623166A1777397600CF8FB5 /* EGOCache.m in Sources */,
@@ -2922,6 +2975,7 @@
 				1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */,
 				1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */,
 				184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */,
+				16EA2D3B192875F0008E9DD3 /* ShareGuideView.m in Sources */,
 				16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */,
 				1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */,
 				188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */,
@@ -2991,6 +3045,7 @@
 				16D0DB2517CA2A7D00EB763F /* PhotoInfo.m in Sources */,
 				16D0DB2917CA31E700EB763F /* FriendOfAddViewController.m in Sources */,
 				1609584717CB9E950027CBB6 /* CustomWindow.m in Sources */,
+				16EA2D4719289B22008E9DD3 /* TencentHelper.m in Sources */,
 				CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */,
 				1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */,
 				CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */,
@@ -3008,6 +3063,7 @@
 				1641CCC017DB0BE5004179E4 /* pinyin.c in Sources */,
 				167F048D18F932C4000A1C21 /* AsyncSocket.m in Sources */,
 				1641CCD917DB685E004179E4 /* SettingOfAddFriendViewController.m in Sources */,
+				16EA2D2119286855008E9DD3 /* GeneGuideView.m in Sources */,
 				1641CCDF17DB688F004179E4 /* SettingOfFriendManagerViewController.m in Sources */,
 				1641CCE417DB68B7004179E4 /* SettingOfNewMessageViewController.m in Sources */,
 				1641CCE917DB6A24004179E4 /* SettingOfNetworkAndLimitViewController.m in Sources */,

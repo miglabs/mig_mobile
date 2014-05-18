@@ -23,14 +23,6 @@
 
 @implementation LoginMenuViewController
 
-@synthesize dataTableView = _dataTableView;
-@synthesize dataList = _dataList;
-
-@synthesize tencentOAuth = _tencentOAuth;
-@synthesize permissions = _permissions;
-
-@synthesize miglabAPI = _miglabAPI;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -112,35 +104,6 @@
     NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪呦账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _dataList = [NSMutableArray arrayWithObjects:menulist0, menulist1, nil];
-    
-    //tencent
-    _permissions = [NSArray arrayWithObjects:
-                    kOPEN_PERMISSION_GET_USER_INFO,
-                    kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                    kOPEN_PERMISSION_ADD_ALBUM,
-                    kOPEN_PERMISSION_ADD_IDOL,
-                    kOPEN_PERMISSION_ADD_ONE_BLOG,
-                    kOPEN_PERMISSION_ADD_PIC_T,
-                    kOPEN_PERMISSION_ADD_SHARE,
-                    kOPEN_PERMISSION_ADD_TOPIC,
-                    kOPEN_PERMISSION_CHECK_PAGE_FANS,
-                    kOPEN_PERMISSION_DEL_IDOL,
-                    kOPEN_PERMISSION_DEL_T,
-                    kOPEN_PERMISSION_GET_FANSLIST,
-                    kOPEN_PERMISSION_GET_IDOLLIST,
-                    kOPEN_PERMISSION_GET_INFO,
-                    kOPEN_PERMISSION_GET_OTHER_INFO,
-                    kOPEN_PERMISSION_GET_REPOST_LIST,
-                    kOPEN_PERMISSION_LIST_ALBUM,
-                    kOPEN_PERMISSION_UPLOAD_PIC,
-                    kOPEN_PERMISSION_GET_VIP_INFO,
-                    kOPEN_PERMISSION_GET_VIP_RICH_INFO,
-                    kOPEN_PERMISSION_GET_INTIMATE_FRIENDS_WEIBO,
-                    kOPEN_PERMISSION_MATCH_NICK_TIPS_WEIBO,
-                    nil];
-    
-	_tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY
-											andDelegate:self];
     
     //api
     _miglabAPI = [[MigLabAPI alloc] init];
@@ -227,10 +190,9 @@
     
     PLog(@"doSinaWeiboLogin...");
     
-    [self removeAuthData];
-    
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    [sinaweibo logIn];
+    SinaWeiboHelper *sinaWeiboHelper = [SinaWeiboHelper sharedInstance];
+    sinaWeiboHelper.delegate = self;
+    [sinaWeiboHelper doSinaWeiboLogin];
     
 }
 
@@ -238,7 +200,9 @@
     
     PLog(@"doQQLogin...");
     
-    [_tencentOAuth authorize:_permissions inSafari:NO];
+    TencentHelper *tencentHelper = [TencentHelper sharedInstance];
+    tencentHelper.delegate = self;
+    [tencentHelper doTencentLogin];
     
 }
 
@@ -380,261 +344,89 @@
 }
 
 //sina weibo
--(SinaWeibo *)sinaweibo{
+
+#pragma mark SinaWeiboHelperDelegate method
+
+- (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error
+{
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    //sina weibo
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (appDelegate.sinaweibo) {
-        appDelegate.sinaweibo.delegate = self;
-        return appDelegate.sinaweibo;
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteUserAccountByUserName:userid];
+    
+    [SVProgressHUD showErrorWithStatus:@"sorry, 登录失败啦～"];
+}
+
+- (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result
+{
+    NSString *name = [result objectForKey:@"name"];
+    NSString *screenName = [result objectForKey:@"screen_name"];
+    NSString *gender = [result objectForKey:@"gender"];
+    
+    //写入缓存
+    [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
+    if ([gender isEqualToString:@"m"]) {
+        gender = [NSString stringWithFormat:@"%d", 1];
+    } else {
+        gender = [NSString stringWithFormat:@"%d", 0];
     }
-    appDelegate.sinaweibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *sinaweiboInfo = [defaults objectForKey:@"SinaWeiboAuthData"];
-    if ([sinaweiboInfo objectForKey:@"AccessTokenKey"] && [sinaweiboInfo objectForKey:@"ExpirationDateKey"] && [sinaweiboInfo objectForKey:@"UserIDKey"])
-    {
-        appDelegate.sinaweibo.accessToken = [sinaweiboInfo objectForKey:@"AccessTokenKey"];
-        appDelegate.sinaweibo.expirationDate = [sinaweiboInfo objectForKey:@"ExpirationDateKey"];
-        appDelegate.sinaweibo.userID = [sinaweiboInfo objectForKey:@"UserIDKey"];
-    }
-    return appDelegate.sinaweibo;
-}
-
-- (void)removeAuthData
-{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SinaWeiboAuthData"];
-}
-
-- (void)storeAuthData
-{
-    SinaWeibo *sinaweibo = [self sinaweibo];
     
-    NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
-                              sinaweibo.accessToken, @"AccessTokenKey",
-                              sinaweibo.expirationDate, @"ExpirationDateKey",
-                              sinaweibo.userID, @"UserIDKey",
-                              sinaweibo.refreshToken, @"refresh_token", nil];
-    [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"SinaWeiboAuthData"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)getUserInfoFromSinaWeibo
-{
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    [sinaweibo requestWithURL:@"users/show.json"
-                       params:[NSMutableDictionary dictionaryWithObject:sinaweibo.userID forKey:@"uid"]
-                   httpMethod:@"GET"
-                     delegate:self];
-}
-
-#pragma mark - SinaWeibo Delegate
-
-- (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
-{
-    NSLog(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
+    //
+    NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
+    SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
-    AccountOf3rdParty *sinaAccount = [[AccountOf3rdParty alloc] init];
-    sinaAccount.accountid = sinaweibo.userID;
-    sinaAccount.accesstoken = sinaweibo.accessToken;
-    sinaAccount.expirationdate = sinaweibo.expirationDate;
-    sinaAccount.accounttype = SourceTypeSinaWeibo;
-    
-    [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
-    [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
-    [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
-    
-    [self storeAuthData];
-    [self getUserInfoFromSinaWeibo];
+    //注册和登录合并，第三方平台直接使用注册接口登录
+    [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
 }
 
-- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
+//update
+- (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error
 {
-    NSLog(@"sinaweiboDidLogOut");
-    [self removeAuthData];
+    [SVProgressHUD showErrorWithStatus:@"新浪微博分享失败～"];
 }
 
-- (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo
+- (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
-    NSLog(@"sinaweiboLogInDidCancel");
-}
-
-- (void)sinaweibo:(SinaWeibo *)sinaweibo logInDidFailWithError:(NSError *)error
-{
-    NSLog(@"sinaweibo logInDidFailWithError %@", error);
-}
-
-- (void)sinaweibo:(SinaWeibo *)sinaweibo accessTokenInvalidOrExpired:(NSError *)error
-{
-    NSLog(@"sinaweiboAccessTokenInvalidOrExpired %@", error);
-    [self removeAuthData];
-}
-
-#pragma mark - SinaWeiboRequest Delegate
-
-- (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error
-{
-    if ([request.url hasSuffix:@"users/show.json"])
-    {
-        PLog(@"didFailWithError...%@", request.url);
-        
-        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-        
-        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-        [databaseManager deleteUserAccountByUserName:userid];
-        
-    }
-}
-
-- (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
-{
-    if ([request.url hasSuffix:@"users/show.json"])
-    {
-        PLog(@"didFinishLoadingWithResult: %@", result);
-        
-        if (result && [result isKindOfClass:[NSDictionary class]]) {
-            
-            NSString *name = [result objectForKey:@"name"];
-            NSString *screenName = [result objectForKey:@"screen_name"];
-            NSString *gender = [result objectForKey:@"gender"];
-            
-            //写入缓存
-            [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
-            if ([gender isEqualToString:@"m"]) {
-                gender = [NSString stringWithFormat:@"%d", 1];
-            } else {
-                gender = [NSString stringWithFormat:@"%d", 0];
-            }
-            
-            //
-            NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
-            SourceType accounttype = [UserSessionManager GetInstance].accounttype;
-            
-            //注册和登录合并，第三方平台直接使用注册接口登录
-            [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
-            
-        }//if
-        
-    }
+    [SVProgressHUD showSuccessWithStatus:@"新浪微博分享成功～"];
 }
 
 //end sina weibo
 
-//tencent weibo
+//tencent
 
-/**
- * Called when the user successfully logged in.
- */
-- (void)tencentDidLogin {
-    
-	// 登录成功
-    
-    if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
-    {
-        PLog(@"_tencentOAuth.openId: %@", _tencentOAuth.openId);
-        PLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
-        PLog(@"_tencentOAuth.expirationDate: %@", _tencentOAuth.expirationDate);
-        
-        AccountOf3rdParty *tencentAccount = [[AccountOf3rdParty alloc] init];
-        tencentAccount.accountid = _tencentOAuth.openId;
-        tencentAccount.accesstoken = _tencentOAuth.accessToken;
-        tencentAccount.expirationdate = _tencentOAuth.expirationDate;
-        tencentAccount.accounttype = SourceTypeTencentWeibo;
-        
-        [UserSessionManager GetInstance].accounttype = SourceTypeTencentWeibo;
-        [UserSessionManager GetInstance].currentUser.tencentAccount = tencentAccount;
-        [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
-        
-        if(![_tencentOAuth getUserInfo]){
-            [self showInvalidTokenOrOpenIDMessage];
-        }
-        
-        [self didFinishLogin];
-    }
-    else
-    {
-        PLog(@"登录不成功 没有获取accesstoken");
-    }
-    
-}
+#pragma mark TencentHelperDelegate method
 
-
-/**
- * Called when the user dismissed the dialog without logging in.
- */
-- (void)tencentDidNotLogin:(BOOL)cancelled
+- (void)tencentLoginHelper:(TencentHelper *)tencentHelper didFailWithError:(NSError *)error
 {
-	if (cancelled){
-        NSLog(@"用户取消登录");
-    }
-	else {
-        NSLog(@"登录失败");
-	}
-	
+    [SVProgressHUD showErrorWithStatus:@"sorry, 登录失败啦～"];
 }
 
-/**
- * Called when the notNewWork.
- */
--(void)tencentDidNotNetWork
+- (void)tencentLoginHelper:(TencentHelper *)tencentHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
-    NSLog(@"无网络连接，请设置网络");
-}
-
-- (void)showInvalidTokenOrOpenIDMessage{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"api调用失败" message:@"可能授权已过期，请重新获取" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-}
-
-/**
- * Called when the get_user_info has response.
- */
-- (void)getUserInfoResponse:(APIResponse*) response {
-	if (response.retCode == URLREQUEST_SUCCEED)
-	{
-        PLog(@"response.jsonResponse: %@", response.jsonResponse);
-        
-        NSDictionary *result = response.jsonResponse;
-        NSString *name = [result objectForKey:@"nickname"];
-        NSString *screenName = [result objectForKey:@"nickname"];
-        NSString *gender = [result objectForKey:@"gender"];
-        
-        //写入缓存
-        [UserSessionManager GetInstance].currentUser.tencentAccount.username = name;
-        if ([gender isEqualToString:@"男"]) {
-            gender = [NSString stringWithFormat:@"%d", 1];
-        } else {
-            gender = [NSString stringWithFormat:@"%d", 0];
-        }
-        
-        //
-        NSString *userid = [UserSessionManager GetInstance].currentUser.tencentAccount.accountid;
-        SourceType accounttype = [UserSessionManager GetInstance].accounttype;
-        
-        //注册和登录合并，第三方平台直接使用注册接口登录
-        [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
-        
-        /*
-         NSMutableString *str=[NSMutableString stringWithFormat:@""];
-         for (id key in response.jsonResponse) {
-         [str appendString: [NSString stringWithFormat:@"%@:%@\n",key,[response.jsonResponse objectForKey:key]]];
-         }
-         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:[NSString stringWithFormat:@"%@",str]
-         
-         delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
-         [alert show];
-         */
-	}
-	else
-    {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:[NSString stringWithFormat:@"%@", response.errorMsg]
-							  
-													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
-		[alert show];
-	}
+    NSString *name = [result objectForKey:@"nickname"];
+    NSString *screenName = [result objectForKey:@"nickname"];
+    NSString *gender = [result objectForKey:@"gender"];
+    
+    //写入缓存
+    [UserSessionManager GetInstance].currentUser.tencentAccount.username = name;
+    if ([gender isEqualToString:@"男"]) {
+        gender = [NSString stringWithFormat:@"%d", 1];
+    } else {
+        gender = [NSString stringWithFormat:@"%d", 0];
+    }
+    
+    //
+    NSString *userid = [UserSessionManager GetInstance].currentUser.tencentAccount.accountid;
+    SourceType accounttype = [UserSessionManager GetInstance].accounttype;
+    
+    //注册和登录合并，第三方平台直接使用注册接口登录
+    [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
     
 }
 
-//end tencent weibo
+//end tencent
+
+//douban
 
 #pragma mark - DoubanAuthorizeViewDelegate
 
@@ -681,6 +473,8 @@
     PLog(@"authorizeViewDidCancel...");
     
 }
+
+//end douban
 
 #pragma mark - UITableView delegate
 

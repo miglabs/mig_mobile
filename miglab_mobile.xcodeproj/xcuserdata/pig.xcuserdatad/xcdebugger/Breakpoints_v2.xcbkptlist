@@ -89,22 +89,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "miglab_mobile/classes/Login/LoginMenuViewController.m"
-            timestampString = "421690500.411576"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "-registerSuccess:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "miglab_mobile/classes/Play/ShareViewController.m"
             timestampString = "421862138.85588"
             startingColumnNumber = "9223372036854775807"
@@ -121,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "miglab_mobile/classes/Play/DetailPlayerViewController.m"
-            timestampString = "421863997.154529"
+            filePath = "miglab_mobile/classes/Gene/GeneViewController.m"
+            timestampString = "422083722.553561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
-            landmarkName = "-doShare2QQZone"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "miglab_mobile/classes/Play/DetailPlayerViewController.m"
-            timestampString = "421865363.145602"
+            filePath = "miglab_mobile/classes/Login/TencentHelper.m"
+            timestampString = "422104065.567959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
-            landmarkName = "-addShareResponse:"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "-addTopicResponse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "miglab_mobile/classes/Play/DetailPlayerViewController.m"
-            timestampString = "421865363.145602"
+            filePath = "miglab_mobile/classes/Login/TencentHelper.m"
+            timestampString = "422103795.816971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
-            landmarkName = "-responseDidReceived:forMessage:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-addTopic:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

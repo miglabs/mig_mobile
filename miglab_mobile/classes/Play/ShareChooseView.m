@@ -34,10 +34,11 @@
 
 -(id)initShareChooseView{
     
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 200)];
+//    self = [super initWithFrame:CGRectMake(0, 0, 320, 200)];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 100)];
     if (self) {
         //1
-        UIImage *firstImage = [UIImage imageWithName:@"qzone_normal@2x" type:@"png"];
+        UIImage *firstImage = [UIImage imageWithName:@"qq_weibo_normal@2x" type:@"png"];
         _btnFirst = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnFirst setTag:201];
         [_btnFirst setFrame:CGRectMake(26, 15, 70, 70)];
@@ -46,7 +47,7 @@
         _lblFirst = [[UILabel alloc] init];
         [_lblFirst setBackgroundColor:[UIColor clearColor]];
         [_lblFirst setFrame:CGRectMake(25, 79, 73, 21)];
-        [_lblFirst setText:@"QQ空间"];
+        [_lblFirst setText:@"腾讯微博"];
         [_lblFirst setTextColor:[UIColor whiteColor]];
         [_lblFirst setShadowColor:[UIColor darkTextColor]];
         [_lblFirst setTextAlignment:kTextAlignmentCenter];
@@ -91,7 +92,7 @@
         [self addSubview:_lblThird];
         
         //4
-        UIImage *fourImage = [UIImage imageWithName:@"qq_weibo_normal@2x" type:@"png"];
+        UIImage *fourImage = [UIImage imageWithName:@"qzone_normal@2x" type:@"png"];
         _btnFour = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnFour setTag:204];
         [_btnFour setFrame:CGRectMake(26, 104, 70, 70)];
@@ -100,7 +101,7 @@
         _lblFour = [[UILabel alloc] init];
         [_lblFour setBackgroundColor:[UIColor clearColor]];
         [_lblFour setFrame:CGRectMake(25, 169, 73, 21)];
-        [_lblFour setText:@"腾讯微博"];
+        [_lblFour setText:@"QQ空间"];
         [_lblFour setTextColor:[UIColor whiteColor]];
         [_lblFour setShadowColor:[UIColor darkTextColor]];
         [_lblFour setTextAlignment:kTextAlignmentCenter];
