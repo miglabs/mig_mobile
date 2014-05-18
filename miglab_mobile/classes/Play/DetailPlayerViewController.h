@@ -14,11 +14,10 @@
 #import "PCustomPlayerMenuView.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "MigLabAPI.h"
-#import "SinaWeibo.h"
-#import "SinaWeiboRequest.h"
 #import "ShareGuideView.h"
+#import "SinaWeiboHelper.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboDelegate, TencentSessionDelegate, TCAPIRequestDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, TencentSessionDelegate, TCAPIRequestDelegate, SinaWeiboHelperDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
@@ -45,9 +44,6 @@
 //qq zone
 @property (nonatomic, strong) TencentOAuth *tencentOAuth;
 @property (nonatomic, strong) NSArray *permissions;
-
-//sina weibo
-@property (nonatomic, strong) SinaWeibo *sinaWeibo;
 
 //分享引导
 @property (nonatomic, strong) ShareGuideView *shareGuideView;

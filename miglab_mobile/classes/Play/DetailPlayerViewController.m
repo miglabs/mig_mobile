@@ -351,11 +351,11 @@
     
     PLog(@"doShare2SinaWeibo...");
     
-    _sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
     
-//    ShareViewController *shareViewController = [[ShareViewController alloc] init];
-//    shareViewController.isShare2SinaWeibo = YES;
-//    [self presentModalViewController:shareViewController animated:YES];
+    SinaWeiboHelper *sinaWeiboHelper = [SinaWeiboHelper sharedInstance];
+    sinaWeiboHelper.delegate = self;
+    [sinaWeiboHelper updateSinaWeibo:currentSong];
     
 }
 
@@ -840,7 +840,7 @@
     [self initSongInfo];
 }
 
-#pragma EGOImageViewDelegate
+#pragma mark EGOImageViewDelegate
 - (void)imageViewLoadedImage:(EGOImageView*)imageView{
     
 }
@@ -849,13 +849,25 @@
     
 }
 
-#pragma EGOImageButtonDelegate
+#pragma mark EGOImageButtonDelegate
 - (void)imageButtonLoadedImage:(EGOImageButton*)imageButton{
     
 }
 
 - (void)imageButtonFailedToLoadImage:(EGOImageButton*)imageButton error:(NSError*)error{
     
+}
+
+#pragma mark SinaWeiboHelperDelegate method
+
+- (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error
+{
+    [SVProgressHUD showErrorWithStatus:@"sorry, 分享新浪微博失败～"];
+}
+
+- (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result
+{
+    [SVProgressHUD showSuccessWithStatus:@"分享新浪微博成功～"];
 }
 
 @end

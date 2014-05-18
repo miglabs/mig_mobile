@@ -227,10 +227,14 @@
     
     PLog(@"doSinaWeiboLogin...");
     
-    [self removeAuthData];
+    SinaWeiboHelper *sinaWeiboHelper = [SinaWeiboHelper sharedInstance];
+    sinaWeiboHelper.delegate = self;
+    [sinaWeiboHelper doSinaWeiboLogin];
     
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    [sinaweibo logIn];
+//    [self removeAuthData];
+//    
+//    SinaWeibo *sinaweibo = [self sinaweibo];
+//    [sinaweibo logIn];
     
 }
 
@@ -380,143 +384,38 @@
 }
 
 //sina weibo
--(SinaWeibo *)sinaweibo{
+
+#pragma mark SinaWeiboHelperDelegate method
+
+- (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error
+{
+    NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    //sina weibo
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (appDelegate.sinaweibo) {
-        appDelegate.sinaweibo.delegate = self;
-        return appDelegate.sinaweibo;
+    PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
+    [databaseManager deleteUserAccountByUserName:userid];
+}
+
+- (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result
+{
+    NSString *name = [result objectForKey:@"name"];
+    NSString *screenName = [result objectForKey:@"screen_name"];
+    NSString *gender = [result objectForKey:@"gender"];
+    
+    //写入缓存
+    [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
+    if ([gender isEqualToString:@"m"]) {
+        gender = [NSString stringWithFormat:@"%d", 1];
+    } else {
+        gender = [NSString stringWithFormat:@"%d", 0];
     }
-    appDelegate.sinaweibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *sinaweiboInfo = [defaults objectForKey:@"SinaWeiboAuthData"];
-    if ([sinaweiboInfo objectForKey:@"AccessTokenKey"] && [sinaweiboInfo objectForKey:@"ExpirationDateKey"] && [sinaweiboInfo objectForKey:@"UserIDKey"])
-    {
-        appDelegate.sinaweibo.accessToken = [sinaweiboInfo objectForKey:@"AccessTokenKey"];
-        appDelegate.sinaweibo.expirationDate = [sinaweiboInfo objectForKey:@"ExpirationDateKey"];
-        appDelegate.sinaweibo.userID = [sinaweiboInfo objectForKey:@"UserIDKey"];
-    }
-    return appDelegate.sinaweibo;
-}
-
-- (void)removeAuthData
-{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SinaWeiboAuthData"];
-}
-
-- (void)storeAuthData
-{
-    SinaWeibo *sinaweibo = [self sinaweibo];
     
-    NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
-                              sinaweibo.accessToken, @"AccessTokenKey",
-                              sinaweibo.expirationDate, @"ExpirationDateKey",
-                              sinaweibo.userID, @"UserIDKey",
-                              sinaweibo.refreshToken, @"refresh_token", nil];
-    [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"SinaWeiboAuthData"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)getUserInfoFromSinaWeibo
-{
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    [sinaweibo requestWithURL:@"users/show.json"
-                       params:[NSMutableDictionary dictionaryWithObject:sinaweibo.userID forKey:@"uid"]
-                   httpMethod:@"GET"
-                     delegate:self];
-}
-
-#pragma mark - SinaWeibo Delegate
-
-- (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
-{
-    NSLog(@"sinaweiboDidLogIn userID = %@ accesstoken = %@ expirationDate = %@ refresh_token = %@", sinaweibo.userID, sinaweibo.accessToken, sinaweibo.expirationDate,sinaweibo.refreshToken);
+    //
+    NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
+    SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
-    AccountOf3rdParty *sinaAccount = [[AccountOf3rdParty alloc] init];
-    sinaAccount.accountid = sinaweibo.userID;
-    sinaAccount.accesstoken = sinaweibo.accessToken;
-    sinaAccount.expirationdate = sinaweibo.expirationDate;
-    sinaAccount.accounttype = SourceTypeSinaWeibo;
-    
-    [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
-    [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
-    [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
-    
-    [self storeAuthData];
-    [self getUserInfoFromSinaWeibo];
+    //注册和登录合并，第三方平台直接使用注册接口登录
+    [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
 }
-
-- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
-{
-    NSLog(@"sinaweiboDidLogOut");
-    [self removeAuthData];
-}
-
-- (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo
-{
-    NSLog(@"sinaweiboLogInDidCancel");
-}
-
-- (void)sinaweibo:(SinaWeibo *)sinaweibo logInDidFailWithError:(NSError *)error
-{
-    NSLog(@"sinaweibo logInDidFailWithError %@", error);
-}
-
-- (void)sinaweibo:(SinaWeibo *)sinaweibo accessTokenInvalidOrExpired:(NSError *)error
-{
-    NSLog(@"sinaweiboAccessTokenInvalidOrExpired %@", error);
-    [self removeAuthData];
-}
-
-#pragma mark - SinaWeiboRequest Delegate
-
-- (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error
-{
-    if ([request.url hasSuffix:@"users/show.json"])
-    {
-        PLog(@"didFailWithError...%@", request.url);
-        
-        NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
-        
-        PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
-        [databaseManager deleteUserAccountByUserName:userid];
-        
-    }
-}
-
-- (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
-{
-    if ([request.url hasSuffix:@"users/show.json"])
-    {
-        PLog(@"didFinishLoadingWithResult: %@", result);
-        
-        if (result && [result isKindOfClass:[NSDictionary class]]) {
-            
-            NSString *name = [result objectForKey:@"name"];
-            NSString *screenName = [result objectForKey:@"screen_name"];
-            NSString *gender = [result objectForKey:@"gender"];
-            
-            //写入缓存
-            [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
-            if ([gender isEqualToString:@"m"]) {
-                gender = [NSString stringWithFormat:@"%d", 1];
-            } else {
-                gender = [NSString stringWithFormat:@"%d", 0];
-            }
-            
-            //
-            NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
-            SourceType accounttype = [UserSessionManager GetInstance].accounttype;
-            
-            //注册和登录合并，第三方平台直接使用注册接口登录
-            [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
-            
-        }//if
-        
-    }
-}
-
 //end sina weibo
 
 //tencent weibo

@@ -405,6 +405,7 @@
 		16EA2D3719286B09008E9DD3 /* share1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2C19286B09008E9DD3 /* share1.png */; };
 		16EA2D3819286B09008E9DD3 /* share_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EA2D2D19286B09008E9DD3 /* share_text.png */; };
 		16EA2D3B192875F0008E9DD3 /* ShareGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */; };
+		16EA2D4419288793008E9DD3 /* SinaWeiboHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */; };
 		16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */; };
 		16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */; };
 		16EDEF401759AD5E001BE4E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16EDEF3F1759AD5E001BE4E9 /* CoreGraphics.framework */; };
@@ -1048,6 +1049,8 @@
 		16EA2D2D19286B09008E9DD3 /* share_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_text.png; sourceTree = "<group>"; };
 		16EA2D39192875F0008E9DD3 /* ShareGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareGuideView.h; sourceTree = "<group>"; };
 		16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareGuideView.m; sourceTree = "<group>"; };
+		16EA2D4219288793008E9DD3 /* SinaWeiboHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboHelper.h; sourceTree = "<group>"; };
+		16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboHelper.m; sourceTree = "<group>"; };
 		16EDEF371759AD5E001BE4E9 /* miglab_mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miglab_mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EDEF3B1759AD5E001BE4E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16EDEF3D1759AD5E001BE4E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -2358,6 +2361,8 @@
 				16C10E1C17A9673300DA628D /* GetPasswordViewController.h */,
 				16C10E1D17A9673300DA628D /* GetPasswordViewController.m */,
 				16C10E1E17A9673400DA628D /* GetPasswordViewController.xib */,
+				16EA2D4219288793008E9DD3 /* SinaWeiboHelper.h */,
+				16EA2D4319288793008E9DD3 /* SinaWeiboHelper.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2913,6 +2918,7 @@
 				162316631777397600CF8FB5 /* AFURLConnectionOperation.m in Sources */,
 				162316641777397600CF8FB5 /* AFXMLRequestOperation.m in Sources */,
 				CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */,
+				16EA2D4419288793008E9DD3 /* SinaWeiboHelper.m in Sources */,
 				162316651777397600CF8FB5 /* UIImageView+AFNetworking.m in Sources */,
 				162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */,
 				1623166A1777397600CF8FB5 /* EGOCache.m in Sources */,
