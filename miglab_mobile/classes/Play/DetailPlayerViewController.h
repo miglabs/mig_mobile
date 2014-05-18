@@ -12,12 +12,12 @@
 #import "PCustomPlayerNavigationView.h"
 #import "PlayBodyView.h"
 #import "PCustomPlayerMenuView.h"
-#import <TencentOpenAPI/TencentOAuth.h>
 #import "MigLabAPI.h"
 #import "ShareGuideView.h"
 #import "SinaWeiboHelper.h"
+#import "TencentHelper.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, TencentSessionDelegate, TCAPIRequestDelegate, SinaWeiboHelperDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
@@ -48,7 +48,6 @@
 //分享引导
 @property (nonatomic, strong) ShareGuideView *shareGuideView;
 
--(void)finishCurrentGuide;
 -(IBAction)doShowMenuViewAction:(id)sender;
 -(IBAction)doShareAction:(id)sender;
 -(IBAction)doGotoShareView:(id)sender;

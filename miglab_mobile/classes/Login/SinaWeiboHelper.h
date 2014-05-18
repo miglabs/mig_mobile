@@ -20,6 +20,8 @@ typedef enum {
 
 @protocol SinaWeiboHelperDelegate <NSObject>
 
+@optional;
+
 //login
 - (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error;
 - (void)sinaWeiboLoginHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result;

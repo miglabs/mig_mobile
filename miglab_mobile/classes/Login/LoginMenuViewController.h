@@ -7,19 +7,15 @@
 //
 
 #import "BaseViewController.h"
-#import <TencentOpenAPI/TencentOAuth.h>
 #import "DoubanAuthorizeView.h"
 #import "MigLabAPI.h"
 #import "SinaWeiboHelper.h"
+#import "TencentHelper.h"
 
-@interface LoginMenuViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, TencentSessionDelegate, DoubanAuthorizeViewDelegate, SinaWeiboHelperDelegate>
+@interface LoginMenuViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, DoubanAuthorizeViewDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate>
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *dataList;
-
-//tencent
-@property (nonatomic, retain) TencentOAuth *tencentOAuth;
-@property (nonatomic, retain) NSArray *permissions;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
