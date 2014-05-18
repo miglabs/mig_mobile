@@ -363,7 +363,15 @@ static int PAGE_WIDTH = 81;
         UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
         [_imgMainView addGestureRecognizer:singleTap];
         [self.view addSubview:_imgMainView];
+        
+        //引导
+        _geneGuideView = [[GeneGuideView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, CGRectGetHeight(kMainScreenFrame))];
+        [self.view addSubview:_geneGuideView];
+        UITapGestureRecognizer *guideSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGeneGuideView)];
+        [_geneGuideView addGestureRecognizer:guideSingleTap];
+        
     }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -410,6 +418,11 @@ static int PAGE_WIDTH = 81;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)hideGeneGuideView
+{
+    _geneGuideView.hidden = YES;
 }
 
 //更新日期显示
