@@ -16,6 +16,7 @@
 #import "MigLabAPI.h"
 #import "SinaWeibo.h"
 #import "SinaWeiboRequest.h"
+#import "ShareGuideView.h"
 
 @interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboDelegate, TencentSessionDelegate, TCAPIRequestDelegate>
 
@@ -28,8 +29,6 @@
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
-
-@property (nonatomic, retain) UIImageView* imgDetailView;
 
 /*
  使用播放计时器控制统一控制刷新，预留后续的歌词刷新
@@ -49,6 +48,9 @@
 
 //sina weibo
 @property (nonatomic, strong) SinaWeibo *sinaWeibo;
+
+//分享引导
+@property (nonatomic, strong) ShareGuideView *shareGuideView;
 
 -(void)finishCurrentGuide;
 -(IBAction)doShowMenuViewAction:(id)sender;

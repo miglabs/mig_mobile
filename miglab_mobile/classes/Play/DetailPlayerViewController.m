@@ -33,8 +33,6 @@
 
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
-@synthesize imgDetailView = _imgDetailView;
-
 @synthesize playerTimer = _playerTimer;
 @synthesize checkUpdatePlayProcess = _checkUpdatePlayProcess;
 @synthesize miglabAPI = _miglabAPI;
@@ -120,27 +118,20 @@
     
     if ([GlobalDataManager GetInstance].isDetailPlayFirstLaunch) {
         
-        float height = [UIScreen mainScreen].bounds.size.height;
-        double version = [[UIDevice currentDevice].systemVersion doubleValue];
-        float heightoffset = version >= 7 ? 0 : (-9);
+        //
+        _shareGuideView = [[ShareGuideView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, CGRectGetHeight(kMainScreenFrame))];
+        [self.view addSubview:_shareGuideView];
+        UITapGestureRecognizer *guideSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideShareGuideView)];
+        [_shareGuideView addGestureRecognizer:guideSingleTap];
         
-        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 3];
-        _imgDetailView = [[UIImageView alloc] init];
-        _imgDetailView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
-        _imgDetailView.image = [UIImage imageWithName:imgName type:@"png"];
-        _imgDetailView.userInteractionEnabled = YES;
-        
-        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
-        [_imgDetailView addGestureRecognizer:singleTap];
-        
-        [self.view addSubview:_imgDetailView];
     }
+    
 }
 
--(void)finishCurrentGuide {
-    
+- (void)hideShareGuideView
+{
+    _shareGuideView.hidden = YES;
     [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = NO;
-    [_imgDetailView setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
