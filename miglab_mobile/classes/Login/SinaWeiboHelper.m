@@ -25,8 +25,13 @@
     return sharedInstance;
 }
 
+/**
+ * 登录微博
+ */
 - (void)doSinaWeiboLogin
 {
+    _sinaWeiboHelperStatus = SinaWeiboHelperStatusLogin;
+    
     [self removeAuthData];
     
     SinaWeibo *sinaweibo = [self sinaweibo];
@@ -74,8 +79,6 @@
 
 - (void)getUserInfoFromSinaWeibo
 {
-    _sinaWeiboHelperStatus = SinaWeiboHelperStatusLogin;
-    
     SinaWeibo *sinaweibo = [self sinaweibo];
     [sinaweibo requestWithURL:@"users/show.json"
                        params:[NSMutableDictionary dictionaryWithObject:sinaweibo.userID forKey:@"uid"]
@@ -83,6 +86,9 @@
                      delegate:self];
 }
 
+/**
+ * 分享微博
+ */
 - (void)updateSinaWeibo:(Song *)tSong
 {
     _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
