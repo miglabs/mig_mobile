@@ -128,11 +128,11 @@
         
     } else {
         
-        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
         [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
-        [GlobalDataManager GetInstance].isFirendMenuFirstLaunch = YES;
-        [GlobalDataManager GetInstance].isProgramFirstLaunch = YES;
-        [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = YES;
+        [GlobalDataManager GetInstance].isFirendMenuFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isProgramFirstLaunch = NO;
+        [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = NO;
     }
     
     /* Begin show main menu */
