@@ -23,10 +23,8 @@
     return sharedInstance;
 }
 
-- (void)doTencentLogin
+- (void)initTencentAndLogin
 {
-    _tencentHelperStatus = TencentHelperStatusLogin;
-    
     //tencent
     _permissions = [NSArray arrayWithObjects:
                     kOPEN_PERMISSION_GET_USER_INFO,
@@ -61,6 +59,14 @@
     
 }
 
+- (void)doTencentLogin
+{
+    _tencentHelperStatus = TencentHelperStatusLogin;
+    
+    [self initTencentAndLogin];
+    
+}
+
 /**
  * 发布一条说说
  */
@@ -72,19 +78,21 @@
     
     if ([_tencentOAuth isSessionValid]) {
         
+        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
+        if (tSong.songname) {
+            statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
+        }
+        
         TCAddTopicDic *params = [TCAddTopicDic dictionary];
-        params.paramCon = @"腾讯addtopic接口测试--失控小警察视频参数 dfdssdfsdff";
-        params.paramLbs_nm = @"广东省深圳市南山区高新科技园腾讯大厦";
-        params.paramThirdSource = @"2";
-        params.paramLbs_x = @"39.909407";
-        params.paramLbs_y = @"116.397521";
+        params.paramCon = statuses;
+        params.paramThirdSource = @"1";
         if (![_tencentOAuth sendAPIRequest:params callback:self]) {
             if (_delegate && [_delegate respondsToSelector:@selector(tencentAddTopicHelper:didFailWithError:)]) {
                 [_delegate tencentAddTopicHelper:self didFailWithError:nil];
             }
         }
     } else {
-        [self doTencentLogin];
+        [self initTencentAndLogin];
     }
 }
 
@@ -97,23 +105,24 @@
     
     self.shareSong = tSong;
     
-    NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
-    if (tSong.songname) {
-        statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
-    }
-    
-    WeiBo_add_t_POST *request = [[WeiBo_add_t_POST alloc] init];
-    request.param_content = statuses;
-    request.param_compatibleflag = @"0x2|0x4|0x8|0x20";
-    
     if ([_tencentOAuth isSessionValid]) {
+        
+        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
+        if (tSong.songname) {
+            statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
+        }
+        
+        WeiBo_add_t_POST *request = [[WeiBo_add_t_POST alloc] init];
+        request.param_content = statuses;
+        request.param_compatibleflag = @"0x2|0x4|0x8|0x20";
+        
         if (![_tencentOAuth sendAPIRequest:request callback:self]) {
             if (_delegate && [_delegate respondsToSelector:@selector(tencentAddTopicHelper:didFailWithError:)]) {
                 [_delegate tencentAddTopicHelper:self didFailWithError:nil];
             }
         }
     } else {
-        [self doTencentLogin];
+        [self initTencentAndLogin];
     }
     
 }

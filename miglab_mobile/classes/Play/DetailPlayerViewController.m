@@ -199,13 +199,16 @@
     UIGraphicsEndImageContext();
     
     //
-    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+//    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
     [shareSelectedView.btnFirst addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    shareSelectedView.btnFour.hidden = YES;
+    shareSelectedView.lblFour.hidden = YES;
     [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     shareSelectedView.btnFive.hidden = YES;
     shareSelectedView.lblFive.hidden = YES;
@@ -227,8 +230,8 @@
     switch (btnShare.tag) {
         case 201:
         {
-            //qqzone
-            [self doShare2QQZone];
+            //tencentweibo
+            [self doShare2TencentWeibo];
         }
             break;
         case 202:
@@ -245,8 +248,8 @@
             break;
         case 204:
         {
-            //tencentweibo
-            [self doShare2TencentWeibo];
+            //qqzone
+            [self doShare2QQZone];
         }
             break;
         case 205:
