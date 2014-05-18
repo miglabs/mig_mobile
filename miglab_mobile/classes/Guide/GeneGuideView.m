@@ -52,4 +52,28 @@
     return self;
 }
 
+-(void)hideAll {
+    
+    [_loginIconImageView setHidden:YES];
+    [_loginTextImageView setHidden:YES];
+    [_gene1ImageView setHidden:YES];
+    [_gene2ImageView setHidden:YES];
+    [_gene3ImageView setHidden:YES];
+    [_geneTextImageView setHidden:YES];
+}
+
+-(void)showLogin {
+    
+    [_loginTextImageView setHidden:NO];
+    [_loginIconImageView setHidden:NO];
+}
+
+-(void)showGene {
+    
+    [_gene1ImageView setHidden:NO];
+    [_gene2ImageView setHidden:NO];
+    [_gene3ImageView setHidden:NO];
+    [_geneTextImageView setHidden:NO];
+}
+
 @end

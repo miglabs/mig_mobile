@@ -308,13 +308,11 @@ static int PAGE_WIDTH = 81;
     [PPlayerManagerCenter GetInstance].delegate = self;
     
     if ([GlobalDataManager GetInstance].isMainMenuFirstLaunch) {
-     
+#if 0
         // 暂时不用strollview，只有一张图片显示
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
         float heightoffset = version >= 7 ? 0 : (-16);
-        
-#if 0
         _mainGuideScrollView = [[UIScrollView alloc] init];
         _mainGuideScrollView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
         _mainGuideScrollView.scrollEnabled = YES;
@@ -354,11 +352,15 @@ static int PAGE_WIDTH = 81;
 #endif
         
         //引导
+        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
+        
         _geneGuideView = [[GeneGuideView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, CGRectGetHeight(kMainScreenFrame))];
         [self.view addSubview:_geneGuideView];
         UITapGestureRecognizer *guideSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGeneGuideView)];
         [_geneGuideView addGestureRecognizer:guideSingleTap];
         
+        [_geneGuideView hideAll];
+        [_geneGuideView showLogin];
     }
     
 }
@@ -385,6 +387,7 @@ static int PAGE_WIDTH = 81;
         [GlobalDataManager GetInstance].isGeneMenuFirstLaunch) {
         
         // 主页引导已经完成
+#if 0
         float height = [UIScreen mainScreen].bounds.size.height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
         float heightoffset = version >= 7 ? 0 : (-32);
@@ -400,6 +403,11 @@ static int PAGE_WIDTH = 81;
         [_imgGeneView addGestureRecognizer:singleTap];
         
         [self.view addSubview:_imgGeneView];
+#endif
+        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
+        [_geneGuideView setHidden:NO];
+        [_geneGuideView hideAll];
+        [_geneGuideView showGene];
     }
 }
 

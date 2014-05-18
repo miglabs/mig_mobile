@@ -18,4 +18,8 @@
 @property (nonatomic, strong) UIImageView *gene3ImageView;
 @property (nonatomic, strong) UIImageView *geneTextImageView;
 
+-(void)hideAll;
+-(void)showLogin;
+-(void)showGene;
+
 @end
