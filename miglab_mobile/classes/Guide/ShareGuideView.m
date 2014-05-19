@@ -19,7 +19,7 @@
         
         self.backgroundColor = [UIColor colorWithRed:37/255 green:37/255 blue:37/255 alpha:0.8f];
         
-        float offset = [GlobalDataManager GetInstance].isLongScreen ? -20 : 0;
+        float offset = (![GlobalDataManager GetInstance].isIOS7Up) ? -20 : 0;
         
         _shareIconImageView = [[UIImageView alloc] init];
         _shareIconImageView.frame = CGRectMake(260, 20+offset, 57, 57);

@@ -19,7 +19,7 @@
         
         self.backgroundColor = [UIColor colorWithRed:37/255 green:37/255 blue:37/255 alpha:0.7];
         
-        float offset = [GlobalDataManager GetInstance].isLongScreen ? -20 : 0;
+        float offset = (![GlobalDataManager GetInstance].isIOS7Up) ? -20 : 0;
         
         _loginIconImageView = [[UIImageView alloc] init];
         _loginIconImageView.frame = CGRectMake(102, 105+offset, 60, 59);
