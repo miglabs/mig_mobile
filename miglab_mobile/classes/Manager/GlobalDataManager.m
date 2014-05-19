@@ -16,6 +16,10 @@
 @synthesize isProgramFirstLaunch = _isProgramFirstLaunch;
 @synthesize isDetailPlayFirstLaunch = _isDetailPlayFirstLaunch;
 @synthesize nNewArrivalMsg = _nNewArrivalMsg;
+@synthesize isIOS7Up = _isIOS7Up;
+@synthesize isLongScreen = _isLongScreen;
+@synthesize isPad = _isPad;
+@synthesize isPadRetina = _isPadRetina;
 
 +(GlobalDataManager *)GetInstance{
     
