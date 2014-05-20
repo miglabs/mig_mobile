@@ -10,7 +10,7 @@
         <attr index = "4"   id = "4"    picname="type_4.png"    name="八零后"   dec="八零后元素" />
         <attr index = "5"   id = "5"    picname="type_5.png"    name="九零后"   dec="九零后元素" />
         <attr index = "6"   id = "6"    picname="type_6.png"    name="粤语经典" dec="粤语经典元素" />
-        <attr index = "7"   id = "7"    picname="type_7.png"    name="摇滚Rock" dec="摇滚元素元素" />
+        <attr index = "7"   id = "7"    picname="type_7.png"    name="摇滚Rock" dec="摇滚Rock元素" />
         <attr index = "8"   id = "9"    picname="type_9.png"    name="影视同声" dec="影视同声元素" />
         <attr index = "9"  id = "16"   picname="type_16.png"   name="轻音乐" dec="轻音乐元素" />
     </type>
