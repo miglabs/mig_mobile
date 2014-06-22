@@ -183,10 +183,23 @@
         
     } else if (indexPath.row == 3) {
         
+        /* 清除新消息显示 */
+        [GlobalDataManager GetInstance].nNewArrivalMsg = 0;
+        MusicSourceMenuCell *cell = (MusicSourceMenuCell *)[tableView cellForRowAtIndexPath:indexPath];
+        
+        int number = [[_tipNumber objectAtIndex:indexPath.row] intValue];
+        if (number > 99) {
+            cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
+        }
+        else {
+            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
+        }
+        cell.lblTipNum.backgroundColor = [UIColor clearColor];
+        
+        
         MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
         messageViewController.totalMsgCount = _totalMsgCount;
         [self.topViewcontroller.navigationController pushViewController:messageViewController animated:YES];
-        
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -233,6 +246,9 @@
         
         if (newMsg > 0) {
             
+            //cell.lblTipNum.layer.cornerRadius = 12;
+            //cell.lblTipNum.backgroundColor = [UIColor blueColor];
+            //cell.lblTipNum.highlightedTextColor = [UIColor blueColor];
             cell.lblTipNum.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"message_tip_bg_x24.png"]];
             
             if (newMsg > 99) {
