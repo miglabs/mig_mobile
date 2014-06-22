@@ -432,7 +432,8 @@
         cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
         cell.lblTipNum.text = [dicMenu objectForKey:@"MenuTip"];
         CGRect tipframe = cell.lblTipNum.frame;
-        tipframe.origin.x += 15.0f;
+        tipframe.origin.x -= 90.0f;
+        tipframe.size.width += 90.0f;
         cell.lblTipNum.frame = tipframe;
         cell.arrowImageView.hidden = YES;
         
@@ -441,8 +442,16 @@
         int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
         if (nMenuTip > 0) {
             cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
-            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
             cell.lblTipNum.hidden = NO;
+            
+            if (nMenuTip > 99) {
+                
+                cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
+            }
+            else {
+                
+                cell.lblTipNum.text = [NSString stringWithFormat:@"%d", nMenuTip];
+            }
         } else {
             cell.lblTipNum.hidden = YES;
         }

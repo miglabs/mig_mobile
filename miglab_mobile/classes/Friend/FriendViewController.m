@@ -144,16 +144,6 @@
 -(void)updateDisplayNumber {
     
     [_bodyTableView reloadData];
-    
-#if 0
-    if ([GlobalDataManager GetInstance].nNewArrivalMsg > 0) {
-        
-        CGRect cellFrame = [_bodyTableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:3]].frame;
-        CGRect cellWindowFrame = cellFrame;
-        _btnNewMsg = [[UIButton alloc] initWithFrame:cellWindowFrame];
-        _btnNewMsg.imageView.image = [UIImage imageWithName:@"message_tip_bg" type:@"png"];
-    }
-#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -226,9 +216,37 @@
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
     
     int number = [[_tipNumber objectAtIndex:indexPath.row] intValue];
-    cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
     
-    NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
+    if (number > 99) {
+        cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
+    }
+    else {
+        cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
+    }
+    
+    int curRow = indexPath.row;
+    
+    /* 第4行消息的数量显示需要特殊处理 */
+    if (curRow == 3) {
+        
+        int newMsg = [GlobalDataManager GetInstance].nNewArrivalMsg;
+        
+        if (newMsg > 0) {
+            
+            cell.lblTipNum.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"message_tip_bg_x24.png"]];
+            
+            if (newMsg > 99) {
+                cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
+            }
+            else {
+                cell.lblTipNum.text = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].nNewArrivalMsg];
+            }
+        }
+        else{
+        
+            cell.lblTipNum.backgroundColor = [UIColor clearColor];
+        }
+    }
     
 	return cell;
 }

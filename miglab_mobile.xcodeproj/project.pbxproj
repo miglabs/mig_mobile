@@ -517,6 +517,7 @@
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
+		CB557FC21956C00400A68B31 /* message_tip_bg_x24.png in Resources */ = {isa = PBXBuildFile; fileRef = CB557FC11956C00400A68B31 /* message_tip_bg_x24.png */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
@@ -1218,6 +1219,7 @@
 		CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearMusicSongCell.xib; sourceTree = "<group>"; };
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		CB557FC11956C00400A68B31 /* message_tip_bg_x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_tip_bg_x24.png; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
 		CB99095B183652C40095C775 /* ChooseSongInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSongInfoCell.m; sourceTree = "<group>"; };
@@ -1678,6 +1680,7 @@
 				1635D96F17F07D5000B392BB /* home_navigation_separator.png */,
 				1635D96617F06C6C00B392BB /* home_navigation_menu_sel.png */,
 				1624BC4417C7A67800BE08A5 /* message_tip_bg.png */,
+				CB557FC11956C00400A68B31 /* message_tip_bg_x24.png */,
 				1624BC4517C7A67800BE08A5 /* user_gender_female.png */,
 				1624BC4617C7A67800BE08A5 /* user_gender_male.png */,
 				162AAB4A17C25451000E904F /* home_navigation_bg.png */,
@@ -2761,6 +2764,7 @@
 				16EA2D3519286B09008E9DD3 /* login_icon.png in Resources */,
 				1624BC4917C7A67800BE08A5 /* user_gender_male.png in Resources */,
 				1624BC4E17C7AAB400BE08A5 /* MyFriendPersonalPageViewController.xib in Resources */,
+				CB557FC21956C00400A68B31 /* message_tip_bg_x24.png in Resources */,
 				16D0DAF317C9E32700EB763F /* FriendOfPhotoListViewController.xib in Resources */,
 				16D0DAF817C9E42700EB763F /* FriendOfRecommendMusicViewController.xib in Resources */,
 				16D0DAFD17C9E47D00EB763F /* FriendOfChatViewController.xib in Resources */,
@@ -3175,8 +3179,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8258C244-9252-4788-BAC9-6661937DB908";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8258C244-9252-4788-BAC9-6661937DB908";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3213,8 +3217,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8258C244-9252-4788-BAC9-6661937DB908";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8258C244-9252-4788-BAC9-6661937DB908";
+				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
