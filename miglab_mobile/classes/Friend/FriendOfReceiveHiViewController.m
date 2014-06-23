@@ -9,6 +9,7 @@
 #import "FriendOfReceiveHiViewController.h"
 #import "FriendOfRecommendMusicViewController.h"
 #import "ChatViewController.h"
+#import "MyFriendPersonalPageViewController.h"
 
 @interface FriendOfReceiveHiViewController ()
 
@@ -125,7 +126,10 @@
     //更新按钮显示位置
     _messageContentView.lbtnSendSong.frame = CGRectMake(83, starty, 98, 30);
     _messageContentView.lbtnChat.frame = CGRectMake(189, starty, 98, 30);
-
+    
+    
+    // 头像按钮
+    //[_userHeadView.btnAvatar addTarget:self action:@selector(checkUsrInfo:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_messageContentView];
     
@@ -135,6 +139,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)checkUsrInfo:(id)sender {
+    
+    if (_msginfo) {
+        
+        MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+        personalPageViewController.userinfo = _msginfo.userInfo;
+        personalPageViewController.isFriend = NO;
+        
+        [self.navigationController pushViewController:personalPageViewController animated:YES];
+    }
 }
 
 -(void)doSendSong:(id)sender {

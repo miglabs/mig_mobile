@@ -20,4 +20,6 @@
 -(IBAction)doSendSong:(id)sender;
 -(IBAction)doLoadChat:(id)sender;
 
+-(IBAction)checkUsrInfo:(id)sender;
+
 @end

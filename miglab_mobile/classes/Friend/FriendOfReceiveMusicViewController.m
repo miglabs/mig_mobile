@@ -10,6 +10,7 @@
 #import "UserSessionManager.h"
 #import "FriendOfRecommendMusicViewController.h"
 #import "ChatViewController.h"
+#import "MyFriendPersonalPageViewController.h"
 
 @interface FriendOfReceiveMusicViewController ()
 
@@ -151,6 +152,7 @@
     btnAvatar.layer.masksToBounds = YES;
     btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
+    [btnAvatar addTarget:self action:@selector(checkUsrInfo:) forControlEvents:UIControlEventTouchUpInside];
     [_messageContentView addSubview:btnAvatar];
     
     // 添加发送人名字
@@ -218,7 +220,6 @@
     _messageContentView.lbtnSendSong.frame = CGRectMake(83, starty, 98, 30);
     _messageContentView.lbtnChat.frame = CGRectMake(189, starty, 98, 30);
     
-    
     [self.view addSubview:_messageContentView];
     
     [self updateDisplayInfo];
@@ -232,6 +233,18 @@
     FriendOfRecommendMusicViewController* recommandView = [[FriendOfRecommendMusicViewController alloc] initWithNibName:@"FriendOfRecommendMusicViewController" bundle:nil];
     recommandView.toUserInfo = _msginfo.userInfo;
     [self.navigationController pushViewController:recommandView animated:YES];
+}
+
+-(IBAction)checkUsrInfo:(id)sender {
+    
+    if (_msginfo) {
+        
+        MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
+        personalPageViewController.userinfo = _msginfo.userInfo;
+        personalPageViewController.isFriend = NO;
+        
+        [self.navigationController pushViewController:personalPageViewController animated:YES];
+    }
 }
 
 -(void)doLoadChat:(id)sender {

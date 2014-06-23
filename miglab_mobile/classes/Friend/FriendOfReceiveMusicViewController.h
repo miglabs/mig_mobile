@@ -33,4 +33,6 @@
 -(void)doCancelSuccess:(NSNotification*)tNotification;
 -(void)doCancelFailed:(NSNotification*)tNotification;
 
+-(IBAction)checkUsrInfo:(id)sender;
+
 @end
