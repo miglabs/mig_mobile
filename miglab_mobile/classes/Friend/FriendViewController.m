@@ -111,6 +111,12 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    /* 为了解决从消息类返回的时候，新消息显示的背景颜色更新 */
+    [_bodyTableView reloadData];
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     
     if (!_isFirstLoadView) {
@@ -185,16 +191,17 @@
         
         /* 清除新消息显示 */
         [GlobalDataManager GetInstance].nNewArrivalMsg = 0;
-        MusicSourceMenuCell *cell = (MusicSourceMenuCell *)[tableView cellForRowAtIndexPath:indexPath];
         
-        int number = [[_tipNumber objectAtIndex:indexPath.row] intValue];
-        if (number > 99) {
-            cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
-        }
-        else {
-            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
-        }
-        cell.lblTipNum.backgroundColor = [UIColor clearColor];
+//        MusicSourceMenuCell *cell = (MusicSourceMenuCell *)[tableView cellForRowAtIndexPath:indexPath];
+//        
+//        int number = [[_tipNumber objectAtIndex:indexPath.row] intValue];
+//        if (number > 99) {
+//            cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
+//        }
+//        else {
+//            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
+//        }
+//        cell.lblTipNum.backgroundColor = [UIColor clearColor];
         
         
         MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
