@@ -572,7 +572,13 @@
         [GlobalDataManager GetInstance].nNewArrivalMsg = newnum;
         _imgNewMsgNum = [[UIImageView alloc] init];
         
-        CGRect msgRect = CGRectMake(280, 27, 10, 10);
+        //CGRect msgRect = CGRectMake(280, 27, 10, 10);
+        CGRect msgRect = _rootNavMenuView.btnMenuThird.frame;
+        int widthend = msgRect.size.width + msgRect.origin.x;
+        msgRect.origin.x = widthend - 37;
+        msgRect.origin.y += 8;
+        msgRect.size.width = msgRect.size.height = NEW_MSG_NUMBER_SIZE;
+        
         _imgNewMsgNum.image = [UIImage imageNamed:@"message_tip_bg_x24"];
         _imgNewMsgNum.frame = msgRect;
         

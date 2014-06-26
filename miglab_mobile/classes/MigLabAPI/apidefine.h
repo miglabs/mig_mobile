@@ -71,6 +71,9 @@
 #define GUIDE_MAIN_NUMBER                       2
 #define GUIDE_FIREND_NUMBER                     2
 
+/* 新消息主界面提醒的大小 */
+#define NEW_MSG_NUMBER_SIZE                     10
+
 
 /* 性别 */
 #define STR_MALE                                @"1"
