@@ -2219,7 +2219,10 @@
                 
                 PLog(@"record current song operation succeeded");
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongSuccess object:nil userInfo:nil];
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRecordCurSongSuccess object:nil userInfo:dicResult];
             }
             else {
                 

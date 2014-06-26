@@ -18,6 +18,7 @@
 
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
+#import "GlobalDataManager.h"
 
 @interface RootViewController ()
 
@@ -35,6 +36,7 @@
 @synthesize currentShowViewTag = _currentShowViewTag;
 
 @synthesize miglabAPI = _miglabAPI;
+@synthesize imgNewMsgNum = _imgNewMsgNum;
 
 + (id)sharedInstance
 {
@@ -72,6 +74,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUserPosFailed:) name:NotificationNameSetUserPosFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUserPosSuccess:) name:NotificationNameSetUserPosSuccess object:nil];
         
+        // new message number
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordCurrentSongSucceed:) name:NotificationNameRecordCurSongSuccess object:nil];
+        
     }
     return self;
 }
@@ -98,6 +103,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosSuccess object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRecordCurSongSuccess object:nil];
 }
 
 - (void)viewDidLoad
@@ -342,6 +348,11 @@
             break;
         case 102:
         {
+            if (_imgNewMsgNum) {
+                
+                [_imgNewMsgNum setHidden:YES];
+            }
+            
             if (controller) {
                 //update
                 FriendViewController *oldFriend = (FriendViewController *)controller;
@@ -547,6 +558,26 @@
 -(void)setUserPosSuccess:(NSNotification *)tNotification{
     
     PLog(@"setUserPosSuccess...");
+    
+}
+
+-(void)recordCurrentSongSucceed:(NSNotification *)tNotification; {
+    
+    NSDictionary *userinfo = [tNotification userInfo];
+    NSDictionary *result = [userinfo objectForKey:@"result"];
+    int newnum = [[result objectForKey:@"new_msg_num"] intValue];
+    
+    if (newnum > 0) {
+        
+        [GlobalDataManager GetInstance].nNewArrivalMsg = newnum;
+        _imgNewMsgNum = [[UIImageView alloc] init];
+        
+        CGRect msgRect = CGRectMake(280, 27, 10, 10);
+        _imgNewMsgNum.image = [UIImage imageNamed:@"message_tip_bg_x24"];
+        _imgNewMsgNum.frame = msgRect;
+        
+        [self.view addSubview:_imgNewMsgNum];
+    }
     
 }
 

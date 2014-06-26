@@ -26,6 +26,9 @@
 
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+//新消息数量显示
+@property (nonatomic, retain) UIImageView* imgNewMsgNum;
+
 + (id)sharedInstance;
 
 -(IBAction)segmentAction:(id)sender;
@@ -45,5 +48,8 @@
 
 -(void)setUserPosFailed:(NSNotification *)tNotification;
 -(void)setUserPosSuccess:(NSNotification *)tNotification;
+
+// 更新新增消息显示
+-(void)recordCurrentSongSucceed:(NSNotification *)tNotification;
 
 @end
