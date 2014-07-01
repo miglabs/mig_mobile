@@ -36,6 +36,9 @@
 /* 打招呼的字数限制 */
 #define MAX_SAYHI_COUNT                         30
 
+/* 收到打招呼和送歌的行数显示限制 */
+#define MAX_RECEIVE_DISPLAY_LINES               15
+
 /* 一页中推送消息显示的数量 */
 #define MSG_DISPLAY_COUNT                       10
 

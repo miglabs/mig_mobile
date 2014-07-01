@@ -207,6 +207,7 @@
     textcontent.backgroundColor = [UIColor clearColor];
     textcontent.textAlignment = UITextAlignmentLeft;
     textcontent.font = [UIFont fontOfApp:16];
+    textcontent.numberOfLines = MAX_RECEIVE_DISPLAY_LINES;
     
     // 更新发送信息内容显示的高度
     CGSize maxsize = CGSizeMake(300, 9000);
