@@ -33,6 +33,7 @@
 @synthesize totalNearMusicCount = _totalNearMusicCount;
 @synthesize totalMsgCount = _totalMsgCount;
 @synthesize btnNewMsg = _btnNewMsg;
+@synthesize imgNewMsgBg = _imgNewMsgBg;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,6 +87,12 @@
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
     
+    _imgNewMsgBg = [[UIImageView alloc] init];
+    _imgNewMsgBg.frame = CGRectMake(238, 200, NEW_MSG_BG_SIZE, NEW_MSG_BG_SIZE);
+    _imgNewMsgBg.image = [UIImage imageWithName:@"message_tip_bg_x24" type:@"png"];
+    //[self.view addSubview:_imgNewMsgBg];
+    [_imgNewMsgBg setHidden:YES];
+    
     NSDictionary *dicMenu0 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_myfriend_tip", @"MenuImageName", @"我的歌友", @"MenuText", nil];
     NSDictionary *dicMenu1 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_listening_tip", @"MenuImageName", @"谁在听你爱的歌", @"MenuText", nil];
     NSDictionary *dicMenu2 = [NSDictionary dictionaryWithObjectsAndKeys:@"friend_nearby_tip", @"MenuImageName", @"附近的歌友", @"MenuText", nil];
@@ -109,12 +116,6 @@
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
         [alert show];
     }
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    
-    /* 为了解决从消息类返回的时候，新消息显示的背景颜色更新 */
-    [_bodyTableView reloadData];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -191,18 +192,7 @@
         
         /* 清除新消息显示 */
         [GlobalDataManager GetInstance].nNewArrivalMsg = 0;
-        
-//        MusicSourceMenuCell *cell = (MusicSourceMenuCell *)[tableView cellForRowAtIndexPath:indexPath];
-//        
-//        int number = [[_tipNumber objectAtIndex:indexPath.row] intValue];
-//        if (number > 99) {
-//            cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
-//        }
-//        else {
-//            cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
-//        }
-//        cell.lblTipNum.backgroundColor = [UIColor clearColor];
-        
+        [_imgNewMsgBg setHidden:YES];
         
         MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
         messageViewController.totalMsgCount = _totalMsgCount;
@@ -253,10 +243,11 @@
         
         if (newMsg > 0) {
             
-            //cell.lblTipNum.layer.cornerRadius = 12;
-            //cell.lblTipNum.backgroundColor = [UIColor blueColor];
-            //cell.lblTipNum.highlightedTextColor = [UIColor blueColor];
-            cell.lblTipNum.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"message_tip_bg_x24.png"]];
+            [cell addSubview:_imgNewMsgBg];
+            [_imgNewMsgBg setHidden:NO];
+            _imgNewMsgBg.frame = cell.lblTipNum.frame;
+            cell.lblTipNum.backgroundColor = [UIColor clearColor];
+            [cell bringSubviewToFront:cell.lblTipNum];
             
             if (newMsg > 99) {
                 cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
@@ -267,7 +258,7 @@
         }
         else{
         
-            cell.lblTipNum.backgroundColor = [UIColor clearColor];
+            [_imgNewMsgBg setHidden:YES];
         }
     }
     

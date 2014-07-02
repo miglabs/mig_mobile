@@ -27,6 +27,9 @@
 /* 底部播放器高度 */
 #define BOTTOM_PLAYER_HEIGHT                    73
 
+/* 新消息背景显示宽度 */
+#define NEW_MSG_BG_SIZE                         24
+
 /* 搜索范围默认距离 */
 #define SEARCH_DISTANCE                         10000000
 
