@@ -243,7 +243,19 @@
         
         if (newMsg > 0) {
             
-            [cell addSubview:_imgNewMsgBg];
+            BOOL needAddView = YES;
+            for (UIView* view in cell.subviews) {
+                
+                if (view == _imgNewMsgBg) {
+                    
+                    needAddView = NO;
+                }
+            }
+            
+            if (needAddView) {
+                [cell addSubview:_imgNewMsgBg];
+            }
+            
             [_imgNewMsgBg setHidden:NO];
             _imgNewMsgBg.frame = cell.lblTipNum.frame;
             cell.lblTipNum.backgroundColor = [UIColor clearColor];
