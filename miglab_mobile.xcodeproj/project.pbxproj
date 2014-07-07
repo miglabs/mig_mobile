@@ -3160,7 +3160,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
-					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2,
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3198,7 +3198,7 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
-					"/Users/pig/Desktop/miglab1.5/0024-20140501miglab/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2,
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
