@@ -456,7 +456,6 @@
 		187A5669179927E800221569 /* PlayBodyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A5668179927E800221569 /* PlayBodyView.xib */; };
 		187EADD117A8B92000456A73 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = 187EADD017A8B92000456A73 /* Mood.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
-		188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */; };
 		188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188A20B917F5638000D4E753 /* CoreText.framework */; };
 		188A20BC17F57F7600D4E753 /* MSYH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188A20BB17F57F7600D4E753 /* MSYH.ttf */; };
 		188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */; };
@@ -1133,8 +1132,6 @@
 		1880E454178E8AFE00330DDE /* PMusicPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMusicPlayerDelegate.h; sourceTree = "<group>"; };
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
-		188A20B617F55C0B00D4E753 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
-		188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		188A20B917F5638000D4E753 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		188A20BB17F57F7600D4E753 /* MSYH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MSYH.ttf; sourceTree = "<group>"; };
 		188E060E1797D7D200AFE89D /* UINavigationController+PAnimationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PAnimationCategory.h"; sourceTree = "<group>"; };
@@ -1294,7 +1291,6 @@
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
 				167F048A18F932C4000A1C21 /* AsyncSocket */,
 				167F046E18F9306F000A1C21 /* SocketChat */,
-				188A20B517F55C0B00D4E753 /* TTTAttributedLabel */,
 				1641CCBD17DB0BE5004179E4 /* PinYin */,
 				18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */,
 				16BE5D2017D6248700802DE1 /* Setting */,
@@ -2434,15 +2430,6 @@
 			path = TSLibraryImport;
 			sourceTree = "<group>";
 		};
-		188A20B517F55C0B00D4E753 /* TTTAttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				188A20B617F55C0B00D4E753 /* TTTAttributedLabel.h */,
-				188A20B717F55C0B00D4E753 /* TTTAttributedLabel.m */,
-			);
-			path = TTTAttributedLabel;
-			sourceTree = "<group>";
-		};
 		18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3071,7 +3058,6 @@
 				18A6022117F2A29400344C5B /* ShareChooseView.m in Sources */,
 				16B2A3C717F311DD00E7F7E6 /* SettingOfAboutViewController.m in Sources */,
 				16B2A3CC17F31C9300E7F7E6 /* SettingOfFeedbackViewController.m in Sources */,
-				188A20B817F55C0B00D4E753 /* TTTAttributedLabel.m in Sources */,
 				16184E3E1802F07E00E6E627 /* ShareViewController.m in Sources */,
 				184C47FF1803F8C4004D7523 /* ShareContentView.m in Sources */,
 				184C48021803F8E5004D7523 /* ShareMenuView.m in Sources */,
