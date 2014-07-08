@@ -6,7 +6,7 @@
 #include<stdint.h>
 #define  TOKEN_LEN 32
 #define  NICKNAME_LEN 48
-#define  HEAD_URL_LEN 64
+#define  HEAD_URL_LEN 256
 
 
 
