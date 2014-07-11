@@ -129,6 +129,7 @@
 		162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5517C25D00000E904F /* ModifyGeneView.xib */; };
 		162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 162AAB5817C25D25000E904F /* CurrentGeneView.m */; };
 		162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 162AAB5A17C25D55000E904F /* CurrentGeneView.xib */; };
+		162CFE9A1970255300B2C005 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 162CFE991970255300B2C005 /* TTTAttributedLabel.m */; };
 		1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1632E50B17D347400089291C /* libWeChatSDK.a */; };
 		1632E50F17D349380089291C /* MusicSourceEditMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1632E50E17D349380089291C /* MusicSourceEditMenuView.m */; };
 		1632E51117D349510089291C /* MusicSourceEditMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1632E51017D349510089291C /* MusicSourceEditMenuView.xib */; };
@@ -700,6 +701,8 @@
 		162AAB5717C25D25000E904F /* CurrentGeneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGeneView.h; sourceTree = "<group>"; };
 		162AAB5817C25D25000E904F /* CurrentGeneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGeneView.m; sourceTree = "<group>"; };
 		162AAB5A17C25D55000E904F /* CurrentGeneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentGeneView.xib; sourceTree = "<group>"; };
+		162CFE981970255300B2C005 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		162CFE991970255300B2C005 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		1632E50B17D347400089291C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1632E50D17D349370089291C /* MusicSourceEditMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicSourceEditMenuView.h; sourceTree = "<group>"; };
 		1632E50E17D349380089291C /* MusicSourceEditMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicSourceEditMenuView.m; sourceTree = "<group>"; };
@@ -1287,6 +1290,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				162CFE971970255300B2C005 /* TTTAttributedLabel */,
 				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
 				167F048A18F932C4000A1C21 /* AsyncSocket */,
@@ -1595,6 +1599,15 @@
 				162AAB4317C25440000E904F /* gene_choose_bg.png */,
 			);
 			path = gene;
+			sourceTree = "<group>";
+		};
+		162CFE971970255300B2C005 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				162CFE981970255300B2C005 /* TTTAttributedLabel.h */,
+				162CFE991970255300B2C005 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		1633F6E417D1D24F00F47DFF /* base */ = {
@@ -2913,6 +2926,7 @@
 				162316681777397600CF8FB5 /* UIImage+PImageCategory.m in Sources */,
 				1623166A1777397600CF8FB5 /* EGOCache.m in Sources */,
 				1623166B1777397600CF8FB5 /* EGOImageButton.m in Sources */,
+				162CFE9A1970255300B2C005 /* TTTAttributedLabel.m in Sources */,
 				1623166C1777397600CF8FB5 /* EGOImageLoadConnection.m in Sources */,
 				1623166D1777397600CF8FB5 /* EGOImageLoader.m in Sources */,
 				1623166E1777397600CF8FB5 /* EGOImageView.m in Sources */,
@@ -3137,6 +3151,10 @@
 		16EDEF561759AD5E001BE4E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
@@ -3146,7 +3164,6 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2,
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3167,7 +3184,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3175,6 +3192,10 @@
 		16EDEF571759AD5E001BE4E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
@@ -3184,7 +3205,6 @@
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
-					/Users/Archer/Documents/Source_code/mig/mobile/mig_mobile/miglab_mobile/classes/Connect_IOS_SDK_V2.2,
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3205,7 +3225,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
