@@ -460,6 +460,10 @@
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
+    cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
+    cell.btnAvatar.layer.masksToBounds = YES;
+    cell.btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
+    cell.btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     cell.lblNickname.text = tempcomment.user.nickname ? tempcomment.user.nickname: @"未知用户";
     cell.lblNickname.font = [UIFont fontOfApp:17.0f];
     
