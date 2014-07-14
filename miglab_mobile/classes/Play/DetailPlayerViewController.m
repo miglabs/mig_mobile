@@ -18,6 +18,7 @@
 #import "WXApi.h"
 #import <objc/runtime.h>
 #import "TencentOpenAPI/QQApiInterface.h"
+#import "apidefine.h"
 
 @interface DetailPlayerViewController ()
 
@@ -348,7 +349,11 @@
     [message setThumbImage:shareImage];
     
     WXMusicObject *ext = [WXMusicObject object];
+#ifdef WEIXIN_REAL_SONG_ADDRESS
     ext.musicUrl = currentSong.songurl;
+#else
+    ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS, currentSong.songid];
+#endif
     message.mediaObject = ext;
     
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
