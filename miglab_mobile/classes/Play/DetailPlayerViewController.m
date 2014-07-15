@@ -353,6 +353,7 @@
     ext.musicUrl = currentSong.songurl;
 #else
     ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS, currentSong.songid];
+    ext.musicDataUrl = currentSong.songurl;
 #endif
     message.mediaObject = ext;
     
