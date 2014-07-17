@@ -104,7 +104,7 @@
     {
          inputString = [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if ( inputString.length > 0 ) {
-            [m_textView resignFirstResponder];
+            //[m_textView resignFirstResponder];
             [ChatNotificationCenter postNotification:CHATMESSAGE_SEND obj:inputString];
             [m_textView setText:@""];
         }
@@ -157,11 +157,11 @@
     {
         switch (notification.type) {
             case FACEBOARD_SEND:
-                self.isFaceBoardShow = false;
+                //self.isFaceBoardShow = false;
                 [self onSend];
-                [m_keyButton setHidden:true];
-                [m_faceButton setHidden:false];
-                [m_textView setInputView: nil];
+                //[m_keyButton setHidden:true];
+                //[m_faceButton setHidden:false];
+                //[m_textView setInputView: nil];
                 break;
             case FACEBOARD_SELECT:
             {

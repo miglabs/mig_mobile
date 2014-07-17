@@ -87,11 +87,12 @@
     return self;
 }
 
+/*
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
      [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
 }
-
+*/
 
 -(void)dealloc
 {

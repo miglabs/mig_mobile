@@ -507,6 +507,11 @@
 		C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */; };
 		C7C9F5C918FC316B001E3A47 /* type_7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C818FC316B001E3A47 /* type_7.png */; };
 		C7C9F5CB18FC5925001E3A47 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5CA18FC5925001E3A47 /* about_icon.png */; };
+		C7DE8EBB1977AE0E0047233D /* MsgTextFaceRun.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB11977AE0E0047233D /* MsgTextFaceRun.m */; };
+		C7DE8EBC1977AE0E0047233D /* MsgTextRun.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB31977AE0E0047233D /* MsgTextRun.m */; };
+		C7DE8EBD1977AE0E0047233D /* MsgTextRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB51977AE0E0047233D /* MsgTextRunDelegate.m */; };
+		C7DE8EBE1977AE0E0047233D /* MsgTextURLRun.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB71977AE0E0047233D /* MsgTextURLRun.m */; };
+		C7DE8EBF1977AE0E0047233D /* MsgTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB91977AE0E0047233D /* MsgTextView.m */; };
 		CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */; };
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
@@ -1205,6 +1210,17 @@
 		C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C7C9F5C818FC316B001E3A47 /* type_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = type_7.png; sourceTree = "<group>"; };
 		C7C9F5CA18FC5925001E3A47 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_icon.png; sourceTree = "<group>"; };
+		C7DE8EB01977AE0E0047233D /* MsgTextFaceRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextFaceRun.h; sourceTree = "<group>"; };
+		C7DE8EB11977AE0E0047233D /* MsgTextFaceRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextFaceRun.m; sourceTree = "<group>"; };
+		C7DE8EB21977AE0E0047233D /* MsgTextRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextRun.h; sourceTree = "<group>"; };
+		C7DE8EB31977AE0E0047233D /* MsgTextRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextRun.m; sourceTree = "<group>"; };
+		C7DE8EB41977AE0E0047233D /* MsgTextRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextRunDelegate.h; sourceTree = "<group>"; };
+		C7DE8EB51977AE0E0047233D /* MsgTextRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextRunDelegate.m; sourceTree = "<group>"; };
+		C7DE8EB61977AE0E0047233D /* MsgTextURLRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextURLRun.h; sourceTree = "<group>"; };
+		C7DE8EB71977AE0E0047233D /* MsgTextURLRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextURLRun.m; sourceTree = "<group>"; };
+		C7DE8EB81977AE0E0047233D /* MsgTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextView.h; sourceTree = "<group>"; };
+		C7DE8EB91977AE0E0047233D /* MsgTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextView.m; sourceTree = "<group>"; };
+		C7DE8EBA1977AE0E0047233D /* MsgTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextViewDelegate.h; sourceTree = "<group>"; };
 		CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
 		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
@@ -1290,6 +1306,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				C7DE8EAF1977AE0E0047233D /* MsgText */,
 				162CFE971970255300B2C005 /* TTTAttributedLabel */,
 				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
@@ -2503,6 +2520,25 @@
 			path = share;
 			sourceTree = "<group>";
 		};
+		C7DE8EAF1977AE0E0047233D /* MsgText */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE8EB01977AE0E0047233D /* MsgTextFaceRun.h */,
+				C7DE8EB11977AE0E0047233D /* MsgTextFaceRun.m */,
+				C7DE8EB21977AE0E0047233D /* MsgTextRun.h */,
+				C7DE8EB31977AE0E0047233D /* MsgTextRun.m */,
+				C7DE8EB41977AE0E0047233D /* MsgTextRunDelegate.h */,
+				C7DE8EB51977AE0E0047233D /* MsgTextRunDelegate.m */,
+				C7DE8EB61977AE0E0047233D /* MsgTextURLRun.h */,
+				C7DE8EB71977AE0E0047233D /* MsgTextURLRun.m */,
+				C7DE8EB81977AE0E0047233D /* MsgTextView.h */,
+				C7DE8EB91977AE0E0047233D /* MsgTextView.m */,
+				C7DE8EBA1977AE0E0047233D /* MsgTextViewDelegate.h */,
+			);
+			name = MsgText;
+			path = SocketChat/MsgText;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2539,6 +2575,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 16EDEF2C1759AD5E001BE4E9;
 			productRefGroup = 16EDEF381759AD5E001BE4E9 /* Products */;
@@ -2994,6 +3031,7 @@
 				1653DC1217BD158F00767E0E /* LocalViewController.m in Sources */,
 				1653DC2C17BD221300767E0E /* LikeViewController.m in Sources */,
 				18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */,
+				C7DE8EBE1977AE0E0047233D /* MsgTextURLRun.m in Sources */,
 				165D7C9317BE60D2000D08E3 /* GeneViewController.m in Sources */,
 				165D7C9C17BE618C000D08E3 /* BaseViewController.m in Sources */,
 				16CDC6071832585E00035634 /* SongOfSendInfoCell.m in Sources */,
@@ -3002,6 +3040,7 @@
 				165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */,
 				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,
 				16F3521817BF241400CF9044 /* NearMusicViewController.m in Sources */,
+				C7DE8EBC1977AE0E0047233D /* MsgTextRun.m in Sources */,
 				16F3521E17BF254D00CF9044 /* OnlineViewController.m in Sources */,
 				16212F9A17BF50580091326E /* RootViewController.m in Sources */,
 				160E073617C076F5003F0E45 /* SYAppStart.m in Sources */,
@@ -3014,7 +3053,9 @@
 				185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */,
 				1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */,
 				1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */,
+				C7DE8EBD1977AE0E0047233D /* MsgTextRunDelegate.m in Sources */,
 				167F048618F93274000A1C21 /* ChatNetService.m in Sources */,
+				C7DE8EBB1977AE0E0047233D /* MsgTextFaceRun.m in Sources */,
 				1649E21017C3A997009A9E3F /* MessageViewController.m in Sources */,
 				1649E21517C3AAB5009A9E3F /* ListenMyMusicViewController.m in Sources */,
 				1649E22017C3B720009A9E3F /* MusicSongCell.m in Sources */,
@@ -3023,6 +3064,7 @@
 				1604F0E717C4F0790072A0D8 /* MusicCommentCell.m in Sources */,
 				1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */,
 				167F047B18F93228000A1C21 /* ChatInputToolBar.m in Sources */,
+				C7DE8EBF1977AE0E0047233D /* MsgTextView.m in Sources */,
 				1624BC1517C7861600BE08A5 /* FriendOfSayHiViewController.m in Sources */,
 				167F048418F93274000A1C21 /* ChatMsgTableViewCell.m in Sources */,
 				1624BC1917C7869500BE08A5 /* FriendMessageUserHead.m in Sources */,
@@ -3165,6 +3207,8 @@
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					"$(PROJECT_DIR)/miglab_mobile/classes",
+					"$(PROJECT_DIR)/miglab_mobile/classes/DoubanAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3174,6 +3218,9 @@
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMFeedback_iOS_1.4\"",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
+					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3182,8 +3229,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				PROVISIONING_PROFILE = "8258C244-9252-4788-BAC9-6661937DB908";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8258C244-9252-4788-BAC9-6661937DB908";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3206,6 +3253,8 @@
 					"$(SRCROOT)/miglab_mobile/classes/TencentAPI",
 					"$(SRCROOT)/miglab_mobile/classes",
 					"$(PROJECT_DIR)/miglab_mobile/classes/Connect_IOS_SDK_V2.2",
+					"$(PROJECT_DIR)/miglab_mobile/classes",
+					"$(PROJECT_DIR)/miglab_mobile/classes/DoubanAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
@@ -3215,6 +3264,9 @@
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID\"",
 					"\"$(SRCROOT)/miglab_mobile/classes/UMFeedback_iOS_1.4\"",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
+					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3223,8 +3275,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D5D1C93F-8ABA-49BB-9955-58493CF607E2";
+				PROVISIONING_PROFILE = "8258C244-9252-4788-BAC9-6661937DB908";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8258C244-9252-4788-BAC9-6661937DB908";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

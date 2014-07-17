@@ -150,4 +150,11 @@
     }
 }
 #endif
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
+}
+
 @end
