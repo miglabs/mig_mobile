@@ -22,6 +22,8 @@
  */
 -(void)doAuthLogin:(NSString *)tusername password:(NSString *)tpassword{
     
+    API_HEADER();
+    
     PLog(@"username: %@, password: %@", tusername, tpassword);
     
     if (!tusername || tusername.length == 0) {
@@ -36,6 +38,7 @@
     
     [self doSsoLoginFirst:tusername password:tpassword];
     
+    API_FOOTER();
 }
 
 /*
@@ -43,6 +46,8 @@
  http://sso.miglab.com/cgi-bin/sp.fcgi?sp
  */
 -(void)doSsoLoginFirst:(NSString *)tusername password:(NSString *)tpassword{
+    
+    API_HEADER();
     
     PLog(@"LOGIN_SSO_SP_URL: %@", LOGIN_SSO_SP_URL);
     
@@ -98,6 +103,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -106,6 +112,8 @@
  http://open.fm.miglab.com/api/userinfo.fcgi
  */
 -(void)doGetUserInfo:(NSString *)tUserName accessToken:(NSString *)tAccessToken{
+    
+    API_HEADER();
     
     NSString *getUserInfoUrl = [NSString stringWithFormat:@"%@?username=%@&token=%@", GET_USER_INFO, tUserName, tAccessToken];
     PLog(@"getUserInfoUrl: %@", getUserInfoUrl);
@@ -162,6 +170,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -170,6 +179,8 @@
  HTTP_REGISTER
  */
 -(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession sex:(NSString*)tsex birthday:(NSString*)tbirthday location:(NSString*)tlocation head:(NSString*)thead{
+    
+    API_HEADER();
     
     NSString* registerUrl = HTTP_REGISTER;
     PLog(@"registerUrl: %@", registerUrl);
@@ -239,18 +250,25 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 -(void)doRegister:(NSString *)tusername password:(NSString *)tpassword nickname:(NSString *)tnickname source:(SourceType)tsourcetype session:(NSString *)tsession sex:(NSString *)tsex {
+    
+    API_HEADER();
     
     NSString* tbirthday = @"0";
     NSString* tlocation = @"0";
     NSString* thead = @"0";
     
     [self doRegister:tusername password:tpassword nickname:tnickname source:tsourcetype session:tsession sex:tsex birthday:tbirthday location:tlocation head:thead];
+    
+    API_FOOTER();
 }
 
 -(void)doRegister:(NSString*)tusername password:(NSString*)tpassword nickname:(NSString*)tnickname source:(SourceType)tsourcetype {
+    
+    API_HEADER();
     
     if( SourceTypeMiglab == tsourcetype) {
         
@@ -260,6 +278,8 @@
         
         [self doRegister:tusername password:tpassword nickname:tnickname source:tsourcetype session:tsession sex:sex];
     }
+    
+    API_FOOTER();
 }
 
 /*
@@ -268,6 +288,8 @@
  HTTP_GUEST
  */
 -(void)doGetGuestInfo {
+    
+    API_HEADER();
     
     PLog(@"guest url: %@", HTTP_GUEST);
     
@@ -324,6 +346,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -332,6 +355,8 @@
  HTTP_UPDATEUSER
  */
 -(void)doUpdateUserInfo:(NSString*)tuid token:(NSString*)ttoken nickname:(NSString*)tnickname gender:(NSString*)tgender birthday:(NSString*)tbirthday {
+    
+    API_HEADER();
     
     PLog(@"update user information url: %@", HTTP_UPDATEUSER);
     
@@ -388,30 +413,44 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 -(void)doUpdateUserInfoNickName:(NSString *)tuid token:(NSString *)ttoken nickname:(NSString *)tnickname {
+    
+    API_HEADER();
     
     NSString* szGender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
     NSString* szBirthday = [UserSessionManager GetInstance].currentUser.birthday;
     
     [self doUpdateUserInfo:tuid token:ttoken nickname:tnickname gender:szGender birthday:szBirthday];
+    
+    API_FOOTER();
 }
 
 -(void)doUpdateUserInfoGender:(NSString *)tuid token:(NSString *)ttoken gender:(NSString *)tgender {
+    
+    API_HEADER();
     
     NSString* szNickname = [UserSessionManager GetInstance].currentUser.nickname;
     NSString* szBirthday = [UserSessionManager GetInstance].currentUser.birthday;
     
     [self doUpdateUserInfo:tuid token:ttoken nickname:szNickname gender:tgender birthday:szBirthday];
+    
+    API_FOOTER();
 }
 
 -(void)doUpdateUserInfoBirthday:(NSString *)tuid token:(NSString *)ttoken birthday:(NSString *)tbirthday {
+    
+    API_HEADER();
     
     NSString* szGender = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUser.gender];
     NSString* szNickname = [UserSessionManager GetInstance].currentUser.nickname;
     
     [self doUpdateUserInfo:tuid token:ttoken nickname:szNickname gender:szGender birthday:tbirthday];
+    
+    API_FOOTER();
 }
 
 /*
@@ -420,6 +459,8 @@
  http://open.fm.miglab.com/api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001
  */
 -(void)doGetDefaultMusic:(NSString *)ttype token:(NSString *)ttoken uid:(int)tuid {
+    
+    API_HEADER();
 
     NSString* musicUrl = HTTP_DEFAULTMUSIC;
     PLog(@"musicUrl: %@", musicUrl);
@@ -464,6 +505,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -472,6 +515,8 @@
  HTTP_ADDBLACKLIST
  */
 -(void)doHateSong:(NSString*)uid token:(NSString *)ttoken sid:(long)tsid {
+    
+    API_HEADER();
     
     PLog(@"do hate song url: %@", HTTP_HATESONG);
     
@@ -524,6 +569,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -532,6 +578,8 @@
  HTTP_PRESENTMUSIC
  */
 -(void)doPresentMusic:(NSString *)uid token:(NSString*)ttoken touid:(NSString *)ttouid sid:(NSArray*)tsid {
+    
+    API_HEADER();
     
     PLog(@"present music url: %@", HTTP_PRESENTMUSIC);
     
@@ -607,6 +655,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -615,6 +664,8 @@
  HTTP_SHAREMUSIC
  */
 -(void)doShareMusic:(NSString *)uid token:(NSString *)ttoken sid:(long)tsid platform:(int)tplatform{
+    
+    API_HEADER();
     
     PLog(@"share music url: %@", HTTP_SHAREMUSIC);
     
@@ -671,6 +722,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -679,6 +731,8 @@
  HTTP_UPLOADMUSIC
  */
 -(void)doUploadMusic:(NSString *)uid token:(NSString *)ttoken sid:(long)tsid enter:(int)tenter urlcode:(int)turlcode content:(long)tcontent{
+    
+    API_HEADER();
     
     PLog(@"upload music url:%@", HTTP_UPLOADMUSIC);
     
@@ -733,6 +787,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 
@@ -742,6 +797,8 @@
  HTTP_NEARBYUSER
  */
 -(void)doGetNearbyUser:(NSString *)uid token:(NSString *)ttoken page:(int)tpage{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@&page=%d", HTTP_NEARBYUSER,  ttoken, uid, tpage];
     PLog(@"get nearby user url: %@", url);
@@ -794,6 +851,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -802,6 +860,8 @@
  HTTP_GETUSERLIST
  */
 -(void)doGetListFromUser:(NSString *)uid sid:(long)tsid token:(NSString *)ttoken{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@&sid=%ld", HTTP_GETUSERLIST, ttoken, uid, tsid];
     PLog(@"get list from user url: %@", url);
@@ -857,6 +917,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -865,6 +926,8 @@
  HTTP_GETPLAYINGMUSIC
  */
 -(void)doGetPlayingMusicFromUser:(NSString *)uid token:(NSString *)ttoken begin:(int)tbegin page:(int)tpage{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@&token=%@&uid=%@", HTTP_GETPLAYINGMUSIC, ttoken, uid];
     PLog(@"playing music url: %@", url);
@@ -919,6 +982,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -927,6 +991,8 @@
  HTTP_GETCHANNEL
  */
 -(void)doGetChannel:(NSString*)uid token:(NSString *)ttoken num:(int)tnum {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?num=%d&token=%@&uid=%@", HTTP_GETCHANNEL, tnum, ttoken, uid];
     PLog(@"get channel url: %@", url);
@@ -997,6 +1063,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1005,6 +1072,8 @@
  HTTP_GETCHANNELMUSIC
  */
 -(void)doGetMusicFromChannel:(NSString*)uid token:(NSString *)ttoken channel:(int)tchannel {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&channel=%d", HTTP_GETCHANNELMUSIC, uid, ttoken, tchannel];
     PLog(@"get channel music url: %@", url);
@@ -1075,6 +1144,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1083,6 +1153,8 @@
  HTTP_MODESCENE
  */
 -(void)doGetWorkOfMood:(NSString*)uid token:(NSString*)ttoken{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?decword=mood&token=%@&uid=%@", HTTP_MOODSCENE, ttoken, uid];
     PLog(@"get mood url: %@", url);
@@ -1152,6 +1224,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1160,6 +1233,8 @@
  HTTP_MOODSCENE
  */
 -(void)doGetWorkOfScene:(NSString*)uid token:(NSString*)ttoken{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?decword=scene&token=%@&uid=%@", HTTP_MOODSCENE, ttoken, uid];
     PLog(@"get scene url: %@", url);
@@ -1229,6 +1304,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1237,6 +1313,8 @@
  HTTP_MODEMUSIC
  */
 -(void)doGetModeMusic:(NSString*)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood num:(int)tnum{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?wordid=%@&mode=%@&token=%@&uid=%@&num=%d", HTTP_MODEMUSIC, twordid, tmood, ttoken, uid, tnum];
     PLog(@"get mode music url: %@", url);
@@ -1315,10 +1393,16 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 -(void)doGetModeMusic:(NSString *)uid token:(NSString *)ttoken wordid:(NSString *)twordid mood:(NSString *)tmood{
+    
+    API_HEADER();
+    
     [self doGetModeMusic:uid token:ttoken wordid:twordid mood:tmood num:10];
+    
+    API_FOOTER();
 }
 
 /*
@@ -1327,6 +1411,8 @@
  HTTP_MODEMAP
  */
 -(void)doGetMoodMap:(NSString *)uid token:(NSString *)ttoken{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@", HTTP_MOODMAP, ttoken, uid];
     PLog(@"get mood map url: %@", url);
@@ -1394,6 +1480,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1402,6 +1489,8 @@
  HTTP_MOODPARENT
  */
 -(void)doGetMoodParent:(NSString *)uid token:(NSString *)ttoken{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@", HTTP_MOODPARENT, ttoken, uid];
     PLog(@"get mood parent url: %@", url);
@@ -1469,6 +1558,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1477,6 +1567,8 @@
  HTTP_ADDMOODRECORD
  */
 -(void)doAddMoodRecord:(NSString*)uid token:(NSString*)ttoken wordid:(int)twordid songid:(long long)tsongid{
+    
+    API_HEADER();
     
     PLog(@"add mood record url: %@", HTTP_ADDMOODRECORD);
     
@@ -1532,6 +1624,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1540,6 +1633,8 @@
  POST
  */
 -(void)doSetUserPos:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation{
+    
+    API_HEADER();
     
     PLog(@"set user pos url: %@", HTTP_SETUSERPOS);
     
@@ -1595,6 +1690,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1603,6 +1699,8 @@
  GET
  */
 -(void)doSearchNearby:(NSString*)uid token:(NSString*)ttoken location:(NSString *)tlocation radius:(int)tradius {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?token=%@&uid=%@&location=%@&radius=%d", HTTP_SEARCHNEARBY, ttoken, uid, tlocation, tradius];
     PLog(@"search nearby url: %@", url);
@@ -1672,13 +1770,16 @@
     }];
     
     [operation start];
-    
+ 
+    API_FOOTER();
 }
 
 /*
  非注册用户获取播放列表（2013-08－17）
  */
 -(void)doGetDefaultGuestSongs{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@", HTTP_GETDEFAULTGUESTSONGS];
     PLog(@"get default guest songs url: %@", url);
@@ -1747,6 +1848,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1755,6 +1857,8 @@
  HTTP_CLTSONGS
  */
 -(void)doGetCollectedSongs:(NSString *)uid token:(NSString *)ttoken taruid:(NSString*)ttaruid {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&taruid=%@", HTTP_GETCLTSONGS, uid, ttoken, ttaruid];
     PLog(@"get collected songs url:%@", url);
@@ -1817,6 +1921,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -1825,6 +1931,8 @@
  HTTP_GETDBCHANNELSONG
  */
 -(void)doGetDoubanChannelSong:(NSString*)uid token:(NSString*)ttoken channel:(NSString*)tchannel {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&channel=%@", HTTP_GETDBCHANNELSONG, uid, ttoken, tchannel];
     PLog(@"get douban channel song url: %@", url);
@@ -1887,6 +1995,7 @@
     
     [operation start];
     
+    API_FOOTER();
 }
 
 /*
@@ -1895,6 +2004,8 @@
  HTTP_GETTYPESONGS
  */
 -(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken typeid:(NSString *)ttypeid typeindex:(NSString *)ttypeindex moodid:(NSString *)tmoodid moodindex:(NSString *)tmoodindex sceneid:(NSString *)tsceneid sceneindex:(NSString *)tsceneindex channelid:(NSString *)tchannelid channelindex:(NSString *)tchannelindex num:(NSString *)tnum{
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&typeid=%@&typeindex=%@&moodid=%@&moodindex=%@&sceneid=%@&sceneindex=%@&channelid=%@&channelindex=%@&num=%@", HTTP_GETTYPESONGS, uid, ttoken, ttypeid, ttypeindex, tmoodid, tmoodindex, tsceneid, tsceneindex, tchannelid, tchannelindex, tnum];
     PLog(@"get type songs url: %@", url);
@@ -1961,6 +2072,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -1969,6 +2082,8 @@
  HTTP_RECORDLOCALSONGS
  */
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"uid=%@&token=%@&source=%@&urlcode=%@&name=%@&content=%@", uid, ttoken, tsource, turlcode, tname, tcontent];
     PLog(@"record local songs url: %@", url);
@@ -2018,9 +2133,13 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 -(void)doRecordLocalSongsSingle:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname song:(Song *)tsong {
+    
+    API_HEADER();
     
     if(tsong != nil) {
         
@@ -2030,9 +2149,13 @@
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:songcontent];
     }
+    
+    API_FOOTER();
 }
 
 -(void)doRecordLocalSongsArray:(NSString *)uid token:(NSString *)ttoken source:(NSString *)tsource urlcode:(NSString *)turlcode name:(NSString *)tname songs:(NSArray *)tsongs {
+    
+    API_HEADER();
     
     if(tsongs != nil) {
         
@@ -2061,6 +2184,8 @@
         
         [self doRecordLocalSongs:uid token:ttoken source:tsource urlcode:turlcode name:tname content:tcontent];
     }
+    
+    API_FOOTER();
 }
 
 /*
@@ -2069,6 +2194,8 @@
  HTTP_GETPUSHMSG
  */
 -(void)doGetPushMsg:(NSString*)uid token:(NSString*)ttoken pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&page_index=%@&page_size=%@", HTTP_GETPUSHMSG, uid, ttoken, tpageindex, tpagesize];
     PLog(@"get push message url: %@", url);
@@ -2129,6 +2256,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2137,6 +2266,8 @@
  HTTP_UPDATECONFIGFILE
  */
 -(void)doUpdateConfigfile:(NSString*)uid token:(NSString*)ttoken version:(NSString*)tversion {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&version=%@", HTTP_UPDATECONFIGFILE, uid, ttoken, tversion];
     PLog(@"update config file url: %@", url);
@@ -2188,6 +2319,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2196,6 +2329,8 @@
  HTTP_RECORDCURSONG
  */
 -(void)doRecordCurrentSong:(NSString*)uid token:(NSString*)ttoken lastsong:(NSString*)tlastsong cursong:(NSString*)tcursong mode:(NSString*)tmode typeid:(NSString*)ttypeid name:(NSString*)tname singer:(NSString*)tsinger state:(NSString*)tstate {
+    
+    API_HEADER();
     
     PLog(@"record current song url: %@", HTTP_RECORDCURSONG);
     
@@ -2251,6 +2386,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2259,6 +2396,8 @@
  HTTP_COLLECTSONG
  */
 -(void)doCollectSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid modetype:(NSString*)tmodetype typeid:(NSString*)ttypeid {
+    
+    API_HEADER();
     
     PLog(@"collect song url: %@", HTTP_COLLECTSONG);
     
@@ -2311,6 +2450,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2319,6 +2460,8 @@
  HTTP_HATESONG
  */
 -(void)doAddHateSong:(NSString*)uid token:(NSString*)ttoken sid:(NSString*)tsid {
+    
+    API_HEADER();
     
     PLog(@"hate song url: %@", HTTP_HATESONG);
     
@@ -2370,6 +2513,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2378,6 +2523,8 @@
  HTTP_COLLECTANDNEARNUM
  */
 -(void)doCollectAndNearNum:(NSString*)uid token:(NSString*)ttoken taruid:(NSString*)ttaruid radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&taruid=%@&radius=%@&page_index=%@&page_size=%@&location=%@", HTTP_COLLECTANDNEARNUM, uid, ttoken, ttaruid, tradius, tpageindex, tpagesize, tlocation];
     PLog(@"collect and near number url: %@", url);
@@ -2430,6 +2577,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2438,6 +2587,8 @@
  HTTP_DELETECOLLECTSONG
  */
 -(void)doDeleteCollectedSong:(NSString*)uid token:(NSString *)ttoken songid:(NSString*)tsongid {
+    
+    API_HEADER();
     
     PLog(@"delete collect song url: %@", HTTP_DELETECOLLECTSONG);
     
@@ -2490,6 +2641,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2498,6 +2651,8 @@
  HTTP_GETSONGINFO
  */
 -(void)doGetSongInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@", HTTP_GETSONGINFO, uid, ttoken, tsongid];
     PLog(@"get song info url: %@", url);
@@ -2550,6 +2705,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2558,6 +2715,8 @@
  HTTP_GETNEARMUSIC
  */
 -(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&page_index=%@&page_size=%@&location=%@", HTTP_GETNEARMUSIC, uid, ttoken, tradius, tpageindex, tpagesize, tlocation];
     PLog(@"get near music url: %@", url);
@@ -2632,6 +2791,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2640,6 +2801,8 @@
  HTTP_COMMENTSONG
  */
 -(void)doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid comment:(NSString*)tcomment {
+    
+    API_HEADER();
 
     PLog(@"comment song url: %@", HTTP_COMMENTSONG);
     
@@ -2692,6 +2855,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2700,6 +2865,8 @@
  HTTP_GETCOMMENT
  */
 -(void)doGetSongComment:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid count:(NSString*)tcount fromid:(NSString*)tfromid {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&count=%@&fromid=%@", HTTP_GETCOMMENT, uid, ttoken, tsongid, tcount, tfromid];
     PLog(@"get song comment url: %@", url);
@@ -2791,6 +2958,8 @@
     }];
     
     [operaion start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2800,6 +2969,8 @@
  HTTP_GETMYNEARMUSICMSGNUM
  */
 -(void)doGetMyNearMusicMsgNumber:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETMYNEARMUSICMSGNUM, uid, ttoken, tradius, tlocation];
     PLog(@"get my nearby music and message url:%@", url);
@@ -2863,6 +3034,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2871,6 +3044,8 @@
  HTTP_GETSAMEMUSIC
  */
 -(void)doGetSameMusic:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETSANMEMUSIC, uid, ttoken, tradius, tlocation];
     PLog(@"get same music url:%@", url);
@@ -2931,6 +3106,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -2939,6 +3116,8 @@
  HTTP_GETNEARUSER
  */
 -(void)doGetNearUser:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETNEARUSER, uid, ttoken, tradius, tlocation];
     PLog(@"get near user url:%@", url);
@@ -2999,6 +3178,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -3007,6 +3188,8 @@
  GET
  */
 -(void)doGetSongHistory:(NSString *)uid token:(NSString *)ttoken fromid:(NSString *)tfromid count:(NSString *)tcount {
+    
+    API_HEADER();
     
     NSString* szfromid = [tfromid isEqualToString:@""] ? @"" : [NSString stringWithFormat:@"&fromid=%@", tfromid];
     NSString* szcount = [tcount isEqualToString:@""] ? @"" : [NSString stringWithFormat:@"&count=%@", tcount];
@@ -3072,6 +3255,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -3080,6 +3265,8 @@
  POST
  */
 -(void)doSayHello:(NSString *)uid token:(NSString *)ttoken touid:(NSString *)ttouid msg:(NSString *)tmsg {
+    
+    API_HEADER();
     
     PLog(@"say hello url: %@", HTTP_SAYHELLO);
     
@@ -3133,6 +3320,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -3141,6 +3330,8 @@
  HTTP_GETMUSICUSER
  */
 -(void)doGetMusicUser:(NSString *)uid token:(NSString *)ttoken fromid:(NSString *)tfromid count:(NSString *)tcount {
+    
+    API_HEADER();
     
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&fromid=%@&count=%@", HTTP_GETMUSICUSER, uid, ttoken, tfromid, tcount];
     PLog(@"get music user url: %@", url);
@@ -3203,6 +3394,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 /*
@@ -3211,6 +3404,8 @@
  HTTP_CONFIGPUSH
  */
 -(void)doConfigPush:(NSString *)uid token:(NSString *)ttoken devicetoken:(NSString *)tdevicetoken isreceive:(NSString *)tisreceive begintime:(NSString *)tbegintime endtime:(NSString *)tendtime {
+    
+    API_HEADER();
     
     PLog(@"config user push url: %@", HTTP_CONFIGPUSH);
     
@@ -3263,6 +3458,8 @@
     }];
     
     [operation start];
+    
+    API_FOOTER();
 }
 
 
