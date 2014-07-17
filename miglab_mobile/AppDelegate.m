@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 //#import "UncaughtExceptionHandler.h"
 #import "MigLabConfig.h"
 #import "MobClick.h"
 #import <AVFoundation/AVFoundation.h>
 #import "AFNetworkActivityIndicatorManager.h"
 #import "PDatabaseManager.h"
+#import "AFHTTPClient.h"
+#import "AFNetworkReachabilityManager.h"
 
 #import "GuideViewController.h"
 
@@ -283,6 +286,46 @@
         }
     }
     
+    /* 网络链接 */
+    
+#if 0
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"www.baidu.com"]];
+    
+    [client setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        PLog(@"%d", status);
+        
+        if (status == AFNetworkReachabilityStatusReachableViaWiFi) {
+            
+            PLog(@"use wifi");
+        }
+        else {
+            
+            PLog(@"not reach");
+        }
+    }];
+    
+#else
+    
+    AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    
+    [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                
+                PLog(@"connect by wifi, can work");
+                break;
+                
+            default:
+                PLog(@"not by wifi, disable work");
+                break;
+        }
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    }];
+    
+#endif
     
     return YES;
 }

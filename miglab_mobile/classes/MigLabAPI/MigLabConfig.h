@@ -76,6 +76,10 @@
 
 #endif
 
+/* 所有接口的标准开头和标准结尾 */
+#define API_HEADER()    
+#define API_FOOTER()
+
 /*
  * 宏控制开关
  */
