@@ -10,6 +10,7 @@
 #import "ChatNetService.h"
 #import "ChatDef.h"
 #import "ChatMessageView.h"
+#import "MsgTextView.h"
 
 @interface ChatMsgContentView ()
 {
@@ -59,26 +60,26 @@
         self.cellNib = [UINib nibWithNibName:@"ChatMsgTableViewCell" bundle:nil];
         
                
-        m_tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-        [m_tapGestureRecognizer addTarget:self action:@selector(handleSingleFingerEvent:)];
-        [m_tapGestureRecognizer setNumberOfTapsRequired:1];
-        [self addGestureRecognizer:m_tapGestureRecognizer];
-        
-        UISwipeGestureRecognizer *recognizer  = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-        recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-        //[self addGestureRecognizer:recognizer];
-        
-        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-        recognizer.direction = UISwipeGestureRecognizerDirectionRight;
-        //[self addGestureRecognizer:recognizer];
-        
-        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-        recognizer.direction = UISwipeGestureRecognizerDirectionUp;
-        //[self addGestureRecognizer:recognizer];
-        
-        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-        recognizer.direction = UISwipeGestureRecognizerDirectionDown;
-        //[self addGestureRecognizer:recognizer];
+//        m_tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+//        [m_tapGestureRecognizer addTarget:self action:@selector(handleSingleFingerEvent:)];
+//        [m_tapGestureRecognizer setNumberOfTapsRequired:1];
+//        [self addGestureRecognizer:m_tapGestureRecognizer];
+//
+//        UISwipeGestureRecognizer *recognizer  = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+//        recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+//        //[self addGestureRecognizer:recognizer];
+//        
+//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+//        recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+//        //[self addGestureRecognizer:recognizer];
+//        
+//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+//        recognizer.direction = UISwipeGestureRecognizerDirectionUp;
+//        //[self addGestureRecognizer:recognizer];
+//        
+//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+//        recognizer.direction = UISwipeGestureRecognizerDirectionDown;
+//        //[self addGestureRecognizer:recognizer];
         m_chatNotification = [[ChatNotificationCenter alloc] init:self];
         m_lastdatacount = 0;
         
@@ -86,10 +87,11 @@
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    
+     [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
 }
+
 
 -(void)dealloc
 {
@@ -101,18 +103,6 @@
 #endif
     [SVProgressHUD dismiss];
 }
-
- - (void)handleSingleFingerEvent:(UISwipeGestureRecognizer *)sender
-{
-    
-    [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
-
-}
-
--(void)handelPan:(UIPanGestureRecognizer*)gestureRecognizer{
-    [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
-}
-
 #pragma mark Notification
 
 -(void) onChatNotification:(ChatNotification *)notification
@@ -163,6 +153,12 @@
     }
 }*/
 
+-(CGSize) getMsgRect:(NSString*) msg
+{
+    CGRect rect = [MsgTextView getRectWithSize:CGSizeMake(VIEW_WIDTH_MAX-VIEW_LEFT-VIEW_RIGHT, 900) font:[UIFont systemFontOfSize:16.0f] string:msg lineSpace:2.0f];
+    rect.size.height += VIEW_TOP+ VIEW_TOP;
+      return rect.size;
+}
 
 #pragma mark TableView
 
@@ -174,7 +170,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     ChatMsg * msg = [m_chatMsgArray objectAtIndex:indexPath.row];
-    CGFloat span =  msg.getViewSize.height- MSG_VIEW_MIN_HEIGHT;
+    CGFloat span =  0;
+#ifdef NEW_MSGVIEW
+    span =  [self getMsgRect:msg.msg_content].height- MSG_VIEW_MIN_HEIGHT;
+#else
+    span =  msg.getViewSize.height- MSG_VIEW_MIN_HEIGHT;
+#endif
     CGFloat height = MSG_CELL_MIN_HEIGHT + span;
     return height;
 }
@@ -196,7 +197,11 @@
     ChatMsg* msg =  [m_chatMsgArray objectAtIndex:indexPath.row];
     if( msg.send_user_info == nil)
        [m_charNet bindSendUserInfo:msg];
+#ifdef NEW_MSGVIEW
+    [cell refreshMsg:msg withSize:[self getMsgRect:msg.msg_content]];
+#else
     [cell refreshMsg:msg withSize:msg.getViewSize];
+#endif
     return cell;
 }
 

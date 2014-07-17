@@ -31,8 +31,9 @@
 -(id) init:(NSDictionary *)dic;
 -(id) init:(NSString*) msg send_id:(int64_t) send_id recv_id:(int64_t) recv_id msg_id:(int64_t) msg_id;
 
+#ifndef NEW_MSGVIEW
 -(NSArray*) getMsg;
-
 -(CGSize) getViewSize;
+#endif
 @end
 

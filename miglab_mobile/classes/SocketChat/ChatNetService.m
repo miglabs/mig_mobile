@@ -5,7 +5,7 @@
 //  Created by 180 on 14-3-30.
 //
 //
-#define  HTTP_API_URL  @"http://42.121.14.108/"
+#define  HTTP_API_URL  @"http://112.124.49.59/"
 #import "ChatNetService.h"
 #import "AFNetworking.h"
 #import "ChatDef.h"
@@ -106,7 +106,7 @@
         @catch (NSException *exception) {
             
             NSString* msg = @"解析返回数据失败:(";
-            PLog(@"failure: %@", msg);
+            PLog(@"failure: %@ %@", msg,exception.description);
             
         }
         

@@ -7,7 +7,7 @@
 //
 
 #import "ChatEntity.h"
-#import "ChatDef.h"
+
 @interface ChatMsg ()
 {
     NSMutableArray* m_msgArray;
@@ -59,7 +59,7 @@
     NSLog(@"%@ dealloc", self);
 #endif
 }
-
+#ifndef NEW_MSGVIEW
 -(NSArray*) getMsg
 {
     if( m_msgArray == nil )
@@ -218,6 +218,7 @@
     }
     return m_viewsize;
 }
+#endif
 @end
 
 @implementation ChatUserInfo

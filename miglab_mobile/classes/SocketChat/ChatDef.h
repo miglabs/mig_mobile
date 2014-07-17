@@ -235,4 +235,6 @@ struct ReplyChatPrivate{
 #define MSG_VIEW_BOTTOM 8
 
 
+#define NEW_MSGVIEW
+
 #endif

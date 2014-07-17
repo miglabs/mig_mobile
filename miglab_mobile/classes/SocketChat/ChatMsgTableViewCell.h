@@ -10,7 +10,14 @@
 #import "ChatMessageView.h"
 #import "ChatEntity.h"
 #import "EGOImageView.h"
+#import "MsgTextView.h"
+#import "ChatDef.h"
+#ifdef NEW_MSGVIEW
+#import "MsgTextViewDelegate.h"
+@interface ChatMsgTableViewCell : UITableViewCell<MsgTextViewDelegate>
+#else
 @interface ChatMsgTableViewCell : UITableViewCell
+#endif
 
 
 @property (nonatomic, retain) IBOutlet EGOImageView *sendIconViewL;
@@ -20,8 +27,11 @@
 @property (nonatomic, retain) IBOutlet UILabel *sendTimeLabel;
 
 @property (nonatomic, retain) IBOutlet UIImageView *msgBgView;
-
+#ifdef NEW_MSGVIEW
+@property (nonatomic, retain) IBOutlet MsgTextView *messageView;
+#else
 @property (nonatomic, retain) IBOutlet ChatMessageView *messageView;
+#endif
 
 
 -(void) refreshMsg:(ChatMsg*) msg withSize:(CGSize)size;

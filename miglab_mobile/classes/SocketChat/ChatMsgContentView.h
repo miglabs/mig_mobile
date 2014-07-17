@@ -16,7 +16,7 @@
                                     UITableViewDelegate,
                                     ChatNetServiceDelegate,
                                     ChatNotificationDelegate,
-                                    EGORefreshTableHeaderDelegate>
+                                    EGORefreshTableHeaderDelegate,UIScrollViewDelegate>
 
 
 
