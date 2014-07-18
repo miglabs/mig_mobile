@@ -17,7 +17,6 @@
     UITableView                 *m_chatTableView;
     ChatNetService              *m_charNet;
     NSMutableArray              *m_chatMsgArray;
-    UITapGestureRecognizer      *m_tapGestureRecognizer;
     ChatNotificationCenter      *m_chatNotification;
     EGORefreshTableHeaderView   *m_refreshHeaderView;
 	BOOL                         m_reloading;
@@ -58,41 +57,12 @@
         m_chatMsgArray = [[NSMutableArray alloc] init];
         
         self.cellNib = [UINib nibWithNibName:@"ChatMsgTableViewCell" bundle:nil];
-        
-               
-//        m_tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-//        [m_tapGestureRecognizer addTarget:self action:@selector(handleSingleFingerEvent:)];
-//        [m_tapGestureRecognizer setNumberOfTapsRequired:1];
-//        [self addGestureRecognizer:m_tapGestureRecognizer];
-//
-//        UISwipeGestureRecognizer *recognizer  = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-//        recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-//        //[self addGestureRecognizer:recognizer];
-//        
-//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-//        recognizer.direction = UISwipeGestureRecognizerDirectionRight;
-//        //[self addGestureRecognizer:recognizer];
-//        
-//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-//        recognizer.direction = UISwipeGestureRecognizerDirectionUp;
-//        //[self addGestureRecognizer:recognizer];
-//        
-//        recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
-//        recognizer.direction = UISwipeGestureRecognizerDirectionDown;
-//        //[self addGestureRecognizer:recognizer];
         m_chatNotification = [[ChatNotificationCenter alloc] init:self];
         m_lastdatacount = 0;
         
     }
     return self;
 }
-
-/*
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-     [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
-}
-*/
 
 -(void)dealloc
 {
