@@ -15,6 +15,7 @@
 {
     [super addAttributedString:attributedString range:range];
     [attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[UIColor blueColor].CGColor range:range];
+    [attributedString addAttribute:(id)kCTUnderlineStyleAttributeName value:(id)[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:range];
 }
 
 + (NSArray *)parserAttributedString:(NSMutableAttributedString *)attributedString
