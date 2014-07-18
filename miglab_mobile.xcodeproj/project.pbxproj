@@ -1309,7 +1309,6 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				C7DE8EAF1977AE0E0047233D /* MsgText */,
 				162CFE971970255300B2C005 /* TTTAttributedLabel */,
 				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
@@ -1852,6 +1851,7 @@
 		167F046E18F9306F000A1C21 /* SocketChat */ = {
 			isa = PBXGroup;
 			children = (
+				C7DE8EAF1977AE0E0047233D /* MsgText */,
 				166171E818F9343B00E86B11 /* FaceBoardView.h */,
 				166171E918F9343B00E86B11 /* FaceBoardView.m */,
 				167F048E18F932FA000A1C21 /* ChatDef.h */,
@@ -2540,8 +2540,7 @@
 				C7DE8EB91977AE0E0047233D /* MsgTextView.m */,
 				C7DE8EBA1977AE0E0047233D /* MsgTextViewDelegate.h */,
 			);
-			name = MsgText;
-			path = SocketChat/MsgText;
+			path = MsgText;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
