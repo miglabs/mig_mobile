@@ -32,9 +32,12 @@
 
 -(void) initialize
 {
-    self.sendTimeLabel.textColor = [UIColor whiteColor];
-    self.sendIconViewR.layer.cornerRadius = self.sendIconViewR.frame.size.width / 2;
-    self.sendIconViewR.layer.masksToBounds = YES;
+    [self.sendTimeLabel setTextColor:[UIColor whiteColor]];
+    CGFloat radius = [self.sendIconViewR frame].size.width/2;
+    [[self.sendIconViewR layer] setCornerRadius:radius];
+    [[self.sendIconViewL layer] setCornerRadius:radius];
+    [[self.sendIconViewR layer] setMasksToBounds:YES];
+    [[self.sendIconViewL layer] setMasksToBounds:YES];
 #ifdef NEW_MSGVIEW
     self.messageView.font        = [UIFont systemFontOfSize:16.0f];
     self.messageView.textColor   = [UIColor whiteColor];
@@ -46,85 +49,69 @@
 
 - (void)refreshUMsg:(ChatMsg*) msg withSize:(CGSize)size {
     
-    if ( msg.send_user_info != nil) {
-        [self setIconView:self.sendIconViewR imgUrl:msg.send_user_info.picurl];
-    }
-    self.sendIconViewL.image = nil;
-    self.sendTimeLabel.text = msg.msg_time;
     
-    CGRect frame = self.messageView.frame;
-    frame.origin.x = MSG_VIEW_RIGHT - size.width;
-    frame.size = size;
-    self.messageView.frame = frame;
+    CGRect msgFrame,bgFrame;
     
-    self.msgBgView.frame = self.messageView.frame;
-    self.msgBgView.image = [[UIImage imageNamed:@"chat_msg_bt_t"]
-                            resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 30 )];
+    msgFrame = [self.messageView frame];
+    msgFrame.origin.x = MSG_VIEW_RIGHT - size.width;
+    msgFrame.size = size;
+    bgFrame = msgFrame;
     
 #ifdef NEW_MSGVIEW
-    frame.origin.x -= VIEW_LEFT ;
-    frame.origin.y += VIEW_TOP;
-    self.messageView.frame = frame;
-    frame.origin.x -= VIEW_RIGHT ;
-    frame.origin.y -= VIEW_TOP;
-    frame.size.width += VIEW_LEFT+VIEW_RIGHT;
-    self.msgBgView.frame = frame;
-    self.messageView.text = msg.msg_content;
+    msgFrame.origin.x -= VIEW_LEFT ;
+    msgFrame.origin.y += VIEW_TOP;
+
+    bgFrame.origin.x -= (VIEW_LEFT + VIEW_RIGHT);
+    bgFrame.size.width += VIEW_LEFT+VIEW_RIGHT;
+#endif
+    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_t"]
+                        resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 30 )];
+    [self refreshMsg:msg headPic:self.sendIconViewR msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage];
+}
+
+-(void) refreshMsg:(ChatMsg *)msg headPic:(EGOImageView*)headPic msgFrame:(CGRect) msgFrame bgFrame:(CGRect) bgFrame bgImage:(UIImage*) bgImage
+{
+    [self.messageView setFrame:msgFrame];
+    [self.msgBgView setFrame:bgFrame];
+    [self.msgBgView setImage:bgImage];
+    [self.sendTimeLabel setText:[msg msg_time]];
+    [self.sendIconViewL setImage:nil];
+    [self.sendIconViewR setImage:nil];
+    [headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
+#ifdef NEW_MSGVIEW
+    [self.messageView setText:[msg msg_content]];
 #else
     [self.messageView showMessage:[msg getMsg]];
 #endif
-}
-
--(void) setIconView:(EGOImageView*) view imgUrl:(NSString*) url
-{
-    if( view != nil)
-    {
-        view.imageURL =  [NSURL URLWithString:url];
-    }
 }
 
 - (void)refreshTMsg:(ChatMsg*) msg withSize:(CGSize)size {
     
-    if ( msg.send_user_info != nil) {
-        [self setIconView:self.sendIconViewL imgUrl:msg.send_user_info.picurl];
-    }
-    self.sendTimeLabel.text = msg.msg_time;
-    self.sendIconViewR.image = nil;
-    
-    CGRect frame = self.messageView.frame;
-    frame.origin.x = MSG_VIEW_LEFT;
-    frame.size = size;
-    self.messageView.frame = frame;
-    
-    self.msgBgView.frame = self.messageView.frame;
-    self.msgBgView.image = [[UIImage imageNamed:@"chat_msg_bt_f"]
-                            resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
+    CGRect msgFrame,bgFrame ;
+    msgFrame = [self.messageView frame];
+    msgFrame.origin.x = MSG_VIEW_LEFT;
+    msgFrame.size = size;
+    bgFrame = msgFrame;
     
 #ifdef NEW_MSGVIEW
-    frame.origin.x += VIEW_LEFT ;
-    frame.origin.y += VIEW_TOP;
-    self.messageView.frame = frame;
-    frame.origin.x -= VIEW_LEFT ;
-    frame.origin.y -= VIEW_TOP;
-    frame.size.width += VIEW_LEFT+VIEW_RIGHT;
-    self.msgBgView.frame = frame;
-    self.messageView.text = msg.msg_content;
-#else
-    [self.messageView showMessage:[msg getMsg]];
+    msgFrame.origin.x += VIEW_LEFT ;
+    msgFrame.origin.y += VIEW_TOP;
+    bgFrame.size.width += VIEW_LEFT+VIEW_RIGHT;
 #endif
+    
+    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f"]
+                        resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
+   
+    [self refreshMsg:msg headPic:self.sendIconViewL msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage];
     
 }
 
 
 - (void)dealloc {
-    
-    self.sendIconViewL  = nil;
-    self.sendIconViewR = nil ;
-    
-    self.sendTimeLabel = nil;
-    
-    self.messageView = nil;
-    
+    [self setSendIconViewL:nil];
+    [self setSendIconViewR:nil];
+    [self setSendTimeLabel:nil];
+    [self setMessageView:nil];
 #if DEBUG
     NSLog(@"%@ dealloc", self);
 #endif
@@ -146,7 +133,21 @@
 {
     if ([msgText isKindOfClass:[MsgTextURLRun class]])
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:msgText.text]];
+        NSString* url = [[msgText text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSError*  error = nil;
+        NSString* regulaStr = @"^(http[s]{0,1}|ftp)://";
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:&error];
+        if (error == nil)
+        {
+            NSArray *arrayOfAllMatches = [regex matchesInString:url
+                                                        options:0
+                                                          range:NSMakeRange(0, [url length])];
+            if( ! ( [arrayOfAllMatches count] > 0  ) )
+                url = [NSString stringWithFormat:@"http://%@",url];
+        }
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
 }
 #endif

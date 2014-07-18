@@ -22,22 +22,25 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FACE_REGULAR
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
-    NSArray *arrayOfAllMatches = [regex matchesInString:string options:0 range:NSMakeRange(0,[string length])];
-    NSTextCheckingResult *match;
-    while([arrayOfAllMatches count] > 0 )
+    if (error == nil)
     {
-        match = [arrayOfAllMatches objectAtIndex:0];
-        MsgTextFaceRun *msg = [[MsgTextFaceRun alloc] init];
-        msg.text     = [string substringWithRange:NSMakeRange(match.range.location,match.range.length)];
-        msg.text    = [msg.text substringWithRange:NSMakeRange(1, msg.text.length - 2)];
-        
-        msg.range    = NSMakeRange(match.range.location, 4);
-        msg.isDraw   = YES;
-        [array addObject:msg];
-        
-        [attributedString replaceCharactersInRange:match.range withString:@"    "];
-        [msg addAttributedString:attributedString range:msg.range];
-        arrayOfAllMatches = [regex matchesInString:attributedString.string options:0 range:NSMakeRange(0,[attributedString.string length])];
+        NSArray *arrayOfAllMatches = [regex matchesInString:string options:0 range:NSMakeRange(0,[string length])];
+        NSTextCheckingResult *match;
+        while([arrayOfAllMatches count] > 0 )
+        {
+            match = [arrayOfAllMatches objectAtIndex:0];
+            MsgTextFaceRun *msg = [[MsgTextFaceRun alloc] init];
+            msg.text     = [string substringWithRange:NSMakeRange(match.range.location,match.range.length)];
+            msg.text    = [msg.text substringWithRange:NSMakeRange(1, msg.text.length - 2)];
+            
+            msg.range    = NSMakeRange(match.range.location, 4);
+            msg.isDraw   = YES;
+            [array addObject:msg];
+            
+            [attributedString replaceCharactersInRange:match.range withString:@"    "];
+            [msg addAttributedString:attributedString range:msg.range];
+            arrayOfAllMatches = [regex matchesInString:attributedString.string options:0 range:NSMakeRange(0,[attributedString.string length])];
+        }
     }
     return array;
 }
