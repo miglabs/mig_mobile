@@ -307,16 +307,28 @@
     
 #else
     
+    [GlobalDataManager GetInstance].isWifiConnect = NO;
+    [GlobalDataManager GetInstance].is3GConnect = NO;
+    [GlobalDataManager GetInstance].isNetConnect = NO;
+    
     AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
         switch (status) {
             case AFNetworkReachabilityStatusReachableViaWiFi:
-                
                 PLog(@"connect by wifi, can work");
+                [GlobalDataManager GetInstance].isWifiConnect = YES;
+                [GlobalDataManager GetInstance].isNetConnect = YES;
                 break;
                 
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [GlobalDataManager GetInstance].is3GConnect = YES;
+                [GlobalDataManager GetInstance].isNetConnect = YES;
+                PLog(@"connect by 3G");
+                break;
+                
+            case AFNetworkReachabilityStatusUnknown:
             default:
                 PLog(@"not by wifi, disable work");
                 break;

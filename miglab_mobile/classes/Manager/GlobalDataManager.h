@@ -19,6 +19,9 @@
 @property (nonatomic, assign) BOOL isLongScreen; // 长屏幕
 @property (nonatomic, assign) BOOL isPad;
 @property (nonatomic, assign) BOOL isPadRetina;
+@property (nonatomic, assign) BOOL isWifiConnect;
+@property (nonatomic, assign) BOOL is3GConnect;
+@property (nonatomic, assign) BOOL isNetConnect;
 
 @property (nonatomic, assign) int nNewArrivalMsg;
 

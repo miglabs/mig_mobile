@@ -20,6 +20,9 @@
 @synthesize isLongScreen = _isLongScreen;
 @synthesize isPad = _isPad;
 @synthesize isPadRetina = _isPadRetina;
+@synthesize isWifiConnect = _isWifiConnect;
+@synthesize is3GConnect = _is3GConnect;
+@synthesize isNetConnect = _isNetConnect;
 
 +(GlobalDataManager *)GetInstance{
     
