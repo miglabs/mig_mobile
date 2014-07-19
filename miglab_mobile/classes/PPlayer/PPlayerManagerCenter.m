@@ -14,11 +14,21 @@
 #import "SVProgressHUD.h"
 #import "UserSessionManager.h"
 #import "apidefine.h"
+#import "GlobalDataManager.h"
 
 #define SONG_INIT_SIZE 30000
 
 
 @implementation PPlayerManagerCenter
+
+#define PLAYER_HEADER()                                     \
+    if (![GlobalDataManager GetInstance].isWifiConnect)     \
+    {                                                       \
+        PLog(@"Wifi is not connect, do not play");          \
+        return;                                             \
+    }
+
+#define PLAYER_FOOTER()
 
 @synthesize playerList = _playerList;
 @synthesize dicPlayer = _dicPlayer;
@@ -143,13 +153,18 @@ static PPlayerManagerCenter *instance;
 //播放控制
 -(void)doPlayOrPause{
     
+    PLAYER_HEADER();
+    
     PLog(@"doPlayOrPause...");
     
     [self playCurrentSong];
     
+    PLAYER_FOOTER();
 }
 
 -(void)playCurrentSong{
+    
+    PLAYER_HEADER();
     
     if ([_songList count] < 1) {
         return;
@@ -170,9 +185,12 @@ static PPlayerManagerCenter *instance;
         [aaMusicPlayer play];
     }
     
+    PLAYER_FOOTER();
 }
 
 -(void)doNext{
+    
+    PLAYER_HEADER();
     
     PLog(@"doNext...");
     
@@ -206,9 +224,12 @@ static PPlayerManagerCenter *instance;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNext object:nil userInfo:nil];
     
+    PLAYER_FOOTER();
 }
 
 -(void)doInsertPlay:(Song *)tInsertSong{
+    
+    PLAYER_HEADER();
     
     PLog(@"doInsertPlay...");
     [tInsertSong log];
@@ -244,10 +265,13 @@ static PPlayerManagerCenter *instance;
         
     }
     
+    PLAYER_FOOTER();
 }
 
 //更新播放列表
 -(void)doUpdateSongList:(NSMutableArray *)tSongList{
+    
+    PLAYER_HEADER();
     
     PLog(@"doUpdateSongList...%d", [tSongList count]);
     
@@ -261,9 +285,13 @@ static PPlayerManagerCenter *instance;
     
     //_currentSongIndex = (_currentSongIndex + 1 > playerManagerCenter.songList.count) ? 0 : (_currentSongIndex + 1);
     playerManagerCenter.currentSongIndex = _currentSongIndex;
+    
+    PLAYER_FOOTER();
 }
 
 -(void)doAddSongList:(NSMutableArray *)tSongList {
+    
+    PLAYER_HEADER();
     
     PLog(@"doAddSonglist");
     
@@ -278,9 +306,13 @@ static PPlayerManagerCenter *instance;
     } else {
         [playerManagerCenter.songList addObjectsFromArray:tSongList];
     }
+    
+    PLAYER_FOOTER();
 }
 
 -(void)doReplaceSongList:(NSMutableArray *)tSongList {
+    
+    PLAYER_HEADER();
     
     PLog(@"doReplaceSongList...");
     
@@ -294,6 +326,8 @@ static PPlayerManagerCenter *instance;
         [playerManagerCenter.songList removeAllObjects];
         [playerManagerCenter.songList addObjectsFromArray:tSongList];
     }
+    
+    PLAYER_FOOTER();
 }
 
 -(void)stopDownload{
