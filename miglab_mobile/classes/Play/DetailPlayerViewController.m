@@ -345,7 +345,12 @@
     //
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = currentSong.artist;
+    
+#ifdef USE_ARTIST_SONGNAME
     message.description = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
+#else
+    message.description = [NSString stringWithFormat:@"%@", currentSong.artist];
+#endif
     [message setThumbImage:shareImage];
     
     WXMusicObject *ext = [WXMusicObject object];
