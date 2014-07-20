@@ -21,12 +21,7 @@
 
 @implementation PPlayerManagerCenter
 
-#define PLAYER_HEADER()                                     \
-    if (![GlobalDataManager GetInstance].isWifiConnect)     \
-    {                                                       \
-        PLog(@"Wifi is not connect, do not play");          \
-        return;                                             \
-    }
+#define PLAYER_HEADER()
 
 #define PLAYER_FOOTER()
 
