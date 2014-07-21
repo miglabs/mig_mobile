@@ -26,6 +26,8 @@
 @synthesize msgCurStartIndex = _msgCurStartIndex;
 @synthesize isLoadingMsg = _isLoadingMsg;
 @synthesize totalMsgCount = _totalMsgCount;
+@synthesize refreshHeaderView = _refreshHeaderView;
+@synthesize reloading = _reloading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,6 +74,14 @@
     bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _dataTableView.backgroundView = bodyBgImageView;
+    
+    // 初始化Headerview
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0 - self.view.bounds.size.height, self.view.frame.size.width, self.view.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    
+    [_dataTableView addSubview:_refreshHeaderView];
+    [_refreshHeaderView refreshLastUpdatedDate];
+    
     [self.view addSubview:_dataTableView];
     
     //
@@ -119,7 +129,10 @@
     
     if([UserSessionManager GetInstance].isLoggedIn && !_isLoadingMsg) {
         
-        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        if (!_reloading) {
+            
+            [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        }
         
         _isLoadingMsg = YES;
         
@@ -199,6 +212,11 @@
     
     _isLoadingMsg = NO;
     
+    if (_reloading) {
+        
+        [self doneLoadingTableViewData];
+    }
+    
     [SVProgressHUD dismiss];
 }
 
@@ -207,6 +225,11 @@
     [SVProgressHUD dismiss];
     
     //[SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
+    
+    if (_reloading) {
+        
+        [self doneLoadingTableViewData];
+    }
     
     _isLoadingMsg = NO;
 }
@@ -242,8 +265,20 @@
     return CELL_HEIGHT;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+#if USE_NEW_LOAD
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+#endif
+}
+
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
+#if USE_NEW_LOAD
+    
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+#else
     if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
         
         // 没有加载消息，并且数量未加载完，则更新
@@ -261,6 +296,40 @@
             [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
         }
     }
+#endif
 }
+
+#if USE_NEW_LOAD
+
+-(void)reloadTableViewDataSource {
+    
+    _reloading = YES;
+    
+    if (!_isLoadingMsg && (_msgCurStartIndex < _totalMsgCount)) {
+        
+        _msgCurStartIndex += MSG_DISPLAY_COUNT;
+        [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
+    }
+}
+
+-(void)doneLoadingTableViewData {
+    
+    _reloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.dataTableView];
+}
+
+-(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
+    
+    [self reloadTableViewDataSource];
+}
+
+-(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
+    
+    return _reloading;
+}
+
+//-(NSData*)egoRefreshTableHeaderDataSourceLastUpdated:(
+
+#endif
 
 @end

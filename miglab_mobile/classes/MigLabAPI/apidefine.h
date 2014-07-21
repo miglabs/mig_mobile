@@ -174,4 +174,7 @@
 #define NotificationNamePlayerStop              @"NotificationNamePlayerStop"
 #define NotificationNamePlayerNext              @"NotificationNamePlayerNext"
 
+/* 代码分支功能 */
+#define USE_NEW_LOAD    1
+
 #endif
