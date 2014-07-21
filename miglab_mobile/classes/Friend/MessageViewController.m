@@ -305,9 +305,9 @@
     
     _reloading = YES;
     
-    if (!_isLoadingMsg && (_msgCurStartIndex < _totalMsgCount)) {
+    if (!_isLoadingMsg) {
         
-        _msgCurStartIndex += MSG_DISPLAY_COUNT;
+        _msgCurStartIndex = 0;
         [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
     }
 }

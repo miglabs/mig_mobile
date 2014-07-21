@@ -176,5 +176,6 @@
 
 /* 代码分支功能 */
 #define USE_NEW_LOAD    1
+#define USE_ARTIST_SONGNAME 0
 
 #endif
