@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSMutableArray *datalist;
 @property (nonatomic, retain) NearbyUser* userinfo;
 @property (nonatomic, retain) EGORefreshTableHeaderView* refreshHeaderView;
+@property (nonatomic, retain) EGORefreshTableHeaderView* refreshFooterView;
 
 @property (nonatomic, assign) int msgCurStartIndex;
 @property (nonatomic, assign) int totalMsgCount;

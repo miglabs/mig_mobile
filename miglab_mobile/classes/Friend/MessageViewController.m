@@ -27,6 +27,7 @@
 @synthesize isLoadingMsg = _isLoadingMsg;
 @synthesize totalMsgCount = _totalMsgCount;
 @synthesize refreshHeaderView = _refreshHeaderView;
+@synthesize refreshFooterView = _refreshFooterView;
 @synthesize reloading = _reloading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -81,6 +82,11 @@
     
     [_dataTableView addSubview:_refreshHeaderView];
     [_refreshHeaderView refreshLastUpdatedDate];
+    
+    // 初始化footerView
+    _refreshFooterView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -1000, self.view.bounds.size.width, self.view.bounds.size.height)];
+    [_dataTableView addSubview:_refreshFooterView];
+    [self putFooterToEnd];
     
     [self.view addSubview:_dataTableView];
     
@@ -301,7 +307,20 @@
 
 #if USE_NEW_LOAD
 
--(void)reloadTableViewDataSource {
+-(void)putFooterToEnd {
+    
+    CGRect footerFrame = _refreshFooterView.frame;
+    CGRect r = CGRectMake(footerFrame.origin.x, _dataTableView.contentSize.height, _dataTableView.frame.size.width, footerFrame.size.height);
+    
+    if (r.origin.y < _dataTableView.frame.size.height) {
+        
+        r.origin.y = _dataTableView.frame.size.height;
+    }
+    
+    _refreshFooterView.frame = r;
+}
+
+-(void)reloadTableViewHeaderDataSource {
     
     _reloading = YES;
     
@@ -312,15 +331,34 @@
     }
 }
 
+-(void)reloadTableViewFooterDataSource {
+    
+    _reloading = YES;
+    
+    if (!_isLoadingMsg && (_msgCurStartIndex < _totalMsgCount)) {
+        
+        _msgCurStartIndex += MSG_DISPLAY_COUNT;
+        [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
+    }
+}
+
 -(void)doneLoadingTableViewData {
     
     _reloading = NO;
+    
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.dataTableView];
 }
 
 -(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
     
-    [self reloadTableViewDataSource];
+    if (view == _refreshHeaderView) {
+        
+        [self reloadTableViewHeaderDataSource];
+    }
+    else if (view == _refreshFooterView) {
+        
+        [self reloadTableViewFooterDataSource];
+    }
 }
 
 -(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
