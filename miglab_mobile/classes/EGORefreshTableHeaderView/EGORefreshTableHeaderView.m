@@ -29,6 +29,7 @@
 
 #define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
 #define FLIP_ANIMATION_DURATION 0.18f
+#define LOAD_HEIGHT 50.0f
 
 
 @interface EGORefreshTableHeaderView (Private)
@@ -40,38 +41,61 @@
 @synthesize delegate=_delegate;
 
 
-- (id)initWithFrame:(CGRect)frame arrowImageName:(NSString *)arrow textColor:(UIColor *)textColor  {
+- (id)initWithFrame:(CGRect)frame arrowImageName:(NSString *)arrow textColor:(UIColor *)textColor
+{
     if((self = [super initWithFrame:frame])) {
-		
+		 
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		//self.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
+		//self.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
+        self.backgroundColor = [UIColor clearColor];
 
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
+		UILabel *label = nil;
+        
+        if (bIsHeader) {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
+        }
+        else {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 35.0f, self.frame.size.width, 20.0f)];
+        }
+        
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.font = [UIFont systemFontOfSize:12.0f];
 		label.textColor = textColor;
 		label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
 		label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = NSTextAlignmentCenter;
+		label.textAlignment = UITextAlignmentCenter;
 		[self addSubview:label];
 		_lastUpdatedLabel=label;
 		[label release];
 		
-		label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
+        if (bIsHeader) {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];
+        }
+        else {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 17.0f, self.frame.size.width, 20.0f)];
+        }
+		
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		label.font = [UIFont boldSystemFontOfSize:13.0f];
 		label.textColor = textColor;
 		label.shadowColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
 		label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = NSTextAlignmentCenter;
+		label.textAlignment = UITextAlignmentCenter;
 		[self addSubview:label];
 		_statusLabel=label;
 		[label release];
 		
 		CALayer *layer = [CALayer layer];
-		layer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
+        if (bIsHeader) {
+            layer.frame = CGRectMake(25.0f, frame.size.height - 65.0f, 30.0f, 55.0f);
+        }
+        else {
+            layer.frame = CGRectMake(25.0f, 0.0f, 30.0f, 55.0f);
+
+        }
+		
 		layer.contentsGravity = kCAGravityResizeAspect;
 		layer.contents = (id)[UIImage imageNamed:arrow].CGImage;
 		
@@ -85,7 +109,15 @@
 		_arrowImage=layer;
 		
 		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        
+        if (bIsHeader) {
+            view.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        }
+        else {
+            view.frame = CGRectMake(25.0f, 20.0f, 20.0f, 20.0f);
+        }
+        
+		
 		[self addSubview:view];
 		_activityView = view;
 		[view release];
@@ -99,7 +131,8 @@
 	
 }
 
-- (id)initWithFrame:(CGRect)frame  {
+- (id)initWithFrame:(CGRect)frame IsHeader: (BOOL)bHeader {
+    bIsHeader = bHeader;
   return [self initWithFrame:frame arrowImageName:@"blueArrow.png" textColor:TEXT_COLOR];
 }
 
@@ -149,8 +182,12 @@
 				_arrowImage.transform = CATransform3DIdentity;
 				[CATransaction commit];
 			}
-			
-			_statusLabel.text = NSLocalizedString(@"下拉刷新", @"Pull down to refresh status");
+            if (bIsHeader) {
+                _statusLabel.text = NSLocalizedString(@"下拉刷新", @"Pull down to refresh status");
+            }
+			else {
+                _statusLabel.text = NSLocalizedString(@"上拉刷新", @"Pull up to refresh status");
+            }
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
@@ -188,7 +225,15 @@
 		
 		CGFloat offset = MAX(scrollView.contentOffset.y * -1, 0);
 		offset = MIN(offset, 60);
-		scrollView.contentInset = UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f);
+        
+        if (bIsHeader) {
+            scrollView.contentInset = UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f);
+        }
+        else {
+            scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0f, 65, 0.0f);
+
+        }
+		
 		
 	} else if (scrollView.isDragging) {
 		
@@ -197,11 +242,21 @@
 			_loading = [_delegate egoRefreshTableHeaderDataSourceIsLoading:self];
 		}
 		
-		if (_state == EGOOPullRefreshPulling && scrollView.contentOffset.y > -65.0f && scrollView.contentOffset.y < 0.0f && !_loading) {
+        if (bIsHeader) {
+            if (_state == EGOOPullRefreshPulling && scrollView.contentOffset.y > -65.0f && scrollView.contentOffset.y < 0.0f && !_loading) {
 			[self setState:EGOOPullRefreshNormal];
-		} else if (_state == EGOOPullRefreshNormal && scrollView.contentOffset.y < -65.0f && !_loading) {
-			[self setState:EGOOPullRefreshPulling];
-		}
+            } else if (_state == EGOOPullRefreshNormal && scrollView.contentOffset.y < -65.0f && !_loading) {
+                [self setState:EGOOPullRefreshPulling];
+            }
+        }
+        else {
+            if (_state == EGOOPullRefreshPulling && scrollView.contentOffset.y + (scrollView.frame.size.height) < scrollView.contentSize.height + 65 && scrollView.contentOffset.y > 0.0f && !_loading) {
+                [self setState:EGOOPullRefreshNormal];
+            } else if (_state == EGOOPullRefreshNormal && scrollView.contentOffset.y + (scrollView.frame.size.height) > scrollView.contentSize.height + 65  && !_loading) {
+                [self setState:EGOOPullRefreshPulling];
+            }
+        }
+		
 		
 		if (scrollView.contentInset.top != 0) {
 			scrollView.contentInset = UIEdgeInsetsZero;
@@ -218,19 +273,37 @@
 		_loading = [_delegate egoRefreshTableHeaderDataSourceIsLoading:self];
 	}
 	
-	if (scrollView.contentOffset.y <= - 65.0f && !_loading) {
-		
-		if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
-			[_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
-		}
-		
-		[self setState:EGOOPullRefreshLoading];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.2];
-		scrollView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
-		[UIView commitAnimations];
-		
-	}
+    if (bIsHeader) {
+        if ( (scrollView.contentOffset.y <= - LOAD_HEIGHT ) && !_loading) {
+            
+            if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
+                [_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
+            }
+            
+            [self setState:EGOOPullRefreshLoading];
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.2];
+            scrollView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+            [UIView commitAnimations];
+            
+        }
+    }
+    else {
+        if (scrollView.contentOffset.y + (scrollView.frame.size.height) > scrollView.contentSize.height + LOAD_HEIGHT && !_loading) {
+            
+            if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
+                [_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
+            }
+            
+            [self setState:EGOOPullRefreshLoading];
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.2];
+            scrollView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 65, 0.0f);
+            [UIView commitAnimations];
+            
+        }
+    }
+	
 	
 }
 

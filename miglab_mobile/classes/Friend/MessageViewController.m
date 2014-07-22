@@ -29,6 +29,7 @@
 @synthesize refreshHeaderView = _refreshHeaderView;
 @synthesize refreshFooterView = _refreshFooterView;
 @synthesize reloading = _reloading;
+@synthesize isHeaderLoading = _isHeaderLoading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +56,8 @@
     // 初始化成员变量值
     _msgCurStartIndex = 0;
     _isLoadingMsg = NO;
+    _reloading = NO;
+    _isHeaderLoading = NO;
     
     //nav
     CGRect navViewFrame = self.navView.frame;
@@ -77,14 +80,14 @@
     _dataTableView.backgroundView = bodyBgImageView;
     
     // 初始化Headerview
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0 - self.view.bounds.size.height, self.view.frame.size.width, self.view.bounds.size.height)];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0 - self.view.bounds.size.height, self.view.frame.size.width, self.view.bounds.size.height) IsHeader:YES];
     _refreshHeaderView.delegate = self;
-    
     [_dataTableView addSubview:_refreshHeaderView];
     [_refreshHeaderView refreshLastUpdatedDate];
     
     // 初始化footerView
-    _refreshFooterView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -1000, self.view.bounds.size.width, self.view.bounds.size.height)];
+    _refreshFooterView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -1000, self.view.bounds.size.width, self.view.bounds.size.height) IsHeader:NO];
+    _refreshFooterView.delegate = self;
     [_dataTableView addSubview:_refreshFooterView];
     [self putFooterToEnd];
     
@@ -220,7 +223,14 @@
     
     if (_reloading) {
         
-        [self doneLoadingTableViewData];
+        if (_isHeaderLoading) {
+            
+            [self finishLoadMoreHeaderData];
+        }
+        else {
+        
+            [self finishLoadMoreFooterData];
+        }
     }
     
     [SVProgressHUD dismiss];
@@ -234,7 +244,14 @@
     
     if (_reloading) {
         
-        [self doneLoadingTableViewData];
+        if (_isHeaderLoading) {
+            
+            [self finishLoadMoreHeaderData];
+        }
+        else {
+            
+            [self finishLoadMoreFooterData];
+        }
     }
     
     _isLoadingMsg = NO;
@@ -275,6 +292,7 @@
     
 #if USE_NEW_LOAD
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
 #endif
 }
 
@@ -283,6 +301,7 @@
 #if USE_NEW_LOAD
     
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
     
 #else
     if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
@@ -322,9 +341,9 @@
 
 -(void)reloadTableViewHeaderDataSource {
     
-    _reloading = YES;
-    
     if (!_isLoadingMsg) {
+        
+        _reloading = YES;
         
         _msgCurStartIndex = 0;
         [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
@@ -333,31 +352,48 @@
 
 -(void)reloadTableViewFooterDataSource {
     
-    _reloading = YES;
-    
     if (!_isLoadingMsg && (_msgCurStartIndex < _totalMsgCount)) {
+        
+        _reloading = YES;
         
         _msgCurStartIndex += MSG_DISPLAY_COUNT;
         [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
     }
 }
 
--(void)doneLoadingTableViewData {
+-(void)finishLoadMoreHeaderData {
     
     _reloading = NO;
     
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.dataTableView];
 }
 
+-(void)finishLoadMoreFooterData {
+    
+    _reloading = NO;
+    
+    [self putFooterToEnd];
+    
+    // TODO:定位到最后一列
+    
+    [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:_dataTableView];
+}
+
 -(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
     
     if (view == _refreshHeaderView) {
         
+        _isHeaderLoading = YES;
         [self reloadTableViewHeaderDataSource];
     }
     else if (view == _refreshFooterView) {
         
+        _isHeaderLoading = NO;
         [self reloadTableViewFooterDataSource];
+    }
+    else {
+        
+        _isHeaderLoading = NO;
     }
 }
 

@@ -36,7 +36,7 @@ typedef enum{
 @protocol EGORefreshTableHeaderDelegate;
 @interface EGORefreshTableHeaderView : UIView {
 	
-	//id <EGORefreshTableHeaderDelegate> _delegate;
+	id _delegate;
 	EGOPullRefreshState _state;
 
 	UILabel *_lastUpdatedLabel;
@@ -44,11 +44,13 @@ typedef enum{
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
 	
-
+    BOOL bIsHeader;
 }
+
 
 @property(nonatomic,assign) id <EGORefreshTableHeaderDelegate> delegate;
 
+- (id)initWithFrame:(CGRect)frame IsHeader: (BOOL)bHeader;
 - (id)initWithFrame:(CGRect)frame arrowImageName:(NSString *)arrow textColor:(UIColor *)textColor;
 
 - (void)refreshLastUpdatedDate;

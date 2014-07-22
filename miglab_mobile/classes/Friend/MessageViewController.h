@@ -21,6 +21,7 @@
 @property (nonatomic, assign) int totalMsgCount;
 @property (nonatomic, assign) BOOL isLoadingMsg;
 @property (nonatomic, assign) BOOL reloading;
+@property (nonatomic, assign) BOOL isHeaderLoading;
 
 -(void)loadData;
 -(void)loadMessageFromDatabase;
