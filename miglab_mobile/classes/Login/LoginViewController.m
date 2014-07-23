@@ -139,7 +139,7 @@
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteUserAccountByUserName:[UserSessionManager GetInstance].currentUser.username];
     
-    [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_ERROR];
 }
 
 -(void)loginSuccess:(NSNotification *)tNotification{

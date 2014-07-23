@@ -102,6 +102,9 @@
 /* 未登录提示语 */
 #define MIGTIP_UNLOGIN                          @"点蓝色头像赶紧登陆吧~~"
 
+/* 登录失败提示语*/
+#define MIGTIP_LOGIN_ERROR                      @"账号或密码错误~~"
+
 /* 正在发送提示语 */
 #define MIGTIP_SENDING_MESSAGE                  @"我们正在为你勾搭~~"
 
@@ -154,10 +157,11 @@
 #define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
 
 /* 分享的地址 */
-#define SHARE_WEIXIN_ADDRESS                    @"http://weixin.share.miyomate.com?songid=77470&from=1&isappinstalled=1"
+#define SHARE_WEIXIN_ADDRESS                    @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
+
 
 /* --------------------- 地址定义 --------------------- */
-#define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miglab.com/default.jpg"
+#define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miyomate.com/system.jpg"
 
 
 /* --------------------- 消息定义 --------------------- */
