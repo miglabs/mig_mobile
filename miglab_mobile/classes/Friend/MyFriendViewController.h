@@ -8,16 +8,21 @@
 
 #import "PlayerViewController.h"
 #import "FriendSearchView.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface MyFriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface MyFriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, retain) FriendSearchView *searchView;
 @property (nonatomic, retain) UITableView *friendTableView;
 @property (nonatomic, retain) NSMutableArray *friendList;
+@property (nonatomic, retain) EGORefreshTableHeaderView* refreshHeaderView;
+@property (nonatomic, retain) EGORefreshTableHeaderView* refreshFooterView;
 
 @property (nonatomic, assign) int friendCurStartIndex;
 @property (nonatomic, assign) int totalFriendCount;
 @property (nonatomic, assign) BOOL isLoadingFriend;
+@property (nonatomic, assign) BOOL reloading;
+@property (nonatomic, assign) BOOL isHeaderLoading;
 
 -(void)loadData;
 -(void)loadMusicUserFromServer:(int)start size:(int)tsize;

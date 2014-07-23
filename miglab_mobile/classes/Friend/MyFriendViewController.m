@@ -24,6 +24,10 @@
 @synthesize friendCurStartIndex = _friendCurStartIndex;
 @synthesize isLoadingFriend = _isLoadingFriend;
 @synthesize totalFriendCount = _totalFriendCount;
+@synthesize refreshHeaderView = _refreshHeaderView;
+@synthesize refreshFooterView = _refreshFooterView;
+@synthesize reloading = _reloading;
+@synthesize isHeaderLoading = _isHeaderLoading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,6 +92,19 @@
     bodyBgImageView.frame = CGRectMake(ORIGIN_X, posy + 10 + 44 + 10, ORIGIN_WIDTH, kMainScreenHeight + self.topDistance - posy - 10 - 44 - 10 - 10 - 10 - BOTTOM_PLAYER_HEIGHT);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     _friendTableView.backgroundView = bodyBgImageView;
+    
+    // 初始化Headerview
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0 - self.view.bounds.size.height, self.view.frame.size.width, self.view.bounds.size.height) IsHeader:YES];
+    _refreshHeaderView.delegate = self;
+    [_friendTableView addSubview:_refreshHeaderView];
+    [_refreshHeaderView refreshLastUpdatedDate];
+    
+    // 初始化footerView
+    _refreshFooterView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -1000, self.view.bounds.size.width, self.view.bounds.size.height) IsHeader:NO];
+    _refreshFooterView.delegate = self;
+    [_friendTableView addSubview:_refreshFooterView];
+    [self putFooterToEnd];
+    
     [self.view addSubview:_friendTableView];
     
     //
@@ -125,7 +142,10 @@
     
     if ([UserSessionManager GetInstance].isLoggedIn && !_isLoadingFriend) {
         
-        [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        if (!_reloading) {
+            
+            [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeGradient];
+        }
         
         _isLoadingFriend = YES;
         
@@ -150,6 +170,18 @@
     [SVProgressHUD dismiss];
     [SVProgressHUD showErrorWithStatus:@"你还没有歌友哦"];
     _isLoadingFriend = NO;
+    
+    if (_reloading) {
+        
+        if (_isHeaderLoading) {
+            
+            [self finishLoadMoreHeaderData];
+        }
+        else {
+            
+            [self finishLoadMoreFooterData];
+        }
+    }
 }
 
 -(void)getMusicUserSuccess:(NSNotification *)tNotification {
@@ -176,6 +208,20 @@
     [_friendTableView reloadData];
     
     _isLoadingFriend = NO;
+    
+    if (_reloading) {
+        
+        if (_isHeaderLoading) {
+            
+            [self finishLoadMoreHeaderData];
+        }
+        else {
+            
+            [self finishLoadMoreFooterData];
+        }
+    }
+    
+    [self putFooterToEnd];
     
     [SVProgressHUD dismiss];
 }
@@ -260,6 +306,12 @@
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
+#if USE_NEW_LOAD
+    
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+#else
     if (scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height) {
         
         if (!_isLoadingFriend && (_friendCurStartIndex < _totalFriendCount)) {
@@ -276,6 +328,98 @@
             [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
         }
     }
+#endif
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+#if USE_NEW_LOAD
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
+#endif
+}
+
+#if USE_NEW_LOAD
+
+-(void)putFooterToEnd {
+    
+    CGRect footerFrame = _refreshFooterView.frame;
+    CGRect r = CGRectMake(footerFrame.origin.x, _friendTableView.contentSize.height, _friendTableView.frame.size.width, footerFrame.size.height);
+    
+    if (r.origin.y < _friendTableView.frame.size.height) {
+        
+        r.origin.y = _friendTableView.frame.size.height;
+    }
+    
+    _refreshFooterView.frame = r;
+}
+
+-(void)reloadTableViewHeaderDataSource {
+    
+    if (!_isLoadingFriend) {
+        
+        _reloading = YES;
+        
+        _friendCurStartIndex = 0;
+        [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
+    }
+}
+
+-(void)reloadTableViewFooterDataSource {
+    
+    if (!_isLoadingFriend && (_friendCurStartIndex < _totalFriendCount)) {
+        
+        _reloading = YES;
+        
+        _friendCurStartIndex += FRIEND_DISPLAY_COUNT;
+        [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
+    }
+}
+
+-(void)finishLoadMoreHeaderData {
+    
+    _reloading = NO;
+    
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.friendTableView];
+}
+
+-(void)finishLoadMoreFooterData {
+    
+    _reloading = NO;
+    
+    [self putFooterToEnd];
+    
+    // TODO:定位到最后一列
+    
+    [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:_friendTableView];
+}
+
+-(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
+    
+    if (view == _refreshHeaderView) {
+        
+        _isHeaderLoading = YES;
+        [self reloadTableViewHeaderDataSource];
+    }
+    else if (view == _refreshFooterView) {
+        
+        _isHeaderLoading = NO;
+        [self reloadTableViewFooterDataSource];
+    }
+    else {
+        
+        _isHeaderLoading = NO;
+    }
+}
+
+-(BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
+    
+    return _reloading;
+}
+
+//-(NSData*)egoRefreshTableHeaderDataSourceLastUpdated:(
+
+#endif
+
 
 @end
