@@ -233,6 +233,8 @@
         }
     }
     
+    [self putFooterToEnd];
+    
     [SVProgressHUD dismiss];
 }
 
