@@ -53,6 +53,7 @@
 
 /*
  * 用于切换不同域名地址
+ * IS_DEBUG_SERVER: 0-未使用，1-正式，2-测试
  */
 
 #ifdef DEBUG
