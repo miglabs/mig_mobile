@@ -54,7 +54,12 @@
 /*
  * 用于切换不同域名地址
  */
+
+#ifdef DEBUG
 #define IS_DEBUG_SERVER 2
+#else
+#define IS_DEBUG_SERVER 1
+#endif
 
 #if (0 == IS_DEBUG_SERVER)
 
