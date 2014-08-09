@@ -196,7 +196,7 @@
         
     } else {
         
-        [SVProgressHUD showErrorWithStatus:@"信息格式不正确, 无法显示"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_WRONG_MSG_TYPE];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -241,8 +241,6 @@
 -(void)loadMessageFailed:(NSNotification *)tNotification {
     
     [SVProgressHUD dismiss];
-    
-    //[SVProgressHUD showErrorWithStatus:@"附近的推送消息失败:("];
     
     if (_reloading) {
         

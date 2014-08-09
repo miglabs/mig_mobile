@@ -168,7 +168,7 @@
     
     PLog(@"get music user failed");
     [SVProgressHUD dismiss];
-    [SVProgressHUD showErrorWithStatus:@"你还没有歌友哦"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_NO_FRIENDS];
     _isLoadingFriend = NO;
     
     if (_reloading) {

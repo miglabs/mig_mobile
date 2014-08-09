@@ -144,6 +144,30 @@
 /* 修改性别失败 */
 #define MIGTIP_CHANGE_GENDER_FAILED             @"修改性别失败，请稍后重试..."
 
+/* 没有歌友 */
+#define MIGTIP_NO_FRIENDS                       @"您还没有歌友哦"
+
+/* 获取歌友失败 */
+#define MIGTIP_GET_NEAR_FRIEND_FAILED           @"您附近没有歌友:("
+
+/* 发送消息的类型不对 */
+#define MIGTIP_WRONG_MSG_TYPE                   @"信息格式不正确, 无法显示"
+
+/* 拒绝搭讪 */
+#define MIGTIP_REJECT_SAY_HELLO                 @"对方拒绝您的搭讪"
+
+/* 拒绝送歌 */
+#define MIGTIP_REJECT_SEND_SONG                 @"对方拒绝你的歌曲了"
+
+/* 没有输入内容 */
+#define MIGTIP_NO_CONTENT                       @"您还没有输入任何字哦"
+
+/* 达到送歌数量限制 */
+#define MIGTIP_1INT_REACH_MAX_SEND_SONG         @"对不起，最多只能送%d首歌哦~~~"
+
+/* 选择一首歌 */
+#define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"
+
 /* 确定 */
 #define MIGTIP_OK                               @"确定"
 

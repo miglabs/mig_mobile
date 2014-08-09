@@ -159,7 +159,6 @@
 #pragma mark - Notification
 -(void)LoadMyMusicFromServerFailed:(NSNotification*)tNotification {
     
-    //[SVProgressHUD showErrorWithStatus:@"获取歌曲列表失败:("];
 }
 
 -(void)LoadMyMusicFromServerSuccess:(NSNotification*)tNotification {
@@ -231,7 +230,7 @@
     }
     else {
         
-        [SVProgressHUD showErrorWithStatus:@"请选择一首歌"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_CHOOSE_ONE_SONG];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -250,8 +250,6 @@
 
 -(void)doLoadChat:(id)sender {
     
-//    [SVProgressHUD showErrorWithStatus:@"还没有聊天功能啊..."];
-    
     int currentUserId = [[UserSessionManager GetInstance].userid intValue];
     ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_msginfo.userInfo.userid intValue]];
     [self.navigationController pushViewController:chatController animated:YES];
@@ -355,8 +353,6 @@
     
     UIImage* img = [UIImage imageWithName:@"music_menu_dark_heart_nor" type:@"png"];
     [_musicCommentHeader.btnCollect setImage:img forState:UIControlStateNormal];
-    
-   // [SVProgressHUD showErrorWithStatus:@"收藏歌曲成功"];
 }
 
 -(void)doCollectedFailed:(NSNotification *)tNotification {
@@ -373,8 +369,6 @@
     
     UIImage* img = [UIImage imageWithName:@"music_menu_light_heart_nor" type:@"png"];
     [_musicCommentHeader.btnCollect setImage:img forState:UIControlStateNormal];
-    
-    //[SVProgressHUD showErrorWithStatus:@"取消成功"];
 }
 
 -(void)doCancelFailed:(NSNotification *)tNotification {

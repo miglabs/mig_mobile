@@ -181,14 +181,12 @@
 -(void)SendMusicToUserFailed:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
-    [SVProgressHUD showErrorWithStatus:@"对方拒绝你的歌曲了"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_REJECT_SEND_SONG];
 }
 
 -(void)SendMusicToUserSuccess:(NSNotification *)tNotification {
     
     _isSendingSong = NO;
-    
-    //[SVProgressHUD showErrorWithStatus:@"赠送成功啦！Ta很快就会收到了"];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -279,7 +277,7 @@
     if ((haveCount > MAX_PRESENT_SONG_COUNT)
         || (haveCount + curCount > MAX_PRESENT_SONG_COUNT)) {
         
-        NSString* strExceed = [NSString stringWithFormat:@"对不起，最多只能送%d首歌哦~~~", MAX_PRESENT_SONG_COUNT];
+        NSString* strExceed = [NSString stringWithFormat:MIGTIP_1INT_REACH_MAX_SEND_SONG, MAX_PRESENT_SONG_COUNT];
         
         [SVProgressHUD showErrorWithStatus:strExceed];
         

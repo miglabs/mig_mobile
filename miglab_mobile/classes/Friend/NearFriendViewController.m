@@ -157,7 +157,7 @@
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:@"附近的歌友获取失败:("];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_GET_NEAR_FRIEND_FAILED];
     
     _isLoadingNearFriend = NO;
 }

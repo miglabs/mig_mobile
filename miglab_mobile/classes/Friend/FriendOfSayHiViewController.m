@@ -96,7 +96,7 @@
     
     if (count <= 0) {
         
-        [SVProgressHUD showErrorWithStatus:@"您还没有输入任何字哦"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NO_CONTENT];
         return;
     }
     
@@ -125,8 +125,6 @@
 
 -(void)doSayHelloSuccess:(NSNotification *)tNotification {
     
-    //[SVProgressHUD showErrorWithStatus:@"打招呼成功啦！！！"];
-    
     _isSendingMsg = NO;
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -134,7 +132,7 @@
 
 -(void)doSayHelloFailed:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:@"对方拒绝你的搭讪"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_REJECT_SAY_HELLO];
     
     _isSendingMsg = NO;
     
