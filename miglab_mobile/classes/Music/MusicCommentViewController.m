@@ -333,7 +333,7 @@
     PLog(@"commentcontent: %@", commentcontent);
     
     if ([NSString checkDataIsNull:commentcontent] == nil) {
-        [SVProgressHUD showErrorWithStatus:@"亲，您忘记输入内容咯～"];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NO_CONTENT];
         return;
     }
     
@@ -361,8 +361,6 @@
 -(void)getCommentListFailed:(NSNotification *)tNotification{
     
     PLog(@"getCommentListFailed...");
-    
-    //[SVProgressHUD showErrorWithStatus:@"歌曲评论信息获取失败:("];
 }
 
 -(void)getCommentListSuccess:(NSNotification *)tNotification{
@@ -420,7 +418,6 @@
 
 -(void)doCommentSongFailed:(NSNotification *)tNotification {
     
-    //[SVProgressHUD showErrorWithStatus:@"评论歌曲怎么就失败了呢..."];
 }
 
 #pragma mark - UITableView delegate

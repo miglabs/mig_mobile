@@ -150,6 +150,12 @@
 /* 获取歌友失败 */
 #define MIGTIP_GET_NEAR_FRIEND_FAILED           @"您附近没有歌友:("
 
+/* 获取收藏歌曲失败 */
+#define MIGTIP_GET_COLLECT_SONG_FAILED          @"收藏歌曲获取失败:("
+
+/* 附近的好音乐获取失败 */
+#define MIGTIP_GET_NEAR_SONG_FAILED             @"附近的好音乐获取失败:("
+
 /* 发送消息的类型不对 */
 #define MIGTIP_WRONG_MSG_TYPE                   @"信息格式不正确, 无法显示"
 

@@ -172,15 +172,13 @@
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:@"收藏歌曲获取失败:("];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_GET_COLLECT_SONG_FAILED];
     _isGettingCollectSong = NO;
 }
 
 -(void)getCollectedSongsSuccess:(NSNotification *)tNotification{
     
     PLog(@"getCollectedSongsSuccess...");
-    
-    //[SVProgressHUD showErrorWithStatus:@"收藏歌曲获取成功:)"];
     
     _isGettingCollectSong = NO;
     

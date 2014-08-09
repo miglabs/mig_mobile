@@ -263,7 +263,7 @@
     
     [SVProgressHUD dismiss];
     
-    [SVProgressHUD showErrorWithStatus:@"附近的好音乐获取失败:("];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_GET_NEAR_SONG_FAILED];
 }
 
 -(void)getNearMusicSuccess:(NSNotification *)tNotification{

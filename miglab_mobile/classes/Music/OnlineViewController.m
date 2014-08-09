@@ -129,16 +129,11 @@
 -(void)getTypeSongsFailed:(NSNotification *)tNotification{
     
     PLog(@"getTypeSongsFailed...");
-    
-    //[SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取失败:("];
-    
 }
 
 -(void)getTypeSongsSuccess:(NSNotification *)tNotification{
     
     PLog(@"getTypeSongsSuccess...");
-    
-    //[SVProgressHUD showErrorWithStatus:@"在线推荐歌曲获取成功:)"];
     
     NSDictionary *result = [tNotification userInfo];
     NSMutableArray *songInfoList = [result objectForKey:@"result"];
