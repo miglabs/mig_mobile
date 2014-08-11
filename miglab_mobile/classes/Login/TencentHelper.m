@@ -8,6 +8,7 @@
 
 #import "TencentHelper.h"
 #import "UserSessionManager.h"
+#import "SVProgressHUD.h"
 
 @implementation TencentHelper
 
@@ -65,6 +66,37 @@
     
     [self initTencentAndLogin];
     
+}
+
+/*
+ * 发布一个歌词分享到QQ空间
+ */
+- (void)addQQZoneWithLyricImage:(Song *)tSong {
+    
+    if ([_tencentOAuth isSessionValid]) {
+#if 1
+        NSString *artist = tSong.artist;
+        NSString *songName = tSong.songname;
+        NSString *img = tSong.coverurl;
+        NSString *shareAdd = [NSString stringWithFormat:SHARE_QQZONE_ADDRESS_1LONG, tSong.songid];
+        
+        QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:shareAdd] title:songName description:artist previewImageURL:[NSURL URLWithString:img]];
+        
+        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
+        
+        [QQApiInterface SendReqToQZone:req];
+        
+#else
+        QQApiImageObject *imgObj = [QQApiImageObject objectWithData:imgData previewImageData:imgData title:@"nice" description:@"nice"];
+        
+        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:imgObj];
+        QQApiSendResultCode send = [QQApiInterface SendReqToQZone:req];
+#endif
+    }
+    else {
+        
+        [self initTencentAndLogin];
+    }
 }
 
 /**
@@ -308,6 +340,43 @@
             [_delegate tencentAddWeiboHelper:self didFailWithError:nil];
         }
     }
+}
+
+/* 增量授权 */
+- (BOOL)tencentNeedPerformIncrAuth:(TencentOAuth *)tencentOAuth withPermissions:(NSArray *)permissions {
+    
+    [tencentOAuth incrAuthWithPermissions:permissions];
+    
+    return NO;
+}
+
+-(void)tencentFailedUpdate:(UpdateFailType)reason {
+    
+    NSString *text;
+    
+    switch (reason)
+    {
+        case kUpdateFailNetwork:
+        {
+            text=@"增量授权失败，无网络连接，请设置网络";
+            break;
+        }
+            
+        case kUpdateFailUserCancel:
+        {
+            text=@"增量授权失败，用户取消授权";
+            break;
+        }
+            
+        case kUpdateFailUnknown:
+        default:
+        {
+            text=@"增量授权失败，未知错误";
+            break;
+        }
+    }
+    
+    [SVProgressHUD showErrorWithStatus:text];
 }
 
 @end

@@ -232,7 +232,8 @@
         case 201:
         {
             //tencentweibo
-            [self doShare2TencentWeibo];
+            //[self doShare2TencentWeibo];
+            [self doShare2QQZone];
         }
             break;
         case 202:
@@ -288,8 +289,8 @@
     
     TencentHelper *tencentHelper = [TencentHelper sharedInstance];
     tencentHelper.delegate = self;
-    [tencentHelper addTopic:currentSong];
-    
+    //[tencentHelper addTopic:currentSong];
+    [tencentHelper addQQZoneWithLyricImage:currentSong];
 }
 
 -(void)doShare2SinaWeibo{

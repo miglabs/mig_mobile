@@ -186,8 +186,11 @@
 /* 没有打开定位服务 */
 #define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
 
-/* 分享的地址 */
+/* 微信分享地址 */
 #define SHARE_WEIXIN_ADDRESS                    @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
+
+/* QQ空间分享地址 */
+#define SHARE_QQZONE_ADDRESS_1LONG              @"http://qzone.share.miyomate.com/?songid=%lld&from=timeline&isappinstalled=1"
 
 
 /* --------------------- 地址定义 --------------------- */
