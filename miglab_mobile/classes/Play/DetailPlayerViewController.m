@@ -231,8 +231,7 @@
     switch (btnShare.tag) {
         case 201:
         {
-            //tencentweibo
-            //[self doShare2TencentWeibo];
+            //qqzone
             [self doShare2QQZone];
         }
             break;
@@ -250,8 +249,8 @@
             break;
         case 204:
         {
-            //qqzone
-            [self doShare2QQZone];
+            //tencentweibo
+            [self doShare2TencentWeibo];
         }
             break;
         case 205:
