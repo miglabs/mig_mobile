@@ -45,6 +45,8 @@
         
         [_db executeUpdate:@"create table if not exists USER_GENE (userid text not null, channelindex integer, typeindex integer, moodindex integer, sceneindex integer)"];
         
+        [_db executeUpdate:@"create table if not exists QQ_ACCOUNT (accesstoken text, longtime integer, localappid text, openid text)"];
+        
         //song cache
         [_db executeUpdate:@"create table if not exists SONG_LOCAL_INFO (songid integer, songname text, pinyin text, artist text, pubtime text, album text, duration text, songurl text, hqurl text, lrcurl text, coverurl text, like text, type text, tid integer, createtime integer, collectnum integer, commentnum integer, hot integer, channelid text, typeid text, moodid text, sceneid text)"];
         [_db executeUpdate:@"create table if not exists SONG_DOWNLOAD_INFO (songid integer, type text, filemaxsize integer)"];
@@ -222,6 +224,66 @@
     [_db executeUpdate:sql];
     [_db close];
     
+}
+
+-(void)insertQQAccount:(NSString *)accessToken data:(NSDate *)expireDate appid:(NSString *)localAppid openid:(NSString *)openId url:(NSString *)redirectUrl permit:(NSString *)permission {
+    
+    long longTime = [expireDate timeIntervalSince1970];
+    NSNumber *loginTime = [NSNumber numberWithLong:longTime];
+    
+    NSString *sql = @"insert into QQ_ACCOUNT (accesstoken, longtime, localappid, openid) values (?, ?, ?, ?)";
+    PLog(@"sql: %@", sql);
+    
+    [_db open];
+    
+    NSString *checksql = [NSString stringWithFormat:@"select * from QQ_ACCOUNT "];
+    
+    FMResultSet *rs = [_db executeQuery:checksql];
+    
+    while ([rs next]) {
+        
+        sql = @"update QQ_ACCOUNT set accesstoken = ?, longtime = ?, localappid = ?, openid = ?";
+        
+        break;
+    }
+    
+    BOOL isOK = [_db executeUpdate:sql, accessToken, loginTime, localAppid, openId];
+    
+    if (isOK) {
+        
+        PLog(@"update QQ account succeed");
+    }
+    else {
+        
+        PLog(@"update QQ account failed");
+    }
+    
+    [_db close];
+}
+
+-(AccountOf3rdParty *)getQQAccount {
+    
+    AccountOf3rdParty *tmp = [[AccountOf3rdParty alloc] init];
+    
+    NSString *sql = @"select * from QQ_ACCOUNT";
+    
+    [_db open];
+    
+    FMResultSet *rs = [_db executeQuery:sql];
+    
+    while ([rs next]) {
+        
+        tmp.qqAccessToken = [rs stringForColumn:@"accesstoken"];
+        tmp.qqOpenId = [rs stringForColumn:@"openid"];
+        tmp.qqLocalAppId = [rs stringForColumn:@"localappid"];
+        tmp.qqLongTime = [rs intForColumn:@"longtime"];
+        
+        break;
+    }
+    
+    [_db close];
+    
+    return tmp;
 }
 
 //记录用户信息

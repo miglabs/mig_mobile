@@ -18,6 +18,11 @@
 @synthesize expirationdate = _expirationdate;
 @synthesize strexpirationdate = _strexpirationdate;
 
+@synthesize qqAccessToken = _qqAccessToken;
+@synthesize qqLocalAppId = _qqLocalAppId;
+@synthesize qqOpenId = _qqOpenId;
+@synthesize qqLongTime = _qqLongTime;
+
 -(void)log{
     
     PLog(@"Print AccountOf3rdParty: username(%@), password(%@), accounttype(%d), accountid(%@), accesstoken(%@), expirationdate(%@), strexpirationdate(%@)", _username, _password, _accounttype, _accountid, _accesstoken, _expirationdate, _strexpirationdate);

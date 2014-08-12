@@ -55,4 +55,6 @@ typedef enum {
 - (void)addWeibo:(Song *)tSong;
 - (void)addQQZoneWithLyricImage:(Song *)tSong;
 
+-(void)initTencentOAuth:(AccountOf3rdParty *)tmpauth;
+
 @end

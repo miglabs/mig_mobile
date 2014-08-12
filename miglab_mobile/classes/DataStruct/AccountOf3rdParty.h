@@ -18,6 +18,12 @@
 @property (nonatomic, retain) NSDate *expirationdate;
 @property (nonatomic, retain) NSString *strexpirationdate;
 
+// QQ account part
+@property (nonatomic, retain) NSString *qqAccessToken;
+@property (nonatomic, retain) NSString *qqOpenId;
+@property (nonatomic, retain) NSString *qqLocalAppId;
+@property (nonatomic, assign) int qqLongTime;
+
 -(void)log;
 
 @end

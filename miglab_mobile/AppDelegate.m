@@ -16,6 +16,8 @@
 #import "PDatabaseManager.h"
 #import "AFHTTPClient.h"
 #import "AFNetworkReachabilityManager.h"
+#import "TencentHelper.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 
 #import "GuideViewController.h"
 
@@ -156,6 +158,12 @@
                 [UserSessionManager GetInstance].accesstoken = tempuser.token;
                 [UserSessionManager GetInstance].accounttype = tempuser.source;
                 [UserSessionManager GetInstance].isLoggedIn = YES;
+            }
+       
+            /* QQ平台的账号登陆 */
+            if (lastAccount.accounttype == SourceTypeTencentWeibo || lastAccount.accounttype == SourceTypeTencentQQZone)
+            {
+                [[TencentHelper sharedInstance] initTencentOAuth:[[PDatabaseManager GetInstance] getQQAccount]];
             }
             
         } else {

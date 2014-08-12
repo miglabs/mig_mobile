@@ -38,6 +38,10 @@
 //清空账号
 -(void)deleteAllUserAccount;
 
+//记录QQ登陆账号信息
+-(void)insertQQAccount:(NSString*)accessToken data:(NSDate*)expireDate appid:(NSString*)localAppid openid:(NSString*)openId url:(NSString*)redirectUrl permit:(NSString*)permission;
+-(AccountOf3rdParty *)getQQAccount;
+
 //更新当前账号生日信息
 -(void)updateBirthday:(NSString*)birthday accountId:(NSString *)taccountid;
 //更新当前账号性别

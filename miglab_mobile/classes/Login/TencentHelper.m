@@ -9,8 +9,11 @@
 #import "TencentHelper.h"
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
+#import "PDatabaseManager.h"
 
 @implementation TencentHelper
+
+@synthesize tencentOAuth = _tencentOAuth;
 
 + (id)sharedInstance
 {
@@ -60,6 +63,19 @@
     
 }
 
+-(void)initTencentOAuth:(AccountOf3rdParty *)tmpauth {
+    
+    if (!_tencentOAuth) {
+        
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENT_WEIBO_APP_KEY andDelegate:self];
+        
+        _tencentOAuth.accessToken = tmpauth.qqAccessToken;
+        _tencentOAuth.openId = tmpauth.qqOpenId;
+        _tencentOAuth.localAppId = tmpauth.qqLocalAppId;
+        _tencentOAuth.expirationDate = [NSDate dateWithTimeIntervalSince1970:tmpauth.qqLongTime];
+    }
+}
+
 - (void)doTencentLogin
 {
     _tencentHelperStatus = TencentHelperStatusLogin;
@@ -74,7 +90,7 @@
 - (void)addQQZoneWithLyricImage:(Song *)tSong {
     
     if ([_tencentOAuth isSessionValid]) {
-#if 1
+        
         NSString *artist = tSong.artist;
         NSString *songName = tSong.songname;
         NSString *img = tSong.coverurl;
@@ -85,13 +101,6 @@
         SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
         
         [QQApiInterface SendReqToQZone:req];
-        
-#else
-        QQApiImageObject *imgObj = [QQApiImageObject objectWithData:imgData previewImageData:imgData title:@"nice" description:@"nice"];
-        
-        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:imgObj];
-        QQApiSendResultCode send = [QQApiInterface SendReqToQZone:req];
-#endif
     }
     else {
         
@@ -171,6 +180,8 @@
         PLog(@"_tencentOAuth.openId: %@", _tencentOAuth.openId);
         PLog(@"_tencentOAuth.accessToken: %@", _tencentOAuth.accessToken);
         PLog(@"_tencentOAuth.expirationDate: %@", _tencentOAuth.expirationDate);
+        
+        [[PDatabaseManager GetInstance] insertQQAccount:_tencentOAuth.accessToken data:_tencentOAuth.expirationDate appid:_tencentOAuth.appId openid:_tencentOAuth.openId url:_tencentOAuth.redirectURI permit:nil];
         
         AccountOf3rdParty *tencentAccount = [[AccountOf3rdParty alloc] init];
         tencentAccount.accountid = _tencentOAuth.openId;
