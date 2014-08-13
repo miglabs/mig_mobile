@@ -48,7 +48,8 @@
     UIGraphicsBeginImageContext(image.size);
     [image drawAtPoint:CGPointZero];
     
-    [text drawAtPoint:CGPointMake(10, 10) withFont:[UIFont systemFontOfSize:20]];
+    //[text drawAtPoint:CGPointMake(10, 10) withFont:[UIFont systemFontOfSize:30]];
+    [text drawInRect:CGRectMake(10, 10, image.size.width, image.size.height) withFont:[UIFont systemFontOfSize:30]];
     
     UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
