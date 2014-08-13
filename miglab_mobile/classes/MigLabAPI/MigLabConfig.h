@@ -119,7 +119,10 @@
     #define USE_LOCAL_PLAY 0
 #endif
 
-
+// 使用新的新浪微博登陆
+#ifndef USE_NEW_SINA_SDK
+    #define USE_NEW_SINA_SDK 1
+#endif
 
 
 //登陆

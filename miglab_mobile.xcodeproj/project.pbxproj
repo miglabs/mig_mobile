@@ -3232,6 +3232,7 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
 					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
+					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3278,6 +3279,7 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMAnalytics_Sdk_2.2.0.OpenUDID",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
 					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
+					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

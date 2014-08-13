@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
+#import "UIImage+ext.h"
 
 @implementation SinaWeiboHelper
 
@@ -103,8 +104,38 @@
     
     SinaWeibo *sinaweibo = [self sinaweibo];
     if ([sinaweibo isAuthValid]) {
-        [sinaweibo requestWithURL:@"statuses/update.json" params:statusesDic httpMethod:@"POST" delegate:self];
+        
+        //[sinaweibo requestWithURL:@"statuses/update.json" params:statusesDic httpMethod:@"POST" delegate:self];
+        
+        NSString *lyric = @"后会无期\n"
+        "作词：韩寒\n"
+        "作曲：Arthur Kent，Dee Sylvia\n"
+        "演唱：G.E.M.邓紫棋\n"
+        "\n"
+        "当一艘船沉入海底\n"
+        "当一个人成了谜\n"
+        "你不知道\n"
+        "他们为何离去\n"
+        "那声再见竟是他最后的一句\n"
+        "\n"
+        "当一辆车消失天际\n"
+        "当一个人成了谜\n"
+        "你不知道\n"
+        "他们为何离去\n"
+        "就像你不知道这竟是结局\n"
+        "\n"
+        "在每个繁星抛弃银河的夜里\n"
+        "我会告别 告别我自己\n"
+        "因为我不知道 我也不想知道\n"
+        "和相聚之间的距离\n";
+        
+        UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
+        UIImage *shareImage = [UIImage_ext imageFromText:bgImage txt:lyric];
+        
+        [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:statuses, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
+        
     } else {
+        
         [sinaweibo logIn];
     }
     

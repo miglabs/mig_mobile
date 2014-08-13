@@ -11,5 +11,6 @@
 @interface UIImage_ext : NSObject
 
 +(UIImage *)addText:(UIImage *)img text:(NSString *)txt;
++(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text;
 
 @end
