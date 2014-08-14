@@ -15,6 +15,9 @@
 /* 屏幕的左上角x坐标 */
 #define ORIGIN_X                                11.5
 
+/* 最小歌词字号 */
+#define MIN_LYRIC_FONT_SIZE                     8.0
+
 /* UITableView 默认宽度 */
 #define ORIGIN_WIDTH                            297
 

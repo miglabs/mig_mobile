@@ -10,7 +10,8 @@
 
 @interface UIImage_ext : NSObject
 
-+(UIImage *)addText:(UIImage *)img text:(NSString *)txt;
-+(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text;
++(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont*)font andFrame:(CGRect)frame;
+
++(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
 
 @end

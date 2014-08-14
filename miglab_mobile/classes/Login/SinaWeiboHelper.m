@@ -103,7 +103,7 @@
     NSMutableDictionary *statusesDic = [NSMutableDictionary dictionaryWithObject:statuses forKey:@"status"];
     
     SinaWeibo *sinaweibo = [self sinaweibo];
-    if ([sinaweibo isAuthValid]) {
+    if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
         
         //[sinaweibo requestWithURL:@"statuses/update.json" params:statusesDic httpMethod:@"POST" delegate:self];
         
@@ -130,7 +130,14 @@
         "和相聚之间的距离\n";
         
         UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
-        UIImage *shareImage = [UIImage_ext imageFromText:bgImage txt:lyric];
+        
+        NSString *fontName = @"Helvetica";
+        float fontSize = [UIImage_ext getFontSize:lyric andFontName:fontName andSize:bgImage.size];
+        
+        UIFont *font = [UIFont fontWithName:fontName size:fontSize];
+        
+                          
+        UIImage *shareImage = [UIImage_ext imageFromText:bgImage txt:lyric andFont:font andFrame:CGRectMake(0, 0, bgImage.size.width, bgImage.size.height)];
         
         [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:statuses, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
         
