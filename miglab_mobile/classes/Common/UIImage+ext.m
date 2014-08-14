@@ -26,6 +26,21 @@
     return finalImg;
 }
 
++(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame {
+    
+    UIGraphicsBeginImageContext(dstImg.size);
+    
+    [dstImg drawInRect:CGRectMake(0, 0, dstImg.size.width, dstImg.size.height)];
+    
+    [srcImg drawInRect:frame blendMode:kCGBlendModeNormal alpha:1.0];
+    
+    UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return finalImg;
+}
+
 +(float)getFontSize:(NSString *)str andFontName:(NSString *)fontName andSize:(CGSize)size{
     
     CGFloat finalFontSize = MIN_LYRIC_FONT_SIZE;

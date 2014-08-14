@@ -130,6 +130,9 @@
         "和相聚之间的距离\n";
         
         UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
+        UIImage *fgImage = [UIImage imageNamed:@"music_comment_avatar_big.png"];
+        
+        UIImage *resImage = [UIImage_ext drawImageIntoImage:bgImage andSrcImg:fgImage andFrame:CGRectMake(160, 0, 160, 160)];
         
         NSString *fontName = @"Helvetica";
         float fontSize = [UIImage_ext getFontSize:lyric andFontName:fontName andSize:bgImage.size];
@@ -137,7 +140,7 @@
         UIFont *font = [UIFont fontWithName:fontName size:fontSize];
         
                           
-        UIImage *shareImage = [UIImage_ext imageFromText:bgImage txt:lyric andFont:font andFrame:CGRectMake(0, 0, bgImage.size.width, bgImage.size.height)];
+        UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:lyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
         
         [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:statuses, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
         

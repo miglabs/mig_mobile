@@ -12,6 +12,8 @@
 
 +(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont*)font andFrame:(CGRect)frame;
 
++(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame;
+
 +(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
 
 @end
