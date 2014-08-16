@@ -364,4 +364,9 @@
 #define NotificationNameConfigPushSuccess                   @"NotificationNameConfigPushSuccess"
 #define NotificationNameConfigPushFailed                    @"NotificationNameConfigPushFailed"
 
+// 获取歌词分享信息
+#define HTTP_GETSHAREINFO                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getshareinfo.fcgi"]
+#define NotificationNameGetShareInfoSuccess                 @"NotificationNameGetShareInfoSuccess"
+#define NotificationNameGetShareInfoFailed                  @"NotificationNameGetShareInfoFailed"
+
 #endif

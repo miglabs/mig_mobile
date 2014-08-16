@@ -280,4 +280,9 @@ typedef enum {
  */
 -(void)doConfigPush:(NSString*)uid token:(NSString*)ttoken devicetoken:(NSString*)tdevicetoken isreceive:(NSString*)tisreceive begintime:(NSString*)tbegintime endtime:(NSString*)tendtime;
 
+/*
+ 获取歌词分享信息
+ */
+-(void)doGetShareInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid type:(NSString*)ttype latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
+
 @end
