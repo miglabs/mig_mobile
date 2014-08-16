@@ -11,6 +11,7 @@
 #import "UserSessionManager.h"
 #import "PDatabaseManager.h"
 #import "UIImage+ext.h"
+#import "SVProgressHUD.h"
 
 @implementation SinaWeiboHelper
 
@@ -94,61 +95,20 @@
 {
     _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+    
     self.shareSong = tSong;
     
-    NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
-    if (tSong.songname) {
-        statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
-    }
-    NSMutableDictionary *statusesDic = [NSMutableDictionary dictionaryWithObject:statuses forKey:@"status"];
+    NSString* uid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* tsongid = [NSString stringWithFormat:@"%lld", tSong.songid];
+    NSString* ttype = STR_USER_SOURCE_SINA;
     
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
-        
-        //[sinaweibo requestWithURL:@"statuses/update.json" params:statusesDic httpMethod:@"POST" delegate:self];
-        
-        NSString *lyric = @"后会无期\n"
-        "作词：韩寒\n"
-        "作曲：Arthur Kent，Dee Sylvia\n"
-        "演唱：G.E.M.邓紫棋\n"
-        "\n"
-        "当一艘船沉入海底\n"
-        "当一个人成了谜\n"
-        "你不知道\n"
-        "他们为何离去\n"
-        "那声再见竟是他最后的一句\n"
-        "\n"
-        "当一辆车消失天际\n"
-        "当一个人成了谜\n"
-        "你不知道\n"
-        "他们为何离去\n"
-        "就像你不知道这竟是结局\n"
-        "\n"
-        "在每个繁星抛弃银河的夜里\n"
-        "我会告别 告别我自己\n"
-        "因为我不知道 我也不想知道\n"
-        "和相聚之间的距离\n";
-        
-        UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
-        UIImage *fgImage = [UIImage imageNamed:@"music_comment_avatar_big.png"];
-        
-        UIImage *resImage = [UIImage_ext drawImageIntoImage:bgImage andSrcImg:fgImage andFrame:CGRectMake(160, 0, 160, 160)];
-        
-        NSString *fontName = @"Helvetica";
-        float fontSize = [UIImage_ext getFontSize:lyric andFontName:fontName andSize:bgImage.size];
-        
-        UIFont *font = [UIFont fontWithName:fontName size:fontSize];
-        
-                          
-        UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:lyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
-        
-        [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:statuses, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
-        
-    } else {
-        
-        [sinaweibo logIn];
-    }
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_WEIBO];
     
+    MigLabAPI* migapi = [[MigLabAPI alloc] init];
+    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:nil longitude:nil];
 }
 
 #pragma mark - SinaWeibo Delegate
@@ -240,6 +200,57 @@
             }
         }
     }
+}
+
+-(void)doShareToSinaWeibo:(LyricShare *)lyric {
+    
+    SinaWeibo *sinaweibo = [self sinaweibo];
+    if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
+        
+        NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
+        
+        NSString *strLyric = lyric.lyric;
+        
+        UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
+        UIImage *fgImage = [UIImage imageNamed:@"music_comment_avatar_big.png"];
+        
+        UIImage *resImage = [UIImage_ext drawImageIntoImage:bgImage andSrcImg:fgImage andFrame:CGRectMake(160, 0, 160, 160)];
+        
+        NSString *fontName = @"Helvetica";
+        float fontSize = [UIImage_ext getFontSize:strLyric andFontName:fontName andSize:bgImage.size];
+        
+        UIFont *font = [UIFont fontWithName:fontName size:fontSize];
+        
+        
+        UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:strLyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
+        
+        [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
+        
+    } else {
+        
+        [sinaweibo logIn];
+    }
+    
+
+}
+
+#pragma mark - get share info
+-(void)getLyricInfoSucceed:(NSNotification *)tNotification {
+    
+    NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
+    NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
+    
+    LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
+    
+    [self doShareToSinaWeibo:ls];
+    
+    [SVProgressHUD dismiss];
+}
+
+-(void)getLyricInfoFailed:(NSNotification *)tNotification {
+    
+    PLog(@"分享到新浪微博失败");
+    [SVProgressHUD dismiss];
 }
 
 @end

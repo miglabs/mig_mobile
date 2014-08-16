@@ -174,8 +174,14 @@
 /* 达到送歌数量限制 */
 #define MIGTIP_1INT_REACH_MAX_SEND_SONG         @"对不起，最多只能送%d首歌哦~~~"
 
+/* 正在分享新浪微博 */
+#define MIGTIP_SHARING_WEIBO                    @"正在分享到新浪微博..."
+
 /* 选择一首歌 */
 #define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"
+
+/* 新浪微博分享词 */
+#define MIGTIP_WEIBO_SHARE_TEXT                 @"这首歌不错哦~~~~~~"
 
 /* 确定 */
 #define MIGTIP_OK                               @"确定"

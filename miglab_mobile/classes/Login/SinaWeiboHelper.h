@@ -10,6 +10,7 @@
 #import "SinaWeibo.h"
 #import "SinaWeiboRequest.h"
 #import "Song.h"
+#import "LyricShare.h"
 
 typedef enum {
     SinaWeiboHelperStatusLogin = 1,
@@ -42,5 +43,10 @@ typedef enum {
 
 - (void)doSinaWeiboLogin;
 - (void)updateSinaWeibo:(Song *)tSong;
+
+-(void)doShareToSinaWeibo:(LyricShare *)lyric;
+
+-(void)getLyricInfoSucceed:(NSNotification *)tNotification;
+-(void)getLyricInfoFailed:(NSNotification *)tNotification;
 
 @end
