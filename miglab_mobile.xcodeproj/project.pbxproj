@@ -524,6 +524,7 @@
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
 		CB30BAA91792873300F96FC4 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30BAA81792873300F96FC4 /* Channel.m */; };
 		CB557FC21956C00400A68B31 /* message_tip_bg_x24.png in Resources */ = {isa = PBXBuildFile; fileRef = CB557FC11956C00400A68B31 /* message_tip_bg_x24.png */; };
+		CB5E92B1199F80EB00B71A10 /* LyricShare.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E92B0199F80EB00B71A10 /* LyricShare.m */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1240,6 +1241,8 @@
 		CB30BAA71792873300F96FC4 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		CB30BAA81792873300F96FC4 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		CB557FC11956C00400A68B31 /* message_tip_bg_x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_tip_bg_x24.png; sourceTree = "<group>"; };
+		CB5E92AF199F80EB00B71A10 /* LyricShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricShare.h; sourceTree = "<group>"; };
+		CB5E92B0199F80EB00B71A10 /* LyricShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyricShare.m; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
@@ -1606,6 +1609,8 @@
 				CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */,
 				CBB425DE17DE18C400E3BA90 /* SongComment.h */,
 				CBB425DF17DE18C400E3BA90 /* SongComment.m */,
+				CB5E92AF199F80EB00B71A10 /* LyricShare.h */,
+				CB5E92B0199F80EB00B71A10 /* LyricShare.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -3100,6 +3105,7 @@
 				CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */,
 				1816E97E17CED8BE00D532EA /* DoubanAuthorizeView.m in Sources */,
 				CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */,
+				CB5E92B1199F80EB00B71A10 /* LyricShare.m in Sources */,
 				1633F73D17D2217600F47DFF /* UserGene.m in Sources */,
 				1633F74217D2219300F47DFF /* MusicBodyHeadMenuView.m in Sources */,
 				1633F74317D2219300F47DFF /* MusicSortMenuView.m in Sources */,
