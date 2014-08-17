@@ -22,6 +22,8 @@
 @property (nonatomic, assign) BOOL isWifiConnect;
 @property (nonatomic, assign) BOOL is3GConnect;
 @property (nonatomic, assign) BOOL isNetConnect;
+@property (nonatomic, retain) NSString* lastLatitude;
+@property (nonatomic, retain) NSString* lastLongitude;
 
 @property (nonatomic, assign) int nNewArrivalMsg;
 

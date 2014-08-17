@@ -12,6 +12,7 @@
 #import "PDatabaseManager.h"
 #import "UIImage+ext.h"
 #import "SVProgressHUD.h"
+#import "GlobalDataManager.h"
 
 @implementation SinaWeiboHelper
 
@@ -104,11 +105,11 @@
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString* tsongid = [NSString stringWithFormat:@"%lld", tSong.songid];
     NSString* ttype = STR_USER_SOURCE_SINA;
-    
-    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_WEIBO];
+    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
+    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
     
     MigLabAPI* migapi = [[MigLabAPI alloc] init];
-    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:nil longitude:nil];
+    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
 }
 
 #pragma mark - SinaWeibo Delegate
@@ -209,6 +210,7 @@
         
         NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
         
+#if 0
         NSString *strLyric = lyric.lyric;
         
         UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
@@ -223,6 +225,11 @@
         
         
         UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:strLyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
+#else
+      
+        UIImage* shareImage = [UIImage_ext createLyricShareImage:lyric song:self.shareSong];
+        
+#endif
         
         [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
         
@@ -243,14 +250,11 @@
     LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
     
     [self doShareToSinaWeibo:ls];
-    
-    [SVProgressHUD dismiss];
 }
 
 -(void)getLyricInfoFailed:(NSNotification *)tNotification {
     
     PLog(@"分享到新浪微博失败");
-    [SVProgressHUD dismiss];
 }
 
 @end

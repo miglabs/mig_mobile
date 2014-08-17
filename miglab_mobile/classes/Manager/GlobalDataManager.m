@@ -23,6 +23,8 @@
 @synthesize isWifiConnect = _isWifiConnect;
 @synthesize is3GConnect = _is3GConnect;
 @synthesize isNetConnect = _isNetConnect;
+@synthesize lastLatitude = _lastLatitude;
+@synthesize lastLongitude = _lastLongitude;
 
 +(GlobalDataManager *)GetInstance{
     

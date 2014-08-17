@@ -601,6 +601,9 @@
     NSString *strLongitude = [NSString stringWithFormat:@"%g", GLongitude];
     NSLog(@"strLatitude: %@, strLongitude: %@", strLatitude, strLongitude);
     
+    [GlobalDataManager GetInstance].lastLatitude = strLatitude;
+    [GlobalDataManager GetInstance].lastLongitude = strLongitude;
+    
     [_locationManager stopUpdatingLocation];
     
     if ([UserSessionManager GetInstance].isLoggedIn) {

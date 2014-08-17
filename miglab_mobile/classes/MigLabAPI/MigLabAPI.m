@@ -13,6 +13,7 @@
 #import "AFHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 #import "UserSessionManager.h"
+#import "LyricShare.h"
 
 @implementation MigLabAPI
 
@@ -3471,9 +3472,6 @@
     
     API_HEADER();
     
-    tlatitude = @"";
-    tlongitude = @"";
-    
     NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&type=%@&latitude=%@&longitude=%@", HTTP_GETSHAREINFO, uid, ttoken, tsongid, ttype, tlatitude, tlongitude];
     PLog(@"get share info url : %@", url);
     
@@ -3493,6 +3491,7 @@
                 PLog(@"get share info succeed");
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoSuccess object:nil userInfo:dicResult];

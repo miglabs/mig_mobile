@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LyricShare.h"
 
 @interface UIImage_ext : NSObject
 
 +(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont*)font andFrame:(CGRect)frame;
 
 +(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame;
+
++(UIImage *)createLyricShareImage:(LyricShare*)ls song:(Song*)tsong;
 
 +(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
 

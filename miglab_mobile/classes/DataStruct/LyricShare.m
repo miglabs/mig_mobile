@@ -31,6 +31,8 @@
         
         PLog(@"parser lyric share structure failed...");
     }
+    
+    return ls;
 }
 
 @end
