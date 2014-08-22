@@ -11,12 +11,16 @@
 
 @interface UIImage_ext : NSObject
 
-+(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont*)font andFrame:(CGRect)frame;
+@property (nonatomic, assign) CIContext *imgContext;
 
-+(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame;
++(UIImage_ext *)GetInstance;
 
-+(UIImage *)createLyricShareImage:(LyricShare*)ls song:(Song*)tsong;
+-(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont*)font andFrame:(CGRect)frame;
 
-+(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
+-(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame;
+
+-(UIImage *)createLyricShareImage:(LyricShare*)ls song:(Song*)tsong;
+
+-(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
 
 @end

@@ -7,11 +7,29 @@
 //
 
 #import "UIImage+ext.h"
+#import "GlobalDataManager.h"
+#import "UIImage+BlurredFrame.h"
 
 @implementation UIImage_ext
 
+@synthesize imgContext = _imgContext;
 
-+(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont *)font andFrame:(CGRect)frame{
++(UIImage_ext *)GetInstance {
+    
+    static UIImage_ext* instance = nil;
+
+    @synchronized(self) {
+        
+        if (nil == instance) {
+            
+            instance = [[self alloc] init];
+        }
+    }
+    
+    return instance;
+}
+
+-(UIImage *)imageFromText:(UIImage *)image txt:(NSString *)text andFont:(UIFont *)font andFrame:(CGRect)frame{
     
     UIGraphicsBeginImageContext(image.size);
     [image drawAtPoint:CGPointZero];
@@ -26,7 +44,7 @@
     return finalImg;
 }
 
-+(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame {
+-(UIImage *)drawImageIntoImage:(UIImage *)dstImg andSrcImg:(UIImage *)srcImg andFrame:(CGRect)frame {
     
     UIGraphicsBeginImageContext(dstImg.size);
     
@@ -41,7 +59,7 @@
     return finalImg;
 }
 
-+(float)getFontSize:(NSString *)str andFontName:(NSString *)fontName andSize:(CGSize)size{
+-(float)getFontSize:(NSString *)str andFontName:(NSString *)fontName andSize:(CGSize)size{
     
     CGFloat finalFontSize = MIN_LYRIC_FONT_SIZE;
     BOOL foundSize = NO;
@@ -64,114 +82,187 @@
     return finalFontSize;
 }
 
-+(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
+-(UIImage *)blurImage:(UIImage *)image andRect:(CGRect)blurRect {
+    
+    CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:kCIInputImageKey, inputImage, @"inputRadius", @(2), nil];
+    
+    CIImage *outputImage = filter.outputImage;
+    
+    if (!_imgContext) {
+        
+        _imgContext = [CIContext contextWithOptions:nil];
+    }
+    
+    CGImageRef outImage = [_imgContext createCGImage:outputImage fromRect:blurRect];
+    
+    return [UIImage imageWithCGImage:outImage];
+}
+
+-(NSString *)addReturns:(NSString *)srcStr {
+    
+    NSMutableString *outStr = [[NSMutableString alloc] init];
+    
+    int count = [srcStr length];
+    
+    for (int i=0; i<count; i++) {
+        
+        [outStr appendFormat:@"%hu\\n", [srcStr characterAtIndex:i]];
+    }
+    
+    return outStr;
+}
+
+-(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
     
-    float bgwidth = 320;
-    float bgheight = 480;
-    float halfWidth = bgwidth / 2;
-    float quadWidth = bgwidth / 4;
-    float oxWidth = bgwidth / 8;
-    float halfHeight = bgheight / 2;
-    float quadHeight = bgheight / 4;
-    float oxHeight = bgheight / 8;
+    UIImage* bgImg;
+    UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
+    UIImage* iconImg = [UIImage imageNamed:@"code.png"];
+    int imgWidth, imgHeight;
+    CGRect songNameRect, artistRect, lyricRect, weatherRect, modeRect, temperatureRect, dateRect, addressRect, mainIconRect, toastRect, iconRect;
+    CGRect rcGroupUp, rcGroupDown, rcGroupBottom;
     
-    // 背景图
-    UIImage* bgImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:tsong.coverurl]]];
-    //CGRect bgImgRect = CGRectMake(0, 0, bgImg.size.width, bgImg.size.height);
-    CGRect bgImgRect = CGRectMake(0, 0, bgwidth, bgheight);
-    NSLog(@"junliu 0");
+    if (1) {
+        
+        bgImg = [UIImage imageNamed:@"sleep_bg.png"];
+        
+        imgWidth = bgImg.size.width;
+        imgHeight = bgImg.size.height;
+        
+        rcGroupUp = CGRectMake(484, 44, 156, 156);
+        rcGroupDown = CGRectMake(484, 210, 156, 156);
+        rcGroupBottom = CGRectMake(0, 1035, imgWidth, 140);
+        
+        lyricRect = CGRectMake(0, 366, imgWidth, imgHeight - 366 - 140);
+        
+        songNameRect = CGRectMake(60, 44, 58, 166);
+        artistRect = CGRectMake(158, 210, 40, 166);
+        weatherRect = CGRectMake(484, 74, 156, 48);
+        modeRect = CGRectMake(484, 122, 156, 48);
+        temperatureRect = CGRectMake(484, 234, 156, 48);
+        dateRect = CGRectMake(484, 282, 156, 25);
+        addressRect = CGRectMake(484, 307, 156, 35);
+        
+        mainIconRect = CGRectMake(38, imgHeight - 140 - 21, 130, 98);
+        toastRect = CGRectMake(38 + 140, imgHeight - 140, imgWidth - 38 - 140 - 38 - 96, 140);
+        iconRect = CGRectMake(38 + 140 + toastRect.size.width, toastRect.origin.y, 96, 96);
+    }
+    else {
+        
+        bgImg = [UIImage imageNamed:@"sleep_bg_ip4.png"];
+    }
     
-    UIGraphicsBeginImageContext(bgImgRect.size);
+    bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
+    bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
+    bgImg = [bgImg applyLightEffectAtFrame:rcGroupBottom];
+    //bgImg = [self blurImage:bgImg andRect:rcGroupUp];
+    //bgImg = [self blurImage:bgImg andRect:rcGroupDown];
+    //bgImg = [self blurImage:bgImg andRect:rcGroupBottom];
     
-    [bgImg drawInRect:bgImgRect];
+    NSString *szSongName = tsong.songname;
+    NSString *szArtist = tsong.artist;
+    NSString *szLyric = ls.lyric;
+    NSString *szMode = @"睡觉中";
+    NSString *szTemperature = ls.temprature;
+    NSString *szDate = @"2014/08/19";
+    NSString *szAddress = ls.address;
+    NSString *szToast = MIGTIP_THE_GOAL;
+    
+#if 1
+    
+    szSongName = @"你爱我像谁";
+    szAddress = @"张卫健";
+    szLyric = @"我什么都没有\n只是有一点吵\n如果你感到寂寞\n我带给你热闹\n为你绕一绕\n没有什么大不了\n却可以让你微笑\n其实我很烦恼\n只是你看不到\n如果我也不开心\n怕你转身就逃\n爱上一个人\n一定要让他相信\n这世界多么美好";
+    szTemperature = @"22.c";
+    szAddress = @"HangZhou";
+    
+#endif
+    
+    float fSongName = 58;
+    float fArtist = 40;
+    float fLyric = 30;
+    float fMode = 40;
+    float fTemperature = 40;
+    float fDate = 22;
+    float fAddress = 24;
+    float fToast = 24;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(imgWidth, imgHeight));
+    
+    [bgImg drawInRect:CGRectMake(0, 0, imgWidth, imgHeight)];
+    
+    [mainIconImg drawInRect:mainIconRect];
+    [iconImg drawInRect:iconRect];
     
     [[UIColor whiteColor] set];
     
-    
-    // 歌词
-    NSString* lyric = ls.lyric;
-    if (lyric && ![lyric isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szSongName)) {
         
-        CGRect lyricRect = CGRectMake(quadWidth, halfHeight, halfWidth, halfHeight);
-        float lyricFontSize = [self getFontSize:lyric andFontName:fontname andSize:CGSizeMake(lyricRect.size.width, lyricRect.size.height)];
-        NSLog(@"junliu 1");
-        [lyric drawInRect:lyricRect withFont:[UIFont fontWithName:fontname size:lyricFontSize]];
+        [szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 歌名
-    NSString* songname = tsong.songname;
-    if (songname && ![songname isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szArtist)) {
         
-        CGRect songnameRect = CGRectMake(0, 0, halfWidth, oxHeight);
-        float songnameFontSize = [self getFontSize:songname andFontName:fontname andSize:CGSizeMake(songnameRect.size.width, songnameRect.size.height)];
-        NSLog(@"junliu 2");
-        [songname drawInRect:songnameRect withFont:[UIFont fontWithName:fontname size:songnameFontSize]];
+        [szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 歌手
-    NSString* artist = tsong.artist;
-    if (artist && ![artist isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szLyric)) {
         
-        CGRect artistRect = CGRectMake(quadWidth, oxHeight, quadWidth, oxHeight);
-        float artistFontSize = [self getFontSize:artist andFontName:fontname andSize:CGSizeMake(artistRect.size.width, artistRect.size.height)];
-        NSLog(@"junliu 3");
-        [artist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:artistFontSize]];
+        [szLyric drawInRect:lyricRect withFont:[UIFont fontWithName:fontname size:fLyric] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 情景
-    NSString* mode = @"旅途中";
-    if (mode && ![mode isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szMode)) {
         
-        CGRect modeRect = CGRectMake(halfWidth, oxHeight, halfWidth, oxHeight);
-        float modeFontSize = [self getFontSize:mode andFontName:fontname andSize:CGSizeMake(modeRect.size.width, modeRect.size.height)];
-        NSLog(@"junliu 4");
-        [mode drawInRect:modeRect withFont:[UIFont fontWithName:fontname size:modeFontSize]];
+        [szMode drawInRect:modeRect withFont:[UIFont fontWithName:fontname size:fMode] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 温度
-    NSString* temperature = ls.temprature;
-    if (temperature && ![temperature isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szTemperature)) {
         
-        CGRect tempRect = CGRectMake(halfWidth, quadHeight, halfWidth, oxHeight);
-        float tempFontSize = [self getFontSize:temperature andFontName:fontname andSize:CGSizeMake(tempRect.size.width, tempRect.size.height)];
-        NSLog(@"junliu 5");
-        [temperature drawInRect:tempRect withFont:[UIFont fontWithName:fontname size:tempFontSize]];
+        [szTemperature drawInRect:temperatureRect withFont:[UIFont fontWithName:fontname size:fTemperature] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 日期
-    NSString* date = @"2014/08/17";
-    if (date && ![date isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szDate)) {
         
-        CGRect dateRect = CGRectMake(halfWidth, oxHeight*3, halfWidth, oxHeight/2);
-        float dateFontSize = [self getFontSize:date andFontName:fontname andSize:CGSizeMake(dateRect.size.width, dateRect.size.height)];
-        NSLog(@"junliu 6");
-        [date drawInRect:dateRect withFont:[UIFont fontWithName:fontname size:dateFontSize]];
+        [szDate drawInRect:dateRect withFont:[UIFont fontWithName:fontname size:fDate] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    
-    // 地址
-    NSString* address = ls.address;
-    if (address && ![address isEqualToString:@""]) {
+    if (MIG_NOT_EMPTY_STR(szAddress)) {
         
-        CGRect addRect = CGRectMake(halfWidth, oxHeight*3+oxHeight/2, halfWidth, oxHeight/2);
-        float addFontSize = [self getFontSize:address andFontName:fontname andSize:CGSizeMake(addRect.size.width, addRect.size.height)];
-        NSLog(@"junliu 7");
-        [address drawInRect:addRect withFont:[UIFont fontWithName:fontname size:addFontSize]];
+        [szAddress drawInRect:addressRect withFont:[UIFont fontWithName:fontname size:fAddress] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+    }
+    
+    if (MIG_NOT_EMPTY_STR(szToast)) {
+        
+        [szToast drawInRect:toastRect withFont:[UIFont fontWithName:fontname size:fToast]];
     }
     
     UIImage* shareImg = UIGraphicsGetImageFromCurrentImageContext();
-    NSLog(@"junliu 8");
     
     UIGraphicsEndImageContext();
     
+    UIImageWriteToSavedPhotosAlbum(shareImg, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
     return shareImg;
+}
+
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    
+    NSString *msg = nil;
+    
+    if (error == nil) {
+        
+        msg = @"cheng";
+    }
+    else {
+        
+        msg = @"shibai";
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"save" message:msg delegate:self cancelButtonTitle:@"sure" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 @end

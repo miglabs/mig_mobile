@@ -96,6 +96,11 @@
 {
     _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
     
+#if 1
+    // test
+    UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:nil song:self.shareSong];
+#endif
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
     
@@ -227,7 +232,7 @@
         UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:strLyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
 #else
       
-        UIImage* shareImage = [UIImage_ext createLyricShareImage:lyric song:self.shareSong];
+        UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
         
 #endif
         
