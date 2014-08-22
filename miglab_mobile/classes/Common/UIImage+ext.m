@@ -120,6 +120,7 @@
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
     UIImage* iconImg = [UIImage imageNamed:@"code.png"];
+    UIImage* weatherImg = [UIImage imageNamed:@"snow_ico.png"];
     int imgWidth, imgHeight;
     CGRect songNameRect, artistRect, lyricRect, weatherRect, modeRect, temperatureRect, dateRect, addressRect, mainIconRect, toastRect, iconRect;
     CGRect rcGroupUp, rcGroupDown, rcGroupBottom;
@@ -133,26 +134,37 @@
         
         rcGroupUp = CGRectMake(484, 44, 156, 156);
         rcGroupDown = CGRectMake(484, 210, 156, 156);
-        rcGroupBottom = CGRectMake(0, 1035, imgWidth, 140);
+        rcGroupBottom = CGRectMake(0, imgHeight - 140, imgWidth, 140);
         
         lyricRect = CGRectMake(0, 366, imgWidth, imgHeight - 366 - 140);
         
-        songNameRect = CGRectMake(60, 44, 58, 166);
-        artistRect = CGRectMake(158, 210, 40, 166);
-        weatherRect = CGRectMake(484, 74, 156, 48);
-        modeRect = CGRectMake(484, 122, 156, 48);
-        temperatureRect = CGRectMake(484, 234, 156, 48);
-        dateRect = CGRectMake(484, 282, 156, 25);
-        addressRect = CGRectMake(484, 307, 156, 35);
+        songNameRect = CGRectMake(60, 44, 58, 1000);
+        artistRect = CGRectMake(158, 210, 40, 1000);
         
-        mainIconRect = CGRectMake(38, imgHeight - 140 - 21, 130, 98);
-        toastRect = CGRectMake(38 + 140, imgHeight - 140, imgWidth - 38 - 140 - 38 - 96, 140);
-        iconRect = CGRectMake(38 + 140 + toastRect.size.width, toastRect.origin.y, 96, 96);
+        weatherRect = CGRectMake(484 + 43, 60, 70, 58);
+        modeRect = CGRectMake(484, 128, 156, 48);
+        
+        temperatureRect = CGRectMake(484, 230, 156, 48);
+        dateRect = CGRectMake(484, 282, 156, 25);
+        addressRect = CGRectMake(484, 311, 156, 35);
+        
+        mainIconRect = CGRectMake(34, imgHeight - 140 + 20, 130, 100);
+        toastRect = CGRectMake(38 + 140, imgHeight - 140 + 18, imgWidth - 38 - 140 - 38 - 96, 140);
+        iconRect = CGRectMake(38 + 140 + toastRect.size.width, imgHeight - 140 + 22, 96, 96);
     }
     else {
         
         bgImg = [UIImage imageNamed:@"sleep_bg_ip4.png"];
     }
+    
+    float fSongName = 58;
+    float fArtist = 40;
+    float fLyric = 30;
+    float fMode = 40;
+    float fTemperature = 40;
+    float fDate = 22;
+    float fAddress = 24;
+    float fToast = 24;
     
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
@@ -172,22 +184,13 @@
     
 #if 1
     
-    szSongName = @"你爱我像谁";
-    szAddress = @"张卫健";
+    szSongName = @"你\n爱\n我\n像\n谁\n";
+    szArtist = @"张\n卫\n健\n";
     szLyric = @"我什么都没有\n只是有一点吵\n如果你感到寂寞\n我带给你热闹\n为你绕一绕\n没有什么大不了\n却可以让你微笑\n其实我很烦恼\n只是你看不到\n如果我也不开心\n怕你转身就逃\n爱上一个人\n一定要让他相信\n这世界多么美好";
     szTemperature = @"22.c";
     szAddress = @"HangZhou";
     
 #endif
-    
-    float fSongName = 58;
-    float fArtist = 40;
-    float fLyric = 30;
-    float fMode = 40;
-    float fTemperature = 40;
-    float fDate = 22;
-    float fAddress = 24;
-    float fToast = 24;
     
     UIGraphicsBeginImageContext(CGSizeMake(imgWidth, imgHeight));
     
@@ -195,6 +198,7 @@
     
     [mainIconImg drawInRect:mainIconRect];
     [iconImg drawInRect:iconRect];
+    [weatherImg drawInRect:weatherRect];
     
     [[UIColor whiteColor] set];
     
@@ -210,7 +214,50 @@
     
     if (MIG_NOT_EMPTY_STR(szLyric)) {
         
-        [szLyric drawInRect:lyricRect withFont:[UIFont fontWithName:fontname size:fLyric] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        int count = [szLyric length];
+        int lstart = 0;
+        int lend = 0;
+        int i = 0;
+        UIFont *lyricFont = [UIFont fontWithName:fontname size:fLyric];
+        CGRect curRect = lyricRect;
+        NSString *curLine;
+        
+        for (i=0; i<count; i++) {
+            
+            if ([szLyric characterAtIndex:i] == '\n') {
+                
+                lend = i;
+                
+                //copy
+                if (lstart == 0) {
+                    
+                    curLine = [szLyric substringWithRange:NSMakeRange(lstart, lend - lstart)];
+                }
+                else {
+                    
+                    // remove \n
+                    curLine = [szLyric substringWithRange:NSMakeRange(lstart + 1, lend - lstart - 1)];
+                }
+                
+                [curLine drawInRect:curRect withFont:lyricFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+                curRect.origin.y += 70;
+                
+                if (curRect.origin.y + 70 > imgHeight - 140) {
+                    
+                    break;
+                }
+                
+                lstart = lend;
+            }
+        }
+        
+        if (i == count) {
+            
+            curLine = [szLyric substringWithRange:NSMakeRange(lstart + 1, i - lstart - 1)];
+            [curLine drawInRect:curRect withFont:lyricFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        }
+        
+        //[szLyric drawInRect:lyricRect withFont:[UIFont fontWithName:fontname size:fLyric] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
     if (MIG_NOT_EMPTY_STR(szMode)) {
@@ -235,14 +282,52 @@
     
     if (MIG_NOT_EMPTY_STR(szToast)) {
         
-        [szToast drawInRect:toastRect withFont:[UIFont fontWithName:fontname size:fToast]];
+        int count = [szToast length];
+        int lstart = 0;
+        int lend = 0;
+        int i = 0;
+        UIFont *toastFont = [UIFont fontWithName:fontname size:fToast];
+        CGRect curRect = toastRect;
+        NSString *curLine;
+        
+        for (i=0; i<count; i++) {
+            
+            if ([szToast characterAtIndex:i] == '\n') {
+                
+                lend = i;
+                
+                //copy
+                if (lstart == 0) {
+                    
+                    curLine = [szToast substringWithRange:NSMakeRange(lstart, lend - lstart)];
+                }
+                else {
+                    
+                    // remove \n
+                    curLine = [szToast substringWithRange:NSMakeRange(lstart + 1, lend - lstart - 1)];
+                }
+                
+                [curLine drawInRect:curRect withFont:toastFont];
+                curRect.origin.y += 36;
+                
+                lstart = lend;
+            }
+        }
+        
+        if (i == count) {
+            
+            curLine = [szToast substringWithRange:NSMakeRange(lstart + 1, i - lstart - 1)];
+            [curLine drawInRect:curRect withFont:toastFont];
+        }
+        
+        //[szToast drawInRect:toastRect withFont:[UIFont fontWithName:fontname size:fToast]];
     }
     
     UIImage* shareImg = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
     
-    UIImageWriteToSavedPhotosAlbum(shareImg, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    //UIImageWriteToSavedPhotosAlbum(shareImg, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     
     return shareImg;
 }
