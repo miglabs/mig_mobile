@@ -539,6 +539,7 @@
 		CB5E92CD19A7A47B00B71A10 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E92CA19A7A47B00B71A10 /* UIImage+BlurredFrame.m */; };
 		CB5E92CE19A7A47B00B71A10 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E92CC19A7A47B00B71A10 /* UIImage+ImageEffects.m */; };
 		CB5E92D019A7A5C000B71A10 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5E92CF19A7A5C000B71A10 /* Accelerate.framework */; };
+		CB5E92D319A836C300B71A10 /* MigWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E92D219A836C300B71A10 /* MigWeather.m */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1273,6 +1274,8 @@
 		CB5E92CB19A7A47B00B71A10 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CB5E92CC19A7A47B00B71A10 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		CB5E92CF19A7A5C000B71A10 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		CB5E92D119A836C300B71A10 /* MigWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigWeather.h; sourceTree = "<group>"; };
+		CB5E92D219A836C300B71A10 /* MigWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigWeather.m; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
@@ -1647,6 +1650,8 @@
 				CBB425DF17DE18C400E3BA90 /* SongComment.m */,
 				CB5E92AF199F80EB00B71A10 /* LyricShare.h */,
 				CB5E92B0199F80EB00B71A10 /* LyricShare.m */,
+				CB5E92D119A836C300B71A10 /* MigWeather.h */,
+				CB5E92D219A836C300B71A10 /* MigWeather.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -3075,6 +3080,7 @@
 				18A451171784017B00CFFAD4 /* PCustomTabBarItemView.m in Sources */,
 				18A451181784017B00CFFAD4 /* PCustomTabBarView.m in Sources */,
 				18A451191784017B00CFFAD4 /* PCustomTabBarViewController.m in Sources */,
+				CB5E92D319A836C300B71A10 /* MigWeather.m in Sources */,
 				18A4511A1784017B00CFFAD4 /* PCustomToolBarView.m in Sources */,
 				18A4511D1784023E00CFFAD4 /* NSString+PStringCategory.m in Sources */,
 				18A4512317841A0400CFFAD4 /* PDatabaseManager.m in Sources */,

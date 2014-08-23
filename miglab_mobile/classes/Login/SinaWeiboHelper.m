@@ -96,11 +96,6 @@
 {
     _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
     
-#if 1
-    // test
-    UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:nil song:self.shareSong];
-#endif
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
     
@@ -188,6 +183,8 @@
             [_delegate sinaWeiboUpdateHelper:self didFailWithError:error];
         }
     }
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
 }
 
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
@@ -199,13 +196,19 @@
                 [_delegate sinaWeiboLoginHelper:self didFinishLoadingWithResult:result];
             }
         }//if
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
     } else if ([request.url hasSuffix:@"statuses/update.json"]) {
         if (result && [result isKindOfClass:[NSDictionary class]]) {
             if (_delegate && [_delegate respondsToSelector:@selector(sinaWeiboUpdateHelper:didFinishLoadingWithResult:)]) {
                 [_delegate sinaWeiboUpdateHelper:self didFinishLoadingWithResult:result];
             }
         }
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
     }
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
 }
 
 -(void)doShareToSinaWeibo:(LyricShare *)lyric {
@@ -214,27 +217,8 @@
     if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
         
         NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
-        
-#if 0
-        NSString *strLyric = lyric.lyric;
-        
-        UIImage *bgImage = [UIImage imageNamed:@"bg_mask_2.png"];
-        UIImage *fgImage = [UIImage imageNamed:@"music_comment_avatar_big.png"];
-        
-        UIImage *resImage = [UIImage_ext drawImageIntoImage:bgImage andSrcImg:fgImage andFrame:CGRectMake(160, 0, 160, 160)];
-        
-        NSString *fontName = @"Helvetica";
-        float fontSize = [UIImage_ext getFontSize:strLyric andFontName:fontName andSize:bgImage.size];
-        
-        UIFont *font = [UIFont fontWithName:fontName size:fontSize];
-        
-        
-        UIImage *shareImage = [UIImage_ext imageFromText:resImage txt:strLyric andFont:font andFrame:CGRectMake(0, 0, resImage.size.width, resImage.size.height)];
-#else
       
         UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
-        
-#endif
         
         [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
         
@@ -260,6 +244,7 @@
 -(void)getLyricInfoFailed:(NSNotification *)tNotification {
     
     PLog(@"分享到新浪微博失败");
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
 }
 
 @end

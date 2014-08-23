@@ -95,6 +95,18 @@
 #define STR_USER_SOURCE_WEIXIN                  @"3"
 #define STR_USER_SOURCE_DOUBAN                  @"4"
 
+/* 天气 */
+#define MIG_WEATHER_RAIN                        @"RAIN"
+#define MIG_WEATHER_CLEAR_DAY                   @"CLEAR_DAY"
+#define MIG_WEATHER_CLEAR_NIGHT                 @"CLEAR_NIGHT"
+#define MIG_WEATHER_PARTLY_CLOUDY_DAY           @"PARTLY_CLOUDY_DAY"
+#define MIG_WEATHER_PARTLY_CLOUDY_NIGHT         @"PARTLY_CLOUDY_NIGHT"
+#define MIG_WEATHER_CLOUDY                      @"CLOUDY"
+#define MIG_WEATHER_SLEET                       @"SLEET"
+#define MIG_WEATHER_SNOW                        @"SNOW"
+#define MIG_WEATHER_WIND                        @"WIND"
+#define MIG_WEATHER_FOG                         @"FOG"
+
 
 /* 米格用户id */
 #define MIG_USER_ACCOUNT_ID                     @"666"
@@ -174,8 +186,11 @@
 /* 达到送歌数量限制 */
 #define MIGTIP_1INT_REACH_MAX_SEND_SONG         @"对不起，最多只能送%d首歌哦~~~"
 
-/* 正在分享新浪微博 */
-#define MIGTIP_SHARING_WEIBO                    @"正在分享到新浪微博..."
+/* 分享成功 */
+#define MIGTIP_SHARING_SUCCEED                  @"分享成功~~~"
+
+/* 分享失败 */
+#define MIGTIP_SHARING_FAILED                   @"网络似乎有问题，请稍后再试-_-#"
 
 /* 选择一首歌 */
 #define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"

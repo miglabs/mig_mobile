@@ -9,6 +9,8 @@
 #import "UIImage+ext.h"
 #import "GlobalDataManager.h"
 #import "UIImage+BlurredFrame.h"
+#import "UserSessionManager.h"
+#import "MigWeather.h"
 
 @implementation UIImage_ext
 
@@ -82,37 +84,6 @@
     return finalFontSize;
 }
 
--(UIImage *)blurImage:(UIImage *)image andRect:(CGRect)blurRect {
-    
-    CIImage *inputImage = [CIImage imageWithCGImage:image.CGImage];
-    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur" keysAndValues:kCIInputImageKey, inputImage, @"inputRadius", @(2), nil];
-    
-    CIImage *outputImage = filter.outputImage;
-    
-    if (!_imgContext) {
-        
-        _imgContext = [CIContext contextWithOptions:nil];
-    }
-    
-    CGImageRef outImage = [_imgContext createCGImage:outputImage fromRect:blurRect];
-    
-    return [UIImage imageWithCGImage:outImage];
-}
-
--(NSString *)addReturns:(NSString *)srcStr {
-    
-    NSMutableString *outStr = [[NSMutableString alloc] init];
-    
-    int count = [srcStr length];
-    
-    for (int i=0; i<count; i++) {
-        
-        [outStr appendFormat:@"%hu\\n", [srcStr characterAtIndex:i]];
-    }
-    
-    return outStr;
-}
-
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
@@ -120,7 +91,7 @@
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
     UIImage* iconImg = [UIImage imageNamed:@"code.png"];
-    UIImage* weatherImg = [UIImage imageNamed:@"snow_ico.png"];
+    UIImage* weatherImg = [UIImage imageNamed:[MigWeather getWeatherIconName:ls.weather]];
     int imgWidth, imgHeight;
     CGRect songNameRect, artistRect, lyricRect, weatherRect, modeRect, temperatureRect, dateRect, addressRect, mainIconRect, toastRect, iconRect;
     CGRect rcGroupUp, rcGroupDown, rcGroupBottom;
@@ -136,7 +107,7 @@
         rcGroupDown = CGRectMake(484, 210, 156, 156);
         rcGroupBottom = CGRectMake(0, imgHeight - 140, imgWidth, 140);
         
-        lyricRect = CGRectMake(0, 366, imgWidth, imgHeight - 366 - 140);
+        lyricRect = CGRectMake(0, 366 + 12, imgWidth, imgHeight - 366 - 140);
         
         songNameRect = CGRectMake(60, 44, 58, 1000);
         artistRect = CGRectMake(158, 210, 40, 1000);
@@ -169,25 +140,39 @@
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupBottom];
-    //bgImg = [self blurImage:bgImg andRect:rcGroupUp];
-    //bgImg = [self blurImage:bgImg andRect:rcGroupDown];
-    //bgImg = [self blurImage:bgImg andRect:rcGroupBottom];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDate *date = [NSDate date];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    comps = [calendar components:unitFlags fromDate:date];
     
     NSString *szSongName = tsong.songname;
     NSString *szArtist = tsong.artist;
     NSString *szLyric = ls.lyric;
-    NSString *szMode = @"睡觉中";
+    NSString *szMode;
     NSString *szTemperature = ls.temprature;
-    NSString *szDate = @"2014/08/19";
+    NSString *szDate = [NSString stringWithFormat:@"%04d/%02d/%02d", [comps year], [comps month], [comps day]];
     NSString *szAddress = ls.address;
     NSString *szToast = MIGTIP_THE_GOAL;
     
-#if 1
+    if ([UserSessionManager GetInstance].currentUserGene.scene.sceneIndex != 1) {
+        
+        szMode = [NSString stringWithFormat:@"%@中", [UserSessionManager GetInstance].currentUserGene.scene.name];
+    }
+    else {
+        
+        szMode = [UserSessionManager GetInstance].currentUserGene.scene.name;
+    }
     
-    szSongName = @"你\n爱\n我\n像\n谁\n";
-    szArtist = @"张\n卫\n健\n";
+#if 0
+    
+    szSongName = @"你爱我像谁";
+    szArtist = @"张卫健";
     szLyric = @"我什么都没有\n只是有一点吵\n如果你感到寂寞\n我带给你热闹\n为你绕一绕\n没有什么大不了\n却可以让你微笑\n其实我很烦恼\n只是你看不到\n如果我也不开心\n怕你转身就逃\n爱上一个人\n一定要让他相信\n这世界多么美好";
-    szTemperature = @"22.c";
+    szTemperature = @"22°C";
     szAddress = @"HangZhou";
     
 #endif
@@ -204,12 +189,46 @@
     
     if (MIG_NOT_EMPTY_STR(szSongName)) {
         
-        [szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        int count = [szSongName length];
+        int stride = fSongName;
+        CGRect curRect = songNameRect;
+        UIFont *songnameFont = [UIFont fontName:fontname size:fSongName];
+        
+        for (int i=0; i<count; i++) {
+            
+            [[szSongName substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:songnameFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            
+            curRect.origin.y += stride;
+            
+            if (curRect.origin.y > 1000) {
+                
+                break;
+            }
+        }
+        
+        //[szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
     if (MIG_NOT_EMPTY_STR(szArtist)) {
         
-        [szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        int count = [szArtist length];
+        int stride = fArtist;
+        CGRect curRect = artistRect;
+        UIFont *artistFont = [UIFont fontName:fontname size:fArtist];
+        
+        for (int i=0; i<count; i++) {
+            
+            [[szArtist substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:artistFont lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+            
+            curRect.origin.y += stride;
+            
+            if (curRect.origin.y > 1000) {
+                
+                break;
+            }
+        }
+        
+        //[szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
     if (MIG_NOT_EMPTY_STR(szLyric)) {
@@ -218,13 +237,14 @@
         int lstart = 0;
         int lend = 0;
         int i = 0;
+        int stride = fLyric + 30;
         UIFont *lyricFont = [UIFont fontWithName:fontname size:fLyric];
         CGRect curRect = lyricRect;
         NSString *curLine;
         
         for (i=0; i<count; i++) {
             
-            if ([szLyric characterAtIndex:i] == '\n') {
+            if ([szLyric characterAtIndex:i] == '\n' || [szLyric characterAtIndex:i] == '\r') {
                 
                 lend = i;
                 
@@ -240,9 +260,9 @@
                 }
                 
                 [curLine drawInRect:curRect withFont:lyricFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
-                curRect.origin.y += 70;
+                curRect.origin.y += stride;
                 
-                if (curRect.origin.y + 70 > imgHeight - 140) {
+                if (curRect.origin.y + stride > imgHeight - 140) {
                     
                     break;
                 }
@@ -286,6 +306,7 @@
         int lstart = 0;
         int lend = 0;
         int i = 0;
+        int stride = fToast + 12;
         UIFont *toastFont = [UIFont fontWithName:fontname size:fToast];
         CGRect curRect = toastRect;
         NSString *curLine;
@@ -308,7 +329,7 @@
                 }
                 
                 [curLine drawInRect:curRect withFont:toastFont];
-                curRect.origin.y += 36;
+                curRect.origin.y += stride;
                 
                 lstart = lend;
             }
@@ -338,14 +359,14 @@
     
     if (error == nil) {
         
-        msg = @"cheng";
+        msg = @"保存图片成功";
     }
     else {
         
-        msg = @"shibai";
+        msg = @"保存图片失败";
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"save" message:msg delegate:self cancelButtonTitle:@"sure" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"存图" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     
     [alert show];
 }
