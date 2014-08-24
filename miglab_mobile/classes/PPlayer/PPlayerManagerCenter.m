@@ -431,7 +431,7 @@ static PPlayerManagerCenter *instance;
     PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
     [databaseManager deleteSongInfo:[localkey longLongValue]];
     
-    //[SVProgressHUD showErrorWithStatus:@"歌曲下载失败:("];
+    PLog(@"歌曲下载失败:(");
 }
 
 -(void)doDownloadProcess:(NSDictionary *)dicProcess{

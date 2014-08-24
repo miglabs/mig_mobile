@@ -7,6 +7,7 @@
 //
 
 #import "PAAMusicPlayer.h"
+#import "SVProgressHUD.h"
 
 @implementation PAAMusicPlayer
 
@@ -17,12 +18,14 @@
 @synthesize delegate = _delegate;
 @synthesize song = _song;
 @synthesize playerDestoried = _playerDestoried;
+@synthesize playAbortTimes = _playAbortTimes;
 
 -(id)init{
     
     self = [super init];
     if (self) {
         _playerDestoried = YES;
+        _playAbortTimes = 0;
     }
     return self;
     
@@ -83,7 +86,7 @@
         [self stop];
     }
     _playerDestoried = YES;
-    
+    _playAbortTimes = 0;
 }
 
 -(void)playAtTime:(NSTimeInterval)timeInterval{
@@ -210,6 +213,7 @@
         }
     }
     
+    _playAbortTimes = 0;
 }
 
 -(void)timerStart{
@@ -232,6 +236,32 @@
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
+#if 0
+    /* 播放时间没有到达指定值，说明播放没有结束，sleep 0.5秒，出现10次，提醒用户网络不稳定*/
+    int songPlayTime = [_song.duration intValue];
+    int playerPlayTime = player.currentTime;
+    int playerTotalTime = player.duration;
+    if (playerPlayTime < songPlayTime) {
+        
+        [self pause];
+
+        sleep(3);
+        _playAbortTimes += 1;
+        
+        if (_playAbortTimes > 10) {
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_UNSTABLE_NETWORK];
+        }
+        
+        PLog(@"junliu net work abort %d", _playAbortTimes);
+        
+        [self play];
+        
+        return;
+    }
+#endif
+    _playAbortTimes = 0;
+    
     [self timerStop];
     
     if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)])

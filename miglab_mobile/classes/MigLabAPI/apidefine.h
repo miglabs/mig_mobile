@@ -196,7 +196,7 @@
 #define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"
 
 /* 新浪微博分享词 */
-#define MIGTIP_WEIBO_SHARE_TEXT_4S              @"分享一首[%@]单曲, <%@ - %@>(来自@咪哟miyou)(#听对的音乐遇见对的人#)试听下载地址%@"
+#define MIGTIP_WEIBO_SHARE_TEXT_4S              @"分享一首[%@]单曲, <%@ - %@>(来自@咪哟miyo)(#听对的音乐遇见对的人#)试听下载地址%@"
 
 /* 确定 */
 #define MIGTIP_OK                               @"确定"
@@ -206,6 +206,9 @@
 
 /* 警告 */
 #define MIGTIP_WARNING                          @"Warning"
+
+/* 网络不稳定 */
+#define MIGTIP_UNSTABLE_NETWORK                 @"您的网络好像不稳定哦~~~"
 
 /* 没有打开定位服务 */
 #define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
