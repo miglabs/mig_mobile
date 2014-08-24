@@ -238,7 +238,31 @@
     
     LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
     
+    // 创建线程完成
+#if 1
     [self doShareToSinaWeibo:ls];
+#else 
+    
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+    
+    [operationQueue addOperationWithBlock:^{
+        
+        SinaWeibo *sinaweibo = [self sinaweibo];
+        if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
+            
+            NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
+            
+            UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:ls song:self.shareSong];
+            
+            [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
+            
+        } else {
+            
+            [sinaweibo logIn];
+        }
+    }];
+    
+#endif
 }
 
 -(void)getLyricInfoFailed:(NSNotification *)tNotification {
