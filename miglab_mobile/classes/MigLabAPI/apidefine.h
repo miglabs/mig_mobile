@@ -196,7 +196,7 @@
 #define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"
 
 /* 新浪微博分享词 */
-#define MIGTIP_WEIBO_SHARE_TEXT                 @"这首歌不错哦~~~~~~"
+#define MIGTIP_WEIBO_SHARE_TEXT_4S              @"分享一首[%@]单曲, <%@ - %@>(来自@咪哟miyou)(#听对的音乐遇见对的人#)试听下载地址%@"
 
 /* 确定 */
 #define MIGTIP_OK                               @"确定"
@@ -213,10 +213,13 @@
 #define MIGTIP_THE_GOAL                         @"咪哟...\n对的地方，对的时刻\n听对的音乐，遇见对的人"
 
 /* 微信分享地址 */
-#define SHARE_WEIXIN_ADDRESS                    @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
+#define SHARE_WEIXIN_ADDRESS_1LONG              @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
 
 /* QQ空间分享地址 */
 #define SHARE_QQZONE_ADDRESS_1LONG              @"http://qzone.share.miyomate.com/?songid=%lld&from=timeline&isappinstalled=1"
+
+/* 微博分享地址 */
+#define SHARE_WEIBO_ADDRESS_1LONG               @"http://weibo.share.miyomate.com/?songid=%lld"
 
 
 /* --------------------- 地址定义 --------------------- */
@@ -241,7 +244,7 @@
 #define USE_NEW_LOAD    1
 #define USE_ARTIST_SONGNAME 0
 
-/* ------------------ Function ---------------------- */
+/* ------------------ 宏函数定义 ---------------------- */
 #define MIG_NOT_EMPTY_STR(x)                     (x && ![x isEqualToString:@""])
 
 #endif

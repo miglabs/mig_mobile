@@ -216,7 +216,9 @@
     SinaWeibo *sinaweibo = [self sinaweibo];
     if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
         
-        NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
+        Song* shareSong = self.shareSong;
+        
+        NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [UserSessionManager GetInstance].currentUserGene.mood.name, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
       
         UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
         

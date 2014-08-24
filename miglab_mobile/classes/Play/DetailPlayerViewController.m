@@ -358,7 +358,7 @@
 #ifdef WEIXIN_REAL_SONG_ADDRESS
     ext.musicUrl = currentSong.songurl;
 #else
-    ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS, currentSong.songid];
+    ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS_1LONG, currentSong.songid];
     PLog(@"musicUrl %@",ext.musicUrl);
     ext.musicDataUrl = currentSong.songurl;
 #endif
