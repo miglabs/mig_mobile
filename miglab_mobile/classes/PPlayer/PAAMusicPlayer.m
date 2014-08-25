@@ -242,8 +242,6 @@
     int playerPlayTime = player.currentTime;
     int playerTotalTime = player.duration;
     if (playerPlayTime < songPlayTime) {
-        
-        [self pause];
 
         sleep(3);
         _playAbortTimes += 1;
@@ -254,8 +252,6 @@
         }
         
         PLog(@"junliu net work abort %d", _playAbortTimes);
-        
-        [self play];
         
         return;
     }

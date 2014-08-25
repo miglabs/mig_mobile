@@ -16,6 +16,8 @@
 
 @implementation SinaWeiboHelper
 
+BOOL _firstLoadObserver = YES;
+
 + (id)sharedInstance
 {
     static id sharedInstance = nil;
@@ -96,8 +98,13 @@
 {
     _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+    if (_firstLoadObserver) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+        
+        _firstLoadObserver = NO;
+    }
     
     self.shareSong = tSong;
     
