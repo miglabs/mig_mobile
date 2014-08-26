@@ -16,6 +16,8 @@
 #import "ShareGuideView.h"
 #import "SinaWeiboHelper.h"
 #import "TencentHelper.h"
+#import "LyricShare.h"
+#import "UIImage+ext.h"
 
 @interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate>
 
@@ -58,6 +60,9 @@
 -(void)doShare2Renren;
 -(void)doSHare2Sms;
 
+-(IBAction)doGetShareInfoWithLongPress:(id)sender;
+-(void)doShare2WeiXinWithLongPress:(LyricShare *)ls;
+
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;
 -(IBAction)doPlayOrPauseAction:(id)sender;
@@ -68,6 +73,9 @@
 -(void)collectSongFailed:(NSNotification *)tNotification;
 -(void)collectSongSuccess:(NSNotification *)tNotification;
 -(void)autoPlayerNext:(NSNotification *)tNotification;
+
+-(void)getShareInfoSuccess:(NSNotification *)tNotification;
+-(void)getShareInfoFailed:(NSNotification *)tNotification;
 
 -(void)initSongInfo;
 -(void)configNowPlayingInfoCenter;               //锁屏封面

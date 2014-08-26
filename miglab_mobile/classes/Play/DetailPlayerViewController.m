@@ -147,6 +147,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
+    // doGetShareInfo
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoSuccess:) name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
     
     //data
@@ -167,6 +171,10 @@
     //doCollectSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    // doGetShareInfo
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoFailed object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerNext object:nil];
 }
@@ -204,15 +212,24 @@
     _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
+    
     [shareSelectedView.btnFirst addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    
     [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doGotoShareViewWithLongPress:)];
+    longPress.minimumPressDuration = 0.8;
+    [shareSelectedView.btnThird addGestureRecognizer:longPress];
+    
     [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     shareSelectedView.btnFour.hidden = YES;
     shareSelectedView.lblFour.hidden = YES;
+    
     [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     shareSelectedView.btnFive.hidden = YES;
     shareSelectedView.lblFive.hidden = YES;
+    
     [shareSelectedView.btnSix addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     shareSelectedView.btnSix.hidden = YES;
     shareSelectedView.lblSix.hidden = YES;
@@ -278,6 +295,23 @@
     //    [self.navigationController pushViewController:shareViewController animated:YES];
 //    [self presentModalViewController:shareViewController animated:YES];
     
+}
+
+-(IBAction)doGotoShareViewWithLongPress:(id)sender {
+    
+    //weixin
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    NSString* uid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+    NSString* ttype = STR_USER_SOURCE_SINA;
+    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
+    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+    
+    [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
+    
+    [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 -(void)doShare2QQZone{
@@ -362,6 +396,49 @@
     PLog(@"musicUrl %@",ext.musicUrl);
     ext.musicDataUrl = currentSong.songurl;
 #endif
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    [WXApi sendReq:req];
+    
+}
+
+-(void)doShare2WeiXinWithLongPress:(LyricShare *)ls{
+    
+    PLog(@"doShare2WeiXinWithLongPress...");
+    
+    //分享到微信朋友圈
+    if (![WXApi isWXAppInstalled]) {
+        NSLog(@"你的iPhone上还没有安装微信，无法使用此功能，请先下载");
+        return;
+    }
+    
+    if (![WXApi isWXAppSupportApi]) {
+        NSLog(@"你当前的微信版本过低，无法支持此功能，请更新微信至最新版本");
+        return;
+    }
+    
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [UserSessionManager GetInstance].currentUserGene.mood.name, currentSong.songname, currentSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, currentSong.songid]];
+    
+    UIImage* shareLyricImage = [[UIImage_ext GetInstance] createLyricShareImage:ls song:currentSong];
+    
+    UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
+    UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
+    UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
+    
+    //
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = shareText;
+    [message setThumbImage:shareImage];
+
+    WXImageObject *ext = [WXImageObject object];
+    ext.imageData = UIImagePNGRepresentation(shareLyricImage);
+
     message.mediaObject = ext;
     
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
@@ -501,6 +578,21 @@
     
     //[SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
     [self initSongInfo];
+}
+
+-(void)getShareInfoSuccess:(NSNotification *)tNotification {
+    
+    NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
+    NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
+    
+    LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
+    
+    [self doShare2WeiXinWithLongPress:ls];
+}
+
+-(void)getShareInfoFailed:(NSNotification *)tNotification {
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
 }
 
 -(void)initSongInfo{
