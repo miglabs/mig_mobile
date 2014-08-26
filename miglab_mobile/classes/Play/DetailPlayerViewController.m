@@ -48,8 +48,21 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        // doGetShareInfo
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoSuccess:) name:NotificationNameGetShareInfoSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    
+    // doGetShareInfo
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoFailed object:nil];
 }
 
 - (void)viewDidLoad
@@ -147,12 +160,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
-    // doGetShareInfo
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoSuccess:) name:NotificationNameGetShareInfoSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
-    
     //data
     _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
     
@@ -171,10 +178,6 @@
     //doCollectSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
-    
-    // doGetShareInfo
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoFailed object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerNext object:nil];
 }
@@ -299,19 +302,24 @@
 
 -(IBAction)doGotoShareViewWithLongPress:(id)sender {
     
-    //weixin
-    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    UILongPressGestureRecognizer *recogSender = (UILongPressGestureRecognizer *)sender;
     
-    NSString* uid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
-    NSString* ttype = STR_USER_SOURCE_SINA;
-    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
-    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
-    
-    [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
-    
-    [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    if (recogSender.state == UIGestureRecognizerStateBegan) {
+        
+        //weixin
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        
+        NSString* uid = [UserSessionManager GetInstance].userid;
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+        NSString* ttype = STR_USER_SOURCE_SINA;
+        NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
+        NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+        
+        [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
+        
+        [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    }
 }
 
 -(void)doShare2QQZone{
