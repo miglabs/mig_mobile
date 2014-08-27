@@ -48,21 +48,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-        // doGetShareInfo
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoSuccess:) name:NotificationNameGetShareInfoSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
     }
     return self;
-}
-
--(void)dealloc {
-    
-    // doGetShareInfo
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoFailed object:nil];
 }
 
 - (void)viewDidLoad
@@ -90,7 +77,7 @@
     _lblSongInfo.textAlignment = kTextAlignmentCenter;
     _lblSongInfo.textColor = [UIColor whiteColor];
     _lblSongInfo.shadowOffset = CGSizeMake(0, 1);
-    _lblSongInfo.text = @"咪呦努力加载";
+    _lblSongInfo.text = MIGTIP_LOADING;
     _lblSongInfo.font = [UIFont systemFontOfSize:20.0f];
     [self.view addSubview:_lblSongInfo];
     
@@ -160,6 +147,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongFailed:) name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectSongSuccess:) name:NotificationNameCollectSongSuccess object:nil];
     
+    // doGetShareInfo
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoSuccess:) name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getShareInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoPlayerNext:) name:NotificationNamePlayerNext object:nil];
+    
     //data
     _isCurSongLike = [[PPlayerManagerCenter GetInstance].currentSong.like intValue];
     
@@ -178,6 +171,10 @@
     //doCollectSong
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongSuccess object:nil];
+    
+    // doGetShareInfo
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetShareInfoFailed object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerNext object:nil];
 }
@@ -212,7 +209,7 @@
     
     //
 //    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
     
@@ -352,12 +349,16 @@
     
     //分享到微信朋友圈
     if (![WXApi isWXAppInstalled]) {
-        NSLog(@"你的iPhone上还没有安装微信，无法使用此功能，请先下载");
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+        
         return;
     }
     
     if (![WXApi isWXAppSupportApi]) {
-        NSLog(@"你当前的微信版本过低，无法支持此功能，请更新微信至最新版本");
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+        
         return;
     }
     
@@ -420,29 +421,24 @@
     
     //分享到微信朋友圈
     if (![WXApi isWXAppInstalled]) {
-        NSLog(@"你的iPhone上还没有安装微信，无法使用此功能，请先下载");
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+        
         return;
     }
     
     if (![WXApi isWXAppSupportApi]) {
-        NSLog(@"你当前的微信版本过低，无法支持此功能，请更新微信至最新版本");
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+        
         return;
     }
     
     Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
     
-    NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [UserSessionManager GetInstance].currentUserGene.mood.name, currentSong.songname, currentSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, currentSong.songid]];
-    
     UIImage* shareLyricImage = [[UIImage_ext GetInstance] createLyricShareImage:ls song:currentSong];
     
-    UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
-    UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
-    UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
-    
-    //
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = shareText;
-    [message setThumbImage:shareImage];
 
     WXImageObject *ext = [WXImageObject object];
     ext.imageData = UIImagePNGRepresentation(shareLyricImage);
@@ -454,7 +450,6 @@
     req.message = message;
     req.scene = WXSceneTimeline;
     [WXApi sendReq:req];
-    
 }
 
 -(void)doShare2TencentWeibo{
@@ -571,20 +566,21 @@
 }
 
 -(void)hateSongFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲拉黑失败:("];
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_HATE_SONG_FAILED];
 }
 
 -(void)hateSongSuccess:(NSNotification *)tNotification{
-    //[SVProgressHUD showSuccessWithStatus:@"歌曲拉黑成功:)"];
+    
 }
 
 -(void)collectSongFailed:(NSNotification *)tNotification{
-    [SVProgressHUD showErrorWithStatus:@"歌曲收藏失败:("];
+    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_COLLECT_SONG_FAILED];
 }
 
 -(void)collectSongSuccess:(NSNotification *)tNotification{
     
-    //[SVProgressHUD showSuccessWithStatus:@"歌曲收藏成功:)"];
     [self initSongInfo];
 }
 
@@ -752,34 +748,34 @@
 
 - (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFailWithError:(NSError *)error
 {
-    [SVProgressHUD showErrorWithStatus:@"sorry, 分享新浪微博失败～"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARE_TO_SINA_WEIBO_FAILED];
 }
 
 - (void)sinaWeiboUpdateHelper:(SinaWeiboHelper *)sinaWeiboHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
-    [SVProgressHUD showSuccessWithStatus:@"分享新浪微博成功～"];
+    [SVProgressHUD showSuccessWithStatus:MIGTIP_SHARE_TO_SINA_WEIBO_SUCCEED];
 }
 
 #pragma mark TencentHelperDelegate method
 
 - (void)tencentAddTopicHelper:(TencentHelper *)tencentHelper didFailWithError:(NSError *)error
 {
-    [SVProgressHUD showErrorWithStatus:@"sorry, 发表说说失败～"];
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARE_TO_QQ_FAILED];
 }
 
 - (void)tencentAddTopicHelper:(TencentHelper *)tencentHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
-    [SVProgressHUD showSuccessWithStatus:@"发表说说成功～"];
+    [SVProgressHUD showSuccessWithStatus:MIGTIP_SHARE_TO_QQ_SUCCEED];
 }
 
 - (void)tencentAddWeiboHelper:(TencentHelper *)tencentHelper didFailWithError:(NSError *)error
 {
-    [SVProgressHUD showErrorWithStatus:@"sorry, 发布微博失败～"];
+    
 }
 
 - (void)tencentAddWeiboHelper:(TencentHelper *)tencentHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
-    [SVProgressHUD showSuccessWithStatus:@"发布微博成功～"];
+    
 }
 
 @end

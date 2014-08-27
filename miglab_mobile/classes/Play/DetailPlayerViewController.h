@@ -60,7 +60,7 @@
 -(void)doShare2Renren;
 -(void)doSHare2Sms;
 
--(IBAction)doGetShareInfoWithLongPress:(id)sender;
+-(IBAction)doGotoShareViewWithLongPress:(id)sender;
 -(void)doShare2WeiXinWithLongPress:(LyricShare *)ls;
 
 -(IBAction)doDeleteAction:(id)sender;

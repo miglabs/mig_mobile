@@ -174,6 +174,30 @@
 /* 发送消息的类型不对 */
 #define MIGTIP_WRONG_MSG_TYPE                   @"信息格式不正确, 无法显示"
 
+/* 歌曲拉黑成功 */
+#define MIGTIP_HATE_SONG_SUCCEED                @"歌曲拉黑成功:)"
+
+/* 歌曲拉黑失败 */
+#define MIGTIP_HATE_SONG_FAILED                 @"歌曲拉黑失败:("
+
+/* 歌曲收藏成功 */
+#define MIGTIP_COLLECT_SONG_SUCCEED             @"歌曲收藏成功:)"
+
+/* 歌曲收藏失败 */
+#define MIGTIP_COLLECT_SONG_FAILED              @"歌曲收藏失败:("
+
+/* 分享新浪微博成功 */
+#define MIGTIP_SHARE_TO_SINA_WEIBO_SUCCEED      @"分享新浪微博成功～"
+
+/* 分享新浪微博失败 */
+#define MIGTIP_SHARE_TO_SINA_WEIBO_FAILED       @"分享新浪微博失败了～"
+
+/* 分享QQ成功 */
+#define MIGTIP_SHARE_TO_QQ_SUCCEED              @"发表说说成功～"
+
+/* 分享QQ失败 */
+#define MIGTIP_SHARE_TO_QQ_FAILED               @"发表说说失败了～"
+
 /* 拒绝搭讪 */
 #define MIGTIP_REJECT_SAY_HELLO                 @"对方拒绝您的搭讪"
 
@@ -213,6 +237,13 @@
 /* 没有打开定位服务 */
 #define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
 
+/* 没有安装微信 */
+#define MIGTIP_NOT_FOUND_WEIXIN                 @"您还没有安装微信，无法使用此功能，请先下载"
+
+/* 微信版本过低 */
+#define MIGTIP_WEIXIN_OUT_OF_DATE               @"您当前的微信版本过低，无法支持此功能，请更新微信至最新版本"
+
+/* 咪哟标语 */
 #define MIGTIP_THE_GOAL                         @"咪哟...\n对的地方，对的时刻\n听对的音乐，遇见对的人"
 
 /* 微信分享地址 */
