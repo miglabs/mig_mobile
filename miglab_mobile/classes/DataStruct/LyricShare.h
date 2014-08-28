@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSString* weather;
 @property (nonatomic, retain) NSString* temprature;
 @property (nonatomic, retain) NSString* address;
+@property (nonatomic, retain) NSString* description;
 
 +(id)initWithNSDictionary:(NSDictionary*)dict;
 

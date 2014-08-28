@@ -87,16 +87,15 @@
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
-    NSString *szMode = [GlobalDataManager GetInstance].curSongTypeName;
     NSString *szBgImg;
     
     if ([GlobalDataManager GetInstance].isLongScreen) {
         
-        szBgImg = [NSString stringWithFormat:@"%@.png", szMode];
+        szBgImg = [NSString stringWithFormat:@"%@.png", [GlobalDataManager GetInstance].curSongTypeName];
     }
     else {
         
-        szBgImg = [NSString stringWithFormat:@"%@_ip4.png", szMode];
+        szBgImg = [NSString stringWithFormat:@"%@_ip4.png", [GlobalDataManager GetInstance].curSongTypeName];
     }
     
     UIImage* bgImg;
@@ -160,6 +159,7 @@
     NSString *szDate = [NSString stringWithFormat:@"%04d/%02d/%02d", [comps year], [comps month], [comps day]];
     NSString *szAddress = ls.address;
     NSString *szToast = MIGTIP_THE_GOAL;
+    NSString *szMode = ls.description;
     
 #if 0
     
