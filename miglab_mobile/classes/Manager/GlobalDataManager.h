@@ -24,6 +24,8 @@
 @property (nonatomic, assign) BOOL isNetConnect;
 @property (nonatomic, retain) NSString* lastLatitude;
 @property (nonatomic, retain) NSString* lastLongitude;
+@property (nonatomic, retain) NSString* curSongType;
+@property (nonatomic, retain) NSString* curSongMode;
 
 @property (nonatomic, assign) int nNewArrivalMsg;
 @property (nonatomic, assign) int nShareSource; // 1-weibo, 2-weixin

@@ -87,6 +87,17 @@
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
+    NSString *szMode = [GlobalDataManager GetInstance].curSongMode;
+    NSString *szBgImg;
+    
+    if ([GlobalDataManager GetInstance].isLongScreen) {
+        
+        szBgImg = [NSString stringWithFormat:@"%@.png", szMode];
+    }
+    else {
+        
+        szBgImg = [NSString stringWithFormat:@"%@_ip4.png", szMode];
+    }
     
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
@@ -96,37 +107,30 @@
     CGRect songNameRect, artistRect, lyricRect, weatherRect, modeRect, temperatureRect, dateRect, addressRect, mainIconRect, toastRect, iconRect;
     CGRect rcGroupUp, rcGroupDown, rcGroupBottom;
     
-    if (1) {
-        
-        bgImg = [UIImage imageNamed:@"sleep_bg.png"];
-        
-        imgWidth = bgImg.size.width;
-        imgHeight = bgImg.size.height;
-        
-        rcGroupUp = CGRectMake(484, 44, 156, 156);
-        rcGroupDown = CGRectMake(484, 210, 156, 156);
-        rcGroupBottom = CGRectMake(0, imgHeight - 140, imgWidth, 140);
-        
-        lyricRect = CGRectMake(0, 366 + 12, imgWidth, imgHeight - 366 - 140);
-        
-        songNameRect = CGRectMake(60, 44, 58, 1000);
-        artistRect = CGRectMake(158, 210, 40, 1000);
-        
-        weatherRect = CGRectMake(484 + 43, 60, 70, 58);
-        modeRect = CGRectMake(484, 128, 156, 48);
-        
-        temperatureRect = CGRectMake(484, 230, 156, 48);
-        dateRect = CGRectMake(484, 282, 156, 25);
-        addressRect = CGRectMake(484, 311, 156, 35);
-        
-        mainIconRect = CGRectMake(34, imgHeight - 140 + 20, 130, 100);
-        toastRect = CGRectMake(38 + 140, imgHeight - 140 + 18, imgWidth - 38 - 140 - 38 - 96, 140);
-        iconRect = CGRectMake(38 + 140 + toastRect.size.width, imgHeight - 140 + 22, 96, 96);
-    }
-    else {
-        
-        bgImg = [UIImage imageNamed:@"sleep_bg_ip4.png"];
-    }
+    bgImg = [UIImage imageNamed:szBgImg];
+    
+    imgWidth = bgImg.size.width;
+    imgHeight = bgImg.size.height;
+    
+    rcGroupUp = CGRectMake(484, 44, 156, 156);
+    rcGroupDown = CGRectMake(484, 210, 156, 156);
+    rcGroupBottom = CGRectMake(0, imgHeight - 140, imgWidth, 140);
+    
+    lyricRect = CGRectMake(0, 366 + 12, imgWidth, imgHeight - 366 - 140);
+    
+    songNameRect = CGRectMake(60, 44, 58, 1000);
+    artistRect = CGRectMake(158, 210, 40, 1000);
+    
+    weatherRect = CGRectMake(484 + 43, 60, 70, 58);
+    modeRect = CGRectMake(484, 128, 156, 48);
+    
+    temperatureRect = CGRectMake(484, 230, 156, 48);
+    dateRect = CGRectMake(484, 282, 156, 25);
+    addressRect = CGRectMake(484, 311, 156, 35);
+    
+    mainIconRect = CGRectMake(34, imgHeight - 140 + 20, 130, 100);
+    toastRect = CGRectMake(38 + 140, imgHeight - 140 + 18, imgWidth - 38 - 140 - 38 - 96, 140);
+    iconRect = CGRectMake(38 + 140 + toastRect.size.width, imgHeight - 140 + 22, 96, 96);
     
     float fSongName = 58;
     float fArtist = 40;
@@ -152,20 +156,10 @@
     NSString *szSongName = tsong.songname;
     NSString *szArtist = tsong.artist;
     NSString *szLyric = ls.lyric;
-    NSString *szMode;
     NSString *szTemperature = ls.temprature;
     NSString *szDate = [NSString stringWithFormat:@"%04d/%02d/%02d", [comps year], [comps month], [comps day]];
     NSString *szAddress = ls.address;
     NSString *szToast = MIGTIP_THE_GOAL;
-    
-    if ([UserSessionManager GetInstance].currentUserGene.scene.sceneIndex != 1) {
-        
-        szMode = [NSString stringWithFormat:@"%@中", [UserSessionManager GetInstance].currentUserGene.scene.name];
-    }
-    else {
-        
-        szMode = [UserSessionManager GetInstance].currentUserGene.scene.name;
-    }
     
 #if 0
     

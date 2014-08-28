@@ -95,6 +95,11 @@
 #define STR_USER_SOURCE_WEIXIN                  @"3"
 #define STR_USER_SOURCE_DOUBAN                  @"4"
 
+/* 歌曲类型 */
+#define STR_TYPE_CHL                            @"chl"
+#define STR_TYPE_MM                             @"mm"
+#define STR_TYPE_MS                             @"ms"
+
 /* 天气 */
 #define MIG_WEATHER_RAIN                        @"RAIN"
 #define MIG_WEATHER_CLEAR_DAY                   @"CLEAR_DAY"

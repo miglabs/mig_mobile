@@ -26,6 +26,8 @@
 @synthesize lastLatitude = _lastLatitude;
 @synthesize lastLongitude = _lastLongitude;
 @synthesize nShareSource = _nShareSource;
+@synthesize curSongType = _curSongType;
+@synthesize curSongMode = _curSongMode;
 
 +(GlobalDataManager *)GetInstance{
     
