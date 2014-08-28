@@ -27,7 +27,8 @@
 @synthesize lastLongitude = _lastLongitude;
 @synthesize nShareSource = _nShareSource;
 @synthesize curSongType = _curSongType;
-@synthesize curSongMode = _curSongMode;
+@synthesize curSongTypeName = _curSongTypeName;
+@synthesize curSongTypeId = _curSongTypeId;
 
 +(GlobalDataManager *)GetInstance{
     

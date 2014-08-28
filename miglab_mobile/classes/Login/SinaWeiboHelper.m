@@ -114,11 +114,13 @@ BOOL _firstLoadObserver = YES;
     NSString* ttype = STR_USER_SOURCE_SINA;
     NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
     NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+    NSString* tmode = [GlobalDataManager GetInstance].curSongType;
+    NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
     
     [GlobalDataManager GetInstance].nShareSource = LOGIN_SINA;
     
     MigLabAPI* migapi = [[MigLabAPI alloc] init];
-    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
+    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype mode:tmode index:tindex latitude:tlatitude longitude:tlongitude];
 }
 
 #pragma mark - SinaWeibo Delegate

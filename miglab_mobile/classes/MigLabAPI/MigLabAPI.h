@@ -283,6 +283,6 @@ typedef enum {
 /*
  获取歌词分享信息
  */
--(void)doGetShareInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid type:(NSString*)ttype latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
+-(void)doGetShareInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid type:(NSString*)ttype mode:(NSString *)tmode index:(NSString *)tindex latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
 
 @end

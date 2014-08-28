@@ -3468,11 +3468,11 @@
  GET
  HTTP_GETSHAREINFO
  */
--(void)doGetShareInfo:(NSString *)uid token:(NSString *)ttoken songid:(NSString *)tsongid type:(NSString *)ttype latitude:(NSString *)tlatitude longitude:(NSString *)tlongitude {
+-(void)doGetShareInfo:(NSString *)uid token:(NSString *)ttoken songid:(NSString *)tsongid type:(NSString *)ttype mode:(NSString *)tmode index:(NSString *)tindex latitude:(NSString *)tlatitude longitude:(NSString *)tlongitude {
     
     API_HEADER();
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&type=%@&latitude=%@&longitude=%@", HTTP_GETSHAREINFO, uid, ttoken, tsongid, ttype, tlatitude, tlongitude];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&type=%@&mode=%@&index=%@&latitude=%@&longitude=%@", HTTP_GETSHAREINFO, uid, ttoken, tsongid, ttype, tmode, tindex, tlatitude, tlongitude];
     PLog(@"get share info url : %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

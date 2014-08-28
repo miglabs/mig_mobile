@@ -87,7 +87,7 @@
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
-    NSString *szMode = [GlobalDataManager GetInstance].curSongMode;
+    NSString *szMode = [GlobalDataManager GetInstance].curSongTypeName;
     NSString *szBgImg;
     
     if ([GlobalDataManager GetInstance].isLongScreen) {

@@ -1129,23 +1129,27 @@ static int PAGE_WIDTH = 81;
    
     NSString* strid = song.type;
     CGRect rect;
+    UserGene *curUserGene = [UserSessionManager GetInstance].currentUserGene;
     
     [GlobalDataManager GetInstance].curSongType = strid;
     
     if ([strid isEqualToString:@"chl"]) {
         
         rect = _btnType.frame;
-        [GlobalDataManager GetInstance].curSongMode = [UserSessionManager GetInstance].currentUserGene.type.name;
+        [GlobalDataManager GetInstance].curSongTypeName = curUserGene.type.name;
+        [GlobalDataManager GetInstance].curSongTypeId = curUserGene.type.typeid;
     }
     else if ([strid isEqualToString:@"mm"]) {
         
         rect = _btnMood.frame;
-        [GlobalDataManager GetInstance].curSongMode = [UserSessionManager GetInstance].currentUserGene.mood.name;
+        [GlobalDataManager GetInstance].curSongTypeName = curUserGene.mood.name;
+        [GlobalDataManager GetInstance].curSongTypeId = curUserGene.mood.typeid;
     }
     else if ([strid isEqualToString:@"ms"]) {
         
         rect = _btnScene.frame;
-        [GlobalDataManager GetInstance].curSongMode = [UserSessionManager GetInstance].currentUserGene.scene.name;
+        [GlobalDataManager GetInstance].curSongTypeName = curUserGene.scene.name;
+        [GlobalDataManager GetInstance].curSongTypeId = curUserGene.scene.typeid;
     }
     else {
      
