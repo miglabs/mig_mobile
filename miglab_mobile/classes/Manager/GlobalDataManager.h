@@ -26,6 +26,7 @@
 @property (nonatomic, retain) NSString* lastLongitude;
 
 @property (nonatomic, assign) int nNewArrivalMsg;
+@property (nonatomic, assign) int nShareSource; // 1-weibo, 2-weixin
 
 +(GlobalDataManager *)GetInstance;
 

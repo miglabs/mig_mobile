@@ -313,6 +313,8 @@
         NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
         NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
         
+        [GlobalDataManager GetInstance].nShareSource = LOGIN_WEIXIN;
+        
         [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype latitude:tlatitude longitude:tlongitude];
         
         [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
@@ -586,12 +588,17 @@
 
 -(void)getShareInfoSuccess:(NSNotification *)tNotification {
     
-    NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
-    NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
-    
-    LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
-    
-    [self doShare2WeiXinWithLongPress:ls];
+    if (LOGIN_WEIXIN == [GlobalDataManager GetInstance].nShareSource) {
+        
+        [GlobalDataManager GetInstance].nShareSource = 0;
+        
+        NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
+        NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
+        
+        LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
+        
+        [self doShare2WeiXinWithLongPress:ls];
+    }
 }
 
 -(void)getShareInfoFailed:(NSNotification *)tNotification {

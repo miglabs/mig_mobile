@@ -25,6 +25,7 @@
 @synthesize isNetConnect = _isNetConnect;
 @synthesize lastLatitude = _lastLatitude;
 @synthesize lastLongitude = _lastLongitude;
+@synthesize nShareSource = _nShareSource;
 
 +(GlobalDataManager *)GetInstance{
     
