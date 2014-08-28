@@ -312,7 +312,7 @@
         NSString* ttype = STR_USER_SOURCE_SINA;
         NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
         NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
-        NSString* tmode = [GlobalDataManager GetInstance].curSongTypeName;
+        NSString* tmode = [GlobalDataManager GetInstance].curSongType;
         NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
         
         [GlobalDataManager GetInstance].nShareSource = LOGIN_WEIXIN;

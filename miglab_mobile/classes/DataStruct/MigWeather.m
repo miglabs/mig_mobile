@@ -13,50 +13,55 @@
 
 +(NSString *)getWeatherIconName:(NSString *)weather {
     
+    NSString *szImg;
+    
     if ([weather isEqualToString:MIG_WEATHER_RAIN]) {
         
-        return @"rain_ico.png";
+        szImg = @"rain_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_CLEAR_DAY]) {
         
-        return @"sun_ico.png";
+        szImg = @"sun_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_CLEAR_NIGHT]) {
         
-        return @"";
+        szImg = @"";
     }
     else if ([weather isEqualToString:MIG_WEATHER_PARTLY_CLOUDY_DAY]) {
         
-        return @"";
+        szImg = @"";
     }
     else if ([weather isEqualToString:MIG_WEATHER_PARTLY_CLOUDY_NIGHT]) {
         
-        return @"";
+        szImg = @"";
     }
     else if ([weather isEqualToString:MIG_WEATHER_CLOUDY]) {
         
-        return @"cloudy_ico.png";
+        szImg = @"cloudy_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_SLEET]) {
         
-        return @"";
+        szImg = @"";
     }
     else if ([weather isEqualToString:MIG_WEATHER_SNOW]) {
         
-        return @"snow_ico.png";
+        szImg = @"snow_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_WIND]) {
         
-        return @"";
+        szImg = @"";
     }
     else if ([weather isEqualToString:MIG_WEATHER_FOG]) {
         
-        return @"";
+        szImg = @"";
     }
-    else {
+    
+    if (!(MIG_NOT_EMPTY_STR(szImg))) {
         
-        return nil;
+        szImg = @"sun_ico.png";
     }
+    
+    return szImg;
 }
 
 @end
