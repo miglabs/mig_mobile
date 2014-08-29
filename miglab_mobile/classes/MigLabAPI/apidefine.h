@@ -140,8 +140,11 @@
 /* 加载提示语 */
 #define MIGTIP_LOADING                          @"咪呦在拼命加载..."
 
-/*加载聊天*/
+/* 加载聊天 */
 #define MIGTIP_HIS_CHAT                         @"加载聊天"
+
+/* 没有歌词 */
+#define MIGTIP_NO_LYRIC                         @"不好意思，这首歌没有歌词哦~~~"
 
 /*重新登录*/
 #define MIGTIP_RELOGIN                          @"重新登录"

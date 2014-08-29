@@ -605,7 +605,18 @@
 
 -(void)getShareInfoFailed:(NSNotification *)tNotification {
     
-    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
+    //[SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
+    
+    if (LOGIN_WEIXIN == [GlobalDataManager GetInstance].nShareSource) {
+        
+        NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;
+        NSString *msg = [dicResult objectForKey:@"msg"];
+        
+        if ([msg isEqualToString:@"没有歌词"]) {
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_NO_LYRIC];
+        }
+    }
 }
 
 -(void)initSongInfo{

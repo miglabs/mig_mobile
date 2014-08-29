@@ -286,7 +286,18 @@ BOOL _firstLoadObserver = YES;
 -(void)getLyricInfoFailed:(NSNotification *)tNotification {
     
     PLog(@"分享到新浪微博失败");
-    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
+    //[SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
+    
+    if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
+        
+        NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;
+        NSString *msg = [dicResult objectForKey:@"msg"];
+        
+        if ([msg isEqualToString:@"没有歌词"]) {
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_NO_LYRIC];
+        }
+    }
 }
 
 @end
