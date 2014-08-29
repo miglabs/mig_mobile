@@ -87,16 +87,7 @@
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
-    NSString *szBgImg;
-    
-    if ([GlobalDataManager GetInstance].isLongScreen) {
-        
-        szBgImg = [NSString stringWithFormat:@"%@.png", [GlobalDataManager GetInstance].curSongTypeName];
-    }
-    else {
-        
-        szBgImg = [NSString stringWithFormat:@"%@_ip4.png", [GlobalDataManager GetInstance].curSongTypeName];
-    }
+    NSString *szBgImg = [NSString stringWithFormat:@"%@.jpg", [GlobalDataManager GetInstance].curSongTypeName];
     
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
