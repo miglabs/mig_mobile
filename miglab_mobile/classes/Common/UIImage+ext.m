@@ -87,7 +87,16 @@
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
-    NSString *szBgImg = [NSString stringWithFormat:@"%@.jpg", [GlobalDataManager GetInstance].curSongTypeName];
+    NSString *szBgImg;
+    
+    if (MIG_NOT_EMPTY_STR([GlobalDataManager GetInstance].curSongTypeName)) {
+        
+        szBgImg = [NSString stringWithFormat:@"%@.jpg", [GlobalDataManager GetInstance].curSongTypeName];
+    }
+    else {
+    
+        szBgImg = @"摇滚Rock.jpg";
+    }
     
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
@@ -152,16 +161,6 @@
     NSString *szToast = MIGTIP_THE_GOAL;
     NSString *szMode = ls.description;
     
-#if 0
-    
-    szSongName = @"你爱我像谁";
-    szArtist = @"张卫健";
-    szLyric = @"我什么都没有\n只是有一点吵\n如果你感到寂寞\n我带给你热闹\n为你绕一绕\n没有什么大不了\n却可以让你微笑\n其实我很烦恼\n只是你看不到\n如果我也不开心\n怕你转身就逃\n爱上一个人\n一定要让他相信\n这世界多么美好";
-    szTemperature = @"22°C";
-    szAddress = @"HangZhou";
-    
-#endif
-    
     UIGraphicsBeginImageContext(CGSizeMake(imgWidth, imgHeight));
     
     [bgImg drawInRect:CGRectMake(0, 0, imgWidth, imgHeight)];
@@ -178,6 +177,15 @@
         int stride = fSongName;
         CGRect curRect = songNameRect;
         UIFont *songnameFont = [UIFont fontName:fontname size:fSongName];
+        
+        /* 限制歌名的长度为8个字 */
+        count = count > 8 ? 8 : count;
+        
+        /* 如果歌名小于等于2个字，把起始位置往下放一点，为了美观 */
+        if (count <= 2) {
+            
+            curRect.origin.y += (3 - count) * fSongName;
+        }
         
         for (int i=0; i<count; i++) {
             

@@ -229,7 +229,7 @@ BOOL _firstLoadObserver = YES;
         
         Song* shareSong = self.shareSong;
         
-        NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [UserSessionManager GetInstance].currentUserGene.mood.name, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
+        NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [GlobalDataManager GetInstance].curSongTypeName, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
       
         UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
         
