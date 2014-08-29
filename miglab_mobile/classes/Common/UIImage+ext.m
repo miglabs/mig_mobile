@@ -84,6 +84,7 @@
     return finalFontSize;
 }
 
+/* 此处是分享歌词的图片生成的主要代码 */
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
