@@ -25,15 +25,15 @@
     }
     else if ([weather isEqualToString:MIG_WEATHER_CLEAR_NIGHT]) {
         
-        szImg = @"";
+        szImg = @"clear_night_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_PARTLY_CLOUDY_DAY]) {
         
-        szImg = @"";
+        szImg = @"clear_night_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_PARTLY_CLOUDY_NIGHT]) {
         
-        szImg = @"";
+        szImg = @"cloudy_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_CLOUDY]) {
         
@@ -49,11 +49,11 @@
     }
     else if ([weather isEqualToString:MIG_WEATHER_WIND]) {
         
-        szImg = @"";
+        szImg = @"wind_ico.png";
     }
     else if ([weather isEqualToString:MIG_WEATHER_FOG]) {
         
-        szImg = @"";
+        szImg = @"fog_ico.png";
     }
     
     if (!(MIG_NOT_EMPTY_STR(szImg))) {

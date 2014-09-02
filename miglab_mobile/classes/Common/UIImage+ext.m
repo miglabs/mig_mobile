@@ -94,6 +94,12 @@
             
             NSString* subStr = [str substringWithRange:NSMakeRange(i, 1)];
             
+            /* 需要特殊排除的字符 */
+            if ([subStr isEqualToString:@"/"]) {
+                
+                continue;
+            }
+            
             const char * cString = [subStr UTF8String];
             
             if (strlen(cString) != 3) {
@@ -245,7 +251,7 @@
         }
         else {
         
-            [szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            [szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentLeft];
         }
     }
     
@@ -272,7 +278,7 @@
         }
         else {
         
-            [szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            [szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentLeft];
         }
     }
     

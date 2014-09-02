@@ -560,6 +560,10 @@
 		CB5E937219B0B20D00B71A10 /* 影视同声.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB5E935D19B0B20D00B71A10 /* 影视同声.jpg */; };
 		CB5E937319B0B20D00B71A10 /* 粤语经典.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB5E935E19B0B20D00B71A10 /* 粤语经典.jpg */; };
 		CB5E937419B0B20D00B71A10 /* 运动.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB5E935F19B0B20D00B71A10 /* 运动.jpg */; };
+		CB5E938219B61E6200B71A10 /* clear_night_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937519B61E6200B71A10 /* clear_night_ico.png */; };
+		CB5E938419B61E6200B71A10 /* cloudy_night.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937719B61E6200B71A10 /* cloudy_night.png */; };
+		CB5E938619B61E6200B71A10 /* fog_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937919B61E6200B71A10 /* fog_ico.png */; };
+		CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E938119B61E6200B71A10 /* wind_ico.png */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1316,6 +1320,10 @@
 		CB5E935D19B0B20D00B71A10 /* 影视同声.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "影视同声.jpg"; path = "share/影视同声.jpg"; sourceTree = "<group>"; };
 		CB5E935E19B0B20D00B71A10 /* 粤语经典.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "粤语经典.jpg"; path = "share/粤语经典.jpg"; sourceTree = "<group>"; };
 		CB5E935F19B0B20D00B71A10 /* 运动.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "运动.jpg"; path = "share/运动.jpg"; sourceTree = "<group>"; };
+		CB5E937519B61E6200B71A10 /* clear_night_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear_night_ico.png; path = share/clear_night_ico.png; sourceTree = "<group>"; };
+		CB5E937719B61E6200B71A10 /* cloudy_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloudy_night.png; path = share/cloudy_night.png; sourceTree = "<group>"; };
+		CB5E937919B61E6200B71A10 /* fog_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fog_ico.png; path = share/fog_ico.png; sourceTree = "<group>"; };
+		CB5E938119B61E6200B71A10 /* wind_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wind_ico.png; path = share/wind_ico.png; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
@@ -2640,6 +2648,10 @@
 		CB5E92D419AF53F600B71A10 /* share */ = {
 			isa = PBXGroup;
 			children = (
+				CB5E937519B61E6200B71A10 /* clear_night_ico.png */,
+				CB5E937719B61E6200B71A10 /* cloudy_night.png */,
+				CB5E937919B61E6200B71A10 /* fog_ico.png */,
+				CB5E938119B61E6200B71A10 /* wind_ico.png */,
 				CB5E92DB19AF540400B71A10 /* cloudy_ico.png */,
 				CB5E92DC19AF540400B71A10 /* code.png */,
 				CB5E92DD19AF540400B71A10 /* logo.png */,
@@ -2760,11 +2772,13 @@
 				1683FB82179119640081612B /* bg_mask_1.png in Resources */,
 				1683FB83179119640081612B /* bg_mask_2.png in Resources */,
 				1661720518F9354600E86B11 /* senditem.png in Resources */,
+				CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */,
 				1683FB84179119640081612B /* bg_mask_3.png in Resources */,
 				1683FB85179119640081612B /* bg_mask_4.png in Resources */,
 				1683FB86179119640081612B /* btn_like_nor.png in Resources */,
 				1683FB87179119640081612B /* btn_like_sel.png in Resources */,
 				1683FB98179127920081612B /* playing_tip_1.png in Resources */,
+				CB5E938219B61E6200B71A10 /* clear_night_ico.png in Resources */,
 				1683FB99179127920081612B /* playing_tip_2.png in Resources */,
 				16CDC6111832604800035634 /* send_song_of_default_head.png in Resources */,
 				1683FB9A179127920081612B /* playing_tip_3.png in Resources */,
@@ -2857,6 +2871,7 @@
 				1684763917BA613700F42172 /* body_bg.png in Resources */,
 				1684763A17BA613700F42172 /* music_src.png in Resources */,
 				1684763B17BA613700F42172 /* player_bg.png in Resources */,
+				CB5E938419B61E6200B71A10 /* cloudy_night.png in Resources */,
 				166171F918F9354600E86B11 /* chat_add_but.png in Resources */,
 				CB5E936919B0B20D00B71A10 /* 七零后.jpg in Resources */,
 				1684763C17BA613700F42172 /* top_bg_0.png in Resources */,
@@ -2995,6 +3010,7 @@
 				16BE5D1017D61D8600802DE1 /* friend_add_separator.png in Resources */,
 				16BE5D1117D61D8600802DE1 /* friend_sayhi_button_ok.png in Resources */,
 				16BE5D1217D61D8600802DE1 /* friend_sayhi_content_bg.png in Resources */,
+				CB5E938619B61E6200B71A10 /* fog_ico.png in Resources */,
 				16BE5D1617D61DA300802DE1 /* friend_user_photo_tip.png in Resources */,
 				16BE5D1717D61DA300802DE1 /* friend_user_songlist_tip.png in Resources */,
 				16BE5D1C17D61E7300802DE1 /* FriendOfAddDetailViewController.xib in Resources */,
