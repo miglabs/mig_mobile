@@ -21,6 +21,8 @@
 
 -(UIImage *)createLyricShareImage:(LyricShare*)ls song:(Song*)tsong;
 
+-(BOOL)isAllChineseChar:(NSString *)str;
+
 -(float)getFontSize:(NSString*)str andFontName:(NSString*)fontName andSize:(CGSize)size;
 
 @end

@@ -84,11 +84,53 @@
     return finalFontSize;
 }
 
+-(BOOL)isAllChineseChar:(NSString *)str {
+    
+    if (MIG_NOT_EMPTY_STR(str)) {
+        
+        int length = [str length];
+        
+        for (int i=0; i<length; i++) {
+            
+            NSString* subStr = [str substringWithRange:NSMakeRange(i, 1)];
+            
+            const char * cString = [subStr UTF8String];
+            
+            if (strlen(cString) != 3) {
+                
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 /* 此处是分享歌词的图片生成的主要代码 */
 -(UIImage *)createLyricShareImage:(LyricShare *)ls song:(Song *)tsong {
     
     NSString* fontname = @"Helvetica";
     NSString *szBgImg;
+    BOOL isAllChinese = NO;
+    
+    NSString *szSongName = tsong.songname;
+    NSString *szArtist = tsong.artist;
+    
+    
+    float fSongName = 58;
+    float fArtist = 40;
+    float fLyric = 30;
+    float fMode = 40;
+    float fTemperature = 40;
+    float fDate = 22;
+    float fAddress = 24;
+    float fToast = 24;
+    
+    
+    /* 测试是否全部为中文 */
+    isAllChinese = [self isAllChineseChar:szSongName] && [self isAllChineseChar:szArtist];
     
     if (MIG_NOT_EMPTY_STR([GlobalDataManager GetInstance].curSongTypeName)) {
         
@@ -118,8 +160,19 @@
     
     lyricRect = CGRectMake(0, 366 + 12, imgWidth, imgHeight - 366 - 140);
     
-    songNameRect = CGRectMake(60, 44, 58, 1000);
-    artistRect = CGRectMake(158, 210, 40, 1000);
+    if (isAllChinese) {
+        
+        songNameRect = CGRectMake(60, 44, 58, 1000);
+        artistRect = CGRectMake(158, 210, 40, 1000);
+    }
+    else {
+        
+        CGSize maxsize = CGSizeMake(360, 166);
+        CGSize stringSize = [szSongName sizeWithFont:[UIFont fontWithName:fontname size:fSongName] constrainedToSize:maxsize];
+        
+        songNameRect = CGRectMake(60, 44, 360, stringSize.height);
+        artistRect = CGRectMake(144, 44 + stringSize.height, 276, 50);
+    }
     
     weatherRect = CGRectMake(484 + 43, 60, 70, 58);
     modeRect = CGRectMake(484, 128, 156, 48);
@@ -132,15 +185,6 @@
     toastRect = CGRectMake(38 + 140, imgHeight - 140 + 18, imgWidth - 38 - 140 - 38 - 96, 140);
     iconRect = CGRectMake(38 + 140 + toastRect.size.width, imgHeight - 140 + 22, 96, 96);
     
-    float fSongName = 58;
-    float fArtist = 40;
-    float fLyric = 30;
-    float fMode = 40;
-    float fTemperature = 40;
-    float fDate = 22;
-    float fAddress = 24;
-    float fToast = 24;
-    
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupBottom];
@@ -152,9 +196,6 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
     comps = [calendar components:unitFlags fromDate:date];
-    
-    NSString *szSongName = tsong.songname;
-    NSString *szArtist = tsong.artist;
     NSString *szLyric = ls.lyric;
     NSString *szTemperature = ls.temprature;
     NSString *szDate = [NSString stringWithFormat:@"%04d/%02d/%02d", [comps year], [comps month], [comps day]];
@@ -174,55 +215,65 @@
     
     if (MIG_NOT_EMPTY_STR(szSongName)) {
         
-        int count = [szSongName length];
-        int stride = fSongName;
-        CGRect curRect = songNameRect;
-        UIFont *songnameFont = [UIFont fontName:fontname size:fSongName];
-        
-        /* 限制歌名的长度为8个字 */
-        count = count > 8 ? 8 : count;
-        
-        /* 如果歌名小于等于2个字，把起始位置往下放一点，为了美观 */
-        if (count <= 2) {
+        if (isAllChinese) {
             
-            curRect.origin.y += (3 - count) * fSongName;
-        }
-        
-        for (int i=0; i<count; i++) {
+            int count = [szSongName length];
+            int stride = fSongName;
+            CGRect curRect = songNameRect;
+            UIFont *songnameFont = [UIFont fontName:fontname size:fSongName];
             
-            [[szSongName substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:songnameFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            /* 限制歌名的长度为8个字 */
+            count = count > 8 ? 8 : count;
             
-            curRect.origin.y += stride;
-            
-            if (curRect.origin.y > 1000) {
+            /* 如果歌名小于等于2个字，把起始位置往下放一点，为了美观 */
+            if (count <= 2) {
                 
-                break;
+                curRect.origin.y += (3 - count) * fSongName;
+            }
+            
+            for (int i=0; i<count; i++) {
+                
+                [[szSongName substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:songnameFont lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+                
+                curRect.origin.y += stride;
+                
+                if (curRect.origin.y > 1000) {
+                    
+                    break;
+                }
             }
         }
+        else {
         
-        //[szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            [szSongName drawInRect:songNameRect withFont:[UIFont fontWithName:fontname size:fSongName] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        }
     }
     
     if (MIG_NOT_EMPTY_STR(szArtist)) {
         
-        int count = [szArtist length];
-        int stride = fArtist;
-        CGRect curRect = artistRect;
-        UIFont *artistFont = [UIFont fontName:fontname size:fArtist];
-        
-        for (int i=0; i<count; i++) {
+        if (isAllChinese) {
             
-            [[szArtist substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:artistFont lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+            int count = [szArtist length];
+            int stride = fArtist;
+            CGRect curRect = artistRect;
+            UIFont *artistFont = [UIFont fontName:fontname size:fArtist];
             
-            curRect.origin.y += stride;
-            
-            if (curRect.origin.y > 1000) {
+            for (int i=0; i<count; i++) {
                 
-                break;
+                [[szArtist substringWithRange:NSMakeRange(i, 1)] drawInRect:curRect withFont:artistFont lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+                
+                curRect.origin.y += stride;
+                
+                if (curRect.origin.y > 1000) {
+                    
+                    break;
+                }
             }
         }
+        else {
         
-        //[szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+            [szArtist drawInRect:artistRect withFont:[UIFont fontWithName:fontname size:fArtist] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
+        }
     }
     
     if (MIG_NOT_EMPTY_STR(szLyric)) {
