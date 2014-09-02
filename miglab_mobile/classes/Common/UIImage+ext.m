@@ -95,7 +95,7 @@
             NSString* subStr = [str substringWithRange:NSMakeRange(i, 1)];
             
             /* 需要特殊排除的字符 */
-            if ([subStr isEqualToString:@"/"]) {
+            if ([subStr isEqualToString:@"/"] || [subStr isEqualToString:@"."]) {
                 
                 continue;
             }
@@ -173,11 +173,12 @@
     }
     else {
         
+        /* 获取需要使用的frame大小 */
         CGSize maxsize = CGSizeMake(360, 166);
         CGSize stringSize = [szSongName sizeWithFont:[UIFont fontWithName:fontname size:fSongName] constrainedToSize:maxsize];
         
-        songNameRect = CGRectMake(60, 44, 360, stringSize.height);
-        artistRect = CGRectMake(144, 44 + stringSize.height, 276, 50);
+        songNameRect = CGRectMake(60, 210 - stringSize.height, 360, stringSize.height);
+        artistRect = CGRectMake(144, 210+20, 276, 50);
     }
     
     weatherRect = CGRectMake(484 + 43, 60, 70, 58);
