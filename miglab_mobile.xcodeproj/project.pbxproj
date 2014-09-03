@@ -564,6 +564,7 @@
 		CB5E938419B61E6200B71A10 /* cloudy_night.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937719B61E6200B71A10 /* cloudy_night.png */; };
 		CB5E938619B61E6200B71A10 /* fog_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937919B61E6200B71A10 /* fog_ico.png */; };
 		CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E938119B61E6200B71A10 /* wind_ico.png */; };
+		CB5E939B19B74E6200B71A10 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E939A19B74E6200B71A10 /* AudioStreamer.m */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1324,6 +1325,8 @@
 		CB5E937719B61E6200B71A10 /* cloudy_night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloudy_night.png; path = share/cloudy_night.png; sourceTree = "<group>"; };
 		CB5E937919B61E6200B71A10 /* fog_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fog_ico.png; path = share/fog_ico.png; sourceTree = "<group>"; };
 		CB5E938119B61E6200B71A10 /* wind_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wind_ico.png; path = share/wind_ico.png; sourceTree = "<group>"; };
+		CB5E939919B74E6200B71A10 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioStreamer.h; path = AudioStreamer/AudioStreamer.h; sourceTree = "<group>"; };
+		CB5E939A19B74E6200B71A10 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioStreamer.m; path = AudioStreamer/AudioStreamer.m; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
@@ -1398,6 +1401,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CB5E938F19B74A9200B71A10 /* AudioStreamer */,
 				162CFE971970255300B2C005 /* TTTAttributedLabel */,
 				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
 				167F048F18F9337D000A1C21 /* EGORefreshTableHeaderView */,
@@ -2686,6 +2690,15 @@
 			name = share;
 			sourceTree = "<group>";
 		};
+		CB5E938F19B74A9200B71A10 /* AudioStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				CB5E939919B74E6200B71A10 /* AudioStreamer.h */,
+				CB5E939A19B74E6200B71A10 /* AudioStreamer.m */,
+			);
+			name = AudioStreamer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3164,6 +3177,7 @@
 				CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */,
 				163623FB177F41A800A1715C /* NSObject+PObjectCategory.m in Sources */,
 				161F850F178032100010090F /* PAAMusicPlayer.m in Sources */,
+				CB5E939B19B74E6200B71A10 /* AudioStreamer.m in Sources */,
 				161F8510178032100010090F /* PAMusicPlayer.m in Sources */,
 				CB1F3DE3197817260009CD91 /* AFNetworkReachabilityManager.m in Sources */,
 				18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */,

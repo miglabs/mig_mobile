@@ -124,6 +124,11 @@
     #define USE_NEW_SINA_SDK 1
 #endif
 
+// 使用新版流播放器
+#ifndef USE_NEW_AUDIO_PLAY
+    #define USE_NEW_AUDIO_PLAY 1
+#endif
+
 
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
