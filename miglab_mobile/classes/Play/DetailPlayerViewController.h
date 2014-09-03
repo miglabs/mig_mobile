@@ -55,13 +55,13 @@
 -(IBAction)doGotoShareView:(id)sender;
 -(void)doShare2QQZone;
 -(void)doShare2SinaWeibo;
--(void)doShare2WeiXin;
+-(IBAction)doShare2WeiXin:(id)sender;
 -(void)doShare2TencentWeibo;
 -(void)doShare2Renren;
 -(void)doSHare2Sms;
 
--(IBAction)doGotoShareViewWithLongPress:(id)sender;
--(void)doShare2WeiXinWithLongPress:(LyricShare *)ls;
+-(IBAction)doGotoShareViewWithLyric:(id)sender;
+-(void)doShare2WeiXinWithLyric:(LyricShare *)ls;
 
 -(IBAction)doDeleteAction:(id)sender;
 -(IBAction)doCollectAction:(id)sender;

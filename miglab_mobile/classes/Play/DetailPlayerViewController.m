@@ -218,7 +218,7 @@
     [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doGotoShareViewWithLongPress:)];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doShare2WeiXin:)];
     longPress.minimumPressDuration = 0.8;
     [shareSelectedView.btnThird addGestureRecognizer:longPress];
     
@@ -261,7 +261,7 @@
         case 203:
         {
             //weixin
-            [self doShare2WeiXin];
+            [self doGotoShareViewWithLyric:sender];
         }
             break;
         case 204:
@@ -297,30 +297,23 @@
     
 }
 
--(IBAction)doGotoShareViewWithLongPress:(id)sender {
+-(IBAction)doGotoShareViewWithLyric:(id)sender {
     
-    UILongPressGestureRecognizer *recogSender = (UILongPressGestureRecognizer *)sender;
+    //weixin
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
     
-    if (recogSender.state == UIGestureRecognizerStateBegan) {
-        
-        //weixin
-        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
-        
-        NSString* uid = [UserSessionManager GetInstance].userid;
-        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-        NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
-        NSString* ttype = STR_USER_SOURCE_SINA;
-        NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
-        NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
-        NSString* tmode = [GlobalDataManager GetInstance].curSongType;
-        NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
-        
-        [GlobalDataManager GetInstance].nShareSource = LOGIN_WEIXIN;
-        
-        [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype mode:tmode index:tindex latitude:tlatitude longitude:tlongitude];
-        
-        [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
-    }
+    NSString* uid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
+    NSString* ttype = STR_USER_SOURCE_SINA;
+    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
+    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+    NSString* tmode = [GlobalDataManager GetInstance].curSongType;
+    NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
+    
+    [GlobalDataManager GetInstance].nShareSource = LOGIN_WEIXIN;
+    
+    [_miglabAPI doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype mode:tmode index:tindex latitude:tlatitude longitude:tlongitude];
 }
 
 -(void)doShare2QQZone{
@@ -347,79 +340,86 @@
     
 }
 
--(void)doShare2WeiXin{
+-(IBAction)doShare2WeiXin:(id)sender {
     
-    PLog(@"doShare2WeiXin...");
+    UILongPressGestureRecognizer *recogSender = (UILongPressGestureRecognizer *)sender;
     
-    //分享到微信朋友圈
-    if (![WXApi isWXAppInstalled]) {
+    if (recogSender.state == UIGestureRecognizerStateBegan) {
         
-        [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+        PLog(@"doShare2WeiXin...");
         
-        return;
-    }
-    
-    if (![WXApi isWXAppSupportApi]) {
+        //分享到微信朋友圈
+        if (![WXApi isWXAppInstalled]) {
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+            
+            return;
+        }
         
-        [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+        if (![WXApi isWXAppSupportApi]) {
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+            
+            return;
+        }
         
-        return;
-    }
-    
-    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
-    UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
-    UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
-    UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
-    
-    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline发送到朋友圈，默认值为WXSceneSession
-    /*
-     WXMediaMessage *message = [WXMediaMessage message];
-     message.title = [UserSessionManager GetInstance].currentRunUser.nickname;
-     message.description = descText;
-     
-     WXImageObject *ext = [WXImageObject object];
-     ext.imageData = UIImagePNGRepresentation(image);
-     message.mediaObject = ext;
-     
-     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-     req.bText = NO;
-     req.message = message;
-     req.scene = scene;//选择发送到朋友圈，默认值为WXSceneSession，发送到会话
-     
-     [WXApi sendReq:req];
-     */
-    
-    //
-    WXMediaMessage *message = [WXMediaMessage message];
-    
+        Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+        UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
+        UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
+        UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
+        
+        //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline发送到朋友圈，默认值为WXSceneSession
+        /*
+         WXMediaMessage *message = [WXMediaMessage message];
+         message.title = [UserSessionManager GetInstance].currentRunUser.nickname;
+         message.description = descText;
+         
+         WXImageObject *ext = [WXImageObject object];
+         ext.imageData = UIImagePNGRepresentation(image);
+         message.mediaObject = ext;
+         
+         SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+         req.bText = NO;
+         req.message = message;
+         req.scene = scene;//选择发送到朋友圈，默认值为WXSceneSession，发送到会话
+         
+         [WXApi sendReq:req];
+         */
+        
+        //
+        WXMediaMessage *message = [WXMediaMessage message];
+        
 #if USE_ARTIST_SONGNAME
-    message.title = currentSong.artist;
-    message.description = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
+        message.title = currentSong.artist;
+        message.description = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
 #else
-    message.title = currentSong.songname;
-    message.description = [NSString stringWithFormat:@"%@", currentSong.artist];
+        message.title = currentSong.songname;
+        message.description = [NSString stringWithFormat:@"%@", currentSong.artist];
 #endif
-    [message setThumbImage:shareImage];
-    
-    WXMusicObject *ext = [WXMusicObject object];
+        [message setThumbImage:shareImage];
+        
+        WXMusicObject *ext = [WXMusicObject object];
 #ifdef WEIXIN_REAL_SONG_ADDRESS
-    ext.musicUrl = currentSong.songurl;
+        ext.musicUrl = currentSong.songurl;
 #else
-    ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS_1LONG, currentSong.songid];
-    PLog(@"musicUrl %@",ext.musicUrl);
-    ext.musicDataUrl = currentSong.songurl;
+        ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS_1LONG, currentSong.songid];
+        PLog(@"musicUrl %@",ext.musicUrl);
+        ext.musicDataUrl = currentSong.songurl;
 #endif
-    message.mediaObject = ext;
-    
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
-    req.message = message;
-    req.scene = WXSceneTimeline;
-    [WXApi sendReq:req];
-    
+        message.mediaObject = ext;
+        
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = WXSceneTimeline;
+        [WXApi sendReq:req];
+        
+        // 隐藏分享栏。因为这里是由分享栏直接调用，所以要专门隐藏
+        [_shareAchtionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    }
 }
 
--(void)doShare2WeiXinWithLongPress:(LyricShare *)ls{
+-(void)doShare2WeiXinWithLyric:(LyricShare *)ls{
     
     PLog(@"doShare2WeiXinWithLongPress...");
     
@@ -599,7 +599,7 @@
         
         LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
         
-        [self doShare2WeiXinWithLongPress:ls];
+        [self doShare2WeiXinWithLyric:ls];
     }
 }
 
