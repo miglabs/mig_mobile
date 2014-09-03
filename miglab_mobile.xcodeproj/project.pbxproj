@@ -565,6 +565,7 @@
 		CB5E938619B61E6200B71A10 /* fog_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E937919B61E6200B71A10 /* fog_ico.png */; };
 		CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E938119B61E6200B71A10 /* wind_ico.png */; };
 		CB5E939B19B74E6200B71A10 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E939A19B74E6200B71A10 /* AudioStreamer.m */; };
+		CB5E939E19B7511500B71A10 /* PAudioStreamerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E939D19B7511500B71A10 /* PAudioStreamerPlayer.m */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1327,6 +1328,8 @@
 		CB5E938119B61E6200B71A10 /* wind_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wind_ico.png; path = share/wind_ico.png; sourceTree = "<group>"; };
 		CB5E939919B74E6200B71A10 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioStreamer.h; path = AudioStreamer/AudioStreamer.h; sourceTree = "<group>"; };
 		CB5E939A19B74E6200B71A10 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioStreamer.m; path = AudioStreamer/AudioStreamer.m; sourceTree = "<group>"; };
+		CB5E939C19B7511500B71A10 /* PAudioStreamerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAudioStreamerPlayer.h; sourceTree = "<group>"; };
+		CB5E939D19B7511500B71A10 /* PAudioStreamerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAudioStreamerPlayer.m; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
@@ -1614,6 +1617,8 @@
 				161F850E178032100010090F /* PAMusicPlayer.m */,
 				1623168A17773E2600CF8FB5 /* PMusicPlayerControllerView.h */,
 				1623168B17773E2600CF8FB5 /* PMusicPlayerControllerView.m */,
+				CB5E939C19B7511500B71A10 /* PAudioStreamerPlayer.h */,
+				CB5E939D19B7511500B71A10 /* PAudioStreamerPlayer.m */,
 			);
 			path = PPlayer;
 			sourceTree = "<group>";
@@ -3294,6 +3299,7 @@
 				1633F74217D2219300F47DFF /* MusicBodyHeadMenuView.m in Sources */,
 				1633F74317D2219300F47DFF /* MusicSortMenuView.m in Sources */,
 				1632E50F17D349380089291C /* MusicSourceEditMenuView.m in Sources */,
+				CB5E939E19B7511500B71A10 /* PAudioStreamerPlayer.m in Sources */,
 				16BE5D1B17D61E7300802DE1 /* FriendOfAddDetailViewController.m in Sources */,
 				16BE5D2417D6249C00802DE1 /* SettingViewController.m in Sources */,
 				18A0EA0A17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m in Sources */,
