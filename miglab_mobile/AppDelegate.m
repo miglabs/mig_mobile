@@ -41,6 +41,7 @@
 //test
 #import "Song.h"
 #import "SongDownloadManager.h"
+#import "PAudioStreamerPlayer.h"
 
 @implementation AppDelegate
 
@@ -276,6 +277,16 @@
         [miglabAPI doGetDefaultGuestSongs];
         
     }
+    
+#if 0
+    // junliu test
+    Song *song = [[Song alloc] init];
+    song.songurl = @"http://rc01.sycdn.kuwo.cn/resource/n2/47/47/1638111385.mp3";
+    PAudioStreamerPlayer *teststreamer = [[PAudioStreamerPlayer alloc] init];
+    teststreamer.song = song;
+    [teststreamer initPlayer];
+    [teststreamer play];
+#endif
     
     //
     self.window.backgroundColor = [UIColor whiteColor];

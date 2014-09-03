@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PHttpDownloader.h"
 #import "PAAMusicPlayer.h"
+#import "PAudioStreamerPlayer.h"
 
 typedef enum{
     
