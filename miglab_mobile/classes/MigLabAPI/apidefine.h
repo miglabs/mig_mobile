@@ -287,6 +287,8 @@
 #define USE_ARTIST_SONGNAME 0
 
 /* ------------------ 宏函数定义 ---------------------- */
-#define MIG_NOT_EMPTY_STR(x)                     (x && ![x isEqualToString:@""])
+#define MIG_NOT_EMPTY_STR(x)                    (x && ![x isEqualToString:@""])
+
+#define MIG_NULL                                0
 
 #endif
