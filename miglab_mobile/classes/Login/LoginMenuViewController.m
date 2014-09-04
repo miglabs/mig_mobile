@@ -149,8 +149,14 @@
     [self SendDeviceToken];
     
     // 如果当前没有播放，获取一次歌曲
+#if USE_NEW_AUDIO_PLAY
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (![asMusicPlayer isMusicPlaying]) {
+#else //USE_NEW_AUDIO_PLAY
     PAAMusicPlayer* aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (![aaMusicPlayer isMusicPlaying]) {
+#endif //USE_NEW_AUDIO_PLAY
         
         [[PPlayerManagerCenter GetInstance] doNext];
     }

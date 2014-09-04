@@ -1094,8 +1094,14 @@ static int PAGE_WIDTH = 81;
         
         _isUpdatedList = NO;
         
+#if USE_NEW_AUDIO_PLAY
+        PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if ([asMusicPlayer isMusicPlaying]) {
+#else //USE_NEW_AUDIO_PLAY
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if ([aaMusicPlayer isMusicPlaying]) {
+#endif //USE_NEW_AUDIO_PLAY
             
             [[PPlayerManagerCenter GetInstance] doPlayOrPause];
         }
@@ -1106,7 +1112,28 @@ static int PAGE_WIDTH = 81;
         // 原有逻辑是添加从本地获取的列表，改为添加从服务端获取的列表，获取失败的逻辑不变
         //[[PPlayerManagerCenter GetInstance] doReplaceSongList:tempsonglist];
         [[PPlayerManagerCenter GetInstance] doReplaceSongList:songInfoList];
+        
+#if USE_NEW_AUDIO_PLAY
+        
+        PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if ([asMusicPlayer isMusicPlaying]) {
+            
+            // 如果正在播放，将播放列表的第一首跳掉，以免和Rootview的正在播放的第一首重复
+            [[PPlayerManagerCenter GetInstance] doNextWithoutPlaying];
+            
+            return;
+        }
+        else {
+            
+            [[PPlayerManagerCenter GetInstance] doNext];
+        }
+        
+#else // USE_NEW_AUDIO_PLAY
+        
         [[PPlayerManagerCenter GetInstance] doNext];
+        
+#endif // USE_NEW_AUDIO_PLAY
     }
     else {
         

@@ -16,6 +16,9 @@
 #import "PAAMusicPlayer.h"
 #import "PAMusicPlayer.h"
 #import "PPlayerManagerCenter.h"
+#if USE_NEW_AUDIO_PLAY
+#import "PAudioStreamerPlayer.h"
+#endif //USE_NEW_AUDIO_PLAY
 
 @interface PlayViewController : UIViewController<UIScrollViewDelegate, EGOImageViewDelegate, EGOImageButtonDelegate, PMusicPlayerDelegate>
 
@@ -41,6 +44,7 @@
 
 @property (nonatomic, retain) PAAMusicPlayer *aaMusicPlayer;
 @property (nonatomic, retain) PAMusicPlayer *aMusicPlayer;
+@property (nonatomic, retain) PAudioStreamerPlayer *asMusicPlayer;
 
 @property (nonatomic, retain) PCustomPlayerMenuView *bottomPlayerMenuView;
 

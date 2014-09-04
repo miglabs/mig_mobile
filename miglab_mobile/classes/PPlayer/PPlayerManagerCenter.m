@@ -124,6 +124,20 @@ static PPlayerManagerCenter *instance;
             return avAudioPlayer;
             
         }
+#if USE_NEW_AUDIO_PLAY
+        else if (WhichPlayer_AudioStreamerPlayer == whichPlayer) {
+            
+            id audioStreamerPlayer = [_dicPlayer objectForKey:@"WhichPlayer_AudioStreamerPlayer"];
+            
+            if (!audioStreamerPlayer || ![audioStreamerPlayer isKindOfClass:[PAudioStreamerPlayer class]]) {
+                
+                audioStreamerPlayer = [[PAudioStreamerPlayer alloc] init];
+                [_dicPlayer setValue:audioStreamerPlayer forKey:@"WhichPlayer_AudioStreamerPlayer"];
+            }
+            
+            return audioStreamerPlayer;
+        }
+#endif //USE_NEW_AUDIO_PLAY
         
     }
     
@@ -141,7 +155,12 @@ static PPlayerManagerCenter *instance;
         [_dicPlayer removeObjectForKey:@"WhichPlayer_AVAudioPlayer"];
         
     }
-    
+#if USE_NEW_AUDIO_PLAY
+    else if (WhichPlayer_AudioStreamerPlayer == whichPlayer) {
+        
+        [_dicPlayer removeObjectForKey:@"WhichPlayer_AudioStreamerPlayer"];
+    }
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 //---------------------logic
@@ -169,6 +188,23 @@ static PPlayerManagerCenter *instance;
         return;
     }
     _currentSong = [_songList objectAtIndex:_currentSongIndex];
+
+#if USE_NEW_AUDIO_PLAY
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if ([asMusicPlayer isMusicPlaying]) {
+        
+        [asMusicPlayer pause];
+    }
+    else if (asMusicPlayer.playerDestroied) {
+        
+        [self initSongInfo];
+    }
+    else {
+        
+        [asMusicPlayer play];
+    }
+#else //USE_NEW_AUDIO_PLAY
     [self stopDownload];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
@@ -178,6 +214,28 @@ static PPlayerManagerCenter *instance;
         [self initSongInfo];
     } else {
         [aaMusicPlayer play];
+    }
+#endif //USE_NEW_AUDIO_PLAY
+    
+    PLAYER_FOOTER();
+}
+
+-(void)doNextWithoutPlaying {
+    
+    PLAYER_HEADER();
+    
+    if (_songList && [_songList count] > 0) {
+        
+        if (([_songList count] > 0) && (_currentSongIndex + 1 >= [_songList count])) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameNeedAddList object:nil userInfo:nil];
+        }
+        else {
+            
+            _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
+            _currentSong = [_songList objectAtIndex:_currentSongIndex];
+            
+        }
     }
     
     PLAYER_FOOTER();
@@ -200,12 +258,22 @@ static PPlayerManagerCenter *instance;
             _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
             _currentSong = [_songList objectAtIndex:_currentSongIndex];
             
+#if USE_NEW_AUDIO_PLAY
+            
+            PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+            
+            if ([asMusicPlayer isMusicPlaying]) {
+                
+                [asMusicPlayer pause];
+            }
+#else //USE_NEW_AUDIO_PLAY
             [self stopDownload];
             
             PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
             if ([aaMusicPlayer isMusicPlaying]) {
                 [aaMusicPlayer pause];
             }
+#endif //USE_NEW_AUDIO_PLAY
             
             [self initSongInfo];
             
@@ -249,12 +317,22 @@ static PPlayerManagerCenter *instance;
         
         _currentSong = tInsertSong;
         
+#if USE_NEW_AUDIO_PLAY
+        
+        PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if ([asMusicPlayer isMusicPlaying]) {
+            
+            [asMusicPlayer pause];
+        }
+#else //USE_NEW_AUDIO_PLAY
         [self stopDownload];
         
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if ([aaMusicPlayer isMusicPlaying]) {
             [aaMusicPlayer pause];
         }
+#endif //USE_NEW_AUDIO_PLAY
         
         [self initSongInfo];
         
@@ -336,8 +414,42 @@ static PPlayerManagerCenter *instance;
 
 -(void)initSongInfo{
     
-    [self downloadSong];
+#if USE_NEW_AUDIO_PLAY
     
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (asMusicPlayer && [asMusicPlayer isMusicPlaying]) {
+        
+        return;
+    }
+    
+    // 记录前一首歌的id
+    _lastSongId = [NSString stringWithFormat:@"%lld", asMusicPlayer.song.songid];
+    asMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [asMusicPlayer initPlayer];
+    
+    if (isPlayerInit) {
+        
+        asMusicPlayer.delegate = self;
+        [asMusicPlayer play];
+        _hasAddMoodRecord = NO;
+        
+        NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:dicPlayerInfo];
+    }
+    else {
+        
+        [asMusicPlayer playerDestroy];
+        _shouldStartPlayAfterDownloaded = YES;
+        
+        NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStop object:nil userInfo:dicPlayerInfo];
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
+    [self downloadSong];
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(void)downloadSong{
@@ -493,11 +605,18 @@ static PPlayerManagerCenter *instance;
 //PAAMusicPlayer
 -(void)aaMusicPlayerTimerFunction{
     
-    //
-//    PLog(@"aaMusicPlayerTimerFunction...");
+    //PLog(@"aaMusicPlayerTimerFunction...");
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (!_hasAddMoodRecord && asMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {
+    
+#else //USE_NEW_AUDIO_PLAY
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (!_hasAddMoodRecord && aaMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {
+#endif //USE_NEW_AUDIO_PLAY
         
         _hasAddMoodRecord = YES;
         

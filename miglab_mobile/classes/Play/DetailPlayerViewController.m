@@ -726,6 +726,23 @@
     }
     _checkUpdatePlayProcess = 0;
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    long duration = asMusicPlayer.getDuration;
+    long currentTime = asMusicPlayer.getCurrentTime;
+    
+    float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
+    
+    [_cdOfSongView updateProcess:playProcess];
+    
+    if (![asMusicPlayer isMusicPlaying]) {
+        
+        [self timerStop];
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     long duration = aaMusicPlayer.getDuration;
     long currentTime = aaMusicPlayer.getCurrentTime;
@@ -737,7 +754,7 @@
     if (![aaMusicPlayer isMusicPlaying]) {
         [self timerStop];
     }
-    
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(void)autoPlayerNext:(NSNotification *)tNotification {

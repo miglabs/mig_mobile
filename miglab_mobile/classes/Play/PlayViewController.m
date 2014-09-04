@@ -50,6 +50,7 @@
 
 @synthesize aaMusicPlayer = _aaMusicPlayer;
 @synthesize aMusicPlayer = _aMusicPlayer;
+@synthesize asMusicPlayer = _asMusicPlayer;
 
 @synthesize bottomPlayerMenuView = _bottomPlayerMenuView;
 
@@ -170,7 +171,11 @@
     _songList = [[NSMutableArray alloc] init];
     _currentSongIndex = 0;
     
+#if USE_NEW_AUDIO_PLAY
+    _asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+#else // USE_NEW_AUDIO_PLAY
     _aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
+#endif //USE_NEW_AUDIO_PLAY
     
     SongDownloadManager *songManager = [SongDownloadManager GetInstance];
     
@@ -270,12 +275,22 @@
             //
             
         } else {
+#if USE_NEW_AUDIO_PLAY
+            
+            if (![_asMusicPlayer isMusicPlaying]) {
+                
+                _shouldStartPlayAfterDownloaded = NO;
+                [self initAndStartPlayer];
+            }
+            
+#else //USE_NEW_AUDIO_PLAY
             
             if (![_aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
-        
+            
+#endif //USE_NEW_AUDIO_PLAY
             
         }
         
@@ -300,8 +315,15 @@
     
     _lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", _currentSong.songname, _currentSong.artist];
     
+#if USE_NEW_AUDIO_PLAY
+    
+    [self initAndStartPlayer];
+    
+#else // USE_NEW_AUDIO_PLAY
+    
     [self downloadSong];
     
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(void)downloadSong{
@@ -322,6 +344,27 @@
 
 -(void)initAndStartPlayer{
     
+#if USE_NEW_AUDIO_PLAY
+    
+    if (_asMusicPlayer && [_asMusicPlayer isMusicPlaying]) {
+        
+        return;
+    }
+    
+    PLog(@"%s...", __func__);
+    
+    _asMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [_asMusicPlayer initPlayer];
+    
+    if (isPlayerInit) {
+        
+        _asMusicPlayer.delegate = self;
+        [_asMusicPlayer play];
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     if (_aaMusicPlayer && [_aaMusicPlayer isMusicPlaying]) {
         return;
     }
@@ -336,6 +379,7 @@
         [_aaMusicPlayer play];
     }
     
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 #pragma UIScrollViewDelegate
@@ -368,6 +412,30 @@
         tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
+#if USE_NEW_AUDIO_PLAY
+        
+        // TODO:此处是本地播放
+        _asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if (_asMusicPlayer.playerDestroied) {
+            
+            _asMusicPlayer.song = tempSong;
+            
+            BOOL isPlayerInit = [_asMusicPlayer initPlayer];
+            
+            if (isPlayerInit) {
+                
+                _asMusicPlayer.delegate = self;
+                [_asMusicPlayer play];
+            }
+            else {
+                
+                [_asMusicPlayer playerPlayPause];
+            }
+        }
+        
+#else // USE_NEW_AUDIO_PLAY
+        
         _aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         
         if (_aaMusicPlayer.playerDestoried) {
@@ -386,6 +454,7 @@
             
         }
         
+#endif //USE_NEW_AUDIO_PLAY
     }
     
 }
@@ -523,9 +592,18 @@
 
 //根据圆圈的比率，刷新圆盘进度
 -(void)doUpdateProcess{
+#if USE_NEW_AUDIO_PLAY
+    
+    long duration = _asMusicPlayer.getDuration;
+    long currentTime = _asMusicPlayer.getCurrentTime;
+    
+#else //USE_NEW_AUDIO_PLAY
     
     long duration = _aaMusicPlayer.getDuration;
     long currentTime = _aaMusicPlayer.getCurrentTime;
+    
+#endif //USE_NEW_AUDIO_PLAY
+    
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     
     [self updateProcess:playProcess];
@@ -587,11 +665,22 @@
         _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
         _currentSong = [_songList objectAtIndex:_currentSongIndex];
         
+#if USE_NEW_AUDIO_PLAY
+        
+        if ([_asMusicPlayer isMusicPlaying]) {
+            
+            [_asMusicPlayer pause];
+        }
+        
+#else //USE_NEW_AUDIO_PLAY
+        
         [self stopDownload];
         
         if ([_aaMusicPlayer isMusicPlaying]) {
             [_aaMusicPlayer pause];
         }
+        
+#endif //USE_NEW_AUDIO_PLAY
         
         [self initSongInfo];
         

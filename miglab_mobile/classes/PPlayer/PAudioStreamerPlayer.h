@@ -55,5 +55,7 @@
 -(void)timerStart;
 -(void)playerTimerFunction;
 
+//播放状态回调
+-(void)playbackStateChanged:(NSNotification *)tNotification;
 
 @end

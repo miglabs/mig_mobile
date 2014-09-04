@@ -14,7 +14,10 @@
 typedef enum{
     
     WhichPlayer_AVPlayer = 0,
-    WhichPlayer_AVAudioPlayer = 1
+    WhichPlayer_AVAudioPlayer = 1,
+#if USE_NEW_AUDIO_PLAY
+    WhichPlayer_AudioStreamerPlayer = 2,
+#endif //USE_NEW_AUDIO_PLAY
     
 } WhichPlayer;
 
@@ -57,6 +60,7 @@ typedef enum{
 -(void)doPlayOrPause;
 -(void)playCurrentSong;
 -(void)doNext;
+-(void)doNextWithoutPlaying;
 -(void)doInsertPlay:(Song *)tInsertSong;
 -(void)doUpdateSongList:(NSMutableArray *)tSongList;
 -(void)doAddSongList:(NSMutableArray*)tSongList;

@@ -29,7 +29,7 @@
 
 -(BOOL)initPlayer {
     
-    [self playerDestroied];
+    [self playerDestroy];
     
     PLog(@"Init Streamer Player.");
     
@@ -61,6 +61,8 @@
                 
                 _playerDestroied = NO;
                 
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged:) name:ASStatusChangedNotification object:_streamerPlayer];
+                
             } else {
                 
                 _playerDestroied = YES;
@@ -84,10 +86,11 @@
     
     PLog(@"Streamer player destroy.");
     
-    if (_streamerPlayer.isPlaying) {
+    if ([_streamerPlayer isPlaying]) {
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ASStatusChangedNotification object:_streamerPlayer];
         
         [_streamerPlayer stop];
-        _streamerPlayer = nil;
     }
     
     _playerDestroied = YES;
@@ -174,6 +177,7 @@
     if (_streamerPlayer) {
         
         [_streamerPlayer stop];
+        _streamerPlayer = nil;
     }
     
     [self timerStop];
@@ -183,7 +187,7 @@
     
     if (_streamerPlayer) {
         
-        return _streamerPlayer.isPlaying;
+        return [_streamerPlayer isPlaying];
     }
     
     if (_streamerPlayer == nil) {
@@ -198,7 +202,7 @@
     
     if (_streamerPlayer) {
         
-        if (_streamerPlayer.isPlaying) {
+        if ([_streamerPlayer isPlaying]) {
             
             [_streamerPlayer pause];
         }
@@ -234,7 +238,26 @@
 
 -(void)playerTimerFunction {
 
-    // TODO：测试Streamer Player的状态
+    if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerTimerFunction)]) {
+        
+        [_delegate aaMusicPlayerTimerFunction];
+    }
+}
+
+// 回调
+-(void)playbackStateChanged:(NSNotification *)tNotification {
+    
+    if ([_streamerPlayer isIdle]) {
+        
+        PLog(@"Streamer player finish current song.");
+        
+        [self timerStop];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)]) {
+            
+            [_delegate aaMusicPlayerStoped];
+        }
+    }
 }
 
 @end

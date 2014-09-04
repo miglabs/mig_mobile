@@ -267,10 +267,20 @@
     //摇一摇
     [self becomeFirstResponder];
     
+#if USE_NEW_AUDIO_PLAY
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if ([asMusicPlayer isMusicPlaying]) {
+        
+        _currentSong = asMusicPlayer.song;
+        
+#else //USE_NEW_AUDIO_PLAY
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if ([aaMusicPlayer isMusicPlaying]) {
         
         _currentSong = aaMusicPlayer.song;
+        
+#endif //USE_NEW_AUDIO_PLAY
         
         [self timerStart];
     } else {
@@ -466,6 +476,27 @@
     
     _currentSong = [_songList objectAtIndex:_currentSongIndex];
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if ([asMusicPlayer isMusicPlaying]) {
+        
+        [asMusicPlayer pause];
+        [self timerStop];
+    }
+    else if (asMusicPlayer.playerDestroied) {
+        
+        [self initSongInfo];
+    }
+    else {
+        
+        [asMusicPlayer play];
+        [self timerStart];
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     [self stopDownload];
     
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
@@ -479,6 +510,7 @@
         [self timerStart];
     }
     
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(IBAction)doNextAction:(id)sender{
@@ -492,10 +524,24 @@
         
         [self stopDownload];
         
+#if USE_NEW_AUDIO_PLAY
+        
+        PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if ([asMusicPlayer isMusicPlaying]) {
+            
+            [asMusicPlayer pause];
+        }
+        
+#else //USE_NEW_AUDIO_PLAY
+        
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         if ([aaMusicPlayer isMusicPlaying]) {
             [aaMusicPlayer pause];
         }
+        
+#endif //USE_NEW_AUDIO_PLAY
+        
         [self timerStop];
         
         [self initSongInfo];
@@ -514,6 +560,30 @@
         tempSong.songurl = filepath;
         tempSong.whereIsTheSong = WhereIsTheSong_IN_APP;
         
+#if USE_NEW_AUDIO_PLAY
+        
+        // TODO: 此处是播放本地音乐，可能不能使用AudioStreamerPlayer，但是目前不需要播放本地音乐
+        PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+        
+        if (asMusicPlayer.playerDestroied) {
+            
+            asMusicPlayer.song = tempSong;
+            
+            BOOL isPlayerInit = [asMusicPlayer initPlayer];
+            
+            if (isPlayerInit) {
+                
+                asMusicPlayer.delegate = self;
+                [asMusicPlayer play];
+            }
+        }
+        else {
+            
+            [asMusicPlayer playerPlayPause];
+        }
+        
+#else //USE_NEW_AUDIO_PLAY
+        
         PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
         
         if (aaMusicPlayer.playerDestoried) {
@@ -531,7 +601,7 @@
             [aaMusicPlayer playerPlayPause];
             
         }
-        
+#endif //USE_NEW_AUDIO_PLAY
     }
     
 }
@@ -1160,12 +1230,24 @@
             
         } else {
             
+#if USE_NEW_AUDIO_PLAY
+            
+            PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+            
+            if (![asMusicPlayer isMusicPlaying]) {
+                
+                [self initAndStartPlayer];
+            }
+            
+#else // USE_NEW_AUDIO_PLAY
+            
             PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
             if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
             
+#endif //USE_NEW_AUDIO_PLAY
             
         }
         
@@ -1217,13 +1299,24 @@
             
         } else {
             
+#if USE_NEW_AUDIO_PLAY
+            
+            PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+            
+            if (![asMusicPlayer isMusicPlaying]) {
+                
+                [self initAndStartPlayer];
+            }
+            
+#else //USE_NEW_AUDIO_PLAY
+            
             PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
             if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
                 _shouldStartPlayAfterDownloaded = NO;
                 [self initAndStartPlayer];
             }
             
-            
+#endif //USE_NEW_AUDIO_PLAY
         }
         
     }
@@ -1235,12 +1328,24 @@
     PLog(@"doDownloadSuccess...%@", dicResult);
     //[SVProgressHUD showErrorWithStatus:@"歌曲下载完成"];
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (![asMusicPlayer isMusicPlaying]) {
+        
+        [self initAndStartPlayer];
+    }
+    
+#else // USE_NEW_AUDIO_PLAY
+    
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (![aaMusicPlayer isMusicPlaying] && _shouldStartPlayAfterDownloaded) {
         _shouldStartPlayAfterDownloaded = NO;
         [self initAndStartPlayer];
     }
-    
+  
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 #pragma PHttpDownloaderDelegate end
@@ -1265,8 +1370,20 @@
     _cdEGOImageView.imageURL = tempCoverUrl;
     _playerBoradView.btnAvatar.imageURL = tempCoverUrl;
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (![asMusicPlayer isMusicPlaying]) {
+        
+        [self initAndStartPlayer];
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     [self downloadSong];
     
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(void)downloadSong{
@@ -1294,6 +1411,35 @@
         return;
     }
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if (asMusicPlayer && [asMusicPlayer isMusicPlaying]) {
+        
+        return;
+    }
+    
+    asMusicPlayer.song = _currentSong;
+    
+    BOOL isPlayerInit = [asMusicPlayer initPlayer];
+    
+    if (isPlayerInit) {
+        
+        asMusicPlayer.delegate = self;
+        
+        [asMusicPlayer play];
+        [self timerStart];
+        _hasAddMoodRecord = NO;
+    }
+    else {
+        
+        [asMusicPlayer playerDestroy];
+        _shouldStartPlayAfterDownloaded = NO;
+    }
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if (aaMusicPlayer && [aaMusicPlayer isMusicPlaying]) {
         return;
@@ -1318,6 +1464,7 @@
         
     }
     
+#endif //USE_NEW_AUDIO_PLAY
 }
 
 -(void)configNowPlayingInfoCenter{
@@ -1394,9 +1541,21 @@
     }
     _checkUpdatePlayProcess = 0;
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    long duration = asMusicPlayer.getDuration;
+    long currentTime = asMusicPlayer.getCurrentTime;
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     long duration = aaMusicPlayer.getDuration;
     long currentTime = aaMusicPlayer.getCurrentTime;
+    
+#endif //USE_NEW_AUDIO_PLAY
+    
     float playProcess = (duration > 0) ? (float)currentTime / (float)duration : 0;
     
     [_cdOfSongView updateProcess:playProcess];

@@ -192,8 +192,18 @@
 
 -(void)updateSongInfo{
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if ([asMusicPlayer isMusicPlaying] && _curPlayingSong.songid == _song.songid) {
+    
+#else //USE_NEW_AUDIO_PLAY
+    
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     if ([aaMusicPlayer isMusicPlaying] && _curPlayingSong.songid == _song.songid) {
+        
+#endif // USE_NEW_AUDIO_PLAY
         UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
         [_commentPlayerView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
     } else {

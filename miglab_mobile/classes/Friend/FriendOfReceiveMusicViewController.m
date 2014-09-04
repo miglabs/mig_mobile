@@ -263,9 +263,19 @@
 
 -(void)updateDisplayInfo {
     
+#if USE_NEW_AUDIO_PLAY
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    
+    if ([asMusicPlayer isMusicPlaying]) {
+        
+#else //USE_NEW_AUDIO_PLAY
+        
     PAAMusicPlayer* aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
     
     if ([aaMusicPlayer isMusicPlaying]) {
+        
+#endif //USE_NEW_AUDIO_PLAY
         
         UIImage* stop = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
         [_musicCommentHeader.btnPlayOrPause setImage:stop forState:UIControlStateNormal];
