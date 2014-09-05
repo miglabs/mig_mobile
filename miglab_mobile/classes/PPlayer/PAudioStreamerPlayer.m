@@ -86,7 +86,12 @@
     
     PLog(@"Streamer player destroy.");
     
-    if ([_streamerPlayer isPlaying]) {
+    if (_streamerPlayer) {
+        
+        if ([_streamerPlayer isPlaying]) {
+            
+            [_streamerPlayer pause];
+        }
         
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ASStatusChangedNotification object:_streamerPlayer];
         
