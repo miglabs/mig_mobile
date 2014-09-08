@@ -224,6 +224,9 @@
 /* 分享失败 */
 #define MIGTIP_SHARING_FAILED                   @"网络似乎有问题，请稍后再试-_-#"
 
+/* 读取文件失败 */
+#define MIGTIP_READFILE_ERROR                   @"对不起，读取文件失败了..."
+
 /* 选择一首歌 */
 #define MIGTIP_CHOOSE_ONE_SONG                  @"请选择一首歌"
 

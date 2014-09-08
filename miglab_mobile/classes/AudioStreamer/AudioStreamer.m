@@ -25,6 +25,9 @@
 #if TARGET_OS_IPHONE			
 #import <CFNetwork/CFNetwork.h>
 #endif
+#import "SVProgressHUD.h"
+#import "apidefine.h"
+#import "MigLabConfig.h"
 
 #define BitRateEstimationMaxPackets 5000
 #define BitRateEstimationMinPackets 50
@@ -418,8 +421,12 @@ static void ASReadStreamCallBack
 			AudioQueueStop(audioQueue, true);
 		}
 
+#ifdef USE_AS_ORG_READFILE_ERROR
 		[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 							message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
+#else
+        [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 	}
 }
 
@@ -646,8 +653,12 @@ static void ASReadStreamCallBack
 			kCFStreamPropertyHTTPShouldAutoredirect,
 			kCFBooleanTrue) == false)
 		{
+#ifdef USE_AS_ORG_READFILE_ERROR
 			[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 								message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
+#else
+            [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 			return NO;
 		}
 		
@@ -685,8 +696,13 @@ static void ASReadStreamCallBack
 		if (!CFReadStreamOpen(stream))
 		{
 			CFRelease(stream);
+#ifdef USE_AS_ORG_READFILE_ERROR
 			[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 								message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
+            
+#else
+            [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 			return NO;
 		}
 		

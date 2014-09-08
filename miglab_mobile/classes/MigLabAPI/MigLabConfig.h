@@ -129,6 +129,11 @@
     #define USE_NEW_AUDIO_PLAY 1
 #endif
 
+// 使用AudioStreamer自带的读取文件错误提醒
+#ifndef USE_AS_ORG_READFILE_ERROR
+    #define USE_AS_ORG_READFILE_ERROR 0
+#endif
+
 
 //登陆
 //登陆第一次验证地址 @"http://sso.miglab.com/cgi-bin/sp.fcgi?sp"
