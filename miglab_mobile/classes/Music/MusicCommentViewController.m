@@ -196,7 +196,7 @@
     
     PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
     
-    if ([asMusicPlayer isMusicPlaying] && _curPlayingSong.songid == _song.songid) {
+    if ([asMusicPlayer isMusicPlaying]) {
     
 #else //USE_NEW_AUDIO_PLAY
     
