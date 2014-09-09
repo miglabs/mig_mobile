@@ -263,6 +263,19 @@
             [_delegate aaMusicPlayerStoped];
         }
     }
+    /* 此处添加两个额外的图标状态更新，主要更新底部播放器的播放图标状态。
+     因为主界面更新时，虽然检查了player的播放状态，但是当时播放器还没有完全启动，
+     所以为停止状态，导致第一首歌的播放状态显示不正确 */
+    else if ([_streamerPlayer isPlaying]) {
+        
+        PLog(@"Update player stat to Playing from audio streamer");
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:nil];
+    }
+    else if ([_streamerPlayer isPaused]) {
+        
+        PLog(@"Update player stat to Pausing from audio streamer");
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStop object:nil userInfo:nil];
+    }
 }
 
 @end
