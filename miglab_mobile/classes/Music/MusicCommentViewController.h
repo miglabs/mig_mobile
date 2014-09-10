@@ -55,6 +55,9 @@
 -(void)doCommentSongSuccess:(NSNotification*)tNotification;
 -(void)doCommentSongFailed:(NSNotification *)tNotification;
 
+-(void)playerStart:(NSNotification *)tNotification;
+-(void)playerStop:(NSNotification *)tNotification;
+
 -(IBAction)doPlayOrPause:(id)sender;
 -(IBAction)doNext:(id)sender;
 -(IBAction)doCollect:(id)sender;

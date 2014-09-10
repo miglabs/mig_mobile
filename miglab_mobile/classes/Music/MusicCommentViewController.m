@@ -57,6 +57,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDeleteCollectSuccess:) name:NotificationNameDeleteCollectSongSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doDeleteCollectFailed:) name:NotificationNameDeleteCollectSongFailed object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStart:) name:NotificationNamePlayerStart object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStop:) name:NotificationNamePlayerStop object:nil];
+        
         //监听键盘高度的变换
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -365,9 +368,22 @@
     
     [self autoMovekeyBoard:0];
 }
+    
 
 #pragma notification
 
+-(void)playerStart:(NSNotification *)tNotification {
+    
+    UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+    [_commentPlayerView.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+}
+    
+-(void)playerStop:(NSNotification *)tNotification {
+    
+    UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+    [_commentPlayerView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+}
+    
 -(void)getCommentListFailed:(NSNotification *)tNotification{
     
     PLog(@"getCommentListFailed...");
