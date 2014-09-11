@@ -285,4 +285,16 @@ typedef enum {
  */
 -(void)doGetShareInfo:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid type:(NSString*)ttype mode:(NSString *)tmode index:(NSString *)tindex latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
 
+
+/*
+ 获取最空闲的聊天地址
+ 
+*/
+-(void) doGetSC:(int64_t)platformid uid:(int64_t)tuid  tid:(int64_t) ttid;
+
+/*
+ 获取聊天记录
+ 
+*/
+-(void) doGetHisChat:(int64_t)platformid uid:(int64_t) tuid  tid:(int64_t) ttid token:(NSString*)ttoken minmsgid:(int64_t) tminmsgid;
 @end

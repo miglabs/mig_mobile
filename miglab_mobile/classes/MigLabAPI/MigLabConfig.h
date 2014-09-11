@@ -379,4 +379,14 @@
 #define NotificationNameGetShareInfoSuccess                 @"NotificationNameGetShareInfoSuccess"
 #define NotificationNameGetShareInfoFailed                  @"NotificationNameGetShareInfoFailed"
 
+//获取聊天服务器
+#define HTTP_GETSC                                          [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getsc.fcgi"]
+#define NotificationNameGetSCSuccess                        @"NotificationNameGetSCSuccess"
+#define NotificationNameGetSCFailed                         @"NotificationNameGetSCFailed"
+
+//获取聊天记录
+#define HTTP_HISTCHAT                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hischat.fcgi"]
+#define NotificationNameHisChatSuccess                      @"NotificationNameHisChatSuccess"
+#define NotificationNameHisChatFailed                       @"NotificationNameHisChatFailed"
+
 #endif
