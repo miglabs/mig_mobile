@@ -3612,7 +3612,7 @@
                 
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoSuccess object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatSuccess object:nil userInfo:dicResult];
             }
             else {
                 
@@ -3621,7 +3621,7 @@
                 NSString* msg = [dicJson objectForKey:@"msg"];
                 NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoFailed object:nil userInfo:dicResult];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatFailed object:nil userInfo:dicResult];
             }
         }
         @catch (NSException *exception) {
@@ -3635,7 +3635,7 @@
         
         PLog(@"get hischat failed : %@", error);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatFailed object:nil userInfo:nil];
     }];
     
     [operation start];
