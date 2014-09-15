@@ -144,7 +144,7 @@
 #define MIGTIP_HIS_CHAT                         @"加载聊天"
 
 /* 没有歌词 */
-#define MIGTIP_NO_LYRIC                         @"不好意思，这首歌没有歌词哦~~~"
+#define MIGTIP_NO_LYRIC                         @"这首歌没有歌词哦~~~请长按分享按钮来分享音乐吧~~~"
 
 /*重新登录*/
 #define MIGTIP_RELOGIN                          @"重新登录"

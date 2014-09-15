@@ -228,12 +228,27 @@ BOOL _firstLoadObserver = YES;
     if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
         
         Song* shareSong = self.shareSong;
+        NSString *szLyric = nil;
+        
+        if (lyric) {
+            
+            szLyric = lyric.lyric;
+        }
         
         NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [GlobalDataManager GetInstance].curSongTypeName, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
-      
-        UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
         
-        [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
+        UIImage* shareImage = nil;
+      
+        if (MIG_NOT_EMPTY_STR(szLyric)) {
+            
+            shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
+            
+            [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
+        }
+        else {
+            
+            [sinaweibo requestWithURL:@"statuses/update.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", nil] httpMethod:@"POST" delegate:self];
+        }
         
     } else {
         
@@ -289,12 +304,15 @@ BOOL _firstLoadObserver = YES;
     
     if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
         
+        // 没有歌词，只分享文字
+        [self doShareToSinaWeibo:nil];
+        
         NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;
         NSString *msg = [dicResult objectForKey:@"msg"];
         
         if ([msg isEqualToString:@"没有歌词"]) {
             
-            [SVProgressHUD showErrorWithStatus:MIGTIP_NO_LYRIC];
+            //[SVProgressHUD showErrorWithStatus:MIGTIP_NO_LYRIC];
         }
     }
 }
