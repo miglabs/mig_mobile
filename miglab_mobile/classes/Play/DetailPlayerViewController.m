@@ -605,8 +605,6 @@
 
 -(void)getShareInfoFailed:(NSNotification *)tNotification {
     
-    //[SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
-    
     if (LOGIN_WEIXIN == [GlobalDataManager GetInstance].nShareSource) {
         
         NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;

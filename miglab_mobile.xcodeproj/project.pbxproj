@@ -566,6 +566,8 @@
 		CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5E938119B61E6200B71A10 /* wind_ico.png */; };
 		CB5E939B19B74E6200B71A10 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E939A19B74E6200B71A10 /* AudioStreamer.m */; };
 		CB5E939E19B7511500B71A10 /* PAudioStreamerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E939D19B7511500B71A10 /* PAudioStreamerPlayer.m */; };
+		CB7A2C0219C5847B0053C751 /* f.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB7A2C0019C5847B0053C751 /* f.jpg */; };
+		CB7A2C0319C5847B0053C751 /* m.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB7A2C0119C5847B0053C751 /* m.jpg */; };
 		CB8C673D1998F6FE00E35D3E /* UIImage+ext.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */; };
 		CB99095C183652C40095C775 /* ChooseSongInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB99095B183652C40095C775 /* ChooseSongInfoCell.m */; };
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
@@ -1331,6 +1333,8 @@
 		CB5E939C19B7511500B71A10 /* PAudioStreamerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAudioStreamerPlayer.h; sourceTree = "<group>"; };
 		CB5E939D19B7511500B71A10 /* PAudioStreamerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAudioStreamerPlayer.m; sourceTree = "<group>"; };
 		CB70C4411922639F007D583A /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/Connect_IOS_SDK_V2.2/TencentOpenAPI.framework; sourceTree = "<group>"; };
+		CB7A2C0019C5847B0053C751 /* f.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = f.jpg; sourceTree = "<group>"; };
+		CB7A2C0119C5847B0053C751 /* m.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = m.jpg; sourceTree = "<group>"; };
 		CB8C673B1998F6FE00E35D3E /* UIImage+ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ext.h"; sourceTree = "<group>"; };
 		CB8C673C1998F6FE00E35D3E /* UIImage+ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ext.m"; sourceTree = "<group>"; };
 		CB99095A183652C40095C775 /* ChooseSongInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSongInfoCell.h; sourceTree = "<group>"; };
@@ -1814,6 +1818,8 @@
 		165D7C8117BE5908000D08E3 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				CB7A2C0019C5847B0053C751 /* f.jpg */,
+				CB7A2C0119C5847B0053C751 /* m.jpg */,
 				166B5803180C2BC400436AB0 /* home_navigation_bg_ios7.png */,
 				1635D96F17F07D5000B392BB /* home_navigation_separator.png */,
 				1635D96617F06C6C00B392BB /* home_navigation_menu_sel.png */,
@@ -3054,6 +3060,7 @@
 				1697325717E5BC8700F4AA6E /* mood_5.png in Resources */,
 				1697325817E5BC8700F4AA6E /* mood_6.png in Resources */,
 				CB5E936219B0B20D00B71A10 /* 工作.jpg in Resources */,
+				CB7A2C0319C5847B0053C751 /* m.jpg in Resources */,
 				1697325917E5BC8700F4AA6E /* scene_1.png in Resources */,
 				1697325A17E5BC8700F4AA6E /* scene_2.png in Resources */,
 				1697325B17E5BC8700F4AA6E /* scene_3.png in Resources */,
@@ -3093,6 +3100,7 @@
 				18A6020F17F2956400344C5B /* renren_icon.png in Resources */,
 				18A6021017F2956400344C5B /* renren_icon@2x.png in Resources */,
 				18A6021117F2956400344C5B /* renren_icon_disabled@2x.png in Resources */,
+				CB7A2C0219C5847B0053C751 /* f.jpg in Resources */,
 				18A6021217F2956400344C5B /* renren_normal@2x.png in Resources */,
 				166171FB18F9354600E86B11 /* chat_msg_bt_f.png in Resources */,
 				18A6021317F2956400344C5B /* sina_weibo_icon.png in Resources */,

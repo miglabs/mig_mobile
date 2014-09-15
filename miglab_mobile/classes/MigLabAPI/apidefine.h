@@ -222,7 +222,7 @@
 #define MIGTIP_SHARING_SUCCEED                  @"分享成功~~~"
 
 /* 分享失败 */
-#define MIGTIP_SHARING_FAILED                   @"网络似乎有问题，请稍后再试-_-#"
+#define MIGTIP_SHARING_FAILED                   @"分享出现问题啦，请稍后再试-_-#"
 
 /* 读取文件失败 */
 #define MIGTIP_READFILE_ERROR                   @"对不起，读取文件失败了..."

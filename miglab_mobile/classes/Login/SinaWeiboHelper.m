@@ -286,7 +286,6 @@ BOOL _firstLoadObserver = YES;
 -(void)getLyricInfoFailed:(NSNotification *)tNotification {
     
     PLog(@"分享到新浪微博失败");
-    //[SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
     
     if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
         
