@@ -66,12 +66,14 @@
     //nav bar
     self.navView.titleLabel.text = @"附近的好音乐";
     
+#if USE_NEARMUSIC_SEARCH
     //search
     UIImage *searchImage = [UIImage imageWithName:@"music_button_search" type:@"png"];
     [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
     self.navView.rightButton.frame = CGRectMake(268, 7.5 + self.topDistance, 48, 29);
     [self.navView.rightButton setHidden:NO];
     [self.navView.rightButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
+#endif
     
     //body
     //body bg
@@ -87,6 +89,9 @@
     
     _bodyHeadMenuView.btnSort.hidden = YES;
     [_bodyHeadMenuView.btnEdit addTarget:self action:@selector(doEdit:) forControlEvents:UIControlEventTouchUpInside];
+#if !USE_NEARMUSIC_EDIT
+    _bodyHeadMenuView.btnEdit.hidden = YES;
+#endif
     
     //song list
     _dataTableView = [[UITableView alloc] init];
