@@ -269,6 +269,7 @@
 
 /* --------------------- 地址定义 --------------------- */
 #define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miyomate.com/system.jpg"
+#define LOCAL_DEFAULT_HEADER_IMAGE              @"music_default_avatar.png"
 
 
 /* --------------------- 消息定义 --------------------- */
