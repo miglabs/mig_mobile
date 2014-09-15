@@ -5,7 +5,6 @@
 //  Created by 180 on 14-3-30.
 //
 //
-#define  HTTP_API_URL  @"http://112.124.49.59/"
 #import "ChatNetService.h"
 #import "AFNetworking.h"
 #import "ChatDef.h"
@@ -33,7 +32,6 @@
 
 
 
-
 - (id) init:(NSString*) token uid:(int64_t)uid
               tid: (int64_t) tid
 {
@@ -50,6 +48,7 @@
     m_minmsgid = 0;
     m_is_relogin = 0;
     [self getSC];
+    
     return self;
 }
 
@@ -77,7 +76,8 @@
     
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     
-    NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_URL,path];
+    NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_DOMAIN,path];
+    
     PLog(@"getUserInfoUrl:%@",strurl);
     NSURL* url = [NSURL URLWithString:strurl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -118,34 +118,6 @@
     }];
     
     [operation start];
-    
-    /*AFHTTPClient* http = [AFHTTPClient clientWithBaseURL:url];
-     [http getPath:nil parameters:nil success:^(AFHTTPRequestOperation *operation,id responseObject){
-     NSData *jsonData=[[NSData alloc] initWithData:[[operation responseString] dataUsingEncoding:NSUTF8StringEncoding]];
-     NSError* error = nil;
-     id jsonObject=[NSJSONSerialization JSONObjectWithData:jsonData
-     options:NSJSONReadingMutableLeaves error:&error];
-     if (jsonObject != nil) {
-     NSInteger status = [[ (NSDictionary*)jsonObject objectForKey:@"status"] integerValue];
-     if (status != 0 ) {
-     if( failure != nil)
-     failure([ (NSDictionary*)jsonObject objectForKey:@"msg"]);
-     }
-     else
-     {
-     success([(NSDictionary*)jsonObject objectForKey:@"result"]);
-     }
-     }
-     else
-     if( failure != nil)
-     failure(error);
-     
-     
-     }
-     failure:^(AFHTTPRequestOperation *operation,NSError *error){
-     if( failure != nil)
-     failure(error);
-     }];*/
 }
 
 - (void)getSC

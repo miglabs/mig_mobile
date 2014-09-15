@@ -3525,5 +3525,123 @@
     API_FOOTER();
 }
 
+/*
+ 获取最空闲的聊天地址
+ 
+ */
+
+-(void) doGetSC:(int64_t)platformid uid:(int64_t)tuid  tid:(int64_t) ttid{
+    API_HEADER();
+    NSString* url = [NSString stringWithFormat:@"%@?platformd=%lld&uid=%lld&tid=%lld",
+                HTTP_GETSC,platformid,tuid,ttid];
+    PLog(@"get SC info url:%@",url);
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get sc info succeed");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSCSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get sc info failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSCFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            PLog(@"解析返回数据失败%s", __FUNCTION__);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetSCFailed object:nil userInfo:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get sc info failed : %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+
+
+/*
+ 获取聊天记录
+ 
+ */
+-(void) doGetHisChat:(int64_t)platformid uid:(int64_t) tuid  tid:(int64_t) ttid token:(NSString*)ttoken minmsgid:(int64_t) tminmsgid{
+    API_HEADER();
+    NSString* url = [NSString stringWithFormat:@"%@?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",
+                     HTTP_GETSC,platformid,tuid,ttid,ttoken,tminmsgid];
+    PLog(@"get hischat info url:%@",url);
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get hischat  succeed");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get hischat failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            PLog(@"解析返回数据失败%s", __FUNCTION__);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameGetShareInfoFailed object:nil userInfo:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get hischat failed : %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameHisChatFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+
 
 @end
