@@ -21,7 +21,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 //
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+#import <AVFoundation/AVAssetExportSession.h>
+#endif
 #define TSLibraryImportErrorDomain @"TSLibraryImportErrorDomain"
 
 #define TSUnknownError @"TSUnknownError"
@@ -30,8 +32,9 @@
 #define kTSUnknownError -65536
 #define kTSFileExistsError -48 //dupFNErr
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_8_0
 typedef NSInteger AVAssetExportSessionStatus;
-
+#endif
 @class AVAssetExportSession;
 
 @interface TSLibraryImport : NSObject {
