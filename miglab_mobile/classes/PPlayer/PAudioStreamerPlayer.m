@@ -276,6 +276,11 @@
         PLog(@"Update player stat to Pausing from audio streamer");
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStop object:nil userInfo:nil];
     }
+    else if (_streamerPlayer.errorCode == AS_AUDIO_DATA_NOT_FOUND)
+    {
+        PLog(@"The network configuration is error, stop the player");
+        [_streamerPlayer stop];
+    }
 }
 
 @end

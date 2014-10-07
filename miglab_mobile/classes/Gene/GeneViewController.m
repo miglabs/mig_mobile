@@ -1057,11 +1057,14 @@ static int PAGE_WIDTH = 81;
     NSDictionary *result = [tNotification userInfo];
     PLog(@"getTypeSongsFailed...%@", [result objectForKey:@"msg"]);
 
+#if 0 // 暂时不支持本地获取音乐
+    
     // 从网络获取歌曲失败，则从本地数据库获取音乐
     UserGene *tusergene = [UserSessionManager GetInstance].currentUserGene;
     NSMutableArray *tempsonglist = [[PDatabaseManager GetInstance] getSongInfoListByUserGene:tusergene rowCount:GET_TYPE_SONGS_NUM];
     
     [[PPlayerManagerCenter GetInstance] doUpdateSongList:tempsonglist];
+#endif
     
     //[SVProgressHUD showErrorWithStatus:@"根据纬度获取歌曲失败:("];
     
