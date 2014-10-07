@@ -140,13 +140,10 @@
     int avatarHeight = 30;
     EGOImageButton* btnAvatar = [[EGOImageButton alloc] initWithFrame:CGRectMake(startx, starty, avatarWidth, avatarHeight)];
     
+    btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (_msginfo.userInfo.headurl) {
         
         btnAvatar.imageURL = [NSURL URLWithString:_msginfo.userInfo.headurl];
-    }
-    else {
-        
-        btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     btnAvatar.layer.cornerRadius = avatarWidth / 2;
     btnAvatar.layer.masksToBounds = YES;

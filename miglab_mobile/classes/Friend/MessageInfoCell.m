@@ -37,13 +37,10 @@
     _msginfo = msg;
     NSString* username = _msginfo.userInfo.nickname;
     
+    _btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (msg.userInfo.headurl) {
         
         _btnAvatar.imageURL = [NSURL URLWithString:msg.userInfo.headurl];
-    }
-    else {
-        
-        _btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
     _btnAvatar.layer.masksToBounds = YES;

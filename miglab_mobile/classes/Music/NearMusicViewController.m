@@ -402,13 +402,10 @@
     tipRect.origin.x = distanceRect.origin.x + distanceRect.size.width - distancesize.width - 5 - tipRect.size.width;
     cell.imgMsgTips.frame = tipRect;
     
+    cell.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (imageurl) {
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
-    }
-    else {
-        
-        cell.btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
     cell.btnAvatar.layer.masksToBounds = YES;

@@ -475,13 +475,10 @@
     
     SongComment *tempcomment = [_dataList objectAtIndex:indexPath.row];
     
+    cell.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (tempcomment.user.head) {
         
         cell.btnAvatar.imageURL = [NSURL URLWithString:tempcomment.user.head];
-    }
-    else {
-        
-        cell.btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
     cell.btnAvatar.layer.masksToBounds = YES;

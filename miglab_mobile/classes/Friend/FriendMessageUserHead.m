@@ -53,13 +53,10 @@
         _imgSex.image = [UIImage imageNamed:@"user_gender_female"];
     }
     
+    _btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (_userinfo.headurl) {
         
         _btnAvatar.imageURL = [NSURL URLWithString:_userinfo.headurl];
-    }
-    else {
-        
-        _btnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     _btnAvatar.layer.cornerRadius = _btnAvatar.frame.size.width / 2;
     _btnAvatar.layer.masksToBounds = YES;

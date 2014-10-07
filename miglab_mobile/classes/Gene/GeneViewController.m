@@ -374,13 +374,10 @@ static int PAGE_WIDTH = 81;
     
     // 刷新头像
     NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
+    _currentGeneView.egoBtnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
         
         _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
-    }
-    else {
-        
-        _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:URL_DEFAULT_HEADER_IMAGE];
     }
     
     if (![GlobalDataManager GetInstance].isMainMenuFirstLaunch &&
