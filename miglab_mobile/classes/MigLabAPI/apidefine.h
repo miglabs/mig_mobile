@@ -290,6 +290,9 @@
 #define USE_NEW_LOAD    1
 #define USE_ARTIST_SONGNAME 0
 
+/* 播放器网络异常 */
+#define NotificationNamePlayerNetworkError      @"NotificationNamePlayerNetworkError"
+
 /* ------------------ 宏函数定义 ---------------------- */
 #define MIG_NOT_EMPTY_STR(x)                    (x && ![x isEqualToString:@""])
 

@@ -279,7 +279,8 @@
     else if (_streamerPlayer.errorCode == AS_AUDIO_DATA_NOT_FOUND)
     {
         PLog(@"The network configuration is error, stop the player");
-        [_streamerPlayer stop];
+        //[_streamerPlayer pause];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNetworkError object:nil userInfo:nil];
     }
 }
 

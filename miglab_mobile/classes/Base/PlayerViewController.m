@@ -23,13 +23,14 @@
 @synthesize playerMenuView = _playerMenuView;
 //接口api
 @synthesize miglabAPI = _miglabAPI;
+@synthesize playerUnavailable = _playerUnavailable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        _playerUnavailable = NO;
     }
     return self;
 }
@@ -86,6 +87,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStart:) name:NotificationNamePlayerStart object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStop:) name:NotificationNamePlayerStop object:nil];
     
+    //Network error
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerAbort:) name:NotificationNamePlayerNetworkError object:nil];
     
     [self updateSongInfo];
     
@@ -133,6 +136,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStart object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStop object:nil];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerNetworkError object:nil];
 }
 
 -(BOOL)canBecomeFirstResponder{
@@ -252,6 +256,11 @@
     
     PLog(@"doPlayOrPause...");
     
+    if (_playerUnavailable) {
+        
+        return;
+    }
+    
     [[PPlayerManagerCenter GetInstance] doPlayOrPause];
     
     [self updateSongInfo];
@@ -261,6 +270,11 @@
 -(IBAction)doNext:(id)sender{
     
     PLog(@"doNext...");
+    
+    if (_playerUnavailable) {
+        
+        return;
+    }
     
     [[PPlayerManagerCenter GetInstance] doNext];
     
@@ -306,6 +320,11 @@
 }
 
 -(void)updateSongInfo{
+    
+    if (_playerUnavailable) {
+        
+        return;
+    }
     
 #if USE_NEW_AUDIO_PLAY
     
@@ -438,6 +457,16 @@
     
     [self updateSongInfo];
     
+}
+    
+-(void)playerAbort:(NSNotification *)tNotification {
+        
+    PLog(@"Player Abort...");
+    
+    PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
+    [asMusicPlayer playerDestroy];
+    _playerUnavailable = YES;
+    //[asMusicPlayer stop];
 }
 
 #pragma EGOImageButtonDelegate

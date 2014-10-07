@@ -23,6 +23,8 @@
 //接口api
 @property (nonatomic, retain) MigLabAPI *miglabAPI;
 
+@property (nonatomic, assign) BOOL playerUnavailable;
+
 -(IBAction)doPlayerAvatar:(id)sender;
 -(IBAction)doDelete:(id)sender;
 -(IBAction)doCollect:(id)sender;
@@ -40,5 +42,8 @@
 -(void)cancelCollectedSongSuccess:(NSNotification *)tNotification;
 -(void)playerStart:(NSNotification *)tNotification;
 -(void)playerStop:(NSNotification *)tNotification;
+
+-(void)playerAbort:(NSNotification *)tNotification;
+-(void)playerResume:(NSNotification *)tNotification;
 
 @end
