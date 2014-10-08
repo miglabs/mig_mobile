@@ -124,7 +124,10 @@
     _commentPlayerView.btnAvatar.layer.masksToBounds = YES;
     _commentPlayerView.btnAvatar.layer.borderWidth = 2;
     _commentPlayerView.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
-    _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+    _commentPlayerView.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+    if (_song.coverurl) {
+        _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+    }
     _commentPlayerView.lblSongName.text = _song.songname;
     _commentPlayerView.lblSongName.font = [UIFont fontOfApp:17.0f];
     _commentPlayerView.lblSongArtist.text = _song.artist;
@@ -214,7 +217,11 @@
         [_commentPlayerView.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
     }
     
-    _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+        _commentPlayerView.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+        if (_song.coverurl) {
+            
+            _commentPlayerView.btnAvatar.imageURL = [NSURL URLWithString:_song.coverurl];
+        }
     
     if (_song.songname) {
         

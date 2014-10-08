@@ -346,7 +346,11 @@
     }
     
     Song *currentsong = [PPlayerManagerCenter GetInstance].currentSong;
-    _playerMenuView.btnAvatar.imageURL = [NSURL URLWithString:currentsong.coverurl];
+        _playerMenuView.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+        if (currentsong.coverurl) {
+            
+            _playerMenuView.btnAvatar.imageURL = [NSURL URLWithString:currentsong.coverurl];
+        }
     
     if (currentsong.songname && currentsong.artist) {
         _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@ - %@", currentsong.songname, currentsong.artist];

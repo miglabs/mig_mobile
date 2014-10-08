@@ -218,7 +218,10 @@
     
     Song* song = (Song*)[_sendsongData objectAtIndex:indexPath.row];
     cell.lblSongInfo.text = [NSString stringWithFormat:@"%@/%@", song.songname, song.artist];
-    cell.btnAvatar.imageURL = [NSURL URLWithString:song.coverurl];
+    cell.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+    if (song.coverurl) {
+        cell.btnAvatar.imageURL = [NSURL URLWithString:song.coverurl];
+    }
     
     if (song.presentMsg) {
         

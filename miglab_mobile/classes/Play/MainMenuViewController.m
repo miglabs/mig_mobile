@@ -296,6 +296,7 @@
         NSURL *tempCoverUrl = [NSURL URLWithString:_currentSong.coverurl];
         _cdOfSongView.coverOfSongEGOImageView.imageURL = tempCoverUrl;
         _cdEGOImageView.imageURL = tempCoverUrl;
+        _playerBoradView.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
         _playerBoradView.btnAvatar.imageURL = tempCoverUrl;
         
     }
@@ -1368,6 +1369,7 @@
     NSURL *tempCoverUrl = [NSURL URLWithString:_currentSong.coverurl];
     _cdOfSongView.coverOfSongEGOImageView.imageURL = tempCoverUrl;
     _cdEGOImageView.imageURL = tempCoverUrl;
+    _playerBoradView.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
     _playerBoradView.btnAvatar.imageURL = tempCoverUrl;
     
 #if USE_NEW_AUDIO_PLAY

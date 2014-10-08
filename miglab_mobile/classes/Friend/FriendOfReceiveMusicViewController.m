@@ -82,7 +82,10 @@
     _musicCommentHeader.btnAvatar.layer.masksToBounds = YES;
     _musicCommentHeader.btnAvatar.layer.borderWidth = 2;
     _musicCommentHeader.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
-    _musicCommentHeader.btnAvatar.imageURL = [NSURL URLWithString:_msginfo.song.coverurl];
+    _musicCommentHeader.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+    if (_msginfo.song.coverurl) {
+        _musicCommentHeader.btnAvatar.imageURL = [NSURL URLWithString:_msginfo.song.coverurl];
+    }
     _musicCommentHeader.lblSongName.text = _msginfo.song.songname;
     _musicCommentHeader.lblSongName.font = [UIFont fontOfApp:17.0f];
     _musicCommentHeader.lblSongArtist.text = _msginfo.song.artist;
