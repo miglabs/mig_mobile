@@ -33,6 +33,9 @@
 -(void)doCancelSuccess:(NSNotification*)tNotification;
 -(void)doCancelFailed:(NSNotification*)tNotification;
 
+-(void)playerStart:(NSNotification *)tNotification;
+-(void)playerStop:(NSNotification *)tNotification;
+
 -(IBAction)checkUsrInfo:(id)sender;
 
 @end

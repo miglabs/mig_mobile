@@ -36,6 +36,9 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCancelSuccess:) name:NotificationNameCancelCollectedSongSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCancelFailed:) name:NotificationNameCancelCollectedSongFailed object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStart:) name:NotificationNamePlayerStart object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStop:) name:NotificationNamePlayerStop object:nil];
     }
     return self;
 }
@@ -46,6 +49,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCollectSongFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCancelCollectedSongSuccess object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameCancelCollectedSongFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStart object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNamePlayerStop object:nil];
 }
 
 - (void)viewDidLoad
@@ -385,6 +390,18 @@
     
     
 }
-
+    
+    
+    -(void)playerStart:(NSNotification *)tNotification {
+        
+        UIImage *stopNorImage = [UIImage imageWithName:@"music_menu_stop_nor" type:@"png"];
+        [_musicCommentHeader.btnPlayOrPause setImage:stopNorImage forState:UIControlStateNormal];
+    }
+    
+    -(void)playerStop:(NSNotification *)tNotification {
+        
+        UIImage *playNorImage = [UIImage imageWithName:@"music_menu_play_nor" type:@"png"];
+        [_musicCommentHeader.btnPlayOrPause setImage:playNorImage forState:UIControlStateNormal];
+    }
 
 @end
