@@ -344,11 +344,13 @@
 // custom view for header. will be adjusted to default or specified header height
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+#if USE_LOCAL_PLAY
     UIButton *btnEdit = [UIButton buttonWithType:UIButtonTypeCustom];
     btnEdit.frame = CGRectMake(230, 8, 58, 28);
     UIImage *editNorImage = [UIImage imageWithName:@"music_source_edit" type:@"png"];
     [btnEdit setImage:editNorImage forState:UIControlStateNormal];
     [btnEdit addTarget:self action:@selector(doShowSourceEdit:) forControlEvents:UIControlEventTouchUpInside];
+#endif
     
     UIImageView *separatorImageView = [[UIImageView alloc] init];
     separatorImageView.frame = CGRectMake(4, 45, 290, 1);
@@ -356,7 +358,11 @@
     
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, 297, 45);
+    
+    
+#if USE_LOCAL_PLAY
     [headerView addSubview:btnEdit];
+#endif
     [headerView addSubview:separatorImageView];
     
     return headerView;
