@@ -1196,7 +1196,7 @@ static int PAGE_WIDTH = 81;
     UIImage* focusImg = [UIImage imageWithName:@"gene_focus"];
     _focusImageView.image = focusImg;
     _focusImageView.frame = rect;
-    _focusImageView.hidden = NO;
+    _focusImageView.hidden = _btnType.hidden;
 }
 
 #pragma mark - Player Delegate
