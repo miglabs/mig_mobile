@@ -521,6 +521,11 @@
     //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
         NSLog(@"resp.errCode: %d, resp.description: %@", resp.errCode, resp.description);
+        
+        if (resp.errCode == 0 ) {
+            
+            // 分享成功
+        }
     }
 }
 

@@ -812,10 +812,4 @@
     [SVProgressHUD showSuccessWithStatus:MIGTIP_SHARE_TO_QQ_SUCCEED];
 }
 
-/* Weixin delegate */
-- (void)onResp:(BaseResp *)resp {
-    
-    PLog(@"%@", resp.errStr);
-}
-
 @end
