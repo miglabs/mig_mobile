@@ -15,7 +15,6 @@
 #import "PDatabaseManager.h"
 #import "ShareChooseView.h"
 #import "ShareViewController.h"
-#import "WXApi.h"
 #import <objc/runtime.h>
 #import "TencentOpenAPI/QQApiInterface.h"
 #import "apidefine.h"
@@ -805,12 +804,18 @@
 
 - (void)tencentAddWeiboHelper:(TencentHelper *)tencentHelper didFailWithError:(NSError *)error
 {
-    
+    [SVProgressHUD showErrorWithStatus:MIGTIP_SHARE_TO_QQ_FAILED];
 }
 
 - (void)tencentAddWeiboHelper:(TencentHelper *)tencentHelper didFinishLoadingWithResult:(NSDictionary *)result
 {
+    [SVProgressHUD showSuccessWithStatus:MIGTIP_SHARE_TO_QQ_SUCCEED];
+}
+
+/* Weixin delegate */
+- (void)onResp:(BaseResp *)resp {
     
+    PLog(@"%@", resp.errStr);
 }
 
 @end

@@ -16,10 +16,11 @@
 #import "ShareGuideView.h"
 #import "SinaWeiboHelper.h"
 #import "TencentHelper.h"
+#import "WXApi.h"
 #import "LyricShare.h"
 #import "UIImage+ext.h"
 
-@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate>
+@interface DetailPlayerViewController : BaseViewController<EGOImageViewDelegate, EGOImageButtonDelegate, UIActionSheetDelegate, SinaWeiboHelperDelegate, TencentHelperDelegate, WXApiDelegate>
 
 @property (nonatomic, retain) PCustomPlayerNavigationView *topPlayerInfoView;
 
