@@ -10,4 +10,6 @@
 
 @interface StartGuideViewController : UIViewController
 
+
++(BOOL) isShowGuide;
 @end
