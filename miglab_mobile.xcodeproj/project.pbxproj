@@ -512,6 +512,13 @@
 		C7DE8EBD1977AE0E0047233D /* MsgTextRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB51977AE0E0047233D /* MsgTextRunDelegate.m */; };
 		C7DE8EBE1977AE0E0047233D /* MsgTextURLRun.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB71977AE0E0047233D /* MsgTextURLRun.m */; };
 		C7DE8EBF1977AE0E0047233D /* MsgTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DE8EB91977AE0E0047233D /* MsgTextView.m */; };
+		CA171A4319EF5F9E00A45A9B /* startpage1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A3D19EF5F9E00A45A9B /* startpage1-568h@2x.png */; };
+		CA171A4419EF5F9E00A45A9B /* startpage1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A3E19EF5F9E00A45A9B /* startpage1@2x.png */; };
+		CA171A4519EF5F9E00A45A9B /* startpage2-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A3F19EF5F9E00A45A9B /* startpage2-568h@2x.png */; };
+		CA171A4619EF5F9E00A45A9B /* startpage2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A4019EF5F9E00A45A9B /* startpage2@2x.png */; };
+		CA171A4719EF5F9E00A45A9B /* startpage3-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A4119EF5F9E00A45A9B /* startpage3-568h@2x.png */; };
+		CA171A4819EF5F9E00A45A9B /* startpage3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA171A4219EF5F9E00A45A9B /* startpage3@2x.png */; };
+		CA171A4B19EF5FE700A45A9B /* StartGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA171A4A19EF5FE700A45A9B /* StartGuideViewController.m */; };
 		CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */; };
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
 		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
@@ -1267,6 +1274,14 @@
 		C7DE8EB81977AE0E0047233D /* MsgTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextView.h; sourceTree = "<group>"; };
 		C7DE8EB91977AE0E0047233D /* MsgTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgTextView.m; sourceTree = "<group>"; };
 		C7DE8EBA1977AE0E0047233D /* MsgTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgTextViewDelegate.h; sourceTree = "<group>"; };
+		CA171A3D19EF5F9E00A45A9B /* startpage1-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage1-568h@2x.png"; sourceTree = "<group>"; };
+		CA171A3E19EF5F9E00A45A9B /* startpage1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage1@2x.png"; sourceTree = "<group>"; };
+		CA171A3F19EF5F9E00A45A9B /* startpage2-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage2-568h@2x.png"; sourceTree = "<group>"; };
+		CA171A4019EF5F9E00A45A9B /* startpage2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage2@2x.png"; sourceTree = "<group>"; };
+		CA171A4119EF5F9E00A45A9B /* startpage3-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage3-568h@2x.png"; sourceTree = "<group>"; };
+		CA171A4219EF5F9E00A45A9B /* startpage3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage3@2x.png"; sourceTree = "<group>"; };
+		CA171A4919EF5FE700A45A9B /* StartGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGuideViewController.h; sourceTree = "<group>"; };
+		CA171A4A19EF5FE700A45A9B /* StartGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGuideViewController.m; sourceTree = "<group>"; };
 		CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
 		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
@@ -1590,6 +1605,8 @@
 				16EA2D2019286855008E9DD3 /* GeneGuideView.m */,
 				16EA2D39192875F0008E9DD3 /* ShareGuideView.h */,
 				16EA2D3A192875F0008E9DD3 /* ShareGuideView.m */,
+				CA171A4919EF5FE700A45A9B /* StartGuideViewController.h */,
+				CA171A4A19EF5FE700A45A9B /* StartGuideViewController.m */,
 			);
 			path = Guide;
 			sourceTree = "<group>";
@@ -2332,6 +2349,12 @@
 		16EA2D2219286B09008E9DD3 /* guide */ = {
 			isa = PBXGroup;
 			children = (
+				CA171A3D19EF5F9E00A45A9B /* startpage1-568h@2x.png */,
+				CA171A3E19EF5F9E00A45A9B /* startpage1@2x.png */,
+				CA171A3F19EF5F9E00A45A9B /* startpage2-568h@2x.png */,
+				CA171A4019EF5F9E00A45A9B /* startpage2@2x.png */,
+				CA171A4119EF5F9E00A45A9B /* startpage3-568h@2x.png */,
+				CA171A4219EF5F9E00A45A9B /* startpage3@2x.png */,
 				16EA2D2319286B09008E9DD3 /* gene1.png */,
 				16EA2D2419286B09008E9DD3 /* gene2.png */,
 				16EA2D2519286B09008E9DD3 /* gene3.png */,
@@ -2739,6 +2762,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = pig;
+				TargetAttributes = {
+					16EDEF361759AD5E001BE4E9 = {
+						DevelopmentTeam = 6JWDKE7GS8;
+					};
+				};
 			};
 			buildConfigurationList = 16EDEF311759AD5E001BE4E9 /* Build configuration list for PBXProject "miglab_mobile" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2887,6 +2915,7 @@
 				1627279D17ACB39A000C79D3 /* borad_menu_stop_sel.png in Resources */,
 				162727A317ACB947000C79D3 /* play_btn_menu_nor.png in Resources */,
 				16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */,
+				CA171A4319EF5F9E00A45A9B /* startpage1-568h@2x.png in Resources */,
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
 				162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */,
@@ -2937,12 +2966,15 @@
 				162AAB5017C258F0000E904F /* gene_src_1.png in Resources */,
 				162AAB5117C258F0000E904F /* gene_src_2.png in Resources */,
 				162AAB5617C25D00000E904F /* ModifyGeneView.xib in Resources */,
+				CA171A4519EF5F9E00A45A9B /* startpage2-568h@2x.png in Resources */,
 				CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */,
 				16896059181171C00031902F /* LoginMenuCell.xib in Resources */,
 				166171FF18F9354600E86B11 /* del_emoji_normal.png in Resources */,
+				CA171A4819EF5F9E00A45A9B /* startpage3@2x.png in Resources */,
 				166171FD18F9354600E86B11 /* chat_textfield_bg.png in Resources */,
 				162AAB5B17C25D55000E904F /* CurrentGeneView.xib in Resources */,
 				1649E20617C3A92D009A9E3F /* MyFriendViewController.xib in Resources */,
+				CA171A4719EF5F9E00A45A9B /* startpage3-568h@2x.png in Resources */,
 				1649E20C17C3A95D009A9E3F /* NearFriendViewController.xib in Resources */,
 				1649E21117C3A997009A9E3F /* MessageViewController.xib in Resources */,
 				C7C9F5CB18FC5925001E3A47 /* about_icon.png in Resources */,
@@ -3004,6 +3036,7 @@
 				16D0DB0C17C9EA2600EB763F /* FriendOfReceiveMusicViewController.xib in Resources */,
 				16D0DB1117C9F12F00EB763F /* MessageInfoCell.xib in Resources */,
 				16D0DB2217CA293800EB763F /* PhotoInfoCell.xib in Resources */,
+				CA171A4619EF5F9E00A45A9B /* startpage2@2x.png in Resources */,
 				16D0DB2A17CA31E700EB763F /* FriendOfAddViewController.xib in Resources */,
 				161D5D9717D0DBE800F1056B /* gene_type.png in Resources */,
 				1633F6E917D1D24F00F47DFF /* base_navigation_bg.png in Resources */,
@@ -3097,6 +3130,7 @@
 				C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */,
 				18A6020D17F2956400344C5B /* qzone_icon_disabled@2x.png in Resources */,
 				18A6020E17F2956400344C5B /* qzone_normal@2x.png in Resources */,
+				CA171A4419EF5F9E00A45A9B /* startpage1@2x.png in Resources */,
 				18A6020F17F2956400344C5B /* renren_icon.png in Resources */,
 				18A6021017F2956400344C5B /* renren_icon@2x.png in Resources */,
 				18A6021117F2956400344C5B /* renren_icon_disabled@2x.png in Resources */,
@@ -3177,6 +3211,7 @@
 				1623166F1777397600CF8FB5 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				162316701777397600CF8FB5 /* FMDatabase.m in Sources */,
 				162316711777397600CF8FB5 /* FMDatabaseAdditions.m in Sources */,
+				CA171A4B19EF5FE700A45A9B /* StartGuideViewController.m in Sources */,
 				162316721777397600CF8FB5 /* FMDatabasePool.m in Sources */,
 				162316731777397600CF8FB5 /* FMDatabaseQueue.m in Sources */,
 				167F047C18F93228000A1C21 /* ChatMsgContentView.m in Sources */,
@@ -3414,8 +3449,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3428,6 +3463,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
 				INFOPLIST_FILE = "miglab_mobile/miglab_mobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
@@ -3445,8 +3481,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f2775bff-bf62-4a70-b956-7c3809cd1922";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f2775bff-bf62-4a70-b956-7c3809cd1922";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ef0b6a4b-0322-48f2-b935-5ec3e1479772";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3461,8 +3497,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3475,6 +3511,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "miglab_mobile/miglab_mobile-Prefix.pch";
 				INFOPLIST_FILE = "miglab_mobile/miglab_mobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/miglab_mobile/classes/WeChatAPI\"",
@@ -3492,8 +3529,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f2775bff-bf62-4a70-b956-7c3809cd1922";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f2775bff-bf62-4a70-b956-7c3809cd1922";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ef0b6a4b-0322-48f2-b935-5ec3e1479772";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

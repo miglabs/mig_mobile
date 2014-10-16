@@ -42,7 +42,7 @@
 #import "Song.h"
 #import "SongDownloadManager.h"
 #import "PAudioStreamerPlayer.h"
-
+#import "StartGuideViewController.h"
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -184,8 +184,16 @@
         _navController = [[UINavigationController alloc] initWithRootViewController:_rootViewController];
         _navController.navigationBar.hidden = YES;
         
-        self.window.rootViewController = _navController;
-        [self.window addSubview:self.navController.view];
+        
+        if ( [StartGuideViewController isShowGuide]) {
+            self.window.rootViewController = [[StartGuideViewController alloc] init];
+            [self.window addSubview:self.window.rootViewController.view];
+        }
+        else
+        {
+         self.window.rootViewController = _navController;
+         [self.window addSubview:self.navController.view];
+        }
         
     }//
     
