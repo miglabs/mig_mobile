@@ -191,8 +191,9 @@
         }
         else
         {
-         self.window.rootViewController = _navController;
-         [self.window addSubview:self.navController.view];
+             self.window.rootViewController = _navController;
+             [self.window addSubview:self.navController.view];
+             [[UIApplication sharedApplication] setStatusBarHidden:NO];
         }
         
     }//
@@ -258,7 +259,7 @@
     }
     
     //显示状态栏
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
     
     //NSString *username = [UserSessionManager GetInstance].currentUser.username;
     //NSString *password = [UserSessionManager GetInstance].currentUser.password;

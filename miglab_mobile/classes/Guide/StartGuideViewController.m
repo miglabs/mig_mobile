@@ -66,10 +66,12 @@
 
 -(void) presentViewController
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     UIViewController* desView = [((AppDelegate*)[UIApplication sharedApplication].delegate) navController];
     [self presentViewController:desView animated:NO completion:^{
         [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:kCFBundleShortVersionString]  forKey:kOLDAPPVERSION_KEY];
     }];
+    
 }
 
 -(BOOL) prefersStatusBarHidden
