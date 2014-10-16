@@ -67,10 +67,8 @@
 -(void) presentViewController
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    UIViewController* desView = [((AppDelegate*)[UIApplication sharedApplication].delegate) navController];
-    [self presentViewController:desView animated:NO completion:^{
-        [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:kCFBundleShortVersionString]  forKey:kOLDAPPVERSION_KEY];
-    }];
+    [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:kCFBundleShortVersionString]  forKey:kOLDAPPVERSION_KEY];
+     [[[UIApplication sharedApplication].delegate window] setRootViewController:[((AppDelegate*)[UIApplication sharedApplication].delegate) navController]];
     
 }
 
