@@ -3643,5 +3643,55 @@
     API_FOOTER();
 }
 
+/*
+ 发送分享结果
+ */
+-(void)doSendShareResult:(NSString*)uid token:(NSString*)ttoken plat:(NSString *)share_plat songid:(NSString*)tsongid {
+    
+    API_HEADER();
+    
+    NSString *url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&share_plat=%@&songid=%@", HTTP_SENDSHARERESULT, uid, ttoken, share_plat, tsongid];
+    PLog(@"send share result url: %@", url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            
+            int status = [[dicJson objectForKey:@"result"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"send share result succeeded");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendShareResultSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"send share result failed");
+                
+                NSString *msg = [dicJson objectForKey:@"msg"];
+                NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendShareResultFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSString* msg = @"解析返回数据失败";
+        NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendShareResultFailed object:nil userInfo:dicResult];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
 
 @end

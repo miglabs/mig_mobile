@@ -297,4 +297,9 @@ typedef enum {
  
 */
 -(void) doGetHisChat:(int64_t)platformid uid:(int64_t) tuid  tid:(int64_t) ttid token:(NSString*)ttoken minmsgid:(int64_t) tminmsgid;
+
+/*
+ 返回分享结果
+ */
+-(void)doSendShareResult:(NSString*)uid token:(NSString*)ttoken plat:(NSString *)share_plat songid:(NSString*)tsongid;
 @end

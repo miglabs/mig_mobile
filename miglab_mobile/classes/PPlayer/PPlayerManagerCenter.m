@@ -257,6 +257,7 @@ static PPlayerManagerCenter *instance;
         
             _currentSongIndex = (_currentSongIndex + 1) % [_songList count];
             _currentSong = [_songList objectAtIndex:_currentSongIndex];
+            [GlobalDataManager GetInstance].curSongId = _currentSong.songid;
             
 #if USE_NEW_AUDIO_PLAY
             

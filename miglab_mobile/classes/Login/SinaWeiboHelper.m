@@ -220,6 +220,13 @@ BOOL _firstLoadObserver = YES;
     }
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
+    
+    // 发送分享结果
+    MigLabAPI *miglapApi = [[MigLabAPI alloc] init];
+    NSString *userid = [UserSessionManager GetInstance].userid;
+    NSString *token = [UserSessionManager GetInstance].accesstoken;
+    NSString *songid = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongId];
+    [miglapApi doSendShareResult:userid token:token plat:STR_USER_SOURCE_WEIXIN songid:songid];
 }
 
 -(void)doShareToSinaWeibo:(LyricShare *)lyric {

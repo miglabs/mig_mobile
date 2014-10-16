@@ -27,6 +27,7 @@
 @property (nonatomic, retain) NSString* curSongType;
 @property (nonatomic, retain) NSString* curSongTypeName;
 @property (nonatomic, assign) int curSongTypeId;
+@property (nonatomic, assign) int curSongId;
 
 @property (nonatomic, assign) int nNewArrivalMsg;
 @property (nonatomic, assign) int nShareSource; // 1-weibo, 2-weixin

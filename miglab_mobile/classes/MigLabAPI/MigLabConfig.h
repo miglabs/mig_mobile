@@ -399,4 +399,9 @@
 #define NotificationNameHisChatSuccess                      @"NotificationNameHisChatSuccess"
 #define NotificationNameHisChatFailed                       @"NotificationNameHisChatFailed"
 
+// 提交分享结果
+#define HTTP_SENDSHARERESULT                                [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/shareresult.fcgi"]
+#define NotificationNameSendShareResultSuccess              @"NotificationNameSendShareResultSuccess"
+#define NotificationNameSendShareResultFailed               @"NotificationNameSendShareResultFailed"
+
 #endif

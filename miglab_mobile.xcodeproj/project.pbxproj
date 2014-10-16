@@ -3485,8 +3485,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ef0b6a4b-0322-48f2-b935-5ec3e1479772";
+				PROVISIONING_PROFILE = "f2775bff-bf62-4a70-b956-7c3809cd1922";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f2775bff-bf62-4a70-b956-7c3809cd1922";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3533,8 +3533,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ef0b6a4b-0322-48f2-b935-5ec3e1479772";
+				PROVISIONING_PROFILE = "f2775bff-bf62-4a70-b956-7c3809cd1922";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "f2775bff-bf62-4a70-b956-7c3809cd1922";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

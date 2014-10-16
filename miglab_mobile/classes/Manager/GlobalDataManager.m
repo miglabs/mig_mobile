@@ -29,6 +29,7 @@
 @synthesize curSongType = _curSongType;
 @synthesize curSongTypeName = _curSongTypeName;
 @synthesize curSongTypeId = _curSongTypeId;
+@synthesize curSongId = _curSongId;
 
 +(GlobalDataManager *)GetInstance{
     
