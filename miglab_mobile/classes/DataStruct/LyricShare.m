@@ -25,7 +25,7 @@
             ls.weather = [dict objectForKey:@"weather"];
             ls.temprature = [dict objectForKey:@"temp"];
             ls.address = [dict objectForKey:@"address"];
-            ls.description = [dict objectForKey:@"description"];
+            ls.mdescription = [dict objectForKey:@"description"];
         }
     }
     @catch (NSException *exception) {

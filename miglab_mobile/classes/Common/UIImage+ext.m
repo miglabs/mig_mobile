@@ -208,7 +208,8 @@
     NSString *szDate = [NSString stringWithFormat:@"%04d/%02d/%02d", [comps year], [comps month], [comps day]];
     NSString *szAddress = ls.address;
     NSString *szToast = MIGTIP_THE_GOAL;
-    NSString *szMode = ls.description;
+    //NSString *szMode = ls.description;
+    NSString * szMode = ls.mdescription;
     
     UIGraphicsBeginImageContext(CGSizeMake(imgWidth, imgHeight));
     
