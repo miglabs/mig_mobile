@@ -492,6 +492,14 @@
     }
     
     if ([[url absoluteString] hasPrefix:@"tencent"]) {
+        
+        NSRange range = [[url absoluteString] rangeOfString:@"mqqapi"];
+        
+        if (range.length > 0) {
+            
+            //[QQApiInterface handleOpenURL:url delegate:(id)[QQAPIHandler class]];
+        }
+        
         return [TencentOAuth HandleOpenURL:url];
     }
     
@@ -509,6 +517,14 @@
     }
     
     if ([[url absoluteString] hasPrefix:@"tencent"]) {
+        
+        NSRange range = [[url absoluteString] rangeOfString:@"mqqapi"];
+        
+        if (range.length > 0) {
+            
+            [QQApiInterface handleOpenURL:url delegate:(id)[QQAPIHandler class]];
+        }
+        
         return [TencentOAuth HandleOpenURL:url];
     }
     

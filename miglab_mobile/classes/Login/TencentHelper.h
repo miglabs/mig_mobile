@@ -19,9 +19,14 @@ typedef enum {
     TencentHelperStatusAddWeibo
 } TencentHelperStatus;
 
+
+@interface QQAPIHandler : NSObject
+
+@end
+
 @class TencentHelper;
 
-@protocol TencentHelperDelegate <NSObject>
+@protocol TencentHelperDelegate <NSObject, TencentLoginDelegate>
 
 @optional;
 

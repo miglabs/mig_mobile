@@ -10,6 +10,7 @@
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
 #import "PDatabaseManager.h"
+#import "GlobalDataManager.h"
 
 @implementation TencentHelper
 
@@ -388,6 +389,52 @@
     }
     
     [SVProgressHUD showErrorWithStatus:text];
+}
+
+@end
+
+
+@implementation QQAPIHandler
+
+#pragma mark - QQApiInterfaceDelegate
++ (void)onReq:(QQBaseReq *)req
+{
+    switch (req.type)
+    {
+        case EGETMESSAGEFROMQQREQTYPE:
+        {
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+
++ (void)onResp:(QQBaseResp *)resp
+{
+    switch (resp.type)
+    {
+        case ESENDMESSAGETOQQRESPTYPE:
+        {
+            PLog(@"%@, %@, %@", resp.result, resp.errorDescription, resp.extendInfo);
+            if ([resp.result isEqualToString:@"0"]) {
+                
+                // 分享成功
+                MigLabAPI *miglapApi = [[MigLabAPI alloc] init];
+                NSString *userid = [UserSessionManager GetInstance].userid;
+                NSString *token = [UserSessionManager GetInstance].accesstoken;
+                NSString *songid = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongId];
+                [miglapApi doSendShareResult:userid token:token plat:STR_USER_SOURCE_QQ songid:songid];
+            }
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 @end
