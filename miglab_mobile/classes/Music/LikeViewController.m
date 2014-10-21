@@ -360,7 +360,7 @@
         
         _sortMenuView.alpha = 0.0f;
         _sortMenuView.frame = CGRectMake(11.5, 44 + self.topDistance + 10 + 45, 297, 0);
-        _dataTableView.frame = CGRectMake(11.5, 44 + self.topDistance + 10 + 45, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 45 - 10 - 73 - 10);
+        _dataTableView.frame = CGRectMake(11.5, 44 + self.topDistance + 10 + 45, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 45 - 10 - 73 - 10 - 20);
         
     } completion:^(BOOL finished) {
         _sortMenuView.hidden = YES;
