@@ -81,6 +81,13 @@
     [_bodyHeadMenuView.btnSort addTarget:self action:@selector(doSort:) forControlEvents:UIControlEventTouchUpInside];
     [_bodyHeadMenuView.btnEdit addTarget:self action:@selector(doEdit:) forControlEvents:UIControlEventTouchUpInside];
     
+#if !USE_LIKE_MUSIC_EDIT
+    _bodyHeadMenuView.btnEdit.hidden = YES;
+    
+    CGRect editframe = _bodyHeadMenuView.btnEdit.frame;
+    _bodyHeadMenuView.btnSort.frame = editframe;
+#endif
+    
     //sort menu
     _sortMenuView = [[MusicSortMenuView alloc] initMusicSortMenuView];
 //    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 45);

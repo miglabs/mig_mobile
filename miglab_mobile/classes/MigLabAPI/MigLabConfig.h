@@ -104,6 +104,11 @@
     #define USE_NEARMUSIC_SEARCH 0
 #endif
 
+// 开启我的音乐中的编辑功能
+#ifndef USE_LIKE_MUSIC_EDIT
+    #define USE_LIKE_MUSIC_EDIT 0
+#endif
+
 // 开启附近好音乐的编辑功能
 #ifndef USE_NEARMUSIC_EDIT
     #define USE_NEARMUSIC_EDIT 0
