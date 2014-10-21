@@ -29,6 +29,7 @@
 
 #include <pthread.h>
 #include <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define LOG_QUEUED_BUFFERS 0
 
@@ -107,7 +108,7 @@ typedef enum
 
 extern NSString * const ASStatusChangedNotification;
 
-@interface AudioStreamer : NSObject
+@interface AudioStreamer : NSObject<AVAudioSessionDelegate>
 {
 	NSURL *url;
 
@@ -177,6 +178,7 @@ extern NSString * const ASStatusChangedNotification;
 @property (readwrite) UInt32 bitRate;
 @property (readonly) NSDictionary *httpHeaders;
 @property (copy,readwrite) NSString *fileExtension;
+@property (nonatomic, assign) BOOL pausedByInterruption;
 
 - (id)initWithURL:(NSURL *)aURL;
 - (void)start;

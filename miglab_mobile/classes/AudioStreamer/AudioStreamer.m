@@ -768,12 +768,19 @@ static void ASReadStreamCallBack
 			// Set the audio session category so that we continue to play if the
 			// iPhone/iPod auto-locks.
 			//
+            
+#if 0 // This is comment by Archer to disable interrupt when playing music in other app
 			AudioSessionInitialize (
 				NULL,                          // 'NULL' to use the default (main) run loop
 				NULL,                          // 'NULL' to use the default run loop mode
 				ASAudioSessionInterruptionListener,  // a reference to your interruption callback
 				(__bridge void *)(self)                       // data to pass to your interruption listener callback
 			);
+            
+#else
+            AVAudioSession *mySession = [AVAudioSession sharedInstance];
+            [mySession setDelegate:self];
+#endif
 			UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
 			AudioSessionSetProperty (
 				kAudioSessionProperty_AudioCategory,
@@ -886,6 +893,26 @@ cleanup:
 		}
 
 	}
+}
+
+//this is add by Archer to handle interrupt from other app's music playing
+-(void)beginInterruption {
+    
+    if ([self isPlaying]) {
+        
+        [self pause];
+        self.pausedByInterruption = YES;
+    }
+}
+
+-(void)endInterruption {
+    
+    if ([self isPaused] && self.pausedByInterruption) {
+        
+        [self start];
+        
+        self.pausedByInterruption = NO;
+    }
 }
 
 //
