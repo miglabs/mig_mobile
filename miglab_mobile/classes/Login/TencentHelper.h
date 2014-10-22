@@ -53,6 +53,9 @@ typedef enum {
 @property (nonatomic, assign) TencentHelperStatus tencentHelperStatus;
 @property (nonatomic, strong) Song *shareSong;
 
+@property (nonatomic, assign) BOOL isLoginForShare;
+@property (nonatomic, strong) Song *reShareSong;
+
 + (id)sharedInstance;
 
 - (void)doTencentLogin;

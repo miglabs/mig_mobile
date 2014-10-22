@@ -15,6 +15,8 @@
 @implementation TencentHelper
 
 @synthesize tencentOAuth = _tencentOAuth;
+@synthesize isLoginForShare = _isLoginForShare;
+@synthesize reShareSong = _reShareSong;
 
 + (id)sharedInstance
 {
@@ -74,6 +76,7 @@
         _tencentOAuth.openId = tmpauth.qqOpenId;
         _tencentOAuth.localAppId = tmpauth.qqLocalAppId;
         _tencentOAuth.expirationDate = [NSDate dateWithTimeIntervalSince1970:tmpauth.qqLongTime];
+        _isLoginForShare = NO;
     }
 }
 
@@ -105,6 +108,8 @@
     }
     else {
         
+        _reShareSong = tSong;
+        _isLoginForShare = YES;
         [self initTencentAndLogin];
     }
 }
@@ -193,6 +198,14 @@
         [UserSessionManager GetInstance].accounttype = SourceTypeTencentWeibo;
         [UserSessionManager GetInstance].currentUser.tencentAccount = tencentAccount;
         [UserSessionManager GetInstance].currentUser.source = SourceTypeTencentWeibo;
+        
+        // 如果是为了分享而登陆的账号，不需要获取账户信息
+        if (_isLoginForShare) {
+            
+            _isLoginForShare = NO;
+            [self addQQZoneWithLyricImage:_reShareSong];
+            return;
+        }
         
         if(![_tencentOAuth getUserInfo]){
             if (_delegate && [_delegate respondsToSelector:@selector(tencentLoginHelper:didFailWithError:)]) {
