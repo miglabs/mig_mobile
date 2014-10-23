@@ -343,8 +343,15 @@
         
         Song *tsong1 = obj1;
         Song *tsong2 = obj2;
-        
-        return [tsong1.pinyin compare:tsong2.pinyin];
+        if ([tsong1.pinyin compare:tsong2.pinyin]<0) {
+            return NSOrderedAscending;
+        } else if ([tsong1.pinyin compare:tsong2.pinyin]>0) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+
+        //return [tsong1.pinyin compare:tsong2.pinyin];
         
     }];
     

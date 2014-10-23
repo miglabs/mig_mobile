@@ -7,6 +7,7 @@
 //
 
 #import "Song.h"
+#import "pinyin.h"
 
 @implementation Song
 
@@ -69,6 +70,16 @@
             
             song.presentMsg = nil;
             song.isChosed = NO;
+            
+            //计算歌曲名拼音
+            song.pinyin =  @"";
+            for (int i = 0; i < [ song.songname length]; i++)
+            {
+                char p = pinyinFirstLetter([song.songname characterAtIndex:i]);
+                song.pinyin = [song.pinyin stringByAppendingFormat:@"%c",p];
+            }
+            
+        
         }
         
     }
@@ -84,5 +95,7 @@
     PLog(@"Print Song: songid(%lld), songname(%@), artist(%@), pubtime(%@), album(%@), duration(%@), songurl(%@), hqurl(%@), lrcurl(%@), coverurl(%@), like(%@), wordid(%d), songtype(%d), collectnum(%d), commentnum(%d), hot(%lld), type(%@), tid(%d), songCachePath(%@), channelid(%@), typeid(%@), moodid(%@), sceneid(%@)", _songid, _songname, _artist, _pubtime, _album, _duration, _songurl, _hqurl, _lrcurl, _coverurl, _like, _wordid, _songtype, _collectnum, _commentnum, _hot, _type, _tid, _songCachePath, _channelid, _typeid, _moodid, _sceneid);
     
 }
+
+
 
 @end
