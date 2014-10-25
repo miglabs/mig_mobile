@@ -420,12 +420,13 @@ static void ASReadStreamCallBack
 			stopReason = AS_STOPPING_ERROR;
 			AudioQueueStop(audioQueue, true);
 		}
-
+#if 0
 #ifdef USE_AS_ORG_READFILE_ERROR
 		[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 							message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
 #else
         [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 #endif
 	}
 }
@@ -653,11 +654,13 @@ static void ASReadStreamCallBack
 			kCFStreamPropertyHTTPShouldAutoredirect,
 			kCFBooleanTrue) == false)
 		{
+#if 0
 #ifdef USE_AS_ORG_READFILE_ERROR
 			[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 								message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
 #else
             [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 #endif
 			return NO;
 		}
@@ -696,12 +699,14 @@ static void ASReadStreamCallBack
 		if (!CFReadStreamOpen(stream))
 		{
 			CFRelease(stream);
+#if 0
 #ifdef USE_AS_ORG_READFILE_ERROR
 			[self presentAlertWithTitle:NSLocalizedStringFromTable(@"File Error", @"Errors", nil)
 								message:NSLocalizedStringFromTable(@"Unable to configure network read stream.", @"Errors", nil)];
             
 #else
             [SVProgressHUD showErrorWithStatus:MIGTIP_READFILE_ERROR];
+#endif
 #endif
 			return NO;
 		}

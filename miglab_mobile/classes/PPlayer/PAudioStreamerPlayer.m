@@ -15,6 +15,7 @@
 @synthesize delegate = _delegate;
 @synthesize song = _song;
 @synthesize playerDestroied = _playerDestroied;
+@synthesize playerAbnormal = _playerAbnormal;
 
 -(id)init {
     
@@ -22,6 +23,7 @@
     if (self) {
         
         _playerDestroied = YES;
+        _playerAbnormal = NO;
     }
     
     return self;
@@ -254,13 +256,19 @@
     
     if ([_streamerPlayer isIdle]) {
         
-        PLog(@"Streamer player finish current song.");
-        
-        [self timerStop];
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)]) {
+        if (_playerAbnormal) {
             
-            [_delegate aaMusicPlayerStoped];
+            PLog(@"Player network error, let's just waiting and do nothing");
+        }
+        else {
+            PLog(@"Streamer player finish current song.");
+            
+            [self timerStop];
+            
+            if (_delegate && [_delegate respondsToSelector:@selector(aaMusicPlayerStoped)]) {
+                
+                [_delegate aaMusicPlayerStoped];
+            }
         }
     }
     /* 此处添加两个额外的图标状态更新，主要更新底部播放器的播放图标状态。
@@ -269,6 +277,7 @@
     else if ([_streamerPlayer isPlaying]) {
         
         PLog(@"Update player stat to Playing from audio streamer");
+        _playerAbnormal = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:nil];
     }
     else if ([_streamerPlayer isPaused]) {
@@ -279,6 +288,7 @@
     else if (_streamerPlayer.errorCode == AS_AUDIO_DATA_NOT_FOUND)
     {
         PLog(@"The network configuration is error, stop the player");
+        _playerAbnormal = YES;
         //[_streamerPlayer pause];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNetworkError object:nil userInfo:nil];
     }

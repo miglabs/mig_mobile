@@ -467,10 +467,15 @@
         
     PLog(@"Player Abort...");
     
+    // 不销毁播放器，改为停止
+#if 0
     PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
     [asMusicPlayer playerDestroy];
     _playerUnavailable = YES;
     //[asMusicPlayer stop];
+#else
+    [self playerStop:nil];
+#endif
 }
 
 #pragma EGOImageButtonDelegate

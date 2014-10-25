@@ -23,6 +23,7 @@
 @property (nonatomic, assign) id<PMusicPlayerDelegate> delegate;
 @property (nonatomic, retain) Song *song;
 @property (nonatomic, assign) BOOL playerDestroied;
+@property (nonatomic, assign) BOOL playerAbnormal;
 
 //初始化
 -(BOOL)initPlayer;
