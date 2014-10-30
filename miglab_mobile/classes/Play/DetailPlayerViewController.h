@@ -40,6 +40,10 @@
 
 //分享选择
 @property (nonatomic, retain) UIActionSheet *shareAchtionSheet;
+
+//适配IOS8的分享选择
+@property (nonatomic,retain) UIAlertController * shareAlertController;
+
 //截图
 @property (nonatomic, retain) UIImage *screenCaptureImage;
 @property (nonatomic, assign) BOOL isCurSongLike;

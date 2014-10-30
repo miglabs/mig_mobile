@@ -57,7 +57,7 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 2
+#define IS_DEBUG_SERVER 1
 #else
 #define IS_DEBUG_SERVER 1
 #endif
@@ -148,6 +148,7 @@
 #ifndef USE_AS_ORG_READFILE_ERROR
     #define USE_AS_ORG_READFILE_ERROR 0
 #endif
+
 
 
 //登陆

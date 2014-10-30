@@ -14,7 +14,7 @@
 		<string>https://github.com/miglabs/mig_mobile</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>miglab_mobile.xcodeproj/project.xcworkspace</string>
+	<string>miglab_mobile.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7A3E1EB72519B0D4FD67CE3D199496E5D800BA74</key>

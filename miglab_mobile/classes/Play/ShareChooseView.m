@@ -39,7 +39,7 @@
     if (self) {
         
         //1
-        UIImage *fourImage = [UIImage imageWithName:@"qzone_normal@2x" type:@"png"];
+       UIImage *fourImage = [UIImage imageWithName:@"qzone_normal@2x" type:@"png"];
         _btnFirst = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnFirst setTag:201];
         [_btnFirst setFrame:CGRectMake(26, 15, 70, 70)];
@@ -91,8 +91,11 @@
         [_lblThird setFont:[UIFont fontOfSystem:14.0f]];
         [self addSubview:_btnThird];
         [self addSubview:_lblThird];
+
         
         //4
+
+        /*
         UIImage *firstImage = [UIImage imageWithName:@"qq_weibo_normal@2x" type:@"png"];
         _btnFour = [UIButton buttonWithType:UIButtonTypeCustom];
         [_btnFour setTag:204];
@@ -145,6 +148,7 @@
         [_lblSix setFont:[UIFont fontOfSystem:14.0f]];
         [self addSubview:_btnSix];
         [self addSubview:_lblSix];
+        */
         
     }
     return self;

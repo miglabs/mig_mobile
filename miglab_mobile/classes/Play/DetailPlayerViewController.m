@@ -40,6 +40,9 @@
 
 //分享选择
 @synthesize shareAchtionSheet = _shareAchtionSheet;
+//适配IOS8 的 分享选择
+@synthesize shareAlertController = _shareAlertController;
+
 @synthesize screenCaptureImage = _screenCaptureImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -208,34 +211,60 @@
     
     //
 //    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
-    ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
+//IOS8 判断
+    int version = [[[UIDevice currentDevice] systemVersion] intValue];
+    if (version>=8) {
+        _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        [_shareAlertController addAction:[UIAlertAction actionWithTitle:MIGTIP_CANCEL
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action) {
+                                                    //NSLog(@"Action 1 Handler Called");
+                                                }]];
+ 
+    }else{
+        _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    }
+
+
     
+   ShareChooseView *shareSelectedView = [[ShareChooseView alloc] initShareChooseView];
+    
+    
+    //添加方法
     [shareSelectedView.btnFirst addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
     [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doShare2WeiXin:)];
     longPress.minimumPressDuration = 0.8;
     [shareSelectedView.btnThird addGestureRecognizer:longPress];
     
+    
+    
+    /*
     [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
-    shareSelectedView.btnFour.hidden = YES;
-    shareSelectedView.lblFour.hidden = YES;
     
     [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
-    shareSelectedView.btnFive.hidden = YES;
-    shareSelectedView.lblFive.hidden = YES;
     
     [shareSelectedView.btnSix addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
-    shareSelectedView.btnSix.hidden = YES;
-    shareSelectedView.lblSix.hidden = YES;
+     */
     
-    [_shareAchtionSheet addSubview:shareSelectedView];
     
-    [_shareAchtionSheet showInView:self.view];
+   if (version>=8) {
+       [_shareAlertController.view addSubview:shareSelectedView];
+        [self presentViewController:_shareAlertController animated:YES completion:nil];
+   }else{
+       [_shareAchtionSheet addSubview:shareSelectedView];
+       
+       [_shareAchtionSheet showInView:self.view];
+   }
+    
+
     
 }
 
