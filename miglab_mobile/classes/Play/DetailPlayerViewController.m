@@ -216,11 +216,11 @@
     int version = [[[UIDevice currentDevice] systemVersion] intValue];
     if (version>=8) {
         _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        
+    
+        //取消
         [_shareAlertController addAction:[UIAlertAction actionWithTitle:MIGTIP_CANCEL
-                                                  style:UIAlertActionStyleDefault
+                                                  style:UIAlertActionStyleCancel
                                                 handler:^(UIAlertAction *action) {
-                                                    //NSLog(@"Action 1 Handler Called");
                                                 }]];
  
     }else{
@@ -260,7 +260,6 @@
         [self presentViewController:_shareAlertController animated:YES completion:nil];
    }else{
        [_shareAchtionSheet addSubview:shareSelectedView];
-       
        [_shareAchtionSheet showInView:self.view];
    }
     
