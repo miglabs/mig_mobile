@@ -216,7 +216,19 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    
     PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
+    
+    if (_isUpdatedLocation) {
+        
+        return;
+    }
+    else {
+        
+        NSString *location = @"0,0";
+        [self loadNearFriendFromServer:location];
+        _isUpdatedLocation = YES;
+    }
 }
 
 #pragma mark - UITableView delegate

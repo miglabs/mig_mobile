@@ -258,6 +258,10 @@
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
+    
+    _location = @"0,0";
+    _isUpdateLocation = YES;
+    [self loadNearMusicFromServer:_location];
 }
 
 #pragma notification

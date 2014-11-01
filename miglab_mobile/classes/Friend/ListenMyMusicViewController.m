@@ -179,7 +179,16 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     
-    
+    if (_isUpdatedLocation) {
+        
+        return;
+    }
+    else {
+        
+        NSString *location = @"0,0";
+        [self LoadListeningMyFavorateMusic:location];
+        _isUpdatedLocation = YES;
+    }
 }
 
 #pragma mark - UITableView delegate

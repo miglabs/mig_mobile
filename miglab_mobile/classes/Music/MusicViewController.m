@@ -337,6 +337,13 @@
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
+    
+    if (_isFirstLoadNumber) {
+        
+        NSString *location = @"0,0";
+        [self loadCollectedAndNearNumFromServer:location];
+        _isFirstLoadNumber = NO;
+    }
 }
 
 #pragma mark - UITableView delegate

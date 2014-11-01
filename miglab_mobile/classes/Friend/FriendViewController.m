@@ -332,8 +332,6 @@
         
         NSString* location = [NSString stringWithFormat:@"%@,%@", strlatitude, strlongtitude];
         
-        //[self loadNumbersFromServer:location];
-        //junliu test
         [self loadNumbersFromServer:location];
         
         _isUpdateLocation = YES;
@@ -341,6 +339,17 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    
+    if (_isUpdateLocation) {
+        
+        return;
+    }
+    else {
+        
+        NSString *location = @"0,0";
+        [self loadNumbersFromServer:location];
+        _isUpdateLocation = YES;
+    }
     
     PLog(@"update location failed");
 }
