@@ -17,6 +17,7 @@
 @synthesize isDetailPlayFirstLaunch = _isDetailPlayFirstLaunch;
 @synthesize nNewArrivalMsg = _nNewArrivalMsg;
 @synthesize isIOS7Up = _isIOS7Up;
+@synthesize isIOS8 = _isIOS8;
 @synthesize isLongScreen = _isLongScreen;
 @synthesize isPad = _isPad;
 @synthesize isPadRetina = _isPadRetina;

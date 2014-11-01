@@ -213,8 +213,8 @@
 //    _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
 //IOS8 判断
-    int version = [[[UIDevice currentDevice] systemVersion] intValue];
-    if (version>=8) {
+    if ([GlobalDataManager GetInstance].isIOS8) {
+        
         _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
         //取消
@@ -255,7 +255,7 @@
      */
     
     
-   if (version>=8) {
+   if ([GlobalDataManager GetInstance].isIOS8) {
        [_shareAlertController.view addSubview:shareSelectedView];
         [self presentViewController:_shareAlertController animated:YES completion:nil];
    }else{

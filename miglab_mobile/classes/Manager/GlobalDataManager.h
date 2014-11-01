@@ -16,6 +16,7 @@
 @property (nonatomic, assign) BOOL isProgramFirstLaunch;
 @property (nonatomic, assign) BOOL isDetailPlayFirstLaunch;
 @property (nonatomic, assign) BOOL isIOS7Up;    // ios 7 及以上版本
+@property (nonatomic, assign) BOOL isIOS8;  // ios 8
 @property (nonatomic, assign) BOOL isLongScreen; // 长屏幕
 @property (nonatomic, assign) BOOL isPad;
 @property (nonatomic, assign) BOOL isPadRetina;

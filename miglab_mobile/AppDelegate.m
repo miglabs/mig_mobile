@@ -162,6 +162,7 @@
     // ios版本
     double version = [[UIDevice currentDevice].systemVersion doubleValue];
     [GlobalDataManager GetInstance].isIOS7Up = version >= 7 ? YES : NO;
+    [GlobalDataManager GetInstance].isIOS8 = version >= 8 ? YES : NO;
     
     
     /* 网络链接 */
