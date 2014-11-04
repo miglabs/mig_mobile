@@ -57,9 +57,9 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #else
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #endif
 
 #if (0 == IS_DEBUG_SERVER)
