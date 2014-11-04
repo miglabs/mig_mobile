@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
+#import "BPush.h"
 
 #import "RootViewController.h"
 
 @class SinaWeibo;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate, BPushDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
