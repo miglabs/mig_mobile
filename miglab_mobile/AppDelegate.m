@@ -43,6 +43,8 @@
 #import "SongDownloadManager.h"
 #import "PAudioStreamerPlayer.h"
 #import "StartGuideViewController.h"
+
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -333,6 +335,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    // 百度推送
+    [BPush setupChannel:launchOptions];
+    [BPush setDelegate:self];
+    
     //注册device token
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         
@@ -578,6 +584,9 @@
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
+    [BPush registerDeviceToken:deviceToken];
+    [BPush bindChannel];
+    
     NSString* device_token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     PLog(@"device token: %@", deviceToken);
@@ -605,6 +614,7 @@
     
     /* 处理推送消息 */
     PLog(@"receive message from push");
+    [BPush handleNotification:userInfo];
     
     /* 清理右上角的未读消息标记 */
     application.applicationIconBadgeNumber = 0;
@@ -614,6 +624,20 @@
     MessageViewController* msgViewControl = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
     
     [self.navController pushViewController:msgViewControl animated:YES];
+}
+
+-(void)onMethod:(NSString *)method response:(NSDictionary *)data {
+    
+    if ([BPushRequestMethod_Bind isEqualToString:method]) {
+        
+        NSDictionary *res = [[NSDictionary alloc] initWithDictionary:data];
+        
+        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+    }
 }
 
 #ifdef DEBUG

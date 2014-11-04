@@ -581,6 +581,12 @@
 		CB99095E1836568D0095C775 /* ChooseSongInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB99095D1836568D0095C775 /* ChooseSongInfoCell.xib */; };
 		CB9909611838DE5C0095C775 /* FriendOfMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */; };
 		CB9909631838DE780095C775 /* FriendOfMessageContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */; };
+		CBB343951A07C2B3007BF368 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB343941A07C2B3007BF368 /* BPushConfig.plist */; };
+		CBB343A51A090029007BF368 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB343961A090029007BF368 /* libBPush.a */; };
+		CBB343A61A090029007BF368 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB343991A090029007BF368 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CBB343A71A090029007BF368 /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB3439C1A090029007BF368 /* BPushClass.m */; };
+		CBB343A81A090029007BF368 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB3439E1A090029007BF368 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CBB343AE1A0903BA007BF368 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB343AD1A0903BA007BF368 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
@@ -1360,6 +1366,18 @@
 		CB99095F1838DE5C0095C775 /* FriendOfMessageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfMessageContentView.h; sourceTree = "<group>"; };
 		CB9909601838DE5C0095C775 /* FriendOfMessageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfMessageContentView.m; sourceTree = "<group>"; };
 		CB9909621838DE780095C775 /* FriendOfMessageContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfMessageContentView.xib; sourceTree = "<group>"; };
+		CBB343921A07C1F6007BF368 /* BPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BPush.h; path = BPush/BPush.h; sourceTree = "<group>"; };
+		CBB343941A07C2B3007BF368 /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
+		CBB343961A090029007BF368 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBPush.a; path = BPush/libBPush.a; sourceTree = "<group>"; };
+		CBB343981A090029007BF368 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		CBB343991A090029007BF368 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		CBB3439A1A090029007BF368 /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
+		CBB3439B1A090029007BF368 /* BPushClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushClass.h; sourceTree = "<group>"; };
+		CBB3439C1A090029007BF368 /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
+		CBB3439D1A090029007BF368 /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
+		CBB3439E1A090029007BF368 /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
+		CBB343AC1A0903BA007BF368 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		CBB343AD1A0903BA007BF368 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
 		CBB425DF17DE18C400E3BA90 /* SongComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongComment.m; sourceTree = "<group>"; };
 		CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_button_recommend.png; sourceTree = "<group>"; };
@@ -1394,6 +1412,7 @@
 				163BCDF9177C680D008656D1 /* AVFoundation.framework in Frameworks */,
 				163BCDF7177C67FD008656D1 /* CoreMedia.framework in Frameworks */,
 				163BCDF5177C67F3008656D1 /* MediaPlayer.framework in Frameworks */,
+				CBB343A51A090029007BF368 /* libBPush.a in Frameworks */,
 				163BCDF3177C67DF008656D1 /* AudioToolbox.framework in Frameworks */,
 				CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */,
 				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
@@ -1425,6 +1444,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				CBB3438E1A07C17B007BF368 /* BPush */,
 				CB5E938F19B74A9200B71A10 /* AudioStreamer */,
 				162CFE971970255300B2C005 /* TTTAttributedLabel */,
 				1640AED1191FA81E0093CC6A /* Connect_IOS_SDK_V2.2 */,
@@ -2453,6 +2473,7 @@
 				16EDEF4D1759AD5E001BE4E9 /* Default.png */,
 				16EDEF4F1759AD5E001BE4E9 /* Default@2x.png */,
 				16EDEF511759AD5E001BE4E9 /* Default-568h@2x.png */,
+				CBB343941A07C2B3007BF368 /* BPushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2736,6 +2757,33 @@
 			name = AudioStreamer;
 			sourceTree = "<group>";
 		};
+		CBB3438E1A07C17B007BF368 /* BPush */ = {
+			isa = PBXGroup;
+			children = (
+				CBB343921A07C1F6007BF368 /* BPush.h */,
+				CBB343961A090029007BF368 /* libBPush.a */,
+				CBB343971A090029007BF368 /* opensource */,
+			);
+			name = BPush;
+			sourceTree = "<group>";
+		};
+		CBB343971A090029007BF368 /* opensource */ = {
+			isa = PBXGroup;
+			children = (
+				CBB343981A090029007BF368 /* Base64.h */,
+				CBB343991A090029007BF368 /* Base64.m */,
+				CBB3439A1A090029007BF368 /* Base64Defines.h */,
+				CBB3439B1A090029007BF368 /* BPushClass.h */,
+				CBB3439C1A090029007BF368 /* BPushClass.m */,
+				CBB3439D1A090029007BF368 /* GzipCompressor.h */,
+				CBB3439E1A090029007BF368 /* GzipCompressor.m */,
+				CBB343AC1A0903BA007BF368 /* OpenUDID.h */,
+				CBB343AD1A0903BA007BF368 /* OpenUDID.m */,
+			);
+			name = opensource;
+			path = BPush/opensource;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2921,6 +2969,7 @@
 				1627279C17ACB39A000C79D3 /* borad_menu_stop_nor.png in Resources */,
 				1627279D17ACB39A000C79D3 /* borad_menu_stop_sel.png in Resources */,
 				162727A317ACB947000C79D3 /* play_btn_menu_nor.png in Resources */,
+				CBB343951A07C2B3007BF368 /* BPushConfig.plist in Resources */,
 				16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */,
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
@@ -3190,6 +3239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB343A61A090029007BF368 /* Base64.m in Sources */,
 				16EDEF481759AD5E001BE4E9 /* main.m in Sources */,
 				1689605A181171C00031902F /* LoginMenuViewController.m in Sources */,
 				16EDEF4C1759AD5E001BE4E9 /* AppDelegate.m in Sources */,
@@ -3263,12 +3313,14 @@
 				16EA2D3B192875F0008E9DD3 /* ShareGuideView.m in Sources */,
 				16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */,
 				1834106217969FC000EAAFFC /* MainMenuViewController.m in Sources */,
+				CBB343A81A090029007BF368 /* GzipCompressor.m in Sources */,
 				188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */,
 				187A5667179927D200221569 /* PlayBodyView.m in Sources */,
 				1830B52E179D129200314A28 /* NSData+AES256.m in Sources */,
 				16ACD17517A163BD00ABB456 /* Word.m in Sources */,
 				18E3472D17A27A58001C46C7 /* PPlayerManagerCenter.m in Sources */,
 				187EADD117A8B92000456A73 /* Mood.m in Sources */,
+				CBB343AE1A0903BA007BF368 /* OpenUDID.m in Sources */,
 				16CDC6141832673B00035634 /* SongOfSendEmptyTipsView.m in Sources */,
 				16C10E0F17A9565E00DA628D /* RegisterOfNickNameViewController.m in Sources */,
 				16C10E1F17A9673400DA628D /* GetPasswordViewController.m in Sources */,
@@ -3316,6 +3368,7 @@
 				1604F0EC17C4F2E60072A0D8 /* MusicCommentInputView.m in Sources */,
 				167F047B18F93228000A1C21 /* ChatInputToolBar.m in Sources */,
 				C7DE8EBF1977AE0E0047233D /* MsgTextView.m in Sources */,
+				CBB343A71A090029007BF368 /* BPushClass.m in Sources */,
 				1624BC1517C7861600BE08A5 /* FriendOfSayHiViewController.m in Sources */,
 				167F048418F93274000A1C21 /* ChatMsgTableViewCell.m in Sources */,
 				1624BC1917C7869500BE08A5 /* FriendMessageUserHead.m in Sources */,
@@ -3477,6 +3530,8 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
 					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
 					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
+					"$(PROJECT_DIR)/miglab_mobile/classes",
+					"$(PROJECT_DIR)/miglab_mobile/classes/BPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3525,6 +3580,8 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_1.4",
 					"$(PROJECT_DIR)/miglab_mobile/classes/WeChatAPI",
 					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
+					"$(PROJECT_DIR)/miglab_mobile/classes",
+					"$(PROJECT_DIR)/miglab_mobile/classes/BPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
