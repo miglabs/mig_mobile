@@ -410,4 +410,9 @@
 #define NotificationNameSendShareResultSuccess              @"NotificationNameSendShareResultSuccess"
 #define NotificationNameSendShareResultFailed               @"NotificationNameSendShareResultFailed"
 
+// 提交百度推送信息
+#define HTTP_SENDBPUSHINFO                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/bdbindpush.fcgi"]
+#define NotificationNameSendBPushInfoSuccess                @"NotificationNameSendBPushInfoSuccess"
+#define NotificationNameSendBPushInfoFailed                 @"NotificationNameSendBPushInfoFailed"
+
 #endif

@@ -3694,4 +3694,62 @@
     API_FOOTER();
 }
 
+
+-(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag {
+    
+    API_HEADER();
+    
+    PLog(@"send bpush info url: %@", HTTP_SENDBPUSHINFO);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_SENDBPUSHINFO]];
+    
+    NSString *httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&channelid=%@&userid=%@&tag=%@", uid, ttoken, tchannelid, tuserid, ttag];
+    PLog(@"send bpush info body: %@", httpBody);
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (status == 1) {
+                
+                PLog(@"send pbush info succeeded");
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendBPushInfoSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"send pbush info failed");
+                NSString *msg = [dicJson objectForKey:@"msg"];
+                NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendBPushInfoFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            PLog(@"send pbush info failed");
+            NSString *msg = @"解析返回数据失败";
+            NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendBPushInfoFailed object:nil userInfo:dicResult];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"send pbush info failed");
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameSendBPushInfoFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+
 @end

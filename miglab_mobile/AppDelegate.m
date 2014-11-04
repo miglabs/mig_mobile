@@ -637,6 +637,13 @@
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+        
+        NSString *tuid = [UserSessionManager GetInstance].userid;
+        NSString *ttoken = [UserSessionManager GetInstance].accesstoken;
+        NSString *ttag = @"miyo";
+        
+        MigLabAPI *miglabApi = [[MigLabAPI alloc] init];
+        [miglabApi doSendBPushInfo:tuid token:ttoken channelid:channelid userid:userid tag:ttag];
     }
 }
 

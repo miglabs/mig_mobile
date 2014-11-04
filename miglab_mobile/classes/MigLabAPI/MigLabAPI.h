@@ -302,4 +302,10 @@ typedef enum {
  返回分享结果
  */
 -(void)doSendShareResult:(NSString*)uid token:(NSString*)ttoken plat:(NSString *)share_plat songid:(NSString*)tsongid;
+
+/*
+ 提交百度推送信息
+ */
+-(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag;
+
 @end
