@@ -29,6 +29,8 @@
 -(void)didFinishLogout;
 -(void)SendDeviceToken;
 
+-(void)SendBDPushToken;
+
 -(void)registerFailed:(NSNotification *)tNotification;
 -(void)registerSuccess:(NSNotification *)tNotification;
 -(void)getUserInfoFailed:(NSNotification *)tNotification;

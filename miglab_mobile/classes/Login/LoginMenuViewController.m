@@ -146,7 +146,8 @@
     //[[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLoginSuccessByUser object:nil userInfo:nil];
     
     // 发送设备号到服务端
-    [self SendDeviceToken];
+    [self SendBDPushToken];
+    //[self SendDeviceToken];
     
     // 如果当前没有播放，获取一次歌曲
 #if USE_NEW_AUDIO_PLAY
@@ -172,6 +173,23 @@
     
 }
 
+-(void) SendBDPushToken{
+    MigLabAPI *miglabApi = [[MigLabAPI alloc] init];
+    NSString* userid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString *channelid = [[UserSessionManager GetInstance].bdBindPush valueForKey:BPushRequestChannelIdKey];
+    NSString *appid = [[UserSessionManager GetInstance].bdBindPush valueForKey:BPushRequestAppIdKey];
+    NSString *bduserid = [[UserSessionManager GetInstance].bdBindPush valueForKey:BPushRequestUserIdKey];
+    NSString *requestid = [[UserSessionManager GetInstance].bdBindPush valueForKey:BPushRequestRequestIdKey];
+    NSString *ttag = @"miyo";
+    NSString *machine = @"1";
+    [miglabApi doSendBPushInfo:userid token:accesstoken channelid:channelid userid:bduserid tag:ttag
+                           pkg: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleIdentifierKey] machine: machine appid: appid requestid:requestid];
+    
+    
+    
+}
+    
 -(void)SendDeviceToken {
         
     MigLabAPI* miglab = [[MigLabAPI alloc] init];
@@ -182,6 +200,8 @@
     
     [miglab doConfigPush:userid token:accesstoken devicetoken:device_token isreceive:@"1" begintime:@"08:00" endtime:@"23:55"];
 }
+    
+
 
 -(IBAction)doGotoRegister:(id)sender{
     

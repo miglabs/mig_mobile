@@ -20,6 +20,8 @@
 @synthesize currentUserGene = _currentUserGene;
 @synthesize networkStatus = _networkStatus;
 
+@synthesize bdBindPush = _bdBindPush;
+
 +(UserSessionManager *)GetInstance{
     
     static UserSessionManager *instance = nil;
@@ -28,6 +30,7 @@
             instance = [[self alloc] init];
             instance.currentUser = [[PUser alloc] init];
             instance.currentUserGene = [[UserGene alloc] init];
+            instance.bdBindPush = [[NSDictionary alloc] init];
         }
     }
     return instance;

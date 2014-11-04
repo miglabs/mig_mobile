@@ -644,6 +644,8 @@
             NSString *ttoken = [UserSessionManager GetInstance].accesstoken;
             NSString *ttag = @"miyo";
             NSString *machine = @"1";
+            [UserSessionManager GetInstance].bdBindPush = res;
+            
             /* 如果用户已经登录，则发送一次数据 */
             if ([UserSessionManager GetInstance].isLoggedIn) {
         

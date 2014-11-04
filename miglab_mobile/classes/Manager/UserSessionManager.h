@@ -22,6 +22,8 @@
 @property (nonatomic, retain) UserGene *currentUserGene;
 @property (nonatomic, assign) int networkStatus;   //0－未知，1-wlan，2-cache，3-2g，3g网络
 
+@property (nonatomic, retain) NSDictionary* bdBindPush;
+
 +(UserSessionManager *)GetInstance;
 -(void)doLogout;
 
