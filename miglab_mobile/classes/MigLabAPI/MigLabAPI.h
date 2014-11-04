@@ -306,6 +306,6 @@ typedef enum {
 /*
  提交百度推送信息
  */
--(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag;
+-(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag pkg:(NSString*)tpkg machine:(NSString*) tmachine appid:(NSString*) tappid requestid:(NSString*) trequestid;
 
 @end

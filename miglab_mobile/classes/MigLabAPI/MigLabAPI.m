@@ -3695,7 +3695,7 @@
 }
 
 
--(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag {
+-(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag pkg:(NSString*)tpkg machine:(NSString*) tmachine appid:(NSString*) tappid requestid:(NSString*) trequestid {
     
     API_HEADER();
     
@@ -3703,7 +3703,7 @@
     
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_SENDBPUSHINFO]];
     
-    NSString *httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&channelid=%@&userid=%@&tag=%@", uid, ttoken, tchannelid, tuserid, ttag];
+    NSString *httpBody = [NSString stringWithFormat:@"platform=10000&uid=%@&token=%@&channel=%@&userid=%@&tag=%@&pkg_name=%@&machine=%@&appid=%@&requestid=%@", uid, ttoken, tchannelid, tuserid, ttag, tpkg,tmachine,tappid,trequestid];
     PLog(@"send bpush info body: %@", httpBody);
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];

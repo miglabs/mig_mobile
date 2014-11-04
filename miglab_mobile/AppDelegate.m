@@ -339,6 +339,7 @@
     [BPush setupChannel:launchOptions];
     [BPush setDelegate:self];
     
+    
     //注册device token
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         
@@ -594,7 +595,7 @@
     [UserSessionManager GetInstance].devicetoken = device_token;
     
     /* 如果用户已经登录，则发送一次数据 */
-    if ([UserSessionManager GetInstance].isLoggedIn) {
+   /* if ([UserSessionManager GetInstance].isLoggedIn) {
         
         MigLabAPI* miglab = [[MigLabAPI alloc] init];
         
@@ -602,7 +603,7 @@
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         
         [miglab doConfigPush:userid token:accesstoken devicetoken:device_token isreceive:@"1" begintime:@"08:00" endtime:@"23:55"];
-    }
+    }*/
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -632,18 +633,25 @@
         
         NSDictionary *res = [[NSDictionary alloc] initWithDictionary:data];
         
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+        // returnCode 为0 则表示注册百度成功
+        if (returnCode==0){
+            NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+            NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+            NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+            NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+            NSString *tuid = [UserSessionManager GetInstance].userid;
+            NSString *ttoken = [UserSessionManager GetInstance].accesstoken;
+            NSString *ttag = @"miyo";
+            NSString *machine = @"1";
+            /* 如果用户已经登录，则发送一次数据 */
+            if ([UserSessionManager GetInstance].isLoggedIn) {
         
-        NSString *tuid = [UserSessionManager GetInstance].userid;
-        NSString *ttoken = [UserSessionManager GetInstance].accesstoken;
-        NSString *ttag = @"miyo";
-        
-        MigLabAPI *miglabApi = [[MigLabAPI alloc] init];
-        [miglabApi doSendBPushInfo:tuid token:ttoken channelid:channelid userid:userid tag:ttag];
+                MigLabAPI *miglabApi = [[MigLabAPI alloc] init];
+                [miglabApi doSendBPushInfo:tuid token:ttoken channelid:channelid userid:userid tag:ttag
+                 pkg: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleIdentifierKey] machine: machine appid: appid requestid:requestid];
+            }
+        }
     }
 }
 
