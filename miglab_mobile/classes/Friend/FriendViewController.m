@@ -109,6 +109,8 @@
             [_locationMng setDistanceFilter:kCLDistanceFilterNone];
             [_locationMng setDesiredAccuracy:kCLLocationAccuracyBest];
             [_locationMng startUpdatingLocation];
+            //IOS8问题
+            [_locationMng requestWhenInUseAuthorization];
         }
     }
     else {

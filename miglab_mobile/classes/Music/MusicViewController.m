@@ -131,8 +131,11 @@
             [_locationManager setDelegate:self];
             [_locationManager setDistanceFilter:kCLDistanceFilterNone];
             [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-            //        [_locationManager startUpdatingLocation];
+            [_locationManager startUpdatingLocation];
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+                [_locationManager requestWhenInUseAuthorization];
         }
+    
     }
     else {
         

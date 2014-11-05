@@ -81,6 +81,9 @@ NSString* szListenMyMusicRadius = @"10000";
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
         [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         [_locationManager startUpdatingLocation];
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+            [_locationManager requestWhenInUseAuthorization];
+        
     }
     
     //
