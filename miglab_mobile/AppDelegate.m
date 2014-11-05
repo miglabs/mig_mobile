@@ -185,7 +185,7 @@
         }
     }];
     
-#else
+#endif
     
     [GlobalDataManager GetInstance].isWifiConnect = NO;
     [GlobalDataManager GetInstance].is3GConnect = NO;
@@ -353,16 +353,6 @@
         [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert];
     }
     
-    if (launchOptions) {
-        
-        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        
-        if (pushNotificationKey) {
-            
-            /* 如果程序是通过消息启动的，在这里做处理 */
-        }
-    }
-    
     AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
     
     [reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -389,7 +379,27 @@
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     }];
     
+    if (launchOptions) {
+        
+        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+       
+#if 1
+        if (pushNotificationKey) {
+            
+            /* 如果程序是通过消息启动的，在这里做处理 */
+            
+            /* 跳转到推送消息的页面 */
+            /* 清理右上角的未读消息标记 */
+            application.applicationIconBadgeNumber = 10;
+            [application cancelAllLocalNotifications];
+            
+            /* 跳转到推送消息的页面 */
+            MessageViewController* msgViewControl = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+            
+            [self.navController pushViewController:msgViewControl animated:YES];
+        }
 #endif
+    }
     
     return YES;
 }
