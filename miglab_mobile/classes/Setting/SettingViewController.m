@@ -174,6 +174,13 @@
     
     UIDatePicker* datepicker = [[UIDatePicker alloc] init];
     datepicker.datePickerMode = UIDatePickerModeDate;
+    //设置初始化时间
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *date = [formatter dateFromString:[UserSessionManager GetInstance].currentUser.birthday];
+    datepicker.date = date;
     datepicker.tag = 101;
     
     if ([GlobalDataManager GetInstance].isIOS8){
@@ -197,6 +204,10 @@
     formatter.dateFormat = @"YYYY-MM-dd";
     
     _updatedBirthday = [formatter stringFromDate:datepicker.date];
+    
+    //对比时间相同则不提交
+    if (_updatedBirthday==[UserSessionManager GetInstance].currentUser.birthday)
+        return;
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
