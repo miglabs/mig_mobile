@@ -13,6 +13,7 @@
 #import "UMFeedback.h"
 #import "SettingOfAboutViewController.h"
 #import "UserSessionManager.h"
+#import "GlobalDataManager.h"
 #import "PDatabaseManager.h"
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
@@ -26,6 +27,7 @@
 @synthesize dataTableView = _dataTableView;
 @synthesize datalist = _datalist;
 @synthesize dateSheet = _dateSheet;
+@synthesize dataContorller = _dataContorller;
 @synthesize miglabApi = _miglabApi;
 @synthesize nChangeID = _nChangeID;
 @synthesize updatedBirthday = _updatedBirthday;
@@ -146,22 +148,50 @@
     
     NSString* title = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? @"\n\n\n\n\n\n\n\n\n" : @"\n\n\n\n\n\n\n\n\n\n\n\n";
     
-    _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:MIGTIP_OK, nil];
-    
-    _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
-    
-    [_dateSheet showInView:self.view];
+    if ([GlobalDataManager GetInstance].isIOS8) {
+        _dataContorller = [UIAlertController alertControllerWithTitle:title  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        //确定
+        [_dataContorller addAction:[UIAlertAction actionWithTitle:MIGTIP_OK
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                [self resetDatePicker];
+        }]];
+        
+        //取消
+        [_dataContorller addAction:[UIAlertAction actionWithTitle:MIGTIP_CANCEL
+                                                                  style:UIAlertActionStyleCancel
+                                                                handler:^(UIAlertAction *action) {
+        }]];
+        
+    }else{
+        _dateSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:MIGTIP_OK, nil];
+        
+        _dateSheet.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+        
+        [_dateSheet showInView:self.view];
+    }
+
     
     UIDatePicker* datepicker = [[UIDatePicker alloc] init];
     datepicker.datePickerMode = UIDatePickerModeDate;
     datepicker.tag = 101;
     
-    [_dateSheet addSubview:datepicker];
+    if ([GlobalDataManager GetInstance].isIOS8){
+        [_dataContorller.view addSubview:datepicker];
+        [self presentViewController:_dataContorller animated:YES completion:nil];
+    }else{
+        [_dateSheet addSubview:datepicker];
+    }
 }
 
 -(void)resetDatePicker {
-    
-    UIDatePicker* datepicker = (UIDatePicker*)[_dateSheet viewWithTag:101];
+    UIDatePicker* datepicker;
+    if ([GlobalDataManager GetInstance].isIOS8) {
+        datepicker = (UIDatePicker*)[_dataContorller.view viewWithTag:101];
+    }else{
+        
+        datepicker = (UIDatePicker*)[_dateSheet viewWithTag:101];
+    }
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"YYYY-MM-dd";

@@ -21,6 +21,9 @@ typedef enum _CHANGE_ID {
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 @property (nonatomic, retain) UIActionSheet* dateSheet;
+//适配IOS8
+@property (nonatomic, retain) UIAlertController* dataContorller;
+
 @property (nonatomic, retain) MigLabAPI* miglabApi;
 @property (nonatomic, assign) CHANGE_ID nChangeID; // 0:birthday, 1:gender
 @property (nonatomic, retain) NSString* updatedBirthday;
