@@ -195,6 +195,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    //默认设置
+    [GlobalDataManager GetInstance].isPushMessageLaunch = NO;
+    
+    if (launchOptions) {
+        
+        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        if (pushNotificationKey) {
+            
+            /* 如果程序是通过消息启动的，在这里做处理 */
+            
+            /* 跳转到推送消息的页面 */
+            /* 清理右上角的未读消息标记 */
+            [GlobalDataManager GetInstance].isPushMessageLaunch = YES;
+            application.applicationIconBadgeNumber = 0;
+            [application cancelAllLocalNotifications];
+
+        }
+    }
+    
     //Crashlytics
     [Crashlytics startWithAPIKey:@"13b0dd85b007ad78249b02fc26fa3972dff8da79"];
     
@@ -315,9 +335,9 @@
         //[miglabAPI doHateSong:accesstoken uid:userid sid:99993];
         
         //获取频道
-        [miglabAPI doGetChannel:userid token:accesstoken num:10];
+       // [miglabAPI doGetChannel:userid token:accesstoken num:10];
         
-        [miglabAPI doGetDefaultGuestSongs];
+       // [miglabAPI doGetDefaultGuestSongs];
         
     }
     
@@ -379,27 +399,6 @@
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     }];
     
-    if (launchOptions) {
-        
-        NSDictionary* pushNotificationKey = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-       
-#if 1
-        if (pushNotificationKey) {
-            
-            /* 如果程序是通过消息启动的，在这里做处理 */
-            
-            /* 跳转到推送消息的页面 */
-            /* 清理右上角的未读消息标记 */
-            application.applicationIconBadgeNumber = 10;
-            [application cancelAllLocalNotifications];
-            
-            /* 跳转到推送消息的页面 */
-            MessageViewController* msgViewControl = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-            
-            [self.navController pushViewController:msgViewControl animated:YES];
-        }
-#endif
-    }
     
     return YES;
 }
@@ -636,6 +635,7 @@
     
     [self.navController pushViewController:msgViewControl animated:YES];
 }
+
 
 -(void)onMethod:(NSString *)method response:(NSDictionary *)data {
     
