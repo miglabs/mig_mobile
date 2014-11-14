@@ -54,7 +54,6 @@
     
     _datalist = [NSMutableArray arrayWithObjects:@"新消息提醒", @"设定网络与流量限额", @"定时收听", @"定时停止收听", @"缓存歌曲数设定", @"耳机线控操作", @"已过滤歌曲", nil];
     
-    
 }
 
 - (void)didReceiveMemoryWarning
