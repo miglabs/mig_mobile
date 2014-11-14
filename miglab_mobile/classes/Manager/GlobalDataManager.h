@@ -33,7 +33,6 @@
 @property (nonatomic, assign) int nShareSource; // 1-weibo, 2-weixin
 @property (nonatomic, assign) BOOL isPushMessageLaunch;
 
-@property (nonatomic, retain) NSString* display;
 
 +(GlobalDataManager *)GetInstance;
 

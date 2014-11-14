@@ -373,7 +373,7 @@
             }
         }
             break;
-        case 103: //跳转消息界面
+       case 103: //跳转消息界面
         {
             if (controller) {
                 //update
@@ -387,6 +387,7 @@
                 controller = oldMessage;
             }
         }
+            
             
         default:
             break;
