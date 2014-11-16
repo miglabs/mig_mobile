@@ -8,10 +8,10 @@
 
 #import "RootViewController.h"
 #import "SYAppStart.h"
-
 #import "GeneViewController.h"
 #import "MusicViewController.h"
 #import "FriendViewController.h"
+#import "MessageViewController.h"
 
 #import "PDatabaseManager.h"
 #import "PPlayerManagerCenter.h"
@@ -166,6 +166,13 @@
     //playerManagerCenter.currentSongIndex = (songListCount > 0) ? rnd : 0;
     playerManagerCenter.currentSongIndex = 0;
     playerManagerCenter.currentSong = (songListCount > 0) ? [tempsonglist objectAtIndex:playerManagerCenter.currentSongIndex] : nil;
+    
+    //推送消息启动，消息界面跳转
+    if([GlobalDataManager GetInstance].isPushMessageLaunch){
+        _currentShowViewTag = 103;
+        [_rootNavMenuView setSelectedMenu:_currentShowViewTag - 100];
+        [self doUpdateView:_currentShowViewTag];
+    }
     
 }
 
@@ -366,6 +373,21 @@
             }
         }
             break;
+       case 103: //跳转消息界面
+        {
+            if (controller) {
+                //update
+                MessageViewController *oldMessage= (MessageViewController *)controller;
+                [oldMessage viewWillAppear:YES];
+            } else {
+                MessageViewController *oldMessage = [[MessageViewController alloc] init];
+                [oldMessage setTopViewcontroller:self];
+                [oldMessage viewWillAppear:YES];
+                [_dicViewControllerCache setObject:oldMessage forKey:numIndex];
+                controller = oldMessage;
+            }
+        }
+            
             
         default:
             break;

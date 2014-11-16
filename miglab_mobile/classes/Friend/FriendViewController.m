@@ -110,7 +110,8 @@
             [_locationMng setDesiredAccuracy:kCLLocationAccuracyBest];
             [_locationMng startUpdatingLocation];
             //IOS8问题
-            [_locationMng requestWhenInUseAuthorization];
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+                [_locationMng requestWhenInUseAuthorization];
         }
     }
     else {

@@ -29,9 +29,10 @@
 @property (nonatomic, retain) NSString* curSongTypeName;
 @property (nonatomic, assign) int curSongTypeId;
 @property (nonatomic, assign) int curSongId;
-
 @property (nonatomic, assign) int nNewArrivalMsg;
 @property (nonatomic, assign) int nShareSource; // 1-weibo, 2-weixin
+@property (nonatomic, assign) BOOL isPushMessageLaunch;
+
 
 +(GlobalDataManager *)GetInstance;
 

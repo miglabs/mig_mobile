@@ -31,6 +31,7 @@
 @synthesize curSongTypeName = _curSongTypeName;
 @synthesize curSongTypeId = _curSongTypeId;
 @synthesize curSongId = _curSongId;
+@synthesize isPushMessageLaunch = _isPushMessageLaunch;
 
 +(GlobalDataManager *)GetInstance{
     
