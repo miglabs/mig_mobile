@@ -276,7 +276,6 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
 	[m_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 
