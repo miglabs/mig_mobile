@@ -230,7 +230,7 @@ struct ReplyChatPrivate{
 
 #define MSG_VIEW_RIGHT  280
 
-#define MSG_VIEW_TOP    30
+#define MSG_VIEW_TOP    23
 
 #define MSG_VIEW_BOTTOM 8
 

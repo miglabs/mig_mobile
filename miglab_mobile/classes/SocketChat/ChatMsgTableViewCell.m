@@ -33,6 +33,8 @@
 -(void) initialize
 {
     [self.sendTimeLabel setTextColor:[UIColor whiteColor]];
+    [self.sendIconViewR initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
+    [self.sendIconViewL initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
     CGFloat radius = [self.sendIconViewR frame].size.width/2;
     [[self.sendIconViewR layer] setCornerRadius:radius];
     [[self.sendIconViewL layer] setCornerRadius:radius];
@@ -78,6 +80,7 @@
     [self.sendIconViewL setImage:nil];
     [self.sendIconViewR setImage:nil];
     [headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
+
 #ifdef NEW_MSGVIEW
     [self.messageView setText:[msg msg_content]];
 #else
