@@ -219,6 +219,8 @@
     [_datalist addObjectsFromArray:messages];
     [_dataTableView reloadData];
     
+    _msgCurStartIndex += messages.count;
+    
     _isLoadingMsg = NO;
     
     if (_reloading) {
@@ -291,6 +293,10 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
 #if USE_NEW_LOAD
+    if (_msgCurStartIndex >= _totalMsgCount - 1) {
+        
+        return;
+    }
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
 #endif
@@ -299,6 +305,11 @@
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
 #if USE_NEW_LOAD
+    
+    if (_msgCurStartIndex >= _totalMsgCount - 1) {
+        
+        return;
+    }
     
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
@@ -356,8 +367,9 @@
         
         _reloading = YES;
         
-        _msgCurStartIndex += MSG_DISPLAY_COUNT;
-        [self loadMessageFromServer:_msgCurStartIndex size:MSG_DISPLAY_COUNT];
+        // 真正返回成功后再加上消息的index
+        //_msgCurStartIndex += MSG_DISPLAY_COUNT;
+        [self loadMessageFromServer:_msgCurStartIndex size:(_msgCurStartIndex + MSG_DISPLAY_COUNT)];
     }
 }
 

@@ -196,16 +196,21 @@
         [_friendList removeAllObjects];
     }
     
-    for (int i=0; i<userlistcount; i++) {
+    if (userlistcount > 0) {
         
-        MessageInfo* nms = [userList objectAtIndex:i];
-        NearbyUser* user = nms.userInfo;
-        user.songname = nms.song.songname;
+        for (int i=0; i<userlistcount; i++) {
+            
+            MessageInfo* nms = [userList objectAtIndex:i];
+            NearbyUser* user = nms.userInfo;
+            user.songname = nms.song.songname;
+            
+            [_friendList addObject:user];
+        }
         
-        [_friendList addObject:user];
+        _friendCurStartIndex += userlistcount;
+        
+        [_friendTableView reloadData];
     }
-    
-    [_friendTableView reloadData];
     
     _isLoadingFriend = NO;
     
@@ -308,6 +313,10 @@
     
 #if USE_NEW_LOAD
     
+    if (_friendCurStartIndex >= _totalFriendCount - 1) {
+        return;
+    }
+    
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
     
@@ -334,6 +343,10 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
 #if USE_NEW_LOAD
+    
+    if (_friendCurStartIndex >= _totalFriendCount - 1) {
+        return;
+    }
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
 #endif
@@ -371,8 +384,9 @@
         
         _reloading = YES;
         
-        _friendCurStartIndex += FRIEND_DISPLAY_COUNT;
-        [self loadMusicUserFromServer:_friendCurStartIndex size:FRIEND_DISPLAY_COUNT];
+        // 只有真正返回成功之后再加到startindex上面
+        //_friendCurStartIndex += FRIEND_DISPLAY_COUNT;
+        [self loadMusicUserFromServer:_friendCurStartIndex size:(_friendCurStartIndex + FRIEND_DISPLAY_COUNT)];
     }
 }
 
