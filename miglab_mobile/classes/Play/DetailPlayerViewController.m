@@ -682,6 +682,8 @@
 //    _cdOfSongView.lrcOfSongTextView.text = usergene.scene.desc;
     
     [self timerStart];
+    //设置锁屏显示
+    [self configNowPlayingInfoCenter];
     
 }
 
