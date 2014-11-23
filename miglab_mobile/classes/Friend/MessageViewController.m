@@ -293,11 +293,12 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
 #if USE_NEW_LOAD
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
     if (_msgCurStartIndex >= _totalMsgCount - 1) {
         
         return;
     }
-    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
 #endif
 }
@@ -305,13 +306,11 @@
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
 #if USE_NEW_LOAD
-    
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     if (_msgCurStartIndex >= _totalMsgCount - 1) {
         
         return;
     }
-    
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
     
 #else

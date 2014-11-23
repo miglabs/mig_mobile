@@ -312,12 +312,12 @@
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
 #if USE_NEW_LOAD
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     
     if (_friendCurStartIndex >= _totalFriendCount - 1) {
         return;
     }
     
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
     
 #else
@@ -344,10 +344,10 @@
     
 #if USE_NEW_LOAD
     
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     if (_friendCurStartIndex >= _totalFriendCount - 1) {
         return;
     }
-    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
 #endif
 }
