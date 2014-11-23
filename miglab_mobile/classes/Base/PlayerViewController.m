@@ -387,15 +387,24 @@
     
     if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
         
+        MPMediaItemArtwork * mArt;
         NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
         [dict setObject:currentSong.songname forKey:MPMediaItemPropertyTitle];
         [dict setObject:currentSong.artist forKey:MPMediaItemPropertyArtist];
         
+        
         if (tArtwork) {
-            MPMediaItemArtwork * mArt = [[MPMediaItemArtwork alloc] initWithImage:tArtwork];
-            [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
+            mArt = [[MPMediaItemArtwork alloc] initWithImage:tArtwork];
+        }else{
+            
+            UIImage *baseViewBg = [UIImage imageNamed:LOCAL_DEFAULT_MUSIC_IMAGE];
+            EGOImageView *baseEGOView = [[EGOImageView alloc]initWithPlaceholderImage:baseViewBg];
+            [baseEGOView setImageURL:[NSURL URLWithString:currentSong.coverurl]];
+            //baseEGOView.imageURL = [NSURL URLWithString:currentSong.coverurl];
+            mArt = [[MPMediaItemArtwork alloc] initWithImage:baseEGOView.image];
         }
         
+        [dict setObject:mArt forKey:MPMediaItemPropertyArtwork];
         [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = nil;
         [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dict];
         

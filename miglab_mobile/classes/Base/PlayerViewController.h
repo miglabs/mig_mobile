@@ -31,6 +31,7 @@
 -(IBAction)doPlayOrPause:(id)sender;
 -(IBAction)doNext:(id)sender;
 
+
 //根据音乐基因获取歌曲
 -(void)loadTypeSongs;
 
