@@ -225,19 +225,48 @@
     
     //if it is a remote control event handle it correctly
     if (event.type == UIEventTypeRemoteControl) {
-        
-        if (event.subtype == UIEventSubtypeRemoteControlTogglePlayPause) {
-            
-            PLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
-            [self doPlayOrPause:nil];
-            
-        } else if (event.subtype == UIEventSubtypeRemoteControlNextTrack) {
-            
-            PLog(@"UIEventSubtypeRemoteControlNextTrack...");
-            [self doNextAction:nil];
-            
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
+                
+                //[[PPlayerManagerCenter GetInstance] doPlayOrPause];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPlay:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                //[[PPlayerManagerCenter GetInstance]doPlayOrPause];
+                [self doPlayOrPause:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPause...");
+                //[[PPlayerManagerCenter GetInstance] doPlayOrPause];
+                [self doPlayOrPause:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlStop:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlStop...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlNextTrack...");
+                //[[PPlayerManagerCenter GetInstance] doNext];
+                [self doNextAction:nil];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPreviousTrack...");
+                break;
+            }
+            default:
+                break;
         }
-        
     }
     
 }

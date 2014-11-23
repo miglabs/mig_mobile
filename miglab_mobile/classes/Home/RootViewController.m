@@ -231,17 +231,19 @@
             case UIEventSubtypeRemoteControlTogglePlayPause:
             {
                 NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
-                [self doPlayOrPause:nil];
+                 [[PPlayerManagerCenter GetInstance]doPlayOrPause];
                 break;
             }
             case UIEventSubtypeRemoteControlPlay:
             {
                 NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                [[PPlayerManagerCenter GetInstance]doPlayOrPause];
                 break;
             }
             case UIEventSubtypeRemoteControlPause:
             {
                 NSLog(@"UIEventSubtypeRemoteControlPause...");
+                 [[PPlayerManagerCenter GetInstance]doPlayOrPause];
                 break;
             }
             case UIEventSubtypeRemoteControlStop:
@@ -252,7 +254,7 @@
             case UIEventSubtypeRemoteControlNextTrack:
             {
                 NSLog(@"UIEventSubtypeRemoteControlNextTrack...");
-                [self doNext:nil];
+                [[PPlayerManagerCenter GetInstance] doNext];
                 break;
             }
             case UIEventSubtypeRemoteControlPreviousTrack:

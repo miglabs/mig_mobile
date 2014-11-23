@@ -157,11 +157,13 @@
             case UIEventSubtypeRemoteControlPlay:
             {
                 NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                [self doPlayOrPause:nil];
                 break;
             }
             case UIEventSubtypeRemoteControlPause:
             {
                 NSLog(@"UIEventSubtypeRemoteControlPause...");
+                [self doPlayOrPause:nil];
                 break;
             }
             case UIEventSubtypeRemoteControlStop:

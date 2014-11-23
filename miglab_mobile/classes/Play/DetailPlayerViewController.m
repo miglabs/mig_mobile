@@ -687,6 +687,53 @@
     
 }
 
+//控制锁屏进度条
+-(void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    
+    //if it is a remote control event handle it correctly
+    if (event.type == UIEventTypeRemoteControl) {
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause...");
+                 [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPlay:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPlay...");
+                [[PPlayerManagerCenter GetInstance]doPlayOrPause];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPause:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPause...");
+                [[PPlayerManagerCenter GetInstance] doPlayOrPause];
+                break;
+            }
+            case UIEventSubtypeRemoteControlStop:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlStop...");
+                break;
+            }
+            case UIEventSubtypeRemoteControlNextTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlNextTrack...");
+                [[PPlayerManagerCenter GetInstance] doNext];
+                break;
+            }
+            case UIEventSubtypeRemoteControlPreviousTrack:
+            {
+                NSLog(@"UIEventSubtypeRemoteControlPreviousTrack...");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+}
+
 -(void)configNowPlayingInfoCenter{
     
     if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
