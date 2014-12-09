@@ -63,7 +63,13 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameGetTypeSongsFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
+        //GetWeatherAndCity
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameLocationFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameLocationSuccess object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
+        
+        
     }
     return self;
 }
@@ -77,6 +83,11 @@ static int PAGE_WIDTH = 81;
     //getTypeSongs
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameGetTypeSongsSuccess object:nil];
+    
+    //GetWeatherAndCity
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocationFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocationSuccess object:nil];
+    
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
 }
@@ -1033,6 +1044,14 @@ static int PAGE_WIDTH = 81;
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification{
     
     PLog(@"getUpdateConfigFailed...");
+    
+}
+
+-(void) getLocationnInfoSuccess:(NSNotification *)tNotification{
+    
+}
+
+-(void) getLocationnInfoFailed:(NSNotification *)tNotification{
     
 }
 

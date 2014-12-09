@@ -78,6 +78,11 @@
 -(void)getTypeSongsFailed:(NSNotification *)tNotification;
 -(void)getTypeSongsSuccess:(NSNotification *)tNotification;
 
+//获取天气和城市
+-(void)getLocationnInfoSuccess:(NSNotification *)tNotification;
+-(void)getLocationnInfoFailed:(NSNotification *)tNotification;
+
+
 //引导界面
 -(void)finishCurrentGuide;
 -(void)pageTurn:(UIPageControl*)sender;

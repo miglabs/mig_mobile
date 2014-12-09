@@ -415,4 +415,9 @@
 #define NotificationNameSendBPushInfoSuccess                @"NotificationNameSendBPushInfoSuccess"
 #define NotificationNameSendBPushInfoFailed                 @"NotificationNameSendBPushInfoFailed"
 
+//获取当前天气和城市
+#define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/location.fcgi"]
+#define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
+#define NotificationNameLocationFailed                      @"NotificationNameLocationFailed"
+
 #endif

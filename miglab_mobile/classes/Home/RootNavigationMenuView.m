@@ -7,6 +7,8 @@
 //
 
 #import "RootNavigationMenuView.h"
+#import "SettingViewController.h"
+#import "LoginMenuViewController.h"
 #import "UIImage+PImageCategory.h"
 #import "UserSessionManager.h"
 
@@ -60,16 +62,12 @@
          */
         
         //添加头像 //位置 9 长度31
-        //avatar
-        _egoBtnAvatar = [[EGOImageButton alloc] initWithFrame:CGRectMake(9, 3 + topdistance, 35, 35)];
+
+        _egoBtnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
         _egoBtnAvatar.layer.cornerRadius = 15;
         _egoBtnAvatar.layer.masksToBounds = YES;
-        //_egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
-       // _egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
-        //[_egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
-        // 刷新头像
         NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
-        _egoBtnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
+        _egoBtnAvatar.frame = CGRectMake(12, 3 + topdistance, 35, 35);
         if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
             
             _egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
@@ -77,8 +75,8 @@
         [self addSubview: _egoBtnAvatar];
         
         
-        //first //位置 9 长度31 间距10
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+50, 0 + topdistance, 120, 42)];
+        //first
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+14, 0 + topdistance, 120, 42)];
         _btnMenuFirst.tag = 100;
         //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -195,6 +193,24 @@
         [_btnMenuThird setSelected:YES];
     }
     
+}
+
+//头像按钮事件
+-(IBAction)doAvatar:(id)sender{
+    
+    PLog(@"gene doAvatar...");
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        SettingViewController *settingViewController = [[SettingViewController alloc] init];
+        //[self.topViewcontroller.navigationController pushViewController:settingViewController animated:YES];
+        
+    } else {
+        
+        LoginMenuViewController *loginMenuViewController = [[LoginMenuViewController alloc] initWithNibName:@"LoginMenuViewController" bundle:nil];
+        //[self.topViewcontroller.navigationController pushViewController:loginMenuViewController animated:YES];
+        
+    }
 }
 
 /*
