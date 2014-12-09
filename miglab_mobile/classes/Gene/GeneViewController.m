@@ -115,17 +115,30 @@ static int PAGE_WIDTH = 81;
     _monthlist = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
     //date
     _currentGeneView.lblYear.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblYear.font = [UIFont fontOfApp:20.0f];
+    _currentGeneView.lblYear.font = [UIFont fontOfApp:25.0f];
     _currentGeneView.lblMonthAndDay.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblMonthAndDay.font = [UIFont fontOfApp:18.0f];
+    _currentGeneView.lblMonthAndDay.font = [UIFont fontOfApp:20.0f];
     
-    //avatar
-    _currentGeneView.egoBtnAvatar.layer.cornerRadius = AVATAR_RADIUS;
+    //avatar //头像转移导航栏
+    /*_currentGeneView.egoBtnAvatar.layer.cornerRadius = AVATAR_RADIUS;
     _currentGeneView.egoBtnAvatar.layer.masksToBounds = YES;
     _currentGeneView.egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
     _currentGeneView.egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     [_currentGeneView.egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
+    */
+    
+    _currentGeneView.lbllocation.textColor = [UIColor darkGrayColor];
+    _currentGeneView.lbllocation.font = [UIFont fontOfApp:30.0f];
+    _currentGeneView.lbllocation.text =@"杭州";
+    
+    UIImage *weatherimage = [UIImage imageNamed:@"snow_icon"];
+    _currentGeneView.imageWeather.image = weatherimage;
+    
+    //
+    
     [self.view addSubview:_currentGeneView];
+    
+  
     
     //desc
     _currentGeneView.lblTypeDesc.textColor = [UIColor darkGrayColor];
@@ -135,9 +148,11 @@ static int PAGE_WIDTH = 81;
     _currentGeneView.lblSceneDesc.textColor = [UIColor darkGrayColor];
     _currentGeneView.lblSceneDesc.font = [UIFont fontOfApp:20.0f];
     
+    //弹幕位置
+    
     //类型
     _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100, 31, 31);
+    _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100+55, 31, 31);
     _btnType.tag = 100;
     UIImage *typeimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnType setImage:typeimage forState:UIControlStateNormal];
@@ -146,7 +161,7 @@ static int PAGE_WIDTH = 81;
     
     //心情
     _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 170, 31, 31);
+    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 170+55, 31, 31);
     _btnMood.tag = 200;
     UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnMood setImage:moodimage forState:UIControlStateNormal];
@@ -155,7 +170,7 @@ static int PAGE_WIDTH = 81;
     
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 240, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 240+55, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
@@ -384,12 +399,12 @@ static int PAGE_WIDTH = 81;
     [self updateDate];
     
     // 刷新头像
-    NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
+   /* NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
     _currentGeneView.egoBtnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
         
         _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
-    }
+    }*/
     
     if (![GlobalDataManager GetInstance].isMainMenuFirstLaunch &&
         [GlobalDataManager GetInstance].isGeneMenuFirstLaunch) {

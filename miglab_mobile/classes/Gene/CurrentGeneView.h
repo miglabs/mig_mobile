@@ -23,4 +23,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *sceneImageView;
 @property (nonatomic, retain) IBOutlet UILabel *lblSceneDesc;
 
+@property (nonatomic, retain) IBOutlet UILabel *lbllocation;
+@property (nonatomic, retain) IBOutlet UIImageView *imageWeather;
+
 @end

@@ -19,6 +19,8 @@
 @synthesize lblMoodDesc = _lblMoodDesc;
 @synthesize sceneImageView = _sceneImageView;
 @synthesize lblSceneDesc = _lblSceneDesc;
+@synthesize lbllocation = _lbllocation;
+@synthesize imageWeather = _imageWeather;
 
 - (id)initWithFrame:(CGRect)frame
 {
