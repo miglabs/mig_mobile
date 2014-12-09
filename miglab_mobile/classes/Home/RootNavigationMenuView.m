@@ -240,6 +240,11 @@
         
         _btnName.titleLabel.text = nickname;
     }
+    else {
+        
+        _egoBtnAvatar.imageURL = nil;
+        _btnName.titleLabel.text = @"请登录";
+    }
 }
 
 /*
