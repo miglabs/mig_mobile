@@ -11,6 +11,8 @@
 
 @interface RootNavigationMenuView : UIView
 
+@property (nonatomic, retain) UIViewController *topViewcontroller; // 导航指针
+
 @property (nonatomic, retain) UIImageView *bgImageView;
 @property (nonatomic, retain) UIButton *btnMenuFirst;
 @property (nonatomic, retain) UIButton *btnMenuSecond;

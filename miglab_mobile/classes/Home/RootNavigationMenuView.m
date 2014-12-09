@@ -68,6 +68,7 @@
         _egoBtnAvatar.layer.masksToBounds = YES;
         NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
         _egoBtnAvatar.frame = CGRectMake(12, 3 + topdistance, 35, 35);
+        [_egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
         if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
             
             _egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
@@ -76,7 +77,7 @@
         
         
         //first
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+14, 0 + topdistance, 120, 42)];
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+25, 0 + topdistance, 120, 42)];
         _btnMenuFirst.tag = 100;
         //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -203,12 +204,12 @@
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         SettingViewController *settingViewController = [[SettingViewController alloc] init];
-        //[self.topViewcontroller.navigationController pushViewController:settingViewController animated:YES];
+        [self.topViewcontroller.navigationController pushViewController:settingViewController animated:YES];
         
     } else {
         
         LoginMenuViewController *loginMenuViewController = [[LoginMenuViewController alloc] initWithNibName:@"LoginMenuViewController" bundle:nil];
-        //[self.topViewcontroller.navigationController pushViewController:loginMenuViewController animated:YES];
+        [self.topViewcontroller.navigationController pushViewController:loginMenuViewController animated:YES];
         
     }
 }
