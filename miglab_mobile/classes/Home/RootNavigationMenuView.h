@@ -18,12 +18,18 @@
 @property (nonatomic, retain) UIButton *btnMenuSecond;
 @property (nonatomic, retain) UIButton *btnMenuThird;
 @property (nonatomic, retain) IBOutlet EGOImageButton *egoBtnAvatar; //头像显示
+@property (nonatomic, retain) IBOutlet UIButton *btnName; // 用户昵称
+
 
 
 -(id)initRootNavigationMenuView;
+#if 0
 -(id)initRootNavigationMenuView:(CGRect)frame;
+#endif
 -(void)setSelectedMenu:(int)aIndex;
 
 -(IBAction)doAvatar:(id)sender; //头像按钮事件
+
+- (void)updateView; // 主要更新头像和名称
 
 @end

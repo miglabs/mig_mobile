@@ -196,6 +196,8 @@
     //
     [self doUpdateView:_currentShowViewTag];
     
+    // 更新导航
+    [_rootNavMenuView updateView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

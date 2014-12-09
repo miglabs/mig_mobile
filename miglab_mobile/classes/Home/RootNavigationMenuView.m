@@ -76,15 +76,6 @@
         [self addSubview: _egoBtnAvatar];
         
         
-        //first
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+25, 0 + topdistance, 120, 42)];
-        _btnMenuFirst.tag = 100;
-        //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
-        [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
-        //[_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
-
-        //判断用户是否登录以及登录后性别判断
         NSString* nickname = [NSString alloc];
         if([UserSessionManager GetInstance].isLoggedIn){
             //性别判断
@@ -95,8 +86,28 @@
         }else{
             nickname = @"请登录";
         }
-        [_btnMenuFirst setTitle: nickname forState:UIControlStateNormal];
-        _btnMenuFirst.titleLabel.font = [UIFont fontOfApp:13.0f];
+        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(30, topdistance+3, 90, 42)];
+        _btnName.backgroundColor = [UIColor clearColor];
+        [_btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btnName setTitle:nickname forState:UIControlStateNormal];
+        _btnName.titleLabel.font = [UIFont fontOfApp:13.0];
+        [_btnName.titleLabel setTextAlignment:NSTextAlignmentLeft];
+        [_btnName addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_btnName];
+        
+        
+        //first
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+25+90, 0 + topdistance, 120, 42)];
+        _btnMenuFirst.tag = 100;
+        //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        //[_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
+        //[_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
+
+        //判断用户是否登录以及登录后性别判断
+        //[_btnMenuFirst setTitle:nil forState:UIControlStateNormal];
+        //_btnMenuFirst.titleLabel.font = [UIFont fontOfApp:13.0f];
+        
         [self addSubview:_btnMenuFirst];
         
         //second //254 - 10 -56
@@ -118,12 +129,12 @@
         [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
         _btnMenuThird.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuThird];
-        
     }
     return self;
     
 }
 
+#if 0
 -(id)initRootNavigationMenuView:(CGRect)frame{
     
 //    self = [super initWithFrame:CGRectMake(0, 0, 320, 45)];
@@ -179,6 +190,7 @@
     return self;
     
 }
+#endif
 
 -(void)setSelectedMenu:(int)aIndex{
     
@@ -211,6 +223,22 @@
         LoginMenuViewController *loginMenuViewController = [[LoginMenuViewController alloc] initWithNibName:@"LoginMenuViewController" bundle:nil];
         [self.topViewcontroller.navigationController pushViewController:loginMenuViewController animated:YES];
         
+    }
+}
+
+- (void)updateView {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        _egoBtnAvatar.imageURL = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
+        
+        NSString *nickname;
+        if([UserSessionManager GetInstance].currentUser.gender==0)
+            nickname =  [NSString stringWithFormat:@"%@  ♀",[UserSessionManager GetInstance].currentUser.nickname];
+        else
+            nickname =  [NSString stringWithFormat:@"%@  ♂",[UserSessionManager GetInstance].currentUser.nickname];
+        
+        _btnName.titleLabel.text = nickname;
     }
 }
 
