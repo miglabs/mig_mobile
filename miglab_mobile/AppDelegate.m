@@ -140,15 +140,14 @@
     NSString* code = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
     NSString* deviceName = [deviceNamesByCode objectForKey:code];
     
-    if ([deviceName isEqualToString:@"iPhone 5c"]
-        || [deviceName isEqualToString:@"iPhone 5s"]
-        || [deviceName isEqualToString:@"iPhone 5"]) {
+    if ([deviceName isEqualToString:@"iPhone 4"]
+        || [deviceName isEqualToString:@"iPhone 4S"]) {
         
-        [GlobalDataManager GetInstance].isLongScreen = YES;
+        [GlobalDataManager GetInstance].isLongScreen = NO;
     }
     else {
         
-        [GlobalDataManager GetInstance].isLongScreen = NO;
+        [GlobalDataManager GetInstance].isLongScreen = YES;
     }
     
     if ([deviceName isEqualToString:@"iPad Air"]

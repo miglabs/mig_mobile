@@ -25,36 +25,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gene_type.png" id="12">
-                    <rect key="frame" x="20" y="154" width="31" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gene_type.png" id="13">
-                    <rect key="frame" x="246" y="224" width="31" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gene_type.png" id="14">
-                    <rect key="frame" x="20" y="294" width="31" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="旅行中" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15">
-                    <rect key="frame" x="59" y="140" width="218" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="心情甚好" textAlignment="right" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="16">
-                    <rect key="frame" x="20" y="210" width="218" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="慵懒的午后。调皮的阳光不安分地跃上窗台，轻巧地挤入绿色的百叶，偷偷探窥那熟睡的香甜" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="17">
-                    <rect key="frame" x="59" y="280" width="218" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="未知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UK6-a5-42b" customClass="TTTAttributedLabel">
                     <rect key="frame" x="154" y="43" width="60" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,20 +41,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="lblMonthAndDay" destination="4" id="11"/>
-                <outlet property="lblMoodDesc" destination="16" id="19"/>
-                <outlet property="lblSceneDesc" destination="17" id="20"/>
-                <outlet property="lblTypeDesc" destination="15" id="18"/>
                 <outlet property="lblYear" destination="3" id="10"/>
                 <outlet property="lbllocation" destination="UK6-a5-42b" id="9RG-Ka-s48"/>
-                <outlet property="moodImageView" destination="13" id="25"/>
-                <outlet property="sceneImageView" destination="14" id="24"/>
-                <outlet property="typeImageView" destination="12" id="21"/>
             </connections>
             <point key="canvasLocation" x="341.5" y="263.5"/>
         </view>
     </objects>
     <resources>
-        <image name="gene_type.png" width="61" height="61"/>
         <image name="snow_ico.png" width="78" height="69"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

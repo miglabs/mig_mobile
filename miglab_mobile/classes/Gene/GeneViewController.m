@@ -139,43 +139,63 @@ static int PAGE_WIDTH = 81;
     [self.view addSubview:_currentGeneView];
     
   
+    //IPHONE4S以上 描述之间的间距加大
+    CGFloat separation = 0;
+    CGFloat start_pos = 0;
     
-    //desc
-    _currentGeneView.lblTypeDesc.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblTypeDesc.font = [UIFont fontOfApp:20.0f];
-    _currentGeneView.lblMoodDesc.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
-    _currentGeneView.lblSceneDesc.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblSceneDesc.font = [UIFont fontOfApp:20.0f];
+    if([GlobalDataManager GetInstance].isLongScreen){
+        separation = 60;
+        start_pos = 20;
+    }
+    
+
     
     //弹幕位置
     
+    
     //类型
     _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100+55, 31, 31);
+    _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100 + 50  - start_pos + separation, 31, 31);
     _btnType.tag = 100;
     UIImage *typeimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnType setImage:typeimage forState:UIControlStateNormal];
     [_btnType addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnType];
     
+    _currentGeneView.lblTypeDesc = [[UILabel alloc] initWithFrame:CGRectMake(11.5 + 20 + 50, posy + 10 + 100 + 50  - start_pos + separation, 246, 31)];
+    _currentGeneView.lblTypeDesc.textColor = [UIColor darkGrayColor];
+    _currentGeneView.lblTypeDesc.font = [UIFont fontOfApp:20.0f];
+    
+    [self.view addSubview:_currentGeneView.lblTypeDesc];
+    
+    
     //心情
+    _currentGeneView.lblMoodDesc = [[UILabel alloc] initWithFrame:CGRectMake(11.5 +20,posy + 10 + 160+50 + separation  - start_pos, 246, 31)];
+    _currentGeneView.lblMoodDesc.textColor = [UIColor darkGrayColor];
+    _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
+    [self.view addSubview:_currentGeneView.lblMoodDesc];
+    
     _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 170+55, 31, 31);
+    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 160 + 50 + separation  - start_pos, 31, 31);
     _btnMood.tag = 200;
     UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnMood setImage:moodimage forState:UIControlStateNormal];
     [_btnMood addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnMood];
     
+    
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 240+55, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 220+50 + separation  - start_pos, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
     [_btnScene addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnScene];
+        _currentGeneView.lblSceneDesc = [[UILabel alloc] initWithFrame:CGRectMake(11.5 + 20 +50, posy + 10 + 210 + 50 + separation  - start_pos, 246, 31)];
+    _currentGeneView.lblSceneDesc.textColor = [UIColor darkGrayColor];
+    _currentGeneView.lblSceneDesc.font = [UIFont fontOfApp:20.0f];
+    [self.view addSubview:_currentGeneView.lblSceneDesc];
     
     //是否锁定频道
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
