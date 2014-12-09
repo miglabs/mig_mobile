@@ -11,6 +11,7 @@
 #import "LoginMenuViewController.h"
 #import "UIImage+PImageCategory.h"
 #import "UserSessionManager.h"
+#import "GlobalDataManager.h"
 
 @implementation RootNavigationMenuView
 
@@ -75,7 +76,12 @@
         }
         [self addSubview: _egoBtnAvatar];
         
+        //IPHONE4S以上 描述之间的间距加大
+        CGFloat separation = 0;
         
+        if([GlobalDataManager GetInstance].isLongScreen){
+            separation = 15;
+        }
         NSString* nickname = [NSString alloc];
         if([UserSessionManager GetInstance].isLoggedIn){
             //性别判断
@@ -86,7 +92,7 @@
         }else{
             nickname = @"请登录";
         }
-        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(30, topdistance+3, 90, 42)];
+        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(30+separation, topdistance+3, 90, 42)];
         _btnName.backgroundColor = [UIColor clearColor];
         [_btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnName setTitle:nickname forState:UIControlStateNormal];

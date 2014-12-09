@@ -709,6 +709,16 @@ static int PAGE_WIDTH = 81;
         _btnCurrentGene.hidden = YES;
         _modifyGeneView.hidden = NO;
         _focusImageView.hidden = YES;
+        
+        //弹幕
+        _bgBarrageImageView.hidden = YES;
+        _btnBarrage.hidden = YES;
+        //描述词
+        _currentGeneView.lblTypeDesc.hidden = YES;
+        _currentGeneView.lblMoodDesc.hidden = YES;
+        _currentGeneView.lblSceneDesc.hidden = YES;
+        
+        
     }];
     
     /*
@@ -774,6 +784,15 @@ static int PAGE_WIDTH = 81;
     _btnCurrentGene.hidden = NO;
     _focusImageView.hidden = NO;
     _btnCurrentGene.alpha = 0.0f;
+    
+    //弹幕
+    _bgBarrageImageView.hidden = NO;
+    _btnBarrage.hidden = NO;
+    
+    //描述词
+    _currentGeneView.lblTypeDesc.hidden = NO;
+    _currentGeneView.lblMoodDesc.hidden = NO;
+    _currentGeneView.lblSceneDesc.hidden = NO;
     
     [UIView animateWithDuration:0.6f delay:0.0f options:UIViewAnimationCurveLinear animations:^{
         
