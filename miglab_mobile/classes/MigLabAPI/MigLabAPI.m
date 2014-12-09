@@ -2799,6 +2799,68 @@
 /*
  评论歌曲
  POST
+ HTTP_COMMENTSONG //评论添加当前歌曲类别 和类别ID
+ */
+-(void) doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid ttype:(NSString*)type ttypeid:(NSString*) tid comment:(NSString*)tcomment{
+    API_HEADER();
+    
+    PLog(@"comment song url: %@", HTTP_COMMENTSONG);
+    
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:HTTP_COMMENTSONG]];
+    
+    NSString* httpBody = [NSString stringWithFormat:@"uid=%@&token=%@&songid=%@&comment=%@&type=%@&tid=%@", uid, ttoken, tsongid, tcomment,type,tid];
+    PLog(@"comment song body: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(status == 1) {
+                
+                PLog(@"comment song operation succeeded");
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongSuccess object:nil userInfo:nil];
+            }
+            else {
+                
+                PLog(@"comment song operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据失败";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:dicResult];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"comment song failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameCommentSongFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+/*
+ 评论歌曲
+ POST
  HTTP_COMMENTSONG
  */
 -(void)doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid comment:(NSString*)tcomment {

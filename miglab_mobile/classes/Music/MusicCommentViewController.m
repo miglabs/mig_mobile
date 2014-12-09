@@ -363,7 +363,6 @@
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         NSString *songid = [NSString stringWithFormat:@"%lld", _song.songid];
         
-        
         [_miglabAPI doCommentSong:userid token:accesstoken songid:songid comment:commentcontent];
     }
     

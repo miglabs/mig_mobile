@@ -57,6 +57,9 @@
 /* 一页中附近歌曲显示的数量 */
 #define NEARMUSIC_DISPLAY_COUNT                 10
 
+/*导航头像宽度*/
+#define NAV_AVATAR_RADOUS                       2
+
 /* 头像的宽度 */
 #define AVATAR_RADIUS                           22
 

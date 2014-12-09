@@ -184,7 +184,10 @@ typedef enum {
  评论歌曲
  */
 -(void)doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid comment:(NSString*)tcomment;
-
+/*
+ 评论歌曲
+ */
+-(void) doCommentSong:(NSString*)uid token:(NSString*)ttoken songid:(NSString*)tsongid ttype:(NSString*)type ttypeid:(NSString*) tid comment:(NSString*)tcomment;
 /*
  获取歌曲评论
  */

@@ -299,6 +299,7 @@
     NSLog(@"_currentShowViewTag: %d", _currentShowViewTag);
     
     [_rootNavMenuView setSelectedMenu:_currentShowViewTag - 100];
+    //登陆成功后通知导航重新加载 //fix me kerry
     [self doUpdateView:_currentShowViewTag];
     
 }

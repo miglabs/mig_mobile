@@ -8,6 +8,7 @@
 
 #import "RootNavigationMenuView.h"
 #import "UIImage+PImageCategory.h"
+#import "UserSessionManager.h"
 
 @implementation RootNavigationMenuView
 
@@ -15,6 +16,7 @@
 @synthesize btnMenuFirst = _btnMenuFirst;
 @synthesize btnMenuSecond = _btnMenuSecond;
 @synthesize btnMenuThird = _btnMenuThird;
+@synthesize egoBtnAvatar = _egoBtnAvatar;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -43,9 +45,10 @@
         _bgImageView.frame = CGRectMake(0, 0, 320, 44 + topdistance);
         [self addSubview:_bgImageView];
         
+        /* 不再使用间隔
         UIImage *separatorImage = [UIImage imageWithName:@"home_navigation_separator" type:@"png"];
         UIImageView *separatorImageView01 = [[UIImageView alloc] initWithImage:separatorImage];
-        separatorImageView01.frame = CGRectMake(106, 0 + topdistance, 1, 42);
+        separatorImageView01.frame = CGRectMake(9+10+31+90, 0 + topdistance, 1, 42);
         [self addSubview:separatorImageView01];
         
         UIImageView *separatorImageView12 = [[UIImageView alloc] initWithImage:separatorImage];
@@ -54,32 +57,65 @@
         
         UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_menu_sel" type:@"png"];
         UIColor *menuSelColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
+         */
         
-        //first
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 + topdistance, 106, 42)];
+        //添加头像 //位置 9 长度31
+        //avatar
+        _egoBtnAvatar = [[EGOImageButton alloc] initWithFrame:CGRectMake(9, 3 + topdistance, 35, 35)];
+        _egoBtnAvatar.layer.cornerRadius = 15;
+        _egoBtnAvatar.layer.masksToBounds = YES;
+        //_egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+       // _egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
+        //[_egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
+        // 刷新头像
+        NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
+        _egoBtnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
+        if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
+            
+            _egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
+        }
+        [self addSubview: _egoBtnAvatar];
+        
+        
+        //first //位置 9 长度31 间距10
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+50, 0 + topdistance, 120, 42)];
         _btnMenuFirst.tag = 100;
-        [_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
-        [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
-        _btnMenuFirst.titleLabel.font = [UIFont fontOfApp:17.0f];
+        //[_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
+        //[_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
+
+        //判断用户是否登录以及登录后性别判断
+        NSString* nickname = [NSString alloc];
+        if([UserSessionManager GetInstance].isLoggedIn){
+            //性别判断
+            if([UserSessionManager GetInstance].currentUser.gender==0)
+                nickname =  [NSString stringWithFormat:@"%@  ♀",[UserSessionManager GetInstance].currentUser.nickname];
+            else
+                nickname =  [NSString stringWithFormat:@"%@  ♂",[UserSessionManager GetInstance].currentUser.nickname];
+        }else{
+            nickname = @"请登录";
+        }
+        [_btnMenuFirst setTitle: nickname forState:UIControlStateNormal];
+        _btnMenuFirst.titleLabel.font = [UIFont fontOfApp:13.0f];
         [self addSubview:_btnMenuFirst];
         
-        //second
-        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(107, 0 + topdistance, 106, 42)];
+        //second //254 - 10 -56
+        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(198, 0 + topdistance, 56, 42)];
         _btnMenuSecond.tag = 101;
-        [_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
+        //[_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
         _btnMenuSecond.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuSecond];
         
-        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(214, 0 + topdistance,106, 42)];
+        //从右开始偏移计算320 - 56 -10
+        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(254, 0 + topdistance,56, 42)];
         _btnMenuThird.tag = 102;
-        [_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
+        //[_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
         _btnMenuThird.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuThird];
