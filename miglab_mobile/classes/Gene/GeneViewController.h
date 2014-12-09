@@ -47,6 +47,10 @@
 @property (nonatomic, retain) UIPageControl* mainGuidePageControl;
 @property (nonatomic, retain) UIImageView* imgGeneView;
 
+//弹幕
+@property (nonatomic, retain) UIImageView *bgBarrageImageView;
+@property (nonatomic, retain) UIButton *btnBarrage;
+
 //引导
 @property (nonatomic, strong) GeneGuideView *geneGuideView;
 

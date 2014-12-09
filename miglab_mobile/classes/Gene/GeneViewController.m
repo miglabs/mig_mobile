@@ -31,6 +31,10 @@ static int PAGE_WIDTH = 81;
 @synthesize btnCurrentGene = _btnCurrentGene;
 @synthesize oldGeneFrame = _oldGeneFrame;
 
+//弹幕
+@synthesize btnBarrage = _btnBarrage;
+@synthesize bgBarrageImageView =_bgBarrageImageView;
+
 //音乐基因
 @synthesize isChannelLock = _isChannelLock;
 @synthesize modifyGeneView = _modifyGeneView;
@@ -139,6 +143,22 @@ static int PAGE_WIDTH = 81;
     [self.view addSubview:_currentGeneView];
     
   
+    
+    
+    
+    //弹幕位置
+    UIImage *barrageBg = [UIImage imageWithName:@"player_bg" type:@"png"];
+    _bgBarrageImageView = [[UIImageView alloc] initWithImage:barrageBg];
+    _bgBarrageImageView.frame = CGRectMake(11.5, posy + 10 + 100, 297, 31);
+    [self.view  addSubview:_bgBarrageImageView];
+    
+    _btnBarrage = [[UIButton alloc] initWithFrame:CGRectMake(11.5, posy + 10 + 100, 297, 31)];
+    _btnBarrage.tag = 100;
+    [_btnBarrage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_btnBarrage setTitle:@"弹幕加载中...." forState:UIControlStateNormal];
+    _btnBarrage.titleLabel.font = [UIFont fontOfApp:17.0f];
+    [self.view addSubview:_btnBarrage];
+    
     //IPHONE4S以上 描述之间的间距加大
     CGFloat separation = 0;
     CGFloat start_pos = 0;
@@ -150,7 +170,6 @@ static int PAGE_WIDTH = 81;
     
 
     
-    //弹幕位置
     
     
     //类型
