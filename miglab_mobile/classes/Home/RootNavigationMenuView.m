@@ -80,7 +80,7 @@
         CGFloat separation = 0;
         
         if([GlobalDataManager GetInstance].isLongScreen){
-            separation = 15;
+            separation = -5;
         }
         NSString* nickname = [NSString alloc];
         if([UserSessionManager GetInstance].isLoggedIn){
@@ -92,7 +92,7 @@
         }else{
             nickname = @"请登录";
         }
-        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(30+separation, topdistance+3, 90, 42)];
+        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(50+separation, topdistance+3, 100, 42)];
         _btnName.backgroundColor = [UIColor clearColor];
         [_btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnName setTitle:nickname forState:UIControlStateNormal];

@@ -51,6 +51,9 @@
 @property (nonatomic, retain) UIImageView *bgBarrageImageView;
 @property (nonatomic, retain) UIButton *btnBarrage;
 
+//弹幕定时器
+@property (nonatomic, retain) NSTimer *barrageTimer;
+
 //引导
 @property (nonatomic, strong) GeneGuideView *geneGuideView;
 
@@ -86,10 +89,16 @@
 -(void)getLocationnInfoSuccess:(NSNotification *)tNotification;
 -(void)getLocationnInfoFailed:(NSNotification *)tNotification;
 
+//刷新弹幕
+-(void)barrageTimerFunction;
+
 
 //引导界面
 -(void)finishCurrentGuide;
 -(void)pageTurn:(UIPageControl*)sender;
+
+//弹幕存储内容
+@property (nonatomic, retain) NSArray *barragelist;
 
 // 新增消息
 -(void)getNewMsgCount:(NSString*)userid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
