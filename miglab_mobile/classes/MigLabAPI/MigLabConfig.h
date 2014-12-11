@@ -51,6 +51,9 @@
 
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
+
+#define BARRAYCOMM_TIME                         3
+
 /*
  * 用于切换不同域名地址
  * IS_DEBUG_SERVER: 0-未使用，1-正式，2-测试
@@ -415,10 +418,16 @@
 #define NotificationNameSendBPushInfoSuccess                @"NotificationNameSendBPushInfoSuccess"
 #define NotificationNameSendBPushInfoFailed                 @"NotificationNameSendBPushInfoFailed"
 
+
+
+//新接口地址================================================================================================
 //获取当前天气和城市
 #define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/location.fcgi"]
 #define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
 #define NotificationNameLocationFailed                      @"NotificationNameLocationFailed"
+
+
+
 
 //获取弹幕和评论
 #define HTTP_BARRAYCOMM                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/soc/v1/getbarragecomm.fcgi"]

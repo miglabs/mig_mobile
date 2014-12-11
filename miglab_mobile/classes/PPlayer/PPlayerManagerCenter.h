@@ -40,6 +40,7 @@ typedef enum{
 @property BOOL shouldStartPlayAfterDownloaded;
 
 @property BOOL hasAddMoodRecord;
+@property BOOL hasGetBarrayComm;
 @property (retain) NSString *lastSongId;
 
 @property (retain) id<PPlayerManagerCenterDelegate> delegate;

@@ -35,6 +35,7 @@
 @synthesize shouldStartPlayAfterDownloaded = _shouldStartPlayAfterDownloaded;
 
 @synthesize hasAddMoodRecord = _hasAddMoodRecord;
+@synthesize hasGetBarrayComm = _hasGetBarrayComm;
 @synthesize lastSongId = _lastSongId;
 @synthesize delegate = _delegate;
 
@@ -436,6 +437,8 @@ static PPlayerManagerCenter *instance;
         [asMusicPlayer play];
         _hasAddMoodRecord = NO;
         
+        _hasGetBarrayComm = NO;
+        
         NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:dicPlayerInfo];
     }
@@ -493,6 +496,8 @@ static PPlayerManagerCenter *instance;
         aaMusicPlayer.delegate = self;
         [aaMusicPlayer play];
         _hasAddMoodRecord = NO;
+        
+        _hasGetBarrayComm = NO;
         
         NSDictionary *dicPlayerInfo = [NSDictionary dictionaryWithObjectsAndKeys:_currentSong, @"PLAYER_INFO", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerStart object:nil userInfo:dicPlayerInfo];
@@ -607,12 +612,13 @@ static PPlayerManagerCenter *instance;
 -(void)aaMusicPlayerTimerFunction{
     
     //PLog(@"aaMusicPlayerTimerFunction...");
+     MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     
 #if USE_NEW_AUDIO_PLAY
     
     PAudioStreamerPlayer *asMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AudioStreamerPlayer];
     
-    if (!_hasAddMoodRecord && asMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {
+    if (!_hasAddMoodRecord && asMusicPlayer.getCurrentTime > 10 && [UserSessionManager GetInstance].isLoggedIn) {//大于10s 表明用户对这首歌至少感兴趣
     
 #else //USE_NEW_AUDIO_PLAY
     PAAMusicPlayer *aaMusicPlayer = [[PPlayerManagerCenter GetInstance] getPlayer:WhichPlayer_AVAudioPlayer];
@@ -631,11 +637,28 @@ static PPlayerManagerCenter *instance;
         NSString *tempcurrentartist = _currentSong.artist;
         NSString *networkstatus = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].networkStatus];
         
-        MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
         [miglabAPI doRecordCurrentSong:userid token:accesstoken lastsong:templastsongid cursong:tempcurrentsongid mode:mode typeid:typeid name:tempcurrentsongname singer:tempcurrentartist state:networkstatus];
         
     }
-    
+    //大于5s 表明用户对这首歌不讨厌 可以获取此歌的弹幕
+#if USE_NEW_AUDIO_PLAY
+    if(!_hasGetBarrayComm && asMusicPlayer.getCurrentTime > BARRAYCOMM_TIME && [UserSessionManager GetInstance].isLoggedIn)
+    {
+#else //USE_NEW_AUDIO_PLAY
+    if (!_hasGetBarrayComm && aaMusicPlayer.getCurrentTime > BARRAYCOMM_TIME && [UserSessionManager GetInstance].isLoggedIn)
+    {
+#endif //USE_NEW_AUDIO_PLAY
+        _hasGetBarrayComm = YES;
+        //提交弹幕
+        NSString* uid = [UserSessionManager GetInstance].userid;
+        NSString* token = [UserSessionManager GetInstance].accesstoken;
+        NSString* ttype = [NSString stringWithFormat:@"%@", _currentSong.type];;
+        NSString* ttid = [NSString stringWithFormat:@"%d", _currentSong.tid];
+        NSString* tmsgid = @"0";//因此版本不需要滚动获取所以暂时不提交MSGID
+        NSString* tsongid = (_lastSongId && _lastSongId.length > 0) ? _lastSongId : @"0";;
+        [miglabAPI doGetBarrayComm:uid ttoken:token ttype:ttype ttid:ttid tmsgid:tmsgid tsongid:tsongid];
+    }
+        
 }
 
 -(void)aaMusicPlayerStoped{

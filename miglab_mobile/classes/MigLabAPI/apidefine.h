@@ -290,6 +290,9 @@
 #define NotificationNamePlayerStop              @"NotificationNamePlayerStop"
 #define NotificationNamePlayerNext              @"NotificationNamePlayerNext"
 
+/*通知更新弹幕和评论*/
+#define NotificationResetBarrayComm             @"NotificationResetBarrayComm"
+
 /* 代码分支功能 */
 #define USE_NEW_LOAD    1
 #define USE_ARTIST_SONGNAME 0

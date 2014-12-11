@@ -96,6 +96,9 @@
 -(void)getBarrayCommFailed:(NSNotification *)tNotification;
 -(void)getBarrayCommSuccess:(NSNotification *)tNotification;
 
+//置空弹幕和评论
+-(void)getResetBarrayComm:(NSNotification *)tNotification;
+
 //刷新弹幕
 -(void)barrageTimerFunction;
 

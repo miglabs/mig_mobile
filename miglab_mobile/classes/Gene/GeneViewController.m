@@ -79,6 +79,8 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBarrayCommFailed:) name:NotificationBarryCommFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBarrayCommSuccess:) name:NotificationBarryCommSuccess object:nil];
         
+        //置空弹幕和评论 getResetBarrayComm
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getResetBarrayComm:) name:NotificationResetBarrayComm object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
         
@@ -104,6 +106,9 @@ static int PAGE_WIDTH = 81;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationBarryCommFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationBarryCommSuccess object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationResetBarrayComm object:nil];
+
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
 }
@@ -385,7 +390,7 @@ static int PAGE_WIDTH = 81;
     [self checkGeneConfigfile];
     
     //获取弹幕和评论 测试
-    [self getBarrayComm];
+    //[self getBarrayComm];
     
     [self doResetChannelLockView];
     
@@ -1204,7 +1209,10 @@ static int PAGE_WIDTH = 81;
      //   [BarrageList addObject:barrayInfo];
     //}
 }
-
+-(void)getResetBarrayComm:(NSNotification *)tNotification{
+    [_mtBarrageList removeAllObjects];
+    [_btnBarrage setTitle:@"弹幕加载中...." forState:UIControlStateNormal];
+}
 
 -(void)getUpdateConfigSuccess:(NSNotification *)tNotification{
     
