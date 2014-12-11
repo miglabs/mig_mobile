@@ -47,6 +47,7 @@
 -(void)getTypeSongsSuccess:(NSNotification *)tNotification;
 
 
+
 -(void)setUserPosFailed:(NSNotification *)tNotification;
 -(void)setUserPosSuccess:(NSNotification *)tNotification;
 

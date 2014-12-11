@@ -17,6 +17,7 @@
 #import "SongComment.h"
 #import "MessageInfo.h"
 #import "apidefine.h"
+#import "Barray.h"
 
 //source（注册来源）：0,来源自身 1,来源于新浪微博 2,来源于腾讯微博 3,来源于QQ空间
 typedef enum {
@@ -310,5 +311,12 @@ typedef enum {
  提交百度推送信息
  */
 -(void)doSendBPushInfo:(NSString*)uid token:(NSString*)ttoken channelid:(NSString*)tchannelid userid:(NSString*)tuserid tag:(NSString*)ttag pkg:(NSString*)tpkg machine:(NSString*) tmachine appid:(NSString*) tappid requestid:(NSString*) trequestid;
+
+/*
+ 根据类别获取弹幕即评论内容
+ */
+
+-(void)doGetBarrayComm:(NSString*)uid ttoken:(NSString*)token ttype:(NSString*) type
+        ttid:(NSString*) tid tmsgid:(NSString*) msgid tsongid:(NSString*) songid;
 
 @end

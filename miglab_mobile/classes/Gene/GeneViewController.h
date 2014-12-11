@@ -79,6 +79,9 @@
 -(void)checkGeneConfigfile;
 -(void)updateGeneDisplay:(Song*)song;
 
+//测试获取弹幕和评论
+-(void) getBarrayComm;
+
 -(void)getUpdateConfigFailed:(NSNotification *)tNotification;
 -(void)getUpdateConfigSuccess:(NSNotification *)tNotification;
 
@@ -88,6 +91,10 @@
 //获取天气和城市
 -(void)getLocationnInfoSuccess:(NSNotification *)tNotification;
 -(void)getLocationnInfoFailed:(NSNotification *)tNotification;
+
+//弹幕和评论
+-(void)getBarrayCommFailed:(NSNotification *)tNotification;
+-(void)getBarrayCommSuccess:(NSNotification *)tNotification;
 
 //刷新弹幕
 -(void)barrageTimerFunction;
@@ -99,6 +106,8 @@
 
 //弹幕存储内容
 @property (nonatomic, retain) NSArray *barragelist;
+//弹幕存储内容
+@property (nonatomic,retain) NSMutableArray* mtBarrageList;
 
 // 新增消息
 -(void)getNewMsgCount:(NSString*)userid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;

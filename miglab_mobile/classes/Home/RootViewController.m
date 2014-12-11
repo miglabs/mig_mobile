@@ -576,6 +576,7 @@
     
 }
 
+
 //setUserPos
 -(void)setUserPosFailed:(NSNotification *)tNotification{
     

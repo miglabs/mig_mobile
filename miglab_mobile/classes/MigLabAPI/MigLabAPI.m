@@ -922,6 +922,68 @@
 }
 
 /*
+ 根据类别获取弹幕即评论内容
+ */
+
+-(void)doGetBarrayComm:(NSString*)uid ttoken:(NSString*)token ttype:(NSString*) type
+                  ttid:(NSString*) tid tmsgid:(NSString*) msgid tsongid:(NSString*) songid{
+    API_HEADER();
+    NSString* url = [NSString stringWithFormat:@"%@?platform=10000&token=%@&uid=%@&ttype=%@&tid=%@&msgid=%@", HTTP_BARRAYCOMM, token, uid, type, tid, msgid];
+    PLog(@"BarrayComm url: %@", url);
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        @try {
+            
+            NSDictionary* dicJson = JSON;
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if(1 == status) {
+                
+                PLog(@"operation succeeded");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationBarryCommSuccess
+                        object:nil userInfo:dicTemp];
+                
+            }
+            else {
+                
+                PLog(@"operation failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationBarryCommFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationBarryCommFailed object:nil userInfo:dicResult];
+            
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        
+        PLog(@"failure: %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+
+
+/*
  获取用户正在听的歌曲
  <!--请求GET-->
  HTTP_GETPLAYINGMUSIC

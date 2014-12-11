@@ -37,6 +37,7 @@ static int PAGE_WIDTH = 81;
 //弹幕定时器
 @synthesize barrageTimer = _barrageTimer;
 @synthesize barragelist = _barragelist;
+@synthesize mtBarrageList = _mtBarrageList;
 
 //音乐基因
 @synthesize isChannelLock = _isChannelLock;
@@ -74,6 +75,11 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameLocationFailed object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameLocationSuccess object:nil];
         
+        //弹幕和评论
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBarrayCommFailed:) name:NotificationBarryCommFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBarrayCommSuccess:) name:NotificationBarryCommSuccess object:nil];
+        
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
         
         
@@ -94,6 +100,9 @@ static int PAGE_WIDTH = 81;
     //GetWeatherAndCity
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocationFailed object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocationSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationBarryCommFailed object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationBarryCommSuccess object:nil];
     
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
@@ -163,8 +172,9 @@ static int PAGE_WIDTH = 81;
     [self.view addSubview:_btnBarrage];
     
     //弹幕存储测试内容
-      _barragelist = [NSArray arrayWithObjects:@"卡卡西:能P的在假点么", @"甄嬛:后面是谁你想都想得到啊", @"双蛋瓦斯:不是，是明目张胆的约炮", @"杰拉德:来公司第二年就全款买的房子和车子", @"archer:那我都认识啊", @"180:暗黑3都发霉了", @"180:表示很久没玩游戏了", @"老K:我们不是做一个安静的音乐播放器 ", @"卡卡西:暴雪，谷歌，facebook", @"双蛋瓦斯:·········也行", @"archer:继续跌是告诉你们，要准备买进了", @"杰拉德:对股票毫无性趣。。", nil];
+    _barragelist = [NSArray arrayWithObjects:@"卡卡西:能P的在假点么", @"甄嬛:后面是谁你想都想得到啊", @"双蛋瓦斯:不是，是明目张胆的约炮", @"杰拉德:来公司第二年就全款买的房子和车子", @"archer:那我都认识啊", @"180:暗黑3都发霉了", @"180:表示很久没玩游戏了", @"老K:我们不是做一个安静的音乐播放器 ", @"卡卡西:暴雪，谷歌，facebook", @"双蛋瓦斯:·········也行", @"archer:继续跌是告诉你们，要准备买进了", @"杰拉德:对股票毫无性趣。。", nil];
     
+
     //IPHONE4S以上 描述之间的间距加大
     CGFloat separation = 0;
     CGFloat start_pos = 0;
@@ -174,8 +184,9 @@ static int PAGE_WIDTH = 81;
         start_pos = 20;
     }
     
+   
 
-    
+     _mtBarrageList = [[NSMutableArray  alloc] init];
     
     
     //类型
@@ -373,7 +384,9 @@ static int PAGE_WIDTH = 81;
     //检查更新
     [self checkGeneConfigfile];
     
-    //
+    //获取弹幕和评论 测试
+    [self getBarrayComm];
+    
     [self doResetChannelLockView];
     
     [PPlayerManagerCenter GetInstance].delegate = self;
@@ -432,7 +445,10 @@ static int PAGE_WIDTH = 81;
         
         [_geneGuideView hideAll];
         [_geneGuideView showLogin];
+        
+   
     }
+    
     
 }
 
@@ -680,6 +696,16 @@ static int PAGE_WIDTH = 81;
         [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
     
+}
+
+-(void) getBarrayComm{
+    NSString* uid = @"0";
+    NSString* token = @"RTREEEE";
+    NSString* ttype = @"mm";
+    NSString* ttid = @"1";
+    NSString* tmsgid = @"0";
+    NSString* tsongid = @"123";
+    [self.miglabAPI doGetBarrayComm:uid ttoken:token ttype:ttype ttid:ttid tmsgid:tmsgid tsongid:tsongid];
 }
 
 -(void)checkGeneConfigfile{
@@ -1160,6 +1186,26 @@ static int PAGE_WIDTH = 81;
     
 }
 
+-(void) getBarrayCommFailed:(NSNotification *)tNotification{
+    
+}
+
+-(void) getBarrayCommSuccess:(NSNotification *)tNotification{
+    NSDictionary* dicResult = (NSDictionary*)tNotification.userInfo;
+    NSArray* barrayArray = [dicResult objectForKey:@"barrage"];
+    [_mtBarrageList removeAllObjects];
+   
+    int bacount = [barrayArray count];
+    if (bacount!=0)
+        [_mtBarrageList addObjectsFromArray:barrayArray];
+    //NSMutableArray*  BarrageList = [[NSMutableArray alloc] init];
+   // for (int i = 0; i < bacount; i++) {
+     //   BarrayInfo* barrayInfo = [BarrayInfo initWithNSDictionary:[barrayArray objectAtIndex:i]];
+     //   [BarrageList addObject:barrayInfo];
+    //}
+}
+
+
 -(void)getUpdateConfigSuccess:(NSNotification *)tNotification{
     
     //todo
@@ -1272,11 +1318,16 @@ static int PAGE_WIDTH = 81;
 -(void)barrageTimerFunction{
     NSString* text = [NSString alloc];
     //包含歌曲所属类别
-    text = [NSString stringWithFormat:@"[旅行中]%@ ",[_barragelist objectAtIndex:arc4random()%12]];
+    if([_mtBarrageList count]==0)
+        return;
+    int count = [_mtBarrageList count];
+    NSDictionary* arry = [_mtBarrageList objectAtIndex:arc4random()%count];
+    BarrayInfo* barrinfo = [BarrayInfo initWithNSDictionary:arry];
+    text = [NSString stringWithFormat:@"[%@] %@说: %@ ",barrinfo.tname,barrinfo.nickname,barrinfo.message];
+    /*text = [NSString stringWithFormat:@"[旅行中]%@ ",[_barragelist objectAtIndex:arc4random()%12]];*/
     [_btnBarrage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btnBarrage setTitle:text forState:UIControlStateNormal];
     _btnBarrage.titleLabel.font = [UIFont fontOfApp:12.0f];
-    ;
     [self.view addSubview:_btnBarrage];
 }
 

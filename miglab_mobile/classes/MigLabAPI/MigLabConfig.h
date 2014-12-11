@@ -420,4 +420,9 @@
 #define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
 #define NotificationNameLocationFailed                      @"NotificationNameLocationFailed"
 
+//获取弹幕和评论
+#define HTTP_BARRAYCOMM                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/soc/v1/getbarragecomm.fcgi"]
+#define NotificationBarryCommSuccess                     @"NotificationBarryCommSuccess"
+#define NotificationBarryCommFailed                      @"NotificationBarryCommFailed"
+
 #endif
