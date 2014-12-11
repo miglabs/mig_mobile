@@ -321,11 +321,7 @@
     
 }
 
--(void)updateBarray{
-    //更新弹幕置空
-    //通知更新
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationResetBarrayComm object:nil userInfo:nil];
-}
+
 
 -(void)updateSongInfo{
     
@@ -469,7 +465,6 @@
     PLog(@"playerStart...");
     
     [self updateSongInfo];
-    [self updateBarray];
     
 }
 

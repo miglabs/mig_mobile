@@ -34,6 +34,8 @@
     [self playerDestroy];
     
     PLog(@"Init Streamer Player.");
+    //置空弹幕
+    [self updateBarray];
     
     if (!_song || !MIG_NOT_EMPTY_STR(_song.songurl)) {
         
@@ -292,6 +294,12 @@
         //[_streamerPlayer pause];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNetworkError object:nil userInfo:nil];
     }
+}
+
+-(void)updateBarray{
+    //更新弹幕置空
+    //通知更新
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationResetBarrayComm object:nil userInfo:nil];
 }
 
 @end
