@@ -14,4 +14,7 @@
 //群聊
 - (id)   init:(NSString*) token uid:(int64_t)uid
           tid: (int64_t) tid;
+
+- (id)  init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
+         tid: (int64_t) tid;
 @end

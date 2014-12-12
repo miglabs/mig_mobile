@@ -503,6 +503,8 @@
 		C72F16BE18FA270900ECD8B8 /* douban_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16BD18FA270900ECD8B8 /* douban_tip.png */; };
 		C72F16C018FA287500ECD8B8 /* tencent_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16BF18FA287500ECD8B8 /* tencent_tip.png */; };
 		C72F16C218FA293E00ECD8B8 /* default_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16C118FA293E00ECD8B8 /* default_tip.png */; };
+		C744EA741A38A7C50004DE31 /* Barray.m in Sources */ = {isa = PBXBuildFile; fileRef = C744EA731A38A7C50004DE31 /* Barray.m */; };
+		C76DF2D01A3B35D000156F52 /* ChatJoinToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */; };
 		C7C9F5C318FC2CA0001E3A47 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C218FC2CA0001E3A47 /* Icon.png */; };
 		C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */; };
 		C7C9F5C918FC316B001E3A47 /* type_7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C818FC316B001E3A47 /* type_7.png */; };
@@ -1266,6 +1268,10 @@
 		C72F16BD18FA270900ECD8B8 /* douban_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = douban_tip.png; sourceTree = "<group>"; };
 		C72F16BF18FA287500ECD8B8 /* tencent_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tencent_tip.png; sourceTree = "<group>"; };
 		C72F16C118FA293E00ECD8B8 /* default_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_tip.png; sourceTree = "<group>"; };
+		C744EA721A38A7B10004DE31 /* Barray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Barray.h; sourceTree = "<group>"; };
+		C744EA731A38A7C50004DE31 /* Barray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barray.m; sourceTree = "<group>"; };
+		C76DF2CE1A3B35C300156F52 /* ChatJoinToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatJoinToolBar.h; sourceTree = "<group>"; };
+		C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatJoinToolBar.m; sourceTree = "<group>"; };
 		C7C9F5C218FC2CA0001E3A47 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C7C9F5C818FC316B001E3A47 /* type_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = type_7.png; sourceTree = "<group>"; };
@@ -1752,6 +1758,8 @@
 				CB5E92B0199F80EB00B71A10 /* LyricShare.m */,
 				CB5E92D119A836C300B71A10 /* MigWeather.h */,
 				CB5E92D219A836C300B71A10 /* MigWeather.m */,
+				C744EA721A38A7B10004DE31 /* Barray.h */,
+				C744EA731A38A7C50004DE31 /* Barray.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -2026,6 +2034,8 @@
 				167F047918F93228000A1C21 /* ChatNotification.m */,
 				167F046F18F9306F000A1C21 /* ChatViewController.h */,
 				167F047018F9306F000A1C21 /* ChatViewController.m */,
+				C76DF2CE1A3B35C300156F52 /* ChatJoinToolBar.h */,
+				C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */,
 			);
 			path = SocketChat;
 			sourceTree = "<group>";
@@ -3341,6 +3351,7 @@
 				165D7C9E17BE618C000D08E3 /* PlayerViewController.m in Sources */,
 				167F047D18F93228000A1C21 /* ChatNotification.m in Sources */,
 				165D7CA217BE61E3000D08E3 /* MusicPlayerMenuView.m in Sources */,
+				C76DF2D01A3B35D000156F52 /* ChatJoinToolBar.m in Sources */,
 				165D7CA717BE6253000D08E3 /* FriendViewController.m in Sources */,
 				16F3521817BF241400CF9044 /* NearMusicViewController.m in Sources */,
 				C7DE8EBC1977AE0E0047233D /* MsgTextRun.m in Sources */,
@@ -3355,6 +3366,7 @@
 				162AAB5917C25D25000E904F /* CurrentGeneView.m in Sources */,
 				185F935917C330A600EBC710 /* TSLibraryImport.m in Sources */,
 				1649E20517C3A92D009A9E3F /* MyFriendViewController.m in Sources */,
+				C744EA741A38A7C50004DE31 /* Barray.m in Sources */,
 				1649E20B17C3A95D009A9E3F /* NearFriendViewController.m in Sources */,
 				C7DE8EBD1977AE0E0047233D /* MsgTextRunDelegate.m in Sources */,
 				167F048618F93274000A1C21 /* ChatNetService.m in Sources */,
@@ -3540,8 +3552,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
+				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3590,8 +3602,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
+				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

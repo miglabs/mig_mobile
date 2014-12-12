@@ -17,8 +17,17 @@
 @property (nonatomic, assign) id<ChatNetServiceDelegate> delegate;
 
 
-- (id)   init:(NSString*) token uid:(int64_t)uid
+//新版本改变加载方式，先获取聊天记录和服务器地址在进行聊天
+//单聊
+-(id) init:(NSString*) token name:(NSString*) name uid:(int64_t)uid
+       tid: (int64_t) tid;
+
+
+- (id) init:(NSString*) token uid:(int64_t)uid
              tid: (int64_t) tid;
+
+
+
 - (void) sendChatMsg:(NSString*) content;
 
 -(void) bindSendUserInfo:(ChatMsg*) msg;

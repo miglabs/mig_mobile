@@ -18,7 +18,9 @@ enum ChatNotificationType
     CHATMESSAGE_SEND,//发送聊天消息
     CHATMESSAGE_RELOAD,//重新加载列表内的聊天消息
     CHATSERVER_CONNENT,//连接聊天服务器
-    CHATSERVER_ONTUSERINFO
+    CHATSERVER_LOAD,//加载聊天内容选择最优服务端
+    CHATSERVER_ONTUSERINFO,
+    CHATSERVER_OPPINFO
     
 };
 

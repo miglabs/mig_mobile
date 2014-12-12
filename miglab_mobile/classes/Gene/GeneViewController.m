@@ -736,8 +736,8 @@ static int PAGE_WIDTH = 81;
 
 -(IBAction)doGroupchat:(id)sender{
      PLog(@"gene doGroupchat...");
-    int currentUserId = [[UserSessionManager GetInstance].userid intValue];
-    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:10108 tid:10104];
+    NSString* name = @"MIGLAB测试组";
+    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:10108 name:name tid:10104];
     [self.topViewcontroller.navigationController pushViewController:chatController animated:YES];
 }
 

@@ -54,6 +54,10 @@
 
 #define BARRAYCOMM_TIME                         3
 
+#define ALONE_CHAT                              1 //单聊
+#define GROUP_CHAT                              3 //群聊
+//#define TEMP_CHAT                               3 //临时聊
+
 /*
  * 用于切换不同域名地址
  * IS_DEBUG_SERVER: 0-未使用，1-正式，2-测试

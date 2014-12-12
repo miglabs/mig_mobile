@@ -26,13 +26,31 @@
     NSString                *m_token;
     ChatNotificationCenter  *m_chatNotification;
     int32_t                  m_type;  //1 单聊 2 群聊 3，临时组
-    NSString                *group_name;
+    int64_t                  m_groupid;
+    NSString                *m_name;
     
 }
 
 @end
 
 @implementation ChatViewController
+
+- (id)  init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
+    tid: (int64_t) tid{
+    
+    self = [super init];
+    m_uid = uid;
+    m_tid = tid;
+    m_token = token;
+    m_name = name;
+    m_type = ALONE_CHAT;
+    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
+    return  self;
+}
+
+
+
+
 
 
 - (id)   init:(NSString*) token uid:(int64_t)uid
@@ -42,6 +60,7 @@
     m_uid = uid;
     m_tid = tid;
     m_token = token;
+    m_type = ALONE_CHAT;
     
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     
@@ -81,14 +100,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     CGRect frame = super.navView.frame;
+    super.navView.titleLabel.font = [UIFont fontOfApp:14.0];
     super.navView.titleLabel.text = @"";
+    
+    
     NSInteger y     = frame.origin.y + frame.size.height;
     NSInteger height = kMainScreenHeight-y - kInputToolBarHeight  + self.topDistance;
     m_msgContentView = [[ChatMsgContentView alloc] initWithFrame:
                      CGRectMake(0, y, kMainScreenWidth,height)];
     [self.view insertSubview:m_msgContentView atIndex:1];
     frame = m_msgContentView.frame;
+    
+    
     y = kMainScreenHeight - kInputToolBarHeight + self.topDistance;
     m_inputToolBar = [[CharInputToolBar alloc] initWithFrame:
                       CGRectMake(0, y, kMainScreenWidth,kInputToolBarHeight)];
@@ -105,11 +130,22 @@
     
     [self binds_Notification];
     
+    //单聊和群聊区分绑定
     NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
-    [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
-    [dic setValue:[NSString stringWithFormat:@"%lld",m_tid] forKey:@"tid"];
-    [dic setValue:m_token forKey:@"token"];
-    [ChatNotificationCenter postNotification:CHATSERVER_CONNENT obj:dic];
+    if (m_type==ALONE_CHAT) {
+        [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
+        [dic setValue:[NSString stringWithFormat:@"%lld",m_tid] forKey:@"tid"];
+        [dic setValue:[NSString stringWithFormat:@"%@",m_name] forKey:@"name"];
+        [dic setValue:m_token forKey:@"token"];
+    }else{
+        [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
+        [dic setValue:[NSString stringWithFormat:@"%lld",m_groupid] forKey:@"gid"];
+        //[dic setValue:[NSString stringWithFormat:@"%@",m_] forKey:@"name"];
+        [dic setValue:m_token forKey:@"token"];
+    }
+
+    //[ChatNotificationCenter postNotification:CHATSERVER_CONNENT obj:dic];
+    [ChatNotificationCenter postNotification:CHATSERVER_LOAD obj:dic];
 
 }
 
@@ -141,6 +177,11 @@
                 }
             }
                 break;
+            case CHATSERVER_OPPINFO:
+                if ( notification.object) {
+                    ChatUserInfo* pInfo = (ChatUserInfo*)notification.object;
+                    super.navView.titleLabel.text = [NSString stringWithFormat:@"与 %@ 聊天中...",pInfo.nickname];
+                }
             default:
                 break;
         }

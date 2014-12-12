@@ -109,6 +109,18 @@
                 m_reloading = YES;
             }
                 break;
+            case CHATSERVER_LOAD:
+            {
+                NSMutableDictionary* dic = (NSMutableDictionary*)notification.object;
+                //init:(NSString*) token name:(NSString*) name uid:(int64_t)uid tid: (int64_t) tid
+                m_charNet =[[ChatNetService alloc]init:[dic valueForKey:@"token"]
+                                                  name:[dic valueForKey:@"name"]
+                                                   uid:[[dic valueForKey:@"uid"] longLongValue]
+                                                   tid:[[dic valueForKey:@"tid"] longLongValue]];
+               [m_charNet setDelegate:self];
+                m_reloading = YES;
+            }
+                break;
             default:
                 break;
         }

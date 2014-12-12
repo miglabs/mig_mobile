@@ -13,6 +13,9 @@
 {
     int64_t                 m_uid;
     int64_t                 m_tid;
+    int64_t                 m_type;
+    int64_t                 m_gid;
+    NSString*               m_name;
     int64_t                 m_platformid;
     int64_t                 m_session;
     int64_t                 m_minmsgid;
@@ -29,8 +32,33 @@
 @end
 @implementation ChatNetService 
 
-
-
+-(id) init:(NSString*) token name:(NSString*) name uid:(int64_t)uid
+       tid: (int64_t) tid{
+    self = [super init];
+    m_uid   = uid;
+    m_tid   = tid;
+    m_token = token;
+    m_platformid = 10000;
+    m_recvdata = nil;
+    m_session = 0;
+    m_name = name;
+    if( m_token == nil )
+        m_token = @"25b4e95be8fa2fb772db9a70c6629600";
+    m_dicuserinfos = [[NSMutableDictionary alloc] init];
+    m_minmsgid = 0;
+    m_is_relogin = 0;
+    m_name = name;
+    [self getSC];
+    [self getHiscChat];
+    ChatUserInfo* info = [[ChatUserInfo alloc] init];
+    info.nickname = m_name;
+    @synchronized(self)
+    {
+        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:info];
+    }
+    
+    return self;
+}
 
 - (id) init:(NSString*) token uid:(int64_t)uid
               tid: (int64_t) tid
@@ -43,7 +71,7 @@
     m_recvdata = nil;
     m_session = 0;
     if( m_token == nil )
-        m_token = @"11231231232132132131232132323";
+        m_token = @"25b4e95be8fa2fb772db9a70c6629600";
     m_dicuserinfos = [[NSMutableDictionary alloc] init];
     m_minmsgid = 0;
     m_is_relogin = 0;
@@ -135,7 +163,7 @@
         if (jsonResult != nil) {
             m_serverIP = [jsonResult objectForKey:@"host"];
             m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
-            [self connectServer:m_serverIP port:m_serverPort];
+            //[self connectServer:m_serverIP port:m_serverPort];
         }
     } failure:^(NSError *error) {
         if( self.delegate != nil )
