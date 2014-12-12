@@ -25,6 +25,8 @@
     int64_t                  m_tid;
     NSString                *m_token;
     ChatNotificationCenter  *m_chatNotification;
+    int32_t                  m_type;  //1 单聊 2 群聊 3，临时组
+    NSString                *group_name;
     
 }
 

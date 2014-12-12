@@ -319,4 +319,11 @@ typedef enum {
 -(void)doGetBarrayComm:(NSString*)uid ttoken:(NSString*)token ttype:(NSString*) type
         ttid:(NSString*) tid tmsgid:(NSString*) msgid tsongid:(NSString*) songid;
 
+/*
+ 获取当前位置相关信息
+ */
+
+-(void)doGetLocation:(NSString*)uid ttoken:(NSString*) token tlatitude:(NSString*)latitude
+    tlongitude:(NSString*)longitude;
+
 @end

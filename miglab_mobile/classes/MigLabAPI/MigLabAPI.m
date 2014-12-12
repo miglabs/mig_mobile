@@ -3876,4 +3876,63 @@
     API_FOOTER();
 }
 
+-(void)doGetLocation:(NSString*)uid ttoken:(NSString*) token tlatitude:(NSString*)latitude tlongitude:(NSString*)longitude{
+    API_HEADER();
+    
+    //测试暂时不提交坐标
+    //NSString* url = [NSString stringWithFormat:@"%@uid=%@&token=%@&latitude=%@&longitude=%@", HTTP_LOCATIONINFO, uid, token,latitude, longitude];
+    NSString* url = [NSString stringWithFormat:@"%@uid=%@&token=%@", HTTP_LOCATIONINFO, uid, token];
+    PLog(@"get share info url : %@", url);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary* dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"get share info succeed");
+                
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLocationSuccess object:nil userInfo:dicResult];
+            }
+            else {
+                
+                PLog(@"get share info failed");
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLocationFailed object:nil userInfo:dicResult];
+            }
+        }
+        @catch (NSException *exception) {
+            
+            PLog(@"解析返回数据失败%s", __FUNCTION__);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLocationFailed object:nil userInfo:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"get share info failed : %@", error);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLocationFailed object:nil userInfo:nil];
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+
+}
+
 @end

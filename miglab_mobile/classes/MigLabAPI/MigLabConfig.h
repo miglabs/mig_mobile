@@ -422,7 +422,7 @@
 
 //新接口地址================================================================================================
 //获取当前天气和城市
-#define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/location.fcgi"]
+#define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/soc/v1/getlocation.fcgi?"]
 #define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
 #define NotificationNameLocationFailed                      @"NotificationNameLocationFailed"
 

@@ -12,6 +12,8 @@
 #import "ConfigFileInfo.h"
 #import "SettingViewController.h"
 #import "LoginMenuViewController.h"
+#import "ChatViewController.h"
+#import "MigWeather.h"
 
 static int PAGE_WIDTH = 81;
 
@@ -27,6 +29,7 @@ static int PAGE_WIDTH = 81;
 @synthesize btnType = _btnType;
 @synthesize btnMood = _btnMood;
 @synthesize btnScene = _btnScene;
+@synthesize weather = _weather;
 
 @synthesize btnCurrentGene = _btnCurrentGene;
 @synthesize oldGeneFrame = _oldGeneFrame;
@@ -72,8 +75,8 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameGetTypeSongsSuccess object:nil];
         
         //GetWeatherAndCity
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsFailed:) name:NotificationNameLocationFailed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTypeSongsSuccess:) name:NotificationNameLocationSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocationnInfoFailed:) name:NotificationNameLocationFailed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocationnInfoSuccess:) name:NotificationNameLocationSuccess object:nil];
         
         //弹幕和评论
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBarrayCommFailed:) name:NotificationBarryCommFailed object:nil];
@@ -150,10 +153,14 @@ static int PAGE_WIDTH = 81;
     
     _currentGeneView.lbllocation.textColor = [UIColor darkGrayColor];
     _currentGeneView.lbllocation.font = [UIFont fontOfApp:30.0f];
-    _currentGeneView.lbllocation.text =@"杭州";
+    _currentGeneView.lbllocation.text =@"德阳";
+
     
-    UIImage *weatherimage = [UIImage imageNamed:@"snow_icon"];
-    _currentGeneView.imageWeather.image = weatherimage;
+    UIImage *weatherimage = [UIImage imageNamed:@"rain_ico.png"];
+    _weather = [[UIImageView alloc] initWithImage:weatherimage];
+    _weather.frame = CGRectMake(_currentGeneView.lbllocation.frame.origin.x  + _currentGeneView.lbllocation.frame.size.width,
+                                _currentGeneView.lbllocation.frame.origin.y - 5, 36, 36);
+    [_currentGeneView addSubview: _weather];
     
     //
     
@@ -175,6 +182,8 @@ static int PAGE_WIDTH = 81;
     [_btnBarrage setTitle:@"弹幕加载中...." forState:UIControlStateNormal];
     _btnBarrage.titleLabel.font = [UIFont fontOfApp:12.0f];
     [self.view addSubview:_btnBarrage];
+    
+    [_btnBarrage addTarget:self action:@selector(doGroupchat:) forControlEvents:UIControlEventTouchUpInside];
     
     //弹幕存储测试内容
     _barragelist = [NSArray arrayWithObjects:@"卡卡西:能P的在假点么", @"甄嬛:后面是谁你想都想得到啊", @"双蛋瓦斯:不是，是明目张胆的约炮", @"杰拉德:来公司第二年就全款买的房子和车子", @"archer:那我都认识啊", @"180:暗黑3都发霉了", @"180:表示很久没玩游戏了", @"老K:我们不是做一个安静的音乐播放器 ", @"卡卡西:暴雪，谷歌，facebook", @"双蛋瓦斯:·········也行", @"archer:继续跌是告诉你们，要准备买进了", @"杰拉德:对股票毫无性趣。。", nil];
@@ -725,6 +734,13 @@ static int PAGE_WIDTH = 81;
     
 }
 
+-(IBAction)doGroupchat:(id)sender{
+     PLog(@"gene doGroupchat...");
+    int currentUserId = [[UserSessionManager GetInstance].userid intValue];
+    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:10108 tid:10104];
+    [self.topViewcontroller.navigationController pushViewController:chatController animated:YES];
+}
+
 -(IBAction)doAvatar:(id)sender{
     
     PLog(@"gene doAvatar...");
@@ -1184,7 +1200,14 @@ static int PAGE_WIDTH = 81;
 }
 
 -(void) getLocationnInfoSuccess:(NSNotification *)tNotification{
-    
+    NSDictionary* dicResult = [(NSDictionary*)tNotification.userInfo objectForKey:@"result"];
+    NSString* city =[dicResult objectForKey:@"city"];
+    //NSString* temp = [dicResult objectForKey:@"temp"];
+    NSString* weather = [dicResult objectForKey:@"weather"];
+    _currentGeneView.lbllocation.text = city;
+    //修改天气logo
+    UIImage* weatherImg =  [UIImage imageNamed:[MigWeather getWeatherIconName:weather]];
+    _weather.image = weatherImg;
 }
 
 -(void) getLocationnInfoFailed:(NSNotification *)tNotification{

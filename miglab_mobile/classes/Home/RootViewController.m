@@ -643,6 +643,9 @@
         
         [_miglabAPI doSetUserPos:userid token:accesstoken location:strLocation];
         
+        //获取地理信息
+        [_miglabAPI doGetLocation:userid ttoken:accesstoken tlatitude:strLatitude tlongitude:strLongitude];
+        
     }
     
 }

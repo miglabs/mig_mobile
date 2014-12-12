@@ -24,6 +24,8 @@
 @property (nonatomic, retain) UIButton *btnType;
 @property (nonatomic, retain) UIButton *btnMood;
 @property (nonatomic, retain) UIButton *btnScene;
+@property (nonatomic, retain) UIImageView  *weather;
+@property (nonatomic, retain) UILabel *lbllocation;
 
 @property (nonatomic, retain) UIButton *btnCurrentGene;
 @property (nonatomic, assign) CGRect oldGeneFrame;
@@ -56,6 +58,9 @@
 
 //引导
 @property (nonatomic, strong) GeneGuideView *geneGuideView;
+
+
+-(IBAction)doGroupchat:(id)sender;
 
 -(IBAction)doAvatar:(id)sender;
 
