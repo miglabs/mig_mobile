@@ -33,6 +33,7 @@
 -(void) initialize
 {
     [self.sendTimeLabel setTextColor:[UIColor whiteColor]];
+    [self.sendNickLabelR setTextColor:[UIColor whiteColor]];
     [self.sendIconViewR initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
     [self.sendIconViewL initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
     CGFloat radius = [self.sendIconViewR frame].size.width/2;
@@ -77,6 +78,7 @@
     [self.msgBgView setFrame:bgFrame];
     [self.msgBgView setImage:bgImage];
     [self.sendTimeLabel setText:[msg msg_time]];
+    [self.sendNickLabelR setText:@"老K-月光下的造梦者"];
     [self.sendIconViewL setImage:nil];
     [self.sendIconViewR setImage:nil];
     [headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
@@ -114,6 +116,7 @@
     [self setSendIconViewL:nil];
     [self setSendIconViewR:nil];
     [self setSendTimeLabel:nil];
+    [self setSendNickLabelR:nil];
     [self setMessageView:nil];
 #if DEBUG
     NSLog(@"%@ dealloc", self);

@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "ChatMsgContentView.h"
 #import "ChatInputToolBar.h"
+#import "ChatJoinToolBar.h"
 #import "ChatNotification.h"
 #import "ChatEntity.h"
 #define kMainScreenFrame [[UIScreen mainScreen] bounds]
@@ -20,6 +21,7 @@
 {
     ChatMsgContentView      *m_msgContentView;
     CharInputToolBar        *m_inputToolBar;
+    CharJoinToolBar         *m_joinToolBar;
     UIActivityIndicatorView *m_indicatorView;
     int64_t                  m_uid;
     int64_t                  m_tid;
@@ -117,7 +119,13 @@
     y = kMainScreenHeight - kInputToolBarHeight + self.topDistance;
     m_inputToolBar = [[CharInputToolBar alloc] initWithFrame:
                       CGRectMake(0, y, kMainScreenWidth,kInputToolBarHeight)];
+    [m_inputToolBar setHidden:true];
     [self.view addSubview:m_inputToolBar];
+    
+    m_joinToolBar = [[CharJoinToolBar alloc] initWithFrame:
+                     CGRectMake(0, y, kMainScreenWidth,kInputToolBarHeight)];
+    [m_joinToolBar setHidden:false];
+    [self.view addSubview:m_joinToolBar];
 
     m_indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
     m_indicatorView.center = self.view.center;
@@ -182,6 +190,13 @@
                     ChatUserInfo* pInfo = (ChatUserInfo*)notification.object;
                     super.navView.titleLabel.text = [NSString stringWithFormat:@"与 %@ 聊天中...",pInfo.nickname];
                 }
+                break;
+            case CHATSERVER_JOIN:
+                [m_inputToolBar setHidden:false];
+                [m_joinToolBar setHidden:true];
+                //通知登陆聊天服务器
+                [ChatNotificationCenter postNotification:CHATSERVER_LOGIN obj:nil];
+                break;
             default:
                 break;
         }

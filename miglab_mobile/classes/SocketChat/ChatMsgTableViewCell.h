@@ -26,6 +26,8 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *sendTimeLabel;
 
+@property (nonatomic, retain) IBOutlet UILabel *sendNickLabelR;
+
 @property (nonatomic, retain) IBOutlet UIImageView *msgBgView;
 #ifdef NEW_MSGVIEW
 @property (nonatomic, retain) IBOutlet MsgTextView *messageView;

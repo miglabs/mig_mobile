@@ -27,6 +27,7 @@
              tid: (int64_t) tid;
 
 
+- (void) loginChat;
 
 - (void) sendChatMsg:(NSString*) content;
 

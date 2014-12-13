@@ -121,6 +121,12 @@
                 m_reloading = YES;
             }
                 break;
+            //连接聊天服务器
+            case CHATSERVER_LOGIN:
+            {
+                [m_charNet loginChat];
+            }
+                break;
             default:
                 break;
         }

@@ -202,6 +202,11 @@
     m_minmsgid = minmsgid;
     [self getHiscChat];
 }
+
+-(void) loginChat{
+    [self connectServer:m_serverIP port:m_serverPort];
+}
+
 -(NSString*) getLastPackString:(const void*) pData pos:(NSInteger) pos
 {
     struct PacketHead* pHead = (struct PacketHead*)pData;
@@ -374,9 +379,9 @@
 -(void) onOppositionInfo:(const void*) pData
 {
     
-    if (m_is_relogin==0)
+    /*if (m_is_relogin==0)
         [self getHiscChat];
-    else
+    else*/
         m_is_relogin = 2;
     
     struct OppositionInfo* pInfo = (struct OppositionInfo*)pData;
