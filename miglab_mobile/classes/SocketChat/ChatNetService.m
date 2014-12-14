@@ -33,6 +33,35 @@
 @implementation ChatNetService 
 
 -(id) init:(NSString*) token name:(NSString*) name uid:(int64_t)uid
+       gid: (int64_t) gid{
+    self = [super init];
+    m_uid   = uid;
+    m_gid   = gid;
+    m_token = token;
+    m_platformid = 10000;
+    m_recvdata = nil;
+    m_session = 0;
+    m_name = name;
+    m_type = GROUP_CHAT;
+    if( m_token == nil )
+        m_token = @"25b4e95be8fa2fb772db9a70c6629600";
+    m_dicuserinfos = [[NSMutableDictionary alloc] init];
+    m_minmsgid = 0;
+    m_is_relogin = 0;
+    m_name = name;
+    [self getGroupSC];
+    [self getGroupHiscChat];
+    ChatUserInfo* info = [[ChatUserInfo alloc] init];
+    info.nickname = m_name;
+    @synchronized(self)
+    {
+        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:info];
+    }
+    
+    return self;
+}
+
+-(id) init:(NSString*) token name:(NSString*) name uid:(int64_t)uid
        tid: (int64_t) tid{
     self = [super init];
     m_uid   = uid;
@@ -42,6 +71,7 @@
     m_recvdata = nil;
     m_session = 0;
     m_name = name;
+    m_type = ALONE_CHAT;
     if( m_token == nil )
         m_token = @"25b4e95be8fa2fb772db9a70c6629600";
     m_dicuserinfos = [[NSMutableDictionary alloc] init];
@@ -147,6 +177,56 @@
     
     [operation start];
 }
+
+- (void)getGroupSC
+{
+#ifdef DEBUG
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+                      m_platformid,m_uid,m_tid];
+#else
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+                      m_platformid,m_uid,m_tid];
+#endif
+    
+    
+    [self getRequestJsonData:path success:^(id jsonResult) {
+        if (jsonResult != nil) {
+            m_serverIP = [jsonResult objectForKey:@"host"];
+            m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
+            //[self connectServer:m_serverIP port:m_serverPort];
+        }
+    } failure:^(NSError *error) {
+        if( self.delegate != nil )
+            [self.delegate onError:error.description];
+    }];
+    
+}
+-(NSArray*)getGroupHiscChat
+{
+#ifdef DEBUG
+    
+    NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
+#else
+     NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
+#endif
+    [self getRequestJsonData:path success:^(id jsonResult) {
+        if (jsonResult != nil) {
+            id jsonObject = [jsonResult objectForKey:@"chat"];
+            if (jsonObject && [jsonObject isKindOfClass:[NSArray class]])
+            {
+                [self onHiscChat:(NSArray*)jsonObject];
+            }
+            
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+        if( self.delegate != nil )
+            [self.delegate onError:error.description];
+        [SVProgressHUD dismiss];
+    }];
+    return nil;
+}
+
 
 - (void)getSC
 {

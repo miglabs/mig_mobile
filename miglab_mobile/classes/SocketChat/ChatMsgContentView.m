@@ -114,10 +114,20 @@
             {
                 NSMutableDictionary* dic = (NSMutableDictionary*)notification.object;
                 //init:(NSString*) token name:(NSString*) name uid:(int64_t)uid tid: (int64_t) tid
-                m_charNet =[[ChatNetService alloc]init:[dic valueForKey:@"token"]
-                                                  name:[dic valueForKey:@"name"]
-                                                   uid:[[dic valueForKey:@"uid"] longLongValue]
-                                                   tid:[[dic valueForKey:@"tid"] longLongValue]];
+                //获取类型
+                int32_t type = [[dic valueForKey:@"type"] integerValue];
+                if (type==ALONE_CHAT) {
+                    m_charNet =[[ChatNetService alloc]init:[dic valueForKey:@"token"]
+                                                      name:[dic valueForKey:@"name"]
+                                                       uid:[[dic valueForKey:@"uid"] longLongValue]
+                                                       tid:[[dic valueForKey:@"tid"] longLongValue]];
+                }else{
+                    m_charNet =[[ChatNetService alloc]init:[dic valueForKey:@"token"]
+                                                      name:[dic valueForKey:@"name"]
+                                                       uid:[[dic valueForKey:@"uid"] longLongValue]
+                                                       gid:[[dic valueForKey:@"gid"] longLongValue]];
+                }
+
                [m_charNet setDelegate:self];
                 m_reloading = YES;
             }

@@ -438,4 +438,7 @@
 #define NotificationBarryCommSuccess                     @"NotificationBarryCommSuccess"
 #define NotificationBarryCommFailed                      @"NotificationBarryCommFailed"
 
+//获取群聊天记录
+#define HTTP_GROUPMESSAGE                                 [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/chat/v1/groupmessage.fcgi"]
+
 #endif

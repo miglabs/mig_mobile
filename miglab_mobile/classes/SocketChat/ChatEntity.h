@@ -24,6 +24,7 @@
 @property (nonatomic)       int64_t         msg_id;
 @property (nonatomic)       BOOL            iscurrentusersend;
 @property (nonatomic)       BOOL            isNeedShowTime;
+@property (nonatomic, copy) NSString*       send_nickname;
 @property (nonatomic, copy) NSString*       timeInterval;
 @property (nonatomic, copy) NSString*       msg_content;
 @property (nonatomic, copy) NSString*       msg_time;
@@ -32,6 +33,7 @@
 -(id) init;
 -(id) init:(NSDictionary *)dic;
 -(id) init:(NSString*) msg send_id:(int64_t) send_id recv_id:(int64_t) recv_id msg_id:(int64_t) msg_id;
+-(id) init:(NSString*) msg send_nickname:(NSString*) nickname send_id:(int64_t) send_id recv_id:(int64_t) recv_id msg_id:(int64_t) msg_id;
 
 #ifndef NEW_MSGVIEW
 -(NSArray*) getMsg;

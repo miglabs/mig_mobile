@@ -46,6 +46,9 @@ static int PAGE_WIDTH = 81;
 @synthesize isChannelLock = _isChannelLock;
 @synthesize modifyGeneView = _modifyGeneView;
 
+@synthesize dimension_name = _dimension_name;
+@synthesize dimension_id = _dimension_id;
+
 @synthesize xmlParserUtil = _xmlParserUtil;
 @synthesize currentChannel = _currentChannel;
 @synthesize currentType = _currentType;
@@ -736,8 +739,10 @@ static int PAGE_WIDTH = 81;
 
 -(IBAction)doGroupchat:(id)sender{
      PLog(@"gene doGroupchat...");
-    NSString* name = @"MIGLAB测试组";
-    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:10108 name:name tid:10104];
+    NSString* name = _dimension_name;
+    NSString* token = [UserSessionManager GetInstance].accesstoken;
+    ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name tid:10104];
+    //ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name gid:_dimension_id];
     [self.topViewcontroller.navigationController pushViewController:chatController animated:YES];
 }
 
@@ -1221,6 +1226,7 @@ static int PAGE_WIDTH = 81;
 -(void) getBarrayCommSuccess:(NSNotification *)tNotification{
     NSDictionary* dicResult = (NSDictionary*)tNotification.userInfo;
     NSArray* barrayArray = [dicResult objectForKey:@"barrage"];
+    _dimension_id = [[dicResult objectForKey:@"group_id"] longLongValue];
     [_mtBarrageList removeAllObjects];
    
     int bacount = [barrayArray count];
@@ -1355,6 +1361,7 @@ static int PAGE_WIDTH = 81;
     NSDictionary* arry = [_mtBarrageList objectAtIndex:arc4random()%count];
     BarrayInfo* barrinfo = [BarrayInfo initWithNSDictionary:arry];
     text = [NSString stringWithFormat:@"[%@] %@说: %@ ",barrinfo.tname,barrinfo.nickname,barrinfo.message];
+    _dimension_name = barrinfo.tname;
     /*text = [NSString stringWithFormat:@"[旅行中]%@ ",[_barragelist objectAtIndex:arc4random()%12]];*/
     [_btnBarrage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_btnBarrage setTitle:text forState:UIControlStateNormal];

@@ -10,11 +10,17 @@
 #import "BaseViewController.h"
 #import "ChatNotification.h"
 @interface ChatViewController : BaseViewController<ChatNotificationDelegate>
-//新增单聊
-//群聊
+
+
 - (id)   init:(NSString*) token uid:(int64_t)uid
           tid: (int64_t) tid;
 
+
+//新增单聊
 - (id)  init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
          tid: (int64_t) tid;
+
+//新增群聊
+-(id) init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
+    gid: (int64_t) gid;
 @end

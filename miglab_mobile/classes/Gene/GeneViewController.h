@@ -59,6 +59,9 @@
 //引导
 @property (nonatomic, strong) GeneGuideView *geneGuideView;
 
+//当前场景名
+@property (nonatomic, retain) NSString* dimension_name;
+@property  long long dimension_id;
 
 -(IBAction)doGroupchat:(id)sender;
 

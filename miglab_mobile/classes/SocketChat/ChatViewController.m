@@ -50,7 +50,17 @@
     return  self;
 }
 
-
+-(id) init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
+       gid: (int64_t) gid{
+    self = [super init];
+    m_uid = uid;
+    m_groupid = gid;
+    m_token = token;
+    m_name = name;
+    m_type = GROUP_CHAT;
+    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
+    return  self;
+}
 
 
 
@@ -145,11 +155,13 @@
         [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
         [dic setValue:[NSString stringWithFormat:@"%lld",m_tid] forKey:@"tid"];
         [dic setValue:[NSString stringWithFormat:@"%@",m_name] forKey:@"name"];
+        [dic setValue:[NSString stringWithFormat:@"%d",m_type] forKey:@"type"];
         [dic setValue:m_token forKey:@"token"];
     }else{
         [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
         [dic setValue:[NSString stringWithFormat:@"%lld",m_groupid] forKey:@"gid"];
-        //[dic setValue:[NSString stringWithFormat:@"%@",m_] forKey:@"name"];
+        [dic setValue:[NSString stringWithFormat:@"%@",m_name] forKey:@"name"];
+         [dic setValue:[NSString stringWithFormat:@"%d",m_type] forKey:@"type"];
         [dic setValue:m_token forKey:@"token"];
     }
 

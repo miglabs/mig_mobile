@@ -53,6 +53,20 @@
     return self;
 }
 
+-(id) init:(NSString*) msg send_nickname:(NSString*) nickname send_id:(int64_t) send_id recv_id:(int64_t) recv_id msg_id:(int64_t) msg_id{
+    self = [super init];
+    self.send_user_id = send_id;
+    self.recv_user_id = recv_id;
+    self.msg_id = msg_id;
+    self.msg_content = msg;
+    self.send_nickname = nickname;
+    NSDate *nowTime = [NSDate date];
+    NSDateFormatter  *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.msg_time = [formatter stringFromDate:nowTime];
+    return self;
+}
+
 -(void)dealloc
 {
 #if DEBUG
