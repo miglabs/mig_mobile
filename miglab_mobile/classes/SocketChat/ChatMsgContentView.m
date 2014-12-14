@@ -171,6 +171,15 @@
     span =  msg.getViewSize.height- MSG_VIEW_MIN_HEIGHT;
 #endif
     CGFloat height = MSG_CELL_MIN_HEIGHT + span;
+    
+    // TODO: 计算时间间隔
+    msg.isNeedShowTime = NO;
+    if (msg.isNeedShowTime) {
+        
+        msg.timeInterval = @"56分钟前";
+        height += 20;
+    }
+    
     return height;
 }
 

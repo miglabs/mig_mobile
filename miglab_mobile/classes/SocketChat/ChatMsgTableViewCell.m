@@ -9,6 +9,7 @@
 #import "ChatMsgTableViewCell.h"
 #import "MsgTextURLRun.h"
 #import "ChatNotification.h"
+#import "UserSessionManager.h"
 
 @implementation ChatMsgTableViewCell
 
@@ -34,8 +35,10 @@
 {
     [self.sendTimeLabel setTextColor:[UIColor whiteColor]];
     [self.sendNickLabelR setTextColor:[UIColor whiteColor]];
-    [self.sendIconViewR initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
-    [self.sendIconViewL initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
+    //[self.sendIconViewR initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
+    //[self.sendIconViewL initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
+    self.sendIconViewL.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
+    self.sendIconViewR.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     CGFloat radius = [self.sendIconViewR frame].size.width/2;
     [[self.sendIconViewR layer] setCornerRadius:radius];
     [[self.sendIconViewL layer] setCornerRadius:radius];
@@ -77,10 +80,26 @@
     [self.messageView setFrame:msgFrame];
     [self.msgBgView setFrame:bgFrame];
     [self.msgBgView setImage:bgImage];
-    [self.sendTimeLabel setText:[msg msg_time]];
+    //[self.sendTimeLabel setText:[msg msg_time]];
+    
+    // TODO: 计算时间间隔
+    BOOL isNeedShowTime = msg.isNeedShowTime;
+    if (isNeedShowTime) {
+        
+        [self.sendTimeLabel setHidden:NO];
+        [self.sendTimeLabel setText:msg.timeInterval];
+        self.sendTimeLabel.textAlignment = NSTextAlignmentCenter;
+        [self.sendTimeLabel setBackgroundColor:[UIColor darkGrayColor]];
+    }
+    else {
+        
+        [self.sendTimeLabel setHidden:YES];
+    }
     
     NSString *nickName = msg.send_user_info.nickname;
     NSString *headurl = msg.send_user_info.picurl;
+    nickName = @"色魔老K";
+    headurl = @"http://face.miu.miyomate.com/system.jpg";
     
     [self.sendNickLabelR setText:nickName];
     if (isself) {
