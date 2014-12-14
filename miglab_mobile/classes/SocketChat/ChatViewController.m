@@ -107,6 +107,7 @@
     super.navView.titleLabel.font = [UIFont fontOfApp:14.0];
     super.navView.titleLabel.text = @"";
     
+    [self.bgImageView setImage:[UIImage imageNamed:@"华语流行.jpg"]];
     
     NSInteger y     = frame.origin.y + frame.size.height;
     NSInteger height = kMainScreenHeight-y - kInputToolBarHeight  + self.topDistance;

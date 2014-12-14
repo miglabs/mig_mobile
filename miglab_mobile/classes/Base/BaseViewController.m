@@ -45,7 +45,7 @@
     
     //bg
     UIImage *baseViewBg = [UIImage imageWithName:@"base_view_bg" type:@"png"];
-    _bgImageView = [[EGOImageView alloc] initWithPlaceholderImage:baseViewBg];
+    _bgImageView = [[UIImageView alloc] initWithImage:baseViewBg];
     _bgImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight + _topDistance);
     [self.view addSubview:_bgImageView];
     

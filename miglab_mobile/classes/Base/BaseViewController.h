@@ -17,7 +17,7 @@
 //导航
 @property (nonatomic, retain) PCustomNavigationBarView *navView;
 //背景图片
-@property (nonatomic, retain) EGOImageView *bgImageView;
+@property (nonatomic, retain) UIImageView *bgImageView;
 
 -(IBAction)doBack:(id)sender;
 

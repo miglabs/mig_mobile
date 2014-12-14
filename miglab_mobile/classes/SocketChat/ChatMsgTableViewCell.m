@@ -69,18 +69,39 @@
 #endif
     UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_t"]
                         resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 30 )];
-    [self refreshMsg:msg headPic:self.sendIconViewR msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage];
+    [self refreshMsg:msg headPic:self.sendIconViewR msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage IsSelf:YES];
 }
 
--(void) refreshMsg:(ChatMsg *)msg headPic:(EGOImageView*)headPic msgFrame:(CGRect) msgFrame bgFrame:(CGRect) bgFrame bgImage:(UIImage*) bgImage
+-(void) refreshMsg:(ChatMsg *)msg headPic:(EGOImageView*)headPic msgFrame:(CGRect) msgFrame bgFrame:(CGRect) bgFrame bgImage:(UIImage*) bgImage IsSelf:(BOOL)isself;
 {
     [self.messageView setFrame:msgFrame];
     [self.msgBgView setFrame:bgFrame];
     [self.msgBgView setImage:bgImage];
     [self.sendTimeLabel setText:[msg msg_time]];
-    [self.sendNickLabelR setText:@"老K-月光下的造梦者"];
-    [self.sendIconViewL setImage:nil];
-    [self.sendIconViewR setImage:nil];
+    
+    NSString *nickName = msg.send_user_info.nickname;
+    NSString *headurl = msg.send_user_info.picurl;
+    
+    [self.sendNickLabelR setText:nickName];
+    if (isself) {
+        
+        // 右边
+        self.sendNickLabelR.textAlignment = NSTextAlignmentRight;
+        self.sendIconViewR.imageURL = [NSURL URLWithString:headurl];
+        [self.sendIconViewR setHidden:NO];
+        [self.sendIconViewL setHidden:YES];
+    }
+    else {
+        
+        // 左边
+        self.sendNickLabelR.textAlignment = NSTextAlignmentLeft;
+        self.sendIconViewL.imageURL = [NSURL URLWithString:headurl];
+        [self.sendIconViewL setHidden:NO];
+        [self.sendIconViewR setHidden:YES];
+    }
+    
+    //[self.sendIconViewL setImage:nil];
+    //[self.sendIconViewR setImage:nil];
     [headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
 
 #ifdef NEW_MSGVIEW
@@ -107,7 +128,7 @@
     UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f"]
                         resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
    
-    [self refreshMsg:msg headPic:self.sendIconViewL msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage];
+    [self refreshMsg:msg headPic:self.sendIconViewL msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage IsSelf:NO];
     
 }
 

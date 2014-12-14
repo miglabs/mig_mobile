@@ -11,6 +11,7 @@
 #import "ChatDef.h"
 #import "ChatMessageView.h"
 #import "MsgTextView.h"
+#import "UserSessionManager.h"
 
 @interface ChatMsgContentView ()
 {
@@ -185,6 +186,7 @@
 		//self.customCell = nil;
         cell = [array objectAtIndex:0];
     }
+    
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ChatMsg* msg =  [m_chatMsgArray objectAtIndex:indexPath.row];
