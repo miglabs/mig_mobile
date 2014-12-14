@@ -154,6 +154,59 @@
       return rect.size;
 }
 
+- (NSString *)compareCurrentTime:(NSDate *)compareDate {
+    
+    NSTimeInterval timeInterval = [compareDate timeIntervalSinceNow];
+    timeInterval = -timeInterval;
+    long temp = 0;
+    NSString *result;
+    
+    if (timeInterval < 60) {
+        
+        result = @"刚刚";
+    }
+    else if ((temp = timeInterval / 60) < 60) {
+        
+        result = [NSString stringWithFormat:@"%ld分钟前", temp];
+    }
+    else if ((temp = temp / 60) < 24) {
+        
+        result = [NSString stringWithFormat:@"%ld小时前", temp];
+    }
+    else if ((temp = temp / 24) < 30) {
+        
+        result = [NSString stringWithFormat:@"%ld天前", temp];
+    }
+    else if ((temp = temp / 30) < 12) {
+        
+        result = [NSString stringWithFormat:@"%ld月前", temp];
+    }
+    else {
+        
+        temp = temp / 12;
+        result = [NSString stringWithFormat:@"%ld年前", temp];
+    }
+    
+    return result;
+}
+
+- (BOOL)isNeedShowTime:(NSDate *)compareDate {
+    
+    NSTimeInterval timeInterval = [compareDate timeIntervalSinceNow];
+    timeInterval = -timeInterval;
+    
+    // 分钟数
+    long temp = timeInterval / 60;
+    
+    // 30分钟前的消息就显示
+    if (temp > 30) {
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 #pragma mark TableView
 
 
@@ -172,11 +225,15 @@
 #endif
     CGFloat height = MSG_CELL_MIN_HEIGHT + span;
     
-    // TODO: 计算时间间隔
-    msg.isNeedShowTime = YES;
+    // 计算时间间隔
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *msgDate = [dateFormatter dateFromString:msg.msg_time];
+    
+    msg.isNeedShowTime = [self isNeedShowTime:msgDate];
     if (msg.isNeedShowTime) {
         
-        msg.timeInterval = @"56分钟前";
+        msg.timeInterval = [self compareCurrentTime:msgDate];
         height += 20;
     }
     
