@@ -48,7 +48,7 @@
         
         if (m_refreshHeaderView == nil) {
             
-            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - m_chatTableView.bounds.size.height, self.frame.size.width, m_chatTableView.bounds.size.height)];
+            EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - m_chatTableView.bounds.size.height, self.frame.size.width, m_chatTableView.bounds.size.height) IsHeader:YES];
             view.delegate = self;
             [self->m_chatTableView addSubview:view];
             m_refreshHeaderView = view;
@@ -173,7 +173,7 @@
     CGFloat height = MSG_CELL_MIN_HEIGHT + span;
     
     // TODO: 计算时间间隔
-    msg.isNeedShowTime = NO;
+    msg.isNeedShowTime = YES;
     if (msg.isNeedShowTime) {
         
         msg.timeInterval = @"56分钟前";
