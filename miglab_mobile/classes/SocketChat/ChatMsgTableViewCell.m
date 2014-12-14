@@ -46,7 +46,7 @@
     [[self.sendIconViewL layer] setMasksToBounds:YES];
 #ifdef NEW_MSGVIEW
     self.messageView.font        = [UIFont systemFontOfSize:16.0f];
-    self.messageView.textColor   = [UIColor whiteColor];
+    self.messageView.textColor   = [UIColor blackColor];
     self.messageView.lineSpace   = 2.0f;
     self.messageView.delegage = self;
 #endif
@@ -82,7 +82,6 @@
     [self.msgBgView setImage:bgImage];
     //[self.sendTimeLabel setText:[msg msg_time]];
     
-    // TODO: 计算时间间隔
     BOOL isNeedShowTime = msg.isNeedShowTime;
     if (isNeedShowTime) {
         
