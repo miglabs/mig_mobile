@@ -740,9 +740,10 @@ static int PAGE_WIDTH = 81;
 -(IBAction)doGroupchat:(id)sender{
      PLog(@"gene doGroupchat...");
     NSString* name = _dimension_name;
+    long long test_id = 20001;
     NSString* token = [UserSessionManager GetInstance].accesstoken;
-    ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name tid:10104];
-    //ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name gid:_dimension_id];
+    //ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name tid:10104];
+    ChatViewController *chatController = [[ChatViewController alloc] init:token uid:[[UserSessionManager GetInstance].userid longLongValue] name:name gid:test_id];
     [self.topViewcontroller.navigationController pushViewController:chatController animated:YES];
 }
 

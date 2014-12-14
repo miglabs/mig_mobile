@@ -52,7 +52,7 @@
 #define AES256_SECRET                       @"ce6dd4ab9ae4f14aa7982a43453cc173"
 
 
-#define BARRAYCOMM_TIME                         3
+#define BARRAYCOMM_TIME                         1
 
 #define ALONE_CHAT                              1 //单聊
 #define GROUP_CHAT                              3 //群聊
@@ -439,6 +439,6 @@
 #define NotificationBarryCommFailed                      @"NotificationBarryCommFailed"
 
 //获取群聊天记录
-#define HTTP_GROUPMESSAGE                                 [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/chat/v1/groupmessage.fcgi"]
+#define HTTP_GROUPMESSAGE                                 [NSString stringWithFormat:@"%@",@"miyo/chat/v1/groupmessage.fcgi"]
 
 #endif

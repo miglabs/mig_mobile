@@ -28,7 +28,11 @@ enum operatorcode
 	REQ_OPPOSITION_INFO = 1020,
 	GET_OPPOSITION_INFO = 1021,
 	TEXT_CHAT_PRIVATE_SEND = 1100,
-	TEXT_CHAT_PRIVATE_RECV = 1101
+	TEXT_CHAT_PRIVATE_RECV = 1101,
+    MULTI_SOUND_SEND = 2100,
+    MULTI_SOUND_RECV = 2101,
+    MULTI_CHAT_SEND = 2200,
+    MULTI_CHAT_RECV = 2201
 };
 
 enum msgtype
@@ -196,6 +200,30 @@ struct ReplyChatPrivate{
     char    token[TOKEN_LEN];
 };
 #pragma pack()
+//MULTI_CHAT_SEND = 2200,
+#define MULTICHATSEND_SIZE
+#pragma pack (1)
+struct MultiChatSend{
+    struct PacketHead packet_head;
+    int64_t platform_id;
+    int64_t multi_id;
+    int64_t send_user_id;
+    int64_t session;
+    char  token[TOKEN_LEN];
+};
+#pragma pack()
+// MULTI_CHAT_RECV = 2201
+#define MULTICHATRECV_SIZE
+#pragma pack (1)
+struct MultiChatRecv{
+    struct PacketHead packet_head;
+    int64_t platform_id;
+    int64_t multi_id;
+    int64_t send_user_id;
+    char  nickname[NICKNAME_LEN];
+};
+#pragma pack()
+
 
 
 #define FACE_REGULAR @"\\[/(([0-9]{1,2})|(10[0-4]))\\]"

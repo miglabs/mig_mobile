@@ -34,6 +34,10 @@
 - (void) loginChat;
 
 - (void) sendChatMsg:(NSString*) content;
+//单聊
+- (void) sendAloneChatMsg:(NSString*) content;
+//群聊
+-(void) senGroupMsg:(NSString*) content;
 
 -(void) bindSendUserInfo:(ChatMsg*) msg;
 -(void) reloadHiscChat:(int64_t) minmsgid;

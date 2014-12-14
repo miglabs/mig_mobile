@@ -82,11 +82,12 @@
     [self.msgBgView setImage:bgImage];
     //[self.sendTimeLabel setText:[msg msg_time]];
     
-    BOOL isNeedShowTime = msg.isNeedShowTime;
+    //BOOL isNeedShowTime = msg.isNeedShowTime;
+    BOOL isNeedShowTime = true;
     if (isNeedShowTime) {
         
         [self.sendTimeLabel setHidden:NO];
-        [self.sendTimeLabel setText:msg.timeInterval];
+        [self.sendTimeLabel setText:[msg timeInterval]];
         self.sendTimeLabel.textAlignment = NSTextAlignmentCenter;
         [self.sendTimeLabel setBackgroundColor:[UIColor darkGrayColor]];
     }
@@ -95,10 +96,9 @@
         [self.sendTimeLabel setHidden:YES];
     }
     
-    NSString *nickName = msg.send_user_info.nickname;
+    NSString *nickName = msg.send_nickname;
     NSString *headurl = msg.send_user_info.picurl;
-    nickName = @"色魔老K";
-    headurl = @"http://face.miu.miyomate.com/system.jpg";
+    //headurl = @"http://face.miu.miyomate.com/system.jpg";
     
     [self.sendNickLabelR setText:nickName];
     if (isself) {
@@ -120,7 +120,9 @@
     
     //[self.sendIconViewL setImage:nil];
     //[self.sendIconViewR setImage:nil];
-    [headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
+    
+    //[headPic setImageURL:[NSURL URLWithString:[[msg send_user_info] picurl]]];
+    [headPic setImageURL:[NSURL URLWithString:headurl]];
 
 #ifdef NEW_MSGVIEW
     [self.messageView setText:[msg msg_content]];

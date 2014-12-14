@@ -205,13 +205,13 @@
 {
 #ifdef DEBUG
     
-    NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
+    NSString* path = [[NSString alloc]initWithFormat:@"%@?platform=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
 #else
-     NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
+     NSString* path = [[NSString alloc]initWithFormat:@"%@?platform=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
 #endif
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {
-            id jsonObject = [jsonResult objectForKey:@"chat"];
+            id jsonObject = [jsonResult objectForKey:@"message"];
             if (jsonObject && [jsonObject isKindOfClass:[NSArray class]])
             {
                 [self onHiscChat:(NSArray*)jsonObject];
@@ -350,9 +350,14 @@
     memset(&req, 0, REQ_OPPOSITION_INFO_SIZE);
     INIT_PACK_HEAD(req.packet_head,REQ_OPPOSITION_INFO_SIZE,REQ_OPPOSITION_INFO,CHAT_TYPE);
     req.user_id = m_uid;
-    req.type = 1;
+    req.type = m_type;
     req.platform_id = m_platformid;
-    req.oppostion_id = m_tid;
+    if (m_type==ALONE_CHAT) {
+        req.oppostion_id = m_tid;
+    }else{
+        req.oppostion_id = m_gid;
+    }
+    
     memcpy(req.token,[m_token UTF8String],TOKEN_LEN);
     [self sendData:&req len:req.packet_head.packet_length];
     
@@ -383,7 +388,14 @@
     [self sendData:&info len:info.packet_head.packet_length];
 }
 
-- (void)  sendChatMsg:(NSString*) content
+- (void) sendChatMsg:(NSString*) content{
+    if(m_type==ALONE_CHAT)
+        [self sendAloneChatMsg:content];
+    else if(m_type==GROUP_CHAT)
+        [self senGroupMsg:content];
+}
+
+- (void)  sendAloneChatMsg:(NSString*) content
 {
     struct TextChatPrivateSend info;
     memset(&info, 0, sizeof(info));
@@ -403,6 +415,28 @@
            msgid:0];
 
 }
+
+-(void) senGroupMsg:(NSString *)content
+{
+    struct MultiChatSend info;
+    memset(&info, 0, sizeof(info));
+    NSData* dataContent = [content dataUsingEncoding:NSUTF8StringEncoding];
+    INIT_PACK_HEAD(info.packet_head,dataContent.length + sizeof(info),MULTI_CHAT_SEND,CHAT_TYPE);
+    info.platform_id = m_platformid;
+    info.send_user_id = m_uid;
+    info.multi_id = m_gid;
+    info.session = m_gid;
+    memcpy(info.token,[m_token UTF8String],TOKEN_LEN);
+    NSMutableData* data = [NSMutableData dataWithBytes:(char*)&info length:sizeof(info)];
+    [data appendData:dataContent];
+    [self sendData:data];
+    //[self onChatMsg:content
+       //         fid:info.send_user_id
+       //         tid:info.recv_user_id
+       //       msgid:0];
+}
+
+
 -(void) replyChatPrivate:(ino64_t) msg_id
 {
     struct ReplyChatPrivate info;
@@ -475,7 +509,7 @@
         ChatUserInfo* info = [[ChatUserInfo alloc] init];
         info.uid = pOppinfo->user_id;
         info.nicknumber = pOppinfo->user_nicknumber;
-        info.nickname = [NSString stringWithUTF8String:pOppinfo->nickname];
+        info.nickname = [NSString stringWithUTF8String:pInfo->oppo_nickname];
         info.picurl = [NSString stringWithUTF8String:pOppinfo->user_head];
         @synchronized(self)
         {

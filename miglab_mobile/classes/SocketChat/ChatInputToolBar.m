@@ -18,6 +18,7 @@
     UIButton                    *m_keyButton;
     FaceBoardView               *m_faceBoard;
     ChatNotificationCenter      *m_chatNotification;
+    
 }
 @end
 
