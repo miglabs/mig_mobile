@@ -129,10 +129,18 @@
     else {
         
         // 左边
-        [self.sendNickLabelR setText:msg.send_nickname];
+        if (msg.send_nickname!=nil)
+            [self.sendNickLabelR setText:msg.send_nickname];
+        else
+            [self.sendNickLabelR setText:msg.send_user_info.nickname];
         self.sendNickLabelR.textAlignment = NSTextAlignmentLeft;
-        self.sendIconViewL.imageURL = [NSURL URLWithString:msg.send_head_url];
-        headurl = msg.send_head_url;
+        if (msg.send_head_url) {
+            self.sendIconViewL.imageURL = [NSURL URLWithString:msg.send_head_url];
+            headurl = msg.send_head_url;
+        }else{
+            self.sendIconViewL.imageURL = [NSURL URLWithString:msg.send_user_info.picurl];
+            headurl = msg.send_user_info.picurl;
+        }
         [self.sendIconViewL setHidden:NO];
         [self.sendIconViewR setHidden:YES];
     }

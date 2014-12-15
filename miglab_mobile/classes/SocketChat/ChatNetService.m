@@ -478,6 +478,9 @@
         case TEXT_CHAT_PRIVATE_RECV:
             [self onRecvChatMsg:pHead];
             break;
+        case MULTI_CHAT_RECV:
+            [self onRecvGroupChatMsg:pHead];
+            break;
         case USER_NOTIFICATION_QUIT:
             [self onQuit:pHead];
             break;
@@ -517,11 +520,11 @@
         ChatUserInfo* info = [[ChatUserInfo alloc] init];
         info.uid = pOppinfo->user_id;
         info.nicknumber = pOppinfo->user_nicknumber;
-        info.nickname = [NSString stringWithUTF8String:pInfo->oppo_nickname];
+        info.nickname = [NSString stringWithUTF8String:pOppinfo->nickname];
         info.picurl = [NSString stringWithUTF8String:pOppinfo->user_head];
         @synchronized(self)
         {
-            [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pInfo->oppo_id]];
+            [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pOppinfo->user_id]];
             [ChatNotificationCenter postNotification:CHATSERVER_ONTUSERINFO obj:info];
         }
 
@@ -558,6 +561,14 @@
     }
 
 }
+
+-(void) onRecvGroupChatMsg:(const void*) pData{
+    struct MultiChatRecv* pInfo = (struct MultiChatRecv*) pData;
+    [self replyChatPrivate:pInfo->packet_head.msg_id];
+    NSString* content = [self getLastPackString:pData pos:sizeof(int64_t) * 3 + NICKNAME_LEN];
+    [self onChatMsg:content fid:pInfo->send_user_id tid:0 msgid:pInfo->packet_head.msg_id];
+}
+
 - (void) onRecvChatMsg:(const void*) pData
 {
     struct TextChatPrivateRecv* pInfo = (struct TextChatPrivateRecv* )pData;

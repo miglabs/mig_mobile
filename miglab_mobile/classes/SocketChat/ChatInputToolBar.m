@@ -30,12 +30,12 @@
     if (self) {
         self.isFaceBoardShow = false;
         // Initialization code
-        //UIImageView* bg = [[UIImageView alloc] initWithImage:
-          //                 [UIImage imageNamed:@"chat_toolbar_bg.png"]];
-        //bg.frame = CGRectMake(0, 0, frame.size.width, frame.size.height+2);
-        UIImageView* bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height+2)];
+        /*UIImageView* bg = [[UIImageView alloc] initWithImage:
+                        [UIImage imageNamed:@"chat_toolbar_bg.png"]];
+        bg.frame = CGRectMake(0, 0, frame.size.width, frame.size.height+2);*/
+       UIImageView* bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height+2)];
         [bg setBackgroundColor:RGB(255, 255, 255, 2)];
-        
+    
         [self addSubview:bg];
         
         UIImage* faceImage  = [UIImage imageNamed:@"face_tip_img.png"];
@@ -43,7 +43,7 @@
         UIImage* keyImage   = [UIImage imageNamed:@"key_but_img.png"];
         
         NSInteger textViewWidth = 0;
-        NSInteger height = frame.size.height - 30;
+        NSInteger height = frame.size.height - 20;
         
         m_faceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         m_keyButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -53,23 +53,23 @@
         NSInteger x = 0;
         
         textViewWidth = frame.size.width -30 - width;
-        x= textViewWidth + 20;
+        x= textViewWidth + 50;
         
-        m_keyButton.frame = CGRectMake(x, 15, width,height);
+        m_keyButton.frame = CGRectMake(x, 10, width,height);
         [m_keyButton setImage:keyImage forState:UIControlStateNormal];
         
         width  = faceImage.size.width * height/ faceImage.size.height;
         x = textViewWidth + 20 + ( m_keyButton.frame.size.width - width)/2;
-        m_faceButton.frame = CGRectMake(x, 15, width,height);
+        m_faceButton.frame = CGRectMake(x, 10, width,height);
         [m_faceButton setImage:faceImage forState:UIControlStateNormal];
 
-        m_closeButton.frame = CGRectMake(0, 15, width, height);
+        m_closeButton.frame = CGRectMake(2, 10, width, height);
         [m_closeButton setImage:closeImage forState:UIControlStateNormal];
         
         [m_keyButton setHidden:true];
         
         height = frame.size.height - 12;
-        CGRect imageViewFrame = CGRectMake(10, 6,textViewWidth , height);
+        CGRect imageViewFrame = CGRectMake(m_closeButton.frame.size.width+6, 6,textViewWidth , height);
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageViewFrame];
         //imageView.image = [UIImage imageNamed:@"chat_textfield_bg.png"];
@@ -95,6 +95,7 @@
         
         [m_keyButton addTarget:self action:@selector(onButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [m_faceButton addTarget:self action:@selector(onButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [m_closeButton addTarget:self action:@selector(onButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         m_chatNotification = [[ChatNotificationCenter alloc] init:self ];
     }
