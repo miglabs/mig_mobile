@@ -200,7 +200,7 @@
     return result;
 }
 
-- (BOOL)isNeedShowTime:(NSDate *)compareDate {
+- (BOOL)isNeedShowTime:(NSDate *)compareDate ThisTimeContent:(NSString *)thisContent LastTimeContent:(NSString *)lastContent {
     
     NSTimeInterval timeInterval = [compareDate timeIntervalSinceNow];
     timeInterval = -timeInterval;
@@ -208,9 +208,35 @@
     // 分钟数
     long temp = timeInterval / 60;
     
-    // 30分钟前的消息就显示
-    if (temp > 30) {
+    // 这次消息和上次消息是否相同, 如果相同则不需要显示
+    if ([thisContent isEqualToString:lastContent]) {
         
+        return NO;
+    }
+    
+    // 不相同,判断相应的时间是否已显示
+    // 如果是1天前且未显示
+    if (temp / 60 > 24 && !_isOneDayShown) {
+        
+        _isOneDayShown = YES;
+        return YES;
+    }
+    
+    if (temp / 60 > 5 && !_isFiveHourShown) {
+        
+        _isFiveHourShown = YES;
+        return YES;
+    }
+    
+    if (temp / 60 > 3 && !_isThreeHourShown) {
+        
+        _isThreeHourShown = YES;
+        return YES;
+    }
+    
+    if (temp / 60 > 1 && !_isOneHourShown) {
+        
+        _isOneHourShown = YES;
         return YES;
     }
     
@@ -239,12 +265,16 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *msgDate = [dateFormatter dateFromString:msg.msg_time];
+    NSString *thisTimeContent = [self compareCurrentTime:msgDate];
     
-    msg.isNeedShowTime = [self isNeedShowTime:msgDate];
+    msg.isNeedShowTime = [self isNeedShowTime:msgDate ThisTimeContent:thisTimeContent LastTimeContent:_lastTimeContent];
     if (msg.isNeedShowTime) {
         
-        msg.timeInterval = [self compareCurrentTime:msgDate];
+        msg.timeInterval = thisTimeContent;
         height += 20;
+        
+        // 保存上次的结果
+        _lastTimeContent = thisTimeContent;
     }
     
     return height;
@@ -345,6 +375,7 @@
 - (void)reloadTableViewDataSource{
 	
 	m_reloading = YES;
+    
 	if ( m_charNet != nil ) {
         int64_t minmsgid = 0;
         if ( m_chatMsgArray != nil && [m_chatMsgArray count] > 0 ) {
@@ -372,6 +403,8 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    _isOneDayShown = _isFiveHourShown = _isThreeHourShown = _isOneHourShown = NO;
 	[m_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 }
 

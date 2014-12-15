@@ -29,13 +29,15 @@
 @property (nonatomic)       int64_t         recv_user_id;
 @property (nonatomic)       int64_t         msg_id;
 @property (nonatomic)       BOOL            iscurrentusersend;
-@property (nonatomic)       BOOL            isNeedShowTime;
 @property (nonatomic, copy) NSString*       send_head_url;
 @property (nonatomic, copy) NSString*       send_nickname;
 @property (nonatomic, copy) NSString*       timeInterval;
 @property (nonatomic, copy) NSString*       msg_content;
 @property (nonatomic, copy) NSString*       msg_time;
 @property (nonatomic)       ChatUserInfo*   send_user_info;
+
+// 本地对消息的处理
+@property (nonatomic)       BOOL            isNeedShowTime;
 
 -(id) init;
 -(id) init:(NSDictionary *)dic;

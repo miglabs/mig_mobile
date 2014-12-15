@@ -22,4 +22,12 @@
 
 @property (strong, nonatomic) UINib *cellNib;
 @property (strong, nonatomic) IBOutlet ChatMsgTableViewCell *customCell;
+
+// 待优化
+@property (nonatomic, retain) NSString *lastTimeContent;
+@property (nonatomic, assign) BOOL isOneDayShown;
+@property (nonatomic, assign) BOOL isFiveHourShown;
+@property (nonatomic, assign) BOOL isThreeHourShown;
+@property (nonatomic, assign) BOOL isOneHourShown;
+
 @end
