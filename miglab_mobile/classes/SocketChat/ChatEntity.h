@@ -16,6 +16,12 @@
 @property (nonatomic) int64_t nicknumber;
 @property (nonatomic, copy) NSString* nickname;
 @property (nonatomic, copy) NSString* picurl;
+@property (nonatomic)   BOOL   isLogin;
+@end
+
+@interface NotifiOppinfo : NSObject
+@property (nonatomic) NSString* nickname;
+@property (nonatomic) int64_t   type;
 @end
 
 @interface ChatMsg : NSObject

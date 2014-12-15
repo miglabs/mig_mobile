@@ -51,11 +51,12 @@
     m_name = name;
     [self getGroupSC];
     [self getGroupHiscChat];
-    ChatUserInfo* info = [[ChatUserInfo alloc] init];
-    info.nickname = m_name;
+    NotifiOppinfo* notifiinfo = [[NotifiOppinfo alloc] init];
+    notifiinfo.nickname = m_name;
+    notifiinfo.type = m_type;
     @synchronized(self)
     {
-        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:info];
+        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:notifiinfo];
     }
     
     return self;
@@ -80,15 +81,19 @@
     m_name = name;
     [self getSC];
     [self getHiscChat];
-    ChatUserInfo* info = [[ChatUserInfo alloc] init];
-    info.nickname = m_name;
+    //ChatUserInfo* info = [[ChatUserInfo alloc] init];
+   // info.isLogin = false;
+    NotifiOppinfo* notifiinfo = [[NotifiOppinfo alloc] init];
+    notifiinfo.nickname = m_name;
+    notifiinfo.type = m_type;
     @synchronized(self)
     {
-        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:info];
+        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:notifiinfo];
     }
     
     return self;
 }
+
 
 - (id) init:(NSString*) token uid:(int64_t)uid
               tid: (int64_t) tid
@@ -430,10 +435,10 @@
     NSMutableData* data = [NSMutableData dataWithBytes:(char*)&info length:sizeof(info)];
     [data appendData:dataContent];
     [self sendData:data];
-    //[self onChatMsg:content
-       //         fid:info.send_user_id
-       //         tid:info.recv_user_id
-       //       msgid:0];
+    [self onChatMsg:content
+               fid:info.send_user_id
+               tid:0
+             msgid:0];
 }
 
 
@@ -590,6 +595,7 @@
     info.nicknumber = pInfo->nick_number;
     info.nickname = [NSString stringWithUTF8String:pInfo->nickname];
     info.picurl = [NSString stringWithUTF8String:pInfo->head_url];
+    info.isLogin = true;
      @synchronized(self)
     {
         [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pInfo->user_id]];

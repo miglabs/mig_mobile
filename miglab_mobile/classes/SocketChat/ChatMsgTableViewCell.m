@@ -82,8 +82,7 @@
     [self.msgBgView setImage:bgImage];
     //[self.sendTimeLabel setText:[msg msg_time]];
     
-    //BOOL isNeedShowTime = msg.isNeedShowTime;
-    BOOL isNeedShowTime = true;
+    BOOL isNeedShowTime = msg.isNeedShowTime;
     if (isNeedShowTime) {
         
         [self.sendTimeLabel setHidden:NO];
@@ -96,22 +95,27 @@
         [self.sendTimeLabel setHidden:YES];
     }
     
-    NSString *nickName = msg.send_nickname;
-    NSString *headurl = msg.send_user_info.picurl;
-    //headurl = @"http://face.miu.miyomate.com/system.jpg";
+    //NSString *nickName = msg.send_nickname;
+    NSString *headurl = @"http://face.miu.miyomate.com/system.jpg";
     
-    [self.sendNickLabelR setText:nickName];
+    
     if (isself) {
         
-        // 右边
+        // 右边 //判断是否已经登录
+        if(msg.send_user_info.isLogin==true)
+            [self.sendNickLabelR setText:msg.send_user_info.nickname];
+        else
+            [self.sendNickLabelR setText:msg.send_nickname];
         self.sendNickLabelR.textAlignment = NSTextAlignmentRight;
-        self.sendIconViewR.imageURL = [NSURL URLWithString:headurl];
+        self.sendIconViewR.imageURL = [NSURL URLWithString:msg.send_user_info.picurl];
+        headurl = msg.send_user_info.picurl;
         [self.sendIconViewR setHidden:NO];
         [self.sendIconViewL setHidden:YES];
     }
     else {
         
         // 左边
+        [self.sendNickLabelR setText:msg.send_nickname];
         self.sendNickLabelR.textAlignment = NSTextAlignmentLeft;
         self.sendIconViewL.imageURL = [NSURL URLWithString:headurl];
         [self.sendIconViewL setHidden:NO];

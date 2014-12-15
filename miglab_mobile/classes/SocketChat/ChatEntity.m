@@ -245,3 +245,13 @@
 #endif
 }
 @end
+
+@implementation NotifiOppinfo
+
+- (void) dealloc
+{
+#if DEBUG
+    NSLog(@"%@ dealloc", self);
+#endif
+}
+@end

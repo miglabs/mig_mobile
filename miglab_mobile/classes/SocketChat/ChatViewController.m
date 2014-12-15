@@ -29,7 +29,7 @@
     ChatNotificationCenter  *m_chatNotification;
     int32_t                  m_type;  //1 单聊 2 群聊 3，临时组
     int64_t                  m_groupid;
-    NSString                *m_name;
+    NSString                *m_oppname;//对方昵称(如果是单聊显示对方昵称，如果是群聊显示维度昵称)
     
 }
 
@@ -44,7 +44,7 @@
     m_uid = uid;
     m_tid = tid;
     m_token = token;
-    m_name = name;
+    m_oppname = name;
     m_type = ALONE_CHAT;
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     return  self;
@@ -56,7 +56,7 @@
     m_uid = uid;
     m_groupid = gid;
     m_token = token;
-    m_name = name;
+    m_oppname = name;
     m_type = GROUP_CHAT;
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     return  self;
@@ -154,13 +154,13 @@
     if (m_type==ALONE_CHAT) {
         [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
         [dic setValue:[NSString stringWithFormat:@"%lld",m_tid] forKey:@"tid"];
-        [dic setValue:[NSString stringWithFormat:@"%@",m_name] forKey:@"name"];
+        [dic setValue:[NSString stringWithFormat:@"%@",m_oppname] forKey:@"name"];
         [dic setValue:[NSString stringWithFormat:@"%d",m_type] forKey:@"type"];
         [dic setValue:m_token forKey:@"token"];
     }else{
         [dic setValue:[NSString stringWithFormat:@"%lld",m_uid] forKey:@"uid"];
         [dic setValue:[NSString stringWithFormat:@"%lld",m_groupid] forKey:@"gid"];
-        [dic setValue:[NSString stringWithFormat:@"%@",m_name] forKey:@"name"];
+        [dic setValue:[NSString stringWithFormat:@"%@",m_oppname] forKey:@"name"];
          [dic setValue:[NSString stringWithFormat:@"%d",m_type] forKey:@"type"];
         [dic setValue:m_token forKey:@"token"];
     }
@@ -194,14 +194,14 @@
                 
                 if ( notification.object) {
                     ChatUserInfo* pInfo = (ChatUserInfo*)notification.object;
-                    super.navView.titleLabel.text = [NSString stringWithFormat:@"与 %@ 聊天中...",pInfo.nickname];
+                    super.navView.titleLabel.text = [NSString stringWithFormat:@"%@",pInfo.nickname];
                 }
             }
                 break;
             case CHATSERVER_OPPINFO:
                 if ( notification.object) {
-                    ChatUserInfo* pInfo = (ChatUserInfo*)notification.object;
-                    super.navView.titleLabel.text = [NSString stringWithFormat:@"与 %@ 聊天中...",pInfo.nickname];
+                    NotifiOppinfo* pInfo = (NotifiOppinfo*)notification.object;
+                    super.navView.titleLabel.text = [NSString stringWithFormat:@"%@ ",pInfo.nickname];
                 }
                 break;
             case CHATSERVER_JOIN:
