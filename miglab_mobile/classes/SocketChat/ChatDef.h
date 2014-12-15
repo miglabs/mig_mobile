@@ -229,9 +229,9 @@ struct MultiChatRecv{
 #define FACE_REGULAR @"\\[/(([0-9]{1,2})|(10[0-4]))\\]"
 
 
-#define MSG_CELL_MIN_HEIGHT 70
+#define MSG_CELL_MIN_HEIGHT 80
 
-#define MSG_VIEW_MIN_HEIGHT 32
+#define MSG_VIEW_MIN_HEIGHT 25
 
 
 #define KFacialSizeWidth    20

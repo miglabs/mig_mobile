@@ -117,7 +117,9 @@
     super.navView.titleLabel.font = [UIFont fontOfApp:14.0];
     super.navView.titleLabel.text = @"";
     
-    [self.bgImageView setImage:[UIImage imageNamed:@"运动.jpg"]];
+    //[self.bgImageView setImage:[UIImage imageNamed:@"运动.jpg"]];
+    [self.bgImageView setImage:[UIImage imageNamed:@""]];
+    [self.bgImageView setBackgroundColor:[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1]];
     
     NSInteger y     = frame.origin.y + frame.size.height;
     NSInteger height = kMainScreenHeight-y - kInputToolBarHeight  + self.topDistance;

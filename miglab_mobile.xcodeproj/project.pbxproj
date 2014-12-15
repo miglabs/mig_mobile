@@ -505,6 +505,8 @@
 		C72F16C218FA293E00ECD8B8 /* default_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16C118FA293E00ECD8B8 /* default_tip.png */; };
 		C744EA741A38A7C50004DE31 /* Barray.m in Sources */ = {isa = PBXBuildFile; fileRef = C744EA731A38A7C50004DE31 /* Barray.m */; };
 		C76DF2D01A3B35D000156F52 /* ChatJoinToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */; };
+		C791AA351A3EDFD0008B69ED /* face_tip_img.png in Resources */ = {isa = PBXBuildFile; fileRef = C791AA341A3EDFD0008B69ED /* face_tip_img.png */; };
+		C791AA371A3EE0EC008B69ED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = C791AA361A3EE0EC008B69ED /* power.png */; };
 		C7C9F5C318FC2CA0001E3A47 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C218FC2CA0001E3A47 /* Icon.png */; };
 		C7C9F5C518FC2CA7001E3A47 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */; };
 		C7C9F5C918FC316B001E3A47 /* type_7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C9F5C818FC316B001E3A47 /* type_7.png */; };
@@ -1273,6 +1275,8 @@
 		C744EA731A38A7C50004DE31 /* Barray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barray.m; sourceTree = "<group>"; };
 		C76DF2CE1A3B35C300156F52 /* ChatJoinToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatJoinToolBar.h; sourceTree = "<group>"; };
 		C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatJoinToolBar.m; sourceTree = "<group>"; };
+		C791AA341A3EDFD0008B69ED /* face_tip_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_tip_img.png; sourceTree = "<group>"; };
+		C791AA361A3EE0EC008B69ED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		C7C9F5C218FC2CA0001E3A47 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C7C9F5C418FC2CA7001E3A47 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C7C9F5C818FC316B001E3A47 /* type_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = type_7.png; sourceTree = "<group>"; };
@@ -1994,6 +1998,8 @@
 		166171EB18F9354600E86B11 /* socket_chat */ = {
 			isa = PBXGroup;
 			children = (
+				C791AA361A3EE0EC008B69ED /* power.png */,
+				C791AA341A3EDFD0008B69ED /* face_tip_img.png */,
 				C7EB7CC21A3E87D8000304F6 /* intalk_ico.png */,
 				166171EC18F9354600E86B11 /* chat_add_but.png */,
 				166171ED18F9354600E86B11 /* chat_face.bundle */,
@@ -2924,6 +2930,7 @@
 				16F575C7179587D900277308 /* borad_menu_play_0716_2137.png in Resources */,
 				16F575C8179587D900277308 /* borad_menu_stop.png in Resources */,
 				16F575C9179587D900277308 /* player_borad_bg.png in Resources */,
+				C791AA371A3EE0EC008B69ED /* power.png in Resources */,
 				16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */,
 				1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */,
 				187A5669179927E800221569 /* PlayBodyView.xib in Resources */,
@@ -3225,6 +3232,7 @@
 				16184E4C1802F09F00E6E627 /* share_tencentweibo_share_icon.png in Resources */,
 				184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */,
 				166B5801180C29CE00436AB0 /* base_navigation_bg_ios7.png in Resources */,
+				C791AA351A3EDFD0008B69ED /* face_tip_img.png in Resources */,
 				166B5804180C2BC400436AB0 /* home_navigation_bg_ios7.png in Resources */,
 				CB5E936019B0B20D00B71A10 /* 暗恋时分.jpg in Resources */,
 			);

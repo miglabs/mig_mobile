@@ -30,6 +30,7 @@
 @property (nonatomic)       int64_t         msg_id;
 @property (nonatomic)       BOOL            iscurrentusersend;
 @property (nonatomic)       BOOL            isNeedShowTime;
+@property (nonatomic, copy) NSString*       send_head_url;
 @property (nonatomic, copy) NSString*       send_nickname;
 @property (nonatomic, copy) NSString*       timeInterval;
 @property (nonatomic, copy) NSString*       msg_content;

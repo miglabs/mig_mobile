@@ -285,7 +285,10 @@
 -(void) reloadHiscChat:(int64_t) minmsgid
 {
     m_minmsgid = minmsgid;
-    [self getHiscChat];
+    if(m_type==ALONE_CHAT)
+        [self getHiscChat];
+    else if (m_type==GROUP_CHAT)
+        [self getGroupHiscChat];
 }
 
 -(void) loginChat{

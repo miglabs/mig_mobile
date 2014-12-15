@@ -10,6 +10,7 @@
 #import "MsgTextURLRun.h"
 #import "ChatNotification.h"
 #import "UserSessionManager.h"
+#import "MigLabConfig.h"
 
 @implementation ChatMsgTableViewCell
 
@@ -34,12 +35,14 @@
 -(void) initialize
 {
     [self.sendTimeLabel setTextColor:[UIColor whiteColor]];
-    [self.sendNickLabelR setTextColor:[UIColor whiteColor]];
+    [self.sendNickLabelR setTextColor:[UIColor clearColor]];
     //[self.sendIconViewR initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
     //[self.sendIconViewL initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
     self.sendIconViewL.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     self.sendIconViewR.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
-    CGFloat radius = [self.sendIconViewR frame].size.width/2;
+    //CGFloat radius = [self.sendIconViewR frame].size.width/2;
+    //修改为方头像
+    CGFloat radius = 0;
     [[self.sendIconViewR layer] setCornerRadius:radius];
     [[self.sendIconViewL layer] setCornerRadius:radius];
     [[self.sendIconViewR layer] setMasksToBounds:YES];
@@ -50,6 +53,12 @@
     self.messageView.lineSpace   = 2.0f;
     self.messageView.delegage = self;
 #endif
+    
+    //初始化昵称样式
+    [self.sendNickLabelR setTextColor:RGB(132,132,132,1)];
+    //设置时间显示样式
+    [self.sendTimeLabel setBackgroundColor:RGB(209, 209, 209, 1)];
+    [self.sendTimeLabel setTextColor:RGB(255, 255, 255, 1)];
 
 }
 
@@ -79,8 +88,9 @@
 {
     [self.messageView setFrame:msgFrame];
     [self.msgBgView setFrame:bgFrame];
-    [self.msgBgView setImage:bgImage];
-    //[self.sendTimeLabel setText:[msg msg_time]];
+    [self.msgBgView setBackgroundColor:RGB(255, 255, 255, 1)];
+    //[self.msgBgView setImage:bgImage];
+    [self.sendTimeLabel setText:[msg msg_time]];
     
     BOOL isNeedShowTime = msg.isNeedShowTime;
     if (isNeedShowTime) {
@@ -88,7 +98,6 @@
         [self.sendTimeLabel setHidden:NO];
         [self.sendTimeLabel setText:[msg timeInterval]];
         self.sendTimeLabel.textAlignment = NSTextAlignmentCenter;
-        [self.sendTimeLabel setBackgroundColor:[UIColor darkGrayColor]];
     }
     else {
         
@@ -96,19 +105,24 @@
     }
     
     //NSString *nickName = msg.send_nickname;
-    NSString *headurl = @"http://face.miu.miyomate.com/system.jpg";
+    NSString *headurl;
     
     
     if (isself) {
         
         // 右边 //判断是否已经登录
-        if(msg.send_user_info.isLogin==true)
+        if(msg.send_user_info.isLogin==true){
             [self.sendNickLabelR setText:msg.send_user_info.nickname];
-        else
+            self.sendIconViewR.imageURL = [NSURL URLWithString:msg.send_user_info.picurl];
+            headurl = msg.send_user_info.picurl;
+        }else{
             [self.sendNickLabelR setText:msg.send_nickname];
+             self.sendIconViewR.imageURL = [NSURL URLWithString:msg.send_head_url];
+            headurl = msg.send_head_url;
+        }
         self.sendNickLabelR.textAlignment = NSTextAlignmentRight;
-        self.sendIconViewR.imageURL = [NSURL URLWithString:msg.send_user_info.picurl];
-        headurl = msg.send_user_info.picurl;
+     
+        
         [self.sendIconViewR setHidden:NO];
         [self.sendIconViewL setHidden:YES];
     }
@@ -117,7 +131,8 @@
         // 左边
         [self.sendNickLabelR setText:msg.send_nickname];
         self.sendNickLabelR.textAlignment = NSTextAlignmentLeft;
-        self.sendIconViewL.imageURL = [NSURL URLWithString:headurl];
+        self.sendIconViewL.imageURL = [NSURL URLWithString:msg.send_head_url];
+        headurl = msg.send_head_url;
         [self.sendIconViewL setHidden:NO];
         [self.sendIconViewR setHidden:YES];
     }
@@ -149,7 +164,9 @@
     bgFrame.size.width += VIEW_LEFT+VIEW_RIGHT;
 #endif
     
-    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f"]
+   // UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f"]
+     //                   resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
+    UIImage* bgImage = [[UIImage imageNamed:@""]
                         resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
    
     [self refreshMsg:msg headPic:self.sendIconViewL msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage IsSelf:NO];

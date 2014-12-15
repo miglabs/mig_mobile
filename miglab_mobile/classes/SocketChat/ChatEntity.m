@@ -36,6 +36,7 @@
         self.msg_content = [dic valueForKey:@"msg"];
         self.msg_time =  [dic valueForKey:@"time"];
         self.send_nickname = [dic valueForKey:@"nickname"];
+        self.send_head_url = [dic valueForKey:@"head"];
     }
     return self;
 }
