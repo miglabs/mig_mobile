@@ -33,6 +33,8 @@
 
 - (void) loginChat;
 
+- (void) quitChat;
+
 - (void) sendChatMsg:(NSString*) content;
 //单聊
 - (void) sendAloneChatMsg:(NSString*) content;

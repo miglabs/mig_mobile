@@ -162,6 +162,10 @@
                              [m_textView becomeFirstResponder];
                          }];
     }
+    else if(sender == m_closeButton){
+        //通知退出聊天
+        [ChatNotificationCenter postNotification:CHATSERVER_QUITCHAT obj:nil];
+    }
 }
 
 -(void) onChatNotification:(ChatNotification *)notification

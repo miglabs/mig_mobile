@@ -22,7 +22,9 @@ enum ChatNotificationType
     CHATSERVER_ONTUSERINFO,
     CHATSERVER_OPPINFO,
     CHATSERVER_JOIN,//加入聊天
-    CHATSERVER_LOGIN//登陆聊天
+    CHATSERVER_LOGIN,//登陆聊天
+    CHATSERVER_QUITCHAT,//退出聊天
+    CHATSERVER_QUITSRV//通知聊天服务器退出
     
 };
 

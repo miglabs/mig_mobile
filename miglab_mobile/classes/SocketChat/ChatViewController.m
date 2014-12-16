@@ -212,6 +212,10 @@
                 //通知登陆聊天服务器
                 [ChatNotificationCenter postNotification:CHATSERVER_LOGIN obj:nil];
                 break;
+            case CHATSERVER_QUITCHAT:
+                [m_inputToolBar setHidden:true];
+                [m_joinToolBar setHidden:false];
+                [ChatNotificationCenter postNotification:CHATSERVER_QUITSRV obj:nil];
             default:
                 break;
         }

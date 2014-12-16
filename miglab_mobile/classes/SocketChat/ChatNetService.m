@@ -117,9 +117,7 @@
 
 - (void)dealloc
 {
-    [self quitLogin];
-    [m_socket disconnect];
-    m_socket = nil;
+    [self quitChat];
 #if DEBUG
     NSLog(@"%@ dealloc", self);
 #endif
@@ -289,6 +287,12 @@
         [self getHiscChat];
     else if (m_type==GROUP_CHAT)
         [self getGroupHiscChat];
+}
+
+-(void) quitChat{
+    [self quitLogin];
+    [m_socket disconnect];
+    m_socket = nil;
 }
 
 -(void) loginChat{
@@ -505,6 +509,7 @@
             break;
         case USER_ONLINE_RSP:
             [self onRecvOnline:pHead];
+            break;
         default:
             break;
     }
@@ -513,7 +518,8 @@
 -(void) onQuit:(const void*) pData
 {
     struct UserQuitNotification * pInfo = (struct UserQuitNotification*)pData;
-    // NSLog(@"onQuit platform_id:%lld user_id:%lld",pInfo->platform_id,pInfo->user_id);
+    NSLog(@"onQuit platform_id:%lld user_id:%lld",pInfo->platform_id,pInfo->user_id);
+    [m_dicuserinfos removeObjectForKey:[NSString stringWithFormat:@"%lld",pInfo->user_id]];
 }
 
 -(void) onOppositionInfo:(const void*) pData
@@ -529,6 +535,8 @@
     NSInteger last = pInfo->packet_head.packet_length - OPPSITIONINFO_SIZE ;
     uint8_t*  pBuffer = (( uint8_t* )pData + OPPSITIONINFO_SIZE);
     struct Oppinfo* pOppinfo = NULL;
+    ChatUserInfo* op = [[ChatUserInfo alloc] init];
+    op.nickname = [NSString stringWithUTF8String:pInfo->oppo_nickname];
     while ( last >=  OPPINFO_SIZE )
     {
         pOppinfo = (struct Oppinfo*)pBuffer;
@@ -540,12 +548,12 @@
         @synchronized(self)
         {
             [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pOppinfo->user_id]];
-            [ChatNotificationCenter postNotification:CHATSERVER_ONTUSERINFO obj:info];
         }
 
         last -= OPPINFO_SIZE;
         pBuffer += OPPINFO_SIZE;
     }
+    [ChatNotificationCenter postNotification:CHATSERVER_ONTUSERINFO obj:op];
     if (m_is_relogin == 2){
         [SVProgressHUD dismiss];
         m_is_relogin = 0;
@@ -591,7 +599,6 @@
     @synchronized(self)
     {
         [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pInfo->user_id]];
-        [ChatNotificationCenter postNotification:CHATSERVER_ONTUSERINFO obj:info];
     }
 }
 

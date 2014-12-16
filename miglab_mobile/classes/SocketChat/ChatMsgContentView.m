@@ -138,6 +138,11 @@
                 [m_charNet loginChat];
             }
                 break;
+            case CHATSERVER_QUITSRV:
+            {
+                [m_charNet quitChat];
+            }
+                break;
             default:
                 break;
         }
