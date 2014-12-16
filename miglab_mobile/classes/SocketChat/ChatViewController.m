@@ -40,44 +40,38 @@
 - (id)  init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
     tid: (int64_t) tid{
     
-    self = [super init];
-    m_uid = uid;
+   self = [self init:token uid:uid name:name type:ALONE_CHAT];
     m_tid = tid;
-    m_token = token;
-    m_oppname = name;
-    m_type = ALONE_CHAT;
-    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     return  self;
 }
 
 -(id) init:(NSString*) token uid:(int64_t) uid  name:(NSString*) name
        gid: (int64_t) gid{
+    self = [self init:token uid:uid name:name type:GROUP_CHAT];
+    m_groupid = gid;
+    return  self;
+}
+
+- (id) init:(NSString *)token uid:(int64_t)uid name:(NSString*) name type:(int32_t)type
+{
     self = [super init];
     m_uid = uid;
-    m_groupid = gid;
     m_token = token;
+    m_type = type;
     m_oppname = name;
-    m_type = GROUP_CHAT;
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     return  self;
 }
 
 
-
-
 - (id)   init:(NSString*) token uid:(int64_t)uid
           tid: (int64_t) tid
 {
-    self = [super init];
-    m_uid = uid;
+    self = [self init:token uid:uid name:nil type:ALONE_CHAT];
     m_tid = tid;
-    m_token = token;
-    m_type = ALONE_CHAT;
-    
-    [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
-    
     return self;
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
