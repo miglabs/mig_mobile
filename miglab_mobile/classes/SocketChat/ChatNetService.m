@@ -459,6 +459,19 @@
     [self sendData:&info len:sizeof(info)];
 }
 
+-(void) reqOnLine
+{
+    struct UserOnLineReq info;
+    memset(&info, 0, sizeof(info));
+    INIT_PACK_HEAD(info.packet_head,sizeof(info),USER_ONLINE_REQ,USER_TYPE);
+    info.platform_id = m_platformid;
+    info.group_id = m_gid;
+    info.platform_id = m_platformid;
+    info.user_id = m_uid;
+    memcpy(info.token,[m_token UTF8String],TOKEN_LEN);
+    [self sendData:&info len:sizeof(info)];
+}
+
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 {
     [sock readDataWithTimeout:-1 tag:0];
@@ -490,6 +503,8 @@
         case GET_OPPOSITION_INFO:
             [self onOppositionInfo:pHead];
             break;
+        case USER_ONLINE_RSP:
+            [self onRecvOnline:pHead];
         default:
             break;
     }
@@ -535,6 +550,10 @@
         [SVProgressHUD dismiss];
         m_is_relogin = 0;
     }
+    //通知服务器登录成功
+    if (m_type==GROUP_CHAT)
+         [self reqOnLine];
+   
 }
 
 -(void) onHeart:(const void*) pData
@@ -560,6 +579,20 @@
         [self.delegate onChatMsg:chatMsg];
     }
 
+}
+
+-(void) onRecvOnline:(const void*) pData{
+    struct UserOnLineRsp* pInfo = (struct UserOnLineRsp*) pData;
+    ChatUserInfo* info = [[ChatUserInfo alloc] init];
+    info.uid = pInfo->user_id;
+    info.nicknumber = pInfo->user_nicknumber;
+    info.nickname = [NSString stringWithUTF8String:pInfo->nickname];
+    info.picurl = [NSString stringWithUTF8String:pInfo->user_head];
+    @synchronized(self)
+    {
+        [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pInfo->user_id]];
+        [ChatNotificationCenter postNotification:CHATSERVER_ONTUSERINFO obj:info];
+    }
 }
 
 -(void) onRecvGroupChatMsg:(const void*) pData{

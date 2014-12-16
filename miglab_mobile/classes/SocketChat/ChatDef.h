@@ -27,6 +27,8 @@ enum operatorcode
 	USER_NOTIFICATION_QUIT = 1011,
 	REQ_OPPOSITION_INFO = 1020,
 	GET_OPPOSITION_INFO = 1021,
+    USER_ONLINE_REQ = 1030,
+    USER_ONLINE_RSP = 1031,
 	TEXT_CHAT_PRIVATE_SEND = 1100,
 	TEXT_CHAT_PRIVATE_RECV = 1101,
     MULTI_SOUND_SEND = 2100,
@@ -200,6 +202,32 @@ struct ReplyChatPrivate{
     char    token[TOKEN_LEN];
 };
 #pragma pack()
+//USER_ONLINE_REQ = 1030
+#define USERONLINEREQ_SIZE
+#pragma pack (1)
+struct UserOnLineReq{
+    struct  PacketHead  packet_head;
+    int64_t platform_id;
+    int64_t group_id;
+    int64_t user_id;
+    char    token[TOKEN_LEN];
+};
+#pragma pack()
+
+//USER_ONLINE_RSP = 1031
+#define USERONLINERSP_SIZE
+#pragma pack (1)
+struct UserOnLineRsp{
+    struct  PacketHead  packet_head;
+    int64_t platform_id;
+    int64_t group_id;
+    int64_t user_id;
+    int64_t user_nicknumber;
+    char  nickname[NICKNAME_LEN];
+    char  user_head[HEAD_URL_LEN];
+};
+#pragma pack()
+
 //MULTI_CHAT_SEND = 2200,
 #define MULTICHATSEND_SIZE
 #pragma pack (1)
@@ -223,6 +251,8 @@ struct MultiChatRecv{
     char  nickname[NICKNAME_LEN];
 };
 #pragma pack()
+
+
 
 
 

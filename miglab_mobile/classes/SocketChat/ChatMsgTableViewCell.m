@@ -79,7 +79,7 @@
     bgFrame.origin.x -= (VIEW_LEFT + VIEW_RIGHT);
     bgFrame.size.width += VIEW_LEFT+VIEW_RIGHT;
 #endif
-    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_t"]
+    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_t2"]
                         resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 30 )];
     [self refreshMsg:msg headPic:self.sendIconViewR msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage IsSelf:YES];
 }
@@ -88,8 +88,9 @@
 {
     [self.messageView setFrame:msgFrame];
     [self.msgBgView setFrame:bgFrame];
-    [self.msgBgView setBackgroundColor:RGB(255, 255, 255, 1)];
-    //[self.msgBgView setImage:bgImage];
+    //[self.msgBgView setBackgroundColor:RGB(255, 255, 255, 1)];
+    [self.msgBgView setBackgroundColor:[UIColor clearColor]];
+    [self.msgBgView setImage:bgImage];
     [self.sendTimeLabel setText:[msg msg_time]];
     
     BOOL isNeedShowTime = msg.isNeedShowTime;
@@ -171,11 +172,11 @@
     msgFrame.origin.y += VIEW_TOP;
     bgFrame.size.width += VIEW_LEFT+VIEW_RIGHT;
 #endif
-    
-   // UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f"]
-     //                   resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
-    UIImage* bgImage = [[UIImage imageNamed:@""]
-                        resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
+
+    UIImage* bgImage = [[UIImage imageNamed:@"chat_msg_bt_f2"]
+                      resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
+    //UIImage* bgImage = [[UIImage imageNamed:@""]
+      //                  resizableImageWithCapInsets:UIEdgeInsetsMake( 30, 5, 5, 5 )];
    
     [self refreshMsg:msg headPic:self.sendIconViewL msgFrame:msgFrame bgFrame:bgFrame bgImage:bgImage IsSelf:NO];
     
