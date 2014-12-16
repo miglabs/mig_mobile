@@ -146,6 +146,9 @@
 /* 加载聊天 */
 #define MIGTIP_HIS_CHAT                         @"加载聊天"
 
+/* 登陆聊天服务器*/
+#define MIGTIP_LOGIN_CHAT                       @"加入聊天中"
+
 /* 没有歌词 */
 #define MIGTIP_NO_LYRIC                         @"这首歌没有歌词哦~~~请长按分享按钮来分享音乐吧~~~"
 

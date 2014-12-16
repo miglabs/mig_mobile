@@ -135,6 +135,7 @@
             //连接聊天服务器
             case CHATSERVER_LOGIN:
             {
+                [SVProgressHUD showWithStatus:MIGTIP_LOGIN_CHAT maskType:SVProgressHUDMaskTypeNone];
                 [m_charNet loginChat];
             }
                 break;

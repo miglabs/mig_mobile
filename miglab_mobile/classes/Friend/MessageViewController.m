@@ -191,7 +191,9 @@
         
         // 聊天留言
         int currentUserId = [[UserSessionManager GetInstance].userid intValue];
-        ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[messageInfo.send_uid intValue]];
+        NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+        //ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[messageInfo.send_uid intValue]];
+        ChatViewController *chatController = [[ChatViewController alloc] init:accesstoken uid:currentUserId name: messageInfo.userInfo.nickname tid:[messageInfo.send_uid intValue]];
         [self.navigationController pushViewController:chatController animated:YES];
         
     } else {

@@ -165,7 +165,11 @@
 -(void)doLoadChat:(id)sender {
     
     int currentUserId = [[UserSessionManager GetInstance].userid intValue];
-    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_msginfo.userInfo.userid intValue]];
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    //ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_msginfo.userInfo.userid intValue]];
+    
+    ChatViewController *chatController = [[ChatViewController alloc] init:accesstoken uid:currentUserId name: _msginfo.userInfo.nickname tid:[_msginfo.userInfo.userid intValue]];
+    
     [self.navigationController pushViewController:chatController animated:YES];
     
 }

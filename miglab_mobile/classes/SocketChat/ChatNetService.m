@@ -561,6 +561,7 @@
     //通知服务器登录成功
     if (m_type==GROUP_CHAT)
          [self reqOnLine];
+    [SVProgressHUD dismiss];
    
 }
 

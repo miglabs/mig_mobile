@@ -131,7 +131,11 @@
     PLog(@"doSendMessage...");
     
     int currentUserId = [[UserSessionManager GetInstance].userid intValue];
-    ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_userinfo.userid intValue]];
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    //ChatViewController *chatController = [[ChatViewController alloc] init:nil uid:currentUserId tid:[_userinfo.userid intValue]];
+    
+    
+    ChatViewController *chatController = [[ChatViewController alloc] init:accesstoken uid:currentUserId name: _userinfo.nickname tid:[_userinfo.userid intValue]];
     [self.navigationController pushViewController:chatController animated:YES];
     
 }

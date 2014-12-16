@@ -59,7 +59,7 @@
         [m_keyButton setImage:keyImage forState:UIControlStateNormal];
         
         width  = faceImage.size.width * height/ faceImage.size.height;
-        x = textViewWidth + 20 + ( m_keyButton.frame.size.width - width)/2;
+        x = textViewWidth + 30 + ( m_keyButton.frame.size.width - width)/2;
         m_faceButton.frame = CGRectMake(x, 10, width,height);
         [m_faceButton setImage:faceImage forState:UIControlStateNormal];
 
@@ -163,6 +163,7 @@
                          }];
     }
     else if(sender == m_closeButton){
+        [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
         //通知退出聊天
         [ChatNotificationCenter postNotification:CHATSERVER_QUITCHAT obj:nil];
     }
