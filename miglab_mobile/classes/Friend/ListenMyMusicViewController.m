@@ -9,6 +9,7 @@
 #import "ListenMyMusicViewController.h"
 #import "FriendInfoCell.h"
 #import "MyFriendPersonalPageViewController.h"
+#import "PoiManager.h"
 
 NSString* szListenMyMusicRadius = @"10000";
 
@@ -18,7 +19,7 @@ NSString* szListenMyMusicRadius = @"10000";
 
 @implementation ListenMyMusicViewController
 
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
 @synthesize isUpdatedLocation = _isUpdatedLocation;
@@ -75,7 +76,7 @@ NSString* szListenMyMusicRadius = @"10000";
     _dataList = [[NSMutableArray alloc] init];
     
     // gps init
-    _locationManager = [[CLLocationManager alloc] init];
+   /* _locationManager = [[CLLocationManager alloc] init];
     if ([CLLocationManager locationServicesEnabled]) {
         [_locationManager setDelegate:self];
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
@@ -84,7 +85,7 @@ NSString* szListenMyMusicRadius = @"10000";
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
             [_locationManager requestWhenInUseAuthorization];
         
-    }
+    }*/
     
     //
     [self loadData];
@@ -92,8 +93,9 @@ NSString* szListenMyMusicRadius = @"10000";
 
 -(void)loadData{
     
-    [self loadNearFriendFromDatabase];
-    //    [self loadNearFriendFromServer];
+    //[self loadNearFriendFromDatabase];
+    [[MigPoiManager GetInstance] setViewType:SAMEMUSCI_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
     
 }
 -(void)loadNearFriendFromDatabase{
@@ -156,7 +158,7 @@ NSString* szListenMyMusicRadius = @"10000";
     [SVProgressHUD dismiss];
 }
 
-#pragma CLLocationManagerDelegate
+/*pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
@@ -172,7 +174,7 @@ NSString* szListenMyMusicRadius = @"10000";
         
         NSString*  szCurLocation = [NSString stringWithFormat:@"%@,%@", [NSString stringWithFormat:@"%g", gLatitude], [NSString stringWithFormat:@"%g", gLongitude]];
         
-        [_locationManager stopUpdatingLocation];
+        //[_locationManager stopUpdatingLocation];
         
         [self LoadListeningMyFavorateMusic:szCurLocation];
      
@@ -192,7 +194,7 @@ NSString* szListenMyMusicRadius = @"10000";
         [self LoadListeningMyFavorateMusic:location];
         _isUpdatedLocation = YES;
     }
-}
+}*/
 
 #pragma mark - UITableView delegate
 

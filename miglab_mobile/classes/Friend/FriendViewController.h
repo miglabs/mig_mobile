@@ -9,12 +9,12 @@
 #import "PlayerViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface FriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface FriendViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *bodyTableView;
 @property (nonatomic, retain) NSArray *tableTitles;
 @property (nonatomic, retain) NSMutableArray* tipNumber;
-@property (nonatomic, retain) CLLocationManager* locationMng;
+//@property (nonatomic, retain) CLLocationManager* locationMng;
 @property (nonatomic, assign) int totalFriendCount;
 @property (nonatomic, assign) int totalNearFriendCount;
 @property (nonatomic, assign) int totalNearMusicCount;

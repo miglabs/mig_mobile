@@ -11,10 +11,10 @@
 #import "MigLabAPI.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : BaseViewController<CLLocationManagerDelegate>
+@interface RootViewController : BaseViewController
 
 //gps定位
-@property (nonatomic, retain) CLLocationManager *locationManager;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
 
 //启动图标志
 @property (assign) BOOL isFirstWillAppear;

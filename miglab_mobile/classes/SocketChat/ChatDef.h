@@ -284,9 +284,9 @@ struct MultiChatRecv{
 #define FACE_NAME_HEAD  @"[/"
 #define FACE_NAME_END  @"]"
 
-#define MSG_VIEW_LEFT   42
+#define MSG_VIEW_LEFT   52
 
-#define MSG_VIEW_RIGHT  280
+#define MSG_VIEW_RIGHT  270
 
 #define MSG_VIEW_TOP    23
 

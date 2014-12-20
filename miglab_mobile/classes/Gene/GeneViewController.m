@@ -14,6 +14,7 @@
 #import "LoginMenuViewController.h"
 #import "ChatViewController.h"
 #import "MigWeather.h"
+#import "PoiManager.h"
 
 static int PAGE_WIDTH = 81;
 
@@ -126,6 +127,8 @@ static int PAGE_WIDTH = 81;
     
     _isUpdatedList = NO;
     
+    //初始化定位
+    [MigPoiManager GetInstance];
     //nav
     CGRect navViewFrame = self.navView.frame;
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-44, ios7-64

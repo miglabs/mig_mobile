@@ -11,7 +11,7 @@
 #import "MusicSourceEditMenuView.h"
 #import "CollectNum.h"
 
-@interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface MusicViewController : PlayerViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) MusicSourceEditMenuView *sourceEditMenuView;
 @property (nonatomic, retain) NSArray *sourceEditData;
@@ -22,7 +22,7 @@
 @property (nonatomic, assign) BOOL isFirstLoadNumber;
 
 //gps定位
-@property (nonatomic, retain) CLLocationManager *locationManager;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CollectNum *collectNum;
 
 -(void)loadCollectedAndNearNumFromServer:(NSString *)tLocation;

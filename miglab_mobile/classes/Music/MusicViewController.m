@@ -14,6 +14,7 @@
 #import "LikeViewController.h"
 #import "NearMusicViewController.h"
 #import "LocalViewController.h"
+#import "PoiManager.h"
 
 @interface MusicViewController ()
 
@@ -27,7 +28,7 @@
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 @synthesize collectNum = _collectNum;
 
 @synthesize isFirstLoadNumber = _isFirstLoadNumber;
@@ -124,7 +125,7 @@
     
     //gps
     
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+    /*if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
         
         _locationManager = [[CLLocationManager alloc] init];
         if ([CLLocationManager locationServicesEnabled]) {
@@ -141,7 +142,7 @@
         
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
         [alert show];
-    }
+    }*/
     
 }
 
@@ -149,15 +150,16 @@
     
     [super viewWillAppear:animated];
     
-    [_locationManager startUpdatingLocation];
+    [[MigPoiManager GetInstance] setViewType:MUSICT_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
+    //[_locationManager startUpdatingLocation];
     
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
-    
-    [_locationManager stopUpdatingLocation];
+    //[_locationManager stopUpdatingLocation];
     
 }
 
@@ -311,7 +313,7 @@
 }
 
 #pragma CLLocationManagerDelegate
-
+/*
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
     PLog(@"[newLocation description]: %@", [newLocation description]);
@@ -348,7 +350,7 @@
         _isFirstLoadNumber = NO;
     }
 }
-
+*/
 #pragma mark - UITableView delegate
 
 // custom view for header. will be adjusted to default or specified header height

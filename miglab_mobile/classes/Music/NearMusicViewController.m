@@ -12,6 +12,7 @@
 #import "PDatabaseManager.h"
 #import "MusicCommentViewController.h"
 #import "MyFriendPersonalPageViewController.h"
+#import "PoiManager.h"
 
 @interface NearMusicViewController ()
 
@@ -19,7 +20,7 @@
 
 @implementation NearMusicViewController
 
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
@@ -108,7 +109,7 @@
     _dicSelectedSongId = [[NSMutableDictionary alloc] init];
     
     //gps
-    _locationManager = [[CLLocationManager alloc] init];
+    /*_locationManager = [[CLLocationManager alloc] init];
     if ([CLLocationManager locationServicesEnabled]) {
         [_locationManager setDelegate:self];
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
@@ -117,7 +118,7 @@
         
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
             [_locationManager requestWhenInUseAuthorization];
-    }
+    }*/
     
     //
     [self loadData];
@@ -132,6 +133,8 @@
 
 -(void)loadData{
     
+    [[MigPoiManager GetInstance] setViewType:NEARRMUSIC_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
 //    [self loadNearMusicFromDatabase];
 //    [self loadNearMusicFromServer:<#(NSString *)#>];
     
@@ -233,6 +236,7 @@
     }
 }
 
+/*
 #pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
@@ -265,7 +269,7 @@
     _location = @"0,0";
     _isUpdateLocation = YES;
     [self loadNearMusicFromServer:_location];
-}
+}*/
 
 #pragma notification
 
@@ -410,10 +414,11 @@
     cell.imgMsgTips.frame = tipRect;
     
     cell.btnAvatar.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
-    if (imageurl) {
+    [cell.btnAvatar setImageURL:[NSURL URLWithString:imageurl]];
+    //if (imageurl) {
         
-        cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
-    }
+      //  cell.btnAvatar.imageURL = [NSURL URLWithString:imageurl];
+    //}
     cell.btnAvatar.layer.cornerRadius = cell.btnAvatar.frame.size.width / 2;
     cell.btnAvatar.layer.masksToBounds = YES;
     cell.btnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
@@ -424,7 +429,9 @@
     [cell.contentView addSubview:cell.btnAvatar];
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
-    NSString *songDesc = @"未缓存";
+    //取消缓存机制暂时填充专辑名
+    //NSString *songDesc = @"未缓存";
+    NSString *songDesc = tempsong.album ? tempsong.album : @"未知专辑";
     long long filesize = [[SongDownloadManager GetInstance] getSongLocalSize:tempsong];
     if (filesize > 0) {
         songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];

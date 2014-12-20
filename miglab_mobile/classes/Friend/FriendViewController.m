@@ -14,7 +14,7 @@
 #import "NearFriendViewController.h"
 #import "MessageViewController.h"
 #import "GlobalDataManager.h"
-
+#import "PoiManager.h"
 
 @interface FriendViewController ()
 
@@ -25,7 +25,7 @@
 @synthesize bodyTableView = _bodyTableView;
 @synthesize tableTitles = _tableTitles;
 @synthesize tipNumber = _tipNumber;
-@synthesize locationMng = _locationMng;
+//@synthesize locationMng = _locationMng;
 @synthesize isUpdateLocation = _isUpdateLocation;
 @synthesize isFirstLoadView = _isFirstLoadView;
 @synthesize totalFriendCount = _totalFriendCount;
@@ -100,7 +100,7 @@
     _tableTitles = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, dicMenu3, nil];
     
     /* 载入gps */
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+    /*if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
         
         _locationMng = [[CLLocationManager alloc] init];
         if ([CLLocationManager locationServicesEnabled]) {
@@ -118,23 +118,25 @@
         
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
         [alert show];
-    }
+    }*/
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    
-    if (!_isFirstLoadView) {
+    [[MigPoiManager GetInstance] ViewPoi:FRINED_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
+    /*if (!_isFirstLoadView) {
         
         _isUpdateLocation = NO;
-        [_locationMng startUpdatingLocation];
+        [[MigPoiManager GetInstance] ViewPoi:FRINED_VIEW_TYPE];
+        [[MigPoiManager GetInstance] startUpdatingLocation];
     }
     else {
         
         _isFirstLoadView = NO;
-    }
+    }*/
 }
 
--(void)loadNumbersFromServer:(NSString*)tlocation {
+/*-(void)loadNumbersFromServer:(NSString*)tlocation {
     
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
@@ -149,7 +151,7 @@
         
         [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];
     }
-}
+}*/
 
 -(void)updateDisplayNumber {
     
@@ -315,6 +317,7 @@
     [SVProgressHUD dismiss];
 }
 
+/*
 #pragma mark - Location delegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -356,5 +359,5 @@
     
     PLog(@"update location failed");
 }
-
+*/
 @end

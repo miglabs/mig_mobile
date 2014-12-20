@@ -468,7 +468,9 @@
     cell.lblSongName.font = [UIFont fontOfApp:15.0f];
     
     NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
-    NSString *songDesc = @"未缓存";
+    //取消缓存机制暂时填充专辑名
+    //NSString *songDesc = @"未缓存";
+    NSString *songDesc = tempsong.album ? tempsong.album : @"未知专辑";
     long long filesize = [[SongDownloadManager GetInstance] getSongLocalSize:tempsong];
     if (filesize > 0) {
         songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];

@@ -9,10 +9,10 @@
 #import "PlayerViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface ListenMyMusicViewController : PlayerViewController <CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ListenMyMusicViewController : PlayerViewController <UITableViewDataSource, UITableViewDelegate>
 
 //gps 定位
-@property (nonatomic, retain) CLLocationManager* locationManager;
+//@property (nonatomic, retain) CLLocationManager* locationManager;
 
 @property (nonatomic, retain) UITableView* dataTableView;
 @property (nonatomic, retain) NSMutableArray* dataList;

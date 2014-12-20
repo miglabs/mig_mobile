@@ -19,6 +19,7 @@
 #import "UserSessionManager.h"
 #import "SVProgressHUD.h"
 #import "GlobalDataManager.h"
+#import "PoiManager.h"
 
 @interface RootViewController ()
 
@@ -26,7 +27,7 @@
 
 @implementation RootViewController
 
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 
 @synthesize isFirstWillAppear = _isFirstWillAppear;
 @synthesize isFirstDidAppear = _isFirstDidAppear;
@@ -126,12 +127,12 @@
     _miglabAPI = [[MigLabAPI alloc] init];
     
     //gps
-    _locationManager = [[CLLocationManager alloc] init];
+    /*_locationManager = [[CLLocationManager alloc] init];
     if ([CLLocationManager locationServicesEnabled]) {
         [_locationManager setDelegate:self];
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
         [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    }
+    }*/
     
     //登录，获取用户资料
     //login
@@ -191,7 +192,9 @@
     [self becomeFirstResponder];
     
     //start gps
-    [_locationManager startUpdatingLocation];
+    //[_locationManager startUpdatingLocation];
+    [[MigPoiManager GetInstance] ViewPoi:ROOT_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
     
     //
     [self doUpdateView:_currentShowViewTag];
@@ -616,7 +619,7 @@
     
 }
 
-#pragma CLLocationManagerDelegate
+/*#pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
@@ -652,6 +655,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     PLog(@"locationManager didFailWithError: %@", [error localizedDescription]);
-}
+}*/
 
 @end

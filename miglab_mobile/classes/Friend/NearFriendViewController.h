@@ -9,10 +9,10 @@
 #import "PlayerViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface NearFriendViewController : PlayerViewController<CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface NearFriendViewController : PlayerViewController< UITableViewDataSource, UITableViewDelegate>
 
 //gps定位
-@property (nonatomic, retain) CLLocationManager *locationManager;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
 
 @property (nonatomic, retain) UITableView *dataTableView;
 @property (nonatomic, retain) NSMutableArray *dataList;

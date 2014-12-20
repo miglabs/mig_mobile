@@ -120,6 +120,7 @@
 //弹幕存储内容
 @property (nonatomic,retain) NSMutableArray* mtBarrageList;
 
+
 // 新增消息
 -(void)getNewMsgCount:(NSString*)userid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
 -(void)getNewMsgCountSucceed:(NSNotification *)tNotification;

@@ -49,8 +49,8 @@
     m_minmsgid = 0;
     m_is_relogin = 0;
     m_name = name;
-    [self getGroupSC];
-    [self getGroupHiscChat];
+    [self getSC];
+    [self getHiscChat];
     NotifiOppinfo* notifiinfo = [[NotifiOppinfo alloc] init];
     notifiinfo.nickname = m_name;
     notifiinfo.type = m_type;
@@ -117,7 +117,9 @@
 
 - (void)dealloc
 {
-    [self quitChat];
+    //[self quitChat];
+    [m_socket disconnect];
+    m_socket = nil;
 #if DEBUG
     NSLog(@"%@ dealloc", self);
 #endif
@@ -181,6 +183,54 @@
     [operation start];
 }
 
+-(void) getSC
+{
+#ifdef DEBUG
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld",
+                      m_platformid,m_uid];
+#else
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld",
+                      m_platformid,m_uid];
+#endif
+    [self getRequestJsonData:path success:^(id jsonResult) {
+        if (jsonResult != nil) {
+            m_serverIP = [jsonResult objectForKey:@"host"];
+            m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
+        }
+    } failure:^(NSError *error) {
+        if( self.delegate != nil )
+            [self.delegate onError:error.description];
+    }];
+}
+
+-(NSArray*)getHiscChat{
+    NSString* path;
+    if (m_type==ALONE_CHAT) {
+        path = [[NSString alloc]initWithFormat:@"%@?platform=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",HTTP_ALONEMESSAGE,m_platformid,m_uid,m_tid,m_token,m_minmsgid];
+    }else {
+        path = [[NSString alloc]initWithFormat:@"%@?platform=%lld&uid=%lld&groupid=%lld&token=%@&msgid=%lld",HTTP_GROUPMESSAGE,m_platformid,m_uid,m_gid,m_token,m_minmsgid];
+    }
+   
+
+    [self getRequestJsonData:path success:^(id jsonResult) {
+        if (jsonResult != nil) {
+            id jsonObject = [jsonResult objectForKey:@"message"];
+            if (jsonObject && [jsonObject isKindOfClass:[NSArray class]])
+            {
+                [self onHiscChat:(NSArray*)jsonObject];
+            }
+            
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+        if( self.delegate != nil )
+            [self.delegate onError:error.description];
+        [SVProgressHUD dismiss];
+    }];
+    return nil;
+}
+
+/*
 - (void)getGroupSC
 {
 #ifdef DEBUG
@@ -230,30 +280,6 @@
     return nil;
 }
 
-
-- (void)getSC
-{
-#ifdef DEBUG
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
-                                                    m_platformid,m_uid,m_tid];
-#else
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
-                      m_platformid,m_uid,m_tid];
-#endif
-    
-    
-    [self getRequestJsonData:path success:^(id jsonResult) {
-        if (jsonResult != nil) {
-            m_serverIP = [jsonResult objectForKey:@"host"];
-            m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
-            //[self connectServer:m_serverIP port:m_serverPort];
-        }
-    } failure:^(NSError *error) {
-        if( self.delegate != nil )
-            [self.delegate onError:error.description];
-    }];
-    
-}
 -(NSArray*)getHiscChat
 {
 #ifdef DEBUG
@@ -280,13 +306,36 @@
     return nil;
 }
 
+
+
+- (void)getSC
+{
+#ifdef DEBUG
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+                                                    m_platformid,m_uid,m_tid];
+#else
+    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld&tid=%lld",
+                      m_platformid,m_uid,m_tid];
+#endif
+    
+    
+    [self getRequestJsonData:path success:^(id jsonResult) {
+        if (jsonResult != nil) {
+            m_serverIP = [jsonResult objectForKey:@"host"];
+            m_serverPort = [[jsonResult objectForKey:@"port"] integerValue];
+            //[self connectServer:m_serverIP port:m_serverPort];
+        }
+    } failure:^(NSError *error) {
+        if( self.delegate != nil )
+            [self.delegate onError:error.description];
+    }];
+    
+}*/
+
 -(void) reloadHiscChat:(int64_t) minmsgid
 {
     m_minmsgid = minmsgid;
-    if(m_type==ALONE_CHAT)
-        [self getHiscChat];
-    else if (m_type==GROUP_CHAT)
-        [self getGroupHiscChat];
+    [self getHiscChat];
 }
 
 -(void) quitChat{
@@ -708,10 +757,17 @@
 }
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
-    //NSLog(@"onSocketDidDisconnect ");
+    NSLog(@"onSocketDidDisconnect ");
     //断开重连接
-    [m_socket disconnect];
-    m_socket = nil;
+    
+    if (m_socket != nil) {//客户端主动断开不需要重连
+        [m_socket disconnect];
+        m_socket = nil;
+        [self connectServer:m_serverIP port:m_serverPort];
+    }
+   
+    
+    
     
 }
 - (void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag

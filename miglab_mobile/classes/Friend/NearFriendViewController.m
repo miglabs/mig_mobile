@@ -10,6 +10,7 @@
 #import "FriendInfoCell.h"
 #import "NearbyUser.h"
 #import "MyFriendPersonalPageViewController.h"
+#import "PoiManager.h"
 
 @interface NearFriendViewController ()
 
@@ -17,7 +18,7 @@
 
 @implementation NearFriendViewController
 
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 
 @synthesize dataTableView = _dataTableView;
 @synthesize dataList = _dataList;
@@ -84,7 +85,7 @@
     _dataList = [[NSMutableArray alloc] init];
     
     //gps
-    _locationManager = [[CLLocationManager alloc] init];
+    /*_locationManager = [[CLLocationManager alloc] init];
     if ([CLLocationManager locationServicesEnabled]) {
         [_locationManager setDelegate:self];
         [_locationManager setDistanceFilter:kCLDistanceFilterNone];
@@ -92,7 +93,7 @@
         [_locationManager startUpdatingLocation];
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
             [_locationManager requestWhenInUseAuthorization];
-    }
+    }*/
     
     //
     [self loadData];
@@ -106,8 +107,9 @@
 }
 
 -(void)loadData{
-    
-    [self loadNearFriendFromDatabase];
+    [[MigPoiManager GetInstance] setViewType:NEARFRI_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
+    //[self loadNearFriendFromDatabase];
     
 }
 -(void)loadNearFriendFromDatabase{
@@ -131,6 +133,7 @@
     
 }
 
+/*
 -(void)loadNearFriendFromServer:(NSString *)tLocation{
     
     if ([UserSessionManager GetInstance].isLoggedIn && tLocation) {
@@ -149,7 +152,7 @@
         
     }
     
-}
+}*/
 
 #pragma notification
 
@@ -185,6 +188,7 @@
     
 }
 
+/*
 #pragma CLLocationManagerDelegate
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
@@ -231,7 +235,7 @@
         [self loadNearFriendFromServer:location];
         _isUpdatedLocation = YES;
     }
-}
+}*/
 
 #pragma mark - UITableView delegate
 

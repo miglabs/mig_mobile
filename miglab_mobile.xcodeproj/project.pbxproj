@@ -504,6 +504,7 @@
 		C72F16C018FA287500ECD8B8 /* tencent_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16BF18FA287500ECD8B8 /* tencent_tip.png */; };
 		C72F16C218FA293E00ECD8B8 /* default_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = C72F16C118FA293E00ECD8B8 /* default_tip.png */; };
 		C744EA741A38A7C50004DE31 /* Barray.m in Sources */ = {isa = PBXBuildFile; fileRef = C744EA731A38A7C50004DE31 /* Barray.m */; };
+		C76179EC1A45075800653AED /* PoiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C76179EB1A45075800653AED /* PoiManager.m */; };
 		C76DF2D01A3B35D000156F52 /* ChatJoinToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */; };
 		C791AA351A3EDFD0008B69ED /* face_tip_img.png in Resources */ = {isa = PBXBuildFile; fileRef = C791AA341A3EDFD0008B69ED /* face_tip_img.png */; };
 		C791AA371A3EE0EC008B69ED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = C791AA361A3EE0EC008B69ED /* power.png */; };
@@ -1275,6 +1276,8 @@
 		C72F16C118FA293E00ECD8B8 /* default_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_tip.png; sourceTree = "<group>"; };
 		C744EA721A38A7B10004DE31 /* Barray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Barray.h; sourceTree = "<group>"; };
 		C744EA731A38A7C50004DE31 /* Barray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barray.m; sourceTree = "<group>"; };
+		C76179EB1A45075800653AED /* PoiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PoiManager.m; path = Poi/PoiManager.m; sourceTree = "<group>"; };
+		C76179ED1A45078C00653AED /* PoiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PoiManager.h; path = Poi/PoiManager.h; sourceTree = "<group>"; };
 		C76DF2CE1A3B35C300156F52 /* ChatJoinToolBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatJoinToolBar.h; sourceTree = "<group>"; };
 		C76DF2CF1A3B35D000156F52 /* ChatJoinToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatJoinToolBar.m; sourceTree = "<group>"; };
 		C791AA341A3EDFD0008B69ED /* face_tip_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_tip_img.png; sourceTree = "<group>"; };
@@ -1460,6 +1463,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				C76179E81A4506FD00653AED /* Poi */,
 				CBB3438E1A07C17B007BF368 /* BPush */,
 				CB5E938F19B74A9200B71A10 /* AudioStreamer */,
 				162CFE971970255300B2C005 /* TTTAttributedLabel */,
@@ -2714,6 +2718,15 @@
 			path = share;
 			sourceTree = "<group>";
 		};
+		C76179E81A4506FD00653AED /* Poi */ = {
+			isa = PBXGroup;
+			children = (
+				C76179EB1A45075800653AED /* PoiManager.m */,
+				C76179ED1A45078C00653AED /* PoiManager.h */,
+			);
+			name = Poi;
+			sourceTree = "<group>";
+		};
 		C7DE8EAF1977AE0E0047233D /* MsgText */ = {
 			isa = PBXGroup;
 			children = (
@@ -2837,7 +2850,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = pig;
+				ORGANIZATIONNAME = miglab;
 				TargetAttributes = {
 					16EDEF361759AD5E001BE4E9 = {
 						DevelopmentTeam = 6JWDKE7GS8;
@@ -3361,6 +3374,7 @@
 				1653DBF017BD094E00767E0E /* MusicSourceMenuCell.m in Sources */,
 				1653DC1217BD158F00767E0E /* LocalViewController.m in Sources */,
 				1653DC2C17BD221300767E0E /* LikeViewController.m in Sources */,
+				C76179EC1A45075800653AED /* PoiManager.m in Sources */,
 				18E434E417BE182000DECFC7 /* RootNavigationMenuView.m in Sources */,
 				C7DE8EBE1977AE0E0047233D /* MsgTextURLRun.m in Sources */,
 				CB5E92CD19A7A47B00B71A10 /* UIImage+BlurredFrame.m in Sources */,

@@ -443,4 +443,7 @@
 //获取群聊天记录
 #define HTTP_GROUPMESSAGE                                 [NSString stringWithFormat:@"%@",@"miyo/chat/v1/groupmessage.fcgi"]
 
+//获取点对点聊天记录
+#define HTTP_ALONEMESSAGE                                  [NSString stringWithFormat:@"%@",@"miyo/chat/v1/alonemessage.fcgi"]
+
 #endif

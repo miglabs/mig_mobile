@@ -11,10 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 
 //附近的好音乐
-@interface NearMusicViewController : PlayerViewController<CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface NearMusicViewController : PlayerViewController<UITableViewDataSource,
+UITableViewDelegate>
 
 //gps定位
-@property (nonatomic, retain) CLLocationManager *locationManager;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
 
 @property (nonatomic, retain) MusicBodyHeadMenuView *bodyHeadMenuView;
 

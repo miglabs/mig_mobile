@@ -19,6 +19,8 @@
 @property (nonatomic, assign) int type;                 //0为游客，1为用户
 @property (nonatomic, retain) NSString *birthday;
 @property (nonatomic, retain) NSString *location;
+@property (nonatomic, retain) NSString *latitude;
+@property (nonatomic, retain) NSString *longitude;
 @property (nonatomic, assign) int age;
 @property (nonatomic, assign) int source;
 @property (nonatomic, retain) NSString *head;
