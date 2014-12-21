@@ -173,10 +173,12 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    Song *tempsong = [_datalist objectAtIndex:indexPath.row];
+    /*Song *tempsong = [_datalist objectAtIndex:indexPath.row];
     cell.lblSongName.text = tempsong.songname;
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, tempsong.songtype==1?@"已缓存":@"未缓存"];
-    
+    */
+    Song *tempsong = [_datalist objectAtIndex:indexPath.row];
+    [cell updateMusicSongCellData:tempsong];
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;

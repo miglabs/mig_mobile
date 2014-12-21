@@ -381,8 +381,10 @@
         [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
     }
     
+   
     MessageInfo *nms = [_dataList objectAtIndex:indexPath.row];
-    Song *tempsong = nms.song;
+    [cell updateNearMusicSongCellData:nms];
+     /*Song *tempsong = nms.song;
     
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
@@ -437,7 +439,7 @@
         songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];
     }
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, songDesc];
-    cell.lblSongArtistAndDesc.font = [UIFont fontOfApp:10.0f];
+    cell.lblSongArtistAndDesc.font = [UIFont fontOfApp:10.0f];*/
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     

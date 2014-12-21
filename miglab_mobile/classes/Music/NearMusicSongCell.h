@@ -11,6 +11,7 @@
 
 @interface NearMusicSongCell : UITableViewCell
 
+@property (nonatomic, retain) UIViewController *topViewcontroller; // 导航指针
 @property (nonatomic, retain) IBOutlet UIButton *btnIcon;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongName;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongArtistAndDesc;
@@ -18,5 +19,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView* imgMsgTips;
 @property (nonatomic, retain) IBOutlet UILabel* lblDistance;
 @property (nonatomic, retain) IBOutlet UILabel* lblFrom;
+@property (nonatomic, retain) MessageInfo* msginfo;
+
+-(void)updateNearMusicSongCellData:(MessageInfo*)message;
 
 @end

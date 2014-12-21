@@ -463,21 +463,7 @@
     }
     
     Song *tempsong = [_dataList objectAtIndex:indexPath.row];
-    cell.btnIcon.tag = tempsong.songid;
-    cell.lblSongName.text = tempsong.songname;
-    cell.lblSongName.font = [UIFont fontOfApp:15.0f];
-    
-    NSString *tempartist = tempsong.artist ? tempsong.artist : @"未知演唱者";
-    //取消缓存机制暂时填充专辑名
-    //NSString *songDesc = @"未缓存";
-    NSString *songDesc = tempsong.album ? tempsong.album : @"未知专辑";
-    long long filesize = [[SongDownloadManager GetInstance] getSongLocalSize:tempsong];
-    if (filesize > 0) {
-        songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];
-    }
-    cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempartist, songDesc];
-    cell.lblSongArtistAndDesc.font = [UIFont fontOfApp:10.0f];
-    
+    [cell updateMusicSongCellData:tempsong];
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;

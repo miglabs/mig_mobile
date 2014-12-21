@@ -356,11 +356,13 @@
         [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
     }
     
-    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    /*Song *tempsong = [_dataList objectAtIndex:indexPath.row];
     cell.btnIcon.tag = tempsong.songid;
     cell.lblSongName.text = tempsong.songname;
     cell.lblSongArtistAndDesc.text = [NSString stringWithFormat:@"%@ | %@", tempsong.artist, @"未缓存"];
-    
+    */
+    Song *tempsong = [_dataList objectAtIndex:indexPath.row];
+    [cell updateMusicSongCellData:tempsong];
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
 	return cell;

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "EGOImageButton.h"
 
 @interface MusicSongCell : UITableViewCell
 
 @property (nonatomic, retain) IBOutlet UIButton *btnIcon;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongName;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongArtistAndDesc;
+@property (nonatomic, retain) IBOutlet EGOImageButton* btnCover;
 
+-(void)updateMusicSongCellData:(Song*)song;
 @end
