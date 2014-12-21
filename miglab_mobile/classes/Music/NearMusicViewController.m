@@ -384,6 +384,7 @@
    
     MessageInfo *nms = [_dataList objectAtIndex:indexPath.row];
     [cell updateNearMusicSongCellData:nms];
+    cell.topViewcontroller = self;
      /*Song *tempsong = nms.song;
     
     cell.btnIcon.tag = tempsong.songid;

@@ -88,7 +88,7 @@
             MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
             personalPageViewController.userinfo = user;
             personalPageViewController.isFriend = NO;
-            //[self.topViewcontroller.navigationController pushViewController:personalPageViewController animated:YES];
+            [self.topViewcontroller.navigationController pushViewController:personalPageViewController animated:YES];
         }
     }
 }
