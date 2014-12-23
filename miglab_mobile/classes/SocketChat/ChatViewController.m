@@ -131,6 +131,8 @@
     
     m_joinToolBar = [[CharJoinToolBar alloc] initWithFrame:
                      CGRectMake(0, y, kMainScreenWidth,kInputToolBarHeight)];
+    UITapGestureRecognizer *joinTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(joinChat)];
+    [m_joinToolBar addGestureRecognizer:joinTap];
     [m_joinToolBar setHidden:false];
     [self.view addSubview:m_joinToolBar];
 
@@ -255,6 +257,17 @@
     y = kMainScreenHeight-kInputToolBarHeight- h + self.topDistance;
     m_inputToolBar.frame = CGRectMake(0.0f, y, kMainScreenWidth,kInputToolBarHeight);
     [ChatNotificationCenter postNotification:CHATMESSAGE_RELOAD obj:nil];
+}
+
+
+
+-(void)joinChat{
+    PLog(@"joinChat");
+ //通知主界面切换
+    @synchronized(self)
+    {
+        [ChatNotificationCenter postNotification:CHATSERVER_JOIN obj:nil];
+    }
 }
 
 

@@ -53,6 +53,7 @@
 @property (nonatomic, retain) UIImageView *bgBarrageImageView;
 @property (nonatomic, retain) UIButton *btnBarrage;
 
+
 //弹幕定时器
 @property (nonatomic, retain) NSTimer *barrageTimer;
 
@@ -62,6 +63,13 @@
 //当前场景名
 @property (nonatomic, retain) NSString* dimension_name;
 @property  long long dimension_id;
+
+
+//更新弹幕
+-(void) doUpdateBarrage:(NSString*) content;
+-(void) doUpdateBarrage;
+//登陆更新弹幕
+-(void) doLoginUpdateBarrage;
 
 -(IBAction)doGroupchat:(id)sender;
 

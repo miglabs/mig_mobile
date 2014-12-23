@@ -25,9 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        m_bg = [[UIImageView alloc] initWithImage:
-                           [UIImage imageNamed:@""]];
-        m_bg.frame = CGRectMake(0, 0, frame.size.width, frame.size.height + 2);
+        m_bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height+2)];
+        [m_bg setBackgroundColor:RGB(255, 255, 255, 2)];
         [self addSubview:m_bg];
         
         UIImage* joinImage = [UIImage imageNamed:@"intalk_ico"];
@@ -47,7 +46,7 @@
         m_joinUILabel.text = @"加入讨论";
         m_joinUILabel.textAlignment = kTextAlignmentLeft;
         m_joinUILabel.textColor = [UIColor grayColor];
-        [m_joinButton addTarget:self action:@selector(joinChat:) forControlEvents:UIControlEventTouchUpInside];
+        //[m_joinButton addTarget:self action:@selector(joinChat:) forControlEvents:UIControlEventTouchUpInside];
         
        [m_joinButton addSubview:m_joinUILabel];
         
@@ -64,13 +63,14 @@
 #endif
 }
 
--(IBAction)joinChat:(id)sender{
+/*-(IBAction)joinChat:(id)sender{
     PLog(@"joinChat");
     //通知主界面切换
     @synchronized(self)
     {
         [ChatNotificationCenter postNotification:CHATSERVER_JOIN obj:nil];
     }
-}
+}*/
+
 
 @end

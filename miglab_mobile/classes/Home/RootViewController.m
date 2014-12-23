@@ -114,6 +114,8 @@
     
     _rootNavMenuView = [[RootNavigationMenuView alloc] initRootNavigationMenuView];
     _rootNavMenuView.topViewcontroller = self;
+    
+    
     [_rootNavMenuView.btnMenuFirst addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuSecond addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
     [_rootNavMenuView.btnMenuThird addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -201,6 +203,7 @@
     
     // 更新导航
     [_rootNavMenuView updateView];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -337,12 +340,14 @@
                 //update
                 GeneViewController *oldGene = (GeneViewController *)controller;
                 [oldGene viewWillAppear:YES];
+                [oldGene doLoginUpdateBarrage];
             } else {
                 GeneViewController *gene = [[GeneViewController alloc] init];
                 [gene setTopViewcontroller:self];
                 [gene viewWillAppear:YES];
                 [_dicViewControllerCache setObject:gene forKey:numIndex];
                 controller = gene;
+                [gene doLoginUpdateBarrage];
             }
             
         }
@@ -526,6 +531,7 @@
     //gene
     NSNumber *numGeneIndex = [NSNumber numberWithInt:100];
     GeneViewController *tempGene = [_dicViewControllerCache objectForKey:numGeneIndex];
+    [tempGene doUpdateBarrage:@"弹幕加载中..."];
     [tempGene loadSongsByGene];
 }
 

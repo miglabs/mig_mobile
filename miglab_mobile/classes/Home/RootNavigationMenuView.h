@@ -21,7 +21,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnName; // 用户昵称
 
 
-
 -(id)initRootNavigationMenuView;
 #if 0
 -(id)initRootNavigationMenuView:(CGRect)frame;
