@@ -118,6 +118,7 @@
 - (void)dealloc
 {
     //[self quitChat];
+    [m_socket setDelegate:nil]; 
     [m_socket disconnect];
     m_socket = nil;
 #if DEBUG
@@ -762,7 +763,7 @@
     
     if (m_socket != nil) {//客户端主动断开不需要重连
         [m_socket disconnect];
-        m_socket = nil;
+         m_socket = nil;
         [self connectServer:m_serverIP port:m_serverPort];
     }
    

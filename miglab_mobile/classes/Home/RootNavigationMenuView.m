@@ -12,6 +12,7 @@
 #import "UIImage+PImageCategory.h"
 #import "UserSessionManager.h"
 #import "GlobalDataManager.h"
+#import "MigLabConfig.h"
 
 @implementation RootNavigationMenuView
 
@@ -64,11 +65,14 @@
         
         //添加头像 //位置 9 长度31
 
-        _egoBtnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
-        _egoBtnAvatar.layer.cornerRadius = 15;
+       _egoBtnAvatar = [[EGOImageButton alloc] initWithPlaceholderImage:[UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE]];
+        CGFloat x = _bgImageView.frame.size.width - _egoBtnAvatar.frame.size.width - 35;
+        _egoBtnAvatar.frame = CGRectMake(x, 5 + topdistance, 28, 28);
+        _egoBtnAvatar.layer.cornerRadius = _egoBtnAvatar.frame.size.width / 2;
         _egoBtnAvatar.layer.masksToBounds = YES;
+        _egoBtnAvatar.layer.borderWidth = AVATAR_BORDER_WIDTH;
+        _egoBtnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
         NSString* userHeadUrl = [UserSessionManager GetInstance].currentUser.head;
-        _egoBtnAvatar.frame = CGRectMake(12, 3 + topdistance, 35, 35);
         [_egoBtnAvatar addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
         if (userHeadUrl && [UserSessionManager GetInstance].isLoggedIn) {
             
@@ -76,8 +80,13 @@
         }
         [self addSubview: _egoBtnAvatar];
         
+        
+
+        
+
+        
         //IPHONE4S以上 描述之间的间距加大
-        CGFloat separation = 0;
+        /*CGFloat separation = 0;
         
         if([GlobalDataManager GetInstance].isLongScreen){
             separation = -5;
@@ -91,24 +100,25 @@
                 nickname =  [NSString stringWithFormat:@"%@  ♂",[UserSessionManager GetInstance].currentUser.nickname];
         }else{
             nickname = @"请登录";
-        }
-        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(50+separation, topdistance+3, 100, 42)];
+        }*/
+        
+        /*CGFloat tip_x = _egoBtnAvatar.frame.origin.x - _egoBtnAvatar.frame.size.width -20;
+        _btnName = [[UIButton alloc] initWithFrame:CGRectMake(tip_x, 0 + topdistance, 50, 42)];
         _btnName.backgroundColor = [UIColor clearColor];
         [_btnName setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btnName setTitle:nickname forState:UIControlStateNormal];
         _btnName.titleLabel.font = [UIFont fontOfApp:13.0];
         [_btnName.titleLabel setTextAlignment:NSTextAlignmentLeft];
         [_btnName addTarget:self action:@selector(doAvatar:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_btnName];
+        [self addSubview:_btnName];*/
         
         
         //first
-        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(0+25+90, 0 + topdistance, 120, 42)];
+        _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(10, 0 + topdistance, 80, 42)];
         _btnMenuFirst.tag = 100;
         //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         //[_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
-        //[_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
+        [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
 
         //判断用户是否登录以及登录后性别判断
         //[_btnMenuFirst setTitle:nil forState:UIControlStateNormal];
@@ -116,8 +126,9 @@
         
         [self addSubview:_btnMenuFirst];
         
-        //second //254 - 10 -56
-        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(198, 0 + topdistance, 56, 42)];
+        //second
+        CGFloat second_x =_btnMenuFirst.frame.origin.x + _btnMenuFirst.frame.size.width + 20;
+        _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(second_x, 0 + topdistance, 56, 42)];
         _btnMenuSecond.tag = 101;
         //[_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -127,7 +138,9 @@
         [self addSubview:_btnMenuSecond];
         
         //从右开始偏移计算320 - 56 -10
-        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(254, 0 + topdistance,56, 42)];
+        //third
+        CGFloat third_x =_btnMenuSecond.frame.origin.x + _btnMenuSecond.frame.size.width + 20;
+        _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(third_x, 0 + topdistance,56, 42)];
         _btnMenuThird.tag = 102;
         //[_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -203,13 +216,19 @@
     [_btnMenuFirst setSelected:NO];
     [_btnMenuSecond setSelected:NO];
     [_btnMenuThird setSelected:NO];
+    [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     if (aIndex == 0) {
         [_btnMenuFirst setSelected:YES];
+        [_btnMenuFirst setTitleColor:RGB(63, 198, 241, 2) forState:UIControlStateNormal];
     } else if (aIndex == 1) {
         [_btnMenuSecond setSelected:YES];
+        [_btnMenuSecond setTitleColor:RGB(63, 198, 241, 2) forState:UIControlStateNormal];
     } else if (aIndex == 2) {
         [_btnMenuThird setSelected:YES];
+        [_btnMenuThird setTitleColor:RGB(63, 198, 241, 2) forState:UIControlStateNormal];
     }
     
 }
@@ -237,19 +256,21 @@
     if ([UserSessionManager GetInstance].isLoggedIn) {
         
         _egoBtnAvatar.imageURL = [NSURL URLWithString:[UserSessionManager GetInstance].currentUser.head];
-        
+       // [_btnName setHidden:TRUE];
+        /*
         NSString *nickname;
         if([UserSessionManager GetInstance].currentUser.gender==0)
-            nickname =  [NSString stringWithFormat:@"%@  ♀",[UserSessionManager GetInstance].currentUser.nickname];
+            nickname =  [NSString stringWithFormat:@"%@ ♀",[UserSessionManager GetInstance].currentUser.nickname];
         else
-            nickname =  [NSString stringWithFormat:@"%@  ♂",[UserSessionManager GetInstance].currentUser.nickname];
+            nickname =  [NSString stringWithFormat:@"%@ ♂",[UserSessionManager GetInstance].currentUser.nickname];*/
         
-        _btnName.titleLabel.text = nickname;
+       // _btnName.titleLabel.text = nickname;
     }
     else {
-        
+        //[_btnName setHidden:FALSE];
         _egoBtnAvatar.imageURL = nil;
-        _btnName.titleLabel.text = @"请登录";
+        //_btnName.titleLabel.text = @"请登录";
+        
     }
 }
 

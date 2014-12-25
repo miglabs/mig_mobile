@@ -21,5 +21,6 @@
 @property (nonatomic, strong) RootViewController *rootViewController;
 
 @property (nonatomic, retain) SinaWeibo *sinaweibo;
+@property (nonatomic,retain) NSString* path;
 
 @end

@@ -3596,7 +3596,7 @@
     
     API_HEADER();
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&type=%@&mode=%@&index=%@&latitude=%@&longitude=%@", HTTP_GETSHAREINFO, uid, ttoken, tsongid, ttype, tmode, tindex, tlatitude, tlongitude];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&songid=%@&stype=%@&mode=%@&index=%@&latitude=%@&longitude=%@", HTTP_GETSHAREINFO, uid, ttoken, tsongid, ttype, tmode, tindex, tlatitude, tlongitude];
     PLog(@"get share info url : %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

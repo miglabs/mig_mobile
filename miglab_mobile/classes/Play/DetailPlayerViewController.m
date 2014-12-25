@@ -333,8 +333,8 @@
     NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString* tsongid = [NSString stringWithFormat:@"%lld", currentSong.songid];
     NSString* ttype = STR_USER_SOURCE_SINA;
-    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
-    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+    NSString* tlatitude = [UserSessionManager GetInstance].currentUser.latitude;
+    NSString* tlongitude = [UserSessionManager GetInstance].currentUser.longitude;
     NSString* tmode = [GlobalDataManager GetInstance].curSongType;
     NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
     

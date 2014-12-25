@@ -185,8 +185,8 @@ static int PAGE_WIDTH = 81;
     _btnBarrage = [[UIButton alloc] initWithFrame:CGRectMake(11.5, posy + 10 + 100, 297, 31)];
     _btnBarrage.tag = 100;
     [_btnBarrage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_btnBarrage setTitle:@"弹幕加载中...." forState:UIControlStateNormal];
     _btnBarrage.titleLabel.font = [UIFont fontOfApp:12.0f];
+    [self doLoginUpdateBarrage];
     [self.view addSubview:_btnBarrage];
     
     [_btnBarrage addTarget:self action:@selector(doGroupchat:) forControlEvents:UIControlEventTouchUpInside];
@@ -1357,6 +1357,10 @@ static int PAGE_WIDTH = 81;
 }
     
 -(void)barrageTimerFunction{
+    [self doUpdateBarrage];
+}
+
+-(void)doUpdateBarrage{
     NSString* text = [NSString alloc];
     //包含歌曲所属类别
     if([_mtBarrageList count]==0)
@@ -1366,11 +1370,25 @@ static int PAGE_WIDTH = 81;
     BarrayInfo* barrinfo = [BarrayInfo initWithNSDictionary:arry];
     text = [NSString stringWithFormat:@"[%@] %@说: %@ ",barrinfo.tname,barrinfo.nickname,barrinfo.message];
     _dimension_name = barrinfo.tname;
-    /*text = [NSString stringWithFormat:@"[旅行中]%@ ",[_barragelist objectAtIndex:arc4random()%12]];*/
+    [self doUpdateBarrage:text];
+}
+    
+-(void) doUpdateBarrage:(NSString*) content{
     [_btnBarrage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_btnBarrage setTitle:text forState:UIControlStateNormal];
+    [_btnBarrage setTitle:content forState:UIControlStateNormal];
     _btnBarrage.titleLabel.font = [UIFont fontOfApp:12.0f];
-    [self.view addSubview:_btnBarrage];
+}
+    
+
+    
+-(void) doLoginUpdateBarrage{
+    if (![UserSessionManager GetInstance].isLoggedIn) {
+        [self doUpdateBarrage:@"点击右上角登陆开始弹幕群聊之旅"];
+    }else{
+        [self doUpdateBarrage:@"弹幕加载中...."];
+        [self doUpdateBarrage];
+    }
+        
 }
 
 -(void)doUpdatePlayList:(id)sender {
