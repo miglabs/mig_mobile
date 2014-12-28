@@ -57,7 +57,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f blue:237.0f/255.0f alpha:1.0f];
     
     //nav bar
-    self.navView.titleLabel.text = @"注册咪呦账号";
+    self.navView.titleLabel.text = @"注册咪哟账号";
     self.bgImageView.hidden = YES;
     
     CGRect textbgframe = _textBgImageView.frame;

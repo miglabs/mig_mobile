@@ -427,23 +427,42 @@
 
 
 //新接口地址================================================================================================
+//接口地址修改
+//http://112.124.49.59/cgi-bin/miyo/soc/v1/getlocation.fcgi?uid=10008&token=eaed123
+//HOST + 路径 + 项目名 + 插件 + 版本 + 接口名
+#define PATH                @"cgi-bin"
+#define PRO                 @"miyo"
+//module
+#define SOCMOD              @"soc"
+#define CHATMOD             @"chat"
+
+//版本
+#define VERSION             @"v1"
+
+#define SOC_INTERFACE     [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,SOCMOD,VERSION]
+
+#define CHAT_INTERFACE    [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,CHATMOD,VERSION]
+
+
+//社交
 //获取当前天气和城市
-#define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/soc/v1/getlocation.fcgi?"]
+#define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getlocation.fcgi"]
 #define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
 #define NotificationNameLocationFailed                      @"NotificationNameLocationFailed"
 
-
-
-
 //获取弹幕和评论
-#define HTTP_BARRAYCOMM                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/miyo/soc/v1/getbarragecomm.fcgi"]
+#define HTTP_BARRAYCOMM                                       [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getbarragecomm.fcgi"]
 #define NotificationBarryCommSuccess                     @"NotificationBarryCommSuccess"
 #define NotificationBarryCommFailed                      @"NotificationBarryCommFailed"
 
+//聊天
 //获取群聊天记录
-#define HTTP_GROUPMESSAGE                                 [NSString stringWithFormat:@"%@",@"miyo/chat/v1/groupmessage.fcgi"]
+#define HTTP_GROUPMESSAGE                                      [NSString stringWithFormat:@"%@%@",CHAT_INTERFACE,@"groupmessage.fcgi"]
 
 //获取点对点聊天记录
-#define HTTP_ALONEMESSAGE                                  [NSString stringWithFormat:@"%@",@"miyo/chat/v1/alonemessage.fcgi"]
+#define HTTP_ALONEMESSAGE                                      [NSString stringWithFormat:@"%@%@",CHAT_INTERFACE,@"alonemessage.fcgi"]
 
+//获取聊天服务器
+#define HTTP_GETIDLESC                                         [NSString stringWithFormat:@"%@%@",CHAT_INTERFACE,@"getsc.fcgi"]
 #endif
+

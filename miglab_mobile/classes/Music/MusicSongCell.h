@@ -15,6 +15,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblSongName;
 @property (nonatomic, retain) IBOutlet UILabel *lblSongArtistAndDesc;
 @property (nonatomic, retain) IBOutlet EGOImageButton* btnCover;
+@property (nonatomic, retain) IBOutlet UILabel* lblLike;
+@property (nonatomic, retain) IBOutlet UIImageView* imgLikeTips;
 
 -(void)updateMusicSongCellData:(Song*)song;
 @end
