@@ -14,6 +14,8 @@
 @synthesize lblSongName = _lblSongName;
 @synthesize lblSongArtistAndDesc = _lblSongArtistAndDesc;
 @synthesize btnCover = _btnCover;
+@synthesize lblLike = _lblLike;
+@synthesize imgLikeTips = _imgLikeTips;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,6 +37,13 @@
     _btnIcon.tag = song.songid;
     _lblSongName.text = song.songname;
     _lblSongName.font = [UIFont fontOfApp:15.0f];
+    int likenum =song.collectnum;
+    //int likenum =1000;
+    NSString* szlike = likenum>999?[NSString stringWithFormat:@"999+"]:[NSString stringWithFormat:@"%d", likenum];
+    
+    CGRect tipRect = _imgLikeTips.frame;
+    tipRect.origin.x = _lblLike.frame.origin.x + _lblLike.frame.size.width  - 10 -tipRect.size.width;
+    _imgLikeTips.frame = tipRect;
     
     NSString *tempartist = song.artist ? song.artist : @"未知演唱者";
     //取消缓存机制暂时填充专辑名
@@ -44,6 +53,9 @@
     if (filesize > 0) {
         songDesc = [NSString stringWithFormat:@"%.2fMB", (float)filesize / 1000000];
     }*/
+    
+    _lblLike.text =  [NSString stringWithFormat:@"%@", szlike];
+    _lblLike.textAlignment = UITextAlignmentRight;
     _btnCover.placeholderImage = [UIImage imageNamed:LOCAL_DEFAULT_HEADER_IMAGE];
     [_btnCover setImageURL:[NSURL URLWithString:song.coverurl]];
     _btnCover.layer.cornerRadius = _btnCover.frame.size.width / 2;

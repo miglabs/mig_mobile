@@ -101,7 +101,7 @@
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu2, nil];
 #endif
     
-    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪呦账号登陆", @"MenuText", nil];
+    NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪哟账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];
     _dataList = [NSMutableArray arrayWithObjects:menulist0, menulist1, nil];
     

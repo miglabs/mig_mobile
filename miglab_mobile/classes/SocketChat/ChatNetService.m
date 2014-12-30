@@ -140,7 +140,8 @@
     
     [SVProgressHUD showWithStatus:MIGTIP_HIS_CHAT maskType:SVProgressHUDMaskTypeNone];
     
-    NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_DOMAIN,path];
+    //NSString* strurl = [[NSString alloc]initWithFormat:@"%@cgi-bin/%@",HTTP_API_DOMAIN,path];
+    NSString* strurl = path;
     
     PLog(@"getUserInfoUrl:%@",strurl);
     NSURL* url = [NSURL URLWithString:strurl];
@@ -186,13 +187,9 @@
 
 -(void) getSC
 {
-#ifdef DEBUG
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld",
-                      m_platformid,m_uid];
-#else
-    NSString* path = [[NSString alloc]initWithFormat:@"getsc.fcgi?platformid=%lld&uid=%lld",
-                      m_platformid,m_uid];
-#endif
+    NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld",
+                      HTTP_GETIDLESC,m_platformid,m_uid];
+
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {
             m_serverIP = [jsonResult objectForKey:@"host"];

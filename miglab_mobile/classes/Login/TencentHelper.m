@@ -125,9 +125,9 @@
     
     if ([_tencentOAuth isSessionValid]) {
         
-        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
+        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪哟#  @咪哟miyou 咪哟 听对的音乐，遇见对的人。下载咪哟: http://itunes.apple.com/cn/app/wei/id862410865"];
         if (tSong.songname) {
-            statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
+            statuses = [NSString stringWithFormat:@"我安装了#咪哟#  @咪哟miyou,【%@】正好是我想要听的。咪哟 听对的音乐，遇见对的人。下载咪哟: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
         }
         
         TCAddTopicDic *params = [TCAddTopicDic dictionary];
@@ -154,9 +154,9 @@
     
     if ([_tencentOAuth isSessionValid]) {
         
-        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou 咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865"];
+        NSString *statuses = [NSString stringWithFormat:@"我安装了#咪哟#  @咪哟miyou 咪哟 听对的音乐，遇见对的人。下载咪哟: http://itunes.apple.com/cn/app/wei/id862410865"];
         if (tSong.songname) {
-            statuses = [NSString stringWithFormat:@"我安装了#咪呦#  @咪呦miyou,【%@】正好是我想要听的。咪呦 听对的音乐，遇见对的人。下载咪呦: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
+            statuses = [NSString stringWithFormat:@"我安装了#咪哟#  @咪哟miyou,【%@】正好是我想要听的。咪哟 听对的音乐，遇见对的人。下载咪哟: http://itunes.apple.com/cn/app/wei/id862410865", tSong.songname];
         }
         
         WeiBo_add_t_POST *request = [[WeiBo_add_t_POST alloc] init];

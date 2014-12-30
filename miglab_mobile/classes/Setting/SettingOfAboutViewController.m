@@ -41,7 +41,7 @@
     float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
     
     //nav bar
-    self.navView.titleLabel.text = @"关于咪呦";
+    self.navView.titleLabel.text = @"关于咪哟";
     self.bgImageView.hidden = YES;
     
     //icon
@@ -55,7 +55,7 @@
     _lblVersion = [[UILabel alloc] init];
     _lblVersion.frame = CGRectMake(10, posy + 55 + 85 + 15, 300, 25);
     _lblVersion.backgroundColor = [UIColor clearColor];
-    _lblVersion.text = [NSString stringWithFormat:@"咪呦 V%@", strVersion];
+    _lblVersion.text = [NSString stringWithFormat:@"咪哟 V%@", strVersion];
     _lblVersion.textColor = [UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f];
     _lblVersion.font = [UIFont fontOfSystem:15.0f];
     _lblVersion.textAlignment = kTextAlignmentCenter;

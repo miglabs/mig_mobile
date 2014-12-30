@@ -3881,7 +3881,7 @@
     
     //测试暂时不提交坐标
     //NSString* url = [NSString stringWithFormat:@"%@uid=%@&token=%@&latitude=%@&longitude=%@", HTTP_LOCATIONINFO, uid, token,latitude, longitude];
-    NSString* url = [NSString stringWithFormat:@"%@uid=%@&token=%@", HTTP_LOCATIONINFO, uid, token];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@", HTTP_LOCATIONINFO, uid, token];
     PLog(@"get share info url : %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

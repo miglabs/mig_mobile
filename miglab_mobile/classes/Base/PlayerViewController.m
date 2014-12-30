@@ -46,7 +46,7 @@
     _playerMenuView = [[MusicPlayerMenuView alloc] initDefaultMenuView:CGRectMake(11.5, kMainScreenHeight + self.topDistance - 73 - 10, 297, 73)];
     _playerMenuView.btnAvatar.delegate = self;
     [_playerMenuView.btnAvatar addTarget:self action:@selector(doPlayerAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    _playerMenuView.lblSongInfo.text = @"咪呦努力加载";
+    _playerMenuView.lblSongInfo.text = @"咪哟努力加载";
     [_playerMenuView.btnDelete addTarget:self action:@selector(doDelete:) forControlEvents:UIControlEventTouchUpInside];
     [_playerMenuView.btnCollect addTarget:self action:@selector(doCollect:) forControlEvents:UIControlEventTouchUpInside];
     [_playerMenuView.btnPlayOrPause addTarget:self action:@selector(doPlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
@@ -363,7 +363,7 @@
     } else if (currentsong.artist) {
         _playerMenuView.lblSongInfo.text = [NSString stringWithFormat:@"%@", currentsong.artist];
     } else {
-        _playerMenuView.lblSongInfo.text = @"咪呦努力加载";
+        _playerMenuView.lblSongInfo.text = @"咪哟努力加载";
     }
     
     

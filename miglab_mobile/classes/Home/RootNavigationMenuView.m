@@ -58,10 +58,10 @@
         UIImageView *separatorImageView12 = [[UIImageView alloc] initWithImage:separatorImage];
         separatorImageView12.frame = CGRectMake(213, 0 + topdistance, 1, 42);
         [self addSubview:separatorImageView12];
-        
+        */
         UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_menu_sel" type:@"png"];
         UIColor *menuSelColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
-         */
+         
         
         //添加头像 //位置 9 长度31
 
@@ -115,9 +115,9 @@
         //first
         _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(10, 0 + topdistance, 80, 42)];
         _btnMenuFirst.tag = 100;
-        //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
 
         //判断用户是否登录以及登录后性别判断
@@ -130,9 +130,9 @@
         CGFloat second_x =_btnMenuFirst.frame.origin.x + _btnMenuFirst.frame.size.width + 20;
         _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(second_x, 0 + topdistance, 56, 42)];
         _btnMenuSecond.tag = 101;
-        //[_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
         _btnMenuSecond.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuSecond];
@@ -142,9 +142,9 @@
         CGFloat third_x =_btnMenuSecond.frame.origin.x + _btnMenuSecond.frame.size.width + 20;
         _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(third_x, 0 + topdistance,56, 42)];
         _btnMenuThird.tag = 102;
-        //[_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        [_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        //[_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
+        [_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
         _btnMenuThird.titleLabel.font = [UIFont fontOfApp:17.0f];
         [self addSubview:_btnMenuThird];

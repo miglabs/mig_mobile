@@ -141,7 +141,7 @@
 #define MIGTIP_EMPTY_PASSWORD                   @"密码不能为空哦~~~"
 
 /* 加载提示语 */
-#define MIGTIP_LOADING                          @"咪呦在拼命加载..."
+#define MIGTIP_LOADING                          @"咪哟在拼命加载..."
 
 /* 加载聊天 */
 #define MIGTIP_HIS_CHAT                         @"加载聊天"
