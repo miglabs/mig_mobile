@@ -144,6 +144,8 @@
         [alert show];
     }*/
     
+    // 主动更新一次底部显示
+    [super updateSongInfo];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -47,4 +47,6 @@
 -(void)playerAbort:(NSNotification *)tNotification;
 -(void)playerResume:(NSNotification *)tNotification;
 
+-(void)updateSongInfo;
+
 @end

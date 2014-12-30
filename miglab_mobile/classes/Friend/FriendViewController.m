@@ -119,6 +119,9 @@
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
         [alert show];
     }*/
+    
+    // 主动更新一次底部显示
+    [super updateSongInfo];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
