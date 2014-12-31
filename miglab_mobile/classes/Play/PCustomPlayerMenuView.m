@@ -33,15 +33,17 @@
         self.backgroundColor = [UIColor clearColor];
         
         //背景图片
-        _playerMenuBgImageView = [[UIImageView alloc] init];
+       /* _playerMenuBgImageView = [[UIImageView alloc] init];
         _playerMenuBgImageView.frame = CGRectMake(0, 0, 320, 90);
         UIImage *playerMenuBgImage = [UIImage imageWithName:@"bottom_control_bg" type:@"png"];
         _playerMenuBgImageView.image = playerMenuBgImage;
         [self addSubview:_playerMenuBgImageView];
-        
+        */
         //移除按钮
+        CGFloat  y = 0;
+        
         _btnRemove = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnRemove.frame = CGRectMake(42, 27, 48, 48);
+        _btnRemove.frame = CGRectMake(42, 27 - y, 48, 48);
         UIImage *removeNorImage = [UIImage imageWithName:@"btn_delete_nor" type:@"png"];
         UIImage *removeSelImage = [UIImage imageWithName:@"btn_delete_sel" type:@"png"];
         [_btnRemove setImage:removeNorImage forState:UIControlStateNormal];
@@ -50,7 +52,7 @@
         
         //喜欢
         _btnLike = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnLike.frame = CGRectMake(128, 16, 62, 62);
+        _btnLike.frame = CGRectMake(128, 16 - y, 62, 62);
         UIImage *likeNorImage = [UIImage imageWithName:@"btn_like_nor" type:@"png"];
         UIImage *likeSelImage = [UIImage imageWithName:@"btn_like_sel" type:@"png"];
         [_btnLike setImage:likeNorImage forState:UIControlStateNormal];
@@ -59,7 +61,7 @@
         
         //下一首
         _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnNext.frame = CGRectMake(232, 27, 48, 48);
+        _btnNext.frame = CGRectMake(232, 27 - y, 48, 48);
         UIImage *nextNorImage = [UIImage imageWithName:@"btn_next_nor" type:@"png"];
         UIImage *nextSelImage = [UIImage imageWithName:@"btn_next_sel" type:@"png"];
         [_btnNext setImage:nextNorImage forState:UIControlStateNormal];

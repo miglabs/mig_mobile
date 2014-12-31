@@ -47,6 +47,7 @@
     [[self.sendIconViewL layer] setCornerRadius:radius];
     [[self.sendIconViewR layer] setMasksToBounds:YES];
     [[self.sendIconViewL layer] setMasksToBounds:YES];
+
 #ifdef NEW_MSGVIEW
     self.messageView.font        = [UIFont systemFontOfSize:16.0f];
     self.messageView.textColor   = [UIColor blackColor];
@@ -235,4 +236,7 @@
     [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
 }
 
+-(void)headUserInfo{
+    PLog(@"headUserInfo");
+}
 @end

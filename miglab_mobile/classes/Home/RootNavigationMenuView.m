@@ -59,7 +59,7 @@
         separatorImageView12.frame = CGRectMake(213, 0 + topdistance, 1, 42);
         [self addSubview:separatorImageView12];
         */
-        UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_menu_sel" type:@"png"];
+        UIImage *menuSelImage = [UIImage imageWithName:@"home_navigation_bg_on" type:@"png"];
         UIColor *menuSelColor = [UIColor colorWithRed:92.0f/255.0f green:210.0f/255.0f blue:248.0f/255.0f alpha:1.0f];
          
         

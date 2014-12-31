@@ -209,6 +209,10 @@ static int PAGE_WIDTH = 81;
      _mtBarrageList = [[NSMutableArray  alloc] init];
     
     
+    // 初始化类型的白框焦点
+    _focusImageView = [[UIImageView alloc] init];
+    [self.view addSubview:_focusImageView];
+    
     //类型
     _btnType = [UIButton buttonWithType:UIButtonTypeCustom];
     _btnType.frame = CGRectMake(11.5 + 20, posy + 10 + 100 + 50  - start_pos + separation, 31, 31);
@@ -390,9 +394,7 @@ static int PAGE_WIDTH = 81;
     [self.view addSubview:_modifyGeneView];
     _modifyGeneView.hidden = YES;
     
-    // 初始化类型的白框焦点
-    _focusImageView = [[UIImageView alloc] init];
-    [self.view addSubview:_focusImageView];
+
     _focusImageView.hidden = YES;
     
     //init gene 4 show

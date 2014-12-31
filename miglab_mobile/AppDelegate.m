@@ -132,7 +132,6 @@
         [GlobalDataManager GetInstance].isProgramFirstLaunch = NO;
         [GlobalDataManager GetInstance].isDetailPlayFirstLaunch = NO;
     }
-    
     // iphone版本
     NSDictionary* deviceNamesByCode =
     @{@"i386"      :@"Simulator",
