@@ -230,18 +230,20 @@ static int PAGE_WIDTH = 81;
     
     
     //心情
-    _currentGeneView.lblMoodDesc = [[UILabel alloc] initWithFrame:CGRectMake(11.5 +20,posy + 10 + 160+50 + separation  - start_pos, 246, 31)];
-    _currentGeneView.lblMoodDesc.textColor = [UIColor darkGrayColor];
-    _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
-    [self.view addSubview:_currentGeneView.lblMoodDesc];
     
     _btnMood = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnMood.frame = CGRectMake(11.5 + 246, posy + 10 + 160 + 50 + separation  - start_pos, 31, 31);
+    _btnMood.frame = CGRectMake(246, posy + 10 + 160 + 50 + separation  - start_pos, 31, 31);
     _btnMood.tag = 200;
     UIImage *moodimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnMood setImage:moodimage forState:UIControlStateNormal];
     [_btnMood addTarget:self action:@selector(doGotoGene:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnMood];
+    
+    _currentGeneView.lblMoodDesc = [[UILabel alloc] initWithFrame:CGRectMake(_btnMood.frame.origin.x - 246 -20,posy + 10 + 160+50 + separation  - start_pos, 246, 31)];
+    _currentGeneView.lblMoodDesc.textColor = [UIColor darkGrayColor];
+    _currentGeneView.lblMoodDesc.font = [UIFont fontOfApp:20.0f];
+    _currentGeneView.lblMoodDesc.textAlignment =  NSTextAlignmentRight;
+    [self.view addSubview:_currentGeneView.lblMoodDesc];
     
     
     //场景

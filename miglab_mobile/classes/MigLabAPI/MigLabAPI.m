@@ -797,6 +797,7 @@
  <!--请求GET-->
  HTTP_NEARBYUSER
  */
+/*
 -(void)doGetNearbyUser:(NSString *)uid token:(NSString *)ttoken page:(int)tpage{
     
     API_HEADER();
@@ -853,7 +854,7 @@
     [operation start];
     
     API_FOOTER();
-}
+}*/
 
 /*
  获取用户歌单
@@ -973,7 +974,7 @@
         
         PLog(@"failure: %@", error);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayingMusicFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationBarryCommFailed object:nil userInfo:nil];
         
     }];
     
@@ -988,6 +989,7 @@
  <!--请求GET-->
  HTTP_GETPLAYINGMUSIC
  */
+/*
 -(void)doGetPlayingMusicFromUser:(NSString *)uid token:(NSString *)ttoken begin:(int)tbegin page:(int)tpage{
     
     API_HEADER();
@@ -1046,7 +1048,7 @@
     [operation start];
     
     API_FOOTER();
-}
+}*/
 
 /*
  获取频道目录
@@ -3653,7 +3655,7 @@
  获取最空闲的聊天地址
  
  */
-
+/*
 -(void) doGetSC:(int64_t)platformid uid:(int64_t)tuid  tid:(int64_t) ttid{
     API_HEADER();
     NSString* url = [NSString stringWithFormat:@"%@?platformd=%lld&uid=%lld&tid=%lld",
@@ -3707,12 +3709,13 @@
     
     API_FOOTER();
 }
-
+*/
 
 /*
  获取聊天记录
  
  */
+/*
 -(void) doGetHisChat:(int64_t)platformid uid:(int64_t) tuid  tid:(int64_t) ttid token:(NSString*)ttoken minmsgid:(int64_t) tminmsgid{
     API_HEADER();
     NSString* url = [NSString stringWithFormat:@"%@?platformid=%lld&uid=%lld&tid=%lld&token=%@&msgid=%lld",
@@ -3766,7 +3769,7 @@
     
     API_FOOTER();
 }
-
+*/
 /*
  发送分享结果
  */

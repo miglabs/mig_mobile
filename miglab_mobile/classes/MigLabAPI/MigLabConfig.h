@@ -172,6 +172,7 @@
 //登陆成功
 #define NotificationNameLoginSuccess                        @"NotificationNameLoginSuccess"
 
+/*
 //获取用户信息
 #define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/userinfo.fcgi"]
 #define NotificationNameGetUserInfoSuccess                  @"NotificationNameGetUserInfoSuccess"
@@ -192,12 +193,13 @@
 #define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/updateusr.fcgi"]
 #define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"
 #define NotificationUpdateUserFailed                        @"NotificationUpdateUserFailed"
-
+*/
 //默认推荐歌曲
 #define HTTP_DEFAULTMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/song.fcgi?token=AAOfv3WG35avZspzKhoeodwv2MFd8zYxOUFENUNCMUFBNjgwMDAyRTI2&uid=10001"]
 #define NotificationNameGetDefaultMusicSuccess              @"NotificationNameGetDefaultMusicSuccess"
 #define NotificationNameGetDefaultMusicFailed               @"NotificationNameGetDefaultMusicFailed"
 
+/*
 //添加歌曲收藏
 #define HTTP_COLLECTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
 #define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
@@ -212,7 +214,8 @@
 #define HTTP_HATESONG                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hatsong.fcgi"]
 #define NotificationNameHateSongSuccess                     @"NotificationNameHateSongSuccess"
 #define NotificationNameHateSongFailed                      @"NotificationNameHateSongFailed"
-
+*/
+/*
 //赠送歌曲
 #define HTTP_PRESENTMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/presentsong.fcgi"]
 #define NotificationNamePresentMusicSuccess                 @"NotificationNamePresentMusicSuccess"
@@ -222,18 +225,16 @@
 #define HTTP_SHAREMUSIC                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/sharesong.fcgi"]
 #define NotificationNameShareMusicSuccess                   @"NotificationNameShareMusicSuccess"
 #define NotificationNameShareMusicFailed                    @"NotificationNameShareMusicFailed"
-
+*/
 //上传用户本地歌曲信息
+/*
 #define HTTP_UPLOADMUSIC                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/updatesong.fcgi"]
 #define NotificationNameUploadMusicSuccess                  @"NotificationNameUploadMusicSuccess"
 #define NotificationNameUploadMusicFailed                   @"NotificationNameUploadMusicFailed"
-
-//获取附近用户
-#define HTTP_NEARBYUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/getusrpos.fcgi"]
-#define NotificationNameNearbyUserSuccess                   @"NotificationNameNearbyUserSuccess"
-#define NotificationNameNearbyUserFailed                    @"NotificationNameNearbyUserFailed"
+*/
 
 //获取用户歌单
+/*
 #define HTTP_GETUSERLIST                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/getsonglist.fcgi"]
 #define NotificationNameUserListSuccess                     @"NotificationNameUserListSuccess"
 #define NotificationNameUserListFailed                      @"NotificationNameUserListFailed"
@@ -279,6 +280,12 @@
 #define HTTP_ADDMOODRECORD                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/moodrcd.fcgi"]
 #define NotificationNameAddMoodRecordSuccess                @"NotificationNameAddMoodRecordSuccess"
 #define NotificationNameAddMoodRecordFailed                 @"NotificationNameAddMoodRecordFailed"
+*/
+/*
+//获取附近用户
+#define HTTP_NEARBYUSER                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"api/getusrpos.fcgi"]
+#define NotificationNameNearbyUserSuccess                   @"NotificationNameNearbyUserSuccess"
+#define NotificationNameNearbyUserFailed                    @"NotificationNameNearbyUserFailed"
 
 //设置用户位置 (2013-7-22)
 #define HTTP_SETUSERPOS                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/setuserpos.fcgi"]
@@ -288,23 +295,24 @@
 //查找附近的人 (2013-7-22)
 #define HTTP_SEARCHNEARBY                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/searchnearby.fcgi"]
 #define NotificationNameSearchNearbySuccess                 @"NotificationNameSearchNearbySuccess"
-#define NotificationNameSearchNearbyFailed                  @"NotificationNameSearchNearbyFailed"
+#define NotificationNameSearchNearbyFailed                  @"NotificationNameSearchNearbyFailed"*/
 
 //非注册用户获取播放列表（2013-08－17）
 #define HTTP_GETDEFAULTGUESTSONGS                           [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getdefguestsongs.fcgi"]
 #define NotificationNameGetDefaultGuestSongsSuccess         @"NotificationNameGetDefaultGuestSongsSuccess"
 #define NotificationNameGetDefaultGuestSongsFailed          @"NotificationNameGetDefaultGuestSongsFailed"
 
+/*
 //获取收藏的歌曲(2013-08-18)
 #define HTTP_GETCLTSONGS                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getcltsongs.fcgi"]
 #define NotificationNameGetCollectedSongsSuccess            @"NotificationNameGetCollectedSongsSuccess"
 #define NotificationNameGetCollectedSongsFailed             @"NotificationNameGetCollectedSongsFailed"
-
+*/
 //获取豆瓣的频道歌曲（2013-08-19）
 #define HTTP_GETDBCHANNELSONG                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/db_channel_song.fcgi"]
 #define NotificationNameGetDbChannelSongSuccess             @"NotificationNameGetDbChannelSongSuccess"
 #define NotificationNameGetDbChannelSongFailed              @"NotificationNameGetDbChannelSongFailed"
-
+/*
 //通过整体纬度获取音乐(2013-08-19)
 #define HTTP_GETTYPESONGS                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/gettypesongs.fcgi"]
 #define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
@@ -314,7 +322,8 @@
 #define HTTP_RECORDLOCALSONGS                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/recordlocalsongs.fcgi"]
 #define NotificationNameRecordLocalSongsSuccess             @"NotificationNameRecordLocalSongsSuccess"
 #define NotificationNameRecordLocalSongsFailed              @"NotificationNameRecordLocalSongsFailed"
-
+*/
+/*
 //获取推送消息(2013-08-20)
 #define HTTP_GETPUSHMSG                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getpushmsg.fcgi"]
 #define NotificationNameGetPushMsgSuccess                          @"NotificationNameGetPushMsgSuccess"
@@ -329,17 +338,21 @@
 #define HTTP_UPDATECONFIGFILE                               [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/updateconfigfile.fcgi"]
 #define NotificationNameUpdateConfigSuccess                 @"NotificationNameUpdateConfigSuccess"
 #define NotificationNameUpdateConfigFailed                  @"NotificationNameUpdateConfigFailed"
-
+*/
 //添加红心歌曲
+/*
 #define HTTP_COLLECTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectsong.fcgi"]
 #define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
 #define NotificationNameCollectSongFailed                   @"NotificationNameCollectSongFailed"
+ */
 
+/*
 //获取收藏歌曲数量和附近人收藏数量
 #define HTTP_COLLECTANDNEARNUM                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/collectandnearnum.fcgi"]
 #define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
 #define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
-
+*/
+/*
 //删除收藏歌曲
 #define HTTP_DELETECOLLECTSONG                              [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/delcltsong.fcgi"]
 #define NotificationNameDeleteCollectSongSuccess            @"NotificationNameDeleteCollectSongSuccess"
@@ -349,13 +362,15 @@
 #define HTTP_GETSONGINFO                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getsonginfo.fcgi"]
 #define NotificationNameGetSongInfoSuccess                  @"NotificationNameGetSongInfoSuccess"
 #define NotificationNameGetSongInfoFailed                   @"NotificationNameGetSongInfoFailed"
-
+*/
+/*
 //附近人的音乐
 #define HTTP_GETNEARMUSIC                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/nearmusic.fcgi"]
 #define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"
 #define NotificationNameGetNearMusicFailed                  @"NotificationNameGetNearMusicFailed"
-
+*/
 // 评论歌曲
+/*
 #define HTTP_COMMENTSONG                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/commentsong.fcgi"]
 #define NotificationNameCommentSongSuccess                  @"NotificationNameCommentSongSuccess"
 #define NotificationNameCommentSongFailed                   @"NotificationNameCommentSongFailed"
@@ -364,7 +379,8 @@
 #define HTTP_GETCOMMENT                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/get_comment.fcgi"]
 #define NotificationNameGetCommentSuccess                   @"NotificationNameGetCommentSuccess"
 #define NotificationNameGetCommentFailed                    @"NotificationNameGetCommentFailed"
-
+*/
+/*
 // 获取周围谁在听你的歌及消息
 #define HTTP_GETMYNEARMUSICMSGNUM                           [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/musicfri.fcgi"]
 #define NotificationNameGetMyNearMusicMsgNumSuccess         @"NotificationNameGetMyNearMusicMsgNumSuccess"
@@ -378,33 +394,38 @@
 // 获取周围的人及音乐
 #define HTTP_GETNEARUSER                                    [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/nearuser.fcgi"]
 #define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
-#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
+#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"*/
 
 // 获取用户听歌记录
+/*
 #define HTTP_GETSONGHISTORY                                 [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getuserhis.fcgi"]
 #define NotificationNameGetSongHistorySuccess               @"NotificationNameGetSongHistorySuccess"
 #define NotificationNameGetSongHistoryFailed                @"NotificationNameGetSongHistoryFailed"
-
+*/
+/*
 // 打招呼
 #define HTTP_SAYHELLO                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/sayhello.fcgi"]
 #define NotificationNameSayHelloSuccess                     @"NotificationNameSayHelloSuccess"
 #define NotificationNameSayHelloFailed                      @"NotificationNameSayHelloFailed"
-
+*//*
 // 获取歌友
 #define HTTP_GETMUSICUSER                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getmusicuser.fcgi"]
 #define NotificationNameGetMusicUserSuccess                 @"NotificationNameGetMusicUserSuccess"
 #define NotificationNameGetMusicUserFailed                  @"NotificationNameGetMusicUserFailed"
-
+*/
+/*
 #define HTTP_CONFIGPUSH                                     [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/setuserconfigofpush.fcgi"]
 #define NotificationNameConfigPushSuccess                   @"NotificationNameConfigPushSuccess"
 #define NotificationNameConfigPushFailed                    @"NotificationNameConfigPushFailed"
-
+ */
+/*
 // 获取歌词分享信息
 #define HTTP_GETSHAREINFO                                   [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getshareinfo.fcgi"]
 #define NotificationNameGetShareInfoSuccess                 @"NotificationNameGetShareInfoSuccess"
 #define NotificationNameGetShareInfoFailed                  @"NotificationNameGetShareInfoFailed"
-
+*/
 //获取聊天服务器
+/*
 #define HTTP_GETSC                                          [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/getsc.fcgi"]
 #define NotificationNameGetSCSuccess                        @"NotificationNameGetSCSuccess"
 #define NotificationNameGetSCFailed                         @"NotificationNameGetSCFailed"
@@ -413,16 +434,13 @@
 #define HTTP_HISTCHAT                                       [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/hischat.fcgi"]
 #define NotificationNameHisChatSuccess                      @"NotificationNameHisChatSuccess"
 #define NotificationNameHisChatFailed                       @"NotificationNameHisChatFailed"
-
+*/
+/*
 // 提交分享结果
 #define HTTP_SENDSHARERESULT                                [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/shareresult.fcgi"]
 #define NotificationNameSendShareResultSuccess              @"NotificationNameSendShareResultSuccess"
 #define NotificationNameSendShareResultFailed               @"NotificationNameSendShareResultFailed"
-
-// 提交百度推送信息
-#define HTTP_SENDBPUSHINFO                                  [NSString stringWithFormat:@"%@%@",HTTP_API_DOMAIN,@"cgi-bin/bdbindpush.fcgi"]
-#define NotificationNameSendBPushInfoSuccess                @"NotificationNameSendBPushInfoSuccess"
-#define NotificationNameSendBPushInfoFailed                 @"NotificationNameSendBPushInfoFailed"
+ */
 
 
 
@@ -435,6 +453,9 @@
 //module
 #define SOCMOD              @"soc"
 #define CHATMOD             @"chat"
+#define MUSICMOD            @"music"
+#define LBSMOD              @"lbs"
+#define USRMOD              @"usr"
 
 //版本
 #define VERSION             @"v1"
@@ -443,8 +464,14 @@
 
 #define CHAT_INTERFACE    [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,CHATMOD,VERSION]
 
+#define MUSIC_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,MUSICMOD,VERSION]
 
-//社交
+#define LBS_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,LBSMOD,VERSION]
+
+#define USR_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,USRMOD,VERSION]
+
+
+//////////////////////////////////////////////////社交///////////////////////////////////////////////////////////////
 //获取当前天气和城市
 #define HTTP_LOCATIONINFO                                    [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getlocation.fcgi"]
 #define NotificationNameLocationSuccess                     @"NotificationNameLocationSuccess"
@@ -455,7 +482,231 @@
 #define NotificationBarryCommSuccess                     @"NotificationBarryCommSuccess"
 #define NotificationBarryCommFailed                      @"NotificationBarryCommFailed"
 
-//聊天
+//提交deviceToken /因换成百度推送 故暂时不调用
+#define HTTP_CONFIGPUSH                                     [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"setuserconfigofpush.fcgi"]
+#define NotificationNameConfigPushSuccess                   @"NotificationNameConfigPushSuccess"
+#define NotificationNameConfigPushFailed                    @"NotificationNameConfigPushFailed"
+
+//赠送歌曲
+#define HTTP_PRESENTMUSIC                                   [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"presentsong.fcgi"]
+#define NotificationNamePresentMusicSuccess                 @"NotificationNamePresentMusicSuccess"
+#define NotificationNamePresentMusicFailed                  @"NotificationNamePresentMusicFailed"
+
+// 打招呼
+#define HTTP_SAYHELLO                                       [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"sayhello.fcgi"]
+#define NotificationNameSayHelloSuccess                     @"NotificationNameSayHelloSuccess"
+#define NotificationNameSayHelloFailed                      @"NotificationNameSayHelloFailed"
+
+#define HTTP_GETPUSHMSG                                     [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getpushmsg.fcgi"]
+#define NotificationNameGetPushMsgSuccess                          @"NotificationNameGetPushMsgSuccess"
+#define NotificationNameGetPushMsgFailed                    @"NotificationNameGetPushMsgFailed"
+
+// 评论歌曲
+#define HTTP_COMMENTSONG                                    [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"commentsong.fcgi"]
+#define NotificationNameCommentSongSuccess                  @"NotificationNameCommentSongSuccess"
+#define NotificationNameCommentSongFailed                   @"NotificationNameCommentSongFailed"
+
+// 获取歌曲评论
+#define HTTP_GETCOMMENT                                     [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"get_comment.fcgi"]
+#define NotificationNameGetCommentSuccess                   @"NotificationNameGetCommentSuccess"
+#define NotificationNameGetCommentFailed                    @"NotificationNameGetCommentFailed"
+
+// 获取歌友
+#define HTTP_GETMUSICUSER                                   [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getmusicuser.fcgi"]
+#define NotificationNameGetMusicUserSuccess                 @"NotificationNameGetMusicUserSuccess"
+#define NotificationNameGetMusicUserFailed                  @"NotificationNameGetMusicUserFailed"
+
+// 获取歌词分享信息
+#define HTTP_GETSHAREINFO                                   [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"getshareinfo.fcgi"]
+#define NotificationNameGetShareInfoSuccess                 @"NotificationNameGetShareInfoSuccess"
+#define NotificationNameGetShareInfoFailed                  @"NotificationNameGetShareInfoFailed"
+
+// 提交分享结果
+#define HTTP_SENDSHARERESULT                                [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"shareresult.fcgi"]
+#define NotificationNameSendShareResultSuccess              @"NotificationNameSendShareResultSuccess"
+#define NotificationNameSendShareResultFailed               @"NotificationNameSendShareResultFailed"
+
+//分享歌曲
+#define HTTP_SHAREMUSIC                                     [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"sharesong.fcgi"]
+#define NotificationNameShareMusicSuccess                   @"NotificationNameShareMusicSuccess"
+#define NotificationNameShareMusicFailed                    @"NotificationNameShareMusicFailed"
+
+
+
+
+//////////////////////////////////////////////////音乐///////////////////////////////////////////////////////////////
+
+//添加歌曲收藏
+#define HTTP_COLLECTSONG                                    [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"collectsong.fcgi"]
+#define NotificationNameCollectSongSuccess                  @"NotificationNameCollectSongSuccess"
+#define NotificationNameCollectSongFailed                   @"NotificationNameCollectSongFailed"
+
+//取消歌曲收藏
+#define HTTP_CANCELCOLLECTEDSONG                            [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"delcltsong.fcgi"]
+#define NotificationNameCancelCollectedSongSuccess          @"NotificationNameCancelCollectedSongSuccess"
+#define NotificationNameCancelCollectedSongFailed           @"NotificationNameCancelCollectedSongFailed"
+
+
+//删除收藏歌曲
+#define HTTP_DELETECOLLECTSONG                              [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"delcltsong.fcgi"]
+#define NotificationNameDeleteCollectSongSuccess            @"NotificationNameDeleteCollectSongSuccess"
+#define NotificationNameDeleteCollectSongFailed             @"NotificationNameDeleteCollectSongFailed"
+
+//获取歌曲信息
+#define HTTP_GETSONGINFO                                    [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"cgetsonginfo.fcgi"]
+#define NotificationNameGetSongInfoSuccess                  @"NotificationNameGetSongInfoSuccess"
+#define NotificationNameGetSongInfoFailed                   @"NotificationNameGetSongInfoFailed"
+
+//歌曲拉黑
+#define HTTP_HATESONG                                       [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"hatsong.fcgi"]
+#define NotificationNameHateSongSuccess                     @"NotificationNameHateSongSuccess"
+#define NotificationNameHateSongFailed                      @"NotificationNameHateSongFailed"
+
+//上传用户本地歌曲信息
+#define HTTP_UPLOADMUSIC                                    [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"updatesong.fcgi"]
+#define NotificationNameUploadMusicSuccess                  @"NotificationNameUploadMusicSuccess"
+#define NotificationNameUploadMusicFailed                   @"NotificationNameUploadMusicFailed"
+
+#define HTTP_GETUSERLIST                                    [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"getsonglist.fcgi"]
+#define NotificationNameUserListSuccess                     @"NotificationNameUserListSuccess"
+#define NotificationNameUserListFailed                      @"NotificationNameUserListFailed"
+
+//获取频道目录
+#define HTTP_GETCHANNEL                                     [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"channel.fcgi"]
+#define NotificationNameGetChannelSuccess                   @"NotificationNameGetChannelSuccess"
+#define NotificationNameGetChannelFailed                    @"NotificationNameGetChannelFailed"
+
+//获取频道的歌曲
+#define HTTP_GETCHANNELMUSIC                                [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"channel_song.fcgi"]
+#define NotificationNameGetChannelMusicSuccess              @"NotificationNameGetChannelMusicSuccess"
+#define NotificationNameGetChannelMusicFailed               @"NotificationNameGetChannelMusicFailed"
+
+//获取心情场景词描述
+#define HTTP_MOODSCENE                                      [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"getword.fcgi"]
+#define NotificationNameMoodSuccess                         @"NotificationNameMoodSuccess"
+#define NotificationNameMoodFailed                          @"NotificationNameMoodFailed"
+#define NotificationNameSceneSuccess                        @"NotificationNameSceneSuccess"
+#define NotificationNameSceneFailed                         @"NotificationNameSceneFailed"
+
+//获取心情场景歌曲
+#define HTTP_MODEMUSIC                                      [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"word_song.fcgi"]
+#define NotificationNameModeMusicSuccess                    @"NotificationNameModeMusicSuccess"
+#define NotificationNameModeMusicFailed                     @"NotificationNameModeMusicFailed"
+
+//获取心绪地图
+#define HTTP_MOODMAP                                        [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"moodmap.fcgi"]
+#define NotificationNameMoodMapSuccess                      @"NotificationNameMoodMapSuccess"
+#define NotificationNameMoodMapFailed                       @"NotificationNameMoodMapFailed"
+
+//获取心绪类别名称
+#define HTTP_MOODPARENT                                     [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"moodparent.fcgi"]
+#define NotificationNameMoodParentSuccess                   @"NotificationNameMoodParentSuccess"
+#define NotificationNameMoodParentFailed                    @"NotificationNameMoodParentFailed"
+
+//提交用户当前状态
+#define HTTP_ADDMOODRECORD                                  [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"moodrcd.fcgi"]
+#define NotificationNameAddMoodRecordSuccess                @"NotificationNameAddMoodRecordSuccess"
+#define NotificationNameAddMoodRecordFailed                 @"NotificationNameAddMoodRecordFailed"
+
+//获取收藏的歌曲
+#define HTTP_GETCLTSONGS                                    [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"getcltsongs.fcgi"]
+#define NotificationNameGetCollectedSongsSuccess            @"NotificationNameGetCollectedSongsSuccess"
+#define NotificationNameGetCollectedSongsFailed             @"NotificationNameGetCollectedSongsFailed"
+
+//记录用户试听歌曲状态
+#define HTTP_RECORDCURSONG                                  [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"recordcursong.fcgi"]
+#define NotificationNameRecordCurSongSuccess                @"NotificationNameRecordCurSongSuccess"
+#define NotificationNameRecordCurSongFailed                 @"NotificationNameRecordCurSongFailed"
+
+//更新音乐纬度配置文件
+#define HTTP_UPDATECONFIGFILE                               [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"updateconfigfile.fcgi"]
+#define NotificationNameUpdateConfigSuccess                 @"NotificationNameUpdateConfigSuccess"
+#define NotificationNameUpdateConfigFailed                  @"NotificationNameUpdateConfigFailed"
+
+//通过整体纬度获取音乐
+#define HTTP_GETTYPESONGS                                   [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"gettypesongs.fcgi"]
+#define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
+#define NotificationNameGetTypeSongsFailed                  @"NotificationNameGetTypeSongsFailed"
+
+//提交本地歌曲信息
+#define HTTP_RECORDLOCALSONGS                               [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"recordlocalsongs.fcgi"]
+#define NotificationNameRecordLocalSongsSuccess             @"NotificationNameRecordLocalSongsSuccess"
+#define NotificationNameRecordLocalSongsFailed              @"NotificationNameRecordLocalSongsFailed"
+
+// 获取用户听歌记录
+#define HTTP_GETSONGHISTORY                                 [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"getuserhis.fcgi"]
+#define NotificationNameGetSongHistorySuccess               @"NotificationNameGetSongHistorySuccess"
+#define NotificationNameGetSongHistoryFailed                @"NotificationNameGetSongHistoryFailed"
+
+//////////////////////////////////////////////////定位相关///////////////////////////////////////////////////////////////
+
+
+//设置用户位置 (2013-7-22)
+#define HTTP_SETUSERPOS                                     [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"setuserpos.fcgi"]
+#define NotificationNameSetUserPosSuccess                   @"NotificationNameSetUserPosSuccess"
+#define NotificationNameSetUserPosFailed                    @"NotificationNameSetUserPosFailed"
+
+//查找附近的人 (2013-7-22)
+#define HTTP_SEARCHNEARBY                                   [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"searchnearby.fcgi"]
+#define NotificationNameSearchNearbySuccess                 @"NotificationNameSearchNearbySuccess"
+#define NotificationNameSearchNearbyFailed                  @"NotificationNameSearchNearbyFailed"
+
+// 获取周围谁在听你的歌及消息
+#define HTTP_GETMYNEARMUSICMSGNUM                           [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"musicfri.fcgi"]
+#define NotificationNameGetMyNearMusicMsgNumSuccess         @"NotificationNameGetMyNearMusicMsgNumSuccess"
+#define NotificationNameGetMyNearMusicMsgNumFailed          @"NotificationNameGetMyNearMusicMsgNumFailed"
+
+// 获取周围谁在听你红心的歌曲
+#define HTTP_GETSANMEMUSIC                                  [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"samemusic.fcgi"]
+#define NotificationNameGetSameMusicSuccess                 @"NotificationNameGetSameMusicSuccess"
+#define NotificationNameGetSameMusicFailed                  @"NotificationNameGetSameMusicFailed"
+
+// 获取周围的人及音乐
+#define HTTP_GETNEARUSER                                    [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"nearuser.fcgi"]
+#define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
+#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
+
+
+//附近人的音乐
+#define HTTP_GETNEARMUSIC                                   [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"nearmusic.fcgi"]
+#define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"
+#define NotificationNameGetNearMusicFailed                  @"NotificationNameGetNearMusicFailed"
+
+
+//获取收藏歌曲数量和附近人收藏数量
+#define HTTP_COLLECTANDNEARNUM                              [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"collectandnearnum.fcgi"]
+#define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
+#define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
+//////////////////////////////////////////////////用户管理///////////////////////////////////////////////////////////////
+
+//获取用户信息
+#define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"userinfo.fcgi"]
+#define NotificationNameGetUserInfoSuccess                  @"NotificationNameGetUserInfoSuccess"
+#define NotificationNameGetUserInfoFailed                   @"NotificationNameGetUserInfoFailed"
+
+
+//注册
+#define HTTP_REGISTER                                       [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"regedit.fcgi"]
+#define NotificationNameRegisterSuccess                     @"NotificationNameRegisterSuccess"
+#define NotificationNameRegisterFailed                      @"NotificationNameRegisterFailed"
+
+//游客信息
+#define HTTP_GUEST                                          [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"guest.fcgi"]
+#define NotificationNameGetGuestSuccess                     @"NotificationNameGetGuestSuccess"
+#define NotificationNameGetGuestFailed                      @"NotificationNameGetGuestFailed"
+
+//更新用户信息
+#define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"updateusr.fcgi"]
+#define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"
+#define NotificationUpdateUserFailed                        @"NotificationUpdateUserFailed"
+
+
+// 提交百度推送信息
+#define HTTP_SENDBPUSHINFO                                  [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"bdbindpush.fcgi"]
+#define NotificationNameSendBPushInfoSuccess                @"NotificationNameSendBPushInfoSuccess"
+#define NotificationNameSendBPushInfoFailed                 @"NotificationNameSendBPushInfoFailed"
+
+//////////////////////////////////////////////////聊天///////////////////////////////////////////////////////////////
 //获取群聊天记录
 #define HTTP_GROUPMESSAGE                                      [NSString stringWithFormat:@"%@%@",CHAT_INTERFACE,@"groupmessage.fcgi"]
 
