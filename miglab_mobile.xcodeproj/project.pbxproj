@@ -600,6 +600,7 @@
 		CBB343AE1A0903BA007BF368 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB343AD1A0903BA007BF368 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CBB425E017DE18C400E3BA90 /* SongComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB425DF17DE18C400E3BA90 /* SongComment.m */; };
 		CBBB6B4B1857446D005BA14A /* friend_button_recommend.png in Resources */ = {isa = PBXBuildFile; fileRef = CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */; };
+		CBCB6A951A5AE3CA0082E361 /* choose_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCB6A941A5AE3CA0082E361 /* choose_line.png */; };
 		CBD3A381182F655E008AA163 /* FriendOfSendSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */; };
 		CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
@@ -1406,6 +1407,7 @@
 		CBB425DE17DE18C400E3BA90 /* SongComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongComment.h; sourceTree = "<group>"; };
 		CBB425DF17DE18C400E3BA90 /* SongComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongComment.m; sourceTree = "<group>"; };
 		CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_button_recommend.png; sourceTree = "<group>"; };
+		CBCB6A941A5AE3CA0082E361 /* choose_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_line.png; sourceTree = "<group>"; };
 		CBD3A37E182F655E008AA163 /* FriendOfSendSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendOfSendSongListViewController.h; sourceTree = "<group>"; };
 		CBD3A37F182F655E008AA163 /* FriendOfSendSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendOfSendSongListViewController.m; sourceTree = "<group>"; };
 		CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendOfSendSongListViewController.xib; sourceTree = "<group>"; };
@@ -1886,6 +1888,7 @@
 		165D7C8117BE5908000D08E3 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				CBCB6A941A5AE3CA0082E361 /* choose_line.png */,
 				C7C408651A484870007163C9 /* home_ico.png */,
 				CB7A2C0019C5847B0053C751 /* m.jpg */,
 				CB7A2C0119C5847B0053C751 /* f.jpg */,
@@ -3055,6 +3058,7 @@
 				167459E217BBB63F00E636F8 /* music_default_avatar.png in Resources */,
 				1653DBF317BD097100767E0E /* MusicSourceMenuCell.xib in Resources */,
 				1653DC1317BD158F00767E0E /* LocalViewController.xib in Resources */,
+				CBCB6A951A5AE3CA0082E361 /* choose_line.png in Resources */,
 				1653DC2D17BD221300767E0E /* LikeViewController.xib in Resources */,
 				165D7C8317BE5908000D08E3 /* top_navigation_bg.png in Resources */,
 				1661720218F9354600E86B11 /* facesbg.png in Resources */,
