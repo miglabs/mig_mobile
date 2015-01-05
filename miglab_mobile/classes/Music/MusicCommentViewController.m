@@ -141,7 +141,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, posy, ORIGIN_WIDTH, kMainScreenHeight - posy - 10 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy, ORIGIN_WIDTH, kMainScreenHeight - posy - 10 - 10 - 89);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -166,6 +166,7 @@
     _commentInputView.frame = CGRectMake(0, kMainScreenHeight - 29, kMainScreenWidth, 49);
     _commentInputView.commentTextField.delegate = self;
     [_commentInputView.btnSendComent addTarget:self action:@selector(doCommentSong:) forControlEvents:UIControlEventTouchUpInside];
+    [_commentInputView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_commentInputView];
     
     //data
