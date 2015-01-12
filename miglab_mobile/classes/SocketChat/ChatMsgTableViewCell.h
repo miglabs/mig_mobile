@@ -18,8 +18,7 @@
 #else
 @interface ChatMsgTableViewCell : UITableViewCell
 #endif
-
-
+ß
 @property (nonatomic, retain) IBOutlet EGOImageView *sendIconViewL;
 
 @property (nonatomic, retain) IBOutlet EGOImageView *sendIconViewR;

@@ -232,6 +232,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    UITouch* touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    if(CGRectContainsPoint(self.sendIconViewR.frame, point) ||
+       CGRectContainsPoint(self.sendIconViewL.frame, point)){
+        
+    }
     [super touchesBegan:touches withEvent:event];
     [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
 }
