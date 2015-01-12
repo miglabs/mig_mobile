@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */; };
 		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
 		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
 		1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */; };
@@ -608,6 +609,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_separator.png; sourceTree = "<group>"; };
 		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
 		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
 		1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_avatar_big.png; sourceTree = "<group>"; };
@@ -1888,6 +1890,7 @@
 		165D7C8117BE5908000D08E3 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */,
 				CBCB6A941A5AE3CA0082E361 /* choose_line.png */,
 				C7C408651A484870007163C9 /* home_ico.png */,
 				CB7A2C0019C5847B0053C751 /* m.jpg */,
@@ -3266,6 +3269,7 @@
 				16184E4A1802F09F00E6E627 /* share_sinaweibo_share_icon.png in Resources */,
 				16184E4B1802F09F00E6E627 /* share_songcover_share_layer.png in Resources */,
 				16EA2D3119286B09008E9DD3 /* gene_text.png in Resources */,
+				048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */,
 				16184E4C1802F09F00E6E627 /* share_tencentweibo_share_icon.png in Resources */,
 				184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */,
 				166B5801180C29CE00436AB0 /* base_navigation_bg_ios7.png in Resources */,
@@ -3528,8 +3532,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "daffc419-1837-4849-90d4-9923d36e1475";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daffc419-1837-4849-90d4-9923d36e1475";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3552,8 +3556,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "daffc419-1837-4849-90d4-9923d36e1475";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daffc419-1837-4849-90d4-9923d36e1475";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3568,8 +3572,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3602,8 +3606,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
+				PROVISIONING_PROFILE = "daffc419-1837-4849-90d4-9923d36e1475";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daffc419-1837-4849-90d4-9923d36e1475";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3618,8 +3622,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiang Dong (T932MCQ645)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiang Dong (T932MCQ645)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/miglab_mobile/classes/DoubanAPI",
@@ -3652,8 +3656,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "81439d53-6015-4ce1-8ad9-d3ccdccea537";
+				PROVISIONING_PROFILE = "daffc419-1837-4849-90d4-9923d36e1475";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "daffc419-1837-4849-90d4-9923d36e1475";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

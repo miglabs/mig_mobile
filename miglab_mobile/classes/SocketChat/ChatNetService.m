@@ -187,8 +187,8 @@
 
 -(void) getSC
 {
-    NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&uid=%lld",
-                      HTTP_GETIDLESC,m_platformid,m_uid];
+    NSString* path = [[NSString alloc]initWithFormat:@"%@?platformid=%lld&token=%@&uid=%lld",
+                      HTTP_GETIDLESC,m_platformid,m_token,m_uid];
 
     [self getRequestJsonData:path success:^(id jsonResult) {
         if (jsonResult != nil) {

@@ -19,7 +19,7 @@
 #define APPLE_ID 577680501
 
 //友盟
-#define UMENG_APPKEY                        @"52ad939456240b089e156ae2"
+#define UMENG_APPKEY                        @"54b3674afd98c52fa7000526"
 
 //友盟统计渠道定义
 #define APP_CHANNEL_ID                      @"咪哟"
@@ -66,9 +66,9 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 2
+#define IS_DEBUG_SERVER 1
 #else
-#define IS_DEBUG_SERVER 2
+#define IS_DEBUG_SERVER 1
 #endif
 
 #if (0 == IS_DEBUG_SERVER)
@@ -449,7 +449,7 @@
 //http://112.124.49.59/cgi-bin/miyo/soc/v1/getlocation.fcgi?uid=10008&token=eaed123
 //HOST + 路径 + 项目名 + 插件 + 版本 + 接口名
 #define PATH                @"cgi-bin"
-#define PRO                 @"miyo"
+#define PRO                 @"testmiyo"
 //module
 #define SOCMOD              @"soc"
 #define CHATMOD             @"chat"

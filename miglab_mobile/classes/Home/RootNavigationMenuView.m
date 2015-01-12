@@ -117,7 +117,7 @@
         _btnMenuFirst = [[UIButton alloc] initWithFrame:CGRectMake(10, 0 + topdistance, 80, 42)];
         _btnMenuFirst.tag = 100;
         [_btnMenuFirst setBackgroundImage:menuNorImage forState:UIControlStateNormal];
-        [_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuFirst setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuFirst setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuFirst setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuFirst setTitle:@"音乐基因" forState:UIControlStateNormal];
@@ -133,7 +133,7 @@
         _btnMenuSecond = [[UIButton alloc] initWithFrame:CGRectMake(second_x, 0 + topdistance, 56, 42)];
         _btnMenuSecond.tag = 101;
         [_btnMenuSecond setBackgroundImage:menuNorImage forState:UIControlStateNormal];
-        [_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuSecond setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuSecond setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuSecond setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuSecond setTitle:@"歌单" forState:UIControlStateNormal];
@@ -146,7 +146,7 @@
         _btnMenuThird = [[UIButton alloc] initWithFrame:CGRectMake(third_x, 0 + topdistance,56, 42)];
         _btnMenuThird.tag = 102;
         [_btnMenuThird setBackgroundImage:menuNorImage forState:UIControlStateNormal];
-        [_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
+        //[_btnMenuThird setBackgroundImage:menuSelImage forState:UIControlStateSelected];
         [_btnMenuThird setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnMenuThird setTitleColor:menuSelColor forState:UIControlStateSelected];
         [_btnMenuThird setTitle:@"歌友" forState:UIControlStateNormal];
@@ -157,7 +157,7 @@
     
 }
 
-#if 0
+#if 0/*
 -(id)initRootNavigationMenuView:(CGRect)frame{
     
 //    self = [super initWithFrame:CGRectMake(0, 0, 320, 45)];
@@ -212,7 +212,7 @@
     }
     return self;
     
-}
+}*/
 #endif
 
 -(void)setSelectedMenu:(int)aIndex{
