@@ -246,9 +246,10 @@
     }
 }
 
--(void) touchUserHeadEvent:(int) flag{
-    NearbyUser* usr = [[NearbyUser alloc] init];
-    PLog(@"11111111111");
+-(void) touchUserHeadEvent:(int64_t) uid{
+    [ChatNotificationCenter postNotification:TOUCH_SHOW_USERINFOS obj:nil];
+    //NearbyUser* usr = [[NearbyUser alloc] init];
+    //PLog(@"11111111111");
 }
 
 -(void)headUserInfo{

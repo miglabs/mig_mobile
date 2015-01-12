@@ -24,7 +24,8 @@ enum ChatNotificationType
     CHATSERVER_JOIN,//加入聊天
     CHATSERVER_LOGIN,//登陆聊天
     CHATSERVER_QUITCHAT,//退出聊天
-    CHATSERVER_QUITSRV//通知聊天服务器退出
+    CHATSERVER_QUITSRV,//通知聊天服务器退出
+    TOUCH_SHOW_USERINFOS//点击头像显示个人信息
     
 };
 
