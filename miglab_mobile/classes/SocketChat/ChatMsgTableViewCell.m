@@ -11,6 +11,7 @@
 #import "ChatNotification.h"
 #import "UserSessionManager.h"
 #import "MigLabConfig.h"
+#import "NearbyUser.h"
 
 @implementation ChatMsgTableViewCell
 
@@ -234,12 +235,20 @@
 {
     UITouch* touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    if(CGRectContainsPoint(self.sendIconViewR.frame, point) ||
-       CGRectContainsPoint(self.sendIconViewL.frame, point)){
-        
+    //判断左头像。右头像
+    if(CGRectContainsPoint(self.sendIconViewR.frame, point))
+        [self touchUserHeadEvent:1];
+    else if(CGRectContainsPoint(self.sendIconViewL.frame, point))
+        [self touchUserHeadEvent:0];
+    else{
+        [super touchesBegan:touches withEvent:event];
+        [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
     }
-    [super touchesBegan:touches withEvent:event];
-    [ChatNotificationCenter postNotification:INPUTBOARD_CLOSE obj:nil];
+}
+
+-(void) touchUserHeadEvent:(int) flag{
+    NearbyUser* usr = [[NearbyUser alloc] init];
+    PLog(@"11111111111");
 }
 
 -(void)headUserInfo{

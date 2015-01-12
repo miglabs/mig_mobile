@@ -290,7 +290,7 @@
 	
     static NSString *CellIdentifier = @"ChatMsgTableViewCell";
     ChatMsgTableViewCell *cell = (ChatMsgTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     if ( cell == nil ) {
         NSArray * array = [self.cellNib instantiateWithOwner:self options:nil];
         //[self.cellNib instantiateWithOwner:self options:nil];
@@ -298,6 +298,7 @@
 		//self.customCell = nil;
         cell = [array objectAtIndex:0];
     }
+    
     
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

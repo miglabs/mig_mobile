@@ -372,7 +372,7 @@
         [cell.btnIcon addTarget:self action:@selector(doSelectedIcon:) forControlEvents:UIControlEventTouchUpInside];
 	}
     
-    //1-排序，2-编辑
+    //1-排序，2-编辑 
     if (_dataStatus == 2) {
         UIImage *iconimage = [UIImage imageWithName:@"music_song_unsel" type:@"png"];
         [cell.btnIcon setImage:iconimage forState:UIControlStateNormal];
