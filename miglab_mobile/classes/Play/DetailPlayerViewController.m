@@ -649,6 +649,12 @@
     UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
     Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
     
+    if (currentSong == nil) {
+        
+        // 没有歌曲，跳出
+        return;
+    }
+    
     // 根据歌曲的类型显示字
     NSString* songtype = currentSong.type;
     NSString* tempText = usergene.type.desc;

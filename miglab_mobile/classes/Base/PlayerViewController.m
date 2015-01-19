@@ -199,6 +199,13 @@
     
     PLog(@"doPlayerAvatar...");
     
+    if (![UserSessionManager GetInstance].isLoggedIn) {
+        
+        // 没有登陆，弹出提示
+        [SVProgressHUD showErrorWithStatus:MIGTIP_DETAIL_NOTACCESS];
+        return;
+    }
+    
     DetailPlayerViewController *detailPlayerViewController = [[DetailPlayerViewController alloc] initWithNibName:@"DetailPlayerViewController" bundle:nil];
     [_topViewcontroller presentModalViewController:detailPlayerViewController animated:YES];
     

@@ -263,6 +263,9 @@
 /* 咪哟标语 */
 #define MIGTIP_THE_GOAL                         @"咪哟...\n对的地方，对的时刻\n听对的音乐，遇见对的人"
 
+/* 未登录进入详细播放的提示 */
+#define MIGTIP_DETAIL_NOTACCESS                 @"想体验更多功能? 先登录试试吧~"
+
 /* 微信分享地址 */
 #define SHARE_WEIXIN_ADDRESS_1LONG              @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
 
