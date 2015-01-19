@@ -134,4 +134,6 @@
 -(void)getNewMsgCountSucceed:(NSNotification *)tNotification;
 -(void)getNewMsgCountFailed:(NSNotification *)tNotification;
 
+- (void)doGetTypeSongListFromLocalRequest;
+
 @end

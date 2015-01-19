@@ -92,6 +92,8 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
         
         
+        // 本地要求音乐列表
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetTypeSongListFromLocalRequest) name:NotificationNameLocalNeedSongList object:nil];
     }
     return self;
 }
@@ -118,6 +120,8 @@ static int PAGE_WIDTH = 81;
 
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocalNeedSongList object:nil];
 }
 
 - (void)viewDidLoad
@@ -861,6 +865,27 @@ static int PAGE_WIDTH = 81;
     [UIView commitAnimations];
     */
     
+}
+
+- (void)doGetTypeSongListFromLocalRequest {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        NSString *ttypeid = [NSString stringWithFormat:@"%d", usergene.type.typeid];
+        NSString *ttypenum = [NSString stringWithFormat:@"%d", usergene.type.changenum];
+        NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+        NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
+        NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+        NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
+        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
+        
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:[NSString stringWithFormat:@"%d", GET_TYPE_SONGS_NUM]];
+        
+    }
 }
 
 -(IBAction)doBackFromGene:(id)sender{
