@@ -158,6 +158,10 @@
     #define USE_AS_ORG_READFILE_ERROR 0
 #endif
 
+#ifndef USE_LOGIN_HELPER
+#define USE_LOGIN_HELPER 0
+#endif
+
 
 
 //登陆

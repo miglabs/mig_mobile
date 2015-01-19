@@ -159,7 +159,7 @@ static int PAGE_WIDTH = 81;
     
     _currentGeneView.lbllocation.textColor = [UIColor darkGrayColor];
     _currentGeneView.lbllocation.font = [UIFont fontOfApp:30.0f];
-    _currentGeneView.lbllocation.text =@"德阳";
+    _currentGeneView.lbllocation.text = @"";
 
     
     UIImage *weatherimage = [UIImage imageNamed:@"rain_ico.png"];
@@ -248,7 +248,7 @@ static int PAGE_WIDTH = 81;
     
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 220+50 + separation  - start_pos, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 220+42 + separation  - start_pos, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
