@@ -345,7 +345,8 @@
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    //以下请求已经不需要
+    /*MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     
     if ([UserSessionManager GetInstance].isLoggedIn && NO) {
         
@@ -364,7 +365,7 @@
         
        // [miglabAPI doGetDefaultGuestSongs];
         
-    }
+    }*/
     
 #if 0
     // junliu test
@@ -383,7 +384,7 @@
     // 百度推送
     [BPush setupChannel:launchOptions];
     [BPush setDelegate:self];
-    
+    [application setApplicationIconBadgeNumber:0];
     
     //注册device token
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -449,7 +450,7 @@
     [self resignFirstResponder];
     
     //处理本地推送提醒，一段时间未使用软件则提示
-    //[self doLocalNotification];
+    [self doLocalNotification];
     
     
 }
@@ -460,11 +461,11 @@
     long addSecond = 3661;
     NSDate *nowDate = [NSDate new];
     //100个消息
-    for (int i=0; i<101; i++) {
+    for (int i=0; i<20; i++) {
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         if (localNotification) {
             NSLog(@"support local notification...");
-            addSecond += ((3311*(arc4random()%2+1))+arc4random()%401);
+            addSecond += ((4311*(arc4random()%2+1))+arc4random()%401);
             NSString *strAlertBody =[NSString stringWithFormat:@"附近%d米有人查看了你的资料，快去看看吧",(arc4random() % 453)+334];
             [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
         }
@@ -477,11 +478,11 @@
     long addSecond = 3123;
     NSDate *nowDate = [NSDate new];
     //100个消息
-    for (int i=0; i<88; i++) {
+    for (int i=0; i<20; i++) {
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         if (localNotification) {
             NSLog(@"support local notification...");
-            addSecond += ((3421*(arc4random()%2+1))+arc4random()%321);
+            addSecond += ((4421*(arc4random()%2+1))+arc4random()%321);
             NSString *strAlertBody =[NSString stringWithFormat:@"有%d个异性歌曲与你很匹配，快去看看吧",(arc4random() % 5)+3];
             [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
         }
@@ -494,11 +495,11 @@
     long addSecond = 2312;
     NSDate *nowDate = [NSDate new];
     //100个消息
-    for (int i=0; i<89; i++) {
+    for (int i=0; i<20; i++) {
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         if (localNotification) {
             NSLog(@"support local notification...");
-            addSecond += ((3421*(arc4random()%2+1))+arc4random()%321);
+            addSecond += ((4421*(arc4random()%2+1))+arc4random()%321);
             //获取最后一个所在兴趣组
             NSString *strAlertBody =[NSString stringWithFormat:@"你感兴趣的群组讨论很热闹，赶紧加入吧"];
             [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
@@ -721,7 +722,8 @@
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     
-    PLog(@"get device token failed");
+    PLog(@"get device token failed %@",[error localizedDescription]);
+    
 }
 
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
