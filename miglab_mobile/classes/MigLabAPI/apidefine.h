@@ -116,6 +116,10 @@
 #define MIG_WEATHER_FOG                         @"FOG"
 
 
+/*聊天等待*/
+#define CHAT_WAIT_TIP                           @"查看聊天记录"
+/*客服ID*/
+#define CSID                                    10001
 /* 米格用户id */
 #define MIG_USER_ACCOUNT_ID                     @"666"
 

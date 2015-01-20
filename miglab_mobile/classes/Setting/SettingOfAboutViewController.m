@@ -90,7 +90,7 @@
     if (indexPath.row == 0) {
         
         NSString *str = [NSString stringWithFormat:
-                         @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d", APPLE_ID];
+                         @"itms-apps://itunes.apple.com/cn/app/mi-you/id%d", APPLE_ID];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         
     } else if (indexPath.row == 1) {

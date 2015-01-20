@@ -16,7 +16,7 @@
 #endif
 
 //app id
-#define APPLE_ID 577680501
+#define APPLE_ID 862410865
 
 //友盟
 #define UMENG_APPKEY                        @"54b3674afd98c52fa7000526"
