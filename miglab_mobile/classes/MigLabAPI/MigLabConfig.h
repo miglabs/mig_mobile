@@ -19,7 +19,7 @@
 #define APPLE_ID 577680501
 
 //友盟
-#define UMENG_APPKEY                        @"54b3674afd98c52fa7000526"
+#define UMENG_APPKEY                        @"54b72c25fd98c533ef0003a5"
 
 //友盟统计渠道定义
 #define APP_CHANNEL_ID                      @"咪哟"
