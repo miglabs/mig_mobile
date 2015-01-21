@@ -286,6 +286,14 @@ static PPlayerManagerCenter *instance;
             }
         }
     }
+    else {
+        
+        if (_songList == nil || [_songList count] <= 0) {
+            
+            // 没有列表要求GenViewController获取一次
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLocalNeedSongList object:nil userInfo:nil];
+        }
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNamePlayerNext object:nil userInfo:nil];
     

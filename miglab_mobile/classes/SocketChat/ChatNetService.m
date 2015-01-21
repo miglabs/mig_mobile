@@ -84,7 +84,7 @@
     //ChatUserInfo* info = [[ChatUserInfo alloc] init];
    // info.isLogin = false;
     NotifiOppinfo* notifiinfo = [[NotifiOppinfo alloc] init];
-    notifiinfo.nickname = m_name;
+    notifiinfo.nickname = CHAT_WAIT_TIP;
     notifiinfo.type = m_type;
     @synchronized(self)
     {
@@ -576,7 +576,7 @@
         [self getHiscChat];
     else*/
         m_is_relogin = 2;
-    
+    NotifiOppinfo* notifiinfo = [[NotifiOppinfo alloc] init];
     struct OppositionInfo* pInfo = (struct OppositionInfo*)pData;
     m_session =  pInfo->session;
     NSInteger last = pInfo->packet_head.packet_length - OPPSITIONINFO_SIZE ;
@@ -584,6 +584,7 @@
     struct Oppinfo* pOppinfo = NULL;
     ChatUserInfo* op = [[ChatUserInfo alloc] init];
     op.nickname = [NSString stringWithUTF8String:pInfo->oppo_nickname];
+    notifiinfo.nickname = op.nickname;
     while ( last >=  OPPINFO_SIZE )
     {
         pOppinfo = (struct Oppinfo*)pBuffer;
@@ -592,10 +593,13 @@
         info.nicknumber = pOppinfo->user_nicknumber;
         info.nickname = [NSString stringWithUTF8String:pOppinfo->nickname];
         info.picurl = [NSString stringWithUTF8String:pOppinfo->user_head];
+        if (m_type==ALONE_CHAT)
+            notifiinfo.nickname = info.nickname;
         @synchronized(self)
         {
             [m_dicuserinfos setObject:info forKey:[NSString stringWithFormat:@"%lld",pOppinfo->user_id]];
         }
+
 
         last -= OPPINFO_SIZE;
         pBuffer += OPPINFO_SIZE;
@@ -605,6 +609,14 @@
         [SVProgressHUD dismiss];
         m_is_relogin = 0;
     }
+    
+   
+    //notifiinfo.type = m_type;
+    @synchronized(self)
+    {
+        [ChatNotificationCenter postNotification:CHATSERVER_OPPINFO obj:notifiinfo];
+    }
+    
     //通知服务器登录成功
     if (m_type==GROUP_CHAT)
          [self reqOnLine];

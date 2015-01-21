@@ -345,7 +345,8 @@
     NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
     NSString *userid = [UserSessionManager GetInstance].currentUser.userid;
     
-    MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
+    //以下请求已经不需要
+    /*MigLabAPI *miglabAPI = [[MigLabAPI alloc] init];
     
     if ([UserSessionManager GetInstance].isLoggedIn && NO) {
         
@@ -364,7 +365,7 @@
         
        // [miglabAPI doGetDefaultGuestSongs];
         
-    }
+    }*/
     
 #if 0
     // junliu test
@@ -383,7 +384,7 @@
     // 百度推送
     [BPush setupChannel:launchOptions];
     [BPush setDelegate:self];
-    
+    [application setApplicationIconBadgeNumber:0];
     
     //注册device token
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -449,24 +450,102 @@
     [self resignFirstResponder];
     
     //处理本地推送提醒，一段时间未使用软件则提示
-//    [self doLocalNotification];
+    [self doLocalNotification];
     
     
 }
 
-//处理本地推送提醒，一段时间未使用软件则提示
+//查看个人时间
+-(void) doPersionalInfoLocalNotification{
+    //初始时间
+    long addSecond = 3661;
+    NSDate *nowDate = [NSDate new];
+    //100个消息
+    for (int i=0; i<20; i++) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        if (localNotification) {
+            NSLog(@"support local notification...");
+            addSecond += ((4311*(arc4random()%2+1))+arc4random()%401);
+            NSString *strAlertBody =[NSString stringWithFormat:@"附近%d米有人查看了你的资料，快去看看吧",(arc4random() % 453)+334];
+            [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
+        }
+    }
+}
+
+//相似的歌曲
+-(void) doSameMusicInfoLocalNotification{
+    //初始时间
+    long addSecond = 3123;
+    NSDate *nowDate = [NSDate new];
+    //100个消息
+    for (int i=0; i<20; i++) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        if (localNotification) {
+            NSLog(@"support local notification...");
+            addSecond += ((4421*(arc4random()%2+1))+arc4random()%321);
+            NSString *strAlertBody =[NSString stringWithFormat:@"有%d个异性歌曲与你很匹配，快去看看吧",(arc4random() % 5)+3];
+            [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
+        }
+    }
+}
+
+//相似的歌曲
+-(void) doGourpLocalNotification{
+    //初始时间
+    long addSecond = 2312;
+    NSDate *nowDate = [NSDate new];
+    //100个消息
+    for (int i=0; i<20; i++) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        if (localNotification) {
+            NSLog(@"support local notification...");
+            addSecond += ((4421*(arc4random()%2+1))+arc4random()%321);
+            //获取最后一个所在兴趣组
+            NSString *strAlertBody =[NSString stringWithFormat:@"你感兴趣的群组讨论很热闹，赶紧加入吧"];
+            [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
+        }
+    }
+}
+
+
+-(void) doLocalNotification:(NSString*) msg firedate:(NSDate *)firedate {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    if (localNotification) {
+        NSLog(@"support local notification...");
+        
+        localNotification.fireDate = firedate;
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.alertBody = msg;
+        localNotification.hasAction = YES;
+        localNotification.soundName = @"sound.caf";
+        localNotification.repeatInterval = kCFCalendarUnitMonth;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+    }
+}
+
 -(void)doLocalNotification{
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [self doPersionalInfoLocalNotification];
+    [self doSameMusicInfoLocalNotification];
+    [self doGourpLocalNotification];
+    /* 三个提示语
+     1、附近（500-1000）有人查看了你的资料，快去看看吧~
+     2、有（5-10）个人正在听和你相似歌曲，看去看看吧~
+     3、你感兴趣的群组讨论很热闹，赶紧加入吧~
+     */
+    
+    //附近查看资料的人
+    //相似歌曲的人
+    //兴趣组
     
     /*
-     1、几天不见，榜单又有更新喽，快来看看有什么好歌吧
-     2、这么多天不来好声音，伦家都感觉不会再爱了~
-     3、“你伤害了我，却一笑而过，你肿么可以许久不来看我。。。”讨厌~
-     4、几天没见，好声音好想里呀~~快来看看吧~
-     5、好声音重磅打造，海量新歌上线，快来欢唱吧~
+     1、附近（500-1000）有人查看了你的资料，快去看看吧~
+     2、有（5-10）个人正在听和你相似歌曲，看去看看吧~
+     3、你感兴趣的群组讨论很热闹，赶紧加入吧~
      */
-    NSArray *alertBodyList = [NSArray arrayWithObjects:@"几天不见，榜单又有更新喽，快来看看有什么好歌吧", @"这么多天不来好声音，伦家都感觉不会再爱了~", @"\"你伤害了我，却一笑而过，你肿么可以许久不来看我。。。\"讨厌~", @"几天没见，好声音好想里呀~~快来看看吧~", @"好声音重磅打造，海量新歌上线，快来欢唱吧~", nil];
+   /* NSArray *alertBodyList = [NSArray arrayWithObjects:@"几天不见，榜单又有更新喽，快来看看有什么好歌吧", @"这么多天不来好声音，伦家都感觉不会再爱了~", @"\"你伤害了我，却一笑而过，你肿么可以许久不来看我。。。\"讨厌~", @"几天没见，好声音好想里呀~~快来看看吧~", @"好声音重磅打造，海量新歌上线，快来欢唱吧~", nil];
     int nAlertBodyListSize = [alertBodyList count];
     
     NSDate *nowDate = [NSDate new];
@@ -492,7 +571,8 @@
             NSLog(@"support local notification...");
             
             //一个月制定10个，按月循环启动
-            addSecond += 3600 * 72 * i;
+            long addSecond = 20;
+            //addSecond += 3600 * 72 * i;
             //随机显示消息内容
             int rnd = rand() % nAlertBodyListSize;
             NSString *strAlertBody = [alertBodyList objectAtIndex:rnd];
@@ -509,7 +589,7 @@
             
         }//if
         
-    }//for
+    }*///for
     
 }
 
@@ -642,7 +722,8 @@
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     
-    PLog(@"get device token failed");
+    PLog(@"get device token failed %@",[error localizedDescription]);
+    
 }
 
 -(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

@@ -17,6 +17,7 @@
 #import "PDatabaseManager.h"
 #import "SVProgressHUD.h"
 #import "RootViewController.h"
+#import "ChatViewController.h"
 
 @interface SettingViewController ()
 
@@ -72,7 +73,7 @@
 #elif USE_FUNCTION_SETTING
     NSArray *section1 = [NSArray arrayWithObjects:@"功能", @"吐槽咪哟", nil];
 #else
-    NSArray *section1 = [NSArray arrayWithObjects:@"吐槽咪哟", nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"吐槽咪哟",nil];
 #endif
     
     NSArray *section2 = [NSArray arrayWithObjects:@"关于咪哟", nil];
@@ -377,11 +378,16 @@
             //反馈加入用户昵称
             NSString *userid = [UserSessionManager GetInstance].userid;
             NSString *nickname = [UserSessionManager GetInstance].currentUser.nickname;
+            NSString *access_token = [UserSessionManager GetInstance].accesstoken;
             userid = userid ? userid : @"UserIdIsNull";
             nickname = nickname ? nickname : @"NickNameIsNull";
             NSString *strUserInfo = [NSString stringWithFormat:@"%@(%@)", nickname, userid];
             NSDictionary *dicUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:strUserInfo, @"USER_INFO", nil];
-            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:dicUserInfo];
+           
+            //加入自己的即时聊天工具
+            ChatViewController *chatController = [[ChatViewController alloc] init:access_token uid:[userid longLongValue] name: nickname tid:CSID];
+            [self.navigationController pushViewController:chatController animated:YES];
+           // [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:dicUserInfo];
             
 //            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];
 //            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:[NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"a", @"b", @"c", nil] forKey:@"hello"]];

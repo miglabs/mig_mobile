@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045341931A6DF67600BC075B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045341901A6DF67600BC075B /* libUMFeedback.a */; };
+		045341941A6DF67600BC075B /* umFeedback.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 045341911A6DF67600BC075B /* umFeedback.bundle */; };
 		048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */; };
 		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
 		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
@@ -467,8 +469,6 @@
 		18A0EA1017D6DBAC004B8BB6 /* SettingOfPrivacyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0EA0E17D6DBAC004B8BB6 /* SettingOfPrivacyViewController.xib */; };
 		18A0EA1417D6DC69004B8BB6 /* SettingOfFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0EA1217D6DC69004B8BB6 /* SettingOfFunctionViewController.m */; };
 		18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0EA1317D6DC69004B8BB6 /* SettingOfFunctionViewController.xib */; };
-		18A0EA1A17D6E0C2004B8BB6 /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A0EA1717D6E0C2004B8BB6 /* libUMFeedback.a */; };
-		18A0EA1B17D6E0C2004B8BB6 /* umFeedback.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18A0EA1817D6E0C2004B8BB6 /* umFeedback.bundle */; };
 		18A450F81783FA5E00CFFAD4 /* PFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F31783FA5E00CFFAD4 /* PFileManager.m */; };
 		18A450F91783FA5E00CFFAD4 /* PHttpDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F51783FA5E00CFFAD4 /* PHttpDownloader.m */; };
 		18A450FA1783FA5E00CFFAD4 /* SongDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A450F71783FA5E00CFFAD4 /* SongDownloadManager.m */; };
@@ -609,6 +609,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		045341901A6DF67600BC075B /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
+		045341911A6DF67600BC075B /* umFeedback.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = umFeedback.bundle; sourceTree = "<group>"; };
+		045341921A6DF67600BC075B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_separator.png; sourceTree = "<group>"; };
 		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
 		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
@@ -1227,9 +1230,6 @@
 		18A0EA1117D6DC68004B8BB6 /* SettingOfFunctionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfFunctionViewController.h; sourceTree = "<group>"; };
 		18A0EA1217D6DC69004B8BB6 /* SettingOfFunctionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingOfFunctionViewController.m; sourceTree = "<group>"; };
 		18A0EA1317D6DC69004B8BB6 /* SettingOfFunctionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingOfFunctionViewController.xib; sourceTree = "<group>"; };
-		18A0EA1717D6E0C2004B8BB6 /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
-		18A0EA1817D6E0C2004B8BB6 /* umFeedback.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = umFeedback.bundle; sourceTree = "<group>"; };
-		18A0EA1917D6E0C2004B8BB6 /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		18A450F21783FA5E00CFFAD4 /* PFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileManager.h; sourceTree = "<group>"; };
 		18A450F31783FA5E00CFFAD4 /* PFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFileManager.m; sourceTree = "<group>"; };
 		18A450F41783FA5E00CFFAD4 /* PHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHttpDownloader.h; sourceTree = "<group>"; };
@@ -1431,6 +1431,7 @@
 				1637CA9E17B7A65200E6F132 /* CoreTelephony.framework in Frameworks */,
 				1637CA9C17B7A63500E6F132 /* libiconv.dylib in Frameworks */,
 				1637CA9A17B7A61F00E6F132 /* libstdc++.dylib in Frameworks */,
+				045341931A6DF67600BC075B /* libUMFeedback.a in Frameworks */,
 				CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */,
 				1637CA7117B7A58800E6F132 /* MobileCoreServices.framework in Frameworks */,
 				1637CA6F17B7A57500E6F132 /* Security.framework in Frameworks */,
@@ -1454,13 +1455,22 @@
 				1640AED4191FA81E0093CC6A /* TencentOpenAPI.framework in Frameworks */,
 				169C2E1317A381C2009774E7 /* libMobClickLibrary.a in Frameworks */,
 				1632E50C17D347400089291C /* libWeChatSDK.a in Frameworks */,
-				18A0EA1A17D6E0C2004B8BB6 /* libUMFeedback.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0453418F1A6DF67600BC075B /* UMFeedback_iOS_1.4 */ = {
+			isa = PBXGroup;
+			children = (
+				045341901A6DF67600BC075B /* libUMFeedback.a */,
+				045341911A6DF67600BC075B /* umFeedback.bundle */,
+				045341921A6DF67600BC075B /* UMFeedback.h */,
+			);
+			path = UMFeedback_iOS_1.4;
+			sourceTree = "<group>";
+		};
 		160E073317C076F5003F0E45 /* SYAppStart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1473,6 +1483,7 @@
 		162315FF1777397600CF8FB5 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				0453418F1A6DF67600BC075B /* UMFeedback_iOS_1.4 */,
 				C76179E81A4506FD00653AED /* Poi */,
 				CBB3438E1A07C17B007BF368 /* BPush */,
 				CB5E938F19B74A9200B71A10 /* AudioStreamer */,
@@ -1482,7 +1493,6 @@
 				167F048A18F932C4000A1C21 /* AsyncSocket */,
 				167F046E18F9306F000A1C21 /* SocketChat */,
 				1641CCBD17DB0BE5004179E4 /* PinYin */,
-				18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */,
 				16BE5D2017D6248700802DE1 /* Setting */,
 				185F935617C330A600EBC710 /* TSLibraryImport */,
 				160E073317C076F5003F0E45 /* SYAppStart */,
@@ -2673,16 +2683,6 @@
 			path = TSLibraryImport;
 			sourceTree = "<group>";
 		};
-		18A0EA1617D6E0C2004B8BB6 /* UMFeedback_iOS_1.4 */ = {
-			isa = PBXGroup;
-			children = (
-				18A0EA1717D6E0C2004B8BB6 /* libUMFeedback.a */,
-				18A0EA1817D6E0C2004B8BB6 /* umFeedback.bundle */,
-				18A0EA1917D6E0C2004B8BB6 /* UMFeedback.h */,
-			);
-			path = UMFeedback_iOS_1.4;
-			sourceTree = "<group>";
-		};
 		18A450F11783FA5E00CFFAD4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2879,6 +2879,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 16EDEF2C1759AD5E001BE4E9;
 			productRefGroup = 16EDEF381759AD5E001BE4E9 /* Products */;
@@ -2975,6 +2976,7 @@
 				CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */,
 				C76F0A0B1A52AAB600E5FC9C /* collect_ico_on.png in Resources */,
 				16AB8BA8179EB8A40009411F /* left_menu_migfm.png in Resources */,
+				045341941A6DF67600BC075B /* umFeedback.bundle in Resources */,
 				16AB8BA9179EB8A40009411F /* left_menu_separator.png in Resources */,
 				16AB8BAA179EB8A40009411F /* left_menu_shezhi.png in Resources */,
 				16AB8BAB179EB8A40009411F /* left_menu_user_avatar.png in Resources */,
@@ -3188,7 +3190,6 @@
 				18A0EA1017D6DBAC004B8BB6 /* SettingOfPrivacyViewController.xib in Resources */,
 				16B61FD618FCFC4800849EB6 /* Icon_120_120.png in Resources */,
 				18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */,
-				18A0EA1B17D6E0C2004B8BB6 /* umFeedback.bundle in Resources */,
 				1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */,
 				1641CCDA17DB685E004179E4 /* SettingOfAddFriendViewController.xib in Resources */,
 				1641CCE017DB688F004179E4 /* SettingOfFriendManagerViewController.xib in Resources */,
@@ -3567,8 +3568,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7s,
 					armv7,
+					armv7s,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3598,7 +3599,13 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
 					"$(PROJECT_DIR)/miglab_mobile/classes",
 					"$(PROJECT_DIR)/miglab_mobile/classes/BPush",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMengFeedback_SDK_2.1",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMengFeedback_SDK_2.1/UMOpus",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1/UMOpus",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
@@ -3617,8 +3624,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7s,
 					armv7,
+					armv7s,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3648,7 +3655,13 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/libWeiboSDK",
 					"$(PROJECT_DIR)/miglab_mobile/classes",
 					"$(PROJECT_DIR)/miglab_mobile/classes/BPush",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMengFeedback_SDK_2.1",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMengFeedback_SDK_2.1/UMOpus",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1",
+					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1/UMOpus",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",

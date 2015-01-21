@@ -92,6 +92,8 @@ static int PAGE_WIDTH = 81;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doUpdatePlayList:) name:NotificationNameNeedAddList object:nil];
         
         
+        // 本地要求音乐列表
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doGetTypeSongListFromLocalRequest) name:NotificationNameLocalNeedSongList object:nil];
     }
     return self;
 }
@@ -118,6 +120,8 @@ static int PAGE_WIDTH = 81;
 
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameNeedAddList object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLocalNeedSongList object:nil];
 }
 
 - (void)viewDidLoad
@@ -159,7 +163,7 @@ static int PAGE_WIDTH = 81;
     
     _currentGeneView.lbllocation.textColor = [UIColor darkGrayColor];
     _currentGeneView.lbllocation.font = [UIFont fontOfApp:30.0f];
-    _currentGeneView.lbllocation.text =@"德阳";
+    _currentGeneView.lbllocation.text = @"";
 
     
     UIImage *weatherimage = [UIImage imageNamed:@"rain_ico.png"];
@@ -248,7 +252,7 @@ static int PAGE_WIDTH = 81;
     
     //场景
     _btnScene = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 220+50 + separation  - start_pos, 31, 31);
+    _btnScene.frame = CGRectMake(11.5 + 20, posy + 10 + 220+42 + separation  - start_pos, 31, 31);
     _btnScene.tag = 300;
     UIImage *sceneimage = [UIImage imageWithName:@"gene_type" type:@"png"];
     [_btnScene setImage:sceneimage forState:UIControlStateNormal];
@@ -861,6 +865,27 @@ static int PAGE_WIDTH = 81;
     [UIView commitAnimations];
     */
     
+}
+
+- (void)doGetTypeSongListFromLocalRequest {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        NSString *userid = [UserSessionManager GetInstance].userid;
+        NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
+        UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
+        NSString *ttypeid = [NSString stringWithFormat:@"%d", usergene.type.typeid];
+        NSString *ttypenum = [NSString stringWithFormat:@"%d", usergene.type.changenum];
+        NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
+        NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
+        NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
+        NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
+        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
+        
+        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:[NSString stringWithFormat:@"%d", GET_TYPE_SONGS_NUM]];
+        
+    }
 }
 
 -(IBAction)doBackFromGene:(id)sender{

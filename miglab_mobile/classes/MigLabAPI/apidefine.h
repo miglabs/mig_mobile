@@ -116,6 +116,10 @@
 #define MIG_WEATHER_FOG                         @"FOG"
 
 
+/*聊天等待*/
+#define CHAT_WAIT_TIP                           @"查看聊天记录"
+/*客服ID*/
+#define CSID                                    10001
 /* 米格用户id */
 #define MIG_USER_ACCOUNT_ID                     @"666"
 
@@ -263,6 +267,9 @@
 /* 咪哟标语 */
 #define MIGTIP_THE_GOAL                         @"咪哟...\n对的地方，对的时刻\n听对的音乐，遇见对的人"
 
+/* 未登录进入详细播放的提示 */
+#define MIGTIP_DETAIL_NOTACCESS                 @"想体验更多功能? 先登录试试吧~"
+
 /* 微信分享地址 */
 #define SHARE_WEIXIN_ADDRESS_1LONG              @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
 
@@ -302,6 +309,9 @@
 
 /* 播放器网络异常 */
 #define NotificationNamePlayerNetworkError      @"NotificationNamePlayerNetworkError"
+
+/* 本地要求获取歌曲列表 */
+#define NotificationNameLocalNeedSongList       @"NotificationNameLocalNeedSongList"
 
 /* ------------------ 宏函数定义 ---------------------- */
 #define MIG_NOT_EMPTY_STR(x)                    (x && ![x isEqualToString:@""])

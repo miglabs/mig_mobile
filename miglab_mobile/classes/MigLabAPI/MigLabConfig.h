@@ -16,7 +16,7 @@
 #endif
 
 //app id
-#define APPLE_ID 577680501
+#define APPLE_ID 862410865
 
 //友盟
 #define UMENG_APPKEY                        @"54b72c25fd98c533ef0003a5"
@@ -156,6 +156,10 @@
 // 使用AudioStreamer自带的读取文件错误提醒
 #ifndef USE_AS_ORG_READFILE_ERROR
     #define USE_AS_ORG_READFILE_ERROR 0
+#endif
+
+#ifndef USE_LOGIN_HELPER
+#define USE_LOGIN_HELPER 0
 #endif
 
 
