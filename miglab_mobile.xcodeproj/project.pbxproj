@@ -10,6 +10,7 @@
 		045341931A6DF67600BC075B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045341901A6DF67600BC075B /* libUMFeedback.a */; };
 		045341941A6DF67600BC075B /* umFeedback.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 045341911A6DF67600BC075B /* umFeedback.bundle */; };
 		048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */; };
+		15C6FCCB1A7CAB6300239364 /* share_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C6FCCA1A7CAB6300239364 /* share_default.png */; };
 		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
 		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
 		1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */; };
@@ -613,6 +614,7 @@
 		045341911A6DF67600BC075B /* umFeedback.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = umFeedback.bundle; sourceTree = "<group>"; };
 		045341921A6DF67600BC075B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_separator.png; sourceTree = "<group>"; };
+		15C6FCCA1A7CAB6300239364 /* share_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_default.png; path = share/share_default.png; sourceTree = "<group>"; };
 		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
 		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
 		1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_avatar_big.png; sourceTree = "<group>"; };
@@ -2763,6 +2765,7 @@
 		CB5E92D419AF53F600B71A10 /* share */ = {
 			isa = PBXGroup;
 			children = (
+				15C6FCCA1A7CAB6300239364 /* share_default.png */,
 				CB5E937519B61E6200B71A10 /* clear_night_ico.png */,
 				CB5E937719B61E6200B71A10 /* cloudy_night.png */,
 				CB5E937919B61E6200B71A10 /* fog_ico.png */,
@@ -3029,6 +3032,7 @@
 				162727A317ACB947000C79D3 /* play_btn_menu_nor.png in Resources */,
 				CBB343951A07C2B3007BF368 /* BPushConfig.plist in Resources */,
 				16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */,
+				15C6FCCB1A7CAB6300239364 /* share_default.png in Resources */,
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
 				162727A617ACB947000C79D3 /* play_btn_share_sel.png in Resources */,
@@ -3533,8 +3537,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3557,8 +3561,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3613,8 +3617,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3669,8 +3673,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93104597-6c9c-4c50-a6cf-4cd17d7c6ece";
+				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};

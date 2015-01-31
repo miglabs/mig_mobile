@@ -246,16 +246,16 @@ BOOL _firstLoadObserver = YES;
         
         UIImage* shareImage = nil;
       
-        if (MIG_NOT_EMPTY_STR(szLyric)) {
+        //if (MIG_NOT_EMPTY_STR(szLyric)) {
             
             shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
             
             [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
-        }
+       /* }
         else {
             
             [sinaweibo requestWithURL:@"statuses/update.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", nil] httpMethod:@"POST" delegate:self];
-        }
+        }*/
         
     } else {
         

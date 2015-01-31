@@ -138,14 +138,17 @@
     /* 测试是否全部为中文 */
     isAllChinese = [self isAllChineseChar:szSongName] && [self isAllChineseChar:szArtist];
     
-    if (MIG_NOT_EMPTY_STR([GlobalDataManager GetInstance].curSongTypeName)) {
-        
+     //检测是否有歌词
+    if (MIG_NOT_EMPTY_STR([GlobalDataManager GetInstance].curSongTypeName)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
+
         szBgImg = [NSString stringWithFormat:@"%@.jpg", [GlobalDataManager GetInstance].curSongTypeName];
     }
     else {
     
-        szBgImg = @"摇滚Rock.jpg";
+        szBgImg = @"share_default.png";
     }
+    
+   
     
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
@@ -192,8 +195,11 @@
     toastRect = CGRectMake(38 + 140, imgHeight - 140 + 18, imgWidth - 38 - 140 - 38 - 96, 140);
     iconRect = CGRectMake(38 + 140 + toastRect.size.width, imgHeight - 140 + 22, 96, 96);
     
-    bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
-    bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
+    //没有歌词不加载
+    if(MIG_NOT_EMPTY_STR(ls.lyric)){
+        bgImg = [bgImg applyLightEffectAtFrame:rcGroupUp];
+        bgImg = [bgImg applyLightEffectAtFrame:rcGroupDown];
+    }
     bgImg = [bgImg applyLightEffectAtFrame:rcGroupBottom];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -212,16 +218,17 @@
     NSString * szMode = ls.mdescription;
     
     UIGraphicsBeginImageContext(CGSizeMake(imgWidth, imgHeight));
-    
     [bgImg drawInRect:CGRectMake(0, 0, imgWidth, imgHeight)];
-    
     [mainIconImg drawInRect:mainIconRect];
     [iconImg drawInRect:iconRect];
-    [weatherImg drawInRect:weatherRect];
+    
+    if(MIG_NOT_EMPTY_STR(ls.lyric)){
+        [weatherImg drawInRect:weatherRect];
+    }
     
     [[UIColor whiteColor] set];
     
-    if (MIG_NOT_EMPTY_STR(szSongName)) {
+    if (MIG_NOT_EMPTY_STR(szSongName)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         if (isAllChinese) {
             
@@ -257,7 +264,7 @@
         }
     }
     
-    if (MIG_NOT_EMPTY_STR(szArtist)) {
+    if (MIG_NOT_EMPTY_STR(szArtist)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         if (isAllChinese) {
             
@@ -284,7 +291,7 @@
         }
     }
     
-    if (MIG_NOT_EMPTY_STR(szLyric)) {
+    if (MIG_NOT_EMPTY_STR(szLyric)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         int count = [szLyric length];
         int lstart = 0;
@@ -333,22 +340,22 @@
         //[szLyric drawInRect:lyricRect withFont:[UIFont fontWithName:fontname size:fLyric] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    if (MIG_NOT_EMPTY_STR(szMode)) {
+    if (MIG_NOT_EMPTY_STR(szMode)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         [szMode drawInRect:modeRect withFont:[UIFont fontWithName:fontname size:fMode] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    if (MIG_NOT_EMPTY_STR(szTemperature)) {
+    if (MIG_NOT_EMPTY_STR(szTemperature)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         [szTemperature drawInRect:temperatureRect withFont:[UIFont fontWithName:fontname size:fTemperature] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    if (MIG_NOT_EMPTY_STR(szDate)) {
+    if (MIG_NOT_EMPTY_STR(szDate)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         [szDate drawInRect:dateRect withFont:[UIFont fontWithName:fontname size:fDate] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
     
-    if (MIG_NOT_EMPTY_STR(szAddress)) {
+    if (MIG_NOT_EMPTY_STR(szAddress)&&MIG_NOT_EMPTY_STR(ls.lyric)) {
         
         [szAddress drawInRect:addressRect withFont:[UIFont fontWithName:fontname size:fAddress] lineBreakMode:UILineBreakModeWordWrap alignment:NSTextAlignmentCenter];
     }
