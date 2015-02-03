@@ -322,8 +322,10 @@
         NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
         Song* song = _msginfo.song;
         NSString* songid = [NSString stringWithFormat:@"%lld", song.songid];
-        NSString* moodid = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUserGene.mood.typeid];
-        NSString* typeid = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUserGene.type.typeid];
+        NSString* mood = song.type;
+        NSString* typeid = [NSString stringWithFormat:@"%d",song.tid];
+        //NSString* moodid = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUserGene.mood.typeid];
+        //NSString* typeid = [NSString stringWithFormat:@"%d", [UserSessionManager GetInstance].currentUserGene.type.typeid];
         
         int isLike = [song.like intValue];
         
@@ -333,7 +335,7 @@
         }
         else {
             
-            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:mood typeid:typeid];
         }
     }
     else {

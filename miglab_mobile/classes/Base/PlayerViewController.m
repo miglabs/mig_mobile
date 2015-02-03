@@ -244,14 +244,16 @@
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
-        NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
-        NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
+        NSString *mood = currentSong.type;
+        NSString *typeid = [NSString stringWithFormat:@"%d", currentSong.tid];
+        //NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
+        //NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
         int isLike = [currentSong.like intValue];
         if (isLike > 0) {
             [_miglabAPI doDeleteCollectedSong:userid token:accesstoken songid:songid];
         } else {
-            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:mood typeid:typeid];
         }
         
         

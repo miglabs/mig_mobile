@@ -555,8 +555,10 @@
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         NSString *songid = [NSString stringWithFormat:@"%lld", currentSong.songid];
-        NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
-        NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
+        NSString* mood = currentSong.type;
+        NSString *typeid = [NSString stringWithFormat:@"%d", currentSong.tid];
+        //NSString *moodid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.mood.typeid];
+        //NSString *typeid = [NSString stringWithFormat:@"%d", userSessionManager.currentUserGene.type.typeid];
         
         if (_isCurSongLike > 0) {
             
@@ -564,7 +566,7 @@
             _isCurSongLike = 0;
         } else {
             
-            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:moodid typeid:typeid];
+            [_miglabAPI doCollectSong:userid token:accesstoken sid:songid modetype:mood typeid:typeid];
             _isCurSongLike = 1;
         }
         
