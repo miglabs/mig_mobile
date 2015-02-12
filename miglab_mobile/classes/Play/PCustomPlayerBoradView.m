@@ -40,7 +40,7 @@
         //背景图片
         _playerBoradBgImageView = [[UIImageView alloc] init];
         _playerBoradBgImageView.frame = CGRectMake(0, 0, 320, 60);
-        UIImage *playerBoradBgImage = [UIImage imageWithName:@"player_borad_bg" type:@"png"];
+        UIImage *playerBoradBgImage = [UIImage imageWithName:@"player_borad_bg" type:@"jpg"];
         _playerBoradBgImageView.image = playerBoradBgImage;
         [self addSubview:_playerBoradBgImageView];
         
@@ -125,7 +125,7 @@
         //背景图片
         _playerBoradBgImageView = [[UIImageView alloc] init];
         _playerBoradBgImageView.frame = CGRectMake(0, 0, 320, 60);
-        UIImage *playerBoradBgImage = [UIImage imageWithName:@"player_borad_bg" type:@"png"];
+        UIImage *playerBoradBgImage = [UIImage imageWithName:@"player_borad_bg" type:@"jpg"];
         _playerBoradBgImageView.image = playerBoradBgImage;
         [self addSubview:_playerBoradBgImageView];
         
