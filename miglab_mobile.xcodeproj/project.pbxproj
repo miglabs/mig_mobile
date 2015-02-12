@@ -305,7 +305,6 @@
 		16BE5D1C17D61E7300802DE1 /* FriendOfAddDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D1A17D61E7300802DE1 /* FriendOfAddDetailViewController.xib */; };
 		16BE5D1F17D6247B00802DE1 /* setting_button_logout_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */; };
 		16BE5D2417D6249C00802DE1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE5D2217D6249C00802DE1 /* SettingViewController.m */; };
-		16C10DFC17A9477E00DA628D /* login_navigation_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10DFB17A9477E00DA628D /* login_navigation_bg.png */; };
 		16C10E0517A94D3800DA628D /* login_back_arrow_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */; };
 		16C10E0617A94D3800DA628D /* login_back_arrow_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */; };
 		16C10E0717A94D3800DA628D /* login_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C10E0217A94D3800DA628D /* login_button.png */; };
@@ -501,6 +500,7 @@
 		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
 		CB0BDCE21A8CF86900CD95C1 /* song_cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */; };
 		CB0BDCE41A8CFA3E00CD95C1 /* player_borad_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */; };
+		CB0BDCE61A8CFABE00CD95C1 /* login_navigation_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */; };
 		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
 		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB1F3DE3197817260009CD91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F3DE2197817260009CD91 /* AFNetworkReachabilityManager.m */; };
@@ -974,7 +974,6 @@
 		16BE5D1E17D6247B00802DE1 /* setting_button_logout_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_button_logout_bg.png; sourceTree = "<group>"; };
 		16BE5D2117D6249C00802DE1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		16BE5D2217D6249C00802DE1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		16C10DFB17A9477E00DA628D /* login_navigation_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_navigation_bg.png; sourceTree = "<group>"; };
 		16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_back_arrow_nor.png; sourceTree = "<group>"; };
 		16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_back_arrow_sel.png; sourceTree = "<group>"; };
 		16C10E0217A94D3800DA628D /* login_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_button.png; sourceTree = "<group>"; };
@@ -1251,6 +1250,7 @@
 		CB0380D9185DA0B500137D8E /* gene_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_focus.png; sourceTree = "<group>"; };
 		CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = song_cover.jpg; sourceTree = "<group>"; };
 		CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player_borad_bg.jpg; sourceTree = "<group>"; };
+		CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_navigation_bg.jpg; sourceTree = "<group>"; };
 		CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
 		CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
@@ -1782,6 +1782,7 @@
 		163EA98A17A7F9B700EBD24C /* login */ = {
 			isa = PBXGroup;
 			children = (
+				CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */,
 				16C10E1517A9638F00DA628D /* get_password_back.png */,
 				16C10E1617A9638F00DA628D /* get_password_by_email.png */,
 				CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */,
@@ -1793,7 +1794,6 @@
 				16C10E0117A94D3800DA628D /* login_back_arrow_sel.png */,
 				16C10E0217A94D3800DA628D /* login_button.png */,
 				16C10E0417A94D3800DA628D /* register_finish_button.png */,
-				16C10DFB17A9477E00DA628D /* login_navigation_bg.png */,
 				163EA99017A7F9B700EBD24C /* login_choose_register.png */,
 			);
 			path = login;
@@ -2847,7 +2847,6 @@
 				CB5E936B19B0B20D00B71A10 /* 失恋疗伤.jpg in Resources */,
 				CA88BC0919EF9D6C006C4E7B /* startpage1@2x.png in Resources */,
 				163EA99717A7F9B700EBD24C /* login_choose_register.png in Resources */,
-				16C10DFC17A9477E00DA628D /* login_navigation_bg.png in Resources */,
 				16C10E0517A94D3800DA628D /* login_back_arrow_nor.png in Resources */,
 				16C10E0617A94D3800DA628D /* login_back_arrow_sel.png in Resources */,
 				CB5E936819B0B20D00B71A10 /* 欧美金曲.jpg in Resources */,
@@ -3040,6 +3039,7 @@
 				16B61FD618FCFC4800849EB6 /* Icon_120_120.png in Resources */,
 				18A0EA1517D6DC69004B8BB6 /* SettingOfFunctionViewController.xib in Resources */,
 				1641CCD117DB4FA5004179E4 /* setting_nickname_modify_bg.png in Resources */,
+				CB0BDCE61A8CFABE00CD95C1 /* login_navigation_bg.jpg in Resources */,
 				1641CCDA17DB685E004179E4 /* SettingOfAddFriendViewController.xib in Resources */,
 				1641CCE017DB688F004179E4 /* SettingOfFriendManagerViewController.xib in Resources */,
 				CB5E937119B0B20D00B71A10 /* 摇滚Rock.jpg in Resources */,
