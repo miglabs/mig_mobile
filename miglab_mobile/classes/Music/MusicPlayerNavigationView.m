@@ -37,7 +37,7 @@
         //bg
         _topBgImageView = [[UIImageView alloc] init];
         _topBgImageView.frame = CGRectMake(0, 0, 320, 45);
-        UIImage *topBgImage = [UIImage imageWithName:@"top_bg_0" type:@"png"];
+        UIImage *topBgImage = [UIImage imageWithName:@"top_bg_0" type:@"jpg"];
         _topBgImageView.image = topBgImage;
         [self addSubview:_topBgImageView];
         
