@@ -435,7 +435,6 @@
 		187EADD117A8B92000456A73 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = 187EADD017A8B92000456A73 /* Mood.m */; };
 		1880E457178E9FE300330DDE /* PCustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880E456178E9FE300330DDE /* PCustomPageControl.m */; };
 		188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188A20B917F5638000D4E753 /* CoreText.framework */; };
-		188A20BC17F57F7600D4E753 /* MSYH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188A20BB17F57F7600D4E753 /* MSYH.ttf */; };
 		188E06101797D7D200AFE89D /* UINavigationController+PAnimationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */; };
 		18A0EA0A17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0EA0817D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.m */; };
 		18A0EA0B17D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0EA0917D6DA39004B8BB6 /* SettingOfModifyNicknameViewController.xib */; };
@@ -1165,7 +1164,6 @@
 		1880E455178E9FE300330DDE /* PCustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCustomPageControl.h; sourceTree = "<group>"; };
 		1880E456178E9FE300330DDE /* PCustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCustomPageControl.m; sourceTree = "<group>"; };
 		188A20B917F5638000D4E753 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		188A20BB17F57F7600D4E753 /* MSYH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MSYH.ttf; sourceTree = "<group>"; };
 		188E060E1797D7D200AFE89D /* UINavigationController+PAnimationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PAnimationCategory.h"; sourceTree = "<group>"; };
 		188E060F1797D7D200AFE89D /* UINavigationController+PAnimationCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PAnimationCategory.m"; sourceTree = "<group>"; };
 		18A0EA0717D6DA38004B8BB6 /* SettingOfModifyNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingOfModifyNicknameViewController.h; sourceTree = "<group>"; };
@@ -1692,7 +1690,6 @@
 		1627EA0D177B1CDB0049F9F5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				188A20BB17F57F7600D4E753 /* MSYH.ttf */,
 				160E073C17C08A45003F0E45 /* channelinfo.xml */,
 				1627EA0E177B1CDB0049F9F5 /* qhc.caf */,
 			);
@@ -3148,7 +3145,6 @@
 				18A6021817F2956400344C5B /* weixin_normal@2x.png in Resources */,
 				16B2A3C817F311DD00E7F7E6 /* SettingOfAboutViewController.xib in Resources */,
 				16B2A3CD17F31C9300E7F7E6 /* SettingOfFeedbackViewController.xib in Resources */,
-				188A20BC17F57F7600D4E753 /* MSYH.ttf in Resources */,
 				16184E471802F09F00E6E627 /* share_button_share_bg.png in Resources */,
 				16184E491802F09F00E6E627 /* share_qqzone_share_icon.png in Resources */,
 				16184E4A1802F09F00E6E627 /* share_sinaweibo_share_icon.png in Resources */,
@@ -3497,8 +3493,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				PROVISIONING_PROFILE = "07a7de23-cb92-4e43-b534-f57d6ff6584a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07a7de23-cb92-4e43-b534-f57d6ff6584a";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3553,8 +3549,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "10462e1b-57ba-4967-bbc0-b7bdadb29482";
+				PROVISIONING_PROFILE = "07a7de23-cb92-4e43-b534-f57d6ff6584a";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07a7de23-cb92-4e43-b534-f57d6ff6584a";
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
