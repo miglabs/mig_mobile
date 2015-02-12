@@ -161,7 +161,7 @@
         //移除按钮
         _btnRemove = [UIButton buttonWithType:UIButtonTypeCustom];
         _btnRemove.frame = CGRectMake(148, 23, 20, 20);
-        UIImage *removeNorImage = [UIImage imageWithName:@"borad_menu_delete" type:@"png"];
+        UIImage *removeNorImage = [UIImage imageWithName:@"borad_menu_delete_nor" type:@"png"];
         [_btnRemove setImage:removeNorImage forState:UIControlStateNormal];
         [self addSubview:_btnRemove];
         
