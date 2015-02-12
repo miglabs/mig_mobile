@@ -82,7 +82,6 @@
 		1624BC1617C7861600BE08A5 /* FriendOfSayHiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC1417C7861600BE08A5 /* FriendOfSayHiViewController.xib */; };
 		1624BC1917C7869500BE08A5 /* FriendMessageUserHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 1624BC1817C7869500BE08A5 /* FriendMessageUserHead.m */; };
 		1624BC1B17C786A300BE08A5 /* FriendMessageUserHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC1A17C786A300BE08A5 /* FriendMessageUserHead.xib */; };
-		1624BC1D17C7883000BE08A5 /* friend_message_user_head_src.png in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC1C17C7883000BE08A5 /* friend_message_user_head_src.png */; };
 		1624BC2017C78D1400BE08A5 /* friend_button_addblack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC1E17C78D1400BE08A5 /* friend_button_addblack.png */; };
 		1624BC2117C78D1400BE08A5 /* friend_button_sayhi.png in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC1F17C78D1400BE08A5 /* friend_button_sayhi.png */; };
 		1624BC2617C795C100BE08A5 /* friend_listening_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 1624BC2217C795C100BE08A5 /* friend_listening_tip.png */; };
@@ -314,7 +313,6 @@
 		16CDC60D18325AC200035634 /* send_song_of_add_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60A18325AC200035634 /* send_song_of_add_button.png */; };
 		16CDC60E18325AC200035634 /* send_song_of_cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */; };
 		16CDC60F18325AC200035634 /* send_song_of_empty_tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */; };
-		16CDC6111832604800035634 /* send_song_of_default_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC6101832604800035634 /* send_song_of_default_head.png */; };
 		16CDC6141832673B00035634 /* SongOfSendEmptyTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */; };
 		16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */; };
 		16D0DAF217C9E32700EB763F /* FriendOfPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D0DAF017C9E32700EB763F /* FriendOfPhotoListViewController.m */; };
@@ -495,6 +493,7 @@
 		CB0BDCE61A8CFABE00CD95C1 /* login_navigation_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */; };
 		CB0BDCE81A8CFB8000CD95C1 /* view_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE71A8CFB8000CD95C1 /* view_bg.jpg */; };
 		CB0BDCEA1A8CFC4100CD95C1 /* top_bg_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE91A8CFC4100CD95C1 /* top_bg_0.jpg */; };
+		CB0BDCEC1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCEB1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg */; };
 		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
 		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB1F3DE3197817260009CD91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F3DE2197817260009CD91 /* AFNetworkReachabilityManager.m */; };
@@ -686,7 +685,6 @@
 		1624BC1717C7869500BE08A5 /* FriendMessageUserHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendMessageUserHead.h; sourceTree = "<group>"; };
 		1624BC1817C7869500BE08A5 /* FriendMessageUserHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendMessageUserHead.m; sourceTree = "<group>"; };
 		1624BC1A17C786A300BE08A5 /* FriendMessageUserHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendMessageUserHead.xib; sourceTree = "<group>"; };
-		1624BC1C17C7883000BE08A5 /* friend_message_user_head_src.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_message_user_head_src.png; sourceTree = "<group>"; };
 		1624BC1E17C78D1400BE08A5 /* friend_button_addblack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_button_addblack.png; sourceTree = "<group>"; };
 		1624BC1F17C78D1400BE08A5 /* friend_button_sayhi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_button_sayhi.png; sourceTree = "<group>"; };
 		1624BC2217C795C100BE08A5 /* friend_listening_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_listening_tip.png; sourceTree = "<group>"; };
@@ -980,7 +978,6 @@
 		16CDC60A18325AC200035634 /* send_song_of_add_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_add_button.png; sourceTree = "<group>"; };
 		16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_cell_bg.png; sourceTree = "<group>"; };
 		16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_empty_tip.png; sourceTree = "<group>"; };
-		16CDC6101832604800035634 /* send_song_of_default_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_song_of_default_head.png; sourceTree = "<group>"; };
 		16CDC6121832673B00035634 /* SongOfSendEmptyTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongOfSendEmptyTipsView.h; sourceTree = "<group>"; };
 		16CDC6131832673B00035634 /* SongOfSendEmptyTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongOfSendEmptyTipsView.m; sourceTree = "<group>"; };
 		16CDC615183267A000035634 /* SongOfSendEmptyTipsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongOfSendEmptyTipsView.xib; sourceTree = "<group>"; };
@@ -1239,6 +1236,7 @@
 		CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_navigation_bg.jpg; sourceTree = "<group>"; };
 		CB0BDCE71A8CFB8000CD95C1 /* view_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = view_bg.jpg; sourceTree = "<group>"; };
 		CB0BDCE91A8CFC4100CD95C1 /* top_bg_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = top_bg_0.jpg; sourceTree = "<group>"; };
+		CB0BDCEB1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = send_song_of_default_head.jpg; sourceTree = "<group>"; };
 		CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
 		CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
@@ -1628,7 +1626,7 @@
 				C72F16C118FA293E00ECD8B8 /* default_tip.png */,
 				C72F16BF18FA287500ECD8B8 /* tencent_tip.png */,
 				C72F16BD18FA270900ECD8B8 /* douban_tip.png */,
-				16CDC6101832604800035634 /* send_song_of_default_head.png */,
+				CB0BDCEB1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg */,
 				16CDC60A18325AC200035634 /* send_song_of_add_button.png */,
 				16CDC60B18325AC200035634 /* send_song_of_cell_bg.png */,
 				16CDC60C18325AC200035634 /* send_song_of_empty_tip.png */,
@@ -1650,7 +1648,6 @@
 				CBBB6B4A1857446D005BA14A /* friend_button_recommend.png */,
 				1624BC1E17C78D1400BE08A5 /* friend_button_addblack.png */,
 				1624BC1F17C78D1400BE08A5 /* friend_button_sayhi.png */,
-				1624BC1C17C7883000BE08A5 /* friend_message_user_head_src.png */,
 				1624BC0817C784DC00BE08A5 /* friend_message_body_bg.png */,
 				1624BC0917C784DC00BE08A5 /* friend_message_content_bg.png */,
 				1624BC0A17C784DC00BE08A5 /* friend_message_replay.png */,
@@ -2792,7 +2789,6 @@
 				1683FB98179127920081612B /* playing_tip_1.png in Resources */,
 				CB5E938219B61E6200B71A10 /* clear_night_ico.png in Resources */,
 				1683FB99179127920081612B /* playing_tip_2.png in Resources */,
-				16CDC6111832604800035634 /* send_song_of_default_head.png in Resources */,
 				1683FB9A179127920081612B /* playing_tip_3.png in Resources */,
 				CB5E936119B0B20D00B71A10 /* 八零后.jpg in Resources */,
 				1683FB9B179127920081612B /* playing_tip_4.png in Resources */,
@@ -2941,7 +2937,6 @@
 				1624BC1017C784DC00BE08A5 /* friend_message_user_head_bg.png in Resources */,
 				1624BC1617C7861600BE08A5 /* FriendOfSayHiViewController.xib in Resources */,
 				1624BC1B17C786A300BE08A5 /* FriendMessageUserHead.xib in Resources */,
-				1624BC1D17C7883000BE08A5 /* friend_message_user_head_src.png in Resources */,
 				CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */,
 				1624BC2017C78D1400BE08A5 /* friend_button_addblack.png in Resources */,
 				1624BC2117C78D1400BE08A5 /* friend_button_sayhi.png in Resources */,
@@ -3059,6 +3054,7 @@
 				CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */,
 				1635D96717F06C6C00B392BB /* home_navigation_menu_sel.png in Resources */,
 				1635D96A17F06C7800B392BB /* gene_avatar_unlogin.png in Resources */,
+				CB0BDCEC1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg in Resources */,
 				C7EB7CC31A3E87D8000304F6 /* intalk_ico.png in Resources */,
 				1635D97017F07D5000B392BB /* home_navigation_separator.png in Resources */,
 				16CDC6091832589200035634 /* SongOfSendInfoCell.xib in Resources */,

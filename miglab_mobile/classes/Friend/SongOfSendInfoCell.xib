@@ -39,7 +39,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G53-vn-FfP" customClass="EGOImageButton">
                     <rect key="frame" x="27" y="25" width="75" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="send_song_of_default_head.png">
+                    <state key="normal" image="send_song_of_default_head.jpg">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -57,7 +57,7 @@
     </objects>
     <resources>
         <image name="send_song_of_cell_bg.png" width="595" height="210"/>
-        <image name="send_song_of_default_head.png" width="145" height="146"/>
+        <image name="send_song_of_default_head.jpg" width="145" height="146"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
