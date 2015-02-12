@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gene_src_1.png" id="5">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="5">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -63,7 +63,6 @@
     </objects>
     <resources>
         <image name="gene_separator.png" width="3" height="110"/>
-        <image name="gene_src_1.png" width="640" height="923"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
