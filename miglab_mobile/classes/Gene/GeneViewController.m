@@ -499,23 +499,6 @@ static int PAGE_WIDTH = 81;
         [GlobalDataManager GetInstance].isGeneMenuFirstLaunch) {
         
         // 主页引导已经完成
-#if 0
-        float height = [UIScreen mainScreen].bounds.size.height;
-        double version = [[UIDevice currentDevice].systemVersion doubleValue];
-        float heightoffset = version >= 7 ? 0 : (-32);
-        
-        NSString* imgName = [NSString stringWithFormat:@"guide_%d", 2];
-        _imgGeneView = [[UIImageView alloc] init];
-        _imgGeneView.frame = CGRectMake(0, heightoffset, 320, height - heightoffset);
-        _imgGeneView.image = [UIImage imageWithName:imgName type:@"png"];
-        
-        _imgGeneView.userInteractionEnabled = YES;
-        
-        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(finishCurrentGuide)];
-        [_imgGeneView addGestureRecognizer:singleTap];
-        
-        [self.view addSubview:_imgGeneView];
-#endif
         [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
         [_geneGuideView setHidden:NO];
         [_geneGuideView hideAll];
