@@ -647,7 +647,7 @@
     _playView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
     
     //background view
-    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"bg_mask_2" type:@"png"];
+    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"view_bg" type:@"jpg"];
     _backgroundEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultBackgroundImage];
     _backgroundEGOImageView.frame = CGRectMake(0, -20, kMainScreenWidth, kMainScreenHeight + 20);
     [_playView addSubview:_backgroundEGOImageView];

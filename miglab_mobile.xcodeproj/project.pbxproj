@@ -237,7 +237,6 @@
 		167F048918F932B9000A1C21 /* ChatMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F048818F932B9000A1C21 /* ChatMessageView.m */; };
 		167F048D18F932C4000A1C21 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F048C18F932C4000A1C21 /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		167F049218F9337D000A1C21 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167F049118F9337D000A1C21 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1683FB83179119640081612B /* bg_mask_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7C179119640081612B /* bg_mask_2.png */; };
 		1683FB86179119640081612B /* btn_like_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB7F179119640081612B /* btn_like_nor.png */; };
 		1683FB87179119640081612B /* btn_like_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB80179119640081612B /* btn_like_sel.png */; };
 		1683FB98179127920081612B /* playing_tip_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1683FB94179127920081612B /* playing_tip_1.png */; };
@@ -254,7 +253,6 @@
 		1684763A17BA613700F42172 /* music_src.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763517BA613700F42172 /* music_src.png */; };
 		1684763B17BA613700F42172 /* player_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763617BA613700F42172 /* player_bg.png */; };
 		1684763C17BA613700F42172 /* top_bg_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763717BA613700F42172 /* top_bg_0.png */; };
-		1684763D17BA613700F42172 /* view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763817BA613700F42172 /* view_bg.png */; };
 		1684764617BA791600F42172 /* music_menu_dark_heart_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763E17BA791600F42172 /* music_menu_dark_heart_nor.png */; };
 		1684764717BA791600F42172 /* music_menu_dark_heart_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684763F17BA791600F42172 /* music_menu_dark_heart_sel.png */; };
 		1684764817BA791600F42172 /* music_menu_delete_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 1684764017BA791600F42172 /* music_menu_delete_nor.png */; };
@@ -501,6 +499,7 @@
 		CB0BDCE21A8CF86900CD95C1 /* song_cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */; };
 		CB0BDCE41A8CFA3E00CD95C1 /* player_borad_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */; };
 		CB0BDCE61A8CFABE00CD95C1 /* login_navigation_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */; };
+		CB0BDCE81A8CFB8000CD95C1 /* view_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE71A8CFB8000CD95C1 /* view_bg.jpg */; };
 		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
 		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB1F3DE3197817260009CD91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F3DE2197817260009CD91 /* AFNetworkReachabilityManager.m */; };
@@ -897,7 +896,6 @@
 		167F048E18F932FA000A1C21 /* ChatDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDef.h; sourceTree = "<group>"; };
 		167F049018F9337D000A1C21 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		167F049118F9337D000A1C21 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		1683FB7C179119640081612B /* bg_mask_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_mask_2.png; sourceTree = "<group>"; };
 		1683FB7F179119640081612B /* btn_like_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_like_nor.png; sourceTree = "<group>"; };
 		1683FB80179119640081612B /* btn_like_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_like_sel.png; sourceTree = "<group>"; };
 		1683FB94179127920081612B /* playing_tip_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing_tip_1.png; sourceTree = "<group>"; };
@@ -915,7 +913,6 @@
 		1684763517BA613700F42172 /* music_src.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_src.png; sourceTree = "<group>"; };
 		1684763617BA613700F42172 /* player_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_bg.png; sourceTree = "<group>"; };
 		1684763717BA613700F42172 /* top_bg_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg_0.png; sourceTree = "<group>"; };
-		1684763817BA613700F42172 /* view_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_bg.png; sourceTree = "<group>"; };
 		1684763E17BA791600F42172 /* music_menu_dark_heart_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_dark_heart_nor.png; sourceTree = "<group>"; };
 		1684763F17BA791600F42172 /* music_menu_dark_heart_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_dark_heart_sel.png; sourceTree = "<group>"; };
 		1684764017BA791600F42172 /* music_menu_delete_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_menu_delete_nor.png; sourceTree = "<group>"; };
@@ -1251,6 +1248,7 @@
 		CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = song_cover.jpg; sourceTree = "<group>"; };
 		CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player_borad_bg.jpg; sourceTree = "<group>"; };
 		CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_navigation_bg.jpg; sourceTree = "<group>"; };
+		CB0BDCE71A8CFB8000CD95C1 /* view_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = view_bg.jpg; sourceTree = "<group>"; };
 		CB1EAE1B18D4ADF10099D2A2 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = miglab_mobile/classes/TencentAPI/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libDoubanApiEngine.framework; path = miglab_mobile/classes/DoubanAPI/libDoubanApiEngine.framework; sourceTree = "<group>"; };
 		CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
@@ -2129,7 +2127,7 @@
 				1684763517BA613700F42172 /* music_src.png */,
 				1684763617BA613700F42172 /* player_bg.png */,
 				1684763717BA613700F42172 /* top_bg_0.png */,
-				1684763817BA613700F42172 /* view_bg.png */,
+				CB0BDCE71A8CFB8000CD95C1 /* view_bg.jpg */,
 			);
 			path = music;
 			sourceTree = "<group>";
@@ -2296,7 +2294,6 @@
 				162727A217ACB947000C79D3 /* play_btn_share_sel.png */,
 				CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */,
 				1683FB93179127920081612B /* playing_tips */,
-				1683FB7C179119640081612B /* bg_mask_2.png */,
 				1683FB7F179119640081612B /* btn_like_nor.png */,
 				1683FB80179119640081612B /* btn_like_sel.png */,
 				16E77EA2178DB1EF006A24A6 /* playing_tip.png */,
@@ -2803,7 +2800,6 @@
 				16E77E9C178DB18C006A24A6 /* progress_line.png in Resources */,
 				16E77E9E178DB18C006A24A6 /* progress_point.png in Resources */,
 				16E77EA3178DB1EF006A24A6 /* playing_tip.png in Resources */,
-				1683FB83179119640081612B /* bg_mask_2.png in Resources */,
 				1661720518F9354600E86B11 /* senditem.png in Resources */,
 				CB5E938E19B61E6200B71A10 /* wind_ico.png in Resources */,
 				1683FB86179119640081612B /* btn_like_nor.png in Resources */,
@@ -2891,7 +2887,6 @@
 				166171F918F9354600E86B11 /* chat_add_but.png in Resources */,
 				CB5E936919B0B20D00B71A10 /* 七零后.jpg in Resources */,
 				1684763C17BA613700F42172 /* top_bg_0.png in Resources */,
-				1684763D17BA613700F42172 /* view_bg.png in Resources */,
 				1661720418F9354600E86B11 /* key_but_img.png in Resources */,
 				C7F91EAC1A40341000141073 /* chat_msg_bt_f2.png in Resources */,
 				16EA2D3619286B09008E9DD3 /* login_text.png in Resources */,
@@ -2923,6 +2918,7 @@
 				16212F9B17BF50580091326E /* RootViewController.xib in Resources */,
 				160E073D17C08A45003F0E45 /* channelinfo.xml in Resources */,
 				160E075F17C0A64F003F0E45 /* DetailPlayerViewController.xib in Resources */,
+				CB0BDCE81A8CFB8000CD95C1 /* view_bg.jpg in Resources */,
 				16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */,
 				CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */,
 				16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */,

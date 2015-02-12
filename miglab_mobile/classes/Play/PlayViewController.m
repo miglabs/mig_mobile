@@ -80,7 +80,7 @@
     //screen height
     float height = [UIScreen mainScreen].bounds.size.height;
     PLog(@"height: %f", height);
-    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"bg_mask_2" type:@"png"];
+    UIImage *defaultBackgroundImage = [UIImage imageWithName:@"view_bg" type:@"jpg"];
     _backgroundEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultBackgroundImage];
     _backgroundEGOImageView.frame = CGRectMake(0, -20, 320, height + 20);
     [self.view addSubview:_backgroundEGOImageView];
