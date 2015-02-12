@@ -166,7 +166,7 @@
     
     //end 播放
     
-    UIImage *defaultCover = [UIImage imageWithName:@"song_cover" type:@"png"];
+    UIImage *defaultCover = [UIImage imageWithName:@"song_cover" type:@"jpg"];
     defaultCover = [UIImage createRoundedRectImage:defaultCover size:CGSizeMake(200, 200) radius:100];
     _cdEGOImageView = [[EGOImageView alloc] initWithPlaceholderImage:defaultCover];
 //    _cdEGOImageView.frame = CGRectMake(9, kMainScreenHeight - 50, 44, 44);
@@ -1634,7 +1634,7 @@
     PLog(@"imageViewFailedToLoadImage tag: %d, error: %@", imageView.tag, error);
     if (imageView && imageView.tag == 2000) {
         //_cdOfSongView.coverOfSongEGOImageView
-        imageView.image = [UIImage imageWithName:@"song_cover" type:@"png"];
+        imageView.image = [UIImage imageWithName:@"song_cover" type:@"jpg"];
     }
     
 }

@@ -92,7 +92,7 @@
     }//for
     _cdOfSongView.frame = CGRectMake(0, 100 + self.topDistance, kMainScreenWidth, kMainScreenHeight - 100 - 90);
     
-    _cdOfSongView.coverOfSongEGOImageView.placeholderImage = [UIImage imageWithName:@"song_cover" type:@"png"];
+    _cdOfSongView.coverOfSongEGOImageView.placeholderImage = [UIImage imageWithName:@"song_cover" type:@"jpg"];
     _cdOfSongView.coverOfSongEGOImageView.tag = 2000;
     _cdOfSongView.coverOfSongEGOImageView.delegate = self;
     _cdOfSongView.coverOfSongEGOImageView.layer.cornerRadius = 98;
@@ -392,7 +392,7 @@
         
         Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
         UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
-        UIImage *upimage = [UIImage imageWithName:@"share_songcover_share_layer" type:@"png"];
+        UIImage *upimage = [UIImage imageWithName:@"" type:@"png"]; // junliu，这是删了一张不用的背景图
         UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
         
         //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline发送到朋友圈，默认值为WXSceneSession

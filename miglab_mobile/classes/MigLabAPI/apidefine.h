@@ -283,7 +283,7 @@
 /* --------------------- 地址定义 --------------------- */
 #define URL_DEFAULT_HEADER_IMAGE                @"http://face.miu.miyomate.com/system.jpg"
 #define LOCAL_DEFAULT_HEADER_IMAGE              @"music_default_avatar.png"
-#define LOCAL_DEFAULT_MUSIC_IMAGE               @"song_cover.png"
+#define LOCAL_DEFAULT_MUSIC_IMAGE               @"song_cover.jpg"
 
 
 /* --------------------- 消息定义 --------------------- */

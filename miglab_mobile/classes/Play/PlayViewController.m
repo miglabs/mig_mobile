@@ -134,12 +134,6 @@
     _cdOfSongEGOImageButton.layer.masksToBounds = YES;
     _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
     
-//    CGSize imageSize = _cdOfSongEGOImageButton.frame.size;
-//    UIImage *defaultSongCover = [UIImage imageWithName:@"song_cover" type:@"png"];
-//    defaultSongCover = [UIImage createRoundedRectImage:defaultSongCover size:imageSize radius:imageSize.width / 2];
-//    [_cdOfSongEGOImageButton setImage:defaultSongCover forState:UIControlStateNormal];
-//    _cdOfSongEGOImageButton.adjustsImageWhenHighlighted = NO;
-    
     [self updateProcess:0.01];
     
     [_songInfoScrollView addSubview:_cdOfSongView];
