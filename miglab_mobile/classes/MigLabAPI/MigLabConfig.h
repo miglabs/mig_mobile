@@ -66,9 +66,9 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #else
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #endif
 
 #if (0 == IS_DEBUG_SERVER)
@@ -102,6 +102,12 @@
 #ifndef USE_QQ_LOGIN
     #define USE_QQ_LOGIN 1
 #endif
+
+// 咪哟账号登陆
+#ifndef USE_MIYO_LOGIN
+ #define USE_MIYO_LOGIN 0
+#endif
+
 
 // 开启隐私
 #ifndef USE_PRIVATE
@@ -453,13 +459,14 @@
 //http://112.124.49.59/cgi-bin/miyo/soc/v1/getlocation.fcgi?uid=10008&token=eaed123
 //HOST + 路径 + 项目名 + 插件 + 版本 + 接口名
 #define PATH                @"cgi-bin"
-#define PRO                 @"testmiyo"
+#define PRO                 @"miyo"
 //module
 #define SOCMOD              @"soc"
 #define CHATMOD             @"chat"
 #define MUSICMOD            @"music"
 #define LBSMOD              @"lbs"
 #define USRMOD              @"usr"
+#define USERMOD             @"user"
 
 //版本
 #define VERSION             @"v1"
@@ -473,6 +480,7 @@
 #define LBS_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,LBSMOD,VERSION]
 
 #define USR_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,USRMOD,VERSION]
+#define USER_INTERFACE   [NSString stringWithFormat:@"%@%@/%@/%@/%@/",HTTP_API_DOMAIN,PATH,PRO,USERMOD,VERSION]
 
 
 //////////////////////////////////////////////////社交///////////////////////////////////////////////////////////////
@@ -682,6 +690,12 @@
 #define NotificationNameCollectAndNearNumSuccess            @"NotificationNameCollectAndNearNumSuccess"
 #define NotificationNameCollectAndNearNumFailed             @"NotificationNameCollectAndNearNumFailed"
 //////////////////////////////////////////////////用户管理///////////////////////////////////////////////////////////////
+
+//第三方平台用户登录
+#define THIRD_LOGIN                                         [NSString stringWithFormat:@"%@%@",USER_INTERFACE,@"thirdlogin.fcgi"]
+#define NotificationThirdLoginSuccess                       @"NotificationNameThirdLoginSuccess"
+#define NotificationThirdLoginFailed                        @"NotificationNameThirdLoginFailed"
+
 
 //获取用户信息
 #define GET_USER_INFO                                       [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"userinfo.fcgi"]

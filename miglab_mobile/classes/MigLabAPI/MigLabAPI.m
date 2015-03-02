@@ -175,6 +175,89 @@
 }
 
 /*
+ <!--请求POST-->
+ THIRD_LOGIN
+ */
+-(void) doThirdLogin:(int) tmachine nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession imei:(NSString*) timei sex:(NSString*)tsex birthday:(NSString*)tbirthday location:(NSString*)tlocation head:(NSString*)thead latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude{
+    
+    API_HEADER();
+    
+    NSString* thirdloginUrl = THIRD_LOGIN;
+    PLog(@"thirdloginUrl: %@", thirdloginUrl);
+    
+    NSURL* url = [NSURL URLWithString:thirdloginUrl];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSString* httpBody = [NSString stringWithFormat:@"machine=%d&nickname=%@&source=%d&session=%@&imei=%@&sex=%@&birthday=%@&location=%@&head=%@&latitude=%@&longitude=%@",tmachine,tnickname,tsourcetype,tsession,timei,tsex,tbirthday,tlocation,thead,tlatitude,tlongitude];
+    PLog(@"httpBody: %@", httpBody);
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST" path:nil parameters:nil];
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @try {
+            
+            NSDictionary *dicJson = [NSJSONSerialization JSONObjectWithData:responseObject options:nil error:nil];
+            PLog(@"dicJson: %@", dicJson);
+            
+            int status = [[dicJson objectForKey:@"status"] intValue];
+            
+            if (1 == status) {
+                
+                PLog(@"register operation succeeded");
+                NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
+                
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:dicTemp, @"result", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationThirdLoginSuccess object:nil userInfo:dicResult];
+                
+                //PUser* user = [PUser initWithNSDictionary:[dicJson objectForKey:@"result"]];
+                //NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:user, @"result", nil];
+                
+                //[[NSNotificationCenter defaultCenter] postNotificationName:NotificationThirdLoginSuccess object:nil userInfo:dicResult];
+                
+            } else if (0 == status || -1 == status) {
+                
+                NSString* msg = [dicJson objectForKey:@"msg"];
+                PLog(@"register operation failed: %@", msg);
+                NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationThirdLoginFailed object:nil userInfo:dicResult];
+                
+            } else {
+                
+                NSString* msg = @"未知错误:(";
+                NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
+                
+            }
+            
+        }
+        @catch (NSException *exception) {
+            
+            NSString* msg = @"解析返回数据信息失败:(";
+            NSDictionary* dicResult = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"msg", nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:dicResult];
+            
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        PLog(@"register failure: %@", error);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameRegisterFailed object:nil userInfo:nil];
+        
+    }];
+    
+    [operation start];
+    
+    API_FOOTER();
+}
+
+/*
  注册用户
  <!--请求POST-->
  HTTP_REGISTER

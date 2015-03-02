@@ -38,7 +38,8 @@
         if (dict && [dict isKindOfClass:[NSDictionary class]]) {
             
             user = [[PUser alloc] init];
-            user.userid = [dict objectForKey:@"userid"];
+            //user.userid = [dict objectForKey:@"userid"];
+            user.userid = [dict objectForKey:@"uid"];
             user.username = [dict objectForKey:@"username"];
             user.password = [dict objectForKey:@"password"];
             user.nickname = [dict objectForKey:@"nickname"];

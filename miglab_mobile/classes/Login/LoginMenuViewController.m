@@ -101,9 +101,14 @@
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu2, nil];
 #endif
     
+#if USE_MIYO_LOGIN
     NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪哟账号登陆", @"MenuText", nil];
     NSArray *menulist1 = [NSArray arrayWithObjects:dicMenu10, nil];
+
     _dataList = [NSMutableArray arrayWithObjects:menulist0, menulist1, nil];
+#else
+    _dataList = [NSMutableArray arrayWithObjects:menulist0, nil];
+#endif
     
     //api
     _miglabAPI = [[MigLabAPI alloc] init];
@@ -118,6 +123,10 @@
     //register
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationNameRegisterFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationNameRegisterSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerFailed:) name:NotificationThirdLoginFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess:) name:NotificationThirdLoginSuccess object:nil];
+    
     
 }
 
@@ -254,6 +263,7 @@
     
 }
 
+
 //register notification
 -(void)registerFailed:(NSNotification *)tNotification{
     
@@ -267,12 +277,14 @@
 
 -(void)registerSuccess:(NSNotification *)tNotification{
     
-    NSDictionary *result = [tNotification userInfo];
+    NSDictionary *dic = [tNotification userInfo];
     NSLog(@"registerSuccess...");
-
-    if (result) {
+    
+    if (dic) {
+        NSDictionary* result = [dic objectForKey:@"result"];
         
-        PUser *tempUser = [result objectForKey:@"result"];
+        
+        PUser *tempUser = [PUser initWithNSDictionary:[result objectForKey:@"userinfo"]];
         [tempUser log];
         
         PDatabaseManager *databaseManager = [PDatabaseManager GetInstance];
@@ -388,7 +400,8 @@
     NSString *name = [result objectForKey:@"name"];
     NSString *screenName = [result objectForKey:@"screen_name"];
     NSString *gender = [result objectForKey:@"gender"];
-    
+    NSString *head = [result objectForKey:@"profile_image_url"];
+    NSString *location = [result objectForKey:@"location"];//地区 做URLCODE
     //写入缓存
     [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
     if ([gender isEqualToString:@"m"]) {
@@ -402,7 +415,8 @@
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
     //注册和登录合并，第三方平台直接使用注册接口登录
-    [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
+    //[_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
+    [_miglabAPI doThirdLogin:1 nickname:screenName source:accounttype session:userid imei:@"888888" sex:gender birthday:DEFAULT_BIRTHDAY location:location head:head latitude:nil longitude:nil];
 }
 
 //update
@@ -432,6 +446,8 @@
     NSString *name = [result objectForKey:@"nickname"];
     NSString *screenName = [result objectForKey:@"nickname"];
     NSString *gender = [result objectForKey:@"gender"];
+    NSString *head = [result objectForKey:@"figureurl_1"];
+    NSString *location = [result objectForKey:@"city"];
     
     //写入缓存
     [UserSessionManager GetInstance].currentUser.tencentAccount.username = name;
@@ -441,12 +457,14 @@
         gender = [NSString stringWithFormat:@"%d", 0];
     }
     
+    
     //
     NSString *userid = [UserSessionManager GetInstance].currentUser.tencentAccount.accountid;
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
     //注册和登录合并，第三方平台直接使用注册接口登录
-    [_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
+    //[_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
+    [_miglabAPI doThirdLogin:1 nickname:screenName source:accounttype session:userid  imei:@"8888" sex:gender birthday:DEFAULT_BIRTHDAY location:location head:head latitude:nil longitude:nil];
     
 }
 
@@ -481,7 +499,8 @@
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
     
     //注册和登录合并，第三方平台直接使用注册接口登录
-    [_miglabAPI doRegister:douban_user_name password:douban_user_name nickname:douban_user_name source:accounttype session:douban_user_id sex:gender];
+    //[_miglabAPI doRegister:douban_user_name password:douban_user_name nickname:douban_user_name source:accounttype session:douban_user_id sex:gender];
+    [_miglabAPI doThirdLogin:1 nickname:douban_user_name  source:accounttype session:douban_user_id imei:@"8888" sex:gender birthday:DEFAULT_BIRTHDAY location:DEFAULT_LOCATION head:DEFAULT_HEAD_MALE latitude:nil longitude:nil];
     
     [self didFinishLogin];
     
@@ -522,9 +541,12 @@
             [self doDouBanLogin:nil];
         }
         
-    } else if (indexPath.section == 1) {
+    }
+#if USE_MIYO_LOGIN
+    else if (indexPath.section == 1) {
         [self doMiglabLogin:nil];
     }
+#endif
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -533,7 +555,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#if USE_MIYO_LOGIN
+    return 1;
+#else
     return 2;
+#endif
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

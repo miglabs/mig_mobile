@@ -115,6 +115,11 @@
 #define MIG_WEATHER_WIND                        @"WIND"
 #define MIG_WEATHER_FOG                         @"FOG"
 
+/*默认生日*/
+#define DEFAULT_BIRTHDAY                        @"1986/10/01"
+#define DEFAULT_LOCATION                        @"杭州"
+#define DEFAULT_HEAD_MALE                       @"http://face.miu.miyomate.com/m.jpg"
+#define DEFAULT_HEAD_FEMALE                     @"http://face.miu.miyomate.com/f.jpg"
 
 /*聊天等待*/
 #define CHAT_WAIT_TIP                           @"查看聊天记录"
