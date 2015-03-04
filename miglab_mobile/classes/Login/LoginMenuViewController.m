@@ -66,40 +66,48 @@
     self.navView.titleLabel.text = @"请登陆";
     
     //search
+#if USE_MIYO_LOGIN
     UIImage *searchImage = [UIImage imageWithName:@"login_choose_register" type:@"png"];
     [self.navView.rightButton setBackgroundImage:searchImage forState:UIControlStateNormal];
     self.navView.rightButton.frame = CGRectMake(262, 7.5 + self.topDistance, 48, 29);
     [self.navView.rightButton setHidden:NO];
     [self.navView.rightButton addTarget:self action:@selector(doGotoRegister:) forControlEvents:UIControlEventTouchUpInside];
+#endif
     
-    //附近歌友
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 10, 320, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10) style:UITableViewStyleGrouped];
+    //登陆
+    //登陆标示
+    UIImageView *loginImageView = [[UIImageView alloc] init];
+    loginImageView.frame = CGRectMake(0, posy + 10, 30, 30);
+    loginImageView.image = [UIImage imageWithName:@"login_logo.png" type:@"png"];
+    [self.view addSubview:loginImageView];
+    
+    int y = 250;
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 10+y, 320, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _dataTableView.scrollEnabled = NO;
     
-//    UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-//    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 10 - 73 - 10);
-//    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
-//    _dataTableView.backgroundView = bodyBgImageView;
+    /*UIImageView *bodyBgImageView = [[UIImageView alloc] init];
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
+    _dataTableView.backgroundView = bodyBgImageView;
+     */
+
+    
     [self.view addSubview:_dataTableView];
     
     //
     NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_sinaweibo", @"MenuImageName", @"新浪微博登陆", @"MenuText", nil];
 
-#if USE_QQ_LOGIN
     NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_qq", @"MenuImageName", @"QQ账号登陆", @"MenuText", nil];
-#endif
     
     NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"login_menu_icon_douban", @"MenuImageName", @"豆瓣账号登陆", @"MenuText", nil];
     
-#if USE_QQ_LOGIN
+
     NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu1, dicMenu2, nil];
-#else
-    NSArray *menulist0 = [NSArray arrayWithObjects:dicMenu0, dicMenu2, nil];
-#endif
+
     
 #if USE_MIYO_LOGIN
     NSMutableDictionary *dicMenu10 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_local", @"MenuImageName", @"用咪哟账号登陆", @"MenuText", nil];
@@ -556,9 +564,9 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 #if USE_MIYO_LOGIN
-    return 1;
-#else
     return 2;
+#else
+    return 1;
 #endif
 }
 

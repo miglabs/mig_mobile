@@ -105,7 +105,7 @@
 
 // 咪哟账号登陆
 #ifndef USE_MIYO_LOGIN
- #define USE_MIYO_LOGIN 1
+ #define USE_MIYO_LOGIN 0
 #endif
 
 
