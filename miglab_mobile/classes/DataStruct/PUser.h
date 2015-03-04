@@ -25,6 +25,7 @@
 @property (nonatomic, assign) int source;
 @property (nonatomic, retain) NSString *head;
 @property (nonatomic, retain) NSString* token;
+@property (nonatomic, retain) NSString* session;
 
 @property (nonatomic, retain) AccountOf3rdParty *sinaAccount;
 @property (nonatomic, retain) AccountOf3rdParty *tencentAccount;

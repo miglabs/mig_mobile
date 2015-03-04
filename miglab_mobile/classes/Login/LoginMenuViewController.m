@@ -400,7 +400,7 @@
     NSString *name = [result objectForKey:@"name"];
     NSString *screenName = [result objectForKey:@"screen_name"];
     NSString *gender = [result objectForKey:@"gender"];
-    NSString *head = [result objectForKey:@"profile_image_url"];
+    NSString *head = [result objectForKey:@"avatar_large"];
     NSString *location = [result objectForKey:@"location"];//地区 做URLCODE
     //写入缓存
     [UserSessionManager GetInstance].currentUser.sinaAccount.username = name;
@@ -446,7 +446,7 @@
     NSString *name = [result objectForKey:@"nickname"];
     NSString *screenName = [result objectForKey:@"nickname"];
     NSString *gender = [result objectForKey:@"gender"];
-    NSString *head = [result objectForKey:@"figureurl_1"];
+    NSString *head = [result objectForKey:@"figureurl_2"];
     NSString *location = [result objectForKey:@"city"];
     
     //写入缓存

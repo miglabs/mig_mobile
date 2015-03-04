@@ -731,6 +731,7 @@ static int PAGE_WIDTH = 81;
     
 }
 
+
 -(IBAction)doGroupchat:(id)sender{
      PLog(@"gene doGroupchat...");
     NSString* name = _dimension_name;

@@ -231,10 +231,12 @@
 #define MIGTIP_NO_CONTENT                       @"您还没有输入任何字哦"
 
 /* 达到送歌数量限制 */
-#define MIGTIP_1INT_REACH_MAX_SEND_SONG         @"对不起，最多只能送%d首歌哦~~~"
+#define MIGTIP_1INT_REACH_MAX_SEND_SONG         @"对不起，最多只能送%d首歌"
 
+/*登陆成功*/
+#define MIGTIP_LOGIN_SUCCEED                    @"登陆成功"
 /* 分享成功 */
-#define MIGTIP_SHARING_SUCCEED                  @"分享成功~~~"
+#define MIGTIP_SHARING_SUCCEED                  @"分享成功"
 
 /* 分享失败 */
 #define MIGTIP_SHARING_FAILED                   @"分享出现问题啦，请稍后再试-_-#"
@@ -258,10 +260,10 @@
 #define MIGTIP_WARNING                          @"Warning"
 
 /* 网络不稳定 */
-#define MIGTIP_UNSTABLE_NETWORK                 @"您的网络好像不稳定哦~~~"
+#define MIGTIP_UNSTABLE_NETWORK                 @"您的网络好像不稳定哦"
 
 /* 没有打开定位服务 */
-#define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧~~~"
+#define MIGTIP_LOCATION_CLOSE                   @"赶快打开定位服务，来体验极致酷炫的功能吧"
 
 /* 没有安装微信 */
 #define MIGTIP_NOT_FOUND_WEIXIN                 @"您还没有安装微信，无法使用此功能，请先下载"

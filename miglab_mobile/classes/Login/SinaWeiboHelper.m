@@ -208,7 +208,7 @@ BOOL _firstLoadObserver = YES;
             }
         }//if
         
-        [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_SUCCEED];
     } else if ([request.url hasSuffix:@"statuses/update.json"]) {
         if (result && [result isKindOfClass:[NSDictionary class]]) {
             if (_delegate && [_delegate respondsToSelector:@selector(sinaWeiboUpdateHelper:didFinishLoadingWithResult:)]) {
@@ -216,7 +216,7 @@ BOOL _firstLoadObserver = YES;
             }
         }
         
-        [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
+        [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_SUCCEED];
     }
     
     [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_SUCCEED];
