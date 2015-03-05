@@ -195,8 +195,6 @@
     
     //start gps
     //[_locationManager startUpdatingLocation];
-    [[MigPoiManager GetInstance] ViewPoi:ROOT_VIEW_TYPE];
-    [[MigPoiManager GetInstance] startUpdatingLocation];
     
     //
     [self doUpdateView:_currentShowViewTag];

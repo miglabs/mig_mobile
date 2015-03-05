@@ -412,8 +412,14 @@ static int PAGE_WIDTH = 81;
     //检查更新
     [self checkGeneConfigfile];
     
+    
     //获取弹幕和评论 测试
     //[self getBarrayComm];
+    
+    //获取天气//登陆记录
+    [[MigPoiManager GetInstance] ViewPoi:ROOT_VIEW_TYPE];
+    [[MigPoiManager GetInstance] startUpdatingLocation];
+    
     
     [self doResetChannelLockView];
     
@@ -730,6 +736,7 @@ static int PAGE_WIDTH = 81;
     }
     
 }
+
 
 
 -(IBAction)doGroupchat:(id)sender{

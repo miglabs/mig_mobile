@@ -713,6 +713,12 @@
 #define NotificationNameGetGuestSuccess                     @"NotificationNameGetGuestSuccess"
 #define NotificationNameGetGuestFailed                      @"NotificationNameGetGuestFailed"
 
+//登陆日志
+#define HTTP_LOGINRECORD                                    [NSString stringWithFormat:@"%@%@",USER_INTERFACE,@"loginrecord.fcgi"]
+#define NotificationNameLogiReocrdSuccess                    @"NotificationNameLogiReocrdSuccess"
+#define NotificationNameLogiReocrdFailed                     @"NotificationNameLogiReocrdFailed"
+
+
 //更新用户信息
 #define HTTP_UPDATEUSER                                     [NSString stringWithFormat:@"%@%@",USR_INTERFACE,@"updateusr.fcgi"]
 #define NotificationUpdateUserSuccess                       @"NotificationUpdateUserSuccess"

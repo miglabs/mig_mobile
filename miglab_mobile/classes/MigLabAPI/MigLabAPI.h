@@ -332,4 +332,11 @@ typedef enum {
  */
 
 -(void) doThirdLogin:(int) tmachine nickname:(NSString*)tnickname source:(SourceType)tsourcetype session:(NSString*)tsession imei:(NSString*) timei sex:(NSString*)tsex birthday:(NSString*)tbirthday location:(NSString*)tlocation head:(NSString*)thead latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
+
+
+/*
+ 登陆日志
+ */
+
+-(void) doLoginRecord:(NSString*)uid ttoken:(NSString*) token latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
 @end

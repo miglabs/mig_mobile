@@ -108,12 +108,14 @@
     _lastViewType = _viewType;
 }
 
-//注册地理位置及获取天气
+//注册地理位置及获取天气及登陆日志
 -(void) RootLocation:(NSString*) uid accesstoken:(NSString*) accesstoken
             location:(NSString*) location latitude:(NSString*) latitude
           longtitude:(NSString*) longtitude{
     
     [_miglabAPI doSetUserPos:uid token:accesstoken location:location];
+    //登陆日志
+    [_miglabAPI doLoginRecord:uid ttoken:accesstoken latitude:latitude longitude:longtitude];
     //获取地理信息
     [_miglabAPI doGetLocation:uid ttoken:accesstoken tlatitude:latitude
                    tlongitude:longtitude];
