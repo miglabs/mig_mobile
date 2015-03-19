@@ -4046,7 +4046,7 @@
             if (status == 1) {
                 
                 PLog(@"send pbush info succeeded");
-                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLogiReocrdSuccess object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameLogiReocrdSuccess object:nil userInfo:dicJson];
             }
             else {
                 

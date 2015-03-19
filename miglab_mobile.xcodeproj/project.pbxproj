@@ -11,6 +11,9 @@
 		045341941A6DF67600BC075B /* umFeedback.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 045341911A6DF67600BC075B /* umFeedback.bundle */; };
 		048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */; };
 		15C6FCCB1A7CAB6300239364 /* share_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C6FCCA1A7CAB6300239364 /* share_default.png */; };
+		15D354B41AA74D1400422FE4 /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */; };
+		15D354B51AA74D1400422FE4 /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */; };
+		15D354B71AA74E1400422FE4 /* login_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B61AA74E1400422FE4 /* login_logo.png */; };
 		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
 		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
 		1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */; };
@@ -484,9 +487,7 @@
 		CA88BC0B19EF9D6C006C4E7B /* startpage2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA88BC0519EF9D6C006C4E7B /* startpage2@2x.png */; };
 		CA88BC0C19EF9D6C006C4E7B /* startpage3-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA88BC0619EF9D6C006C4E7B /* startpage3-568h@2x.png */; };
 		CA88BC0D19EF9D6C006C4E7B /* startpage3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA88BC0719EF9D6C006C4E7B /* startpage3@2x.png */; };
-		CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */; };
 		CB0380D6185CA3AB00137D8E /* login_menu_icon_douban.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */; };
-		CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */; };
 		CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0380D9185DA0B500137D8E /* gene_focus.png */; };
 		CB0BDCE21A8CF86900CD95C1 /* song_cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */; };
 		CB0BDCE41A8CFA3E00CD95C1 /* player_borad_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */; };
@@ -571,6 +572,9 @@
 		045341921A6DF67600BC075B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_separator.png; sourceTree = "<group>"; };
 		15C6FCCA1A7CAB6300239364 /* share_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_default.png; path = share/share_default.png; sourceTree = "<group>"; };
+		15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
+		15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
+		15D354B61AA74E1400422FE4 /* login_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_logo.png; sourceTree = "<group>"; };
 		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
 		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
 		1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_avatar_big.png; sourceTree = "<group>"; };
@@ -1227,9 +1231,7 @@
 		CA88BC0519EF9D6C006C4E7B /* startpage2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage2@2x.png"; sourceTree = "<group>"; };
 		CA88BC0619EF9D6C006C4E7B /* startpage3-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage3-568h@2x.png"; sourceTree = "<group>"; };
 		CA88BC0719EF9D6C006C4E7B /* startpage3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startpage3@2x.png"; sourceTree = "<group>"; };
-		CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
 		CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_douban.png; sourceTree = "<group>"; };
-		CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		CB0380D9185DA0B500137D8E /* gene_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gene_focus.png; sourceTree = "<group>"; };
 		CB0BDCE11A8CF86900CD95C1 /* song_cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = song_cover.jpg; sourceTree = "<group>"; };
 		CB0BDCE31A8CFA3E00CD95C1 /* player_borad_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = player_borad_bg.jpg; sourceTree = "<group>"; };
@@ -1765,12 +1767,13 @@
 		163EA98A17A7F9B700EBD24C /* login */ = {
 			isa = PBXGroup;
 			children = (
+				15D354B61AA74E1400422FE4 /* login_logo.png */,
+				15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */,
+				15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */,
 				CB0BDCE51A8CFABE00CD95C1 /* login_navigation_bg.jpg */,
 				16C10E1517A9638F00DA628D /* get_password_back.png */,
 				16C10E1617A9638F00DA628D /* get_password_by_email.png */,
-				CB0380D3185C9D3D00137D8E /* login_menu_icon_sinaweibo.png */,
 				CB0380D5185CA3AB00137D8E /* login_menu_icon_douban.png */,
-				CB0380D7185CA45E00137D8E /* login_menu_icon_qq.png */,
 				16C10E1717A9638F00DA628D /* login_edit1_bg.png */,
 				16C10E0A17A94F4200DA628D /* login_edit2_bg.png */,
 				16C10E0017A94D3800DA628D /* login_back_arrow_nor.png */,
@@ -2806,6 +2809,7 @@
 				C7F8696F1A5396CE00A21F01 /* home_navigation_bg_on.png in Resources */,
 				1661720118F9354600E86B11 /* face_but_img.png in Resources */,
 				16F575C1179587D900277308 /* borad_default_avatar.png in Resources */,
+				15D354B51AA74D1400422FE4 /* login_menu_icon_sinaweibo.png in Resources */,
 				16F575C4179587D900277308 /* borad_menu_like_nor.png in Resources */,
 				CB5E937319B0B20D00B71A10 /* 粤语经典.jpg in Resources */,
 				16F575C5179587D900277308 /* borad_menu_next.png in Resources */,
@@ -2815,7 +2819,6 @@
 				16F575CF179590BA00277308 /* borad_menu_like_sel.png in Resources */,
 				1834106317969FC000EAAFFC /* MainMenuViewController.xib in Resources */,
 				187A5669179927E800221569 /* PlayBodyView.xib in Resources */,
-				CB0380D8185CA45E00137D8E /* login_menu_icon_qq.png in Resources */,
 				C76F0A0B1A52AAB600E5FC9C /* collect_ico_on.png in Resources */,
 				045341941A6DF67600BC075B /* umFeedback.bundle in Resources */,
 				166171FE18F9354600E86B11 /* chat_toolbar_bg.png in Resources */,
@@ -2875,7 +2878,6 @@
 				C72F16BE18FA270900ECD8B8 /* douban_tip.png in Resources */,
 				1684764817BA791600F42172 /* music_menu_delete_nor.png in Resources */,
 				CB5E936D19B0B20D00B71A10 /* 睡觉.jpg in Resources */,
-				CB0380D4185C9D3D00137D8E /* login_menu_icon_sinaweibo.png in Resources */,
 				CA88BC0C19EF9D6C006C4E7B /* startpage3-568h@2x.png in Resources */,
 				CB5E931719AF540500B71A10 /* temperature_ico.png in Resources */,
 				CB5E930E19AF540500B71A10 /* cloudy_ico.png in Resources */,
@@ -3052,6 +3054,7 @@
 				16CDC616183267A000035634 /* SongOfSendEmptyTipsView.xib in Resources */,
 				CB5E930F19AF540500B71A10 /* code.png in Resources */,
 				CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */,
+				15D354B41AA74D1400422FE4 /* login_menu_icon_qq.png in Resources */,
 				1635D96717F06C6C00B392BB /* home_navigation_menu_sel.png in Resources */,
 				1635D96A17F06C7800B392BB /* gene_avatar_unlogin.png in Resources */,
 				CB0BDCEC1A8CFE5E00CD95C1 /* send_song_of_default_head.jpg in Resources */,
@@ -3078,6 +3081,7 @@
 				18A6021417F2956400344C5B /* sina_weibo_icon@2x.png in Resources */,
 				18A6021517F2956400344C5B /* sina_weibo_icon_disabled@2x.png in Resources */,
 				16EA2D2F19286B09008E9DD3 /* gene2.png in Resources */,
+				15D354B71AA74E1400422FE4 /* login_logo.png in Resources */,
 				18A6021617F2956400344C5B /* sina_weibo_normal@2x.png in Resources */,
 				18A6021717F2956400344C5B /* sms_normal@2x.png in Resources */,
 				1661720318F9354600E86B11 /* head_border.png in Resources */,

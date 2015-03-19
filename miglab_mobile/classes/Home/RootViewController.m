@@ -78,6 +78,7 @@
         // new message number
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordCurrentSongSucceed:) name:NotificationNameRecordCurSongSuccess object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordCurrentSongSucceed:) name:NotificationNameLogiReocrdSuccess object:nil];
     }
     return self;
 }
@@ -105,6 +106,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameSetUserPosSuccess object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameRecordCurSongSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNameLogiReocrdSuccess object:nil];
 }
 
 - (void)viewDidLoad
@@ -597,7 +600,9 @@
     
 }
 
--(void)recordCurrentSongSucceed:(NSNotification *)tNotification; {
+
+
+-(void)recordCurrentSongSucceed:(NSNotification *)tNotification {
     
     NSDictionary *userinfo = [tNotification userInfo];
     NSDictionary *result = [userinfo objectForKey:@"result"];

@@ -202,7 +202,7 @@
     }
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"YYYY-MM-dd";
+    formatter.dateFormat = @"YYYY/MM/dd";
     
     _updatedBirthday = [formatter stringFromDate:datepicker.date];
     
