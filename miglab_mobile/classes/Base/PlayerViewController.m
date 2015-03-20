@@ -313,16 +313,16 @@
         NSString *userid = [UserSessionManager GetInstance].userid;
         NSString *accesstoken = [UserSessionManager GetInstance].accesstoken;
         UserGene *usergene = [UserSessionManager GetInstance].currentUserGene;
-        NSString *ttypeid = [NSString stringWithFormat:@"%d", usergene.type.typeid];
-        NSString *ttypenum = [NSString stringWithFormat:@"%d", usergene.type.changenum];
+        NSString *tchannelid= [NSString stringWithFormat:@"%d", usergene.type.typeid];
+        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.type.changenum];
         NSString *tmoodid = [NSString stringWithFormat:@"%d", usergene.mood.typeid];
         NSString *tmoodnum = [NSString stringWithFormat:@"%d", usergene.mood.changenum];
         NSString *tsceneid = [NSString stringWithFormat:@"%d", usergene.scene.typeid];
         NSString *tscenenum = [NSString stringWithFormat:@"%d", usergene.scene.changenum];
-        NSString *tchannelid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
-        NSString *tchannelnum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
+        NSString *ttypeid = [NSString stringWithFormat:@"%@", usergene.channel.channelId];
+        NSString *ttypenum = [NSString stringWithFormat:@"%d", usergene.channel.changenum];
         
-        [self.miglabAPI doGetTypeSongs:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:[NSString stringWithFormat:@"%d", GET_TYPE_SONGS_NUM]];
+        [self.miglabAPI doGetDimensions:userid token:accesstoken typeid:ttypeid typeindex:ttypenum moodid:tmoodid moodindex:tmoodnum sceneid:tsceneid sceneindex:tscenenum channelid:tchannelid channelindex:tchannelnum num:[NSString stringWithFormat:@"%d", GET_TYPE_SONGS_NUM]];
         
     } else {
         [SVProgressHUD showErrorWithStatus:MIGTIP_UNLOGIN];

@@ -14,6 +14,7 @@
 		15D354B41AA74D1400422FE4 /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */; };
 		15D354B51AA74D1400422FE4 /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */; };
 		15D354B71AA74E1400422FE4 /* login_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B61AA74E1400422FE4 /* login_logo.png */; };
+		15E03D071ABC0027002F2876 /* login_cd_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 15E03D061ABC0027002F2876 /* login_cd_pic.png */; };
 		1604F0CA17C4D9650072A0D8 /* music_button_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C817C4D9650072A0D8 /* music_button_search.png */; };
 		1604F0CB17C4D9650072A0D8 /* music_song_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0C917C4D9650072A0D8 /* music_song_avatar.png */; };
 		1604F0D417C4E6140072A0D8 /* music_comment_avatar_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */; };
@@ -575,6 +576,7 @@
 		15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
 		15D354B61AA74E1400422FE4 /* login_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_logo.png; sourceTree = "<group>"; };
+		15E03D061ABC0027002F2876 /* login_cd_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_cd_pic.png; sourceTree = "<group>"; };
 		1604F0C817C4D9650072A0D8 /* music_button_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_button_search.png; sourceTree = "<group>"; };
 		1604F0C917C4D9650072A0D8 /* music_song_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_song_avatar.png; sourceTree = "<group>"; };
 		1604F0CF17C4E6140072A0D8 /* music_comment_avatar_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_comment_avatar_big.png; sourceTree = "<group>"; };
@@ -1767,6 +1769,7 @@
 		163EA98A17A7F9B700EBD24C /* login */ = {
 			isa = PBXGroup;
 			children = (
+				15E03D061ABC0027002F2876 /* login_cd_pic.png */,
 				15D354B61AA74E1400422FE4 /* login_logo.png */,
 				15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */,
 				15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */,
@@ -3043,6 +3046,7 @@
 				CB5E931519AF540500B71A10 /* snow_ico.png in Resources */,
 				1697326017E5BC8700F4AA6E /* type_16.png in Resources */,
 				1697326117E5BC8700F4AA6E /* type_2.png in Resources */,
+				15E03D071ABC0027002F2876 /* login_cd_pic.png in Resources */,
 				1697326217E5BC8700F4AA6E /* type_3.png in Resources */,
 				CB5E931019AF540500B71A10 /* logo.png in Resources */,
 				1697326317E5BC8700F4AA6E /* type_4.png in Resources */,

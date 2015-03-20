@@ -77,8 +77,8 @@
     //登陆
     //登陆标示
     UIImageView *loginImageView = [[UIImageView alloc] init];
-    loginImageView.frame = CGRectMake(0, posy + 10, 30, 30);
-    loginImageView.image = [UIImage imageWithName:@"login_logo.png" type:@"png"];
+    loginImageView.frame = CGRectMake(0, posy + 60, 300, 157);
+    loginImageView.image = [UIImage imageWithName:@"login_cd_pic" type:@"png"];
     [self.view addSubview:loginImageView];
     
     int y = 250;
@@ -88,6 +88,7 @@
     _dataTableView.backgroundColor = [UIColor clearColor];
     _dataTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _dataTableView.scrollEnabled = NO;
+    _dataTableView.separatorColor = [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:0.2];
     
     /*UIImageView *bodyBgImageView = [[UIImageView alloc] init];
     bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - 44 - 10 - 10 - 73 - 10);
@@ -585,7 +586,7 @@
     if (cell == nil) {
         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"LoginMenuCell" owner:self options:nil];
         cell = (LoginMenuCell *)[nibContents objectAtIndex:0];
-        cell.backgroundColor = [UIColor colorWithRed:100.0f/255.0f green:100.0f/255.0f blue:100.0f/255.0f alpha:0.5];
+        cell.backgroundColor = [UIColor colorWithRed:100.0f/255.0f green:100.0f/255.0f blue:100.0f/255.0f alpha:0.3];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}

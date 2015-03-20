@@ -66,9 +66,9 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #else
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #endif
 
 #if (0 == IS_DEBUG_SERVER)
@@ -459,7 +459,7 @@
 //http://112.124.49.59/cgi-bin/miyo/soc/v1/getlocation.fcgi?uid=10008&token=eaed123
 //HOST + 路径 + 项目名 + 插件 + 版本 + 接口名
 #define PATH                @"cgi-bin"
-#define PRO                 @"testmiyo"
+#define PRO                 @"miyo"
 //module
 #define SOCMOD              @"soc"
 #define CHATMOD             @"chat"
@@ -637,6 +637,7 @@
 
 //通过整体纬度获取音乐
 #define HTTP_GETTYPESONGS                                   [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"gettypesongs.fcgi"]
+#define HTTP_GETDIMENSION                                   [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"getdimensions.fcgi"]
 #define NotificationNameGetTypeSongsSuccess                 @"NotificationNameGetTypeSongsSuccess"
 #define NotificationNameGetTypeSongsFailed                  @"NotificationNameGetTypeSongsFailed"
 

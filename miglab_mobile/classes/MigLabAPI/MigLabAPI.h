@@ -110,6 +110,11 @@ typedef enum {
 -(void)doGetTypeSongs:(NSString*)uid token:(NSString*)ttoken typeid:(NSString *)ttypeid typeindex:(NSString *)ttypeindex moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex num:(NSString*)tnum;
 
 /*
+ 通过整体维度获取音乐(verified, 2015-03-19)
+ */
+-(void)doGetDimensions:(NSString*)uid token:(NSString*)ttoken typeid:(NSString *)ttypeid typeindex:(NSString *)ttypeindex moodid:(NSString*)tmoodid moodindex:(NSString*)tmoodindex sceneid:(NSString*)tsceneid sceneindex:(NSString*)tsceneindex channelid:(NSString*)tchannelid channelindex:(NSString*)tchannelindex num:(NSString*)tnum;
+
+/*
  提交本地歌曲信息(verified, 2013-08-28)
  */
 -(void)doRecordLocalSongs:(NSString*)uid token:(NSString*)ttoken source:(NSString*)tsource urlcode:(NSString*)turlcode name:(NSString*)tname content:(NSString*)tcontent;
