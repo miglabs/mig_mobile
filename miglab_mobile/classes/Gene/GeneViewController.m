@@ -469,18 +469,6 @@ static int PAGE_WIDTH = 81;
         [self.view addSubview:_mainGuidePageControl];
 #endif
         
-        //引导
-        [GlobalDataManager GetInstance].isMainMenuFirstLaunch = NO;
-        
-        _geneGuideView = [[GeneGuideView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, CGRectGetHeight(kMainScreenFrame))];
-        [self.view addSubview:_geneGuideView];
-        UITapGestureRecognizer *guideSingleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGeneGuideView)];
-        [_geneGuideView addGestureRecognizer:guideSingleTap];
-        
-        [_geneGuideView hideAll];
-        [_geneGuideView showLogin];
-        
-   
     }
     
     
@@ -500,16 +488,6 @@ static int PAGE_WIDTH = 81;
         
         _currentGeneView.egoBtnAvatar.imageURL = [NSURL URLWithString:userHeadUrl];
     }*/
-    
-    if (![GlobalDataManager GetInstance].isMainMenuFirstLaunch &&
-        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch) {
-        
-        // 主页引导已经完成
-        [GlobalDataManager GetInstance].isGeneMenuFirstLaunch = NO;
-        [_geneGuideView setHidden:NO];
-        [_geneGuideView hideAll];
-        [_geneGuideView showGene];
-    }
     
     //启动定时器
     [self timerStart];
@@ -557,7 +535,6 @@ static int PAGE_WIDTH = 81;
 
 - (void)hideGeneGuideView
 {
-    _geneGuideView.hidden = YES;
 }
 
 //更新日期显示

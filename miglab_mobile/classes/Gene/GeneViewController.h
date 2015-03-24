@@ -57,9 +57,6 @@
 //弹幕定时器
 @property (nonatomic, retain) NSTimer *barrageTimer;
 
-//引导
-@property (nonatomic, strong) GeneGuideView *geneGuideView;
-
 //当前场景名
 @property (nonatomic, retain) NSString* dimension_name;
 @property  long long dimension_id;
