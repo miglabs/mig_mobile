@@ -65,7 +65,7 @@
     //   channelId 为NSString * 类型，channelId 为nil或@""时,默认会被被当作@"App Store"渠道
     
     //[MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
-    //[MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
+    [MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
     
     [MobClick updateOnlineConfig];  //在线参数配置
     
@@ -483,7 +483,7 @@
         if (localNotification) {
             NSLog(@"support local notification...");
             addSecond += ((4421*(arc4random()%2+1))+arc4random()%321);
-            NSString *strAlertBody =[NSString stringWithFormat:@"有%d个异性歌曲与你很匹配，快去看看吧",(arc4random() % 5)+3];
+            NSString *strAlertBody =[NSString stringWithFormat:@"有%d个异性歌友与你很匹配，快去看看吧",(arc4random() % 5)+3];
             [self doLocalNotification:strAlertBody firedate:[nowDate dateByAddingTimeInterval:addSecond]];
         }
     }
