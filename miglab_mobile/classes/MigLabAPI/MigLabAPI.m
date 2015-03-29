@@ -2933,11 +2933,11 @@
  GET
  HTTP_GETNEARMUSIC
  */
--(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation {
+-(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude{
     
     API_HEADER();
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&page_index=%@&page_size=%@&location=%@", HTTP_GETNEARMUSIC, uid, ttoken, tradius, tpageindex, tpagesize, tlocation];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&page_index=%@&page_size=%@&latitude=%@&longitude=%@", HTTP_NEARMUSC, uid, ttoken, tradius, tpageindex, tpagesize, tlatitude,tlongitude];
     PLog(@"get near music url: %@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -3396,11 +3396,11 @@
  GET
  HTTP_GETNEARUSER
  */
--(void)doGetNearUser:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius location:(NSString *)tlocation {
+-(void)doGetNearUser:(NSString *)uid token:(NSString *)ttoken radius:(NSString *)tradius latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude; {
     
     API_HEADER();
     
-    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&location=%@", HTTP_GETNEARUSER, uid, ttoken, tradius, tlocation];
+    NSString* url = [NSString stringWithFormat:@"%@?uid=%@&token=%@&radius=%@&latitude=%@&longitude=%@", HTTP_GETNEARUSER, uid, ttoken, tradius, tlatitude,tlongitude];
     PLog(@"get near user url:%@", url);
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

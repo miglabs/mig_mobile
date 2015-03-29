@@ -527,9 +527,9 @@
 -(void)doLocalNotification{
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [self doPersionalInfoLocalNotification];
-    [self doSameMusicInfoLocalNotification];
-    [self doGourpLocalNotification];
+    //[self doPersionalInfoLocalNotification];
+    //[self doSameMusicInfoLocalNotification];
+    //[self doGourpLocalNotification];
     /* 三个提示语
      1、附近（500-1000）有人查看了你的资料，快去看看吧~
      2、有（5-10）个人正在听和你相似歌曲，看去看看吧~

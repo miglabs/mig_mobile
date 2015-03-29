@@ -107,8 +107,13 @@
 }
 
 -(void)loadData{
-    [[MigPoiManager GetInstance] setViewType:NEARFRI_VIEW_TYPE];
-    [[MigPoiManager GetInstance] startUpdatingLocation];
+    if ([UserSessionManager GetInstance].isLocation) {
+        [[MigPoiManager GetInstance] setViewType:NEARFRI_VIEW_TYPE];
+        [[MigPoiManager GetInstance] startUpdatingLocation];
+    }else{
+        [self.miglabAPI doGetNearUser:[UserSessionManager GetInstance].userid token:[UserSessionManager GetInstance].accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] latitude:@"0.0" longitude:@"0.0"];
+    }
+   
     //[self loadNearFriendFromDatabase];
     
 }

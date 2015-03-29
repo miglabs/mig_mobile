@@ -34,9 +34,9 @@
 
 
 - (instancetype)init{
-     self = [super init];
+    self = [super init];
     [self GPSInit];
-     _miglabAPI = [[MigLabAPI alloc] init];
+    _miglabAPI = [[MigLabAPI alloc] init];
     _isUpdateLocation = false;
     _lastViewType = INIT_VIEW_TYPE;
     return  self;
@@ -53,6 +53,7 @@
             [_locationManager setDistanceFilter:kCLDistanceFilterNone];
             [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
             [_locationManager startUpdatingLocation];
+            [UserSessionManager GetInstance].isLocation = YES;
             //IOS8问题
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
                 [_locationManager requestWhenInUseAuthorization];
@@ -61,8 +62,9 @@
     else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:MIGTIP_LOCATION_CLOSE delegate:nil cancelButtonTitle:MIGTIP_OK otherButtonTitles:nil, nil];
         [alert show];
+        [UserSessionManager GetInstance].isLocation = NO;
     }
-
+    
 }
 
 
@@ -143,7 +145,7 @@
                   location:(NSString*) location latitude:(NSString*) latitude
                 longtitude:(NSString*) longtitude{
     [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeNone];
-    [_miglabAPI doGetNearUser:uid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] location:location];
+    [_miglabAPI doGetNearUser:uid token:accesstoken radius:[NSString stringWithFormat:@"%d", SEARCH_DISTANCE] latitude:latitude longitude:longtitude];
 }
 //音乐界面
 -(void) MusicLocation:(NSString*) uid accesstoken:(NSString*) accesstoken
@@ -157,17 +159,17 @@
 -(void) NearMusciLocation:(NSString*) uid accesstoken:(NSString*) accesstoken
                  location:(NSString*) location latitude:(NSString*) latitude
                longtitude:(NSString*) longtitude{
-     [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeNone];
-    [self.miglabAPI doGetNearMusic:uid token:accesstoken radius:@"1000" pageindex:0 pagesize:@"10" location:location];
+    [SVProgressHUD showWithStatus:MIGTIP_LOADING maskType:SVProgressHUDMaskTypeNone];
+    [self.miglabAPI doGetNearMusic:uid token:accesstoken radius:@"1000" pageindex:0 pagesize:@"10" latitude:latitude longitude:longtitude];
 }
 
 
 
 -(double)  CalcGEODistance:(double)latitude1 longitude1:(double) longitude1
-            latitude2:(double) latitude2  longitude2:(double) longitude2{
+                 latitude2:(double) latitude2  longitude2:(double) longitude2{
     if ((latitude1==latitude2)&&(longitude1==longitude2))
         return 0;
-
+    
     double dd = M_PI/180;
     double x1 = longitude1 * dd;
     double y1 = latitude1 * dd;
@@ -199,7 +201,7 @@
     CLLocationCoordinate2D oldcoordinate = oldLocation.coordinate;
     CLLocationDegrees oldLatitude = oldcoordinate.latitude;
     CLLocationDegrees oldLongitude = oldcoordinate.longitude;
-
+    
     double distance = [self CalcGEODistance:newLatitude longitude1:newLongitude latitude2:oldLatitude longitude2:oldLongitude];
     
     if (distance>RANGE)
@@ -207,7 +209,7 @@
     
     if (!_isUpdateLocation) {
         
-
+        
         NSString* strlatitude = [NSString stringWithFormat:@"%g", newLatitude];
         NSString* strlongtitude = [NSString stringWithFormat:@"%g", newLongitude];
         
@@ -225,8 +227,8 @@
     //如果类型不同则请求
     //如果距离大于RANGE则请求
     if (_lastViewType!=_viewType||distance>RANGE)
-         [self RequestServer];
-   
+        [self RequestServer];
+    
     //[self loadNumbersFromServer:location];
 }
 

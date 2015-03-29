@@ -66,9 +66,9 @@
  */
 
 #ifdef DEBUG
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #else
-#define IS_DEBUG_SERVER 1
+#define IS_DEBUG_SERVER 2
 #endif
 
 #if (0 == IS_DEBUG_SERVER)
@@ -459,7 +459,7 @@
 //http://112.124.49.59/cgi-bin/miyo/soc/v1/getlocation.fcgi?uid=10008&token=eaed123
 //HOST + 路径 + 项目名 + 插件 + 版本 + 接口名
 #define PATH                @"cgi-bin"
-#define PRO                 @"testmiyo"
+#define PRO                 @"miyo"
 //module
 #define SOCMOD              @"soc"
 #define CHATMOD             @"chat"
@@ -542,6 +542,11 @@
 #define HTTP_SHAREMUSIC                                     [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"sharesong.fcgi"]
 #define NotificationNameShareMusicSuccess                   @"NotificationNameShareMusicSuccess"
 #define NotificationNameShareMusicFailed                    @"NotificationNameShareMusicFailed"
+
+// 获取周围的人及音乐
+#define HTTP_GETNEARUSER                                    [NSString stringWithFormat:@"%@%@",SOC_INTERFACE,@"nearuser.fcgi"]
+#define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
+#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
 
 
 
@@ -651,6 +656,11 @@
 #define NotificationNameGetSongHistorySuccess               @"NotificationNameGetSongHistorySuccess"
 #define NotificationNameGetSongHistoryFailed                @"NotificationNameGetSongHistoryFailed"
 
+//周围的音乐
+#define HTTP_NEARMUSC                                       [NSString stringWithFormat:@"%@%@",MUSIC_INTERFACE,@"nearmusic.fcgi"]
+#define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"
+#define NotificationNameGetNearMusicFailed                  @"NotificationNameGetNearMusicFailed"
+
 //////////////////////////////////////////////////定位相关///////////////////////////////////////////////////////////////
 
 
@@ -674,12 +684,9 @@
 #define NotificationNameGetSameMusicSuccess                 @"NotificationNameGetSameMusicSuccess"
 #define NotificationNameGetSameMusicFailed                  @"NotificationNameGetSameMusicFailed"
 
-// 获取周围的人及音乐
-#define HTTP_GETNEARUSER                                    [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"nearuser.fcgi"]
-#define NotificationNameGetNearUserSuccess                  @"NotificationNameGetNearUserSuccess"
-#define NotificationNameGetNearUserFailed                   @"NotificationNameGetNearUserFailed"
 
 
+// -- 更换新的 delete
 //附近人的音乐
 #define HTTP_GETNEARMUSIC                                   [NSString stringWithFormat:@"%@%@",LBS_INTERFACE,@"nearmusic.fcgi"]
 #define NotificationNameGetNearMusicSuccess                 @"NotificationNameGetNearMusicSuccess"

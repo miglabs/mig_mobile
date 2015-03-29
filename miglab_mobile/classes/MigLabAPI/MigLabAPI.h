@@ -184,7 +184,7 @@ typedef enum {
 /*
  附近人的音乐
  */
--(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize location:(NSString*)tlocation;
+-(void)doGetNearMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius pageindex:(NSString*)tpageindex pagesize:(NSString*)tpagesize latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
 
 /*
  评论歌曲
@@ -209,7 +209,7 @@ typedef enum {
  获取周围的人及歌曲
  */
 -(void)doGetSameMusic:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
--(void)doGetNearUser:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius location:(NSString*)tlocation;
+-(void)doGetNearUser:(NSString*)uid token:(NSString*)ttoken radius:(NSString*)tradius latitude:(NSString*)tlatitude longitude:(NSString*)tlongitude;
 
 /*
  打招呼

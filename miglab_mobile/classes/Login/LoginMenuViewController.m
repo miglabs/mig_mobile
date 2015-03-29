@@ -81,8 +81,8 @@
     loginImageView.image = [UIImage imageWithName:@"login_cd_pic" type:@"png"];
     [self.view addSubview:loginImageView];
     
-    int y = 250;
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 10+y, 320, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10) style:UITableViewStyleGrouped];
+    int y = y = kMainScreenHeight - 220 + self.topDistance;
+    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, y, 320, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10) style:UITableViewStyleGrouped];
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];

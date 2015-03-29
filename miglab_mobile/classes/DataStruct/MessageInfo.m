@@ -15,6 +15,7 @@
 @synthesize content = _content;
 @synthesize userInfo = _userInfo;
 @synthesize song = _song;
+@synthesize poi = _poi;
 @synthesize send_uid = _send_uid;
 @synthesize to_uid = _to_uid;
 @synthesize time = _time;
@@ -32,6 +33,7 @@
         
         msginfo.song = [Song initWithNSDictionary:[dict objectForKey:@"music"]];
         msginfo.userInfo = [NearbyUser initWithNSDictionary:[dict objectForKey:@"userinfo"]];
+        msginfo.poi = [PoiInfo initWithNSDictionary:[dict objectForKey:@"poi"]];
         msginfo.songstat = [dict objectForKey:@"songstat"];
         
         /* 根据字符串获取类型 */

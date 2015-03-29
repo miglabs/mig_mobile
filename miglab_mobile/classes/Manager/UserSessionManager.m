@@ -16,6 +16,7 @@
 @synthesize accounttype = _accounttype;
 @synthesize currentUser = _currentUser;
 @synthesize isLoggedIn = _isLoggedIn;
+@synthesize isLocation = _isLocation;
 
 @synthesize currentUserGene = _currentUserGene;
 @synthesize networkStatus = _networkStatus;
@@ -43,6 +44,7 @@
     _currentUser = [[PUser alloc] init];
     _currentUserGene = [[UserGene alloc] init];
     _isLoggedIn = NO;
+    _isLocation = NO;
     
 }
 

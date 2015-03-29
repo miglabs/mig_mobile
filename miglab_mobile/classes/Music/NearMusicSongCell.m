@@ -39,17 +39,18 @@
 -(void)updateNearMusicSongCellData:(MessageInfo*)message{
     _msginfo = message;
     Song *tempsong =_msginfo.song;
-    
+    PoiInfo * temppoi = _msginfo.poi;
     _btnIcon.tag = tempsong.songid;
     _lblSongName.text = tempsong.songname;
     _lblSongName.font = [UIFont fontOfApp:15.0f];
     
-    long distance = _msginfo.userInfo.distance;
+    long distance = _msginfo.poi.distance;
     int favornum = tempsong.commentnum>999?999:tempsong.commentnum;
     NSString* imageurl = _msginfo.userInfo.headurl;
     NSString* szFavor = [NSString stringWithFormat:@"%d", favornum];
     
-    _lblDistance.text = distance<1000?[NSString stringWithFormat:@"%@ | %ldm内", szFavor, distance]:[NSString stringWithFormat:@"%@ | %ldkm", szFavor, distance / 1000];
+    if(temppoi!=nil)
+        _lblDistance.text = distance<1000?[NSString stringWithFormat:@"%@ | %ldm内", szFavor, distance]:[NSString stringWithFormat:@"%@ |    %ldkm", szFavor, distance / 1000];
     
     _lblDistance.textAlignment = UITextAlignmentRight;
     
