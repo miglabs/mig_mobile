@@ -5,7 +5,7 @@
     </updateurl>
     <type>
         <attr index = "1"   id = "1"    picname="type_1.png"    name="华语流行" dec="流行时尚元素" />
-        <attr index = "2"   id = "2"    picname="type_2.png"    name="欧美金曲" dec="欧美金曲元素" />
+        <attr index = "2"   id = "2"    picname="type_2.png"    name="欧美金曲" dec="11" />
         <attr index = "3"   id = "3"    picname="type_3.png"    name="七零后"   dec="七零后元素" />
         <attr index = "4"   id = "4"    picname="type_4.png"    name="八零后"   dec="八零后元素" />
         <attr index = "5"   id = "5"    picname="type_5.png"    name="九零后"   dec="九零后元素" />

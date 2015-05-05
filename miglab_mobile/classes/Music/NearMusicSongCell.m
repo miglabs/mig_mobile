@@ -51,6 +51,9 @@
     
     if(temppoi!=nil)
         _lblDistance.text = distance<1000?[NSString stringWithFormat:@"%@ | %ldm内", szFavor, distance]:[NSString stringWithFormat:@"%@ |    %ldkm", szFavor, distance / 1000];
+    else
+        _lblDistance.text = [NSString stringWithFormat:@"%@ | %@", szFavor, MIGTIP_UNKOWN_DISTANCE];
+;
     
     _lblDistance.textAlignment = UITextAlignmentRight;
     
@@ -85,6 +88,8 @@
 -(IBAction)checkNearMusicUserInfo:(id)sender{
     if (sender == _btnAvatar) {
         NearbyUser* user = _msginfo.userInfo;
+        user.distance = _msginfo.poi.distance;
+        //MessageInfo* msg = _msginfo;
         if (user) {
             MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
             personalPageViewController.userinfo = user;

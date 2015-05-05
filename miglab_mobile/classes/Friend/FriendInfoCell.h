@@ -17,7 +17,9 @@
 @property (nonatomic, retain) IBOutlet UIImageView *genderImageView;
 @property (nonatomic, retain) IBOutlet UIImageView *userSourceImageView;
 @property (nonatomic, retain) NearbyUser* userinfo;
+@property (nonatomic, retain) Song*       song;
+@property (nonatomic, retain) PoiInfo*    poi;
 
--(void)updateFriendInfoCellData:(NearbyUser*)user;
+-(void)updateFriendInfoCellData:(MessageInfo*)user;
 
 @end

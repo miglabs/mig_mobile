@@ -61,16 +61,25 @@
             [_userHeadView updateFriendMessageUserHead:_userinfo];
             
             // 单独更新距离信息
-            float fDistance = _userinfo.distance / 1000.0f;
-            NSString* source = _userinfo.source;
-            if (source) {
-                
-                _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%.2fkm | %@", fDistance, source];
+            NSString* distance;
+            if(_userinfo.distance==0){
+                distance = [NSString stringWithFormat:@"%@ ", MIGTIP_UNKOWN_DISTANCE];
+            }else{
+                distance = [NSString stringWithFormat:@"%.2fkm",_userinfo.distance / 1000.0f];
             }
-            else {
-                
-                _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%.2fkm", fDistance];
+            NSString* source;
+            if ([_userinfo.source isEqual:@"1"]) {
+                source = @"微博";
+            }else if([_userinfo.source isEqual:@"2"]){
+                source = @"QQ";
+            }else if([_userinfo.source isEqual:@"3"]){
+                source = @"微信";
+            }else if([_userinfo.source isEqual:@"2"]){
+                source = @"豆瓣";
+            }else{
+                source = @"未知";
             }
+            _userHeadView.lblDistance.text = [NSString stringWithFormat:@"%@ | 来自%@", distance, source];
         }//if
     }//for
     _userHeadView.frame = CGRectMake(ORIGIN_X, posy + 10, ORIGIN_WIDTH, 129);

@@ -276,6 +276,8 @@
 
 /* 未登录进入详细播放的提示 */
 #define MIGTIP_DETAIL_NOTACCESS                 @"想体验更多功能? 先登录试试吧~"
+/*未打开定位*/
+#define MIGTIP_UNKOWN_DISTANCE                  @"未知距离"
 
 /* 微信分享地址 */
 #define SHARE_WEIXIN_ADDRESS_1LONG              @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"

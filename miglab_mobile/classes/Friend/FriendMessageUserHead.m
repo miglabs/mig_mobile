@@ -12,6 +12,7 @@
 
 @implementation FriendMessageUserHead
 
+
 @synthesize userinfo = _userinfo;
 @synthesize lblListening = _lblListening;
 @synthesize btnAvatar = _btnAvatar;
@@ -64,7 +65,7 @@
     _btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     
     //初始化个人信息
-    NSArray* birthday = [_userinfo.birthday componentsSeparatedByString:@"-"];
+    NSArray* birthday = [_userinfo.birthday componentsSeparatedByString:@"/"];
 
     if ([birthday count] == 3) {
         

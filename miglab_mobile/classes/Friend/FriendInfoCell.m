@@ -17,6 +17,8 @@
 @synthesize genderImageView = _genderImageView;
 @synthesize userSourceImageView = _userSourceImageView;
 @synthesize userinfo = _userinfo;
+@synthesize poi = _poi;
+@synthesize song = _song;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -34,8 +36,10 @@
     // Configure the view for the selected state
 }
 
--(void)updateFriendInfoCellData:(NearbyUser*)user {
-    _userinfo = user;
+-(void)updateFriendInfoCellData:(MessageInfo*)msg {
+    _userinfo = msg.userInfo;
+    _song = msg.song;
+    _poi = msg.poi;
     
     _lblNickName.text = _userinfo.nickname;
     
@@ -50,14 +54,32 @@
     _btnAvatar.layer.borderColor = AVATAR_BORDER_COLOR;
     
     /* 显示状态 */
+    NSString* disctance;
+    NSString* songstatus;
+    if (_poi.distance>0) {
+        disctance = [NSString stringWithFormat:@"%.2f km", (float)_poi.distance/1000.0f];
+    }else{
+        disctance = [NSString stringWithFormat:@"未知距离"];
+    }
+    
     if (!_userinfo.songname) {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_userinfo.distance/1000.0f];
+        songstatus = [NSString stringWithFormat:@"未开启音乐之旅"];
     }
     else {
         
-        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_userinfo.distance/1000.0f, _userinfo.songname];
+        songstatus = [NSString stringWithFormat:@"正在听 - %@",_song.songname];
     }
+
+    _lblUserInfo.text = [NSString stringWithFormat:@"%@ | %@",disctance,songstatus];
+    /*if (!_userinfo.songname) {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km", (float)_poi.distance/1000.0f];
+    }
+    else {
+        
+        _lblUserInfo.text = [NSString stringWithFormat:@"%.2f km | 正在听 - %@", (float)_poi.distance/1000.0f, _song.songname];
+    }*/
     
     /* 显示性别的图片 */
     if ([_userinfo.sex isEqual:STR_FEMALE]) {

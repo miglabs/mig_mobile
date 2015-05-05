@@ -252,7 +252,9 @@
     
     NSInteger row = indexPath.row;
     MessageInfo* msginfo = (MessageInfo*)[_dataList objectAtIndex:row];
-    personalPageViewController.userinfo = msginfo.userInfo;
+    NearbyUser* user = msginfo.userInfo;
+    user.distance = msginfo.poi.distance;
+    personalPageViewController.userinfo = user;
     personalPageViewController.isFriend = NO;
     [self.navigationController pushViewController:personalPageViewController animated:YES];
     
@@ -278,8 +280,8 @@
 	}
     
     MessageInfo *msginfo = [_dataList objectAtIndex:indexPath.row];
-    NearbyUser* userinfo = msginfo.userInfo;
-    [cell updateFriendInfoCellData:userinfo];
+    //NearbyUser* userinfo = msginfo.userInfo;
+    [cell updateFriendInfoCellData:msginfo];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
