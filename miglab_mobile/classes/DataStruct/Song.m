@@ -55,7 +55,7 @@
             song.songname = [dict objectForKey:@"title"];
             song.artist = [dict objectForKey:@"artist"];
             song.pubtime = [dict objectForKey:@"pub_time"];
-            song.album = [dict objectForKey:@"album"];
+            song.album = [dict objectForKey:@"ablum"];
             song.duration = [dict objectForKey:@"time"];
             song.songurl = [dict objectForKey:@"url"];
             song.hqurl = [dict objectForKey:@"hqurl"];

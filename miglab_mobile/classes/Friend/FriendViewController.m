@@ -237,8 +237,9 @@
     
     if (number > 99) {
         cell.lblTipNum.text = [NSString stringWithFormat:@"99+"];
-    }
-    else {
+    }else if (number == 0){
+        cell.lblTipNum.hidden = true;
+    }else {
         cell.lblTipNum.text = [NSString stringWithFormat:@"%d", number];
     }
     
