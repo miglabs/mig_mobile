@@ -10,6 +10,7 @@
 		045341931A6DF67600BC075B /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045341901A6DF67600BC075B /* libUMFeedback.a */; };
 		045341941A6DF67600BC075B /* umFeedback.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 045341911A6DF67600BC075B /* umFeedback.bundle */; };
 		048EAC401A63A1D4000A9DFD /* top_menu_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */; };
+		156B47EB1AC7A54500B0D794 /* Poi.m in Sources */ = {isa = PBXBuildFile; fileRef = 156B47EA1AC7A54500B0D794 /* Poi.m */; };
 		15C6FCCB1A7CAB6300239364 /* share_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C6FCCA1A7CAB6300239364 /* share_default.png */; };
 		15D354B41AA74D1400422FE4 /* login_menu_icon_qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */; };
 		15D354B51AA74D1400422FE4 /* login_menu_icon_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */; };
@@ -572,6 +573,8 @@
 		045341911A6DF67600BC075B /* umFeedback.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = umFeedback.bundle; sourceTree = "<group>"; };
 		045341921A6DF67600BC075B /* UMFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFeedback.h; sourceTree = "<group>"; };
 		048EAC3F1A63A1D4000A9DFD /* top_menu_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_menu_separator.png; sourceTree = "<group>"; };
+		156B47E91AC7A53400B0D794 /* Poi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Poi.h; sourceTree = "<group>"; };
+		156B47EA1AC7A54500B0D794 /* Poi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Poi.m; sourceTree = "<group>"; };
 		15C6FCCA1A7CAB6300239364 /* share_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_default.png; path = share/share_default.png; sourceTree = "<group>"; };
 		15D354B21AA74D1400422FE4 /* login_menu_icon_qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_qq.png; sourceTree = "<group>"; };
 		15D354B31AA74D1400422FE4 /* login_menu_icon_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_menu_icon_sinaweibo.png; sourceTree = "<group>"; };
@@ -1708,6 +1711,8 @@
 				CB5E92D219A836C300B71A10 /* MigWeather.m */,
 				C744EA721A38A7B10004DE31 /* Barray.h */,
 				C744EA731A38A7C50004DE31 /* Barray.m */,
+				156B47E91AC7A53400B0D794 /* Poi.h */,
+				156B47EA1AC7A54500B0D794 /* Poi.m */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -3134,6 +3139,7 @@
 				CBB343A61A090029007BF368 /* Base64.m in Sources */,
 				16EDEF481759AD5E001BE4E9 /* main.m in Sources */,
 				1689605A181171C00031902F /* LoginMenuViewController.m in Sources */,
+				156B47EB1AC7A54500B0D794 /* Poi.m in Sources */,
 				16EDEF4C1759AD5E001BE4E9 /* AppDelegate.m in Sources */,
 				1623165D1777397600CF8FB5 /* AFHTTPClient.m in Sources */,
 				1623165E1777397600CF8FB5 /* AFHTTPRequestOperation.m in Sources */,
