@@ -53,27 +53,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    CGRect navViewFrame = self.navView.frame;
+    float posy = navViewFrame.origin.y + navViewFrame.size.height;//ios6-45, ios7-65
+    
     //nav bar
     self.navView.titleLabel.text = @"在线推荐";
     
     //body
     //body bg
     UIImageView *bodyBgImageView = [[UIImageView alloc] init];
-    bodyBgImageView.frame = CGRectMake(11.5, 44 + 10, 297, kMainScreenHeight - 44 - 10 - 10 - 73 - 10);
+    bodyBgImageView.frame = CGRectMake(11.5, posy + 10, 297, kMainScreenHeight + self.topDistance - posy - 10 - 10 - 73 - 10);
     bodyBgImageView.image = [UIImage imageWithName:@"body_bg" type:@"png"];
     [self.view addSubview:bodyBgImageView];
     
     //body head
     _bodyHeadMenuView = [[MusicBodyHeadMenuView alloc] initMusicBodyHeadMenuView];
-    _bodyHeadMenuView.frame = CGRectMake(11.5, 44 + 10, 297, 45);
+    _bodyHeadMenuView.frame = CGRectMake(11.5, posy + 10, 297, 45);
     [self.view addSubview:_bodyHeadMenuView];
     
     [_bodyHeadMenuView.btnSort addTarget:self action:@selector(doSort:) forControlEvents:UIControlEventTouchUpInside];
     [_bodyHeadMenuView.btnEdit addTarget:self action:@selector(doEdit:) forControlEvents:UIControlEventTouchUpInside];
     
+#if !USE_LIKE_MUSIC_EDIT
+    _bodyHeadMenuView.btnEdit.hidden = YES;
+    
+    CGRect editframe = _bodyHeadMenuView.btnEdit.frame;
+    _bodyHeadMenuView.btnSort.frame = editframe;
+#endif
+    
     //sort menu
     _sortMenuView = [[MusicSortMenuView alloc] initMusicSortMenuView];
-    _sortMenuView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, 0);
+    _sortMenuView.frame = CGRectMake(11.5, posy + 10 + 45, 297, 0);
     [self.view addSubview:_sortMenuView];
     
     [_sortMenuView.btnSortFirst addTarget:self action:@selector(doSortMenu1:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +94,7 @@
     
     //song list
     _dataTableView = [[UITableView alloc] init];
-    _dataTableView.frame = CGRectMake(11.5, 44 + 10 + 45, 297, kMainScreenHeight - 44 - 10 - 45 - 10 - 73 - 10);
+    _dataTableView.frame = CGRectMake(11.5, posy + 10 + 45, 297, kMainScreenHeight + self.topDistance - posy - 10 - 45 - 10 - 73 - 10);
     _dataTableView.dataSource = self;
     _dataTableView.delegate = self;
     _dataTableView.backgroundColor = [UIColor clearColor];
@@ -342,6 +352,7 @@
     if (cell == nil) {
         NSArray *nibContents = [[NSBundle mainBundle] loadNibNamed:@"MusicSongCell" owner:self options:nil];
         cell = (MusicSongCell *)[nibContents objectAtIndex:0];
+        [cell setBackgroundColor:[UIColor clearColor]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         [cell.btnIcon addTarget:self action:@selector(doSelectedIcon:) forControlEvents:UIControlEventTouchUpInside];

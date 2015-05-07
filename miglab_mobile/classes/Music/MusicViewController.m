@@ -84,7 +84,7 @@
     [self.view addSubview:_sourceEditMenuView];
     _sourceEditMenuView.hidden = YES;
     
-    NSMutableDictionary *dicEdit0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"EditName", @"在线推荐", @"MenuText", @"1", @"IsSelected", nil];
+    NSMutableDictionary *dicEdit0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"EditName", @"在线推荐", @"MenuText", @"0", @"IsSelected", nil];
     NSMutableDictionary *dicEdit1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"EditName", @"我喜欢的", @"MenuText", @"0", @"IsSelected", nil];
     NSMutableDictionary *dicEdit2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"EditName", @"附近的好音乐", @"MenuText", @"0", @"IsSelected", nil];
     
@@ -111,7 +111,7 @@
     _bodyTableView.backgroundView = bodyBgImageView;
     [self.view addSubview:_bodyTableView];
     
-    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"已经消耗0MB流量", @"MenuTip", nil];
+    NSMutableDictionary *dicMenu0 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_online", @"MenuImageName", @"在线推荐", @"MenuText", @"0", @"MenuTip", nil];
     NSMutableDictionary *dicMenu1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_like", @"MenuImageName", @"我喜欢的", @"MenuText", @"0", @"MenuTip", nil];
     NSMutableDictionary *dicMenu2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"music_source_menu_nearby", @"MenuImageName", @"附近的好音乐", @"MenuText", @"0", @"MenuTip", nil];
     
@@ -391,10 +391,8 @@
     // ...
     if (indexPath.row == 0) {
         
-        /*
         OnlineViewController *onlineViewController = [[OnlineViewController alloc] initWithNibName:@"OnlineViewController" bundle:nil];
         [self.topViewcontroller.navigationController pushViewController:onlineViewController animated:YES];
-        */
         
     } else if (indexPath.row == 1) {
         
@@ -447,6 +445,7 @@
     cell.lblMenu.font = [UIFont fontOfApp:17.0f];
     cell.lblMenu.text = [dicMenu objectForKey:@"MenuText"];
     
+#if 0
     if (indexPath.row == 0) {
         
         cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
@@ -457,8 +456,10 @@
         cell.lblTipNum.frame = tipframe;
         cell.arrowImageView.hidden = YES;
         
-    } else {
-        
+    }
+    else
+#endif
+    {
         int nMenuTip = [[dicMenu objectForKey:@"MenuTip"] intValue];
         if (nMenuTip > 0) {
             cell.lblTipNum.font = [UIFont fontOfApp:10.0f];
