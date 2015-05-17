@@ -267,7 +267,11 @@
 // Called after the user changes the selection.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // ...
-    NearbyUser* user = [_friendList objectAtIndex:indexPath.row];
+    //NearbyUser* user = [_friendList objectAtIndex:indexPath.row];
+    
+    MessageInfo* msginfo = (MessageInfo*)[_friendList objectAtIndex:indexPath.row];
+    NearbyUser* user = msginfo.userInfo;
+    user.distance = msginfo.poi.distance;
     
     MyFriendPersonalPageViewController *personalPageViewController = [[MyFriendPersonalPageViewController alloc] initWithNibName:@"MyFriendPersonalPageViewController" bundle:nil];
     personalPageViewController.userinfo = user;

@@ -94,8 +94,8 @@ NSString* szListenMyMusicRadius = @"10000";
 -(void)loadData{
     
     //[self loadNearFriendFromDatabase];
-    [[MigPoiManager GetInstance] setViewType:SAMEMUSCI_VIEW_TYPE];
-    [[MigPoiManager GetInstance] startUpdatingLocation];
+    //[[MigPoiManager GetInstance] setViewType:SAMEMUSCI_VIEW_TYPE];
+    //[[MigPoiManager GetInstance] startUpdatingLocation];
     
 }
 -(void)loadNearFriendFromDatabase{

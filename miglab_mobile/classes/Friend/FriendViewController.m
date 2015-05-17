@@ -125,8 +125,8 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    [[MigPoiManager GetInstance] ViewPoi:FRINED_VIEW_TYPE];
-    [[MigPoiManager GetInstance] startUpdatingLocation];
+    //[[MigPoiManager GetInstance] ViewPoi:FRINED_VIEW_TYPE];
+    //[[MigPoiManager GetInstance] startUpdatingLocation];
     /*if (!_isFirstLoadView) {
         
         _isUpdateLocation = NO;
