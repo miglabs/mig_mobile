@@ -98,7 +98,7 @@
     _genderImageView.frame = genderRect;
     
     /* 显示用户来源 */
-    NSString* plat = _userinfo.plat;
+    NSString* plat = _userinfo.source;
     if ([plat isEqual:STR_USER_SOURCE_SINA]) {
         
         _userSourceImageView.image = [UIImage imageNamed:@"sina_tip"];
