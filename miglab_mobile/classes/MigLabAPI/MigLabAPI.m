@@ -3631,7 +3631,7 @@
                 PLog(@"get music user opration succeeded");
                 
                 NSDictionary* dicTemp = [dicJson objectForKey:@"result"];
-                NSArray* userArray = [dicTemp objectForKey:@"nearUser"];
+                NSArray* userArray = [dicTemp objectForKey:@"list"];
                 int userArrayCount = [userArray count];
                 
                 NSMutableArray* userList = [[NSMutableArray alloc] init];

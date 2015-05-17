@@ -201,10 +201,10 @@
         for (int i=0; i<userlistcount; i++) {
             
             MessageInfo* nms = [userList objectAtIndex:i];
-            NearbyUser* user = nms.userInfo;
-            user.songname = nms.song.songname;
+            //NearbyUser* user = nms.userInfo;
+            //user.songname = nms.song.songname;
             
-            [_friendList addObject:user];
+            [_friendList addObject:nms];
         }
         
         _friendCurStartIndex += userlistcount;
@@ -296,8 +296,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
     
-    NearbyUser *tempfriend = [_friendList objectAtIndex:indexPath.row];
-    [cell updateFriendInfoCellData:tempfriend];
+    MessageInfo *nms = [_friendList objectAtIndex:indexPath.row];
+    NearbyUser *tempfriend = nms.userInfo;
+    [cell updateFriendInfoCellData:nms];
     
     NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
     
