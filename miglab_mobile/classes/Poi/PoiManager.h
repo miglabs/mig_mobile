@@ -41,6 +41,9 @@ enum ViewTypes{
                 latitude2:(double) latitude2 longitude2:(double) longitude2;
 //通知服务端
 -(void) RequestServer;
+//通知服务端
+-(void) RequestServer:(NSInteger) view_type;
+
 +(MigPoiManager *)GetInstance;
 @end
 #endif

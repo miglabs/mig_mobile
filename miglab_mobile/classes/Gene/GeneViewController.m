@@ -417,7 +417,8 @@ static int PAGE_WIDTH = 81;
     //[self getBarrayComm];
     
     //获取天气//登陆记录
-    [[MigPoiManager GetInstance] ViewPoi:ROOT_VIEW_TYPE];
+    //[[MigPoiManager GetInstance] ViewPoi:ROOT_VIEW_TYPE];
+    [[MigPoiManager GetInstance] RequestServer:ROOT_VIEW_TYPE];
     [[MigPoiManager GetInstance] startUpdatingLocation];
     
     

@@ -152,7 +152,8 @@
     
     [super viewWillAppear:animated];
     
-    [[MigPoiManager GetInstance] setViewType:MUSICT_VIEW_TYPE];
+    //[[MigPoiManager GetInstance] setViewType:MUSICT_VIEW_TYPE];
+    //[[MigPoiManager GetInstance] RequestServer:MUSICT_VIEW_TYPE];
     [[MigPoiManager GetInstance] startUpdatingLocation];
     //[_locationManager startUpdatingLocation];
     

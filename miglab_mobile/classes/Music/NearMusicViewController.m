@@ -135,7 +135,8 @@
     
 //如果定位打开请求定位，如果没有打开则请求推荐
     if([UserSessionManager GetInstance].isLocation){
-        [[MigPoiManager GetInstance] setViewType:NEARRMUSIC_VIEW_TYPE];
+       // [[MigPoiManager GetInstance] setViewType:NEARRMUSIC_VIEW_TYPE];
+         [[MigPoiManager GetInstance] RequestServer:NEARRMUSIC_VIEW_TYPE];
         [[MigPoiManager GetInstance] startUpdatingLocation];
     }else{
         [self.miglabAPI doGetNearMusic:[UserSessionManager GetInstance].userid token:[UserSessionManager GetInstance].accesstoken radius:@"1000" pageindex:[NSString stringWithFormat:@"%d", _pageIndex] pagesize:[NSString stringWithFormat:@"%d", _pageSize]  latitude:@"0.0" longitude:@"0.0"];

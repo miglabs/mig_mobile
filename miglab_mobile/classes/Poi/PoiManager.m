@@ -76,7 +76,35 @@
     _viewType = view_type;
 }
 
-
+-(void) RequestServer:(NSInteger) view_type{
+    NSString* userid = [UserSessionManager GetInstance].currentUser.userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* strLocation = [UserSessionManager GetInstance].currentUser.location;
+    NSString* strlatitude = [UserSessionManager GetInstance].currentUser.latitude;
+    NSString* strlongtitude = [UserSessionManager GetInstance].currentUser.longitude;
+    switch (view_type) {
+        case ROOT_VIEW_TYPE:
+            [self RootLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        case MUSICT_VIEW_TYPE:
+            [self MusicLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        case FRINED_VIEW_TYPE:
+            [self FriendLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        case SAMEMUSCI_VIEW_TYPE:
+            [self SameMusicLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        case NEARFRI_VIEW_TYPE:
+            [self NearFriendLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        case NEARRMUSIC_VIEW_TYPE:
+            [self NearMusciLocation:userid accesstoken:accesstoken location:strLocation latitude:strlatitude longtitude:strlongtitude];
+            break;
+        default:
+            break;
+    }
+}
 
 -(void) RequestServer{
     NSString* userid = [UserSessionManager GetInstance].currentUser.userid;
@@ -226,8 +254,8 @@
     
     //如果类型不同则请求
     //如果距离大于RANGE则请求
-    if (_lastViewType!=_viewType||distance>RANGE)
-        [self RequestServer];
+    //if (_lastViewType!=_viewType||distance>RANGE)
+      //  [self RequestServer];
     
     //[self loadNumbersFromServer:location];
 }
