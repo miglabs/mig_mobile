@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SinaWeibo.h"
-#import "SinaWeiboRequest.h"
 #import "Song.h"
 #import "LyricShare.h"
 
@@ -33,7 +32,7 @@ typedef enum {
 
 @end
 
-@interface SinaWeiboHelper : NSObject<SinaWeiboDelegate, SinaWeiboRequestDelegate>
+@interface SinaWeiboHelper : NSObject<WBHttpRequestDelegate, WeiboSDKDelegate>
 
 @property (nonatomic, assign) id<SinaWeiboHelperDelegate> delegate;
 @property (nonatomic, assign) SinaWeiboHelperStatus sinaWeiboHelperStatus;
@@ -41,10 +40,13 @@ typedef enum {
 
 + (id)sharedInstance;
 
+- (void)doInit;
+
 - (void)doSinaWeiboLogin;
 - (void)updateSinaWeibo:(Song *)tSong;
 
 -(void)doShareToSinaWeibo:(LyricShare *)lyric;
+- (BOOL)handleOpenURL:(NSURL *)url;
 
 -(void)getLyricInfoSucceed:(NSNotification *)tNotification;
 -(void)getLyricInfoFailed:(NSNotification *)tNotification;

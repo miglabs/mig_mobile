@@ -37,6 +37,7 @@
 #import <libDoubanAPIEngine/DOUService.h>
 #import <Crashlytics/Crashlytics.h>
 #import <sys/utsname.h>
+#import "SinaWeiboHelper.h"
 
 //test
 #import "Song.h"
@@ -49,8 +50,6 @@
 
 @synthesize window = _window;
 @synthesize navController = _navController;
-
-@synthesize sinaweibo = _sinaweibo;
 
 - (void)umengTrack {
     
@@ -610,8 +609,7 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     NSLog(@"applicationDidBecomeActive...");
-    [_sinaweibo applicationDidBecomeActive];
-    
+    //[_sinaweibo applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -626,8 +624,9 @@
         return [WXApi handleOpenURL:url delegate:self];
     }
     
-    if ([[url absoluteString] hasPrefix:@"sinaweibosso"]) {
-        return [_sinaweibo handleOpenURL:url];
+    if ([[url absoluteString] hasPrefix:@"wb"]) {
+        //return [_sinaweibo handleOpenURL:url];
+        return [[SinaWeiboHelper sharedInstance] handleOpenURL:url];
     }
     
     if ([[url absoluteString] hasPrefix:@"tencent"]) {
@@ -651,8 +650,9 @@
         return [WXApi handleOpenURL:url delegate:self];
     }
     
-    if ([[url absoluteString] hasPrefix:@"sinaweibosso"]) {
-        return [_sinaweibo handleOpenURL:url];
+    if ([[url absoluteString] hasPrefix:@"wb"]) {
+        //return [_sinaweibo handleOpenURL:url];
+        return [[SinaWeiboHelper sharedInstance] handleOpenURL:url];
     }
     
     if ([[url absoluteString] hasPrefix:@"tencent"]) {

@@ -25,9 +25,15 @@ BOOL _firstLoadObserver = YES;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SinaWeiboHelper alloc] init];
+        [sharedInstance doInit];
     });
     
     return sharedInstance;
+}
+
+- (void)doInit {
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:SINA_WEIBO_APP_KEY];
 }
 
 /**
@@ -39,19 +45,215 @@ BOOL _firstLoadObserver = YES;
     
     [self removeAuthData];
     
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    [sinaweibo logIn];
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI = SINA_WEIBO_APP_REDIRECTURI;
+    request.scope = @"all";
+    request.userInfo = @{@"SSO_From": @"SinaWeiboHelper",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    [WeiboSDK sendRequest:request];
 }
 
+- (void)removeAuthData
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SinaWeiboAuthData"];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url {
+    
+    return [WeiboSDK handleOpenURL:url delegate:self];
+}
+
+// WeiboSDK Delegate
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response {
+    
+    if ([response isKindOfClass:WBAuthorizeResponse.class]) {
+        
+        // 授权成功
+        if (response.statusCode == WeiboSDKResponseStatusCodeSuccess) {
+            
+            NSString *userid = [(WBAuthorizeResponse *)response userID];
+            NSString *accesstoken = [(WBAuthorizeResponse *)response accessToken];
+            NSDate *expirateDate = [(WBAuthorizeResponse *)response expirationDate];
+            
+            AccountOf3rdParty *sinaAccount = [[AccountOf3rdParty alloc] init];
+            sinaAccount.accountid = userid;
+            sinaAccount.accesstoken = accesstoken;
+            sinaAccount.expirationdate = expirateDate;
+            sinaAccount.accounttype = SourceTypeSinaWeibo;
+            
+            [UserSessionManager GetInstance].accounttype = SourceTypeSinaWeibo;
+            [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
+            [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
+            
+            // 新浪微博授权成功, 获取用户信息
+            [self getUserInfo];
+        }
+    }
+}
+
+
+-(void)doShareToSinaWeibo:(LyricShare *)lyric {
+    
+    if ([UserSessionManager GetInstance].isLoggedIn) {
+        
+        Song* shareSong = self.shareSong;
+        NSString *szLyric = nil;
+        
+        if (lyric) {
+            
+            szLyric = lyric.lyric;
+        }
+        
+        NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [GlobalDataManager GetInstance].curSongTypeName, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
+        
+        UIImage* shareImage = nil;
+        
+        shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
+        
+        NSString *weibouserid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
+        NSString *accesstoken = [UserSessionManager GetInstance].currentUser.sinaAccount.accesstoken;
+        
+        [WBHttpRequest requestWithAccessToken:accesstoken url:@"https://upload.api.weibo.com/2/statuses/upload.json" httpMethod:@"POST" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] delegate:self withTag:@"upload"];
+        
+    } else {
+        
+        [self doSinaWeiboLogin];
+    }
+}
+
+- (void)getUserInfo {
+    
+    NSString *weibouserid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
+    NSString *accesstoken = [UserSessionManager GetInstance].currentUser.sinaAccount.accesstoken;
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:weibouserid forKey:@"uid"];
+    
+    [WBHttpRequest requestWithAccessToken:accesstoken url:@"https://api.weibo.com/2/users/show.json" httpMethod:@"GET" params:dic delegate:self withTag:@"userinfo"];
+}
+
+- (void)updateSinaWeibo:(Song *)tSong
+{
+    _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
+    
+    if (_firstLoadObserver) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
+        
+        _firstLoadObserver = NO;
+    }
+    
+    self.shareSong = tSong;
+    
+    NSString* uid = [UserSessionManager GetInstance].userid;
+    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
+    NSString* tsongid = [NSString stringWithFormat:@"%lld", tSong.songid];
+    NSString* ttype = STR_USER_SOURCE_SINA;
+    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
+    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
+    NSString* tmode = [GlobalDataManager GetInstance].curSongType;
+    NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
+    
+    [GlobalDataManager GetInstance].nShareSource = LOGIN_SINA;
+    
+    MigLabAPI* migapi = [[MigLabAPI alloc] init];
+    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype mode:tmode index:tindex latitude:tlatitude longitude:tlongitude];
+}
+
+- (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
+    
+    
+}
+
+- (void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result {
+    
+    NSDictionary *dicResult = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    int error = [[dicResult objectForKey:@"error_code"] intValue];
+    
+    if (error == 0) {
+        
+        if ([request.url hasSuffix:@"users/show.json"]) {
+            if (_delegate && [_delegate respondsToSelector:@selector(sinaWeiboLoginHelper:didFinishLoadingWithResult:)]) {
+                [_delegate sinaWeiboLoginHelper:self didFinishLoadingWithResult:dicResult];
+            }
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_SUCCEED];
+        } else if ([request.url hasSuffix:@"statuses/update.json"]) {
+            if (_delegate && [_delegate respondsToSelector:@selector(sinaWeiboUpdateHelper:didFinishLoadingWithResult:)]) {
+                [_delegate sinaWeiboUpdateHelper:self didFinishLoadingWithResult:dicResult];
+            }
+            
+            [SVProgressHUD showErrorWithStatus:MIGTIP_LOGIN_SUCCEED];
+        }
+
+    }
+    else {
+        
+    }
+}
+
+- (void)request:(WBHttpRequest *)request didFailWithError:(NSError *)error {
+    
+    NSString *title = nil;
+    UIAlertView *alert = nil;
+    
+    title = NSLocalizedString(@"请求异常", nil);
+    alert = [[UIAlertView alloc] initWithTitle:title
+                                       message:[NSString stringWithFormat:@"%@",error]
+                                      delegate:nil
+                             cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                             otherButtonTitles:nil];
+    [alert show];
+}
+
+#pragma mark - get share info
+-(void)getLyricInfoSucceed:(NSNotification *)tNotification {
+    
+    if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
+        
+        [GlobalDataManager GetInstance].nShareSource = 0;
+        
+        NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
+        NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
+        
+        LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
+        
+        [self doShareToSinaWeibo:ls];
+    }
+}
+
+-(void)getLyricInfoFailed:(NSNotification *)tNotification {
+    
+    PLog(@"分享到新浪微博失败");
+    
+    if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
+        
+        // 没有歌词，只分享文字
+        [self doShareToSinaWeibo:nil];
+        
+        NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;
+        NSString *msg = [dicResult objectForKey:@"msg"];
+        
+        if ([msg isEqualToString:@"没有歌词"]) {
+            
+        }
+    }
+}
+
+#if 0
 //sina weibo
 - (SinaWeibo *)sinaweibo
 {
     //sina weibo
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (appDelegate.sinaweibo) {
-        appDelegate.sinaweibo.delegate = self;
+        //appDelegate.sinaweibo.delegate = self;
         return appDelegate.sinaweibo;
     }
+    
     appDelegate.sinaweibo = [[SinaWeibo alloc] initWithAppKey:SINA_WEIBO_APP_KEY appSecret:SINA_WEIBO_APP_SECRET appRedirectURI:SINA_WEIBO_APP_REDIRECTURI andDelegate:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *sinaweiboInfo = [defaults objectForKey:@"SinaWeiboAuthData"];
@@ -94,35 +296,6 @@ BOOL _firstLoadObserver = YES;
 /**
  * 分享微博
  */
-- (void)updateSinaWeibo:(Song *)tSong
-{
-    _sinaWeiboHelperStatus = SinaWeiboHelperStatusUpdate;
-    
-    if (_firstLoadObserver) {
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoSucceed:) name:NotificationNameGetShareInfoSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLyricInfoFailed:) name:NotificationNameGetShareInfoFailed object:nil];
-        
-        _firstLoadObserver = NO;
-    }
-    
-    self.shareSong = tSong;
-    
-    NSString* uid = [UserSessionManager GetInstance].userid;
-    NSString* accesstoken = [UserSessionManager GetInstance].accesstoken;
-    NSString* tsongid = [NSString stringWithFormat:@"%lld", tSong.songid];
-    NSString* ttype = STR_USER_SOURCE_SINA;
-    NSString* tlatitude = [GlobalDataManager GetInstance].lastLatitude;
-    NSString* tlongitude = [GlobalDataManager GetInstance].lastLongitude;
-    NSString* tmode = [GlobalDataManager GetInstance].curSongType;
-    NSString* tindex = [NSString stringWithFormat:@"%d", [GlobalDataManager GetInstance].curSongTypeId];
-    
-    [GlobalDataManager GetInstance].nShareSource = LOGIN_SINA;
-    
-    MigLabAPI* migapi = [[MigLabAPI alloc] init];
-    [migapi doGetShareInfo:uid token:accesstoken songid:tsongid type:ttype mode:tmode index:tindex latitude:tlatitude longitude:tlongitude];
-}
-
 #pragma mark - SinaWeibo Delegate
 
 - (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
@@ -182,9 +355,9 @@ BOOL _firstLoadObserver = YES;
 
 #pragma mark - SinaWeiboRequest Delegate
 
-- (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error
+- (void)request:(WBHttpRequest *)request didFailWithError:(NSError *)error
 {
-    PLog(@"didFailWithError...%@", request.url);
+    //PLog(@"didFailWithError...%@", request.url);
     if ([request.url hasSuffix:@"users/show.json"]) {
         if (_delegate && [_delegate respondsToSelector:@selector(sinaWeiboLoginHelper:didFailWithError:)]) {
             [_delegate sinaWeiboLoginHelper:self didFailWithError:error];
@@ -198,7 +371,7 @@ BOOL _firstLoadObserver = YES;
     [SVProgressHUD showErrorWithStatus:MIGTIP_SHARING_FAILED];
 }
 
-- (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
+- (void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(id)result
 {
     PLog(@"didFinishLoadingWithResult: %@", result);
     if ([request.url hasSuffix:@"users/show.json"]) {
@@ -229,99 +402,6 @@ BOOL _firstLoadObserver = YES;
     [miglapApi doSendShareResult:userid token:token plat:STR_USER_SOURCE_WEIXIN songid:songid];
 }
 
--(void)doShareToSinaWeibo:(LyricShare *)lyric {
-    
-    SinaWeibo *sinaweibo = [self sinaweibo];
-    if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
-        
-        Song* shareSong = self.shareSong;
-        NSString *szLyric = nil;
-        
-        if (lyric) {
-            
-            szLyric = lyric.lyric;
-        }
-        
-        NSString *shareText = [NSString stringWithFormat:MIGTIP_WEIBO_SHARE_TEXT_4S, [GlobalDataManager GetInstance].curSongTypeName, shareSong.songname, shareSong.artist, [NSString stringWithFormat:SHARE_WEIBO_ADDRESS_1LONG, shareSong.songid]];
-        
-        UIImage* shareImage = nil;
-      
-        //if (MIG_NOT_EMPTY_STR(szLyric)) {
-            
-            shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
-            
-            [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
-       /* }
-        else {
-            
-            [sinaweibo requestWithURL:@"statuses/update.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", nil] httpMethod:@"POST" delegate:self];
-        }*/
-        
-    } else {
-        
-        [sinaweibo logIn];
-    }
-    
-
-}
-
-#pragma mark - get share info
--(void)getLyricInfoSucceed:(NSNotification *)tNotification {
-    
-    if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
-        
-        [GlobalDataManager GetInstance].nShareSource = 0;
-        
-        NSDictionary *dicResult = (NSDictionary*)tNotification.userInfo;
-        NSDictionary *dicLyric = [dicResult objectForKey:@"result"];
-        
-        LyricShare* ls = [LyricShare initWithNSDictionary:dicLyric];
-        
-        // 创建线程完成
-#if 1
-        [self doShareToSinaWeibo:ls];
-#else
-        
-        NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-        
-        [operationQueue addOperationWithBlock:^{
-            
-            SinaWeibo *sinaweibo = [self sinaweibo];
-            if ([sinaweibo isAuthValid] && ![sinaweibo isAuthorizeExpired]) {
-                
-                NSString *shareText = MIGTIP_WEIBO_SHARE_TEXT;
-                
-                UIImage* shareImage = [[UIImage_ext GetInstance] createLyricShareImage:ls song:self.shareSong];
-                
-                [sinaweibo requestWithURL:@"statuses/upload.json" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] httpMethod:@"POST" delegate:self];
-                
-            } else {
-                
-                [sinaweibo logIn];
-            }
-        }];
-    
 #endif
-    }
-}
-
--(void)getLyricInfoFailed:(NSNotification *)tNotification {
-    
-    PLog(@"分享到新浪微博失败");
-    
-    if (LOGIN_SINA == [GlobalDataManager GetInstance].nShareSource) {
-        
-        // 没有歌词，只分享文字
-        [self doShareToSinaWeibo:nil];
-        
-        NSDictionary *dicResult = (NSDictionary *)tNotification.userInfo;
-        NSString *msg = [dicResult objectForKey:@"msg"];
-        
-        if ([msg isEqualToString:@"没有歌词"]) {
-            
-            //[SVProgressHUD showErrorWithStatus:MIGTIP_NO_LYRIC];
-        }
-    }
-}
 
 @end

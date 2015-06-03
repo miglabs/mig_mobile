@@ -12,15 +12,12 @@
 
 #import "RootViewController.h"
 
-@class SinaWeibo;
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate, BPushDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, strong) RootViewController *rootViewController;
 
-@property (nonatomic, retain) SinaWeibo *sinaweibo;
 @property (nonatomic,retain) NSString* path;
 
 @end

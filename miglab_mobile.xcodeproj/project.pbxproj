@@ -405,10 +405,6 @@
 		1846484B1793A61700E83EBB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648491793A61700E83EBB /* LoginViewController.m */; };
 		1846484C1793A61700E83EBB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846484A1793A61700E83EBB /* LoginViewController.xib */; };
 		1846485A1793AA5F00E83EBB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648501793AA5F00E83EBB /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1846485B1793AA5F00E83EBB /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 184648521793AA5F00E83EBB /* SinaWeibo.bundle */; };
-		1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648541793AA5F00E83EBB /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648591793AA5F00E83EBB /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 184648671793D4D500E83EBB /* AccountOf3rdParty.m */; };
 		184C47FC1803F6E1004D7523 /* share_at_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 184C47FB1803F6E1004D7523 /* share_at_icon.png */; };
 		184C47FF1803F8C4004D7523 /* ShareContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C47FE1803F8C3004D7523 /* ShareContentView.m */; };
@@ -500,6 +496,9 @@
 		CB1EAE1E18D4AE150099D2A2 /* libDoubanApiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1D18D4AE150099D2A2 /* libDoubanApiEngine.framework */; };
 		CB1EAE2018D4AE260099D2A2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */; };
 		CB1F3DE3197817260009CD91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F3DE2197817260009CD91 /* AFNetworkReachabilityManager.m */; };
+		CB272B031B1B52270060A62D /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB272AF81B1B52270060A62D /* libWeiboSDK.a */; };
+		CB272B041B1B52270060A62D /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB272B001B1B52270060A62D /* WeiboSDK.bundle */; };
+		CB272B071B1DE5520060A62D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB272B061B1DE5520060A62D /* ImageIO.framework */; };
 		CB30756C1927BCB500BA3E1C /* GlobalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30756B1927BCB500BA3E1C /* GlobalDataManager.m */; };
 		CB30AD8718C0E45F0072B198 /* NearMusicSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB30AD8518C0E45F0072B198 /* NearMusicSongCell.m */; };
 		CB30AD8818C0E45F0072B198 /* NearMusicSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB30AD8618C0E45F0072B198 /* NearMusicSongCell.xib */; };
@@ -1109,14 +1108,6 @@
 		1846484A1793A61700E83EBB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		1846484F1793AA5F00E83EBB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		184648501793AA5F00E83EBB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		184648521793AA5F00E83EBB /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
-		184648531793AA5F00E83EBB /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
-		184648541793AA5F00E83EBB /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
-		184648551793AA5F00E83EBB /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
-		184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboAuthorizeView.m; sourceTree = "<group>"; };
-		184648571793AA5F00E83EBB /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
-		184648581793AA5F00E83EBB /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
-		184648591793AA5F00E83EBB /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
 		184648621793ACF700E83EBB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		184648631793ACF700E83EBB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		184648661793D4D500E83EBB /* AccountOf3rdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOf3rdParty.h; sourceTree = "<group>"; };
@@ -1249,6 +1240,19 @@
 		CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = miglab_mobile/classes/Crashlytics.framework; sourceTree = "<group>"; };
 		CB1F3DE1197817260009CD91 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		CB1F3DE2197817260009CD91 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		CB272AF81B1B52270060A62D /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		CB272AF91B1B52270060A62D /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
+		CB272AFA1B1B52270060A62D /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
+		CB272AFB1B1B52270060A62D /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
+		CB272AFC1B1B52270060A62D /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
+		CB272AFD1B1B52270060A62D /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
+		CB272AFE1B1B52270060A62D /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
+		CB272AFF1B1B52270060A62D /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
+		CB272B001B1B52270060A62D /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		CB272B011B1B52270060A62D /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		CB272B021B1B52270060A62D /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
+		CB272B051B1B527A0060A62D /* SinaWeibo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		CB272B061B1DE5520060A62D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CB30756A1927BCB500BA3E1C /* GlobalDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDataManager.h; sourceTree = "<group>"; };
 		CB30756B1927BCB500BA3E1C /* GlobalDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalDataManager.m; sourceTree = "<group>"; };
 		CB30AD8418C0E45F0072B198 /* NearMusicSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearMusicSongCell.h; sourceTree = "<group>"; };
@@ -1346,6 +1350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB272B071B1DE5520060A62D /* ImageIO.framework in Frameworks */,
 				CB5E92D019A7A5C000B71A10 /* Accelerate.framework in Frameworks */,
 				CB5E92C819A773AC00B71A10 /* CoreImage.framework in Frameworks */,
 				188A20BA17F5638000D4E753 /* CoreText.framework in Frameworks */,
@@ -1369,6 +1374,7 @@
 				1623168817773BEE00CF8FB5 /* CoreLocation.framework in Frameworks */,
 				1623168417773BE000CF8FB5 /* OpenGLES.framework in Frameworks */,
 				1623168217773BD600CF8FB5 /* SystemConfiguration.framework in Frameworks */,
+				CB272B031B1B52270060A62D /* libWeiboSDK.a in Frameworks */,
 				1623167C17773B6700CF8FB5 /* libsqlite3.0.dylib in Frameworks */,
 				16EDEF3C1759AD5E001BE4E9 /* UIKit.framework in Frameworks */,
 				16EDEF3E1759AD5E001BE4E9 /* Foundation.framework in Frameworks */,
@@ -2349,6 +2355,7 @@
 		16EDEF3A1759AD5E001BE4E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB272B061B1DE5520060A62D /* ImageIO.framework */,
 				CB5E92CF19A7A5C000B71A10 /* Accelerate.framework */,
 				CB5E92C719A773AC00B71A10 /* CoreImage.framework */,
 				CB1EAE1F18D4AE260099D2A2 /* Crashlytics.framework */,
@@ -2512,6 +2519,7 @@
 			children = (
 				1846484E1793AA5F00E83EBB /* JSONKit */,
 				184648511793AA5F00E83EBB /* SinaWeibo */,
+				CB272B051B1B527A0060A62D /* SinaWeibo.h */,
 			);
 			path = sinaweibo_ios_sdk;
 			sourceTree = "<group>";
@@ -2528,14 +2536,17 @@
 		184648511793AA5F00E83EBB /* SinaWeibo */ = {
 			isa = PBXGroup;
 			children = (
-				184648521793AA5F00E83EBB /* SinaWeibo.bundle */,
-				184648531793AA5F00E83EBB /* SinaWeibo.h */,
-				184648541793AA5F00E83EBB /* SinaWeibo.m */,
-				184648551793AA5F00E83EBB /* SinaWeiboAuthorizeView.h */,
-				184648561793AA5F00E83EBB /* SinaWeiboAuthorizeView.m */,
-				184648571793AA5F00E83EBB /* SinaWeiboConstants.h */,
-				184648581793AA5F00E83EBB /* SinaWeiboRequest.h */,
-				184648591793AA5F00E83EBB /* SinaWeiboRequest.m */,
+				CB272AF81B1B52270060A62D /* libWeiboSDK.a */,
+				CB272AF91B1B52270060A62D /* WBHttpRequest.h */,
+				CB272AFA1B1B52270060A62D /* WBHttpRequest+WeiboShare.h */,
+				CB272AFB1B1B52270060A62D /* WBHttpRequest+WeiboToken.h */,
+				CB272AFC1B1B52270060A62D /* WBHttpRequest+WeiboUser.h */,
+				CB272AFD1B1B52270060A62D /* WBSDKBasicButton.h */,
+				CB272AFE1B1B52270060A62D /* WBSDKCommentButton.h */,
+				CB272AFF1B1B52270060A62D /* WBSDKRelationshipButton.h */,
+				CB272B001B1B52270060A62D /* WeiboSDK.bundle */,
+				CB272B011B1B52270060A62D /* WeiboSDK.h */,
+				CB272B021B1B52270060A62D /* WeiboUser.h */,
 			);
 			path = SinaWeibo;
 			sourceTree = "<group>";
@@ -2812,12 +2823,12 @@
 				1846483F1793A25300E83EBB /* SVProgressHUD.bundle in Resources */,
 				184648471793A60800E83EBB /* RegisterViewController.xib in Resources */,
 				1846484C1793A61700E83EBB /* LoginViewController.xib in Resources */,
-				1846485B1793AA5F00E83EBB /* SinaWeibo.bundle in Resources */,
 				CB5E931619AF540500B71A10 /* sun_ico.png in Resources */,
 				C7F8696F1A5396CE00A21F01 /* home_navigation_bg_on.png in Resources */,
 				1661720118F9354600E86B11 /* face_but_img.png in Resources */,
 				16F575C1179587D900277308 /* borad_default_avatar.png in Resources */,
 				15D354B51AA74D1400422FE4 /* login_menu_icon_sinaweibo.png in Resources */,
+				CB272B041B1B52270060A62D /* WeiboSDK.bundle in Resources */,
 				16F575C4179587D900277308 /* borad_menu_like_nor.png in Resources */,
 				CB5E937319B0B20D00B71A10 /* 粤语经典.jpg in Resources */,
 				16F575C5179587D900277308 /* borad_menu_next.png in Resources */,
@@ -3204,9 +3215,6 @@
 				184648461793A60800E83EBB /* RegisterViewController.m in Sources */,
 				1846484B1793A61700E83EBB /* LoginViewController.m in Sources */,
 				1846485A1793AA5F00E83EBB /* JSONKit.m in Sources */,
-				1846485C1793AA5F00E83EBB /* SinaWeibo.m in Sources */,
-				1846485D1793AA5F00E83EBB /* SinaWeiboAuthorizeView.m in Sources */,
-				1846485E1793AA5F00E83EBB /* SinaWeiboRequest.m in Sources */,
 				184648681793D4D500E83EBB /* AccountOf3rdParty.m in Sources */,
 				16EA2D3B192875F0008E9DD3 /* ShareGuideView.m in Sources */,
 				16F575CD17958B2300277308 /* PCustomPlayerBoradView.m in Sources */,
@@ -3438,6 +3446,7 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1/UMOpus",
+					"$(PROJECT_DIR)/miglab_mobile/classes/sinaweibo_ios_sdk/SinaWeibo",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -3494,6 +3503,7 @@
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMFeedback_iOS_2.1/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1",
 					"$(PROJECT_DIR)/miglab_mobile/classes/UMengFeedback_SDK_2.1/UMOpus",
+					"$(PROJECT_DIR)/miglab_mobile/classes/sinaweibo_ios_sdk/SinaWeibo",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
