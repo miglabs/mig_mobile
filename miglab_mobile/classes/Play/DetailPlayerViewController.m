@@ -215,7 +215,7 @@
 //IOS8 判断
     if ([GlobalDataManager GetInstance].isIOS8) {
         
-        _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        _shareAlertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n"  message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
         //取消
         [_shareAlertController addAction:[UIAlertAction actionWithTitle:MIGTIP_CANCEL
@@ -224,7 +224,7 @@
                                                 }]];
  
     }else{
-        _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+        _shareAchtionSheet = [[UIActionSheet alloc] initWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n" delegate:self cancelButtonTitle:MIGTIP_CANCEL destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     }
 
 
@@ -238,6 +238,10 @@
     [shareSelectedView.btnSecond addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
     [shareSelectedView.btnThird addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [shareSelectedView.btnFour addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [shareSelectedView.btnFive addTarget:self action:@selector(doGotoShareView:) forControlEvents:UIControlEventTouchUpInside];
     
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doShare2WeiXin:)];
@@ -275,32 +279,36 @@
     switch (btnShare.tag) {
         case 201:
         {
-            //qqzone
-            [self doShare2QQZone];
+            //weixin timeline
+            [self doGotoShareViewWithLyric:sender];
         }
             break;
+            
         case 202:
+        {
+            //weixin friend
+            [self doShare2WeiXinForFriendOnly:sender];
+        }
+            break;
+            
+        case 203:
         {
             //sinaweibo
             [self doShare2SinaWeibo];
         }
             break;
-        case 203:
-        {
-            //weixin
-            [self doGotoShareViewWithLyric:sender];
-        }
-            break;
+            
         case 204:
         {
-            //tencentweibo
-            [self doShare2TencentWeibo];
+            //tencent friend
+            [self doShare2QQ];
         }
             break;
+            
         case 205:
         {
-            //renren
-            [self doShare2Renren];
+            //qqzone
+            [self doShare2QQZone];
         }
             break;
         case 206:
@@ -355,6 +363,18 @@
     [tencentHelper addQQZoneWithLyricImage:currentSong];
 }
 
+-(void)doShare2QQ{
+    
+    PLog(@"doShare2QQ...");
+    
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    
+    TencentHelper *tencentHelper = [TencentHelper sharedInstance];
+    tencentHelper.delegate = self;
+    //[tencentHelper addTopic:currentSong];
+    [tencentHelper addQQWithLyricImage:currentSong];
+}
+
 -(void)doShare2SinaWeibo{
     
     PLog(@"doShare2SinaWeibo...");
@@ -365,6 +385,59 @@
     sinaWeiboHelper.delegate = self;
     [sinaWeiboHelper updateSinaWeibo:currentSong];
     
+}
+
+-(IBAction)doShare2WeiXinForFriendOnly:(id)sender {
+    
+    PLog(@"doShare2WeiXin...");
+    
+    //分享到微信朋友圈
+    if (![WXApi isWXAppInstalled]) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+        
+        return;
+    }
+    
+    if (![WXApi isWXAppSupportApi]) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+        
+        return;
+    }
+    
+    Song *currentSong = [PPlayerManagerCenter GetInstance].currentSong;
+    UIImage *defaultSongCoverImage = _cdOfSongView.coverOfSongEGOImageView.image;
+    UIImage *upimage = [UIImage imageWithName:@"" type:@"png"]; // junliu，这是删了一张不用的背景图
+    UIImage *shareImage = [PCommonUtil maskImage:defaultSongCoverImage withImage:upimage];
+    
+    //
+    WXMediaMessage *message = [WXMediaMessage message];
+    
+#if USE_ARTIST_SONGNAME
+    message.title = currentSong.artist;
+    message.description = [NSString stringWithFormat:@"%@ - %@", currentSong.artist, currentSong.songname];
+#else
+    message.title = currentSong.songname;
+    message.description = [NSString stringWithFormat:@"%@", currentSong.artist];
+#endif
+    [message setThumbImage:shareImage];
+    
+    WXMusicObject *ext = [WXMusicObject object];
+#ifdef WEIXIN_REAL_SONG_ADDRESS
+    ext.musicUrl = currentSong.songurl;
+#else
+    ext.musicUrl = [NSString stringWithFormat:SHARE_WEIXIN_ADDRESS_1LONG, currentSong.songid];
+    PLog(@"musicUrl %@",ext.musicUrl);
+    ext.musicDataUrl = currentSong.songurl;
+#endif
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;
+    [WXApi sendReq:req];
 }
 
 -(IBAction)doShare2WeiXin:(id)sender {
@@ -447,8 +520,6 @@
 }
 
 -(void)doShare2WeiXinWithLyric:(LyricShare *)ls{
-    
-    PLog(@"doShare2WeiXinWithLongPress...");
     
     //分享到微信朋友圈
     if (![WXApi isWXAppInstalled]) {

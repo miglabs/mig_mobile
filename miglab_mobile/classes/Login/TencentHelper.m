@@ -114,6 +114,32 @@
     }
 }
 
+/*
+ * 发布一个歌词分享到QQ好友
+ */
+- (void)addQQWithLyricImage:(Song *)tSong {
+    
+    if ([_tencentOAuth isSessionValid]) {
+        
+        NSString *artist = tSong.artist;
+        NSString *songName = tSong.songname;
+        NSString *img = tSong.coverurl;
+        NSString *shareAdd = [NSString stringWithFormat:SHARE_QQZONE_ADDRESS_1LONG, tSong.songid];
+        
+        QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:shareAdd] title:songName description:artist previewImageURL:[NSURL URLWithString:img]];
+        
+        SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
+        
+        [QQApiInterface sendReq:req];
+    }
+    else {
+        
+        _reShareSong = tSong;
+        _isLoginForShare = YES;
+        [self initTencentAndLogin];
+    }
+}
+
 /**
  * 发布一条说说
  */

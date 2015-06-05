@@ -61,6 +61,7 @@
 -(void)doShare2QQZone;
 -(void)doShare2SinaWeibo;
 -(IBAction)doShare2WeiXin:(id)sender;
+-(IBAction)doShare2WeiXinForFriendOnly:(id)sender;
 -(void)doShare2TencentWeibo;
 -(void)doShare2Renren;
 -(void)doSHare2Sms;
