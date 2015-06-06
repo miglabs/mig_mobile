@@ -422,9 +422,6 @@
     //
     NSString *userid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
     SourceType accounttype = [UserSessionManager GetInstance].accounttype;
-    
-    //注册和登录合并，第三方平台直接使用注册接口登录
-    //[_miglabAPI doRegister:name password:name nickname:screenName source:accounttype session:userid sex:gender];
     [_miglabAPI doThirdLogin:1 nickname:screenName source:accounttype session:userid imei:@"888888" sex:gender birthday:DEFAULT_BIRTHDAY location:location head:head latitude:nil longitude:nil];
 }
 

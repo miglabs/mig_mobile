@@ -87,6 +87,14 @@ BOOL _firstLoadObserver = YES;
             [UserSessionManager GetInstance].currentUser.sinaAccount = sinaAccount;
             [UserSessionManager GetInstance].currentUser.source = SourceTypeSinaWeibo;
             
+            // storeAuthData
+            NSDictionary *authData = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      accesstoken, @"AccessTokenKey",
+                                      expirateDate, @"ExpirationDateKey",
+                                      userid, @"UserIDKey", nil];
+            [[NSUserDefaults standardUserDefaults] setObject:authData forKey:@"SinaWeiboAuthData"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             // 新浪微博授权成功, 获取用户信息
             [self getUserInfo];
         }
@@ -112,8 +120,8 @@ BOOL _firstLoadObserver = YES;
         
         shareImage = [[UIImage_ext GetInstance] createLyricShareImage:lyric song:self.shareSong];
         
-        NSString *weibouserid = [UserSessionManager GetInstance].currentUser.sinaAccount.accountid;
-        NSString *accesstoken = [UserSessionManager GetInstance].currentUser.sinaAccount.accesstoken;
+        NSDictionary *authData = [[NSUserDefaults standardUserDefaults] objectForKey:@"SinaWeiboAuthData"];
+        NSString *accesstoken = [authData objectForKey:@"AccessTokenKey"];
         
         [WBHttpRequest requestWithAccessToken:accesstoken url:@"https://upload.api.weibo.com/2/statuses/upload.json" httpMethod:@"POST" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] delegate:self withTag:@"upload"];
         

@@ -148,7 +148,7 @@
         szBgImg = @"share_default.png";
     }
     
-   
+    PLog(@"%@", [GlobalDataManager GetInstance].curSongTypeName);
     
     UIImage* bgImg;
     UIImage* mainIconImg = [UIImage imageNamed:@"main_logo_white.png"];
