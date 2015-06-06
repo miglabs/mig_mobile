@@ -13,6 +13,9 @@
 #import "GlobalDataManager.h"
 
 @implementation TencentHelper
+{
+    int qqShareType; // 0: qzone, 1:qq friend
+}
 
 @synthesize tencentOAuth = _tencentOAuth;
 @synthesize isLoginForShare = _isLoginForShare;
@@ -92,6 +95,7 @@
  * 发布一个歌词分享到QQ空间
  */
 - (void)addQQZoneWithLyricImage:(Song *)tSong {
+    qqShareType = 0;
     
     if ([_tencentOAuth isSessionValid]) {
         
@@ -118,6 +122,7 @@
  * 发布一个歌词分享到QQ好友
  */
 - (void)addQQWithLyricImage:(Song *)tSong {
+    qqShareType = 1;
     
     if ([_tencentOAuth isSessionValid]) {
         
@@ -229,7 +234,13 @@
         if (_isLoginForShare) {
             
             _isLoginForShare = NO;
-            [self addQQZoneWithLyricImage:_reShareSong];
+            if (qqShareType == 1)
+            {
+                [self addQQWithLyricImage:_reShareSong];
+            }
+            else {
+                [self addQQZoneWithLyricImage:_reShareSong];
+            }
             return;
         }
         
