@@ -76,7 +76,7 @@
         //3
         UIImage *thirdImage = [UIImage imageWithName:@"sina_weibo_normal@2x" type:@"png"];
         _btnThird = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btnThird setTag:201];
+        [_btnThird setTag:203];
         [_btnThird setFrame:CGRectMake(221, 15, 70, 70)];
         [_btnThird setImage:thirdImage forState:UIControlStateNormal];
         
