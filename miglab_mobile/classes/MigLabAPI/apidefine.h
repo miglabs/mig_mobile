@@ -280,13 +280,13 @@
 #define MIGTIP_UNKOWN_DISTANCE                  @"未知距离"
 
 /* 微信分享地址 */
-#define SHARE_WEIXIN_ADDRESS_1LONG              @"http://weixin.share.miyomate.com?songid=%lld&from=1&isappinstalled=1"
+#define SHARE_WEIXIN_ADDRESS_1LONG              @"http://fir.im/imiyo?songid=%lld&from=1&isappinstalled=1"
 
 /* QQ空间分享地址 */
-#define SHARE_QQZONE_ADDRESS_1LONG              @"http://qzone.share.miyomate.com/?songid=%lld&from=timeline&isappinstalled=1"
+#define SHARE_QQZONE_ADDRESS_1LONG              @"http://fir.im/imiyo?songid=%lld&from=timeline&isappinstalled=1"
 
 /* 微博分享地址 */
-#define SHARE_WEIBO_ADDRESS_1LONG               @"http://weibo.share.miyomate.com/?songid=%lld"
+#define SHARE_WEIBO_ADDRESS_1LONG               @"http://fir.im/imiyo?songid=%lld"
 
 
 /* --------------------- 地址定义 --------------------- */
