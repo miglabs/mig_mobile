@@ -123,7 +123,19 @@ BOOL _firstLoadObserver = YES;
         NSDictionary *authData = [[NSUserDefaults standardUserDefaults] objectForKey:@"SinaWeiboAuthData"];
         NSString *accesstoken = [authData objectForKey:@"AccessTokenKey"];
         
+#if 1
+        NSData *imagedata = UIImageJPEGRepresentation(shareImage, 1.0);
+        WBImageObject *imgObj = [WBImageObject object];
+        [imgObj setImageData:imagedata];
+        
+        WBMessageObject *msg = [WBMessageObject message];
+        [msg setText:shareText];
+        msg.imageObject = imgObj;
+        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:msg];
+        [WeiboSDK sendRequest:request];
+#else
         [WBHttpRequest requestWithAccessToken:accesstoken url:@"https://upload.api.weibo.com/2/statuses/upload.json" httpMethod:@"POST" params:[NSMutableDictionary dictionaryWithObjectsAndKeys:shareText, @"status", shareImage, @"pic", nil] delegate:self withTag:@"upload"];
+#endif
         
     } else {
         
