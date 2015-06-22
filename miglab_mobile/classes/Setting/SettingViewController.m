@@ -73,7 +73,7 @@
 #elif USE_FUNCTION_SETTING
     NSArray *section1 = [NSArray arrayWithObjects:@"功能", @"吐槽咪哟", nil];
 #else
-    NSArray *section1 = [NSArray arrayWithObjects:@"吐槽咪哟",nil];
+    NSArray *section1 = [NSArray arrayWithObjects:@"吐槽咪哟", @"评个分吧",nil];
 #endif
     
     NSArray *section2 = [NSArray arrayWithObjects:@"关于咪哟", nil];
@@ -360,7 +360,7 @@
         curRow += 1;
         
 #else 
-        curRow = 2;
+        curRow += 2;
         
 #endif
         if (curRow == 0) {
@@ -392,6 +392,11 @@
 //            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];
 //            [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY dictionary:[NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"a", @"b", @"c", nil] forKey:@"hello"]];
             
+        } else if (curRow == 3) {
+            
+            NSString *str = [NSString stringWithFormat:
+                             @"itms-apps://itunes.apple.com/cn/app/mi-you/id%d", APPLE_ID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
         
     } else if (indexPath.section == 2) {

@@ -70,7 +70,7 @@
     _dataTableView.scrollEnabled = YES;
     [self.view addSubview:_dataTableView];
     
-    _datalist = [NSMutableArray arrayWithObjects:@"评个分吧", @"检查新版本", @"使用条款与隐私政策", nil];
+    _datalist = [NSMutableArray arrayWithObjects:@"检查新版本", @"使用条款与隐私政策", nil];
     
     
 }
@@ -88,12 +88,6 @@
     // ...
     
     if (indexPath.row == 0) {
-        
-        NSString *str = [NSString stringWithFormat:
-                         @"itms-apps://itunes.apple.com/cn/app/mi-you/id%d", APPLE_ID];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-        
-    } else if (indexPath.row == 1) {
         
 //        SettingOfNetworkAndLimitViewController *networkAndLimit = [[SettingOfNetworkAndLimitViewController alloc] initWithNibName:@"SettingOfNetworkAndLimitViewController" bundle:nil];
 //        [self.navigationController pushViewController:networkAndLimit animated:YES];
