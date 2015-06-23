@@ -567,6 +567,8 @@
 		CBD3A382182F655E008AA163 /* FriendOfSendSongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD3A380182F655E008AA163 /* FriendOfSendSongListViewController.xib */; };
 		CBE1E4E017CE345600C0BB55 /* ConfigFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */; };
 		CBE1E4E317D1EB6F00C0BB55 /* CollectNum.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */; };
+		CBE9A9151B399376000CFE82 /* logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE9A9131B399376000CFE82 /* logo_about.png */; };
+		CBE9A9161B399376000CFE82 /* point.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE9A9141B399376000CFE82 /* point.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1347,6 +1349,8 @@
 		CBE1E4DF17CE345600C0BB55 /* ConfigFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileInfo.m; sourceTree = "<group>"; };
 		CBE1E4E117D1EB6F00C0BB55 /* CollectNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectNum.h; sourceTree = "<group>"; };
 		CBE1E4E217D1EB6F00C0BB55 /* CollectNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectNum.m; sourceTree = "<group>"; };
+		CBE9A9131B399376000CFE82 /* logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_about.png; path = about/logo_about.png; sourceTree = "<group>"; };
+		CBE9A9141B399376000CFE82 /* point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = point.png; path = about/point.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2238,6 +2242,7 @@
 		16E77DE9178DA4B0006A24A6 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CBE9A9101B399350000CFE82 /* about */,
 				CB5E92D419AF53F600B71A10 /* share */,
 				16EA2D2219286B09008E9DD3 /* guide */,
 				166171EB18F9354600E86B11 /* socket_chat */,
@@ -2728,6 +2733,15 @@
 			path = BPush/opensource;
 			sourceTree = "<group>";
 		};
+		CBE9A9101B399350000CFE82 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				CBE9A9131B399376000CFE82 /* logo_about.png */,
+				CBE9A9141B399376000CFE82 /* point.png */,
+			);
+			name = about;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2883,6 +2897,7 @@
 				162727A317ACB947000C79D3 /* play_btn_menu_nor.png in Resources */,
 				CBB343951A07C2B3007BF368 /* BPushConfig.plist in Resources */,
 				16EA2D2E19286B09008E9DD3 /* gene1.png in Resources */,
+				CBE9A9151B399376000CFE82 /* logo_about.png in Resources */,
 				15C6FCCB1A7CAB6300239364 /* share_default.png in Resources */,
 				162727A417ACB947000C79D3 /* play_btn_menu_sel.png in Resources */,
 				162727A517ACB947000C79D3 /* play_btn_share_nor.png in Resources */,
@@ -2928,6 +2943,7 @@
 				CB0BDCE81A8CFB8000CD95C1 /* view_bg.jpg in Resources */,
 				16E4588717C0C26700D25475 /* music_menu_light_heart_nor.png in Resources */,
 				CB0380DA185DA0B500137D8E /* gene_focus.png in Resources */,
+				CBE9A9161B399376000CFE82 /* point.png in Resources */,
 				16E4588B17C0C3CB00D25475 /* music_menu_stop_nor.png in Resources */,
 				162AAB4617C25440000E904F /* gene_choose_bg.png in Resources */,
 				162AAB4B17C25451000E904F /* home_navigation_bg.png in Resources */,

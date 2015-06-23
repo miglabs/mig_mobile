@@ -7,6 +7,7 @@
 //
 
 #import "SettingOfAboutViewController.h"
+#import "GlobalDataManager.h"
 
 @interface SettingOfAboutViewController ()
 
@@ -15,10 +16,16 @@
 @implementation SettingOfAboutViewController
 
 @synthesize iconImageView = _iconImageView;
-@synthesize lblVersion = _lblVersion;
+@synthesize btnFAQ = _btnFAQ;
+@synthesize btnQRCode = _btnQRCode;
+@synthesize btnShare = _btnShare;
+@synthesize lblRight = _lblRight;
+@synthesize qrImageView = _qrImageView;
+@synthesize screenCaptureImage = _screenCaptureImage;
+@synthesize qrAchtionSheet = _qrAchtionSheet;
+@synthesize qrAlertController = _qrAlertController;
 
-@synthesize dataTableView = _dataTableView;
-@synthesize datalist = _datalist;
+UIView *gobackgroundView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,97 +52,108 @@
     self.bgImageView.hidden = YES;
     
     //icon
-    _iconImageView = [[UIImageView alloc] init];
-    _iconImageView.frame = CGRectMake((kMainScreenWidth - 86) / 2, posy + 55, 85.5f, 85.5f);
-    _iconImageView.image = [UIImage imageWithName:@"about_icon" type:@"png"];
+    _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kMainScreenWidth - 261) / 2, posy + 55, 261, 204)];
+    _iconImageView.image = [UIImage imageNamed:@"logo_about.png"];
     [self.view addSubview:_iconImageView];
     
-    //version
-    NSString *strVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-    _lblVersion = [[UILabel alloc] init];
-    _lblVersion.frame = CGRectMake(10, posy + 55 + 85 + 15, 300, 25);
-    _lblVersion.backgroundColor = [UIColor clearColor];
-    _lblVersion.text = [NSString stringWithFormat:@"咪哟 V%@", strVersion];
-    _lblVersion.textColor = [UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f];
-    _lblVersion.font = [UIFont fontOfSystem:15.0f];
-    _lblVersion.textAlignment = kTextAlignmentCenter;
-    [self.view addSubview:_lblVersion];
+    float remainHeight = kMainScreenHeight - (posy + 55 + 261);
+    posy = kMainScreenHeight - remainHeight / 2 - 40;
     
-    //body
-    _dataTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, posy + 55 + 85 + 15 + 25 + 50, 320, 150) style:UITableViewStyleGrouped];
-    _dataTableView.dataSource = self;
-    _dataTableView.delegate = self;
-    _dataTableView.backgroundColor = [UIColor clearColor];
-    _dataTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _dataTableView.scrollEnabled = YES;
-    [self.view addSubview:_dataTableView];
+    float hunit = 261 / 15.0f;
+    float hstart = (kMainScreenWidth - 261) / 2;
+    float btnheight = 25;
+    _btnShare = [[UIButton alloc] initWithFrame:CGRectMake(hstart, posy, 4 * hunit, btnheight)];
+    [_btnShare setTitle:@"分享微信" forState:UIControlStateNormal];
+    [_btnShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [_btnShare.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    [_btnShare addTarget:self action:@selector(shareToWeixin:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnShare];
     
-    _datalist = [NSMutableArray arrayWithObjects:@"检查新版本", @"使用条款与隐私政策", nil];
+    hstart += 4 * hunit;
+    UIImageView *sep1 = [[UIImageView alloc] initWithFrame:CGRectMake(hstart + hunit - 5, posy + 10, 5, 5)];
+    [sep1 setImage:[UIImage imageNamed:@"point.png"]];
+    [self.view addSubview:sep1];
     
+    hstart += 2 * hunit;
+    _btnQRCode = [[UIButton alloc] initWithFrame:CGRectMake(hstart, posy, 3 * hunit, btnheight)];
+    [_btnQRCode setTitle:@"二维码" forState:UIControlStateNormal];
+    [_btnQRCode setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [_btnQRCode.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    [_btnQRCode addTarget:self action:@selector(popQRcode:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnQRCode];
     
+    hstart += 3 * hunit;
+    UIImageView *sep2 = [[UIImageView alloc] initWithFrame:CGRectMake(hstart + hunit, posy + 10, 5, 5)];
+    [sep2 setImage:[UIImage imageNamed:@"point.png"]];
+    [self.view addSubview:sep2];
+    
+    hstart += 2 * hunit;
+    _btnFAQ = [[UIButton alloc] initWithFrame:CGRectMake(hstart, posy, 4 * hunit, btnheight)];
+    [_btnFAQ setTitle:@"常见问题" forState:UIControlStateNormal];
+    [_btnFAQ setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [_btnFAQ.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    [_btnFAQ addTarget:self action:@selector(popFAQ:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnFAQ];
+    
+    NSString *szRight = @"Copyright2013-2015 Miglab Team 版权所有";
+    _lblRight = [[UILabel alloc] initWithFrame:CGRectMake(10, kMainScreenHeight - 30, kMainScreenWidth - 20, 15)];
+    [_lblRight setFont:[UIFont systemFontOfSize:12]];
+    [_lblRight setText:szRight];
+    [_lblRight setTextColor:[UIColor lightGrayColor]];
+    [_lblRight setTextAlignment:NSTextAlignmentCenter];
+    [self.view addSubview:_lblRight];
+    
+    _qrImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [_qrImageView setImage:[UIImage imageNamed:@"睡觉.jpg"]];
+}
+
+- (IBAction)shareToWeixin:(id)sender
+{
+
+}
+
+- (IBAction)popQRcode:(id)sender
+{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    gobackgroundView = [[UIView alloc] initWithFrame:kApplicationFrame];
+    gobackgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    
+    _qrImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kMainScreenWidth/2, kMainScreenHeight/2, 1, 1)];
+    [_qrImageView setImage:[UIImage imageNamed:@"睡觉.jpg"]];
+    [gobackgroundView addSubview:_qrImageView];
+    
+    UITapGestureRecognizer *singletab = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissQRcode:)];
+    singletab.numberOfTapsRequired = 1;
+    [gobackgroundView addGestureRecognizer:singletab];
+    
+    [window addSubview:gobackgroundView];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        _qrImageView.frame = CGRectMake((kMainScreenWidth - 100) / 2, (kMainScreenHeight - 100) / 2, 100, 100);
+    } completion:^(BOOL finished) {
+    }];
+}
+
+- (IBAction)popFAQ:(id)sender
+{
+
+}
+
+- (IBAction)dismissQRcode:(id)sender
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        _qrImageView.frame = CGRectMake(kMainScreenWidth/2, kMainScreenHeight/2, 1, 1);
+    } completion:^(BOOL finished) {
+        
+    }];
+    [gobackgroundView removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - UITableView delegate
-
-// Called after the user changes the selection.
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // ...
-    
-    if (indexPath.row == 0) {
-        
-//        SettingOfNetworkAndLimitViewController *networkAndLimit = [[SettingOfNetworkAndLimitViewController alloc] initWithNibName:@"SettingOfNetworkAndLimitViewController" bundle:nil];
-//        [self.navigationController pushViewController:networkAndLimit animated:YES];
-        
-    }
-    
-    //
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
-
-#pragma mark - UITableView datasource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [_datalist count];
-    
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"TableViewCell";
-	UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellAccessoryDisclosureIndicator reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	}
-    
-    //desc
-    UILabel *lblDesc = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 24)];
-    [lblDesc setBackgroundColor:[UIColor clearColor]];
-    [lblDesc setTextAlignment:kTextAlignmentLeft];
-    [lblDesc setFont:[UIFont systemFontOfSize:15]];
-    [lblDesc setTextColor:[UIColor colorWithRed:61.0f/255.0f green:61.0f/255.0f blue:61.0f/255.0f alpha:1.0f]];
-    [cell.contentView addSubview:lblDesc];
-    
-    //arrow
-    UIImageView *arrowimage = [[UIImageView alloc] initWithFrame:CGRectMake(280, 16, 8, 12)];
-    arrowimage.image = [UIImage imageNamed:@"friend_add_friend_arrow.png"];
-    [cell.contentView addSubview:arrowimage];
-    
-    //desc
-    lblDesc.text = [_datalist objectAtIndex:indexPath.row];
-    
-    
-    NSLog(@"cell.frame.size.height: %f", cell.frame.size.height);
-    
-	return cell;
 }
 
 @end
