@@ -120,7 +120,7 @@ UIView *gobackgroundView;
     gobackgroundView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     
     _qrImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kMainScreenWidth/2, kMainScreenHeight/2, 1, 1)];
-    [_qrImageView setImage:[UIImage imageNamed:@"睡觉.jpg"]];
+    [_qrImageView setImage:[UIImage imageNamed:@"code.png"]];
     [gobackgroundView addSubview:_qrImageView];
     
     UITapGestureRecognizer *singletab = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissQRcode:)];
