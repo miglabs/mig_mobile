@@ -8,6 +8,8 @@
 
 #import "SettingOfAboutViewController.h"
 #import "GlobalDataManager.h"
+#import "WXApi.h"
+#import "SVProgressHUD.h"
 
 @interface SettingOfAboutViewController ()
 
@@ -109,7 +111,40 @@ UIView *gobackgroundView;
 
 - (IBAction)shareToWeixin:(id)sender
 {
-
+    
+    PLog(@"doShare2WeiXin...");
+    
+    //分享到微信朋友圈
+    if (![WXApi isWXAppInstalled]) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_NOT_FOUND_WEIXIN];
+        
+        return;
+    }
+    
+    if (![WXApi isWXAppSupportApi]) {
+        
+        [SVProgressHUD showErrorWithStatus:MIGTIP_WEIXIN_OUT_OF_DATE];
+        
+        return;
+    }
+    
+    UIImage *shareImage = [UIImage imageNamed:@"about_icon.png"];
+    //
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"咪哟 - FIR.im";
+    [message setThumbImage:shareImage];
+    
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = @"http://fir.im/imiyo/";
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    [WXApi sendReq:req];
 }
 
 - (IBAction)popQRcode:(id)sender
@@ -137,7 +172,8 @@ UIView *gobackgroundView;
 
 - (IBAction)popFAQ:(id)sender
 {
-
+    NSString *str = @"http://www.zhihu.com/question/31771410";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
 - (IBAction)dismissQRcode:(id)sender
